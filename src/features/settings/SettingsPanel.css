@@ -1,0 +1,76 @@
+.ferby-settings-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background-color: #181a1f;
+  color: #f3f4f6;
+  border: 1px solid #2b2f38;
+}
+
+.ferby-settings-panel__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.ferby-settings-panel__title {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.ferby-settings-panel__reset-btn {
+  padding: 0.35rem 0.65rem;
+  border-radius: 0.375rem;
+  border: 1px solid #374151;
+  background-color: #222630;
+  color: #e5e7eb;
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+
+.ferby-settings-panel__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.ferby-settings-panel__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.ferby-settings-panel__label {
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.ferby-settings-panel__hint {
+  margin: 0;
+  font-size: 0.75rem;
+  color: #9ca3af;
+}
+
+.ferby-settings-panel__select,
+.ferby-settings-panel__number {
+  padding: 0.4rem 0.6rem;
+  border-radius: 0.375rem;
+  border: 1px solid #374151;
+  background-color: #111318;
+  color: #f9fafb;
+  font-size: 0.85rem;
+}
+
+.ferby-settings-panel__checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+

@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "20261105T093447-copilot-P02-a9715a22",
+  "created_at": "2026-11-05T09:34:47.210850+07:00",
+  "agent": "copilot",
+  "request": "BUILD-20261105",
+  "task": "P02",
+  "completion": "done",
+  "summary": "Implemented validated rectangle, point-clamping and pixel-to-point helpers",
+  "files": [
+    "src/features/measurement/measurement.ts",
+    "src/features/measurement/measurement.test.ts"
+  ],
+  "file_sha256": {
+    "src/features/measurement/measurement.ts": "feef361abf10e2bddf8fa857375990866e51f85bf8de4347999e5a6b4cf3d6ad",
+    "src/features/measurement/measurement.test.ts": "0a35c7ea5e76950d57d2520b1d22a7b9ffd83ac195fbe0040243f7c952de1f2d"
+  },
+  "checks": [
+    "npm run test:unit -- src/features/measurement/measurement.test.ts: passed (4 tests)"
+  ],
+  "risks": [
+    "Display scale is caller-supplied; no UI/display API integration"
+  ],
+  "review": "pending"
+}

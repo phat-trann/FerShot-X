@@ -1,0 +1,171 @@
+{
+  "request": "BUILD-20261105",
+  "foundation": "C00",
+  "tasks": [
+    {
+      "id": "C01",
+      "agent": "codex",
+      "title": "Annotation model and history",
+      "owned_paths": "src/features/editor/model/**",
+      "inputs": "src/contracts/editor.ts",
+      "work": "Implement an immutable annotation state/reducer with add/update/delete/select, bounded undo/redo and counter allocation. Use source-image pixel coordinates. Preserve readonly contract inputs; do not render UI or wire the shell.",
+      "acceptance": "Tests cover undo branching after a new edit, deletion/selection consistency, counter allocation and a bounded history. Export an index with API examples.",
+      "dependency": "independent",
+      "state": "READY"
+    },
+    {
+      "id": "C02",
+      "agent": "codex",
+      "title": "macOS capture core",
+      "owned_paths": "src-tauri/crates/capture-core/**",
+      "inputs": "docs/implementation/ARCHITECTURE.md",
+      "work": "Create standalone ferby-capture-core Rust library. Define mode/result/error types and an injectable command runner. Use a fixed /usr/sbin/screencapture executable with explicit arguments, internally generated output paths and cleanup on cancellation/failure. Clearly reject unsupported platforms. No actual screen capture in tests.",
+      "acceptance": "Cargo tests cover command arguments, path safety, cancel/permission/failure classification with fake runner, and cleanup. Do not change the root Cargo manifest or Tauri registrations.",
+      "dependency": "independent",
+      "state": "READY"
+    },
+    {
+      "id": "C03",
+      "agent": "codex",
+      "title": "Image transform and export core",
+      "owned_paths": "src-tauri/crates/image-core/**",
+      "inputs": "docs/implementation/ARCHITECTURE.md",
+      "work": "Create standalone ferby-image-core Rust library for bounded image decoding, crop, aspect-preserving resize and PNG/JPEG encoding. Choose documented library APIs from primary sources. Keep input immutable, validate dimensions/overflow and avoid overwriting existing outputs.",
+      "acceptance": "Cargo tests use synthetic pixels for exact crop dimensions/colors, invalid/out-of-bounds/zero/overflow cases, resize aspect ratio and decoded output headers. Own dependencies and lockfile stay inside this crate.",
+      "dependency": "independent",
+      "state": "READY"
+    },
+    {
+      "id": "C04",
+      "agent": "codex",
+      "title": "Review and integrate available modules",
+      "owned_paths": "src/Workspace.*; src/platform/**; src-tauri/src/**; root manifests/configs/lockfiles",
+      "inputs": "coordination/reviews/INDEX.md",
+      "work": "Refresh review inbox. Review available packets against actual code/tests and record approved/changes_requested decisions. Integrate only reviewed modules through frozen contracts and typed Tauri commands. Keep native work off the UI thread, use constrained capabilities, and do not pretend pending modules are functional.",
+      "acceptance": "Run relevant frontend tests/build and Rust checks plus meaningful IPC tests. If modules are absent, record partial and proceed to C05 without polling. Never approve a stale snapshot.",
+      "dependency": "available-reviewed-modules",
+      "state": "WHEN_AVAILABLE"
+    },
+    {
+      "id": "C05",
+      "agent": "codex",
+      "title": "Foundation regression and native boundary hardening",
+      "owned_paths": "tests/e2e/codex-regressions.spec.ts; src/platform/**; src-tauri/src/**",
+      "inputs": "src/Workspace.tsx; src/platform/import-image.ts; tests/e2e/workspace.spec.ts",
+      "work": "Add bounded regression coverage for baseline multi-image selection/close/reimport/error recovery and inspect the native command boundary. Fix actual defects only in Codex-owned files. Check capability/CSP scope and document native-vs-browser coverage honestly.",
+      "acceptance": "Run targeted E2E and Rust command tests/build. No capture, cloud, telemetry or permission changes. Preserve unfinished worker files.",
+      "dependency": "independent",
+      "state": "READY"
+    },
+    {
+      "id": "A01",
+      "agent": "antigravity",
+      "title": "Capture panel",
+      "owned_paths": "src/features/capture/**",
+      "inputs": "src/contracts/media.ts",
+      "work": "Implement CapturePanel.tsx and scoped CSS using CapturePanelProps: fullscreen/area/window actions, busy/error states, keyboard focus and accessible names. Buttons call onCapture only. No native invoke, root wiring, global shortcuts or real capture.",
+      "acceptance": "Use React Testing Library tests with jsdom for callback mode values, disabled/busy behavior and announced errors. Keep fixtures synthetic; report that native behavior is unwired.",
+      "dependency": "independent",
+      "state": "READY"
+    },
+    {
+      "id": "A02",
+      "agent": "antigravity",
+      "title": "Session library panel",
+      "owned_paths": "src/features/library/**",
+      "inputs": "src/contracts/media.ts",
+      "work": "Implement LibraryPanel.tsx using LibraryPanelProps. Add local query filtering, selection, remove affordance, list/grid presentation and empty/no-match states. Operate only on provided images; no filesystem/database access or root wiring.",
+      "acceptance": "Test query/selection/removal callbacks, selected state, empty results and keyboard operability. Do not revoke parent-owned object URLs.",
+      "dependency": "independent",
+      "state": "READY"
+    },
+    {
+      "id": "A03",
+      "agent": "antigravity",
+      "title": "Ferby settings panel",
+      "owned_paths": "src/features/settings/**",
+      "inputs": "src/contracts/settings.ts",
+      "work": "Implement controlled SettingsPanel.tsx for Ferby save format, JPEG quality, downscale and preview preferences. Validate ranges and call onChange with a new value. No persistence, native calls or changes to Shottr preferences.",
+      "acceptance": "Test immutable updates, PNG/JPEG quality visibility, bounds and accessible controls. Use only frozen defaults; label unimplemented persistence honestly in the packet.",
+      "dependency": "independent",
+      "state": "READY"
+    },
+    {
+      "id": "A04",
+      "agent": "antigravity",
+      "title": "Editor interaction view",
+      "owned_paths": "src/features/editor/view/**",
+      "inputs": "src/contracts/editor.ts",
+      "work": "Implement EditorView.tsx with source-image-coordinate pointer mapping and an SVG/canvas annotation overlay. Support select, rectangle, arrow and pen creation through callbacks, and render supplied annotations. Implement local gesture helpers; do not depend on C01 reducer, mutate annotations or claim export/blur behavior.",
+      "acceptance": "Test zoom-to-image coordinate mapping, drag direction, cancellation and out-of-image clamping. Add component behavior tests where practical. Report unsupported tools explicitly; do not modify the shared contract.",
+      "dependency": "independent",
+      "state": "READY"
+    },
+    {
+      "id": "A05",
+      "agent": "antigravity",
+      "title": "Pin and preview presentation",
+      "owned_paths": "src/features/pin/**",
+      "inputs": "src/contracts/media.ts",
+      "work": "Create a presentation component for an ImageDocument with scale/opacity controls and edit/copy/close callback props defined locally. Use controlled state/callbacks. No Tauri window creation, clipboard access, persistent storage or always-on-top claims.",
+      "acceptance": "Test callback boundaries, scale/opacity limits and accessible labels. Native pin wiring is a Codex integration follow-up, not a blocker to this component.",
+      "dependency": "independent",
+      "state": "READY"
+    },
+    {
+      "id": "P01",
+      "agent": "copilot",
+      "title": "Color formatting utilities",
+      "owned_paths": "src/features/color/**",
+      "inputs": "No full evidence required",
+      "work": "Implement rgbToHex and hexToRgb for integer RGB channels and #RGB/#RRGGBB. Validate ranges and reject unsupported alpha/malformed input. Pure functions only.",
+      "acceptance": "At most 2 implementation/test files; test boundaries, round trips and invalid input. Run targeted Vitest. Summary at most 150 words.",
+      "dependency": "independent",
+      "state": "READY"
+    },
+    {
+      "id": "P02",
+      "agent": "copilot",
+      "title": "Measurement utilities",
+      "owned_paths": "src/features/measurement/**",
+      "inputs": "src/contracts/editor.ts",
+      "work": "Implement normalizeRect, clampPointToImage and pixelsToPoints using explicit positive display scale. Use image-pixel coordinates and reject non-finite/invalid dimensions. No display API or UI.",
+      "acceptance": "At most 2 implementation/test files; test reverse drag, bounds, 1x/2x scaling and invalid inputs. Run targeted Vitest. Summary at most 150 words.",
+      "dependency": "independent",
+      "state": "READY"
+    },
+    {
+      "id": "P03",
+      "agent": "copilot",
+      "title": "Editor shortcut matching",
+      "owned_paths": "src/features/shortcuts/**",
+      "inputs": "src/contracts/editor.ts",
+      "work": "Define small editor tool key descriptors and a pure matcher returning an AnnotationTool or null. Ignore input/contenteditable focus, composition, repeats and unexpected modifiers. Do not register global listeners or OS shortcuts.",
+      "acceptance": "At most 2 implementation/test files; test text-input safety, composition/repeats and modifier cases. Run targeted Vitest. Summary at most 150 words.",
+      "dependency": "independent",
+      "state": "READY"
+    },
+    {
+      "id": "P04",
+      "agent": "copilot",
+      "title": "Export filename utilities",
+      "owned_paths": "src/features/export/names.ts; src/features/export/names.test.ts",
+      "inputs": "No full evidence required",
+      "work": "Implement a pure safeExportName utility for PNG/JPEG: sanitize path separators/control characters, reject empty/dot-only names, normalize extension and bound filename length while preserving reasonable Unicode. No disk IO or overwrite behavior.",
+      "acceptance": "Only named files; test traversal-like names, duplicate extensions, Unicode, long names and invalid cases. Run targeted Vitest. Summary at most 150 words.",
+      "dependency": "independent",
+      "state": "READY"
+    },
+    {
+      "id": "P05",
+      "agent": "copilot",
+      "title": "Bounded baseline accessibility review",
+      "owned_paths": "docs/qa/copilot-P05.md",
+      "inputs": "src/Workspace.tsx; src/Workspace.css",
+      "work": "Review only the runnable baseline for accessible names, focus order, disabled/error states, image alt text and narrow-window behavior. Do not scan the whole repo or modify product code.",
+      "acceptance": "Report at most 5 actionable findings with file/line, severity, evidence and proposed fix, at most 250 words. Separate static findings from browser-tested facts.",
+      "dependency": "independent",
+      "state": "READY"
+    }
+  ]
+}

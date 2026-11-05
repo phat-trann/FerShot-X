@@ -1,13 +1,51 @@
-# Start a second agent
+# Start the implementation queues
 
-Open `/Users/phattran/Documents/Code/Personal/ferby-shottr/` in the intended coding client. If REA has not appeared since setup, restart/reconnect that client once. No additional REA setup is required for a configured client.
+Stack: **Tauri 2 + Rust + React/TypeScript**. The runnable foundation is present in this checkout. Open `/Users/phattran/Documents/Code/Personal/ferby-shottr/` locally in all three clients.
 
-## Antigravity prompt
+## Copy one prompt to each client
 
-> Work in /Users/phattran/Documents/Code/Personal/ferby-shottr/. Read AGENTS.md, coordination/PROTOCOL.md, coordination/BOARD.md and coordination/handoffs/codex/T01-static-inventory.md. Review the existing REA evidence first. Claim T02 if it is still available, then verify Shottr 1.9.3 capture, scrolling and OCR/QR using synthetic fixtures. Acquire the shared runtime-shottr claim before manipulating Shottr. Do not edit the consolidated report or board, change user preferences, read private screenshots, upload data, or install dependencies. Write your report under docs/agents/antigravity/, save portable evidence locally, and hand off through coordination/handoffs/antigravity/. Report permission/tool blockers and leave untested items UNKNOWN.
+**Codex**
 
-## Codex follow-up prompt
+```text
+Work in ferby-shottr. Read AGENTS.md and coordination/prompts/codex.md.
+Execute its Queue dispatcher: C01-C05 with scoped claims, meaningful checks,
+and a completion packet after every task/request. Review incoming packets
+and integrate available approved modules. Skip blocked scopes without polling.
+```
 
-> Work in /Users/phattran/Documents/Code/Personal/ferby-shottr/. Read AGENTS.md and the coordination board. Review Antigravity's messages and handoffs if present. Claim T03 if available and verify the editor, backdrop, measurements and color tools using a synthetic image. Acquire runtime-shottr before interactive UI work, and respect other task ownership. Save your task report and evidence, then integrate reviewed findings as the board's integrator. Keep unverified behavior UNKNOWN and do not implement an app yet.
+**Antigravity**
 
-The two clients can read packaged resources and write their own reports concurrently. Their interactive tests against the same Shottr instance must take turns. A task description does not automatically launch the other coding client.
+```text
+Work in ferby-shottr. Read AGENTS.md and coordination/prompts/antigravity.md.
+Execute its Queue dispatcher: A01-A05, one owned module at a time.
+Use frozen props contracts without waiting for native wiring or editor state.
+Submit each result to the common review inbox, release, then continue.
+```
+
+**GitHub Copilot**
+
+```text
+Work in ferby-shottr. Read AGENTS.md and coordination/prompts/copilot.md.
+Execute P01-P05 in order, only the assigned small files and targeted tests.
+Do not scan the whole repo or call REA. Submit a short completion packet
+for each task/request, release your claim and continue without waiting.
+```
+
+## Sources of truth
+
+- [Build queue and file ownership](BUILD-QUEUE.md).
+- [Codex: five task prompts](prompts/codex.md).
+- [Antigravity: five task prompts](prompts/antigravity.md).
+- [Copilot: five task prompts](prompts/copilot.md).
+- [Common completion/review inbox](reviews/README.md) and [generated index](reviews/INDEX.md).
+- [Architecture and frozen contracts](../docs/implementation/ARCHITECTURE.md).
+
+Each role file also has individual prompts if a single bounded request is preferred. Missing inputs/claims lead to another independent owned task, not a polling loop. C04 integrates available reviewed modules and can be partial; it must not fabricate readiness.
+
+The original investigation prompts are preserved in [research-round1.md](prompts/research-round1.md). They are historical and their no-product-implementation instruction is superseded.
+
+## Tooling
+
+Node 26 is available through nvm, Rust stable/Cargo through `$HOME/.cargo/env`, and project-local npm dependencies are installed. No shared AI orchestrator is necessary. These files do not start another client automatically.
+
+GitHub Copilot can implement its pure utility tasks from local files without another REA connection. Codex/Antigravity can reuse installed REA for focused target research if needed. macOS Screen Recording/Accessibility access for the REA host was denied during T02; installing Rust does not change those privacy permissions.

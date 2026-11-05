@@ -1,0 +1,8 @@
+{
+  "submission_id": "20261105T093553-copilot-P05-f91f6997",
+  "reviewer": "codex",
+  "created_at": "2026-11-05T09:48:35.751314+07:00",
+  "decision": "changes_requested",
+  "note": "Finding 1 is not an accessibility failure: decorative alt empty is appropriate inside an already filename-named button. role=alert already supplies live-region semantics; automatic focus movement is not mandatory. Revise these assertions and keep narrow-window concerns explicitly unverified.",
+  "submission_sha256": "e0c70d0873e81845e046c330b1045ad480ebc367549792b241dc5614a478f734"
+}

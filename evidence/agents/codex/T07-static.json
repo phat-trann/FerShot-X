@@ -1,0 +1,3123 @@
+{
+  "task": "T07",
+  "kind": "projection of saved REA observations, not new canonical Evidence",
+  "source_evidence_id": "ev_7a54c59efe5ad259d8b8b7c187965d29df9ca99f3686ffa068c92add599df2ca",
+  "source_file": "evidence/raw/interface-builder.json",
+  "source_file_sha256": "cf38421b8287f46cdb8ab5a31958dc966bb319f9259eebf5d2ff61d051c0364e",
+  "target": {
+    "app_path": "/Applications/Shottr.app",
+    "version": "1.9.3",
+    "build": "137",
+    "executable_sha256": "4a1ea879e1079b81b1c501e7ef0c399cf7d0890c2b33fc79f97c4124620360a3"
+  },
+  "classification": "STATIC_OBSERVED",
+  "runtime_status": "UNKNOWN",
+  "limitations": [
+    "Artifact identity is unavailable for this observation.",
+    "The graph reflects recognized Interface Builder archive fields and connections; omitted private or unrecognized archive fields remain unknown.",
+    "A target-action selector is an Interface Builder observation and does not prove that the binary contains a matching implementation.",
+    "Decoded constraints, runtime visibility, dynamic UI creation, and pixel geometry are not inferred from these archives.",
+    "Compiled Interface Builder archives are private serialized object graphs. The decoder reports only recognized keyed-archive objects and connections; unrecognized object classes and fields remain unknown.",
+    "Some serialized hierarchy links could not be projected within the bounded hierarchy; their parentage remains unknown.",
+    "Resolved control text follows only selected explicit archive reference fields.",
+    "Archived slider values, flags and shortcut masks are serialized declarations, not runtime defaults or effective bindings.",
+    "External placeholders and null action targets remain unresolved; no implementation or responder-chain receiver is inferred."
+  ],
+  "documents": [
+    {
+      "id": "UI-04",
+      "resource_path": "Contents/Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib",
+      "archive_sha256": "d92cb78b5fdb56ee31ba533b6357bdd74cfefa22b0273e3f710bd1ffbfd4a248",
+      "current_resource_sha256": "d92cb78b5fdb56ee31ba533b6357bdd74cfefa22b0273e3f710bd1ffbfd4a248",
+      "coverage": [
+        {
+          "facet": "objects:Contents/Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib",
+          "status": "complete",
+          "reason": null,
+          "examined": 169,
+          "omitted": 0
+        },
+        {
+          "facet": "connections:Contents/Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib",
+          "status": "partial",
+          "reason": "unsupported_connection_type",
+          "examined": 20,
+          "omitted": 0
+        },
+        {
+          "facet": "hierarchy:Contents/Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib",
+          "status": "complete",
+          "reason": null,
+          "examined": 114,
+          "omitted": 0
+        },
+        {
+          "facet": "classes:Contents/Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib",
+          "status": "complete",
+          "reason": null,
+          "examined": 30,
+          "omitted": 0
+        }
+      ],
+      "declared_classes": [
+        {
+          "object_id": "2",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib\":object:[\"2\"]",
+          "archived_class": "NSObject",
+          "nib_name": null
+        },
+        {
+          "object_id": "9",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib\":object:[\"9\"]",
+          "archived_class": "_TtC6Shottr10CtrlButton",
+          "nib_name": null
+        },
+        {
+          "object_id": "25",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib\":object:[\"25\"]",
+          "archived_class": "_TtC6Shottr10CtrlButton",
+          "nib_name": null
+        },
+        {
+          "object_id": "49",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib\":object:[\"49\"]",
+          "archived_class": "_TtC6Shottr10CtrlButton",
+          "nib_name": null
+        },
+        {
+          "object_id": "59",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib\":object:[\"59\"]",
+          "archived_class": "_TtC6Shottr10CtrlButton",
+          "nib_name": null
+        },
+        {
+          "object_id": "73",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib\":object:[\"73\"]",
+          "archived_class": "_TtC6Shottr10CtrlButton",
+          "nib_name": null
+        },
+        {
+          "object_id": "98",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib\":object:[\"98\"]",
+          "archived_class": "_TtC6Shottr10CtrlButton",
+          "nib_name": null
+        },
+        {
+          "object_id": "135",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib\":object:[\"135\"]",
+          "archived_class": "_TtC6Shottr10CtrlButton",
+          "nib_name": null
+        },
+        {
+          "object_id": "151",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib\":object:[\"151\"]",
+          "archived_class": "_TtC6Shottr10CtrlButton",
+          "nib_name": null
+        },
+        {
+          "object_id": "168",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib\":object:[\"168\"]",
+          "archived_class": "_TtC6Shottr8ShotView",
+          "nib_name": null
+        },
+        {
+          "object_id": "172",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib\":object:[\"172\"]",
+          "archived_class": "NSView",
+          "nib_name": null
+        },
+        {
+          "object_id": "191",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib\":object:[\"191\"]",
+          "archived_class": "NSImage",
+          "nib_name": null
+        },
+        {
+          "object_id": "196",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib\":object:[\"196\"]",
+          "archived_class": "NSView",
+          "nib_name": null
+        },
+        {
+          "object_id": "206",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib\":object:[\"206\"]",
+          "archived_class": "NSImage",
+          "nib_name": null
+        },
+        {
+          "object_id": "218",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib\":object:[\"218\"]",
+          "archived_class": "NSView",
+          "nib_name": null
+        },
+        {
+          "object_id": "225",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib\":object:[\"225\"]",
+          "archived_class": "NSImage",
+          "nib_name": null
+        },
+        {
+          "object_id": "241",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib\":object:[\"241\"]",
+          "archived_class": "NSView",
+          "nib_name": null
+        },
+        {
+          "object_id": "251",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib\":object:[\"251\"]",
+          "archived_class": "NSImage",
+          "nib_name": null
+        },
+        {
+          "object_id": "274",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib\":object:[\"274\"]",
+          "archived_class": "NSView",
+          "nib_name": null
+        },
+        {
+          "object_id": "284",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib\":object:[\"284\"]",
+          "archived_class": "NSImage",
+          "nib_name": null
+        },
+        {
+          "object_id": "363",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib\":object:[\"363\"]",
+          "archived_class": "NSApplication",
+          "nib_name": null
+        }
+      ],
+      "labels": [
+        {
+          "text": "Update Shottr",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib\":object:[\"19\"]"
+        },
+        {
+          "text": "Next Time",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib\":object:[\"32\"]"
+        },
+        {
+          "text": "Run at Startup",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib\":object:[\"56\"]"
+        },
+        {
+          "text": "Setup Hotkeys",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib\":object:[\"66\"]"
+        },
+        {
+          "text": "Maybe Later",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib\":object:[\"78\"]"
+        },
+        {
+          "text": "Yes",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib\":object:[\"105\"]"
+        },
+        {
+          "text": "Purchase Shottr",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib\":object:[\"142\"]"
+        },
+        {
+          "text": "Later",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib\":object:[\"157\"]"
+        },
+        {
+          "text": "Hi! I’m the world’s most annoying salesperson. Do you want to buy Shottr?",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib\":object:[\"293\"]"
+        }
+      ],
+      "actions": [
+        {
+          "selector": "clickIntroNewVersion:",
+          "action_node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib\":action:[\"9:connection:0\"]",
+          "source": {
+            "object_id": "9",
+            "class": "_TtC6Shottr10CtrlButton",
+            "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib\":object:[\"9\"]",
+            "text_or_resource_names": [
+              "Update Shottr"
+            ],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "18",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "327",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "clickIntroNextTime:",
+          "action_node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib\":action:[\"25:connection:0\"]",
+          "source": {
+            "object_id": "25",
+            "class": "_TtC6Shottr10CtrlButton",
+            "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib\":object:[\"25\"]",
+            "text_or_resource_names": [
+              "Next Time"
+            ],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "31",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "327",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "runAtStartup:",
+          "action_node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib\":action:[\"49:connection:0\"]",
+          "source": {
+            "object_id": "49",
+            "class": "_TtC6Shottr10CtrlButton",
+            "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib\":object:[\"49\"]",
+            "text_or_resource_names": [
+              "Run at Startup"
+            ],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "55",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "327",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "setupHotkeys:",
+          "action_node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib\":action:[\"59:connection:0\"]",
+          "source": {
+            "object_id": "59",
+            "class": "_TtC6Shottr10CtrlButton",
+            "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib\":object:[\"59\"]",
+            "text_or_resource_names": [
+              "Setup Hotkeys"
+            ],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "65",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "327",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "clickIntroPurchaseLater:",
+          "action_node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib\":action:[\"73:connection:0\"]",
+          "source": {
+            "object_id": "73",
+            "class": "_TtC6Shottr10CtrlButton",
+            "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib\":object:[\"73\"]",
+            "text_or_resource_names": [
+              "Maybe Later"
+            ],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "77",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "327",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "clickShottyPurchase:",
+          "action_node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib\":action:[\"104:connection:0\"]",
+          "source": {
+            "object_id": "104",
+            "class": "NSButtonCell",
+            "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib\":object:[\"104\"]",
+            "text_or_resource_names": [
+              "Yes"
+            ],
+            "archived_properties": {
+              "NSKeyEquivalent": ""
+            },
+            "cell_object_id": null,
+            "archived_cell_properties": {}
+          },
+          "destination_object_id": "327",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "clickIntroPurchase:",
+          "action_node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib\":action:[\"135:connection:0\"]",
+          "source": {
+            "object_id": "135",
+            "class": "_TtC6Shottr10CtrlButton",
+            "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib\":object:[\"135\"]",
+            "text_or_resource_names": [
+              "Purchase Shottr"
+            ],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "141",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "327",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "clickShottySkip:",
+          "action_node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib\":action:[\"151:connection:0\"]",
+          "source": {
+            "object_id": "151",
+            "class": "_TtC6Shottr10CtrlButton",
+            "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib\":object:[\"151\"]",
+            "text_or_resource_names": [
+              "Later"
+            ],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "156",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "327",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        }
+      ]
+    },
+    {
+      "id": "UI-10",
+      "resource_path": "Contents/Resources/Preferences.storyboardc/6sQ-om-XCe-view-qXZ-XU-bNz.nib",
+      "archive_sha256": "612e1d4c546d55d52d74a03b19fb72938bdffd085c0ef329c483f7abbc2c2b37",
+      "current_resource_sha256": "612e1d4c546d55d52d74a03b19fb72938bdffd085c0ef329c483f7abbc2c2b37",
+      "coverage": [
+        {
+          "facet": "objects:Contents/Resources/Preferences.storyboardc/6sQ-om-XCe-view-qXZ-XU-bNz.nib",
+          "status": "complete",
+          "reason": null,
+          "examined": 161,
+          "omitted": 0
+        },
+        {
+          "facet": "connections:Contents/Resources/Preferences.storyboardc/6sQ-om-XCe-view-qXZ-XU-bNz.nib",
+          "status": "complete",
+          "reason": null,
+          "examined": 14,
+          "omitted": 0
+        },
+        {
+          "facet": "hierarchy:Contents/Resources/Preferences.storyboardc/6sQ-om-XCe-view-qXZ-XU-bNz.nib",
+          "status": "complete",
+          "reason": null,
+          "examined": 138,
+          "omitted": 0
+        },
+        {
+          "facet": "classes:Contents/Resources/Preferences.storyboardc/6sQ-om-XCe-view-qXZ-XU-bNz.nib",
+          "status": "complete",
+          "reason": null,
+          "examined": 25,
+          "omitted": 0
+        }
+      ],
+      "declared_classes": [
+        {
+          "object_id": "2",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/6sQ-om-XCe-view-qXZ-XU-bNz.nib\":object:[\"2\"]",
+          "archived_class": "NSObject",
+          "nib_name": null
+        },
+        {
+          "object_id": "9",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/6sQ-om-XCe-view-qXZ-XU-bNz.nib\":object:[\"9\"]",
+          "archived_class": "NSView",
+          "nib_name": null
+        },
+        {
+          "object_id": "12",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/6sQ-om-XCe-view-qXZ-XU-bNz.nib\":object:[\"12\"]",
+          "archived_class": "NSView",
+          "nib_name": null
+        },
+        {
+          "object_id": "74",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/6sQ-om-XCe-view-qXZ-XU-bNz.nib\":object:[\"74\"]",
+          "archived_class": "NSView",
+          "nib_name": null
+        },
+        {
+          "object_id": "125",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/6sQ-om-XCe-view-qXZ-XU-bNz.nib\":object:[\"125\"]",
+          "archived_class": "NSView",
+          "nib_name": null
+        },
+        {
+          "object_id": "134",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/6sQ-om-XCe-view-qXZ-XU-bNz.nib\":object:[\"134\"]",
+          "archived_class": "NSView",
+          "nib_name": null
+        },
+        {
+          "object_id": "143",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/6sQ-om-XCe-view-qXZ-XU-bNz.nib\":object:[\"143\"]",
+          "archived_class": "NSView",
+          "nib_name": null
+        },
+        {
+          "object_id": "152",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/6sQ-om-XCe-view-qXZ-XU-bNz.nib\":object:[\"152\"]",
+          "archived_class": "NSView",
+          "nib_name": null
+        },
+        {
+          "object_id": "157",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/6sQ-om-XCe-view-qXZ-XU-bNz.nib\":object:[\"157\"]",
+          "archived_class": "NSView",
+          "nib_name": null
+        },
+        {
+          "object_id": "172",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/6sQ-om-XCe-view-qXZ-XU-bNz.nib\":object:[\"172\"]",
+          "archived_class": "NSView",
+          "nib_name": null
+        },
+        {
+          "object_id": "177",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/6sQ-om-XCe-view-qXZ-XU-bNz.nib\":object:[\"177\"]",
+          "archived_class": "NSView",
+          "nib_name": null
+        },
+        {
+          "object_id": "190",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/6sQ-om-XCe-view-qXZ-XU-bNz.nib\":object:[\"190\"]",
+          "archived_class": "NSView",
+          "nib_name": null
+        },
+        {
+          "object_id": "283",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/6sQ-om-XCe-view-qXZ-XU-bNz.nib\":object:[\"283\"]",
+          "archived_class": "NSApplication",
+          "nib_name": null
+        }
+      ],
+      "labels": [
+        {
+          "text": "Reassign Default",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/6sQ-om-XCe-view-qXZ-XU-bNz.nib\":object:[\"21\"]"
+        },
+        {
+          "text": "Reassign default shortcuts",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/6sQ-om-XCe-view-qXZ-XU-bNz.nib\":object:[\"46\"]"
+        },
+        {
+          "text": "Steps to assign ⌘⇧4 to Shottr",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/6sQ-om-XCe-view-qXZ-XU-bNz.nib\":object:[\"58\"]"
+        },
+        {
+          "text": "1. Go to System Settings → Keyboard → Keyboard Shortcuts",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/6sQ-om-XCe-view-qXZ-XU-bNz.nib\":object:[\"78\"]"
+        },
+        {
+          "text": "2. Select \"Screenshots\" and uncheck checkboxes for system shortcuts",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/6sQ-om-XCe-view-qXZ-XU-bNz.nib\":object:[\"82\"]"
+        },
+        {
+          "text": "Open System Settings",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/6sQ-om-XCe-view-qXZ-XU-bNz.nib\":object:[\"87\"]"
+        },
+        {
+          "text": "3. Put ⌘⇧3 into Fullscreen and ⌘⇧4 into Area fields below ",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/6sQ-om-XCe-view-qXZ-XU-bNz.nib\":object:[\"91\"]"
+        },
+        {
+          "text": "How to reassign default shortcuts",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/6sQ-om-XCe-view-qXZ-XU-bNz.nib\":object:[\"95\"]"
+        },
+        {
+          "text": "Title",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/6sQ-om-XCe-view-qXZ-XU-bNz.nib\":object:[\"118\"]"
+        },
+        {
+          "text": "Fullscreen screenshot",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/6sQ-om-XCe-view-qXZ-XU-bNz.nib\":object:[\"123\"]"
+        },
+        {
+          "text": "Area screenshot",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/6sQ-om-XCe-view-qXZ-XU-bNz.nib\":object:[\"132\"]"
+        },
+        {
+          "text": "Active window screenshot",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/6sQ-om-XCe-view-qXZ-XU-bNz.nib\":object:[\"141\"]"
+        },
+        {
+          "text": "Scrolling screenshot",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/6sQ-om-XCe-view-qXZ-XU-bNz.nib\":object:[\"150\"]"
+        },
+        {
+          "text": "Title",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/6sQ-om-XCe-view-qXZ-XU-bNz.nib\":object:[\"167\"]"
+        },
+        {
+          "text": "Instant Text/QR Recognition",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/6sQ-om-XCe-view-qXZ-XU-bNz.nib\":object:[\"170\"]"
+        },
+        {
+          "text": "Repeat area screenshot",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/6sQ-om-XCe-view-qXZ-XU-bNz.nib\":object:[\"184\"]"
+        },
+        {
+          "text": "Any window screenshot",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/6sQ-om-XCe-view-qXZ-XU-bNz.nib\":object:[\"188\"]"
+        },
+        {
+          "text": "Show Shottr",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/6sQ-om-XCe-view-qXZ-XU-bNz.nib\":object:[\"197\"]"
+        }
+      ],
+      "actions": [
+        {
+          "selector": "clickReassignDefault:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/6sQ-om-XCe-view-qXZ-XU-bNz.nib\":action:[\"14:connection:0\"]",
+          "source": {
+            "object_id": "14",
+            "class": "NSButton",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/6sQ-om-XCe-view-qXZ-XU-bNz.nib\":object:[\"14\"]",
+            "text_or_resource_names": [
+              "Reassign Default"
+            ],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "21",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": "\r"
+            }
+          },
+          "destination_object_id": "255",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "clickOpenPreferences:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/6sQ-om-XCe-view-qXZ-XU-bNz.nib\":action:[\"84:connection:0\"]",
+          "source": {
+            "object_id": "84",
+            "class": "NSButton",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/6sQ-om-XCe-view-qXZ-XU-bNz.nib\":object:[\"84\"]",
+            "text_or_resource_names": [
+              "Open System Settings"
+            ],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "87",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "255",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        }
+      ]
+    },
+    {
+      "id": "UI-11",
+      "resource_path": "Contents/Resources/Preferences.storyboardc/NSWindowController-3cz-fX-Ya1.nib",
+      "archive_sha256": "5a397bcb2d33d8ee7351ad756a614c5741c69b46e3df00f12a6ea9249b5c153b",
+      "current_resource_sha256": "5a397bcb2d33d8ee7351ad756a614c5741c69b46e3df00f12a6ea9249b5c153b",
+      "coverage": [
+        {
+          "facet": "objects:Contents/Resources/Preferences.storyboardc/NSWindowController-3cz-fX-Ya1.nib",
+          "status": "complete",
+          "reason": null,
+          "examined": 47,
+          "omitted": 0
+        },
+        {
+          "facet": "connections:Contents/Resources/Preferences.storyboardc/NSWindowController-3cz-fX-Ya1.nib",
+          "status": "complete",
+          "reason": null,
+          "examined": 17,
+          "omitted": 0
+        },
+        {
+          "facet": "hierarchy:Contents/Resources/Preferences.storyboardc/NSWindowController-3cz-fX-Ya1.nib",
+          "status": "complete",
+          "reason": null,
+          "examined": 25,
+          "omitted": 0
+        },
+        {
+          "facet": "classes:Contents/Resources/Preferences.storyboardc/NSWindowController-3cz-fX-Ya1.nib",
+          "status": "complete",
+          "reason": null,
+          "examined": 25,
+          "omitted": 0
+        }
+      ],
+      "declared_classes": [
+        {
+          "object_id": "2",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NSWindowController-3cz-fX-Ya1.nib\":object:[\"2\"]",
+          "archived_class": "NSObject",
+          "nib_name": null
+        },
+        {
+          "object_id": "14",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NSWindowController-3cz-fX-Ya1.nib\":object:[\"14\"]",
+          "archived_class": "NSImage",
+          "nib_name": null
+        },
+        {
+          "object_id": "19",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NSWindowController-3cz-fX-Ya1.nib\":object:[\"19\"]",
+          "archived_class": "_TtC6Shottr24PrefUploadViewController",
+          "nib_name": "PA4-Wk-i8P-view-ifL-La-miy"
+        },
+        {
+          "object_id": "30",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NSWindowController-3cz-fX-Ya1.nib\":object:[\"30\"]",
+          "archived_class": "NSImage",
+          "nib_name": null
+        },
+        {
+          "object_id": "33",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NSWindowController-3cz-fX-Ya1.nib\":object:[\"33\"]",
+          "archived_class": "_TtC6Shottr24PrefHotkeyViewController",
+          "nib_name": "6sQ-om-XCe-view-qXZ-XU-bNz"
+        },
+        {
+          "object_id": "41",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NSWindowController-3cz-fX-Ya1.nib\":object:[\"41\"]",
+          "archived_class": "NSImage",
+          "nib_name": null
+        },
+        {
+          "object_id": "44",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NSWindowController-3cz-fX-Ya1.nib\":object:[\"44\"]",
+          "archived_class": "_TtC6Shottr18PrefViewController",
+          "nib_name": "vXi-bH-nTd-view-fki-md-Men"
+        },
+        {
+          "object_id": "52",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NSWindowController-3cz-fX-Ya1.nib\":object:[\"52\"]",
+          "archived_class": "NSImage",
+          "nib_name": null
+        },
+        {
+          "object_id": "55",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NSWindowController-3cz-fX-Ya1.nib\":object:[\"55\"]",
+          "archived_class": "_TtC6Shottr25PrefLicenseViewController",
+          "nib_name": "YPR-Ju-4pY-view-Mcz-Zk-Zk0"
+        },
+        {
+          "object_id": "63",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NSWindowController-3cz-fX-Ya1.nib\":object:[\"63\"]",
+          "archived_class": "NSImage",
+          "nib_name": null
+        },
+        {
+          "object_id": "66",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NSWindowController-3cz-fX-Ya1.nib\":object:[\"66\"]",
+          "archived_class": "_TtC6Shottr26PrefAdvancedViewController",
+          "nib_name": "NTL-U4-RCY-view-jEA-Ft-qg2"
+        },
+        {
+          "object_id": "73",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NSWindowController-3cz-fX-Ya1.nib\":object:[\"73\"]",
+          "archived_class": "_TtC6Shottr20PrefWindowController",
+          "nib_name": null
+        },
+        {
+          "object_id": "145",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NSWindowController-3cz-fX-Ya1.nib\":object:[\"145\"]",
+          "archived_class": "NSApplication",
+          "nib_name": null
+        }
+      ],
+      "labels": [
+        {
+          "text": "Uploading",
+          "field": "NSTitle",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NSWindowController-3cz-fX-Ya1.nib\":object:[\"19\"]"
+        },
+        {
+          "text": "Hotkeys",
+          "field": "NSTitle",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NSWindowController-3cz-fX-Ya1.nib\":object:[\"33\"]"
+        },
+        {
+          "text": "General",
+          "field": "NSTitle",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NSWindowController-3cz-fX-Ya1.nib\":object:[\"44\"]"
+        },
+        {
+          "text": "License",
+          "field": "NSTitle",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NSWindowController-3cz-fX-Ya1.nib\":object:[\"55\"]"
+        },
+        {
+          "text": "Advanced",
+          "field": "NSTitle",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NSWindowController-3cz-fX-Ya1.nib\":object:[\"66\"]"
+        }
+      ],
+      "actions": []
+    },
+    {
+      "id": "UI-12",
+      "resource_path": "Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib",
+      "archive_sha256": "7e5bef014e15e3c2af1708bb53703394e887aeff233d0d3abb527047ef8d2665",
+      "current_resource_sha256": "7e5bef014e15e3c2af1708bb53703394e887aeff233d0d3abb527047ef8d2665",
+      "coverage": [
+        {
+          "facet": "objects:Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib",
+          "status": "complete",
+          "reason": null,
+          "examined": 176,
+          "omitted": 0
+        },
+        {
+          "facet": "connections:Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib",
+          "status": "complete",
+          "reason": null,
+          "examined": 31,
+          "omitted": 0
+        },
+        {
+          "facet": "hierarchy:Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib",
+          "status": "partial",
+          "reason": "serialized_view_hierarchy_incomplete",
+          "examined": 158,
+          "omitted": 25
+        },
+        {
+          "facet": "classes:Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib",
+          "status": "complete",
+          "reason": null,
+          "examined": 33,
+          "omitted": 0
+        }
+      ],
+      "declared_classes": [
+        {
+          "object_id": "2",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"2\"]",
+          "archived_class": "NSObject",
+          "nib_name": null
+        },
+        {
+          "object_id": "37",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"37\"]",
+          "archived_class": "NSImage",
+          "nib_name": null
+        },
+        {
+          "object_id": "42",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"42\"]",
+          "archived_class": "NSImage",
+          "nib_name": null
+        },
+        {
+          "object_id": "66",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"66\"]",
+          "archived_class": "NSView",
+          "nib_name": null
+        },
+        {
+          "object_id": "93",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"93\"]",
+          "archived_class": "NSView",
+          "nib_name": null
+        },
+        {
+          "object_id": "136",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"136\"]",
+          "archived_class": "NSView",
+          "nib_name": null
+        },
+        {
+          "object_id": "160",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"160\"]",
+          "archived_class": "NSView",
+          "nib_name": null
+        },
+        {
+          "object_id": "185",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"185\"]",
+          "archived_class": "NSView",
+          "nib_name": null
+        },
+        {
+          "object_id": "378",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"378\"]",
+          "archived_class": "NSApplication",
+          "nib_name": null
+        }
+      ],
+      "labels": [
+        {
+          "text": "Primary OCR language",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"14\"]"
+        },
+        {
+          "text": "English",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"32\"]"
+        },
+        {
+          "text": "English",
+          "field": "NSTitle",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"36\"]"
+        },
+        {
+          "text": "OCR line breaks",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"51\"]"
+        },
+        {
+          "text": "Remove line breaks",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"57\"]"
+        },
+        {
+          "text": "Menubar icon",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"64\"]"
+        },
+        {
+          "text": "Hide menubar icon",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"72\"]"
+        },
+        {
+          "text": "Splash window",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"91\"]"
+        },
+        {
+          "text": "Don't show splash",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"98\"]"
+        },
+        {
+          "text": "Main window",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"116\"]"
+        },
+        {
+          "text": "Always on top",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"121\"]"
+        },
+        {
+          "text": "Zoom with mouse wheel",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"125\"]"
+        },
+        {
+          "text": "Reverse scroll direction",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"130\"]"
+        },
+        {
+          "text": "Scrolling capture",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"134\"]"
+        },
+        {
+          "text": "Reverse scroll direction",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"141\"]"
+        },
+        {
+          "text": "Default zoom level",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"158\"]"
+        },
+        {
+          "text": "Prefer 100%",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"165\"]"
+        },
+        {
+          "text": "Action when hiding with Esc",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"183\"]"
+        },
+        {
+          "text": "Copy Image",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"190\"]"
+        },
+        {
+          "text": "Save Image",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"195\"]"
+        },
+        {
+          "text": "Confirmation style",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"207\"]"
+        },
+        {
+          "text": "Custom Notification",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"214\"]"
+        },
+        {
+          "text": "Custom Notification",
+          "field": "NSTitle",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"216\"]"
+        },
+        {
+          "text": "System Notification",
+          "field": "NSTitle",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"219\"]"
+        },
+        {
+          "text": "None",
+          "field": "NSTitle",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"221\"]"
+        },
+        {
+          "text": "URL Scheme API",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"225\"]"
+        },
+        {
+          "text": "Enable deep links",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"230\"]"
+        },
+        {
+          "text": "Diagnostics information",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"234\"]"
+        },
+        {
+          "text": "Allow collection",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"239\"]"
+        },
+        {
+          "text": "We DO collect: performance metrics, error codes, frequency of feature usage; OS version, screen resolution and internationalization preferences.\nWe DON'T collect: any personal information, IP address, any images or text. Screenshots never leave the computer unless you upload them to the cloud.",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"243\"]"
+        }
+      ],
+      "actions": [
+        {
+          "selector": "updatePrimaryOCR:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":action:[\"27:connection:0\"]",
+          "source": {
+            "object_id": "27",
+            "class": "NSPopUpButton",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"27\"]",
+            "text_or_resource_names": [
+              "English"
+            ],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "32",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": "",
+              "NSMenuItemRespectAlignment": true
+            }
+          },
+          "destination_object_id": "317",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "updateRemoveBreaksOCR:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":action:[\"53:connection:0\"]",
+          "source": {
+            "object_id": "53",
+            "class": "NSButton",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"53\"]",
+            "text_or_resource_names": [
+              "Remove line breaks"
+            ],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "57",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "317",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "updateHideMenubar:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":action:[\"69:connection:0\"]",
+          "source": {
+            "object_id": "69",
+            "class": "NSButton",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"69\"]",
+            "text_or_resource_names": [
+              "Hide menubar icon"
+            ],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "72",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "317",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "helpHideMenubar:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":action:[\"74:connection:0\"]",
+          "source": {
+            "object_id": "74",
+            "class": "NSButton",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"74\"]",
+            "text_or_resource_names": [],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "79",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "317",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "updateHideSplash:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":action:[\"95:connection:0\"]",
+          "source": {
+            "object_id": "95",
+            "class": "NSButton",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"95\"]",
+            "text_or_resource_names": [
+              "Don't show splash"
+            ],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "98",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "317",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "helpHideMenubar:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":action:[\"100:connection:0\"]",
+          "source": {
+            "object_id": "100",
+            "class": "NSButton",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"100\"]",
+            "text_or_resource_names": [],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "105",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "317",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "updateAlwaysOnTop:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":action:[\"118:connection:0\"]",
+          "source": {
+            "object_id": "118",
+            "class": "NSButton",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"118\"]",
+            "text_or_resource_names": [
+              "Always on top"
+            ],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "121",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "317",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "updateReverseScroll:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":action:[\"127:connection:0\"]",
+          "source": {
+            "object_id": "127",
+            "class": "NSButton",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"127\"]",
+            "text_or_resource_names": [
+              "Reverse scroll direction"
+            ],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "130",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "317",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "updateReverseAutoscroll:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":action:[\"138:connection:0\"]",
+          "source": {
+            "object_id": "138",
+            "class": "NSButton",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"138\"]",
+            "text_or_resource_names": [
+              "Reverse scroll direction"
+            ],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "141",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "317",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "helpReverseAutoscroll:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":action:[\"142:connection:0\"]",
+          "source": {
+            "object_id": "142",
+            "class": "NSButton",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"142\"]",
+            "text_or_resource_names": [],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "147",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "317",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "updateLargerWindow:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":action:[\"162:connection:0\"]",
+          "source": {
+            "object_id": "162",
+            "class": "NSButton",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"162\"]",
+            "text_or_resource_names": [
+              "Prefer 100%"
+            ],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "165",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "317",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "helpLargerWindow:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":action:[\"167:connection:0\"]",
+          "source": {
+            "object_id": "167",
+            "class": "NSButton",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"167\"]",
+            "text_or_resource_names": [],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "172",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "317",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "updateEscCopy:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":action:[\"187:connection:0\"]",
+          "source": {
+            "object_id": "187",
+            "class": "NSButton",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"187\"]",
+            "text_or_resource_names": [
+              "Copy Image"
+            ],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "190",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "317",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "updateEscSave:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":action:[\"192:connection:0\"]",
+          "source": {
+            "object_id": "192",
+            "class": "NSButton",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"192\"]",
+            "text_or_resource_names": [
+              "Save Image"
+            ],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "195",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "317",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "updateNotificationType:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":action:[\"209:connection:0\"]",
+          "source": {
+            "object_id": "209",
+            "class": "NSPopUpButton",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"209\"]",
+            "text_or_resource_names": [
+              "Custom Notification"
+            ],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "214",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": "",
+              "NSMenuItemRespectAlignment": true
+            }
+          },
+          "destination_object_id": "317",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "updateDeeplinks:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":action:[\"227:connection:0\"]",
+          "source": {
+            "object_id": "227",
+            "class": "NSButton",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"227\"]",
+            "text_or_resource_names": [
+              "Enable deep links"
+            ],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "230",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "317",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "updateTelemetry:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":action:[\"236:connection:0\"]",
+          "source": {
+            "object_id": "236",
+            "class": "NSButton",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"236\"]",
+            "text_or_resource_names": [
+              "Allow collection"
+            ],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "239",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "317",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        }
+      ]
+    },
+    {
+      "id": "UI-13",
+      "resource_path": "Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib",
+      "archive_sha256": "eb90eab04a353717809395c758d63445ba8c0f79fff53b10ee80586834df785f",
+      "current_resource_sha256": "eb90eab04a353717809395c758d63445ba8c0f79fff53b10ee80586834df785f",
+      "coverage": [
+        {
+          "facet": "objects:Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib",
+          "status": "complete",
+          "reason": null,
+          "examined": 289,
+          "omitted": 0
+        },
+        {
+          "facet": "connections:Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib",
+          "status": "partial",
+          "reason": "unsupported_connection_type",
+          "examined": 47,
+          "omitted": 0
+        },
+        {
+          "facet": "hierarchy:Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib",
+          "status": "complete",
+          "reason": null,
+          "examined": 254,
+          "omitted": 0
+        },
+        {
+          "facet": "classes:Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib",
+          "status": "complete",
+          "reason": null,
+          "examined": 39,
+          "omitted": 0
+        }
+      ],
+      "declared_classes": [
+        {
+          "object_id": "2",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"2\"]",
+          "archived_class": "NSObject",
+          "nib_name": null
+        },
+        {
+          "object_id": "9",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"9\"]",
+          "archived_class": "NSView",
+          "nib_name": null
+        },
+        {
+          "object_id": "38",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"38\"]",
+          "archived_class": "NSImage",
+          "nib_name": null
+        },
+        {
+          "object_id": "43",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"43\"]",
+          "archived_class": "NSImage",
+          "nib_name": null
+        },
+        {
+          "object_id": "56",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"56\"]",
+          "archived_class": "_TtC6Shottr10CtrlButton",
+          "nib_name": null
+        },
+        {
+          "object_id": "83",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"83\"]",
+          "archived_class": "NSView",
+          "nib_name": null
+        },
+        {
+          "object_id": "107",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"107\"]",
+          "archived_class": "NSView",
+          "nib_name": null
+        },
+        {
+          "object_id": "125",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"125\"]",
+          "archived_class": "NSView",
+          "nib_name": null
+        },
+        {
+          "object_id": "143",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"143\"]",
+          "archived_class": "NSView",
+          "nib_name": null
+        },
+        {
+          "object_id": "176",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"176\"]",
+          "archived_class": "NSView",
+          "nib_name": null
+        },
+        {
+          "object_id": "193",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"193\"]",
+          "archived_class": "NSView",
+          "nib_name": null
+        },
+        {
+          "object_id": "211",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"211\"]",
+          "archived_class": "NSView",
+          "nib_name": null
+        },
+        {
+          "object_id": "230",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"230\"]",
+          "archived_class": "NSView",
+          "nib_name": null
+        },
+        {
+          "object_id": "273",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"273\"]",
+          "archived_class": "NSView",
+          "nib_name": null
+        },
+        {
+          "object_id": "302",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"302\"]",
+          "archived_class": "NSView",
+          "nib_name": null
+        },
+        {
+          "object_id": "333",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"333\"]",
+          "archived_class": "NSView",
+          "nib_name": null
+        },
+        {
+          "object_id": "400",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"400\"]",
+          "archived_class": "NSView",
+          "nib_name": null
+        },
+        {
+          "object_id": "419",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"419\"]",
+          "archived_class": "NSView",
+          "nib_name": null
+        },
+        {
+          "object_id": "421",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"421\"]",
+          "archived_class": "_TtC6Shottr10CtrlButton",
+          "nib_name": null
+        },
+        {
+          "object_id": "426",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"426\"]",
+          "archived_class": "_TtC6Shottr10CtrlButton",
+          "nib_name": null
+        },
+        {
+          "object_id": "456",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"456\"]",
+          "archived_class": "NSView",
+          "nib_name": null
+        },
+        {
+          "object_id": "599",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"599\"]",
+          "archived_class": "NSApplication",
+          "nib_name": null
+        }
+      ],
+      "labels": [
+        {
+          "text": "Image Uploading & Link Sharing",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"15\"]"
+        },
+        {
+          "text": "Disable Uploading",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"32\"]"
+        },
+        {
+          "text": "Disable Uploading",
+          "field": "NSTitle",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"36\"]"
+        },
+        {
+          "text": "Shottr Cloud",
+          "field": "NSTitle",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"50\"]"
+        },
+        {
+          "text": "S3 (Amazon, Cloudflare, Backblaze, etc.)",
+          "field": "NSTitle",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"53\"]"
+        },
+        {
+          "text": "Requires Activation",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"62\"]"
+        },
+        {
+          "text": "Access key",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"88\"]"
+        },
+        {
+          "text": "Secret key",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"111\"]"
+        },
+        {
+          "text": "Bucket",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"129\"]"
+        },
+        {
+          "text": "Service",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"147\"]"
+        },
+        {
+          "text": "Amazon (AWS)",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"155\"]"
+        },
+        {
+          "text": "Other",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"163\"]"
+        },
+        {
+          "text": "Region",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"179\"]"
+        },
+        {
+          "text": "Endpoint",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"197\"]"
+        },
+        {
+          "text": "Key prefix (path)",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"215\"]"
+        },
+        {
+          "text": "Optional",
+          "field": "NSPlaceholderString",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"221\"]"
+        },
+        {
+          "text": "Test Connection",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"237\"]"
+        },
+        {
+          "text": "Checking",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"244\"]"
+        },
+        {
+          "text": "Title",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"270\"]"
+        },
+        {
+          "text": "Link sharing",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"277\"]"
+        },
+        {
+          "text": "Don't Generate URL",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"284\"]"
+        },
+        {
+          "text": "Don't Generate URL",
+          "field": "NSTitle",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"286\"]"
+        },
+        {
+          "text": "Generate Presigned URL",
+          "field": "NSTitle",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"289\"]"
+        },
+        {
+          "text": "Generate Public Bucket URL",
+          "field": "NSTitle",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"292\"]"
+        },
+        {
+          "text": "Link Expiration",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"306\"]"
+        },
+        {
+          "text": "N days",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"315\"]"
+        },
+        {
+          "text": "Presigned URLs are only valid for up to 7 days",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"319\"]"
+        },
+        {
+          "text": "Public bucket URL",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"337\"]"
+        },
+        {
+          "text": "Will only work if your bucket is public",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"348\"]"
+        },
+        {
+          "text": "Token",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"404\"]"
+        },
+        {
+          "text": "Learn More",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"424\"]"
+        },
+        {
+          "text": "Get a Token",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"429\"]"
+        },
+        {
+          "text": "To upload images to Shottr Cloud, you need a security token. Think of it as a secret code that grants access to your uploads.",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"441\"]"
+        },
+        {
+          "text": "Shottr allows you to upload an image online and generate a shareable link. Use the dropdown above to enable this functionality.",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"460\"]"
+        }
+      ],
+      "actions": [
+        {
+          "selector": "changeUploadMode:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":action:[\"28:connection:0\"]",
+          "source": {
+            "object_id": "28",
+            "class": "NSPopUpButton",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"28\"]",
+            "text_or_resource_names": [
+              "Disable Uploading"
+            ],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "32",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": "",
+              "NSMenuItemRespectAlignment": true
+            }
+          },
+          "destination_object_id": "514",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "requiresActivation:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":action:[\"56:connection:0\"]",
+          "source": {
+            "object_id": "56",
+            "class": "_TtC6Shottr10CtrlButton",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"56\"]",
+            "text_or_resource_names": [
+              "Requires Activation"
+            ],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "62",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "514",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "editS3Access:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":action:[\"90:connection:0\"]",
+          "source": {
+            "object_id": "90",
+            "class": "NSTextField",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"90\"]",
+            "text_or_resource_names": [],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "96",
+            "archived_cell_properties": {}
+          },
+          "destination_object_id": "514",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "editS3Secret:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":action:[\"113:connection:0\"]",
+          "source": {
+            "object_id": "113",
+            "class": "NSSecureTextField",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"113\"]",
+            "text_or_resource_names": [],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "115",
+            "archived_cell_properties": {}
+          },
+          "destination_object_id": "514",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "editS3Bucket:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":action:[\"131:connection:0\"]",
+          "source": {
+            "object_id": "131",
+            "class": "NSTextField",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"131\"]",
+            "text_or_resource_names": [],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "135",
+            "archived_cell_properties": {}
+          },
+          "destination_object_id": "514",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "pickS3RegionOrEndpoint:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":action:[\"151:connection:0\"]",
+          "source": {
+            "object_id": "151",
+            "class": "NSButton",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"151\"]",
+            "text_or_resource_names": [
+              "Amazon (AWS)"
+            ],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "155",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "514",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "pickS3RegionOrEndpoint:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":action:[\"159:connection:0\"]",
+          "source": {
+            "object_id": "159",
+            "class": "NSButton",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"159\"]",
+            "text_or_resource_names": [
+              "Other"
+            ],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "163",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "514",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "editS3Region:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":action:[\"181:connection:0\"]",
+          "source": {
+            "object_id": "181",
+            "class": "NSTextField",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"181\"]",
+            "text_or_resource_names": [],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "185",
+            "archived_cell_properties": {}
+          },
+          "destination_object_id": "514",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "editS3Endpoint:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":action:[\"199:connection:0\"]",
+          "source": {
+            "object_id": "199",
+            "class": "NSTextField",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"199\"]",
+            "text_or_resource_names": [],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "203",
+            "archived_cell_properties": {}
+          },
+          "destination_object_id": "514",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "editS3Prefix:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":action:[\"217:connection:0\"]",
+          "source": {
+            "object_id": "217",
+            "class": "NSTextField",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"217\"]",
+            "text_or_resource_names": [],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "221",
+            "archived_cell_properties": {}
+          },
+          "destination_object_id": "514",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "clickS3Test:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":action:[\"234:connection:0\"]",
+          "source": {
+            "object_id": "234",
+            "class": "NSButton",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"234\"]",
+            "text_or_resource_names": [
+              "Test Connection"
+            ],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "237",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "514",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "changeS3Sharing:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":action:[\"279:connection:0\"]",
+          "source": {
+            "object_id": "279",
+            "class": "NSPopUpButton",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"279\"]",
+            "text_or_resource_names": [
+              "Don't Generate URL"
+            ],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "284",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": "",
+              "NSMenuItemRespectAlignment": true
+            }
+          },
+          "destination_object_id": "514",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "changeS3Expiration:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":action:[\"308:connection:0\"]",
+          "source": {
+            "object_id": "308",
+            "class": "NSSlider",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"308\"]",
+            "text_or_resource_names": [],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "312",
+            "archived_cell_properties": {
+              "NSMaxValue": 100,
+              "NSMinValue": 0,
+              "NSValue": 41.38671875
+            }
+          },
+          "destination_object_id": "514",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "editS3PublicURL:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":action:[\"339:connection:0\"]",
+          "source": {
+            "object_id": "339",
+            "class": "NSTextField",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"339\"]",
+            "text_or_resource_names": [],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "344",
+            "archived_cell_properties": {}
+          },
+          "destination_object_id": "514",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "editCloudToken:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":action:[\"406:connection:0\"]",
+          "source": {
+            "object_id": "406",
+            "class": "NSSecureTextField",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"406\"]",
+            "text_or_resource_names": [],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "410",
+            "archived_cell_properties": {}
+          },
+          "destination_object_id": "514",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "clickLearnMore:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":action:[\"421:connection:0\"]",
+          "source": {
+            "object_id": "421",
+            "class": "_TtC6Shottr10CtrlButton",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"421\"]",
+            "text_or_resource_names": [
+              "Learn More"
+            ],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "424",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "514",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "clickGetToken:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":action:[\"426:connection:0\"]",
+          "source": {
+            "object_id": "426",
+            "class": "_TtC6Shottr10CtrlButton",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"426\"]",
+            "text_or_resource_names": [
+              "Get a Token"
+            ],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "429",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "514",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        }
+      ]
+    },
+    {
+      "id": "UI-14",
+      "resource_path": "Contents/Resources/Preferences.storyboardc/YPR-Ju-4pY-view-Mcz-Zk-Zk0.nib",
+      "archive_sha256": "87170dd496570588f48f57e1b7e5468a5dad33cc942d7b1d6221ccf741fa9dea",
+      "current_resource_sha256": "87170dd496570588f48f57e1b7e5468a5dad33cc942d7b1d6221ccf741fa9dea",
+      "coverage": [
+        {
+          "facet": "objects:Contents/Resources/Preferences.storyboardc/YPR-Ju-4pY-view-Mcz-Zk-Zk0.nib",
+          "status": "complete",
+          "reason": null,
+          "examined": 124,
+          "omitted": 0
+        },
+        {
+          "facet": "connections:Contents/Resources/Preferences.storyboardc/YPR-Ju-4pY-view-Mcz-Zk-Zk0.nib",
+          "status": "partial",
+          "reason": "unsupported_connection_type",
+          "examined": 15,
+          "omitted": 0
+        },
+        {
+          "facet": "hierarchy:Contents/Resources/Preferences.storyboardc/YPR-Ju-4pY-view-Mcz-Zk-Zk0.nib",
+          "status": "complete",
+          "reason": null,
+          "examined": 97,
+          "omitted": 0
+        },
+        {
+          "facet": "classes:Contents/Resources/Preferences.storyboardc/YPR-Ju-4pY-view-Mcz-Zk-Zk0.nib",
+          "status": "complete",
+          "reason": null,
+          "examined": 31,
+          "omitted": 0
+        }
+      ],
+      "declared_classes": [
+        {
+          "object_id": "2",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/YPR-Ju-4pY-view-Mcz-Zk-Zk0.nib\":object:[\"2\"]",
+          "archived_class": "NSObject",
+          "nib_name": null
+        },
+        {
+          "object_id": "9",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/YPR-Ju-4pY-view-Mcz-Zk-Zk0.nib\":object:[\"9\"]",
+          "archived_class": "NSView",
+          "nib_name": null
+        },
+        {
+          "object_id": "29",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/YPR-Ju-4pY-view-Mcz-Zk-Zk0.nib\":object:[\"29\"]",
+          "archived_class": "NSImage",
+          "nib_name": null
+        },
+        {
+          "object_id": "70",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/YPR-Ju-4pY-view-Mcz-Zk-Zk0.nib\":object:[\"70\"]",
+          "archived_class": "NSView",
+          "nib_name": null
+        },
+        {
+          "object_id": "105",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/YPR-Ju-4pY-view-Mcz-Zk-Zk0.nib\":object:[\"105\"]",
+          "archived_class": "NSView",
+          "nib_name": null
+        },
+        {
+          "object_id": "118",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/YPR-Ju-4pY-view-Mcz-Zk-Zk0.nib\":object:[\"118\"]",
+          "archived_class": "NSImage",
+          "nib_name": null
+        },
+        {
+          "object_id": "182",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/YPR-Ju-4pY-view-Mcz-Zk-Zk0.nib\":object:[\"182\"]",
+          "archived_class": "NSView",
+          "nib_name": null
+        },
+        {
+          "object_id": "184",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/YPR-Ju-4pY-view-Mcz-Zk-Zk0.nib\":object:[\"184\"]",
+          "archived_class": "_TtC6Shottr10CtrlButton",
+          "nib_name": null
+        },
+        {
+          "object_id": "192",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/YPR-Ju-4pY-view-Mcz-Zk-Zk0.nib\":object:[\"192\"]",
+          "archived_class": "_TtC6Shottr10CtrlButton",
+          "nib_name": null
+        },
+        {
+          "object_id": "267",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/YPR-Ju-4pY-view-Mcz-Zk-Zk0.nib\":object:[\"267\"]",
+          "archived_class": "NSApplication",
+          "nib_name": null
+        }
+      ],
+      "labels": [
+        {
+          "text": "Activate Shottr",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/YPR-Ju-4pY-view-Mcz-Zk-Zk0.nib\":object:[\"38\"]"
+        },
+        {
+          "text": "Thank you for making app development possible",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/YPR-Ju-4pY-view-Mcz-Zk-Zk0.nib\":object:[\"54\"]"
+        },
+        {
+          "text": "License Number",
+          "field": "NSPlaceholderString",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/YPR-Ju-4pY-view-Mcz-Zk-Zk0.nib\":object:[\"75\"]"
+        },
+        {
+          "text": "Your license number is in the confirmation email that you receive after purchasing Shottr",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/YPR-Ju-4pY-view-Mcz-Zk-Zk0.nib\":object:[\"85\"]"
+        },
+        {
+          "text": "Activate",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/YPR-Ju-4pY-view-Mcz-Zk-Zk0.nib\":object:[\"92\"]"
+        },
+        {
+          "text": "Purchase Shottr",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/YPR-Ju-4pY-view-Mcz-Zk-Zk0.nib\":object:[\"125\"]"
+        },
+        {
+          "text": "Regular tier. Purchase Shottr and get rid of the Annoying Fellow.",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/YPR-Ju-4pY-view-Mcz-Zk-Zk0.nib\":object:[\"129\"]"
+        },
+        {
+          "text": "Purchase License",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/YPR-Ju-4pY-view-Mcz-Zk-Zk0.nib\":object:[\"135\"]"
+        },
+        {
+          "text": "Thank you for purchasing\nan extended license!",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/YPR-Ju-4pY-view-Mcz-Zk-Zk0.nib\":object:[\"165\"]"
+        },
+        {
+          "text": "Explore hidden features",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/YPR-Ju-4pY-view-Mcz-Zk-Zk0.nib\":object:[\"170\"]"
+        },
+        {
+          "text": "Box",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/YPR-Ju-4pY-view-Mcz-Zk-Zk0.nib\":object:[\"180\"]"
+        },
+        {
+          "text": "Learn More",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/YPR-Ju-4pY-view-Mcz-Zk-Zk0.nib\":object:[\"190\"]"
+        },
+        {
+          "text": "Restore License",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/YPR-Ju-4pY-view-Mcz-Zk-Zk0.nib\":object:[\"195\"]"
+        }
+      ],
+      "actions": [
+        {
+          "selector": "clickActivate:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/YPR-Ju-4pY-view-Mcz-Zk-Zk0.nib\":action:[\"87:connection:0\"]",
+          "source": {
+            "object_id": "87",
+            "class": "NSButton",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/YPR-Ju-4pY-view-Mcz-Zk-Zk0.nib\":object:[\"87\"]",
+            "text_or_resource_names": [
+              "Activate"
+            ],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "92",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "239",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "clickPurchase:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/YPR-Ju-4pY-view-Mcz-Zk-Zk0.nib\":action:[\"131:connection:0\"]",
+          "source": {
+            "object_id": "131",
+            "class": "NSButton",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/YPR-Ju-4pY-view-Mcz-Zk-Zk0.nib\":object:[\"131\"]",
+            "text_or_resource_names": [
+              "Purchase License"
+            ],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "135",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "239",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "clickFriendsClub:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/YPR-Ju-4pY-view-Mcz-Zk-Zk0.nib\":action:[\"167:connection:0\"]",
+          "source": {
+            "object_id": "167",
+            "class": "NSButton",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/YPR-Ju-4pY-view-Mcz-Zk-Zk0.nib\":object:[\"167\"]",
+            "text_or_resource_names": [
+              "Explore hidden features"
+            ],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "170",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "239",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "clickLearnMore:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/YPR-Ju-4pY-view-Mcz-Zk-Zk0.nib\":action:[\"184:connection:0\"]",
+          "source": {
+            "object_id": "184",
+            "class": "_TtC6Shottr10CtrlButton",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/YPR-Ju-4pY-view-Mcz-Zk-Zk0.nib\":object:[\"184\"]",
+            "text_or_resource_names": [
+              "Learn More"
+            ],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "190",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "239",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "clickRestoreLicense:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/YPR-Ju-4pY-view-Mcz-Zk-Zk0.nib\":action:[\"192:connection:0\"]",
+          "source": {
+            "object_id": "192",
+            "class": "_TtC6Shottr10CtrlButton",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/YPR-Ju-4pY-view-Mcz-Zk-Zk0.nib\":object:[\"192\"]",
+            "text_or_resource_names": [
+              "Restore License"
+            ],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "195",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "239",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        }
+      ]
+    },
+    {
+      "id": "UI-15",
+      "resource_path": "Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib",
+      "archive_sha256": "8aa20a6fba6c453e9e02f47a6c5683f7c15293c3d76e1e7ec94bde02f2dc5e29",
+      "current_resource_sha256": "8aa20a6fba6c453e9e02f47a6c5683f7c15293c3d76e1e7ec94bde02f2dc5e29",
+      "coverage": [
+        {
+          "facet": "objects:Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib",
+          "status": "complete",
+          "reason": null,
+          "examined": 238,
+          "omitted": 0
+        },
+        {
+          "facet": "connections:Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib",
+          "status": "complete",
+          "reason": null,
+          "examined": 40,
+          "omitted": 0
+        },
+        {
+          "facet": "hierarchy:Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib",
+          "status": "complete",
+          "reason": null,
+          "examined": 205,
+          "omitted": 0
+        },
+        {
+          "facet": "classes:Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib",
+          "status": "complete",
+          "reason": null,
+          "examined": 38,
+          "omitted": 0
+        }
+      ],
+      "declared_classes": [
+        {
+          "object_id": "2",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"2\"]",
+          "archived_class": "NSObject",
+          "nib_name": null
+        },
+        {
+          "object_id": "9",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"9\"]",
+          "archived_class": "NSView",
+          "nib_name": null
+        },
+        {
+          "object_id": "12",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"12\"]",
+          "archived_class": "NSView",
+          "nib_name": null
+        },
+        {
+          "object_id": "30",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"30\"]",
+          "archived_class": "_TtC6Shottr14CtrlRadioImage",
+          "nib_name": null
+        },
+        {
+          "object_id": "41",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"41\"]",
+          "archived_class": "NSImage",
+          "nib_name": null
+        },
+        {
+          "object_id": "46",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"46\"]",
+          "archived_class": "_TtC6Shottr14CtrlRadioImage",
+          "nib_name": null
+        },
+        {
+          "object_id": "53",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"53\"]",
+          "archived_class": "NSImage",
+          "nib_name": null
+        },
+        {
+          "object_id": "56",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"56\"]",
+          "archived_class": "_TtC6Shottr14CtrlRadioImage",
+          "nib_name": null
+        },
+        {
+          "object_id": "63",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"63\"]",
+          "archived_class": "NSImage",
+          "nib_name": null
+        },
+        {
+          "object_id": "66",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"66\"]",
+          "archived_class": "_TtC6Shottr14CtrlRadioImage",
+          "nib_name": null
+        },
+        {
+          "object_id": "73",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"73\"]",
+          "archived_class": "NSImage",
+          "nib_name": null
+        },
+        {
+          "object_id": "142",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"142\"]",
+          "archived_class": "NSView",
+          "nib_name": null
+        },
+        {
+          "object_id": "210",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"210\"]",
+          "archived_class": "NSView",
+          "nib_name": null
+        },
+        {
+          "object_id": "296",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"296\"]",
+          "archived_class": "NSView",
+          "nib_name": null
+        },
+        {
+          "object_id": "347",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"347\"]",
+          "archived_class": "NSImage",
+          "nib_name": null
+        },
+        {
+          "object_id": "351",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"351\"]",
+          "archived_class": "NSImage",
+          "nib_name": null
+        },
+        {
+          "object_id": "498",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"498\"]",
+          "archived_class": "NSApplication",
+          "nib_name": null
+        }
+      ],
+      "labels": [
+        {
+          "text": "Window Screenshot Background",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"17\"]"
+        },
+        {
+          "text": "Wallpaper",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"78\"]"
+        },
+        {
+          "text": "Transparent",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"83\"]"
+        },
+        {
+          "text": "Solid Color",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"87\"]"
+        },
+        {
+          "text": "Trim shadow",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"91\"]"
+        },
+        {
+          "text": "#C4C6C8",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"98\"]"
+        },
+        {
+          "text": "Title",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"140\"]"
+        },
+        {
+          "text": "Screenshots folder",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"146\"]"
+        },
+        {
+          "text": "Auto (PNG/JPEG)",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"151\"]"
+        },
+        {
+          "text": "Save format",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"157\"]"
+        },
+        {
+          "text": "Resize retina screenshots",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"161\"]"
+        },
+        {
+          "text": "Downscale to 1× when saving",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"166\"]"
+        },
+        {
+          "text": "PNG",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"173\"]"
+        },
+        {
+          "text": "Select Folder",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"178\"]"
+        },
+        {
+          "text": "Title",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"209\"]"
+        },
+        {
+          "text": "Scrolling screenshot max height",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"263\"]"
+        },
+        {
+          "text": "px",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"267\"]"
+        },
+        {
+          "text": "Scrolling screenshot speed",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"274\"]"
+        },
+        {
+          "text": "Title",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"295\"]"
+        },
+        {
+          "text": "Launch at startup",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"301\"]"
+        },
+        {
+          "text": "Thumbnail",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"306\"]"
+        },
+        {
+          "text": "After Area Crop, show",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"310\"]"
+        },
+        {
+          "text": "Autostart",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"314\"]"
+        },
+        {
+          "text": "Editor",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"319\"]"
+        },
+        {
+          "text": "Show",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"324\"]"
+        },
+        {
+          "text": "Copy",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"329\"]"
+        },
+        {
+          "text": "Save",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"334\"]"
+        },
+        {
+          "text": "After screenshot",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"338\"]"
+        },
+        {
+          "text": "Automatically (click outside)",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"343\"]"
+        },
+        {
+          "text": "Automatically (click outside)",
+          "field": "NSTitle",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"346\"]"
+        },
+        {
+          "text": "Manually (close button)",
+          "field": "NSTitle",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"358\"]"
+        },
+        {
+          "text": "Hide preview thumbnail",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"362\"]"
+        }
+      ],
+      "actions": [
+        {
+          "selector": "riWinBackground:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":action:[\"30:connection:0\"]",
+          "source": {
+            "object_id": "30",
+            "class": "_TtC6Shottr14CtrlRadioImage",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"30\"]",
+            "text_or_resource_names": [],
+            "archived_properties": {
+              "NSTag": 1,
+              "NSEnabled": true
+            },
+            "cell_object_id": "38",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "423",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "riWinBackground:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":action:[\"46:connection:0\"]",
+          "source": {
+            "object_id": "46",
+            "class": "_TtC6Shottr14CtrlRadioImage",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"46\"]",
+            "text_or_resource_names": [],
+            "archived_properties": {
+              "NSTag": 2,
+              "NSEnabled": true
+            },
+            "cell_object_id": "52",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "423",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "riWinBackground:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":action:[\"56:connection:0\"]",
+          "source": {
+            "object_id": "56",
+            "class": "_TtC6Shottr14CtrlRadioImage",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"56\"]",
+            "text_or_resource_names": [],
+            "archived_properties": {
+              "NSTag": 3,
+              "NSEnabled": true
+            },
+            "cell_object_id": "62",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "423",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "riWinBackground:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":action:[\"66:connection:0\"]",
+          "source": {
+            "object_id": "66",
+            "class": "_TtC6Shottr14CtrlRadioImage",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"66\"]",
+            "text_or_resource_names": [],
+            "archived_properties": {
+              "NSTag": 4,
+              "NSEnabled": true
+            },
+            "cell_object_id": "72",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "423",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "updateSolidColor:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":action:[\"93:connection:0\"]",
+          "source": {
+            "object_id": "93",
+            "class": "NSTextField",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"93\"]",
+            "text_or_resource_names": [
+              "#C4C6C8"
+            ],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "98",
+            "archived_cell_properties": {}
+          },
+          "destination_object_id": "423",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "helpWindowBG:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":action:[\"102:connection:0\"]",
+          "source": {
+            "object_id": "102",
+            "class": "NSButton",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"102\"]",
+            "text_or_resource_names": [],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "105",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "423",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "changeSaveFormat:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":action:[\"148:connection:0\"]",
+          "source": {
+            "object_id": "148",
+            "class": "NSButton",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"148\"]",
+            "text_or_resource_names": [
+              "Auto (PNG/JPEG)"
+            ],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "151",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "423",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "changeDownscale:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":action:[\"163:connection:0\"]",
+          "source": {
+            "object_id": "163",
+            "class": "NSButton",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"163\"]",
+            "text_or_resource_names": [
+              "Downscale to 1× when saving"
+            ],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "166",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "423",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "changeSaveFormat:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":action:[\"170:connection:0\"]",
+          "source": {
+            "object_id": "170",
+            "class": "NSButton",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"170\"]",
+            "text_or_resource_names": [
+              "PNG"
+            ],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "173",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "423",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "clickSaveFolder:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":action:[\"175:connection:0\"]",
+          "source": {
+            "object_id": "175",
+            "class": "NSButton",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"175\"]",
+            "text_or_resource_names": [
+              "Select Folder"
+            ],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "178",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "423",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "helpSaveFormat:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":action:[\"180:connection:0\"]",
+          "source": {
+            "object_id": "180",
+            "class": "NSButton",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"180\"]",
+            "text_or_resource_names": [],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "183",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "423",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "updateScrollingMax:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":action:[\"212:connection:0\"]",
+          "source": {
+            "object_id": "212",
+            "class": "NSTextField",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"212\"]",
+            "text_or_resource_names": [],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "218",
+            "archived_cell_properties": {}
+          },
+          "destination_object_id": "423",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "updateScrollingSpeed:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":action:[\"269:connection:0\"]",
+          "source": {
+            "object_id": "269",
+            "class": "NSSlider",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"269\"]",
+            "text_or_resource_names": [],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "271",
+            "archived_cell_properties": {
+              "NSMaxValue": 3,
+              "NSMinValue": 0,
+              "NSValue": 2
+            }
+          },
+          "destination_object_id": "423",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "updateLunchAtStartup:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":action:[\"298:connection:0\"]",
+          "source": {
+            "object_id": "298",
+            "class": "NSButton",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"298\"]",
+            "text_or_resource_names": [
+              "Launch at startup"
+            ],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "301",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "423",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "changeAreaCropBehavior:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":action:[\"303:connection:0\"]",
+          "source": {
+            "object_id": "303",
+            "class": "NSButton",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"303\"]",
+            "text_or_resource_names": [
+              "Thumbnail"
+            ],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "306",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "423",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "changeAreaCropBehavior:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":action:[\"316:connection:0\"]",
+          "source": {
+            "object_id": "316",
+            "class": "NSButton",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"316\"]",
+            "text_or_resource_names": [
+              "Editor"
+            ],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "319",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "423",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "updateAfterGrabShow:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":action:[\"321:connection:0\"]",
+          "source": {
+            "object_id": "321",
+            "class": "NSButton",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"321\"]",
+            "text_or_resource_names": [
+              "Show"
+            ],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "324",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "423",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "updateAfterGrabCopy:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":action:[\"326:connection:0\"]",
+          "source": {
+            "object_id": "326",
+            "class": "NSButton",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"326\"]",
+            "text_or_resource_names": [
+              "Copy"
+            ],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "329",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "423",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "updateAfterGrabSave:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":action:[\"331:connection:0\"]",
+          "source": {
+            "object_id": "331",
+            "class": "NSButton",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"331\"]",
+            "text_or_resource_names": [
+              "Save"
+            ],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "334",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "423",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "selectThumbnailClosing:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":action:[\"340:connection:0\"]",
+          "source": {
+            "object_id": "340",
+            "class": "NSPopUpButton",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"340\"]",
+            "text_or_resource_names": [
+              "Automatically (click outside)"
+            ],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "343",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": "",
+              "NSMenuItemRespectAlignment": true
+            }
+          },
+          "destination_object_id": "423",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        }
+      ]
+    }
+  ]
+}

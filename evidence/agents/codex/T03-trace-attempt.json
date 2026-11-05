@@ -1,0 +1,45 @@
+{
+  "operation": "trace-native-ui-action",
+  "action": "editorSetConcealType:",
+  "target": "/Applications/Shottr.app",
+  "rea_version": "6.8.0",
+  "exit_code": 1,
+  "code": "provider_unavailable",
+  "message": "The selected analysis provider is unavailable. Review the reported local diagnostics or run `rea doctor`, then retry.",
+  "raw_file": "evidence/raw/codex/T03-trace-conceal.json",
+  "raw_sha256": "8ebdcd63fc582f89ecef4cd175e5de196543fb14a31cf326002b223c4dccac76",
+  "evidence_id": null,
+  "rejections": [
+    {
+      "provider_id": "ghidra",
+      "code": "not_configured",
+      "reason": "Set GHIDRA_INSTALL_DIR to an extracted Ghidra 12.1.x release directory."
+    },
+    {
+      "provider_id": "ghidra",
+      "code": "architecture_unsupported",
+      "reason": "Ghidra v1 cannot enforce the selected architecture when importing a universal Mach-O; analyze a thinned Mach-O slice instead."
+    },
+    {
+      "provider_id": "hopper",
+      "code": "executable_missing",
+      "reason": "Hopper launcher is missing or not executable: /Applications/Hopper Disassembler.app/Contents/MacOS/hopper"
+    },
+    {
+      "provider_id": "ida",
+      "code": "not_configured",
+      "reason": "REA configuration is invalid: Set REA_IDA_MCP_CONFIG to an upstream IDA MCP JSON registration; see docs/ida-provider.md."
+    },
+    {
+      "provider_id": "kuna",
+      "code": "not_configured",
+      "reason": "Set REA_KUNA_COMMAND to the absolute path of a caller-supplied kuna executable (verified with 1.833). REA does not download, install or update Kuna."
+    },
+    {
+      "provider_id": "kuna",
+      "code": "target_format_unsupported",
+      "reason": "REA's Kuna provider has no verified universal Mach-O slice selection yet; open a thin slice or use another provider."
+    }
+  ],
+  "conclusion": "Native handler implementation remains UNKNOWN; no engine installed, no repeat attempted."
+}

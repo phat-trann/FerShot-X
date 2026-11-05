@@ -1,5 +1,13 @@
 # Coordination protocol
 
+## Active implementation workflow
+
+The user selected Tauri 2 + Rust. `BUILD-QUEUE.md` and `prompts/codex.md`, `prompts/antigravity.md`, `prompts/copilot.md` now define implementation work. The older Txx investigation procedure below remains valid for research, but its role allocation does not limit product implementation.
+
+Every agent must submit a completion packet to `coordination/reviews/submissions/` before ending each request/task. Follow [the completion protocol](reviews/README.md). Codex alone generates the review inbox and decisions. Submission does not imply approval; file changes make a snapshot stale.
+
+For implementation tasks, use the claim/release commands in that protocol. Work only in the queue's owned paths, submit actual checks and limitations, release, then continue your next independent task. Do not poll for another agent, rerun unchanged blocked work or wait for Codex review before starting an unrelated owned module. No agent may change root dependencies/contracts/wiring to bypass another task's boundary.
+
 ## Accept and claim work
 
 1. Read `AGENTS.md`, the board and the latest relevant handoff. Check local Git changes before editing.
@@ -15,6 +23,15 @@
 
 4. Immediately write `coordination/claims/T02/owner.md` with agent/client name, timestamp with timezone, scope, intended files and current activity. Create the task handoff in your own directory with status IN_PROGRESS. The lock must exist before the handoff; do not rely on a board edit for mutual exclusion.
 5. For any interactive Shottr control, acquire `coordination/claims/runtime-shottr` in the same way. Static reads need only the task claim. Do not let two agents manipulate the same Shottr windows/clipboard simultaneously.
+
+## Three-agent scheduling and context budget
+
+- Codex owns T03/T04/T07 and integration T06. Read the complete feature matrix and selected evidence; do not reread every raw JSON for each task.
+- Antigravity owns T02 only. Plan its UI slot first. Codex starts independent static analysis while Antigravity uses Shottr and takes a UI slot after it is released.
+- Copilot owns only T05. Read its brief and compact evidence snapshot. No full UI inventory, raw JSON, repository-wide search, web research or REA tool discovery is needed. Limit output to four feature rows, four proposed tests and a short handoff.
+- Output caps constrain report size, not guaranteed total token consumption. No provider quota has been changed.
+- Claim the task being worked on, not the whole queue. If runtime-shottr is occupied, do static work. If nothing independent remains, save a PARTIAL handoff and stop; do not poll or remove another agent's claim.
+- For missing evidence, record UNKNOWN and ask Codex one precise question. Copilot stops after its bounded audit rather than taking another feature group.
 
 ## Work and communicate
 

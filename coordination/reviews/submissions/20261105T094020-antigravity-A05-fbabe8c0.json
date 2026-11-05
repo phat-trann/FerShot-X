@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "id": "20261105T094020-antigravity-A05-fbabe8c0",
+  "created_at": "2026-11-05T09:40:20.490094+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A05",
+  "completion": "done",
+  "summary": "Implemented controlled PinPreviewCard (and PinPanel alias) for ImageDocument with clamped scale/opacity controls, presets, and edit/copy/close callbacks with unit tests.",
+  "files": [
+    "src/features/pin/PinPreviewCard.tsx",
+    "src/features/pin/PinPreviewCard.css",
+    "src/features/pin/PinPreviewCard.test.tsx"
+  ],
+  "file_sha256": {
+    "src/features/pin/PinPreviewCard.tsx": "69474f2153017af37d1828ca51b3ea6992af53a313fa506100e8cf2184c7d8d8",
+    "src/features/pin/PinPreviewCard.css": "26be81ce457515d94cd817b19bfd10c931f8be06cd1e018bbd1f40e655cd5d43",
+    "src/features/pin/PinPreviewCard.test.tsx": "06fd0c4603ee2ed877b3f0ca1cd0e72369469f4a55ca63989c3e65d8dd2aa428"
+  },
+  "checks": [
+    "npm run test:unit -- src/features/pin/PinPreviewCard.test.tsx: passed (3 tests)",
+    "npm run test:unit -- src/features/capture src/features/library src/features/settings src/features/editor/view src/features/pin: passed (5 files, 19 tests)",
+    "npm run build: passed"
+  ],
+  "risks": [
+    "Controlled presentation component only; native Tauri window creation, always-on-top window management, and system clipboard writes are not wired here and require Codex integration."
+  ],
+  "review": "pending"
+}

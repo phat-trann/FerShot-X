@@ -1,0 +1,172 @@
+.ferby-library-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background-color: #181a1f;
+  color: #f3f4f6;
+  border: 1px solid #2b2f38;
+}
+
+.ferby-library-panel__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.ferby-library-panel__title {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.ferby-library-panel__layout-group {
+  display: inline-flex;
+  gap: 0.25rem;
+}
+
+.ferby-library-panel__layout-btn {
+  padding: 0.3rem 0.6rem;
+  border-radius: 0.375rem;
+  border: 1px solid #374151;
+  background-color: #222630;
+  color: #e5e7eb;
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+
+.ferby-library-panel__layout-btn[aria-pressed="true"] {
+  background-color: #2563eb;
+  border-color: #60a5fa;
+  color: #ffffff;
+}
+
+.ferby-library-panel__search {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ferby-library-panel__search-input {
+  flex: 1;
+  padding: 0.45rem 0.65rem;
+  border-radius: 0.375rem;
+  border: 1px solid #374151;
+  background-color: #111318;
+  color: #f9fafb;
+  font-size: 0.85rem;
+}
+
+.ferby-library-panel__clear-btn {
+  padding: 0.4rem 0.6rem;
+  border-radius: 0.375rem;
+  border: 1px solid #374151;
+  background-color: #222630;
+  color: #e5e7eb;
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+
+.ferby-library-panel__items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.625rem;
+}
+
+.ferby-library-panel__items--list {
+  grid-template-columns: 1fr;
+}
+
+.ferby-library-panel__items--grid {
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+}
+
+.ferby-library-panel__item {
+  display: flex;
+  align-items: stretch;
+  gap: 0.375rem;
+  padding: 0.375rem;
+  border-radius: 0.375rem;
+  border: 1px solid #2e3440;
+  background-color: #20242d;
+}
+
+.ferby-library-panel__item--selected {
+  border-color: #60a5fa;
+  background-color: rgba(37, 99, 235, 0.16);
+}
+
+.ferby-library-panel__select-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.25rem;
+  border: none;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  border-radius: 0.25rem;
+}
+
+.ferby-library-panel__items--grid .ferby-library-panel__select-btn {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.ferby-library-panel__thumb {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 0.25rem;
+  background-color: #111318;
+  flex-shrink: 0;
+}
+
+.ferby-library-panel__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  min-width: 0;
+}
+
+.ferby-library-panel__name {
+  font-size: 0.85rem;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ferby-library-panel__details {
+  font-size: 0.75rem;
+  color: #9ca3af;
+}
+
+.ferby-library-panel__remove-btn {
+  align-self: center;
+  padding: 0.35rem 0.55rem;
+  border-radius: 0.25rem;
+  border: 1px solid #4b5563;
+  background-color: #2b303c;
+  color: #fca5a5;
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+
+.ferby-library-panel__empty {
+  margin: 0;
+  padding: 1rem;
+  text-align: center;
+  color: #9ca3af;
+  font-size: 0.85rem;
+  border-radius: 0.375rem;
+  background-color: #14161b;
+}
+

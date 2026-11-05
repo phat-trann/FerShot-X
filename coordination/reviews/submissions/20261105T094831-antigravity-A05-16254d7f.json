@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "id": "20261105T094831-antigravity-A05-16254d7f",
+  "created_at": "2026-11-05T09:48:31.211665+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A05",
+  "completion": "done",
+  "summary": "Updated AGENTS.md per explicit user instruction to prioritize established libraries/crates over hand-rolled code and use the latest stable technologies.",
+  "files": [
+    "AGENTS.md"
+  ],
+  "file_sha256": {
+    "AGENTS.md": "651179021618045c9b9d6cf79d79f8424b7fefe7fa01cae8ef4a3e424dee464c"
+  },
+  "checks": [
+    "rtk git diff --check: passed"
+  ],
+  "risks": [
+    "Root manifest/lockfile changes for new frontend or Tauri dependencies remain owned by Codex integrator per AGENTS.md."
+  ],
+  "review": "pending"
+}

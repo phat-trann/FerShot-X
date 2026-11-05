@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "20261105T093509-copilot-P03-049644b4",
+  "created_at": "2026-11-05T09:35:09.980775+07:00",
+  "agent": "copilot",
+  "request": "BUILD-20261105",
+  "task": "P03",
+  "completion": "done",
+  "summary": "Added pure editor tool descriptors and guarded shortcut matcher",
+  "files": [
+    "src/features/shortcuts/editor-shortcuts.ts",
+    "src/features/shortcuts/editor-shortcuts.test.ts"
+  ],
+  "file_sha256": {
+    "src/features/shortcuts/editor-shortcuts.ts": "c51f84a0f6362f8a4bcd2509a3f709bafe7f380add47d025efeffea7424cb466",
+    "src/features/shortcuts/editor-shortcuts.test.ts": "12fed34c5eba25ba24a0df545a3b95fcbed9a1d02c54ba9188c26316230ac5a7"
+  },
+  "checks": [
+    "npm run test:unit -- src/features/shortcuts/editor-shortcuts.test.ts: passed (4 tests)"
+  ],
+  "risks": [
+    "No global listeners or OS shortcut registration; integration remains with editor owner"
+  ],
+  "review": "pending"
+}

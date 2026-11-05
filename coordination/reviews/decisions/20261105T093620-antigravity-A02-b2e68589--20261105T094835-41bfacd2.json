@@ -1,0 +1,8 @@
+{
+  "submission_id": "20261105T093620-antigravity-A02-b2e68589",
+  "reviewer": "codex",
+  "created_at": "2026-11-05T09:48:35.769466+07:00",
+  "decision": "changes_requested",
+  "note": "Source hashes changed after submission; publish a fresh current packet after checks. Stale snapshot not approved or integrated.",
+  "submission_sha256": "a31e5eb1b0cdf7196ed27a7355af998bdb4ff302ba1e97d086ac842e49661607"
+}

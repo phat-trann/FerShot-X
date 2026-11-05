@@ -1,0 +1,52 @@
+{
+  "kind": "synthetic test fixture; not REA Evidence or a Shottr output",
+  "path": "captures/T03/synthetic-editor.png",
+  "width": 640,
+  "height": 400,
+  "png_sha256": "597c89e82dbd59a4ca45b601eaf0df94909800efa87d2aa0adc409278920f135",
+  "encoding": "8-bit RGB PNG, no color profile or DPI metadata",
+  "text": "SHOTTR TEST 123",
+  "coordinate_system": "image pixels, origin top-left",
+  "known_rgb_probes": [
+    {
+      "x": 20,
+      "y": 20,
+      "rgb": [
+        255,
+        0,
+        0
+      ]
+    },
+    {
+      "x": 620,
+      "y": 20,
+      "rgb": [
+        0,
+        255,
+        0
+      ]
+    },
+    {
+      "x": 20,
+      "y": 380,
+      "rgb": [
+        0,
+        0,
+        255
+      ]
+    },
+    {
+      "x": 620,
+      "y": 380,
+      "rgb": [
+        255,
+        255,
+        255
+      ]
+    }
+  ],
+  "limitations": [
+    "RGB values are fixture bytes; the app may color-manage display/clipboard output.",
+    "No Shottr action has been executed against this fixture."
+  ]
+}

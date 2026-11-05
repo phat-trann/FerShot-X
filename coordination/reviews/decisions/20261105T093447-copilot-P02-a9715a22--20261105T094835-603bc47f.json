@@ -1,0 +1,8 @@
+{
+  "submission_id": "20261105T093447-copilot-P02-a9715a22",
+  "reviewer": "codex",
+  "created_at": "2026-11-05T09:48:35.731611+07:00",
+  "decision": "changes_requested",
+  "note": "normalizeRect with finite endpoints +/-1e308 yields Infinity width; pixelsToPoints(1, Number.MIN_VALUE) also yields Infinity. Validate computed outputs/overflow, add regression tests, and submit a fresh packet. Existing files were not modified by the reviewer.",
+  "submission_sha256": "c15748fc6782b9e10d751e6b1198bc40d94a7ac85c5354d339f03ae82a881dac"
+}

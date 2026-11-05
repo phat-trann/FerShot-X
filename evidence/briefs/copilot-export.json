@@ -1,0 +1,198 @@
+{
+  "kind": "selected-observations; not complete REA Evidence",
+  "feature_ids": [
+    "F05",
+    "F24",
+    "F25",
+    "F32"
+  ],
+  "target": {
+    "app_path": "/Applications/Shottr.app",
+    "version": "1.9.3",
+    "build": "137",
+    "bundle_id": "cc.ffitch.shottr",
+    "executable_sha256": "4a1ea879e1079b81b1c501e7ef0c399cf7d0890c2b33fc79f97c4124620360a3"
+  },
+  "source_evidence_ids": {
+    "plist": "ev_873e89b3dfe28175d06beecfaef6a625b85d61fd7e7f79c50888494f39633abd",
+    "interface_builder": "ev_7a54c59efe5ad259d8b8b7c187965d29df9ca99f3686ffa068c92add599df2ca"
+  },
+  "source_projection": "evidence/ui-signals.json",
+  "source_projection_sha256": "97b5b875a514981e9fcece3f853520488b1bd8047d6f7ae79b97c7c1bc8fa5ee",
+  "plist_observations": {
+    "CFBundleDocumentTypes": [
+      {
+        "CFBundleTypeRole": "Editor",
+        "LSHandlerRank": "Default",
+        "LSItemContentTypes": [
+          "public.png",
+          "public.jpeg",
+          "public.compuserve.gif"
+        ]
+      }
+    ],
+    "CFBundleURLTypes": [
+      {
+        "CFBundleTypeRole": "Editor",
+        "CFBundleURLSchemes": [
+          "shottr"
+        ]
+      }
+    ]
+  },
+  "ui_observations": [
+    {
+      "id": "UI-02",
+      "resource_path": "Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib",
+      "archive_sha256": "058ff01e60d9856e36feace3224524a111d703ed2680f1de142221ad8ee12e34",
+      "labels": [
+        {
+          "text": "Copy Image",
+          "field": "NSDev",
+          "object_id": "164"
+        },
+        {
+          "text": "Save Image",
+          "field": "NSDev",
+          "object_id": "169"
+        },
+        {
+          "text": "Save Image As",
+          "field": "NSDev",
+          "object_id": "173"
+        },
+        {
+          "text": "Print",
+          "field": "NSDev",
+          "object_id": "188"
+        },
+        {
+          "text": "Open File",
+          "field": "NSDev",
+          "object_id": "198"
+        },
+        {
+          "text": "Open From Clipboard",
+          "field": "NSDev",
+          "object_id": "203"
+        }
+      ],
+      "actions": [
+        {
+          "selector": "menuCopy:",
+          "source_object_id": "163"
+        },
+        {
+          "selector": "menuSave:",
+          "source_object_id": "168"
+        },
+        {
+          "selector": "menuSaveAs:",
+          "source_object_id": "172"
+        },
+        {
+          "selector": "menuPrint:",
+          "source_object_id": "187"
+        },
+        {
+          "selector": "menuOpenFile:",
+          "source_object_id": "197"
+        },
+        {
+          "selector": "menuOpenFromClipboard:",
+          "source_object_id": "202"
+        }
+      ]
+    },
+    {
+      "id": "UI-12",
+      "resource_path": "Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib",
+      "archive_sha256": "7e5bef014e15e3c2af1708bb53703394e887aeff233d0d3abb527047ef8d2665",
+      "labels": [
+        {
+          "text": "URL Scheme API",
+          "field": "NSContents",
+          "object_id": "225"
+        },
+        {
+          "text": "Enable deep links",
+          "field": "NSContents",
+          "object_id": "230"
+        }
+      ],
+      "actions": [
+        {
+          "selector": "updateDeeplinks:",
+          "source_object_id": "227"
+        }
+      ]
+    },
+    {
+      "id": "UI-15",
+      "resource_path": "Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib",
+      "archive_sha256": "8aa20a6fba6c453e9e02f47a6c5683f7c15293c3d76e1e7ec94bde02f2dc5e29",
+      "labels": [
+        {
+          "text": "Screenshots folder",
+          "field": "NSContents",
+          "object_id": "146"
+        },
+        {
+          "text": "Auto (PNG/JPEG)",
+          "field": "NSContents",
+          "object_id": "151"
+        },
+        {
+          "text": "Save format",
+          "field": "NSContents",
+          "object_id": "157"
+        },
+        {
+          "text": "Resize retina screenshots",
+          "field": "NSContents",
+          "object_id": "161"
+        },
+        {
+          "text": "Downscale to 1× when saving",
+          "field": "NSContents",
+          "object_id": "166"
+        },
+        {
+          "text": "PNG",
+          "field": "NSContents",
+          "object_id": "173"
+        },
+        {
+          "text": "Select Folder",
+          "field": "NSContents",
+          "object_id": "178"
+        }
+      ],
+      "actions": [
+        {
+          "selector": "changeSaveFormat:",
+          "source_object_id": "148"
+        },
+        {
+          "selector": "changeDownscale:",
+          "source_object_id": "163"
+        },
+        {
+          "selector": "changeSaveFormat:",
+          "source_object_id": "170"
+        },
+        {
+          "selector": "clickSaveFolder:",
+          "source_object_id": "175"
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "Selected static declarations only; no runtime verification.",
+    "UI labels/actions do not prove enabled state, implementation or successful behavior.",
+    "Full source graph reports partial connections/hierarchy and truncation.",
+    "Resource Evidence has null executable identity; executable hash is separate collection metadata.",
+    "No supported deep-link commands or animated-GIF behavior established."
+  ]
+}

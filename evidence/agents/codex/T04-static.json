@@ -1,0 +1,2075 @@
+{
+  "task": "T04",
+  "kind": "projection of saved REA observations, not new canonical Evidence",
+  "source_evidence_id": "ev_7a54c59efe5ad259d8b8b7c187965d29df9ca99f3686ffa068c92add599df2ca",
+  "source_file": "evidence/raw/interface-builder.json",
+  "source_file_sha256": "cf38421b8287f46cdb8ab5a31958dc966bb319f9259eebf5d2ff61d051c0364e",
+  "target": {
+    "app_path": "/Applications/Shottr.app",
+    "version": "1.9.3",
+    "build": "137",
+    "executable_sha256": "4a1ea879e1079b81b1c501e7ef0c399cf7d0890c2b33fc79f97c4124620360a3"
+  },
+  "classification": "STATIC_OBSERVED",
+  "runtime_status": "UNKNOWN",
+  "limitations": [
+    "Artifact identity is unavailable for this observation.",
+    "The graph reflects recognized Interface Builder archive fields and connections; omitted private or unrecognized archive fields remain unknown.",
+    "A target-action selector is an Interface Builder observation and does not prove that the binary contains a matching implementation.",
+    "Decoded constraints, runtime visibility, dynamic UI creation, and pixel geometry are not inferred from these archives.",
+    "Compiled Interface Builder archives are private serialized object graphs. The decoder reports only recognized keyed-archive objects and connections; unrecognized object classes and fields remain unknown.",
+    "Some serialized hierarchy links could not be projected within the bounded hierarchy; their parentage remains unknown.",
+    "Resolved control text follows only selected explicit archive reference fields.",
+    "Archived slider values, flags and shortcut masks are serialized declarations, not runtime defaults or effective bindings.",
+    "External placeholders and null action targets remain unresolved; no implementation or responder-chain receiver is inferred."
+  ],
+  "documents": [
+    {
+      "id": "UI-06",
+      "resource_path": "Contents/Resources/Library.storyboardc/NSViewController-bU7-R8-ocO.nib",
+      "archive_sha256": "429f5bcbfe95e453ec7b86e2a2668ef67c7b9fdc2088f1b13ddaf9808bdb77c1",
+      "current_resource_sha256": "429f5bcbfe95e453ec7b86e2a2668ef67c7b9fdc2088f1b13ddaf9808bdb77c1",
+      "coverage": [
+        {
+          "facet": "objects:Contents/Resources/Library.storyboardc/NSViewController-bU7-R8-ocO.nib",
+          "status": "complete",
+          "reason": null,
+          "examined": 4,
+          "omitted": 0
+        },
+        {
+          "facet": "connections:Contents/Resources/Library.storyboardc/NSViewController-bU7-R8-ocO.nib",
+          "status": "complete",
+          "reason": null,
+          "examined": 2,
+          "omitted": 0
+        },
+        {
+          "facet": "hierarchy:Contents/Resources/Library.storyboardc/NSViewController-bU7-R8-ocO.nib",
+          "status": "complete",
+          "reason": null,
+          "examined": 4,
+          "omitted": 0
+        },
+        {
+          "facet": "classes:Contents/Resources/Library.storyboardc/NSViewController-bU7-R8-ocO.nib",
+          "status": "complete",
+          "reason": null,
+          "examined": 12,
+          "omitted": 0
+        }
+      ],
+      "declared_classes": [
+        {
+          "object_id": "2",
+          "node_id": "ib:\"Contents/Resources/Library.storyboardc/NSViewController-bU7-R8-ocO.nib\":object:[\"2\"]",
+          "archived_class": "NSObject",
+          "nib_name": null
+        },
+        {
+          "object_id": "7",
+          "node_id": "ib:\"Contents/Resources/Library.storyboardc/NSViewController-bU7-R8-ocO.nib\":object:[\"7\"]",
+          "archived_class": "_TtC6Shottr17LibViewController",
+          "nib_name": "bU7-R8-ocO-view-tOy-S4-hL0"
+        },
+        {
+          "object_id": "20",
+          "node_id": "ib:\"Contents/Resources/Library.storyboardc/NSViewController-bU7-R8-ocO.nib\":object:[\"20\"]",
+          "archived_class": "NSApplication",
+          "nib_name": null
+        }
+      ],
+      "labels": [],
+      "actions": []
+    },
+    {
+      "id": "UI-07",
+      "resource_path": "Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib",
+      "archive_sha256": "1698e22f0030cd0d7d6088aab2440bd31ee8b7d71cfd2feab310ac0088ce9b77",
+      "current_resource_sha256": "1698e22f0030cd0d7d6088aab2440bd31ee8b7d71cfd2feab310ac0088ce9b77",
+      "coverage": [
+        {
+          "facet": "objects:Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib",
+          "status": "complete",
+          "reason": null,
+          "examined": 219,
+          "omitted": 0
+        },
+        {
+          "facet": "connections:Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib",
+          "status": "partial",
+          "reason": "unsupported_connection_type",
+          "examined": 36,
+          "omitted": 0
+        },
+        {
+          "facet": "hierarchy:Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib",
+          "status": "complete",
+          "reason": null,
+          "examined": 153,
+          "omitted": 0
+        },
+        {
+          "facet": "classes:Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib",
+          "status": "complete",
+          "reason": null,
+          "examined": 45,
+          "omitted": 0
+        }
+      ],
+      "declared_classes": [
+        {
+          "object_id": "2",
+          "node_id": "ib:\"Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib\":object:[\"2\"]",
+          "archived_class": "NSObject",
+          "nib_name": null
+        },
+        {
+          "object_id": "13",
+          "node_id": "ib:\"Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib\":object:[\"13\"]",
+          "archived_class": "_TtC6Shottr11CtrlToolbar",
+          "nib_name": null
+        },
+        {
+          "object_id": "20",
+          "node_id": "ib:\"Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib\":object:[\"20\"]",
+          "archived_class": "_TtC6Shottr15CtrlButtonHover",
+          "nib_name": null
+        },
+        {
+          "object_id": "32",
+          "node_id": "ib:\"Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib\":object:[\"32\"]",
+          "archived_class": "NSImage",
+          "nib_name": null
+        },
+        {
+          "object_id": "66",
+          "node_id": "ib:\"Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib\":object:[\"66\"]",
+          "archived_class": "NSView",
+          "nib_name": null
+        },
+        {
+          "object_id": "82",
+          "node_id": "ib:\"Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib\":object:[\"82\"]",
+          "archived_class": "_TtC6Shottr10CtrlButton",
+          "nib_name": null
+        },
+        {
+          "object_id": "121",
+          "node_id": "ib:\"Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib\":object:[\"121\"]",
+          "archived_class": "NSView",
+          "nib_name": null
+        },
+        {
+          "object_id": "150",
+          "node_id": "ib:\"Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib\":object:[\"150\"]",
+          "archived_class": "NSView",
+          "nib_name": null
+        },
+        {
+          "object_id": "169",
+          "node_id": "ib:\"Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib\":object:[\"169\"]",
+          "archived_class": "NSImage",
+          "nib_name": null
+        },
+        {
+          "object_id": "181",
+          "node_id": "ib:\"Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib\":object:[\"181\"]",
+          "archived_class": "_TtC6Shottr10CtrlButton",
+          "nib_name": null
+        },
+        {
+          "object_id": "202",
+          "node_id": "ib:\"Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib\":object:[\"202\"]",
+          "archived_class": "NSView",
+          "nib_name": null
+        },
+        {
+          "object_id": "211",
+          "node_id": "ib:\"Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib\":object:[\"211\"]",
+          "archived_class": "NSView",
+          "nib_name": null
+        },
+        {
+          "object_id": "240",
+          "node_id": "ib:\"Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib\":object:[\"240\"]",
+          "archived_class": "NSView",
+          "nib_name": null
+        },
+        {
+          "object_id": "254",
+          "node_id": "ib:\"Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib\":object:[\"254\"]",
+          "archived_class": "NSImage",
+          "nib_name": null
+        },
+        {
+          "object_id": "268",
+          "node_id": "ib:\"Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib\":object:[\"268\"]",
+          "archived_class": "NSImage",
+          "nib_name": null
+        },
+        {
+          "object_id": "271",
+          "node_id": "ib:\"Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib\":object:[\"271\"]",
+          "archived_class": "NSImage",
+          "nib_name": null
+        },
+        {
+          "object_id": "275",
+          "node_id": "ib:\"Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib\":object:[\"275\"]",
+          "archived_class": "NSImage",
+          "nib_name": null
+        },
+        {
+          "object_id": "284",
+          "node_id": "ib:\"Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib\":object:[\"284\"]",
+          "archived_class": "NSImage",
+          "nib_name": null
+        },
+        {
+          "object_id": "289",
+          "node_id": "ib:\"Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib\":object:[\"289\"]",
+          "archived_class": "NSImage",
+          "nib_name": null
+        },
+        {
+          "object_id": "294",
+          "node_id": "ib:\"Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib\":object:[\"294\"]",
+          "archived_class": "NSImage",
+          "nib_name": null
+        },
+        {
+          "object_id": "304",
+          "node_id": "ib:\"Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib\":object:[\"304\"]",
+          "archived_class": "NSImage",
+          "nib_name": null
+        },
+        {
+          "object_id": "307",
+          "node_id": "ib:\"Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib\":object:[\"307\"]",
+          "archived_class": "NSImage",
+          "nib_name": null
+        },
+        {
+          "object_id": "365",
+          "node_id": "ib:\"Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib\":object:[\"365\"]",
+          "archived_class": "_TtC6Shottr22CtrlColoredPopoverView",
+          "nib_name": null
+        },
+        {
+          "object_id": "477",
+          "node_id": "ib:\"Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib\":object:[\"477\"]",
+          "archived_class": "NSApplication",
+          "nib_name": null
+        }
+      ],
+      "labels": [
+        {
+          "text": "Button",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib\":object:[\"28\"]"
+        },
+        {
+          "text": "Label",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib\":object:[\"79\"]"
+        },
+        {
+          "text": "Cancel",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib\":object:[\"89\"]"
+        },
+        {
+          "text": "Label",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib\":object:[\"93\"]"
+        },
+        {
+          "text": "search",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib\":object:[\"130\"]"
+        },
+        {
+          "text": "clear",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib\":object:[\"138\"]"
+        },
+        {
+          "text": "Label",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib\":object:[\"177\"]"
+        },
+        {
+          "text": "Button",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib\":object:[\"186\"]"
+        },
+        {
+          "text": "Label",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib\":object:[\"244\"]"
+        },
+        {
+          "text": "File List",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib\":object:[\"264\"]"
+        },
+        {
+          "text": "File List",
+          "field": "NSTitle",
+          "node_id": "ib:\"Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib\":object:[\"267\"]"
+        },
+        {
+          "text": "Small Tiles",
+          "field": "NSTitle",
+          "node_id": "ib:\"Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib\":object:[\"282\"]"
+        },
+        {
+          "text": "Medium Tiles",
+          "field": "NSTitle",
+          "node_id": "ib:\"Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib\":object:[\"287\"]"
+        },
+        {
+          "text": "Large Tiles",
+          "field": "NSTitle",
+          "node_id": "ib:\"Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib\":object:[\"292\"]"
+        },
+        {
+          "text": "Label",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib\":object:[\"374\"]"
+        },
+        {
+          "text": "Label",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib\":object:[\"378\"]"
+        }
+      ],
+      "actions": [
+        {
+          "selector": "clickMore:",
+          "action_node_id": "ib:\"Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib\":action:[\"20:connection:0\"]",
+          "source": {
+            "object_id": "20",
+            "class": "_TtC6Shottr15CtrlButtonHover",
+            "node_id": "ib:\"Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib\":object:[\"20\"]",
+            "text_or_resource_names": [
+              "Button"
+            ],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "28",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "409",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "clickProgressAction:",
+          "action_node_id": "ib:\"Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib\":action:[\"82:connection:0\"]",
+          "source": {
+            "object_id": "82",
+            "class": "_TtC6Shottr10CtrlButton",
+            "node_id": "ib:\"Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib\":object:[\"82\"]",
+            "text_or_resource_names": [
+              "Cancel"
+            ],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "89",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "409",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "search:",
+          "action_node_id": "ib:\"Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib\":action:[\"123:connection:0\"]",
+          "source": {
+            "object_id": "123",
+            "class": "NSSearchField",
+            "node_id": "ib:\"Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib\":object:[\"123\"]",
+            "text_or_resource_names": [],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "127",
+            "archived_cell_properties": {}
+          },
+          "destination_object_id": "409",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "clickMessageAction:",
+          "action_node_id": "ib:\"Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib\":action:[\"181:connection:0\"]",
+          "source": {
+            "object_id": "181",
+            "class": "_TtC6Shottr10CtrlButton",
+            "node_id": "ib:\"Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib\":object:[\"181\"]",
+            "text_or_resource_names": [
+              "Button"
+            ],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "186",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "409",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "clickSettings:",
+          "action_node_id": "ib:\"Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib\":action:[\"247:connection:0\"]",
+          "source": {
+            "object_id": "247",
+            "class": "NSButton",
+            "node_id": "ib:\"Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib\":object:[\"247\"]",
+            "text_or_resource_names": [],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "253",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "409",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "selectLayout:",
+          "action_node_id": "ib:\"Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib\":action:[\"258:connection:0\"]",
+          "source": {
+            "object_id": "258",
+            "class": "NSPopUpButton",
+            "node_id": "ib:\"Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib\":object:[\"258\"]",
+            "text_or_resource_names": [
+              "File List"
+            ],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "264",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": "",
+              "NSMenuItemRespectAlignment": true
+            }
+          },
+          "destination_object_id": "409",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "changePopoverSize:",
+          "action_node_id": "ib:\"Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib\":action:[\"297:connection:0\"]",
+          "source": {
+            "object_id": "297",
+            "class": "NSButton",
+            "node_id": "ib:\"Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib\":object:[\"297\"]",
+            "text_or_resource_names": [],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "303",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "409",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        }
+      ]
+    },
+    {
+      "id": "UI-08",
+      "resource_path": "Contents/Resources/Pin.storyboardc/Ma0-De-PqN-view-rnf-7n-jyj.nib",
+      "archive_sha256": "6a6624b888f29a3fe211a3a0c8866db39f0cfcceba9dc76e916f9f3b5f3dcdb1",
+      "current_resource_sha256": "6a6624b888f29a3fe211a3a0c8866db39f0cfcceba9dc76e916f9f3b5f3dcdb1",
+      "coverage": [
+        {
+          "facet": "objects:Contents/Resources/Pin.storyboardc/Ma0-De-PqN-view-rnf-7n-jyj.nib",
+          "status": "complete",
+          "reason": null,
+          "examined": 72,
+          "omitted": 0
+        },
+        {
+          "facet": "connections:Contents/Resources/Pin.storyboardc/Ma0-De-PqN-view-rnf-7n-jyj.nib",
+          "status": "partial",
+          "reason": "unsupported_connection_type",
+          "examined": 17,
+          "omitted": 0
+        },
+        {
+          "facet": "hierarchy:Contents/Resources/Pin.storyboardc/Ma0-De-PqN-view-rnf-7n-jyj.nib",
+          "status": "complete",
+          "reason": null,
+          "examined": 50,
+          "omitted": 0
+        },
+        {
+          "facet": "classes:Contents/Resources/Pin.storyboardc/Ma0-De-PqN-view-rnf-7n-jyj.nib",
+          "status": "complete",
+          "reason": null,
+          "examined": 26,
+          "omitted": 0
+        }
+      ],
+      "declared_classes": [
+        {
+          "object_id": "2",
+          "node_id": "ib:\"Contents/Resources/Pin.storyboardc/Ma0-De-PqN-view-rnf-7n-jyj.nib\":object:[\"2\"]",
+          "archived_class": "NSObject",
+          "nib_name": null
+        },
+        {
+          "object_id": "9",
+          "node_id": "ib:\"Contents/Resources/Pin.storyboardc/Ma0-De-PqN-view-rnf-7n-jyj.nib\":object:[\"9\"]",
+          "archived_class": "_TtC6Shottr11CtrlDragOut",
+          "nib_name": null
+        },
+        {
+          "object_id": "22",
+          "node_id": "ib:\"Contents/Resources/Pin.storyboardc/Ma0-De-PqN-view-rnf-7n-jyj.nib\":object:[\"22\"]",
+          "archived_class": "NSImage",
+          "nib_name": null
+        },
+        {
+          "object_id": "27",
+          "node_id": "ib:\"Contents/Resources/Pin.storyboardc/Ma0-De-PqN-view-rnf-7n-jyj.nib\":object:[\"27\"]",
+          "archived_class": "_TtC6Shottr10CtrlButton",
+          "nib_name": null
+        },
+        {
+          "object_id": "35",
+          "node_id": "ib:\"Contents/Resources/Pin.storyboardc/Ma0-De-PqN-view-rnf-7n-jyj.nib\":object:[\"35\"]",
+          "archived_class": "NSImage",
+          "nib_name": null
+        },
+        {
+          "object_id": "39",
+          "node_id": "ib:\"Contents/Resources/Pin.storyboardc/Ma0-De-PqN-view-rnf-7n-jyj.nib\":object:[\"39\"]",
+          "archived_class": "_TtC6Shottr10CtrlButton",
+          "nib_name": null
+        },
+        {
+          "object_id": "46",
+          "node_id": "ib:\"Contents/Resources/Pin.storyboardc/Ma0-De-PqN-view-rnf-7n-jyj.nib\":object:[\"46\"]",
+          "archived_class": "NSImage",
+          "nib_name": null
+        },
+        {
+          "object_id": "49",
+          "node_id": "ib:\"Contents/Resources/Pin.storyboardc/Ma0-De-PqN-view-rnf-7n-jyj.nib\":object:[\"49\"]",
+          "archived_class": "NSView",
+          "nib_name": null
+        },
+        {
+          "object_id": "80",
+          "node_id": "ib:\"Contents/Resources/Pin.storyboardc/Ma0-De-PqN-view-rnf-7n-jyj.nib\":object:[\"80\"]",
+          "archived_class": "_TtC6Shottr10CtrlButton",
+          "nib_name": null
+        },
+        {
+          "object_id": "89",
+          "node_id": "ib:\"Contents/Resources/Pin.storyboardc/Ma0-De-PqN-view-rnf-7n-jyj.nib\":object:[\"89\"]",
+          "archived_class": "NSImage",
+          "nib_name": null
+        },
+        {
+          "object_id": "109",
+          "node_id": "ib:\"Contents/Resources/Pin.storyboardc/Ma0-De-PqN-view-rnf-7n-jyj.nib\":object:[\"109\"]",
+          "archived_class": "_TtC6Shottr17CtrlMouseListener",
+          "nib_name": null
+        },
+        {
+          "object_id": "112",
+          "node_id": "ib:\"Contents/Resources/Pin.storyboardc/Ma0-De-PqN-view-rnf-7n-jyj.nib\":object:[\"112\"]",
+          "archived_class": "NSView",
+          "nib_name": null
+        },
+        {
+          "object_id": "114",
+          "node_id": "ib:\"Contents/Resources/Pin.storyboardc/Ma0-De-PqN-view-rnf-7n-jyj.nib\":object:[\"114\"]",
+          "archived_class": "NSVisualEffectView",
+          "nib_name": null
+        },
+        {
+          "object_id": "117",
+          "node_id": "ib:\"Contents/Resources/Pin.storyboardc/Ma0-De-PqN-view-rnf-7n-jyj.nib\":object:[\"117\"]",
+          "archived_class": "NSView",
+          "nib_name": null
+        },
+        {
+          "object_id": "175",
+          "node_id": "ib:\"Contents/Resources/Pin.storyboardc/Ma0-De-PqN-view-rnf-7n-jyj.nib\":object:[\"175\"]",
+          "archived_class": "NSApplication",
+          "nib_name": null
+        }
+      ],
+      "labels": [
+        {
+          "text": "Label",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Pin.storyboardc/Ma0-De-PqN-view-rnf-7n-jyj.nib\":object:[\"55\"]"
+        }
+      ],
+      "actions": [
+        {
+          "selector": "clickEdit:",
+          "action_node_id": "ib:\"Contents/Resources/Pin.storyboardc/Ma0-De-PqN-view-rnf-7n-jyj.nib\":action:[\"27:connection:0\"]",
+          "source": {
+            "object_id": "27",
+            "class": "_TtC6Shottr10CtrlButton",
+            "node_id": "ib:\"Contents/Resources/Pin.storyboardc/Ma0-De-PqN-view-rnf-7n-jyj.nib\":object:[\"27\"]",
+            "text_or_resource_names": [],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "34",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "145",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "clickCopy:",
+          "action_node_id": "ib:\"Contents/Resources/Pin.storyboardc/Ma0-De-PqN-view-rnf-7n-jyj.nib\":action:[\"39:connection:0\"]",
+          "source": {
+            "object_id": "39",
+            "class": "_TtC6Shottr10CtrlButton",
+            "node_id": "ib:\"Contents/Resources/Pin.storyboardc/Ma0-De-PqN-view-rnf-7n-jyj.nib\":object:[\"39\"]",
+            "text_or_resource_names": [],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "45",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "145",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "close:",
+          "action_node_id": "ib:\"Contents/Resources/Pin.storyboardc/Ma0-De-PqN-view-rnf-7n-jyj.nib\":action:[\"80:connection:0\"]",
+          "source": {
+            "object_id": "80",
+            "class": "_TtC6Shottr10CtrlButton",
+            "node_id": "ib:\"Contents/Resources/Pin.storyboardc/Ma0-De-PqN-view-rnf-7n-jyj.nib\":object:[\"80\"]",
+            "text_or_resource_names": [],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "86",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "145",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        }
+      ]
+    },
+    {
+      "id": "UI-09",
+      "resource_path": "Contents/Resources/Pin.storyboardc/NSWindowController-0Tw-K1-gZ6.nib",
+      "archive_sha256": "243babefea3cd82f7d8f76bdfbb1ab24759074cca3452839953a98f04541c5b4",
+      "current_resource_sha256": "243babefea3cd82f7d8f76bdfbb1ab24759074cca3452839953a98f04541c5b4",
+      "coverage": [
+        {
+          "facet": "objects:Contents/Resources/Pin.storyboardc/NSWindowController-0Tw-K1-gZ6.nib",
+          "status": "complete",
+          "reason": null,
+          "examined": 24,
+          "omitted": 0
+        },
+        {
+          "facet": "connections:Contents/Resources/Pin.storyboardc/NSWindowController-0Tw-K1-gZ6.nib",
+          "status": "complete",
+          "reason": null,
+          "examined": 14,
+          "omitted": 0
+        },
+        {
+          "facet": "hierarchy:Contents/Resources/Pin.storyboardc/NSWindowController-0Tw-K1-gZ6.nib",
+          "status": "complete",
+          "reason": null,
+          "examined": 18,
+          "omitted": 0
+        },
+        {
+          "facet": "classes:Contents/Resources/Pin.storyboardc/NSWindowController-0Tw-K1-gZ6.nib",
+          "status": "complete",
+          "reason": null,
+          "examined": 21,
+          "omitted": 0
+        }
+      ],
+      "declared_classes": [
+        {
+          "object_id": "2",
+          "node_id": "ib:\"Contents/Resources/Pin.storyboardc/NSWindowController-0Tw-K1-gZ6.nib\":object:[\"2\"]",
+          "archived_class": "NSObject",
+          "nib_name": null
+        },
+        {
+          "object_id": "7",
+          "node_id": "ib:\"Contents/Resources/Pin.storyboardc/NSWindowController-0Tw-K1-gZ6.nib\":object:[\"7\"]",
+          "archived_class": "_TtC6Shottr19PinWindowController",
+          "nib_name": null
+        },
+        {
+          "object_id": "23",
+          "node_id": "ib:\"Contents/Resources/Pin.storyboardc/NSWindowController-0Tw-K1-gZ6.nib\":object:[\"23\"]",
+          "archived_class": "_TtC6Shottr17PinViewController",
+          "nib_name": "Ma0-De-PqN-view-rnf-7n-jyj"
+        },
+        {
+          "object_id": "34",
+          "node_id": "ib:\"Contents/Resources/Pin.storyboardc/NSWindowController-0Tw-K1-gZ6.nib\":object:[\"34\"]",
+          "archived_class": "NSImage",
+          "nib_name": null
+        },
+        {
+          "object_id": "39",
+          "node_id": "ib:\"Contents/Resources/Pin.storyboardc/NSWindowController-0Tw-K1-gZ6.nib\":object:[\"39\"]",
+          "archived_class": "NSImage",
+          "nib_name": null
+        },
+        {
+          "object_id": "93",
+          "node_id": "ib:\"Contents/Resources/Pin.storyboardc/NSWindowController-0Tw-K1-gZ6.nib\":object:[\"93\"]",
+          "archived_class": "NSApplication",
+          "nib_name": null
+        }
+      ],
+      "labels": [
+        {
+          "text": "Edit",
+          "field": "NSTitle",
+          "node_id": "ib:\"Contents/Resources/Pin.storyboardc/NSWindowController-0Tw-K1-gZ6.nib\":object:[\"32\"]"
+        },
+        {
+          "text": "Copy",
+          "field": "NSTitle",
+          "node_id": "ib:\"Contents/Resources/Pin.storyboardc/NSWindowController-0Tw-K1-gZ6.nib\":object:[\"43\"]"
+        },
+        {
+          "text": "50%",
+          "field": "NSTitle",
+          "node_id": "ib:\"Contents/Resources/Pin.storyboardc/NSWindowController-0Tw-K1-gZ6.nib\":object:[\"46\"]"
+        },
+        {
+          "text": "100%",
+          "field": "NSTitle",
+          "node_id": "ib:\"Contents/Resources/Pin.storyboardc/NSWindowController-0Tw-K1-gZ6.nib\":object:[\"48\"]"
+        },
+        {
+          "text": "200%",
+          "field": "NSTitle",
+          "node_id": "ib:\"Contents/Resources/Pin.storyboardc/NSWindowController-0Tw-K1-gZ6.nib\":object:[\"50\"]"
+        },
+        {
+          "text": "Semi-transparent",
+          "field": "NSTitle",
+          "node_id": "ib:\"Contents/Resources/Pin.storyboardc/NSWindowController-0Tw-K1-gZ6.nib\":object:[\"52\"]"
+        },
+        {
+          "text": "Close",
+          "field": "NSTitle",
+          "node_id": "ib:\"Contents/Resources/Pin.storyboardc/NSWindowController-0Tw-K1-gZ6.nib\":object:[\"55\"]"
+        }
+      ],
+      "actions": [
+        {
+          "selector": "menuEdit:",
+          "action_node_id": "ib:\"Contents/Resources/Pin.storyboardc/NSWindowController-0Tw-K1-gZ6.nib\":action:[\"32:connection:0\"]",
+          "source": {
+            "object_id": "32",
+            "class": "NSMenuItem",
+            "node_id": "ib:\"Contents/Resources/Pin.storyboardc/NSWindowController-0Tw-K1-gZ6.nib\":object:[\"32\"]",
+            "text_or_resource_names": [
+              "Edit"
+            ],
+            "archived_properties": {
+              "NSKeyEquiv": "",
+              "NSHiddenInRepresentation": false
+            },
+            "cell_object_id": null,
+            "archived_cell_properties": {}
+          },
+          "destination_object_id": "23",
+          "destination_archived_class": "_TtC6Shottr17PinViewController",
+          "destination_placeholder": null
+        },
+        {
+          "selector": "menuCopy:",
+          "action_node_id": "ib:\"Contents/Resources/Pin.storyboardc/NSWindowController-0Tw-K1-gZ6.nib\":action:[\"43:connection:0\"]",
+          "source": {
+            "object_id": "43",
+            "class": "NSMenuItem",
+            "node_id": "ib:\"Contents/Resources/Pin.storyboardc/NSWindowController-0Tw-K1-gZ6.nib\":object:[\"43\"]",
+            "text_or_resource_names": [
+              "Copy"
+            ],
+            "archived_properties": {
+              "NSKeyEquiv": "",
+              "NSHiddenInRepresentation": false
+            },
+            "cell_object_id": null,
+            "archived_cell_properties": {}
+          },
+          "destination_object_id": "23",
+          "destination_archived_class": "_TtC6Shottr17PinViewController",
+          "destination_placeholder": null
+        },
+        {
+          "selector": "menu50:",
+          "action_node_id": "ib:\"Contents/Resources/Pin.storyboardc/NSWindowController-0Tw-K1-gZ6.nib\":action:[\"46:connection:0\"]",
+          "source": {
+            "object_id": "46",
+            "class": "NSMenuItem",
+            "node_id": "ib:\"Contents/Resources/Pin.storyboardc/NSWindowController-0Tw-K1-gZ6.nib\":object:[\"46\"]",
+            "text_or_resource_names": [
+              "50%"
+            ],
+            "archived_properties": {
+              "NSKeyEquiv": "",
+              "NSHiddenInRepresentation": false
+            },
+            "cell_object_id": null,
+            "archived_cell_properties": {}
+          },
+          "destination_object_id": "23",
+          "destination_archived_class": "_TtC6Shottr17PinViewController",
+          "destination_placeholder": null
+        },
+        {
+          "selector": "menu100:",
+          "action_node_id": "ib:\"Contents/Resources/Pin.storyboardc/NSWindowController-0Tw-K1-gZ6.nib\":action:[\"48:connection:0\"]",
+          "source": {
+            "object_id": "48",
+            "class": "NSMenuItem",
+            "node_id": "ib:\"Contents/Resources/Pin.storyboardc/NSWindowController-0Tw-K1-gZ6.nib\":object:[\"48\"]",
+            "text_or_resource_names": [
+              "100%"
+            ],
+            "archived_properties": {
+              "NSKeyEquiv": "",
+              "NSHiddenInRepresentation": false
+            },
+            "cell_object_id": null,
+            "archived_cell_properties": {}
+          },
+          "destination_object_id": "23",
+          "destination_archived_class": "_TtC6Shottr17PinViewController",
+          "destination_placeholder": null
+        },
+        {
+          "selector": "menu200:",
+          "action_node_id": "ib:\"Contents/Resources/Pin.storyboardc/NSWindowController-0Tw-K1-gZ6.nib\":action:[\"50:connection:0\"]",
+          "source": {
+            "object_id": "50",
+            "class": "NSMenuItem",
+            "node_id": "ib:\"Contents/Resources/Pin.storyboardc/NSWindowController-0Tw-K1-gZ6.nib\":object:[\"50\"]",
+            "text_or_resource_names": [
+              "200%"
+            ],
+            "archived_properties": {
+              "NSKeyEquiv": "",
+              "NSHiddenInRepresentation": false
+            },
+            "cell_object_id": null,
+            "archived_cell_properties": {}
+          },
+          "destination_object_id": "23",
+          "destination_archived_class": "_TtC6Shottr17PinViewController",
+          "destination_placeholder": null
+        },
+        {
+          "selector": "menuTransparency:",
+          "action_node_id": "ib:\"Contents/Resources/Pin.storyboardc/NSWindowController-0Tw-K1-gZ6.nib\":action:[\"52:connection:0\"]",
+          "source": {
+            "object_id": "52",
+            "class": "NSMenuItem",
+            "node_id": "ib:\"Contents/Resources/Pin.storyboardc/NSWindowController-0Tw-K1-gZ6.nib\":object:[\"52\"]",
+            "text_or_resource_names": [
+              "Semi-transparent"
+            ],
+            "archived_properties": {
+              "NSKeyEquiv": "",
+              "NSHiddenInRepresentation": false
+            },
+            "cell_object_id": null,
+            "archived_cell_properties": {}
+          },
+          "destination_object_id": "23",
+          "destination_archived_class": "_TtC6Shottr17PinViewController",
+          "destination_placeholder": null
+        },
+        {
+          "selector": "menuClose:",
+          "action_node_id": "ib:\"Contents/Resources/Pin.storyboardc/NSWindowController-0Tw-K1-gZ6.nib\":action:[\"55:connection:0\"]",
+          "source": {
+            "object_id": "55",
+            "class": "NSMenuItem",
+            "node_id": "ib:\"Contents/Resources/Pin.storyboardc/NSWindowController-0Tw-K1-gZ6.nib\":object:[\"55\"]",
+            "text_or_resource_names": [
+              "Close"
+            ],
+            "archived_properties": {
+              "NSKeyEquiv": "",
+              "NSHiddenInRepresentation": false
+            },
+            "cell_object_id": null,
+            "archived_cell_properties": {}
+          },
+          "destination_object_id": "23",
+          "destination_archived_class": "_TtC6Shottr17PinViewController",
+          "destination_placeholder": null
+        }
+      ]
+    },
+    {
+      "id": "UI-15",
+      "resource_path": "Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib",
+      "archive_sha256": "8aa20a6fba6c453e9e02f47a6c5683f7c15293c3d76e1e7ec94bde02f2dc5e29",
+      "current_resource_sha256": "8aa20a6fba6c453e9e02f47a6c5683f7c15293c3d76e1e7ec94bde02f2dc5e29",
+      "coverage": [
+        {
+          "facet": "objects:Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib",
+          "status": "complete",
+          "reason": null,
+          "examined": 238,
+          "omitted": 0
+        },
+        {
+          "facet": "connections:Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib",
+          "status": "complete",
+          "reason": null,
+          "examined": 40,
+          "omitted": 0
+        },
+        {
+          "facet": "hierarchy:Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib",
+          "status": "complete",
+          "reason": null,
+          "examined": 205,
+          "omitted": 0
+        },
+        {
+          "facet": "classes:Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib",
+          "status": "complete",
+          "reason": null,
+          "examined": 38,
+          "omitted": 0
+        }
+      ],
+      "declared_classes": [
+        {
+          "object_id": "2",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"2\"]",
+          "archived_class": "NSObject",
+          "nib_name": null
+        },
+        {
+          "object_id": "9",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"9\"]",
+          "archived_class": "NSView",
+          "nib_name": null
+        },
+        {
+          "object_id": "12",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"12\"]",
+          "archived_class": "NSView",
+          "nib_name": null
+        },
+        {
+          "object_id": "30",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"30\"]",
+          "archived_class": "_TtC6Shottr14CtrlRadioImage",
+          "nib_name": null
+        },
+        {
+          "object_id": "41",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"41\"]",
+          "archived_class": "NSImage",
+          "nib_name": null
+        },
+        {
+          "object_id": "46",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"46\"]",
+          "archived_class": "_TtC6Shottr14CtrlRadioImage",
+          "nib_name": null
+        },
+        {
+          "object_id": "53",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"53\"]",
+          "archived_class": "NSImage",
+          "nib_name": null
+        },
+        {
+          "object_id": "56",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"56\"]",
+          "archived_class": "_TtC6Shottr14CtrlRadioImage",
+          "nib_name": null
+        },
+        {
+          "object_id": "63",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"63\"]",
+          "archived_class": "NSImage",
+          "nib_name": null
+        },
+        {
+          "object_id": "66",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"66\"]",
+          "archived_class": "_TtC6Shottr14CtrlRadioImage",
+          "nib_name": null
+        },
+        {
+          "object_id": "73",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"73\"]",
+          "archived_class": "NSImage",
+          "nib_name": null
+        },
+        {
+          "object_id": "142",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"142\"]",
+          "archived_class": "NSView",
+          "nib_name": null
+        },
+        {
+          "object_id": "210",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"210\"]",
+          "archived_class": "NSView",
+          "nib_name": null
+        },
+        {
+          "object_id": "296",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"296\"]",
+          "archived_class": "NSView",
+          "nib_name": null
+        },
+        {
+          "object_id": "347",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"347\"]",
+          "archived_class": "NSImage",
+          "nib_name": null
+        },
+        {
+          "object_id": "351",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"351\"]",
+          "archived_class": "NSImage",
+          "nib_name": null
+        },
+        {
+          "object_id": "498",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"498\"]",
+          "archived_class": "NSApplication",
+          "nib_name": null
+        }
+      ],
+      "labels": [
+        {
+          "text": "Window Screenshot Background",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"17\"]"
+        },
+        {
+          "text": "Wallpaper",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"78\"]"
+        },
+        {
+          "text": "Transparent",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"83\"]"
+        },
+        {
+          "text": "Solid Color",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"87\"]"
+        },
+        {
+          "text": "Trim shadow",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"91\"]"
+        },
+        {
+          "text": "#C4C6C8",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"98\"]"
+        },
+        {
+          "text": "Title",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"140\"]"
+        },
+        {
+          "text": "Screenshots folder",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"146\"]"
+        },
+        {
+          "text": "Auto (PNG/JPEG)",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"151\"]"
+        },
+        {
+          "text": "Save format",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"157\"]"
+        },
+        {
+          "text": "Resize retina screenshots",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"161\"]"
+        },
+        {
+          "text": "Downscale to 1× when saving",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"166\"]"
+        },
+        {
+          "text": "PNG",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"173\"]"
+        },
+        {
+          "text": "Select Folder",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"178\"]"
+        },
+        {
+          "text": "Title",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"209\"]"
+        },
+        {
+          "text": "Scrolling screenshot max height",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"263\"]"
+        },
+        {
+          "text": "px",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"267\"]"
+        },
+        {
+          "text": "Scrolling screenshot speed",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"274\"]"
+        },
+        {
+          "text": "Title",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"295\"]"
+        },
+        {
+          "text": "Launch at startup",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"301\"]"
+        },
+        {
+          "text": "Thumbnail",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"306\"]"
+        },
+        {
+          "text": "After Area Crop, show",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"310\"]"
+        },
+        {
+          "text": "Autostart",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"314\"]"
+        },
+        {
+          "text": "Editor",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"319\"]"
+        },
+        {
+          "text": "Show",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"324\"]"
+        },
+        {
+          "text": "Copy",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"329\"]"
+        },
+        {
+          "text": "Save",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"334\"]"
+        },
+        {
+          "text": "After screenshot",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"338\"]"
+        },
+        {
+          "text": "Automatically (click outside)",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"343\"]"
+        },
+        {
+          "text": "Automatically (click outside)",
+          "field": "NSTitle",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"346\"]"
+        },
+        {
+          "text": "Manually (close button)",
+          "field": "NSTitle",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"358\"]"
+        },
+        {
+          "text": "Hide preview thumbnail",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"362\"]"
+        }
+      ],
+      "actions": [
+        {
+          "selector": "riWinBackground:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":action:[\"30:connection:0\"]",
+          "source": {
+            "object_id": "30",
+            "class": "_TtC6Shottr14CtrlRadioImage",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"30\"]",
+            "text_or_resource_names": [],
+            "archived_properties": {
+              "NSTag": 1,
+              "NSEnabled": true
+            },
+            "cell_object_id": "38",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "423",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "riWinBackground:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":action:[\"46:connection:0\"]",
+          "source": {
+            "object_id": "46",
+            "class": "_TtC6Shottr14CtrlRadioImage",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"46\"]",
+            "text_or_resource_names": [],
+            "archived_properties": {
+              "NSTag": 2,
+              "NSEnabled": true
+            },
+            "cell_object_id": "52",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "423",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "riWinBackground:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":action:[\"56:connection:0\"]",
+          "source": {
+            "object_id": "56",
+            "class": "_TtC6Shottr14CtrlRadioImage",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"56\"]",
+            "text_or_resource_names": [],
+            "archived_properties": {
+              "NSTag": 3,
+              "NSEnabled": true
+            },
+            "cell_object_id": "62",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "423",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "riWinBackground:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":action:[\"66:connection:0\"]",
+          "source": {
+            "object_id": "66",
+            "class": "_TtC6Shottr14CtrlRadioImage",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"66\"]",
+            "text_or_resource_names": [],
+            "archived_properties": {
+              "NSTag": 4,
+              "NSEnabled": true
+            },
+            "cell_object_id": "72",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "423",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "updateSolidColor:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":action:[\"93:connection:0\"]",
+          "source": {
+            "object_id": "93",
+            "class": "NSTextField",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"93\"]",
+            "text_or_resource_names": [
+              "#C4C6C8"
+            ],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "98",
+            "archived_cell_properties": {}
+          },
+          "destination_object_id": "423",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "helpWindowBG:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":action:[\"102:connection:0\"]",
+          "source": {
+            "object_id": "102",
+            "class": "NSButton",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"102\"]",
+            "text_or_resource_names": [],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "105",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "423",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "changeSaveFormat:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":action:[\"148:connection:0\"]",
+          "source": {
+            "object_id": "148",
+            "class": "NSButton",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"148\"]",
+            "text_or_resource_names": [
+              "Auto (PNG/JPEG)"
+            ],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "151",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "423",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "changeDownscale:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":action:[\"163:connection:0\"]",
+          "source": {
+            "object_id": "163",
+            "class": "NSButton",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"163\"]",
+            "text_or_resource_names": [
+              "Downscale to 1× when saving"
+            ],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "166",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "423",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "changeSaveFormat:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":action:[\"170:connection:0\"]",
+          "source": {
+            "object_id": "170",
+            "class": "NSButton",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"170\"]",
+            "text_or_resource_names": [
+              "PNG"
+            ],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "173",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "423",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "clickSaveFolder:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":action:[\"175:connection:0\"]",
+          "source": {
+            "object_id": "175",
+            "class": "NSButton",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"175\"]",
+            "text_or_resource_names": [
+              "Select Folder"
+            ],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "178",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "423",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "helpSaveFormat:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":action:[\"180:connection:0\"]",
+          "source": {
+            "object_id": "180",
+            "class": "NSButton",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"180\"]",
+            "text_or_resource_names": [],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "183",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "423",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "updateScrollingMax:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":action:[\"212:connection:0\"]",
+          "source": {
+            "object_id": "212",
+            "class": "NSTextField",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"212\"]",
+            "text_or_resource_names": [],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "218",
+            "archived_cell_properties": {}
+          },
+          "destination_object_id": "423",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "updateScrollingSpeed:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":action:[\"269:connection:0\"]",
+          "source": {
+            "object_id": "269",
+            "class": "NSSlider",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"269\"]",
+            "text_or_resource_names": [],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "271",
+            "archived_cell_properties": {
+              "NSMaxValue": 3,
+              "NSMinValue": 0,
+              "NSValue": 2
+            }
+          },
+          "destination_object_id": "423",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "updateLunchAtStartup:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":action:[\"298:connection:0\"]",
+          "source": {
+            "object_id": "298",
+            "class": "NSButton",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"298\"]",
+            "text_or_resource_names": [
+              "Launch at startup"
+            ],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "301",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "423",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "changeAreaCropBehavior:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":action:[\"303:connection:0\"]",
+          "source": {
+            "object_id": "303",
+            "class": "NSButton",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"303\"]",
+            "text_or_resource_names": [
+              "Thumbnail"
+            ],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "306",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "423",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "changeAreaCropBehavior:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":action:[\"316:connection:0\"]",
+          "source": {
+            "object_id": "316",
+            "class": "NSButton",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"316\"]",
+            "text_or_resource_names": [
+              "Editor"
+            ],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "319",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "423",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "updateAfterGrabShow:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":action:[\"321:connection:0\"]",
+          "source": {
+            "object_id": "321",
+            "class": "NSButton",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"321\"]",
+            "text_or_resource_names": [
+              "Show"
+            ],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "324",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "423",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "updateAfterGrabCopy:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":action:[\"326:connection:0\"]",
+          "source": {
+            "object_id": "326",
+            "class": "NSButton",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"326\"]",
+            "text_or_resource_names": [
+              "Copy"
+            ],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "329",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "423",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "updateAfterGrabSave:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":action:[\"331:connection:0\"]",
+          "source": {
+            "object_id": "331",
+            "class": "NSButton",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"331\"]",
+            "text_or_resource_names": [
+              "Save"
+            ],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "334",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "423",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "selectThumbnailClosing:",
+          "action_node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":action:[\"340:connection:0\"]",
+          "source": {
+            "object_id": "340",
+            "class": "NSPopUpButton",
+            "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"340\"]",
+            "text_or_resource_names": [
+              "Automatically (click outside)"
+            ],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "343",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": "",
+              "NSMenuItemRespectAlignment": true
+            }
+          },
+          "destination_object_id": "423",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        }
+      ]
+    },
+    {
+      "id": "UI-16",
+      "resource_path": "Contents/Resources/Preview.storyboardc/NJi-sV-KQJ-view-bhd-SB-Gtf.nib",
+      "archive_sha256": "9e2b908f96838ad4f3205cb712a08af1d7cb2186e976c83ff05108847a5ffba5",
+      "current_resource_sha256": "9e2b908f96838ad4f3205cb712a08af1d7cb2186e976c83ff05108847a5ffba5",
+      "coverage": [
+        {
+          "facet": "objects:Contents/Resources/Preview.storyboardc/NJi-sV-KQJ-view-bhd-SB-Gtf.nib",
+          "status": "complete",
+          "reason": null,
+          "examined": 123,
+          "omitted": 0
+        },
+        {
+          "facet": "connections:Contents/Resources/Preview.storyboardc/NJi-sV-KQJ-view-bhd-SB-Gtf.nib",
+          "status": "partial",
+          "reason": "unsupported_connection_type",
+          "examined": 24,
+          "omitted": 0
+        },
+        {
+          "facet": "hierarchy:Contents/Resources/Preview.storyboardc/NJi-sV-KQJ-view-bhd-SB-Gtf.nib",
+          "status": "complete",
+          "reason": null,
+          "examined": 74,
+          "omitted": 0
+        },
+        {
+          "facet": "classes:Contents/Resources/Preview.storyboardc/NJi-sV-KQJ-view-bhd-SB-Gtf.nib",
+          "status": "complete",
+          "reason": null,
+          "examined": 29,
+          "omitted": 0
+        }
+      ],
+      "declared_classes": [
+        {
+          "object_id": "2",
+          "node_id": "ib:\"Contents/Resources/Preview.storyboardc/NJi-sV-KQJ-view-bhd-SB-Gtf.nib\":object:[\"2\"]",
+          "archived_class": "NSObject",
+          "nib_name": null
+        },
+        {
+          "object_id": "9",
+          "node_id": "ib:\"Contents/Resources/Preview.storyboardc/NJi-sV-KQJ-view-bhd-SB-Gtf.nib\":object:[\"9\"]",
+          "archived_class": "_TtC6Shottr10CtrlButton",
+          "nib_name": null
+        },
+        {
+          "object_id": "22",
+          "node_id": "ib:\"Contents/Resources/Preview.storyboardc/NJi-sV-KQJ-view-bhd-SB-Gtf.nib\":object:[\"22\"]",
+          "archived_class": "NSImage",
+          "nib_name": null
+        },
+        {
+          "object_id": "27",
+          "node_id": "ib:\"Contents/Resources/Preview.storyboardc/NJi-sV-KQJ-view-bhd-SB-Gtf.nib\":object:[\"27\"]",
+          "archived_class": "_TtC6Shottr10CtrlButton",
+          "nib_name": null
+        },
+        {
+          "object_id": "34",
+          "node_id": "ib:\"Contents/Resources/Preview.storyboardc/NJi-sV-KQJ-view-bhd-SB-Gtf.nib\":object:[\"34\"]",
+          "archived_class": "NSImage",
+          "nib_name": null
+        },
+        {
+          "object_id": "37",
+          "node_id": "ib:\"Contents/Resources/Preview.storyboardc/NJi-sV-KQJ-view-bhd-SB-Gtf.nib\":object:[\"37\"]",
+          "archived_class": "_TtC6Shottr10CtrlButton",
+          "nib_name": null
+        },
+        {
+          "object_id": "44",
+          "node_id": "ib:\"Contents/Resources/Preview.storyboardc/NJi-sV-KQJ-view-bhd-SB-Gtf.nib\":object:[\"44\"]",
+          "archived_class": "NSImage",
+          "nib_name": null
+        },
+        {
+          "object_id": "47",
+          "node_id": "ib:\"Contents/Resources/Preview.storyboardc/NJi-sV-KQJ-view-bhd-SB-Gtf.nib\":object:[\"47\"]",
+          "archived_class": "_TtC6Shottr10CtrlButton",
+          "nib_name": null
+        },
+        {
+          "object_id": "54",
+          "node_id": "ib:\"Contents/Resources/Preview.storyboardc/NJi-sV-KQJ-view-bhd-SB-Gtf.nib\":object:[\"54\"]",
+          "archived_class": "NSImage",
+          "nib_name": null
+        },
+        {
+          "object_id": "57",
+          "node_id": "ib:\"Contents/Resources/Preview.storyboardc/NJi-sV-KQJ-view-bhd-SB-Gtf.nib\":object:[\"57\"]",
+          "archived_class": "_TtC6Shottr10CtrlButton",
+          "nib_name": null
+        },
+        {
+          "object_id": "64",
+          "node_id": "ib:\"Contents/Resources/Preview.storyboardc/NJi-sV-KQJ-view-bhd-SB-Gtf.nib\":object:[\"64\"]",
+          "archived_class": "NSImage",
+          "nib_name": null
+        },
+        {
+          "object_id": "67",
+          "node_id": "ib:\"Contents/Resources/Preview.storyboardc/NJi-sV-KQJ-view-bhd-SB-Gtf.nib\":object:[\"67\"]",
+          "archived_class": "_TtC6Shottr10CtrlButton",
+          "nib_name": null
+        },
+        {
+          "object_id": "74",
+          "node_id": "ib:\"Contents/Resources/Preview.storyboardc/NJi-sV-KQJ-view-bhd-SB-Gtf.nib\":object:[\"74\"]",
+          "archived_class": "NSImage",
+          "nib_name": null
+        },
+        {
+          "object_id": "97",
+          "node_id": "ib:\"Contents/Resources/Preview.storyboardc/NJi-sV-KQJ-view-bhd-SB-Gtf.nib\":object:[\"97\"]",
+          "archived_class": "_TtC6Shottr10CtrlHelper",
+          "nib_name": null
+        },
+        {
+          "object_id": "142",
+          "node_id": "ib:\"Contents/Resources/Preview.storyboardc/NJi-sV-KQJ-view-bhd-SB-Gtf.nib\":object:[\"142\"]",
+          "archived_class": "_TtC6Shottr10CtrlButton",
+          "nib_name": null
+        },
+        {
+          "object_id": "149",
+          "node_id": "ib:\"Contents/Resources/Preview.storyboardc/NJi-sV-KQJ-view-bhd-SB-Gtf.nib\":object:[\"149\"]",
+          "archived_class": "NSImage",
+          "nib_name": null
+        },
+        {
+          "object_id": "182",
+          "node_id": "ib:\"Contents/Resources/Preview.storyboardc/NJi-sV-KQJ-view-bhd-SB-Gtf.nib\":object:[\"182\"]",
+          "archived_class": "NSView",
+          "nib_name": null
+        },
+        {
+          "object_id": "184",
+          "node_id": "ib:\"Contents/Resources/Preview.storyboardc/NJi-sV-KQJ-view-bhd-SB-Gtf.nib\":object:[\"184\"]",
+          "archived_class": "_TtC6Shottr15CtrlDragOutView",
+          "nib_name": null
+        },
+        {
+          "object_id": "208",
+          "node_id": "ib:\"Contents/Resources/Preview.storyboardc/NJi-sV-KQJ-view-bhd-SB-Gtf.nib\":object:[\"208\"]",
+          "archived_class": "NSView",
+          "nib_name": null
+        },
+        {
+          "object_id": "216",
+          "node_id": "ib:\"Contents/Resources/Preview.storyboardc/NJi-sV-KQJ-view-bhd-SB-Gtf.nib\":object:[\"216\"]",
+          "archived_class": "_TtC6Shottr14ImageViewNoHit",
+          "nib_name": null
+        },
+        {
+          "object_id": "225",
+          "node_id": "ib:\"Contents/Resources/Preview.storyboardc/NJi-sV-KQJ-view-bhd-SB-Gtf.nib\":object:[\"225\"]",
+          "archived_class": "NSImage",
+          "nib_name": null
+        },
+        {
+          "object_id": "304",
+          "node_id": "ib:\"Contents/Resources/Preview.storyboardc/NJi-sV-KQJ-view-bhd-SB-Gtf.nib\":object:[\"304\"]",
+          "archived_class": "NSApplication",
+          "nib_name": null
+        }
+      ],
+      "labels": [
+        {
+          "text": "Label",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preview.storyboardc/NJi-sV-KQJ-view-bhd-SB-Gtf.nib\":object:[\"104\"]"
+        },
+        {
+          "text": "Label",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preview.storyboardc/NJi-sV-KQJ-view-bhd-SB-Gtf.nib\":object:[\"119\"]"
+        }
+      ],
+      "actions": [
+        {
+          "selector": "clickEdit:",
+          "action_node_id": "ib:\"Contents/Resources/Preview.storyboardc/NJi-sV-KQJ-view-bhd-SB-Gtf.nib\":action:[\"9:connection:0\"]",
+          "source": {
+            "object_id": "9",
+            "class": "_TtC6Shottr10CtrlButton",
+            "node_id": "ib:\"Contents/Resources/Preview.storyboardc/NJi-sV-KQJ-view-bhd-SB-Gtf.nib\":object:[\"9\"]",
+            "text_or_resource_names": [],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "18",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "245",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "clickCopy:",
+          "action_node_id": "ib:\"Contents/Resources/Preview.storyboardc/NJi-sV-KQJ-view-bhd-SB-Gtf.nib\":action:[\"27:connection:0\"]",
+          "source": {
+            "object_id": "27",
+            "class": "_TtC6Shottr10CtrlButton",
+            "node_id": "ib:\"Contents/Resources/Preview.storyboardc/NJi-sV-KQJ-view-bhd-SB-Gtf.nib\":object:[\"27\"]",
+            "text_or_resource_names": [],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "33",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "245",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "clickSave:",
+          "action_node_id": "ib:\"Contents/Resources/Preview.storyboardc/NJi-sV-KQJ-view-bhd-SB-Gtf.nib\":action:[\"37:connection:0\"]",
+          "source": {
+            "object_id": "37",
+            "class": "_TtC6Shottr10CtrlButton",
+            "node_id": "ib:\"Contents/Resources/Preview.storyboardc/NJi-sV-KQJ-view-bhd-SB-Gtf.nib\":object:[\"37\"]",
+            "text_or_resource_names": [],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "43",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "245",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "clickUpload:",
+          "action_node_id": "ib:\"Contents/Resources/Preview.storyboardc/NJi-sV-KQJ-view-bhd-SB-Gtf.nib\":action:[\"47:connection:0\"]",
+          "source": {
+            "object_id": "47",
+            "class": "_TtC6Shottr10CtrlButton",
+            "node_id": "ib:\"Contents/Resources/Preview.storyboardc/NJi-sV-KQJ-view-bhd-SB-Gtf.nib\":object:[\"47\"]",
+            "text_or_resource_names": [],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "53",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "245",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "clickOCR:",
+          "action_node_id": "ib:\"Contents/Resources/Preview.storyboardc/NJi-sV-KQJ-view-bhd-SB-Gtf.nib\":action:[\"57:connection:0\"]",
+          "source": {
+            "object_id": "57",
+            "class": "_TtC6Shottr10CtrlButton",
+            "node_id": "ib:\"Contents/Resources/Preview.storyboardc/NJi-sV-KQJ-view-bhd-SB-Gtf.nib\":object:[\"57\"]",
+            "text_or_resource_names": [],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "63",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "245",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "btnPin:",
+          "action_node_id": "ib:\"Contents/Resources/Preview.storyboardc/NJi-sV-KQJ-view-bhd-SB-Gtf.nib\":action:[\"67:connection:0\"]",
+          "source": {
+            "object_id": "67",
+            "class": "_TtC6Shottr10CtrlButton",
+            "node_id": "ib:\"Contents/Resources/Preview.storyboardc/NJi-sV-KQJ-view-bhd-SB-Gtf.nib\":object:[\"67\"]",
+            "text_or_resource_names": [],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "73",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "245",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        },
+        {
+          "selector": "btnClose:",
+          "action_node_id": "ib:\"Contents/Resources/Preview.storyboardc/NJi-sV-KQJ-view-bhd-SB-Gtf.nib\":action:[\"142:connection:0\"]",
+          "source": {
+            "object_id": "142",
+            "class": "_TtC6Shottr10CtrlButton",
+            "node_id": "ib:\"Contents/Resources/Preview.storyboardc/NJi-sV-KQJ-view-bhd-SB-Gtf.nib\":object:[\"142\"]",
+            "text_or_resource_names": [],
+            "archived_properties": {
+              "NSEnabled": true
+            },
+            "cell_object_id": "148",
+            "archived_cell_properties": {
+              "NSKeyEquivalent": ""
+            }
+          },
+          "destination_object_id": "245",
+          "destination_archived_class": "NSNibExternalObjectPlaceholder",
+          "destination_placeholder": "UpstreamPlaceholder-1"
+        }
+      ]
+    },
+    {
+      "id": "UI-17",
+      "resource_path": "Contents/Resources/Preview.storyboardc/NSWindowController-1na-jt-6US.nib",
+      "archive_sha256": "f4691d6261202360e58a6b4237deddac960dd660d49b9a69bc4df473f27ebff4",
+      "current_resource_sha256": "f4691d6261202360e58a6b4237deddac960dd660d49b9a69bc4df473f27ebff4",
+      "coverage": [
+        {
+          "facet": "objects:Contents/Resources/Preview.storyboardc/NSWindowController-1na-jt-6US.nib",
+          "status": "complete",
+          "reason": null,
+          "examined": 10,
+          "omitted": 0
+        },
+        {
+          "facet": "connections:Contents/Resources/Preview.storyboardc/NSWindowController-1na-jt-6US.nib",
+          "status": "complete",
+          "reason": null,
+          "examined": 5,
+          "omitted": 0
+        },
+        {
+          "facet": "hierarchy:Contents/Resources/Preview.storyboardc/NSWindowController-1na-jt-6US.nib",
+          "status": "complete",
+          "reason": null,
+          "examined": 8,
+          "omitted": 0
+        },
+        {
+          "facet": "classes:Contents/Resources/Preview.storyboardc/NSWindowController-1na-jt-6US.nib",
+          "status": "complete",
+          "reason": null,
+          "examined": 16,
+          "omitted": 0
+        }
+      ],
+      "declared_classes": [
+        {
+          "object_id": "2",
+          "node_id": "ib:\"Contents/Resources/Preview.storyboardc/NSWindowController-1na-jt-6US.nib\":object:[\"2\"]",
+          "archived_class": "NSObject",
+          "nib_name": null
+        },
+        {
+          "object_id": "7",
+          "node_id": "ib:\"Contents/Resources/Preview.storyboardc/NSWindowController-1na-jt-6US.nib\":object:[\"7\"]",
+          "archived_class": "_TtC6Shottr23PreviewWindowController",
+          "nib_name": null
+        },
+        {
+          "object_id": "23",
+          "node_id": "ib:\"Contents/Resources/Preview.storyboardc/NSWindowController-1na-jt-6US.nib\":object:[\"23\"]",
+          "archived_class": "_TtC6Shottr21PreviewViewController",
+          "nib_name": "NJi-sV-KQJ-view-bhd-SB-Gtf"
+        },
+        {
+          "object_id": "47",
+          "node_id": "ib:\"Contents/Resources/Preview.storyboardc/NSWindowController-1na-jt-6US.nib\":object:[\"47\"]",
+          "archived_class": "NSApplication",
+          "nib_name": null
+        }
+      ],
+      "labels": [],
+      "actions": []
+    }
+  ]
+}

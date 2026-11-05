@@ -1,0 +1,8 @@
+{
+  "submission_id": "20261105T094831-antigravity-A05-16254d7f",
+  "reviewer": "codex",
+  "created_at": "2026-11-05T09:48:35.855663+07:00",
+  "decision": "approved",
+  "note": "Reviewed the current PinPreviewCard source snapshot and reran presentation tests. Accepts controlled presentation only; no native pin/clipboard wiring is claimed. Earlier stale implementation packet remains unapproved.",
+  "submission_sha256": "8ac681259667e29227b7ee9e63acabacee434229db2652c9b788441f6ab78713"
+}

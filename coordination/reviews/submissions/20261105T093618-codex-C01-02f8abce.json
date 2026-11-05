@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "id": "20261105T093618-codex-C01-02f8abce",
+  "created_at": "2026-11-05T09:36:18.978911+07:00",
+  "agent": "codex",
+  "request": "BUILD-20261105",
+  "task": "C01",
+  "completion": "done",
+  "summary": "Immutable annotation reducer with bounded undo/redo, safe selection and snapshot-based counter allocation.",
+  "files": [
+    "src/features/editor/model/index.test.ts",
+    "src/features/editor/model/README.md",
+    "src/features/editor/model/index.ts"
+  ],
+  "file_sha256": {
+    "src/features/editor/model/index.test.ts": "87de4e5d4fd95d17ca9445b0fd06f30700d6058def7fabe90f91d2a858846c1e",
+    "src/features/editor/model/README.md": "2c2476e4fd72105b445526b1a818681425248deb06e28da438687e7927646203",
+    "src/features/editor/model/index.ts": "03f794d5b55d7df251c7bb0919f907f7cfba8e104e63261f87801e823d88e126"
+  },
+  "checks": [
+    "Targeted Vitest: 7 passed",
+    "TypeScript typecheck: passed"
+  ],
+  "risks": [
+    "Pure model only; UI, persistence and export are not wired yet"
+  ],
+  "review": "pending"
+}

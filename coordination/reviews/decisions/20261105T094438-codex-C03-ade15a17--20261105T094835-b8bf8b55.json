@@ -1,0 +1,8 @@
+{
+  "submission_id": "20261105T094438-codex-C03-ade15a17",
+  "reviewer": "codex",
+  "created_at": "2026-11-05T09:48:35.825747+07:00",
+  "decision": "approved",
+  "note": "Reviewed bounded decode, crop overflow checks, integer aspect fit, alpha flattening and non-clobbering output; ten tests and strict clippy passed. No native runtime UI claim.",
+  "submission_sha256": "927fc8bf76e4ea18f4504fa16f26adcebbaa38996a6f4e4d4dea688893c616df"
+}

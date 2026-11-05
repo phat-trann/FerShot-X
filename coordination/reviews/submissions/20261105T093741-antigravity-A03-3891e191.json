@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "id": "20261105T093741-antigravity-A03-3891e191",
+  "created_at": "2026-11-05T09:37:41.992662+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A03",
+  "completion": "done",
+  "summary": "Implemented controlled SettingsPanel for Ferby saveFormat, jpegQuality (clamped 1-100, conditionally visible for JPEG), downscaleRetina, showPreview, and reset-to-defaults with unit tests.",
+  "files": [
+    "src/features/settings/SettingsPanel.tsx",
+    "src/features/settings/SettingsPanel.css",
+    "src/features/settings/SettingsPanel.test.tsx"
+  ],
+  "file_sha256": {
+    "src/features/settings/SettingsPanel.tsx": "540f2a8ba6925f4ca01f3c89c95ac67a48c5901aeb8239677542f3c4f0fac46a",
+    "src/features/settings/SettingsPanel.css": "d3a4abf0560627ba52bd97ffaf1e46239b405280077614f26d15ba20760b73e8",
+    "src/features/settings/SettingsPanel.test.tsx": "3404a30ed1c9c178da6c6513ca54bb8b85617bb6cde1d08f8bdc9fec11654f13"
+  },
+  "checks": [
+    "npm run test:unit -- src/features/settings/SettingsPanel.test.tsx: passed (3 tests)",
+    "npm run typecheck: passed"
+  ],
+  "risks": [
+    "Controlled UI component only; settings persistence, native export plumbing, and root Workspace wiring are not implemented here and require Codex integration."
+  ],
+  "review": "pending"
+}

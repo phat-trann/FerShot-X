@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "id": "20261105T094438-codex-C03-ade15a17",
+  "created_at": "2026-11-05T09:44:38.747490+07:00",
+  "agent": "codex",
+  "request": "BUILD-20261105",
+  "task": "C03",
+  "completion": "done",
+  "summary": "Bounded PNG/JPEG decode, exact non-destructive crop, aspect-preserving resize, alpha-aware encoding and non-clobbering export core.",
+  "files": [
+    "src-tauri/crates/image-core/Cargo.lock",
+    "src-tauri/crates/image-core/Cargo.toml",
+    "src-tauri/crates/image-core/README.md",
+    "src-tauri/crates/image-core/src/lib.rs"
+  ],
+  "file_sha256": {
+    "src-tauri/crates/image-core/Cargo.lock": "99a4c20d81a0a5f642bc2468a0893c626e3f4b3d21ad04724462049a125765ec",
+    "src-tauri/crates/image-core/Cargo.toml": "5656dff71452793bbb479fcf395b7a18b7d71cb105c94dade59c813dab09c2ad",
+    "src-tauri/crates/image-core/README.md": "5b39fb1320216559c197343e3751e06b015f76a1ca86ed7f7bd6fdb1981589be",
+    "src-tauri/crates/image-core/src/lib.rs": "543032601fe9fbe4c1083bcc97c75b79172e2ce63bdf4bf4dac82436bdbe8113"
+  },
+  "checks": [
+    "Cargo tests: 10 passed (pixel correctness, bounds/overflow, hostile header, codecs and concurrent exports)",
+    "cargo clippy --all-targets -D warnings: passed",
+    "Image/tempfile APIs verified against primary crate documentation"
+  ],
+  "risks": [
+    "No UI or Tauri wiring yet",
+    "PNG/JPEG native decode only; WebP/GIF must be rasterized before transforms",
+    "Decoder max_alloc is best-effort, not a total-process memory bound"
+  ],
+  "review": "pending"
+}

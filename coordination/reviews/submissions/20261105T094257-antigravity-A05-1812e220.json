@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "id": "20261105T094257-antigravity-A05-1812e220",
+  "created_at": "2026-11-05T09:42:57.590568+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A05",
+  "completion": "done",
+  "summary": "Answered user question on how to build and run Ferby Shottr locally (Tauri desktop dev/build, Vite web preview, and unit/E2E tests) based on README.md and package.json.",
+  "files": [
+    "src/features/pin/PinPreviewCard.tsx",
+    "src/features/pin/PinPreviewCard.css",
+    "src/features/pin/PinPreviewCard.test.tsx"
+  ],
+  "file_sha256": {
+    "src/features/pin/PinPreviewCard.tsx": "e17ca4daaf8a8d9bf0e8358ad8b8c2d62920ddc99bcf74c94cdebacdd65273cc",
+    "src/features/pin/PinPreviewCard.css": "d2a498257f61ee966ba48678a612056f6a0c3c0b8d83990d0a3fbd4cfde139fb",
+    "src/features/pin/PinPreviewCard.test.tsx": "97b494f347297edf2bf7ec55e46e057b1322663301d340d41ef7fec01629fa1a"
+  },
+  "checks": [
+    "Verified README.md, package.json, and existing src-tauri/target/debug/bundle/macos/Ferby Shottr.app bundle."
+  ],
+  "risks": [
+    "Documentation/guidance response only; A01-A05 presentation components still await Codex C04 integration into src/Workspace.tsx."
+  ],
+  "review": "pending"
+}

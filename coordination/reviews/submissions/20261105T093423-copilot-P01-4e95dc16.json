@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "20261105T093423-copilot-P01-4e95dc16",
+  "created_at": "2026-11-05T09:34:23.212048+07:00",
+  "agent": "copilot",
+  "request": "BUILD-20261105",
+  "task": "P01",
+  "completion": "done",
+  "summary": "Implemented pure RGB/hex conversion with strict validation and boundary tests",
+  "files": [
+    "src/features/color/color.ts",
+    "src/features/color/color.test.ts"
+  ],
+  "file_sha256": {
+    "src/features/color/color.ts": "e080dc13a6baaf07d30cff77a6a8855d2fc24f12be5206e313834dd6d0be643b",
+    "src/features/color/color.test.ts": "b12916df4c7b6c67a0ca60e87bacd7defc652ce01c5651a884125c1a4133461c"
+  },
+  "checks": [
+    "npm run test:unit -- src/features/color/color.test.ts: passed (5 tests)"
+  ],
+  "risks": [
+    "No UI/native integration; alpha formats intentionally rejected"
+  ],
+  "review": "pending"
+}

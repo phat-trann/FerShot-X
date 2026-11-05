@@ -2,7 +2,11 @@
 
 ## Scope
 
-This repository investigates the installed `/Applications/Shottr.app`. Begin with `README.md`, `docs/phase-1-features.md`, and `coordination/BOARD.md`. The current deliverable is a feature inventory and subsequent verification, not a product implementation.
+The user has selected **Tauri 2 + Rust**, with React/TypeScript for the frontend, to build Ferby Shottr. The earlier investigation-only restriction is superseded. Preserve the Shottr investigation as reference; do not invent unknown target behavior or copy proprietary resources/code.
+
+Begin with these instructions, `coordination/BUILD-QUEUE.md` and `coordination/reviews/README.md`, then only the inputs named by your task. Architecture and frozen contracts are in `docs/implementation/ARCHITECTURE.md` and `src/contracts/`. Codex owns broad native/domain work and integration, Antigravity presentation components, Copilot bounded utilities/tests. Historical Txx research tasks remain on `coordination/BOARD.md`; new implementation tasks use Cxx/Axx/Pxx.
+
+The user authorized installing missing development prerequisites and task-required dependencies. Prefer established, well-maintained libraries and modern ecosystem packages/crates over custom hand-rolled implementations, and use the latest stable technologies where compatible. Use existing Node 26 through nvm and Rust stable, preserve the default Node 8 alias, and avoid unrelated analysis engines or global configuration changes. Root manifests, lockfiles and capability registration are owned by Codex; workers propose additions in a packet or use their owned standalone Rust crate.
 
 All Markdown is written in English. Reply to the user in their requested language. Prefix shell commands with `rtk`; use `rtk proxy` for unsupported commands or exact output.
 
@@ -18,18 +22,23 @@ All Markdown is written in English. Reply to the user in their requested languag
 
 ## Coordination and ownership
 
+- **Before ending EVERY user request, all agents MUST publish a completion packet under `coordination/reviews/submissions/` using `scripts/review_queue.py submit`, including analysis-only, partial and blocked work.** Record summary, changed/report file snapshots, actual checks, limitations and next steps. A queue request needs a packet after each completed/partial task. Include packet IDs in the final response.
+- Codex refreshes `coordination/reviews/INDEX.md` at the start/end of its requests, reviews actual code/evidence, and records decisions separately. DONE is not approval. STALE packets require a fresh submission. Agents never approve their own work on Codex's behalf.
+- Use `scripts/review_queue.py claim/release` for new implementation tasks. Take only your reserved scope. If a claim/input is unavailable, skip to another independent task; do not wait or poll. Submit, release, then continue your queue without waiting for review.
+- Only Codex edits shared contracts, application/native command wiring, root manifests/lockfiles, global CSS/configuration and generated review index/decisions. Other agents work in the path boundaries in the build queue. Never touch another agent's unfinished files to make a global check pass.
 - Follow `coordination/PROTOCOL.md`. Claim a task before working; do not overwrite another agent's files or Git changes.
 - `coordination/BOARD.md` and `docs/phase-1-features.md` have one integrator: Codex unless a handoff explicitly changes ownership. Other agents report through their own handoff files.
 - Write findings to task-specific files under `docs/agents/<agent>/` and `coordination/handoffs/<agent>/`. Use unique timestamped message filenames under `coordination/messages/<recipient>/`.
 - Do not assume an agent is running because a task recommends it. No automatic cross-client dispatcher is installed.
+- Use the active build queue's roles. Read research/REA only when a specific target-behavior claim requires it; normal source implementation does not need REA. Keep Copilot inputs/output bounded; no full raw evidence or repository-wide scans for a small utility task.
 - Never reset, clean, force-checkout, stage or commit another agent's work. A future implementation should use distinct worktrees or explicit file ownership.
 
 ## Runtime boundaries
 
-Use synthetic images and isolated test windows for runtime verification. Observe permissions and report actual blockers. Do not silently install native engines, change system permissions, modify Shottr.app, activate licenses, upload images, configure cloud accounts, send telemetry intentionally, or change the user's preferences to complete an inventory.
+Use synthetic images and isolated test windows. Native screenshot APIs may be invoked in the product only after an explicit user capture action; automated tests use an injected/fake runner. Observe permissions and report actual blockers. Do not change OS privacy settings, modify Shottr.app, activate licenses, upload images, configure cloud accounts, send telemetry or alter Shottr preferences. Ferby's own controlled settings UI is an authorized implementation feature.
 
 Only one agent may operate Shottr's interactive UI at a time. Static artifact reads may run concurrently. Acquire the shared `runtime-shottr` claim before UI automation and release it in the task handoff. Close only sessions/processes owned by the investigation.
 
 ## Validation
 
-Validate JSON, source links and hashes where available. Check `rtk git diff --check` and `rtk git status --short` before handing off. Confirm `.vscode/`, raw evidence and captures remain ignored. Do not add an application dependency tree or tests for a product that has not been requested.
+Validate JSON, source links and hashes where relevant. Run meaningful scoped frontend/Rust tests and builds; do not claim global checks passed if another in-progress module failed. Check `rtk git diff --check` and `rtk git status --short`. Confirm `.vscode/`, raw evidence, captures, node_modules and Rust targets remain ignored; track application manifests/lockfiles. Submit the completion packet before the final response and release only your own claims.

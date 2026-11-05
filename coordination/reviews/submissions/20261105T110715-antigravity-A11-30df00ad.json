@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "id": "20261105T110715-antigravity-A11-30df00ad",
+  "created_at": "2026-11-05T11:07:15.095912+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A11",
+  "completion": "done",
+  "summary": "Implemented controlled OcrPanel with language and line-break controls, inert text rendering, busy/error/empty states, onRecognize/onCopy callbacks, and RTL tests.",
+  "files": [
+    "src/features/ocr-panel/OcrPanel.tsx",
+    "src/features/ocr-panel/OcrPanel.css",
+    "src/features/ocr-panel/index.ts",
+    "src/features/ocr-panel/OcrPanel.test.tsx"
+  ],
+  "file_sha256": {
+    "src/features/ocr-panel/OcrPanel.tsx": "7bb27c6e9deb5e5ba6de57f55a5b554bfa6fe1216d8ee22565d75186c57c4923",
+    "src/features/ocr-panel/OcrPanel.css": "60b979f56d01eabf766c30f0a1073b1d39ff09c8935c3fbf5cac87cdff34719d",
+    "src/features/ocr-panel/index.ts": "a402e5a63d6599cf8803eb44dd68bce270fbd59cf6ec51d5e62be116b050b957",
+    "src/features/ocr-panel/OcrPanel.test.tsx": "ba595cf6d93173fde05cc903e494a41e0577991e1dba704b49b883ca358f790e"
+  },
+  "checks": [
+    "npm run test:unit -- src/features/ocr-panel/OcrPanel.test.tsx: passed (3 tests)",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Controlled presentation component only; native Vision OCR invocation belongs to Codex C08 integration."
+  ],
+  "review": "pending"
+}

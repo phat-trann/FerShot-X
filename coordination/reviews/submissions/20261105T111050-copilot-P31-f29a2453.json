@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "20261105T111050-copilot-P31-f29a2453",
+  "created_at": "2026-11-05T11:10:50.628346+07:00",
+  "agent": "copilot",
+  "request": "BUILD-20261105",
+  "task": "P31",
+  "completion": "done",
+  "summary": "Added pure symmetric backdrop sizing with documented upward rounding, preserved source dimensions and explicit work caps.",
+  "files": [
+    "src/features/backdrop-size/index.ts",
+    "src/features/backdrop-size/index.test.ts"
+  ],
+  "file_sha256": {
+    "src/features/backdrop-size/index.ts": "a598d0df5ac50da23249fc245471f4d884bc7bdd7d240f7e4b04e9deda5acb1b",
+    "src/features/backdrop-size/index.test.ts": "d62febe973e647a6d8e83e1e36405bbd8ad76fc9962642a11401e29708dde026"
+  },
+  "checks": [
+    "targeted Vitest passed: 2 tests"
+  ],
+  "risks": [
+    "Planner rejects over-cap output rather than silently scaling source aspect."
+  ],
+  "review": "pending"
+}

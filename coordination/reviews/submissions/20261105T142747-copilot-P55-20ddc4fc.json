@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "20261105T142747-copilot-P55-20ddc4fc",
+  "created_at": "2026-11-05T14:27:47.071804+07:00",
+  "agent": "copilot",
+  "request": "P55-lifecycle-policy-regressions",
+  "task": "P55",
+  "completion": "done",
+  "summary": "Added four public-API regression tests for duplicate intent suppression, deep-link confirmation/stale-token rejection, revision invalidation of pending save confirmation, and accepted-effects-only dispatch. Tests use synthetic in-memory intents/context and do not perform OS actions or modify producer code.",
+  "files": [
+    "src/testing/copilot-lifecycle-policy.test.ts",
+    "docs/qa/copilot-P55.md"
+  ],
+  "file_sha256": {
+    "src/testing/copilot-lifecycle-policy.test.ts": "0ca7a940a85724046effa3cf1ecb1219feaa51c7e86cbbcc57c766a53e0cd713",
+    "docs/qa/copilot-P55.md": "eb6a37310331f48c7590c28f1a2b200b9cf603091f6d7e5c436947a4a1329c38"
+  },
+  "checks": [
+    "Node 26.13.0: npm run test:unit -- src/testing/copilot-lifecycle-policy.test.ts (4 tests passed); rtk proxy git diff --check passed."
+  ],
+  "risks": [
+    "No URL activation, native save/clipboard action, OS operation or producer implementation was exercised."
+  ],
+  "review": "pending"
+}

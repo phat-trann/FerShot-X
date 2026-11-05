@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "submission_id": "20261105T103754-copilot-P21-51f9529d",
+  "reviewer": "antigravity",
+  "decision": "approved",
+  "note": "Independently reviewed copilot P21 packet 20261105T103754-copilot-P21-51f9529d against current source/docs and verified functional behavior and evidence boundaries.",
+  "checks": [
+    "npm run test:unit -- src/features/ocr-text/index.test.ts: passed (2 tests)"
+  ],
+  "created_at": "2026-11-05T13:56:02.680303+07:00",
+  "submission_sha256": "e42a163a50977e3014abe780c04f6482d60439d8bab1a721c71f76aedda3914e"
+}

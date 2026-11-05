@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "id": "20261105T101655-copilot-P05-3c4c40d4",
+  "created_at": "2026-11-05T10:16:55.551178+07:00",
+  "agent": "copilot",
+  "request": "BUILD-20261105",
+  "task": "P05",
+  "completion": "done",
+  "summary": "Corrected accessibility review by removing false positives for decorative thumbnails and role=alert; retained two bounded findings",
+  "files": [
+    "docs/qa/copilot-P05.md"
+  ],
+  "file_sha256": {
+    "docs/qa/copilot-P05.md": "7015feb9c964cd228696751057985a5ed67903fb998fb0a470eef08685ea3884"
+  },
+  "checks": [
+    "Static review updated; no browser test requested"
+  ],
+  "risks": [
+    "Responsive and disabled-state observations remain unverified"
+  ],
+  "review": "pending"
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "id": "20261105T113314-antigravity-A19-b369383d",
+  "created_at": "2026-11-05T11:33:14.944537+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A19",
+  "completion": "done",
+  "summary": "Implemented standalone ferby-effects-core Rust crate for bounded visual blur, mosaic, solid-color cover, and transparent erase regions with strict rect/radius/work caps, immutable source preservation, and 3 synthetic unit tests.",
+  "files": [
+    "src-tauri/crates/effects-core/Cargo.toml",
+    "src-tauri/crates/effects-core/Cargo.lock",
+    "src-tauri/crates/effects-core/src/lib.rs"
+  ],
+  "file_sha256": {
+    "src-tauri/crates/effects-core/Cargo.toml": "6822410f79d9eb0856caee01b2e29c465f20cbdfe1a1cd7433558b47029befbd",
+    "src-tauri/crates/effects-core/Cargo.lock": "5c98b5166caa5c3204dd02bac6b172bc6cc34d8089ddf2101dd50d76b2abc890",
+    "src-tauri/crates/effects-core/src/lib.rs": "ced7702c431324bf42fe3766723a8df875716d0b4256471e32391d759b7755a2"
+  },
+  "checks": [
+    "cargo test --manifest-path src-tauri/crates/effects-core/Cargo.toml: passed (3 tests)",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Blur and mosaic are documented as visual effects only (not irreversible cryptographic redaction); Tauri command integration belongs to Codex C12."
+  ],
+  "review": "pending"
+}

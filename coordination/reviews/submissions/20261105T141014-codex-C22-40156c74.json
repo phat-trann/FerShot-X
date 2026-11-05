@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "id": "20261105T141014-codex-C22-40156c74",
+  "created_at": "2026-11-05T14:10:14.297015+07:00",
+  "agent": "codex",
+  "request": "BUILD-20261105",
+  "task": "C22",
+  "completion": "done",
+  "summary": "Implemented standalone ordered Rust image effects orchestration over existing image/effects cores with typed indexed errors, preflight budgets, immutable input and owned PNG output.",
+  "files": [
+    "src-tauri/crates/effects-pipeline/Cargo.toml",
+    "src-tauri/crates/effects-pipeline/Cargo.lock",
+    "src-tauri/crates/effects-pipeline/README.md",
+    "src-tauri/crates/effects-pipeline/src/lib.rs",
+    "coordination/messages/copilot/20261105-codex-H01-C17-C22.md"
+  ],
+  "file_sha256": {
+    "src-tauri/crates/effects-pipeline/Cargo.toml": "73f627da2198d2d5cf1f87a05d4822f457d0350b82715e984a02625887f3ee83",
+    "src-tauri/crates/effects-pipeline/Cargo.lock": "017368459bdecb44492876e354d9d65e483bce73c5f4828f5594e4093bc2c336",
+    "src-tauri/crates/effects-pipeline/README.md": "264f715caed982074405e172716e416515501af2e59c7e8c2f24bbc12faa809f",
+    "src-tauri/crates/effects-pipeline/src/lib.rs": "da10759cd02f13a3a7ac4beddee3c0d3314008437167b70eda0b78838b0a9bda",
+    "coordination/messages/copilot/20261105-codex-H01-C17-C22.md": "b728754de54b21d407d5014e46552e21a9e0e8936069534dd78280d24d58247f"
+  },
+  "checks": [
+    "8 standalone Rust pipeline tests passed --locked --offline after correcting header-vs-policy memory-limit classification",
+    "All standalone dependency version pairs match frozen root lock except two local 0.1.0 crates; root lock untouched",
+    "Current frontend full suite: 243 tests / 81 files passed",
+    "Global TypeScript blocked by A37 unused DEFAULT_SETTINGS; already handed to H01",
+    "Formatting/lint delegated to Copilot H01; existing A19 unused import warning delegated"
+  ],
+  "risks": [
+    "Independent Antigravity review and Codex review of A19 producer required before C12 root integration",
+    "Allocation/work values are conservative preflight estimates, not total-process resource quotas; encoded output cap checked after encoding",
+    "No native acceptance, original concealment equivalence, root manifest registration or Swift"
+  ],
+  "review": "pending"
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "id": "20261105T103956-antigravity-A09-735e9765",
+  "created_at": "2026-11-05T10:39:56.533124+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A09",
+  "completion": "done",
+  "summary": "Standalone ferby-settings-core crate with serde schema matching frozen AppSettings contract, versioned JSON envelope, strict bounds/byte caps, symlink/non-regular target rejection, atomic sibling replacement, and 7 tempdir tests; refreshed current file snapshots. Proposed C04 integration: link ferby-settings-core in src-tauri/Cargo.toml and pass Tauri app_config_dir() to load_settings/save_settings commands.",
+  "files": [
+    "src-tauri/crates/settings-core/Cargo.toml",
+    "src-tauri/crates/settings-core/Cargo.lock",
+    "src-tauri/crates/settings-core/src/lib.rs"
+  ],
+  "file_sha256": {
+    "src-tauri/crates/settings-core/Cargo.toml": "c2f42c4c6689ccc11716dee54b148c090f7bae2d430335a4ee3ea054b7de210f",
+    "src-tauri/crates/settings-core/Cargo.lock": "beb5a12570c3718dec590e52ac4ea54dcee8f105e93aa6210381d067018ed547",
+    "src-tauri/crates/settings-core/src/lib.rs": "e298e18da4957f87cd9ac539e6353a7c6215e929b801ca50431435e8e383dc35"
+  },
+  "checks": [
+    "cargo test --manifest-path src-tauri/crates/settings-core/Cargo.toml: passed (7 tests)",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Single-directory POSIX rename atomicity with last-writer-wins concurrency; Tauri command registration and app_config_dir resolution belong to Codex C04 integration."
+  ],
+  "review": "pending"
+}

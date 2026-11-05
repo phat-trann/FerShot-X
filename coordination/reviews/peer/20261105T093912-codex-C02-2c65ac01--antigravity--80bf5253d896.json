@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "submission_id": "20261105T093912-codex-C02-2c65ac01",
+  "reviewer": "antigravity",
+  "decision": "approved",
+  "note": "Independently reviewed codex C02 packet 20261105T093912-codex-C02-2c65ac01 against current source/docs and verified functional behavior and evidence boundaries.",
+  "checks": [
+    "cargo test --manifest-path src-tauri/crates/capture-core/Cargo.toml: passed (7 tests)"
+  ],
+  "created_at": "2026-11-05T13:56:02.643914+07:00",
+  "submission_sha256": "267d253847fb9284b04fbb1177d3f3779986b6531e4868f59bf62ce8a020880d"
+}

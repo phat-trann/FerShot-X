@@ -1,0 +1,50 @@
+[
+  {
+    "id": "P49-F23-post-capture-actions",
+    "feature_id": "F23",
+    "source_reference": "UI-15 Show/Copy/Save, area-crop Editor/Thumbnail and preview-close affordances; post-capture public exports",
+    "source_evidence_level": "STATIC_OBSERVED",
+    "fixture": "Synthetic captured image with area-crop and preview options plus an explicit close/cancel path.",
+    "trigger": "Plan and run post-capture steps through planPostCaptureSteps and runPostCapturePlan.",
+    "target_observation_needed": "Record which options combine, action order and when each action fires or cancels.",
+    "ferby_observation_needed": "Record planned steps, token/result behavior and handler invocation order.",
+    "expected_target_result": null,
+    "acceptance_rule": "Compare ordering, cancellation and output only after recording target behavior.",
+    "target_status": "NOT_EXECUTED",
+    "ferby_status": "NOT_EXECUTED",
+    "owner": "C10",
+    "limitations": "The public planner API does not prove UI wiring or actual image/show/save effects."
+  },
+  {
+    "id": "P49-F24-output-boundaries",
+    "feature_id": "F24",
+    "source_reference": "UI-02/UI-03 Copy Image, Save Image, Save Image As, Print and drag-and-drop labels",
+    "source_evidence_level": "STATIC_OBSERVED",
+    "fixture": "Synthetic output document and injectable step handlers for copy, save, print and drag destinations.",
+    "trigger": "Run a plan containing each output operation, including handler failure and cancellation.",
+    "target_observation_needed": "Record clipboard types, print output and drag destination formats/errors.",
+    "ferby_observation_needed": "Record PostCaptureStep sequence, handler results and failure propagation.",
+    "expected_target_result": null,
+    "acceptance_rule": "Compare step ordering, formats and errors only with separately recorded target results.",
+    "target_status": "NOT_EXECUTED",
+    "ferby_status": "NOT_EXECUTED",
+    "owner": "C08",
+    "limitations": "The named API plans generic steps; it does not prove native clipboard, print or drag implementations."
+  },
+  {
+    "id": "P49-F25-save-preferences",
+    "feature_id": "F25",
+    "source_reference": "UI-15 Screenshots folder, Auto/PNG/JPEG and Retina-to-1x save labels; post-capture preferences exports",
+    "source_evidence_level": "STATIC_OBSERVED",
+    "fixture": "Synthetic preferences with Auto, PNG and JPEG choices, folder boundary and Retina dimensions.",
+    "trigger": "Clone defaults, create a token and plan save steps for each preference variant.",
+    "target_observation_needed": "Record format decision, filename, quality, folder behavior and scaling rules.",
+    "ferby_observation_needed": "Record clonePostCapturePreferences, createPostCaptureToken and planned preference steps.",
+    "expected_target_result": null,
+    "acceptance_rule": "Compare preferences and scaling only after target and Ferby observations are captured.",
+    "target_status": "NOT_EXECUTED",
+    "ferby_status": "NOT_EXECUTED",
+    "owner": "C10",
+    "limitations": "The public exports do not establish filesystem writes, filename policy, encoder quality or Retina scaling."
+  }
+]

@@ -1,0 +1,8 @@
+{
+  "submission_id": "20261105T103353-antigravity-A04-df878b14",
+  "reviewer": "codex",
+  "created_at": "2026-11-05T10:39:09.144389+07:00",
+  "decision": "approved",
+  "note": "Reviewed pointerup endpoint/dedup, secondary-pointer rejection and explicit unsupported-tool omission; accepts rectangle/arrow/pen view only. Workbench/toolbar integration requires current snapshots.",
+  "submission_sha256": "28199d24647e46844279ab1447214e1483f0395ec02c6cf98c4244dd014bfbde"
+}

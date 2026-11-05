@@ -1,0 +1,8 @@
+{
+  "submission_id": "20261105T104253-antigravity-A05-640d5042",
+  "reviewer": "codex",
+  "created_at": "2026-11-05T11:12:23.993351+07:00",
+  "decision": "approved",
+  "note": "Current pin presentation reviewed; scale/opacity callback boundaries accepted. This is no proof of native always-on-top or transparent-window behavior.",
+  "submission_sha256": "1e923c7f26efc8d3cbadd9829b68440016e42925a2d424ee884407655a81080d"
+}

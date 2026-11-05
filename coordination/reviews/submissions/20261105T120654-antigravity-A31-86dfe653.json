@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "id": "20261105T120654-antigravity-A31-86dfe653",
+  "created_at": "2026-11-05T12:06:54.600456+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A31",
+  "completion": "done",
+  "summary": "Implemented non-destructive automatic tonal image adjustment with documented deterministic Ferby luminance percentile stretch rule, reset helper, immutable source preservation, and unit + real-browser Playwright tests.",
+  "files": [
+    "src/features/auto-adjust/auto-adjust.ts",
+    "src/features/auto-adjust/index.ts",
+    "src/features/auto-adjust/auto-adjust.test.ts",
+    "tests/e2e/antigravity-auto-adjust.spec.ts"
+  ],
+  "file_sha256": {
+    "src/features/auto-adjust/auto-adjust.ts": "9168558fa6ab7e0ce4895a63ba6bb5d6e7426d8c8541c2d1aa5e163b6216eb4d",
+    "src/features/auto-adjust/index.ts": "c6fee1f216058c4e7dc64f8e3bfb204ed334e2cf166382be778e4b22e325f2e1",
+    "src/features/auto-adjust/auto-adjust.test.ts": "e8e2e08c53878ff996d69eb1c5124f2e880d8e0458d0df654459b2f5c64a5f03",
+    "tests/e2e/antigravity-auto-adjust.spec.ts": "f28d05b842b9a2e236f383578cb31810354bb7805d704c6c02aa265607b757c0"
+  },
+  "checks": [
+    "npm run test:unit -- src/features/auto-adjust/auto-adjust.test.ts: passed (1 test)",
+    "npm run test:e2e -- tests/e2e/antigravity-auto-adjust.spec.ts: passed (1 real-browser test)",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Shottr exact auto-adjust heuristic is UNKNOWN; uses documented deterministic Ferby percentile rule."
+  ],
+  "review": "pending"
+}

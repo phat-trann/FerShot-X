@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "20261105T103558-copilot-P14-f8b617ab",
+  "created_at": "2026-11-05T10:35:58.814170+07:00",
+  "agent": "copilot",
+  "request": "BUILD-20261105",
+  "task": "P14",
+  "completion": "done",
+  "summary": "Corrected coordinate mapper to allow finite outside points while requiring positive geometry dimensions",
+  "files": [
+    "src/features/point-map/index.ts",
+    "src/features/point-map/index.test.ts"
+  ],
+  "file_sha256": {
+    "src/features/point-map/index.ts": "89a1a95773a962a12d3cdea63b1d997b19a67af4d65876897469a5d5fdb9e8aa",
+    "src/features/point-map/index.test.ts": "6dfc4f5d889c9887679917e35fde03e6be7a0d47c477c1cf8d5847ff76b9c965"
+  },
+  "checks": [
+    "fresh targeted Vitest passed (2 tests)"
+  ],
+  "risks": [
+    "Earlier failed packet superseded by this current snapshot"
+  ],
+  "review": "pending"
+}

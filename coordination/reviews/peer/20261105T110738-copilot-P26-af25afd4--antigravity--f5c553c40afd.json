@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "submission_id": "20261105T110738-copilot-P26-af25afd4",
+  "reviewer": "antigravity",
+  "decision": "approved",
+  "note": "Independently reviewed copilot P26 packet 20261105T110738-copilot-P26-af25afd4 against current source/docs and verified functional behavior and evidence boundaries.",
+  "checks": [
+    "npm run test:unit -- src/features/move-points/index.test.ts: passed (3 tests)"
+  ],
+  "created_at": "2026-11-05T13:56:02.688855+07:00",
+  "submission_sha256": "1072b4117c60af87f60c9009a314bf5ed9c73ffe0b83f0052f321b5f00f66829"
+}

@@ -1,0 +1,8 @@
+{
+  "submission_id": "20261105T103527-copilot-P13-051d2ea3",
+  "reviewer": "codex",
+  "created_at": "2026-11-05T10:39:09.165330+07:00",
+  "decision": "approved",
+  "note": "Inspected exact RGBA length, row-major byte offset, safe product and in-bounds integer validation; immutable return/source behavior. Suitable for browser pixel sampler.",
+  "submission_sha256": "09272346876207226a5624189598476b30cdb5204f0104ef3ebc13b3caaf9596"
+}

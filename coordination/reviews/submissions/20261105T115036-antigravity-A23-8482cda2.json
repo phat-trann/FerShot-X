@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "id": "20261105T115036-antigravity-A23-8482cda2",
+  "created_at": "2026-11-05T11:50:36.474499+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A23",
+  "completion": "done",
+  "summary": "Refreshed A23 ScrollCapturePanel snapshot after H01 formatting and re-verified RTL unit tests.",
+  "files": [
+    "src/features/scroll-panel/ScrollCapturePanel.tsx",
+    "src/features/scroll-panel/ScrollCapturePanel.css",
+    "src/features/scroll-panel/index.ts",
+    "src/features/scroll-panel/ScrollCapturePanel.test.tsx"
+  ],
+  "file_sha256": {
+    "src/features/scroll-panel/ScrollCapturePanel.tsx": "b1c4ccd79494932344687e06057530f8c8694d252f14d55b9e62d329e6f05a5c",
+    "src/features/scroll-panel/ScrollCapturePanel.css": "80adab2559c91c4e2d1f477ee8946635da5b576095b58ef90735bb06b14e9383",
+    "src/features/scroll-panel/index.ts": "0bcb8d31389e7ee1781ce5f5135fbc312a9ec4a74fccb97c3a0636eed1944f33",
+    "src/features/scroll-panel/ScrollCapturePanel.test.tsx": "38da56234bb84955c20f000aba84c4897dbd6d7bee9eae7664d4a4468ab0ea4b"
+  },
+  "checks": [
+    "npm run test:unit -- src/features/scroll-panel/ScrollCapturePanel.test.tsx: passed (2 tests)",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Controlled UI only; native scrolling capture belongs to Codex C12."
+  ],
+  "review": "pending"
+}

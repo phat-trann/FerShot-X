@@ -14,7 +14,7 @@ pub struct NativeError {
     pub message: String,
 }
 impl NativeError {
-    fn new(code: &'static str, message: impl Into<String>) -> Self {
+    pub(crate) fn new(code: &'static str, message: impl Into<String>) -> Self {
         Self {
             code,
             message: message.into(),
@@ -26,14 +26,14 @@ impl NativeError {
 pub struct NativeJobs {
     busy: Arc<AtomicBool>,
 }
-struct JobGuard(Arc<AtomicBool>);
+pub(crate) struct JobGuard(Arc<AtomicBool>);
 impl Drop for JobGuard {
     fn drop(&mut self) {
         self.0.store(false, Ordering::Release);
     }
 }
 impl NativeJobs {
-    fn acquire(&self) -> Result<JobGuard, NativeError> {
+    pub(crate) fn acquire(&self) -> Result<JobGuard, NativeError> {
         self.busy
             .compare_exchange(false, true, Ordering::AcqRel, Ordering::Acquire)
             .map_err(|_| NativeError::new("busy", "Another image operation is still running."))?;
@@ -41,13 +41,13 @@ impl NativeJobs {
     }
 }
 
-#[derive(Debug, Serialize)]
+#[derive(Debug, Clone, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ImagePayload {
-    png_base64: String,
-    width: u32,
-    height: u32,
-    byte_size: usize,
+    pub(crate) png_base64: String,
+    pub(crate) width: u32,
+    pub(crate) height: u32,
+    pub(crate) byte_size: usize,
 }
 
 #[derive(Clone, Copy, Deserialize)]
@@ -80,7 +80,7 @@ pub struct ProcessRequest {
     resize: Option<Resize>,
 }
 
-fn decode_input(text: &str) -> Result<Raster, NativeError> {
+pub(crate) fn decode_input(text: &str) -> Result<Raster, NativeError> {
     if text.len() > MAX_INPUT_BYTES.div_ceil(3) * 4 {
         return Err(NativeError::new("input_limit", "Image input is too large."));
     }
@@ -90,7 +90,7 @@ fn decode_input(text: &str) -> Result<Raster, NativeError> {
     Raster::decode(&bytes).map_err(|error| NativeError::new("invalid_image", error.to_string()))
 }
 
-fn payload(raster: Raster) -> Result<ImagePayload, NativeError> {
+pub(crate) fn payload(raster: Raster) -> Result<ImagePayload, NativeError> {
     let (width, height) = raster.dimensions();
     let bytes = raster
         .encode(ExportFormat::Png)
@@ -129,11 +129,23 @@ fn process(request: ProcessRequest) -> Result<ImagePayload, NativeError> {
     payload(raster)
 }
 
+pub(crate) fn validate_window_label(label: &str) -> Result<(), NativeError> {
+    if label != "main" {
+        return Err(NativeError::new(
+            "forbidden_window",
+            "Image operations are only available from the main workspace.",
+        ));
+    }
+    Ok(())
+}
+
 #[tauri::command]
 pub async fn process_image(
     request: ProcessRequest,
+    window: tauri::WebviewWindow,
     jobs: tauri::State<'_, NativeJobs>,
 ) -> Result<ImagePayload, NativeError> {
+    validate_window_label(window.label())?;
     let guard = jobs.acquire()?;
     tauri::async_runtime::spawn_blocking(move || {
         let _guard = guard;
@@ -162,6 +174,7 @@ pub async fn capture_image(
     window: tauri::WebviewWindow,
     jobs: tauri::State<'_, NativeJobs>,
 ) -> Result<ImagePayload, NativeError> {
+    validate_window_label(window.label())?;
     if !cfg!(target_os = "macos") {
         return Err(NativeError::new(
             "unsupported",
@@ -238,7 +251,7 @@ fn export_format(format: SaveFormat, quality: u8) -> Result<ExportFormat, Native
     })
 }
 
-fn validate_name(name: &str) -> Result<(), NativeError> {
+pub(crate) fn validate_name(name: &str) -> Result<(), NativeError> {
     if name.is_empty()
         || name.len() > 240
         || name == "."
@@ -262,6 +275,7 @@ pub async fn save_image(
     app: tauri::AppHandle,
     jobs: tauri::State<'_, NativeJobs>,
 ) -> Result<Option<String>, NativeError> {
+    validate_window_label(window.label())?;
     let guard = jobs.acquire()?;
     tauri::async_runtime::spawn_blocking(move || {
         let _guard = guard;
@@ -316,10 +330,144 @@ pub async fn save_image(
     .map_err(|_| NativeError::new("worker_failed", "Image export stopped unexpectedly."))?
 }
 
+#[derive(Deserialize)]
+#[serde(rename_all = "camelCase", deny_unknown_fields)]
+pub struct CopyRequest {
+    png_base64: String,
+}
+
+// Inject the write boundary: tests can verify exact decoded bytes without
+// opening, reading, clearing or writing the user's actual system clipboard.
+fn copy_with(
+    request: CopyRequest,
+    sink: impl FnOnce(usize, usize, Vec<u8>) -> Result<(), NativeError>,
+) -> Result<(), NativeError> {
+    let raster = decode_input(&request.png_base64)?;
+    let (width, height) = raster.dimensions();
+    sink(width as usize, height as usize, raster.rgba_bytes())
+}
+
+#[cfg(target_os = "macos")]
+fn system_clipboard(width: usize, height: usize, bytes: Vec<u8>) -> Result<(), NativeError> {
+    let mut clipboard = arboard::Clipboard::new()
+        .map_err(|e| NativeError::new("clipboard_unavailable", e.to_string()))?;
+    clipboard
+        .set_image(arboard::ImageData {
+            width,
+            height,
+            bytes: std::borrow::Cow::Owned(bytes),
+        })
+        .map_err(|e| NativeError::new("clipboard_failed", e.to_string()))
+}
+
+#[tauri::command]
+pub async fn copy_image(
+    request: CopyRequest,
+    window: tauri::WebviewWindow,
+    jobs: tauri::State<'_, NativeJobs>,
+) -> Result<(), NativeError> {
+    validate_window_label(window.label())?;
+    #[cfg(not(target_os = "macos"))]
+    {
+        let _ = (request, jobs);
+        Err(NativeError::new(
+            "unsupported",
+            "Image clipboard copy is currently supported on macOS only.",
+        ))
+    }
+    #[cfg(target_os = "macos")]
+    {
+        let guard = jobs.acquire()?;
+        tauri::async_runtime::spawn_blocking(move || {
+            let _guard = guard;
+            copy_with(request, system_clipboard)
+        })
+        .await
+        .map_err(|_| NativeError::new("worker_failed", "Image copy stopped unexpectedly."))?
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
     const PNG: &str = "iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAIAAAD91JpzAAAAEklEQVR4nGP4z8DAAMIM/4EAAB/uBfsL2WiLAAAAAElFTkSuQmCC";
+    #[test]
+    fn clipboard_receives_owned_rgba_pixels_once() {
+        let mut calls = 0;
+        copy_with(
+            CopyRequest {
+                png_base64: PNG.into(),
+            },
+            |width, height, bytes| {
+                calls += 1;
+                assert_eq!((width, height), (2, 2));
+                assert_eq!(bytes.len(), 16);
+                assert_eq!(&bytes[..4], &[255, 0, 0, 255]);
+                Ok(())
+            },
+        )
+        .unwrap();
+        assert_eq!(calls, 1);
+    }
+    #[test]
+    fn clipboard_preserves_straight_alpha_and_color_channels() {
+        let request = CopyRequest { png_base64: "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR4nGMQ0bBpAAABxQD5BVCswgAAAABJRU5ErkJggg==".into() };
+        copy_with(request, |w, h, pixels| {
+            assert_eq!((w, h), (1, 1));
+            assert_eq!(pixels, [20, 40, 60, 128]);
+            Ok(())
+        })
+        .unwrap();
+    }
+    #[test]
+    fn invalid_clipboard_input_never_reaches_write_boundary() {
+        for text in ["***", "", "bm90IGFuIGltYWdl"] {
+            let result = copy_with(
+                CopyRequest {
+                    png_base64: text.into(),
+                },
+                |_, _, _| panic!("invalid input must never open the clipboard"),
+            );
+            assert!(result.is_err());
+        }
+        assert!(
+            serde_json::from_value::<CopyRequest>(
+                serde_json::json!({"pngBase64":PNG,"path":"/tmp/private"})
+            )
+            .is_err()
+        );
+    }
+    #[test]
+    fn clipboard_failure_is_reported_and_job_can_retry() {
+        let jobs = NativeJobs::default();
+        {
+            let _guard = jobs.acquire().unwrap();
+            let error = copy_with(
+                CopyRequest {
+                    png_base64: PNG.into(),
+                },
+                |_, _, _| {
+                    Err(NativeError::new(
+                        "clipboard_failed",
+                        "Synthetic clipboard busy",
+                    ))
+                },
+            )
+            .unwrap_err();
+            assert_eq!(error.code, "clipboard_failed");
+        }
+        assert!(jobs.acquire().is_ok());
+    }
+    #[test]
+    fn mutating_operations_require_the_main_window() {
+        assert!(validate_window_label("main").is_ok());
+        for label in ["pin", "", "remote", "main-child"] {
+            assert_eq!(
+                validate_window_label(label).err().unwrap().code,
+                "forbidden_window"
+            );
+        }
+    }
     #[test]
     fn typed_process_request_roundtrips_crop_and_resize() {
         let request: ProcessRequest = serde_json::from_value(serde_json::json!({"pngBase64":PNG,"crop":{"x":0,"y":0,"width":1,"height":2},"resize":{"width":4,"height":4}})).unwrap();
@@ -381,4 +529,11 @@ mod tests {
         worker.join().unwrap();
         assert!(jobs.acquire().is_ok());
     }
+}
+
+pub(crate) fn copy_encoded_image(text: &str) -> Result<(), NativeError> {
+    #[cfg(target_os = "macos")]
+    { let raster = decode_input(text)?; let (width, height) = raster.dimensions(); system_clipboard(width as usize, height as usize, raster.rgba_bytes()) }
+    #[cfg(not(target_os = "macos"))]
+    { let _ = text; Err(NativeError::new("unsupported", "Clipboard copy is currently supported on macOS only.")) }
 }

@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "id": "20261105T110559-copilot-P11-e8716bf8",
+  "created_at": "2026-11-05T11:05:59.458078+07:00",
+  "agent": "copilot",
+  "request": "BUILD-20261105",
+  "task": "P11",
+  "completion": "done",
+  "summary": "Corrected checklist to treat fullscreen capture as completion flow and Escape cancellation as interactive area/window only.",
+  "files": [
+    "docs/qa/copilot-native-checklist.md"
+  ],
+  "file_sha256": {
+    "docs/qa/copilot-native-checklist.md": "dd8b7ca95f617be12491493fd2d3ff55f06e25fae2e398e06ecf17016748f6b9"
+  },
+  "checks": [
+    "Static checklist review completed; native GUI remains NOT EXECUTED."
+  ],
+  "risks": [
+    "No actual capture, permissions, or save dialog exercised."
+  ],
+  "review": "pending"
+}

@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "20261105T134130-copilot-P44-9fbf8d67",
+  "created_at": "2026-11-05T13:41:30.703888+07:00",
+  "agent": "copilot",
+  "request": "P44-source-grounded-recognition-import-cases",
+  "task": "P44",
+  "completion": "done",
+  "summary": "Added five bounded source-grounded parity cases for F03 text and QR recognition, F04 OCR language/line-break formatting, and F05 file/clipboard import boundaries. Cases cite supplied UI/resource references, retain null target results and NOT_EXECUTED statuses, identify C08/C10 owners, and document public API limitations without claiming integration.",
+  "files": [
+    "docs/qa/parity/P44.json",
+    "docs/qa/parity/P44.md"
+  ],
+  "file_sha256": {
+    "docs/qa/parity/P44.json": "9a7e5c0628c7a4a599b85e1ac5844396a4bff8ecfd4936211b4eb0139fd94365",
+    "docs/qa/parity/P44.md": "d33cc00baf02dde7f057b246feff5da4ecdf153fcbae1ea2d5271a26f617280c"
+  },
+  "checks": [
+    "Python JSON field/coverage validation: 5 cases passed; rtk proxy git diff --check passed"
+  ],
+  "risks": [
+    "No Shottr, Ferby runtime, native OCR/QR, file import, or real clipboard operation was executed."
+  ],
+  "review": "pending"
+}

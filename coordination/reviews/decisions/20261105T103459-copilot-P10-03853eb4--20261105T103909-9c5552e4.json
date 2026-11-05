@@ -1,0 +1,8 @@
+{
+  "submission_id": "20261105T103459-copilot-P10-03853eb4",
+  "reviewer": "codex",
+  "created_at": "2026-11-05T10:39:09.159498+07:00",
+  "decision": "approved",
+  "note": "Null/nonobject/wrong-type options now rejected while undefined field defaults remain explicit. Pure normalization only.",
+  "submission_sha256": "714b0f0dd169ebf0d494c3e00ef4a3520f22b64b14e1a761d49b6a3a0106963e"
+}

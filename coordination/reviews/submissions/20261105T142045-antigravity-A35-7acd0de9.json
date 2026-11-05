@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "id": "20261105T142045-antigravity-A35-7acd0de9",
+  "created_at": "2026-11-05T14:20:45.491657+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A35",
+  "completion": "done",
+  "summary": "Refreshed A35 CaptureWorkflowController snapshot after H01 formatting; verified unit tests.",
+  "files": [
+    "src/features/capture-workflow/CaptureWorkflowController.ts",
+    "src/features/capture-workflow/index.ts",
+    "src/features/capture-workflow/CaptureWorkflowController.test.ts"
+  ],
+  "file_sha256": {
+    "src/features/capture-workflow/CaptureWorkflowController.ts": null,
+    "src/features/capture-workflow/index.ts": "94806968e543047cb74f9ae28ba757aac98dffbde1afc1f4a8e9562d2c0e2c23",
+    "src/features/capture-workflow/CaptureWorkflowController.test.ts": null
+  },
+  "checks": [
+    "npm run test:unit -- src/features/capture-workflow/CaptureWorkflowController.test.ts: passed (1 test)",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Preserved late-completion isolation and retry side-effect guards."
+  ],
+  "review": "pending"
+}

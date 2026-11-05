@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "id": "20261105T140355-codex-C21-a0317c2e",
+  "created_at": "2026-11-05T14:03:55.372201+07:00",
+  "agent": "codex",
+  "request": "BUILD-20261105",
+  "task": "C21",
+  "completion": "done",
+  "summary": "Implemented capability-aware lifecycle policy with inert declarative effects, shortcut/deep-link guards, intent dedupe and revision-bound unsaved-close confirmation/save arbitration.",
+  "files": [
+    "src/features/lifecycle-policy/index.test.ts",
+    "src/features/lifecycle-policy/README.md",
+    "src/features/lifecycle-policy/index.ts"
+  ],
+  "file_sha256": {
+    "src/features/lifecycle-policy/index.test.ts": "708ef76e3557ea36ecc4e61ffeb0a50a283e9fa849464c1ca62e6244bb80a94b",
+    "src/features/lifecycle-policy/README.md": "6c3b0f4196a567c474cb3f4822cfadaace3db466761347f2789a6e50282df17b",
+    "src/features/lifecycle-policy/index.ts": "2b6e9a98e52efd920d5a457c714e018a77373d64008d3a4d18c98d3a0e64ebb4"
+  },
+  "checks": [
+    "Focused lifecycle Vitest suite passed (11 cases)",
+    "Owned C21 implementation/test TypeScript noEmit passed",
+    "Formatting/lint delegated to Copilot H01"
+  ],
+  "risks": [
+    "Independent Antigravity review and C13/C15 real shortcut/lifecycle wiring pending",
+    "Effects are declarations; native handlers must validate current context and acknowledge actual save/close outcomes",
+    "No OS registration, URL activation, capture or native acceptance performed"
+  ],
+  "review": "pending"
+}

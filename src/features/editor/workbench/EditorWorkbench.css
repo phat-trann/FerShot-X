@@ -1,0 +1,37 @@
+.ferby-editor-workbench {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.ferby-editor-workbench__bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.ferby-editor-workbench__status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.8rem;
+  color: #9ca3af;
+}
+
+.ferby-editor-workbench__export-btn {
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.375rem;
+  border: 1px solid #2563eb;
+  background-color: #1d4ed8;
+  color: #ffffff;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.ferby-editor-workbench__export-btn:hover {
+  background-color: #2563eb;
+}
+

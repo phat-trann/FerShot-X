@@ -1,0 +1,8 @@
+{
+  "submission_id": "20261105T103514-copilot-P12-69f34a4d",
+  "reviewer": "codex",
+  "created_at": "2026-11-05T10:39:09.161138+07:00",
+  "decision": "changes_requested",
+  "note": "Header helper lacks the task-required legal PNG dimension cap 2^31-1. A 33-byte signature/IHDR header width=0x80000000,height=1 currently passes default maxPixels. Enforce both dimension caps and safe product/caller limits; add boundary tests. Header-only scope must remain explicit.",
+  "submission_sha256": "1bb590df5ece37c8ee0b3268e79c63970112c781f499364572f879c050c2bf01"
+}

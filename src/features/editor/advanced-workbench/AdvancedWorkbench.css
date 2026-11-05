@@ -1,0 +1,35 @@
+.ferby-advanced-workbench {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 12px;
+  background: #0f172a;
+  color: #f8fafc;
+}
+
+.ferby-advanced-workbench__toolbar,
+.ferby-advanced-workbench__history,
+.ferby-advanced-workbench__emphasis-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.ferby-advanced-workbench__stage {
+  position: relative;
+  overflow: hidden;
+  background: #1e293b;
+}
+
+.ferby-advanced-workbench__stage svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.ferby-advanced-workbench__error {
+  color: #fca5a5;
+  font-size: 12px;
+}
+

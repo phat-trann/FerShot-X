@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "20261105T104036-copilot-REQUIREMENT-0.1.0-dc15feed",
+  "created_at": "2026-11-05T10:40:36.501406+07:00",
+  "agent": "copilot",
+  "request": "BUILD-20261105",
+  "task": "REQUIREMENT-0.1.0",
+  "completion": "done",
+  "summary": "Recorded 0.1.0 function-parity gate: complete and verify requested functions before version upgrades or broader UI expansion.",
+  "files": [
+    "AGENTS.md",
+    "coordination/START-HERE.md"
+  ],
+  "file_sha256": {
+    "AGENTS.md": "7115ee29d3dde915f6f93824ba5a9b7347d965dec957314e951c7f035fa2a030",
+    "coordination/START-HERE.md": "8f5410b7ddb783d58df20d1ae19d09cd913072c0c56ddc3b2821a132c1f8c86b"
+  },
+  "checks": [
+    "Requirement text reviewed; no product tests required for documentation-only change"
+  ],
+  "risks": [
+    "Parity completeness still requires implementation and verification work"
+  ],
+  "review": "pending"
+}

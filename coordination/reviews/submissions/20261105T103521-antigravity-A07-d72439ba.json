@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "id": "20261105T103521-antigravity-A07-d72439ba",
+  "created_at": "2026-11-05T10:35:21.232190+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A07",
+  "completion": "done",
+  "summary": "Replaced plain-object per-image history map with ReadonlyMap<string, EditorState> in EditorWorkbench so Object.prototype keys like toString and __proto__ work safely.",
+  "files": [
+    "src/features/editor/workbench/EditorWorkbench.tsx",
+    "src/features/editor/workbench/EditorWorkbench.css",
+    "src/features/editor/workbench/index.ts",
+    "src/features/editor/workbench/EditorWorkbench.test.tsx"
+  ],
+  "file_sha256": {
+    "src/features/editor/workbench/EditorWorkbench.tsx": "051b90b4d32dabfa4a4590fa1dfa1d135f6d6607efe5902a7d3d0458416ccc40",
+    "src/features/editor/workbench/EditorWorkbench.css": "c6d70f73102c29465f28c2dca6554146876f179b975d2e42a2d3af090129f209",
+    "src/features/editor/workbench/index.ts": "9293e9e5eab2033a0618b310d7cf823eb51d883a1328340ac139649ee2c27675",
+    "src/features/editor/workbench/EditorWorkbench.test.tsx": "bbe33bf335f79ec511936e5c873b0e0639187bb3daad349b5fb81d10a163dbe5"
+  },
+  "checks": [
+    "npm run test:unit -- src/features/editor/workbench/EditorWorkbench.test.tsx: passed (3 tests)",
+    "npm run typecheck: passed",
+    "npm run build: passed"
+  ],
+  "risks": [
+    "Requires Codex C07 integration to mount EditorWorkbench inside src/Workspace.tsx."
+  ],
+  "review": "pending"
+}

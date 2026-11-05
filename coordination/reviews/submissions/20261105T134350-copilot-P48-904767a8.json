@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "20261105T134350-copilot-P48-904767a8",
+  "created_at": "2026-11-05T13:43:50.805898+07:00",
+  "agent": "copilot",
+  "request": "P48-source-grounded-pin-library-preview-cases",
+  "task": "P48",
+  "completion": "done",
+  "summary": "Added three bounded source-grounded parity cases for F20 pin controls, F21 library boundaries, and F22 preview actions. Cases use only the supplied brief and PinPreviewCard public API, retain null target results and NOT_EXECUTED statuses, identify C09/C14 ownership, and document absent native/library/action APIs.",
+  "files": [
+    "docs/qa/parity/P48.json",
+    "docs/qa/parity/P48.md"
+  ],
+  "file_sha256": {
+    "docs/qa/parity/P48.json": "e8c88fb8dea0eb427275def03232c812dff32ba3ab70dc61aabcf04caaf6897f",
+    "docs/qa/parity/P48.md": "1d5ec1788cb3652d6fef1f0ab40da58b78dda4329c42e91e0bbf2eb20a065b73"
+  },
+  "checks": [
+    "Python JSON field/coverage validation: 3 cases passed; rtk proxy git diff --check passed"
+  ],
+  "risks": [
+    "No target or Ferby runtime, native window action, library operation, OS operation, or product code execution was performed."
+  ],
+  "review": "pending"
+}

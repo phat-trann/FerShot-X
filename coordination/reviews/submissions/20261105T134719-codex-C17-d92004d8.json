@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "id": "20261105T134719-codex-C17-d92004d8",
+  "created_at": "2026-11-05T13:47:19.896727+07:00",
+  "agent": "codex",
+  "request": "BUILD-20261105",
+  "task": "C17",
+  "completion": "done",
+  "summary": "Implemented manual bounded capture-session controller with stale-result isolation, exact-once resource cleanup, stop/cancel and display-bound repeat-area invalidation.",
+  "files": [
+    "src/features/capture-session/index.test.ts",
+    "src/features/capture-session/README.md",
+    "src/features/capture-session/index.ts"
+  ],
+  "file_sha256": {
+    "src/features/capture-session/index.test.ts": "9e3feef85af11f7c5ef15b48e6889a6e2e8a8a0befdae4836e6f5ba4557ea63c",
+    "src/features/capture-session/README.md": "fdcd6a44930b287d967adf6af02c5088d0f21fdb05fc94f680b4f34691f5590c",
+    "src/features/capture-session/index.ts": "bba7ddc8e55361e7b62ecb7ad6425a1415fe37edce12d7ec8e145a653466ff11"
+  },
+  "checks": [
+    "6 focused Vitest tests passed",
+    "TypeScript noEmit passed",
+    "Formatting/lint delegated to Copilot H01"
+  ],
+  "risks": [
+    "Independent Antigravity peer review and C11 native/root integration pending",
+    "Cooperative adapters must settle to release resources still read by an in-flight stitch; no actual OS capture/scrolling or target parity verified"
+  ],
+  "review": "pending"
+}

@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "20261105T110947-copilot-P29-2c911be4",
+  "created_at": "2026-11-05T11:09:47.061429+07:00",
+  "agent": "copilot",
+  "request": "BUILD-20261105",
+  "task": "P29",
+  "completion": "done",
+  "summary": "Added bounded nearest snap candidate selection with finite tolerance, deterministic first tie and immutable result point.",
+  "files": [
+    "src/features/snap-distance/index.ts",
+    "src/features/snap-distance/index.test.ts"
+  ],
+  "file_sha256": {
+    "src/features/snap-distance/index.ts": "8e2c22ab6d3f7295147099322d4bf4cb41be56359942d1f7000db0cf02981e74",
+    "src/features/snap-distance/index.test.ts": "b5d7562a5fc1851dc8c338586926e953584e6f7b49c117377d0be3808c3f84c3"
+  },
+  "checks": [
+    "targeted Vitest passed: 2 tests"
+  ],
+  "risks": [
+    "Uses Euclidean point distance; no object similarity or renderer integration."
+  ],
+  "review": "pending"
+}

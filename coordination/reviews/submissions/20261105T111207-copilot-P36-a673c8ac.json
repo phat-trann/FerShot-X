@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "id": "20261105T111207-copilot-P36-a673c8ac",
+  "created_at": "2026-11-05T11:12:07.058099+07:00",
+  "agent": "copilot",
+  "request": "BUILD-20261105",
+  "task": "P36",
+  "completion": "done",
+  "summary": "Added independent v1 settings compatibility fixtures for exact fields, defaults, malformed/version/type/quality/size boundaries.",
+  "files": [
+    "src/testing/copilot-settings-compat.test.ts"
+  ],
+  "file_sha256": {
+    "src/testing/copilot-settings-compat.test.ts": "3e7580cef22558e0dee1ae2f7ed7304b6a55ca08728416d3f1585ff2a3f8371b"
+  },
+  "checks": [
+    "targeted Vitest passed: 3 tests"
+  ],
+  "risks": [
+    "Test-only coverage; codec and native storage untouched."
+  ],
+  "review": "pending"
+}

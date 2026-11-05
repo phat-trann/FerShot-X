@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "id": "20261105T112715-codex-C10-e3aaf538",
+  "created_at": "2026-11-05T11:27:15.175573+07:00",
+  "agent": "codex",
+  "request": "BUILD-20261105",
+  "task": "C10",
+  "completion": "partial",
+  "summary": "Wired reviewed bounded preference storage to main-only native commands, explicit Save preferences and applied persisted export format/quality. Remaining downscale/preview effects and native restart acceptance stay open.",
+  "files": [
+    "src-tauri/Cargo.toml",
+    "src-tauri/Cargo.lock",
+    "src-tauri/src/imaging.rs",
+    "src-tauri/src/lib.rs",
+    "src-tauri/src/preferences.rs",
+    "src/platform/native.ts",
+    "src/platform/preferences.test.ts",
+    "src/Workspace.tsx",
+    "src/Workspace.css",
+    "src/Workspace.preferences.tsx",
+    "tests/e2e/codex-preferences.spec.ts",
+    "tests/e2e/codex-editor.spec.ts",
+    "tests/e2e/codex-clipboard.spec.ts",
+    "tests/e2e/codex-regressions.spec.ts",
+    "docs/agents/codex/C10-preferences.md"
+  ],
+  "file_sha256": {
+    "src-tauri/Cargo.toml": "0c61fefa2ef57bde1890a102b55c42d5f9c597280343afaf95f6d393e78803e0",
+    "src-tauri/Cargo.lock": "315e7d6e58d7fedc15d8de97c9d1cad9a4351db0299f18620560dc52c9d64503",
+    "src-tauri/src/imaging.rs": "36e744ecd3c1ca9567f1312758c9e4841c75dab5b1c615bd20edad81fe5ddfcf",
+    "src-tauri/src/lib.rs": "6d3475a6ea4a2080675bbc255e930c9bce32ca1dd28251792af12f13d5ff428c",
+    "src-tauri/src/preferences.rs": "9f7a647c2a9ae53742a1e7039853399c7079379ccfcf67be72d60acdeba593c3",
+    "src/platform/native.ts": "02496d12a050bd697096da67a72fc2636f64b34517f1845be549de75e15c9edc",
+    "src/platform/preferences.test.ts": "bc4d8270a77d003b033f29767e5d92dc028b573da188e1303af2f7fc4a5229e2",
+    "src/Workspace.tsx": "0c02cb4012a3a84f75b8127c6f5db813fe09e9066fa5c0165151eb4db0ce0729",
+    "src/Workspace.css": "2526dabf4e28418b61de5d199b6b28c2e03e916348a8a148cf0173001e4ef048",
+    "src/Workspace.preferences.tsx": "eacfd339003503cad822e4dded5f64ef4875f65b75c1b42c3f4dc447b5031bc4",
+    "tests/e2e/codex-preferences.spec.ts": "ef4d307b048869bfd3affdaa7f9ceb527288522d946fed794fcd6ac9db0b99df",
+    "tests/e2e/codex-editor.spec.ts": "8c64bf53a38c0669163e3efb180c745d327fab01f6f4d8db72cdfc97c11b88c8",
+    "tests/e2e/codex-clipboard.spec.ts": "5f721d14a24ddebe7daed001389d45bf94fef0887f6a3db766b26d2467b96215",
+    "tests/e2e/codex-regressions.spec.ts": "4941a5ca452693693e5861aca111d4312e0661166840c66b7935094a95b4571f",
+    "docs/agents/codex/C10-preferences.md": "d8540218078b297f3aa0de4c29be0dc18403e648c69fa2d56feaa92ba5c5284b"
+  },
+  "checks": [
+    "Root Rust: 12 tests passed; A09 crate: 7 passed",
+    "Adapter: 3 tests passed; mock browser preference reload/export quality: 2 passed",
+    "TypeScript/Vite build passed",
+    "Existing Cargo package versions unchanged; local settings-core 0.1.0 added",
+    "Formatting/lint delegated to Copilot H01"
+  ],
+  "risks": [
+    "No native app restart/real user-profile preference test performed",
+    "Downscale requires actual display metadata; preview behavior not implemented yet",
+    "Browser persistence test is explicitly mocked; Rust store tested in temp directories"
+  ],
+  "review": "pending"
+}

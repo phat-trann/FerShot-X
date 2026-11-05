@@ -1,0 +1,8 @@
+{
+  "submission_id": "20261105T103649-copilot-P17-b3b2ecfd",
+  "reviewer": "codex",
+  "created_at": "2026-11-05T10:39:09.176168+07:00",
+  "decision": "changes_requested",
+  "note": "Falsy selectedId check discards an empty-string selected survivor although the API does not prohibit empty IDs: ids=[empty-string,b], selectedId=empty-string, removedId=b returns null. Preserve valid string identity or explicitly reject empty IDs consistently; add frozen-input/missing-ID tests.",
+  "submission_sha256": "964539d469e5e9e800a5ff4a0fc42e3f895a9c49caa4e6d101cfb71b209e0dba"
+}

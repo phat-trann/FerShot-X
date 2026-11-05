@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "20261105T155835-copilot-P61-9473af39",
+  "created_at": "2026-11-05T15:58:35.378763+07:00",
+  "agent": "copilot",
+  "request": "P61-preferences-workspace-regressions",
+  "task": "P61",
+  "completion": "done",
+  "summary": "Added three independent regressions for capability-disabled preference preservation, controlled save callback payloads, and clean-workspace adoption of an external snapshot. Checked current A37 packet/claim; no producer code changed.",
+  "files": [
+    "src/testing/copilot-preferences-workspace.test.tsx",
+    "docs/qa/copilot-P61.md"
+  ],
+  "file_sha256": {
+    "src/testing/copilot-preferences-workspace.test.tsx": "e5a862e33f5f84ce7536f664eeca6398b960bd6112f61212226ed114d83c4a13",
+    "docs/qa/copilot-P61.md": "d89dd92e694f6bfbd3c094830f089b04e71e8cbcf8252ebea5cf8b8cc132e16d"
+  },
+  "checks": [
+    "Node 26.13.0: npm run test:unit -- src/testing/copilot-preferences-workspace.test.tsx src/features/preferences-workspace/PreferencesWorkspace.test.tsx (2 files, 4 tests passed); rtk proxy git diff --check passed."
+  ],
+  "risks": [
+    "No OS actions, build, producer edits or Antigravity review performed."
+  ],
+  "review": "pending"
+}

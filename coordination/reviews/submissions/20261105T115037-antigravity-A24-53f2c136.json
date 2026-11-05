@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "id": "20261105T115037-antigravity-A24-53f2c136",
+  "created_at": "2026-11-05T11:50:37.580949+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A24",
+  "completion": "done",
+  "summary": "Refreshed A24 PostCapturePlanner snapshot after H01 formatting and re-verified RTL unit tests.",
+  "files": [
+    "src/features/post-capture/PostCapturePlanner.tsx",
+    "src/features/post-capture/index.ts",
+    "src/features/post-capture/PostCapturePlanner.test.tsx"
+  ],
+  "file_sha256": {
+    "src/features/post-capture/PostCapturePlanner.tsx": "cdc747053b26f09d376f97a74856860f670eb363c780aea991c27a5cc946b842",
+    "src/features/post-capture/index.ts": "d55b675bece991d794c07dc4805a4da5758ade6ab532035d1bb4a4222200ab26",
+    "src/features/post-capture/PostCapturePlanner.test.tsx": "19c4135e724c1781a17ddd72558cdfb6fb98aa9bd0bd2ec75ed827b3e5310d99"
+  },
+  "checks": [
+    "npm run test:unit -- src/features/post-capture/PostCapturePlanner.test.tsx: passed (2 tests)",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Pure plan and controlled callback runner; no IO backend."
+  ],
+  "review": "pending"
+}

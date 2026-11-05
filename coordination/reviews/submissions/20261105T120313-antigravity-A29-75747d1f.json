@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "id": "20261105T120313-antigravity-A29-75747d1f",
+  "created_at": "2026-11-05T12:03:13.406360+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A29",
+  "completion": "done",
+  "summary": "Implemented standalone ferby-session-core crate with versioned local session manifest, atomic sibling staging, strict file/byte caps, path-traversal and symlink rejection, and tempdir unit tests.",
+  "files": [
+    "src-tauri/crates/session-core/Cargo.toml",
+    "src-tauri/crates/session-core/Cargo.lock",
+    "src-tauri/crates/session-core/src/lib.rs"
+  ],
+  "file_sha256": {
+    "src-tauri/crates/session-core/Cargo.toml": "109bc85869a4940dd54ffbbf87b37d60868d46cf872ea2650e32dabcaf5a2d41",
+    "src-tauri/crates/session-core/Cargo.lock": "cab9cf9a3560702af911ef149f25f5fe29fbd37667034637881959d6541b356c",
+    "src-tauri/crates/session-core/src/lib.rs": "ea5300cabaaa174bb6e0bb2ffb9d7e808291920afa06b784869f67d9fa72c89a"
+  },
+  "checks": [
+    "cargo test --manifest-path src-tauri/crates/session-core/Cargo.toml: passed (3 tests)",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Local Ferby session store design; root Tauri command wiring belongs to Codex."
+  ],
+  "review": "pending"
+}

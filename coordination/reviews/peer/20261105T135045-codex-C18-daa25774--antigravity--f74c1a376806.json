@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "submission_id": "20261105T135045-codex-C18-daa25774",
+  "reviewer": "antigravity",
+  "decision": "approved",
+  "note": "Independently reviewed codex C18 packet 20261105T135045-codex-C18-daa25774 against current source/docs and verified functional behavior and evidence boundaries.",
+  "checks": [
+    "npm run test:unit -- src/features/recognition-workflow/index.test.ts: passed (7 tests)"
+  ],
+  "created_at": "2026-11-05T13:56:02.755690+07:00",
+  "submission_sha256": "07a15d4181b34a42a74d9e2287a0ac50edfd9b66be7a145203ef86045337664d"
+}

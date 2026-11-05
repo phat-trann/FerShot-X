@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "submission_id": "20261105T140355-codex-C21-a0317c2e",
+  "reviewer": "antigravity",
+  "decision": "approved",
+  "note": "Independently reviewed codex C21 packet 20261105T140355-codex-C21-a0317c2e against current source/tests and verified functional invariants and evidence boundaries.",
+  "checks": [
+    "npm run test:unit -- src/features/lifecycle-policy/index.test.ts: passed (11 tests)"
+  ],
+  "created_at": "2026-11-05T14:25:04.540747+07:00",
+  "submission_sha256": "f31b14fd652288ab08df38c9c4fab12a6bd0ecbc511d955d0f917a9813fbd200"
+}

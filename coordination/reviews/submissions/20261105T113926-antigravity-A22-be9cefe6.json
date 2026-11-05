@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "id": "20261105T113926-antigravity-A22-be9cefe6",
+  "created_at": "2026-11-05T11:39:26.507812+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A22",
+  "completion": "done",
+  "summary": "Implemented standalone ferby-scroll-core Rust crate for deterministic vertical RGBA8 frame stitching with downward/upward overlap matching, duplicate skipping, height/pixel caps, no-match errors, and synthetic row-pattern unit tests.",
+  "files": [
+    "src-tauri/crates/scroll-core/Cargo.toml",
+    "src-tauri/crates/scroll-core/Cargo.lock",
+    "src-tauri/crates/scroll-core/src/lib.rs"
+  ],
+  "file_sha256": {
+    "src-tauri/crates/scroll-core/Cargo.toml": "b5b81d76a55a8ea0fbb4f30b0fa8b785bd37a218b64305789a6f0162c038ddf2",
+    "src-tauri/crates/scroll-core/Cargo.lock": "55d65b00b5af4e6eaef939e814c073056dcccbd6f2c56bca92efa0af4053e1b8",
+    "src-tauri/crates/scroll-core/src/lib.rs": "253a3b42b9b45da8b4a9f0829835958e858521840d57be08106ce62c1191a04c"
+  },
+  "checks": [
+    "cargo test --manifest-path src-tauri/crates/scroll-core/Cargo.toml: passed (2 tests)",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Matches contiguous horizontal row bands without automatic sticky-header removal or OS scroll synthesis; Tauri integration belongs to Codex C11."
+  ],
+  "review": "pending"
+}

@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "20261105T103737-copilot-P20-2db9b31a",
+  "created_at": "2026-11-05T10:37:37.047939+07:00",
+  "agent": "copilot",
+  "request": "BUILD-20261105",
+  "task": "P20",
+  "completion": "done",
+  "summary": "Implemented explicit output-dimension planning with opt-in scale down, floor policy and minimum one-pixel bounds",
+  "files": [
+    "src/features/output-size/index.ts",
+    "src/features/output-size/index.test.ts"
+  ],
+  "file_sha256": {
+    "src/features/output-size/index.ts": "96b891ac05ef6c7e5b548f4be20865a0e200c3bbc5c17ffc2651c3c7eb816ca4",
+    "src/features/output-size/index.test.ts": "cce94c549207a19c128bfa5dd507c9cc113565eedb2d06e3a416a4ca6236a167"
+  },
+  "checks": [
+    "targeted Vitest passed (2 tests)"
+  ],
+  "risks": [
+    "No native display API or Retina inference"
+  ],
+  "review": "pending"
+}

@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "20261105T110611-copilot-P16-eeee99c2",
+  "created_at": "2026-11-05T11:06:11.903611+07:00",
+  "agent": "copilot",
+  "request": "BUILD-20261105",
+  "task": "P16",
+  "completion": "done",
+  "summary": "Refreshed current P16 implementation/test snapshots after prior overflow correction; no additional semantic changes.",
+  "files": [
+    "src/features/annotation-bounds/index.ts",
+    "src/features/annotation-bounds/index.test.ts"
+  ],
+  "file_sha256": {
+    "src/features/annotation-bounds/index.ts": "20ae814a0d9a58f6f07f33215d1a10dd3ea219c0809d629e9d28395ff0806ae4",
+    "src/features/annotation-bounds/index.test.ts": "1c7b0bbc4853aed536d1b4cee5b87861a80a0c7d8767c27aab648080aa6cbe9e"
+  },
+  "checks": [
+    "targeted Vitest passed: 2 tests"
+  ],
+  "risks": [
+    "Geometric bounds intentionally exclude arrowhead/text glyph painted bounds."
+  ],
+  "review": "pending"
+}

@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "20261105T104213-copilot-P12-16588f73",
+  "created_at": "2026-11-05T10:42:13.637539+07:00",
+  "agent": "copilot",
+  "request": "BUILD-20261105",
+  "task": "P12",
+  "completion": "done",
+  "summary": "Enforced PNG legal per-dimension cap 2^31-1 and added dimension/product-limit regressions.",
+  "files": [
+    "src/features/png-header/index.ts",
+    "src/features/png-header/index.test.ts"
+  ],
+  "file_sha256": {
+    "src/features/png-header/index.ts": "259982bd317d78ba444b2fb5bd389bfa0e69d1f5eeb52590ea52f28d49947832",
+    "src/features/png-header/index.test.ts": "3ce9636a5908fa29c4df398d8d9ff7d7ae8c8579e7d26268698acf0ce92585bd"
+  },
+  "checks": [
+    "targeted Vitest passed: 2 tests"
+  ],
+  "risks": [
+    "Header-only validation; no CRC or full decode"
+  ],
+  "review": "pending"
+}

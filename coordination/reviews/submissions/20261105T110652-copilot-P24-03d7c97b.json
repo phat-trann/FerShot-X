@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "20261105T110652-copilot-P24-03d7c97b",
+  "created_at": "2026-11-05T11:06:52.004172+07:00",
+  "agent": "copilot",
+  "request": "BUILD-20261105",
+  "task": "P24",
+  "completion": "done",
+  "summary": "Added inert QR payload classification for safe schemes, plain text and unsupported schemes with control-character/size guards.",
+  "files": [
+    "src/features/qr-payload/index.ts",
+    "src/features/qr-payload/index.test.ts"
+  ],
+  "file_sha256": {
+    "src/features/qr-payload/index.ts": "7ec4b886e0e5065c4ed870b30b5b4a75a71eb084e4688e05c2d964565e564405",
+    "src/features/qr-payload/index.test.ts": "648608ae2db682054cd7b7260ae9fcddd24188300da9532bb7617543c72b6a4c"
+  },
+  "checks": [
+    "targeted Vitest passed: 3 tests"
+  ],
+  "risks": [
+    "Classification never opens, executes or creates links."
+  ],
+  "review": "pending"
+}

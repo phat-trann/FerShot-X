@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "20261105T111514-copilot-P37-8640bed1",
+  "created_at": "2026-11-05T11:15:14.277263+07:00",
+  "agent": "copilot",
+  "request": "BUILD-20261105",
+  "task": "P37",
+  "completion": "done",
+  "summary": "Corrected custom-scheme URL pathname handling and verified strict inert Ferby capture/editor parsing.",
+  "files": [
+    "src/features/deep-link-parser/index.ts",
+    "src/features/deep-link-parser/index.test.ts"
+  ],
+  "file_sha256": {
+    "src/features/deep-link-parser/index.ts": "bf35a85f768989ca88e948c3ae02a10199b3271cdc80f089cfe0ae5d177986c5",
+    "src/features/deep-link-parser/index.test.ts": "f62491b5a0019c7ba632d557e2a3164ad23245772be675757333aef20f668d61"
+  },
+  "checks": [
+    "fresh targeted Vitest passed: 3 tests"
+  ],
+  "risks": [
+    "Earlier failed packet superseded; parser remains Ferby-only and non-executing."
+  ],
+  "review": "pending"
+}

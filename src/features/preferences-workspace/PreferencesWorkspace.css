@@ -1,0 +1,62 @@
+.ferby-preferences-workspace {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+  border-radius: 10px;
+  background: #0f172a;
+  color: #f8fafc;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.ferby-preferences-workspace__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.ferby-preferences-workspace__title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.ferby-preferences-workspace__badge {
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  background: #334155;
+  color: #e2e8f0;
+}
+
+.ferby-preferences-workspace__banner {
+  padding: 10px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+}
+
+.ferby-preferences-workspace__banner--error {
+  background: rgba(239, 68, 68, 0.16);
+  color: #fca5a5;
+}
+
+.ferby-preferences-workspace__banner--conflict {
+  background: rgba(245, 158, 11, 0.18);
+  color: #fde68a;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ferby-preferences-workspace__banner--info {
+  background: rgba(56, 189, 248, 0.14);
+  color: #bae6fd;
+}
+
+.ferby-preferences-workspace__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+

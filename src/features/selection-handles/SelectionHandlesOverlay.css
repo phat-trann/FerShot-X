@@ -1,0 +1,24 @@
+.ferby-selection-handles {
+  position: absolute;
+  box-sizing: border-box;
+  border: 1px solid #38bdf8;
+  user-select: none;
+  touch-action: none;
+}
+
+.ferby-selection-handles__body {
+  position: absolute;
+  inset: 0;
+  cursor: move;
+}
+
+.ferby-selection-handles__handle {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  padding: 0;
+  border: 1px solid #0f172a;
+  border-radius: 2px;
+  background: #38bdf8;
+}
+

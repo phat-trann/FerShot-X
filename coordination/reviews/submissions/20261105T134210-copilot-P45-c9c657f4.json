@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "20261105T134210-copilot-P45-c9c657f4",
+  "created_at": "2026-11-05T13:42:10.980741+07:00",
+  "agent": "copilot",
+  "request": "P45-source-grounded-annotation-history-cases",
+  "task": "P45",
+  "completion": "done",
+  "summary": "Added six bounded source-grounded parity cases for F06 shapes, F07 text/counter, F10 styles, F11 crop/reset, F13 history/merge, and F15 zoom/selection. Cases use only the supplied brief and editor contract, preserve null target results and NOT_EXECUTED statuses, identify C07/C12 ownership, and document API limitations.",
+  "files": [
+    "docs/qa/parity/P45.json",
+    "docs/qa/parity/P45.md"
+  ],
+  "file_sha256": {
+    "docs/qa/parity/P45.json": "2b3552b84a5a5c8effc710ec5bb9ba6051a672051468c9aee4daf7537b4a4f06",
+    "docs/qa/parity/P45.md": "6938d39a4972324da8c8d520e912d1e6924e7c01723803bbe0764a0aa079bf69"
+  },
+  "checks": [
+    "Python JSON field/coverage validation: 6 cases passed; rtk proxy git diff --check passed"
+  ],
+  "risks": [
+    "No target or Ferby runtime, UI, native operation, or product code execution was performed."
+  ],
+  "review": "pending"
+}

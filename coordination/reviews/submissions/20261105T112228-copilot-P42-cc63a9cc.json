@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "id": "20261105T112228-copilot-P42-cc63a9cc",
+  "created_at": "2026-11-05T11:22:28.527337+07:00",
+  "agent": "copilot",
+  "request": "P42-functional-regression-triage",
+  "task": "P42",
+  "completion": "done",
+  "summary": "Created a bounded triage report from the named Codex C04/P19 blocker message. Records Copilot ownership, npm run build reproduction, exact image-sort test locations, TS2741/TS2304 causes, and explicitly marks the blocker as historical and not re-checked by P42.",
+  "files": [
+    "docs/qa/copilot-P42-triage.md"
+  ],
+  "file_sha256": {
+    "docs/qa/copilot-P42-triage.md": "bbe16f2fbd968f9973def65ad93d36c103370c0352da99f0c24eebd505c2cf4b"
+  },
+  "checks": [
+    "rtk proxy git diff --check (passed); documentation-only triage, no functional re-check claimed"
+  ],
+  "risks": [
+    "No new pass/failure inferred beyond the exact supplied Codex message."
+  ],
+  "review": "pending"
+}

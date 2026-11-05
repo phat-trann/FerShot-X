@@ -11,7 +11,7 @@ The user selected **Tauri 2 + Rust**. The frontend is React + TypeScript + Vite.
 - `src/contracts/`: shared, frozen TypeScript types. Read the relevant file, not the entire research inventory.
 - `tests/e2e/`: browser-side import/zoom/close/error tests with generated, non-sensitive PNG bytes. These do not establish native screen-capture permissions or every WKWebView behavior.
 
-Screen capture, OCR, drawing, export and persistent storage are future queue work. Do not display controls that pretend those operations already work.
+Capture, crop/resize and PNG/JPEG save now have typed native wiring; actual GUI/permission acceptance remains pending. See C04/C05 reports. OCR, drawing export, native pin and persistent storage remain future integration work. Do not present unintegrated modules as working features.
 
 ## Ownership and integration seams
 
@@ -53,6 +53,8 @@ Image transforms use explicit bounds, decode limits and non-overwriting output b
 
 ## Checks and tooling
 
+Current validation ownership: Copilot handles format/lint through H01; Codex handles functional integration/type checks and builds; Antigravity runs scoped functional tests only, no format/lint or standalone build/packaging. Test-intrinsic compilation is allowed. This overrides older task examples; see AGENTS.md.
+
 Use Node selected by `.nvmrc` and Rust stable through `source "$HOME/.cargo/env"`. No global Node default needs changing.
 
 ```sh
@@ -66,3 +68,13 @@ rtk proxy python3 -m unittest discover -s scripts -p test_review_queue.py -v
 Run checks relevant to your changes; a not-yet-created Vitest scope has no tests and must not be reported as passed. Another agent's unfinished file can break a global check: record the exact failure and leave their code alone. Submit your own result and move to the next independent scope.
 
 See [the build queue](../../coordination/BUILD-QUEUE.md) and [completion protocol](../../coordination/reviews/README.md).
+
+## Integration checkpoint (2026-11-05)
+
+C02/C03 are connected through `src-tauri/src/imaging.rs` and `src/platform/native.ts`. Commands capture_image/process_image/save_image require the main window, serialize jobs and offload blocking work. Save destinations come from a native dialog; frontend input cannot choose an arbitrary path. Capture modes use the main display for fullscreen. See [C04](../agents/codex/C04-integration.md) and [C05](../agents/codex/C05-validation.md). Browser IPC mocks and compilation do not establish native GUI acceptance.
+
+Round 2 ownership expands Antigravity to `src/features/editor/{toolbar,workbench,render}/**`, `src/features/export-panel/**` and standalone `src-tauri/crates/settings-core/**`, plus exactly `tests/e2e/antigravity-render.spec.ts` for real rendering checks. Copilot owns only the exact helper/test paths P06-P11 in the [active queue](../../coordination/BUILD-QUEUE.md). Codex retains root wiring, contracts and decisions. No upload or Ferby licensing gates are in scope.
+
+## Clipboard checkpoint
+
+C06 registers `copy_image`: main-window-only, bounded decode, serialized blocking job and a macOS-only arboard backend. JavaScript supplies raster bytes, never clipboard types or file paths. Tests use an injected write sink and mocked IPC; none reads/writes the real clipboard. `Raster::rgba_bytes` provides a fresh row-major RGBA8 buffer. Existing annotation overlays are not part of current-raster copy. A01 capture presentation and P07 frontend crop validation are integrated; Rust retains independent validation.

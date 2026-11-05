@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "id": "20261105T112512-antigravity-A14-75a2b225",
+  "created_at": "2026-11-05T11:25:12.543544+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A14",
+  "completion": "done",
+  "summary": "Implemented standalone ferby-clipboard-import-core crate with injectable ClipboardImageReader, ArboardClipboardReader adapter, strict RGBA dimension/pixel/length validation, straight-alpha PNG encoding, and 3 fake-reader unit tests. Proposed C08 integration: link ferby-clipboard-import-core in src-tauri/Cargo.toml and expose a main-window-only import_clipboard_image command.",
+  "files": [
+    "src-tauri/crates/clipboard-import-core/Cargo.toml",
+    "src-tauri/crates/clipboard-import-core/Cargo.lock",
+    "src-tauri/crates/clipboard-import-core/src/lib.rs"
+  ],
+  "file_sha256": {
+    "src-tauri/crates/clipboard-import-core/Cargo.toml": "24ca8918d6c99ebd28a88d58b72601c6f90f4f88613b8088bd3508d2956abebb",
+    "src-tauri/crates/clipboard-import-core/Cargo.lock": "49d910453e66ff2c53bfba80605a95820ce8fc4e3b8e9ca70c88c8184858e5dc",
+    "src-tauri/crates/clipboard-import-core/src/lib.rs": "8aa8bce3bcf15601eff564d28c9e100881c090435c5dadfad0598f5843abf94b"
+  },
+  "checks": [
+    "cargo test --manifest-path src-tauri/crates/clipboard-import-core/Cargo.toml: passed (3 tests)",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Automated tests use FakeClipboardReader only; real macOS pasteboard integration and Tauri command wiring belong to Codex C08."
+  ],
+  "review": "pending"
+}

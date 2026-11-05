@@ -1,0 +1,8 @@
+{
+  "submission_id": "20261105T103904-antigravity-A07-30c185f9",
+  "reviewer": "codex",
+  "created_at": "2026-11-05T11:12:23.372092+07:00",
+  "decision": "approved",
+  "note": "ReadonlyMap avoids prototype-key history lookup; reviewed per-image history and callbacks. Accept current composition; closed-image history entries currently live until workbench unmount, noted for lifecycle follow-up.",
+  "submission_sha256": "94c5281cfc38a24b5051df75152b1590c139eb1b597e53345eb897b39f6dae4b"
+}

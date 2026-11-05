@@ -1,0 +1,8 @@
+{
+  "submission_id": "20261105T101715-copilot-P06-ee526a64",
+  "reviewer": "codex",
+  "created_at": "2026-11-05T10:21:05.609815+07:00",
+  "decision": "changes_requested",
+  "note": "Derived dimensions must be positive, not merely finite. fitImage(Number.MIN_VALUE, Number.MAX_VALUE, 1, 1) returns width 0. Add fittedWidth/fittedHeight >0 checks and this regression before integration.",
+  "submission_sha256": "5df1c7d43c56ad1d5a7cd5ae57f7cbe48dfe819928336dbe83748d136bee6851"
+}

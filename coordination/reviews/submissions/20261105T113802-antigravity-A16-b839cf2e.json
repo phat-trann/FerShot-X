@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "id": "20261105T113802-antigravity-A16-b839cf2e",
+  "created_at": "2026-11-05T11:38:02.693089+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A16",
+  "completion": "done",
+  "summary": "Fixed readonly [Point, Point] tuple typing with as const in ShapesOverlay and shapes.test.tsx per C09 review feedback, verified with scoped unit tests, and submitted fresh snapshots.",
+  "files": [
+    "src/features/shapes/shapes.tsx",
+    "src/features/shapes/index.ts",
+    "src/features/shapes/shapes.test.tsx"
+  ],
+  "file_sha256": {
+    "src/features/shapes/shapes.tsx": "da778548ea5dd5277d38bc46c5b549b264597290864d9002ead37c2fd3097fbf",
+    "src/features/shapes/index.ts": "d9ada286aa996b3a4bfa59b6d534d7d5a1a204e9189ad4105dcc110aad0f1e06",
+    "src/features/shapes/shapes.test.tsx": "643d378459a6807b5977cb7ff4644159512b0d71941aa53381e5db3224cf483c"
+  },
+  "checks": [
+    "npm run test:unit -- src/features/shapes/shapes.test.tsx: passed (3 tests)",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Plain line primitive requires Codex C12 to extend AnnotationTool with line rather than mapping to arrow."
+  ],
+  "review": "pending"
+}

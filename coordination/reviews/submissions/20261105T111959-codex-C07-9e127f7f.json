@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "id": "20261105T111959-codex-C07-9e127f7f",
+  "created_at": "2026-11-05T11:19:59.008683+07:00",
+  "agent": "codex",
+  "request": "BUILD-20261105",
+  "task": "C07",
+  "completion": "partial",
+  "summary": "Integrated reviewed per-image annotation workbench, zoom/fit, undo/redo/delete, original-preserving merge and annotated copy/save/transform raster ownership. Export preferences/native end-to-end acceptance remain incomplete.",
+  "files": [
+    "src/Workspace.tsx",
+    "src/Workspace.css",
+    "src/Workspace.editor.tsx",
+    "src/platform/annotations.ts",
+    "src/platform/annotations.test.ts",
+    "tests/e2e/codex-editor.spec.ts",
+    "docs/agents/codex/C07-editor-integration.md",
+    "coordination/progress.json",
+    "coordination/PROGRESS.md"
+  ],
+  "file_sha256": {
+    "src/Workspace.tsx": "1196d6547d90d1e19a94cae84675cd934031242dd0c4ecbba056143396b46be5",
+    "src/Workspace.css": "dfc3baa3d6a2cbb004081a2932813e3e3fb13fe1d88ab5f2bb67d578b0762b17",
+    "src/Workspace.editor.tsx": "f96407776bf7d2175c1d1c6d755bfbaf636fcbc3ca345750e238e75277fd8e87",
+    "src/platform/annotations.ts": "6fdd9ed788fe83c5296087c9d4cd0671185cda9f34b2cdb84732f8e8e8454d1c",
+    "src/platform/annotations.test.ts": "ec5c09413523ce53555cf90378911ae56fed49f02cbd175e125558c18ad46ac5",
+    "tests/e2e/codex-editor.spec.ts": "5991abeb114f8e171fa5d09e03aa5626212f31c1a4df14e4780f60f9148301dc",
+    "docs/agents/codex/C07-editor-integration.md": "5475e3fcda401f850d85f72e0280e434670199e6f8727c2f8779e460d653a944",
+    "coordination/progress.json": "9eb76830fc59e7858d79539c1903ecbbc835fd8391a95d12bce19924f4d1d3d5",
+    "coordination/PROGRESS.md": "66c357461ad8a67bbf5faaa6e26d769c251a909364f20aa714ff21fe2d5105f3"
+  },
+  "checks": [
+    "30 reviewed module frontend tests passed",
+    "4 new annotation raster/URL lifetime tests passed",
+    "2 browser editor integration tests passed, including actual annotation pixel inspection from mocked native requests",
+    "A08 real-browser synthetic renderer test passed",
+    "TypeScript/Vite build passed; formatting/lint delegated to H01"
+  ],
+  "risks": [
+    "Native clipboard/dialog/OS end-to-end annotation acceptance not performed",
+    "A10 downscale preference not wired without reliable capture scale; C10 continues preference effects",
+    "Closed-image history metadata survives until workbench unmount; source object URLs still revoked on close"
+  ],
+  "review": "pending"
+}

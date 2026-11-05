@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "20261105T103514-copilot-P12-69f34a4d",
+  "created_at": "2026-11-05T10:35:14.009608+07:00",
+  "agent": "copilot",
+  "request": "BUILD-20261105",
+  "task": "P12",
+  "completion": "done",
+  "summary": "Added bounded PNG signature/IHDR header validation without decoding pixels",
+  "files": [
+    "src/features/png-header/index.ts",
+    "src/features/png-header/index.test.ts"
+  ],
+  "file_sha256": {
+    "src/features/png-header/index.ts": "4c465a44ff01c538a92b378127b8f8453f5a1ffdb5a5c7279ccbd44dee8055b6",
+    "src/features/png-header/index.test.ts": "8704662e141d3406a931ecb57e4745f49a10ba462d814e35f297170393a4b605"
+  },
+  "checks": [
+    "targeted Vitest passed (2 tests)"
+  ],
+  "risks": [
+    "Header validation does not prove CRC or full PNG validity"
+  ],
+  "review": "pending"
+}

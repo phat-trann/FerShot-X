@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "id": "20261105T102327-antigravity-A06-4c256f6c",
+  "created_at": "2026-11-05T10:23:27.755430+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A06",
+  "completion": "done",
+  "summary": "Implemented controlled EditorToolbar supporting select/rectangle/arrow/pen, undo/redo/delete-selected guards, arrow-key roving focus, scoped shortcut matching via editor-shortcuts, and RTL tests.",
+  "files": [
+    "src/features/editor/toolbar/EditorToolbar.tsx",
+    "src/features/editor/toolbar/EditorToolbar.css",
+    "src/features/editor/toolbar/index.ts",
+    "src/features/editor/toolbar/EditorToolbar.test.tsx"
+  ],
+  "file_sha256": {
+    "src/features/editor/toolbar/EditorToolbar.tsx": "23ef5e19968f191075f0a2ab4396f640f480cc6b7101984b4bb4f1830a3dfc00",
+    "src/features/editor/toolbar/EditorToolbar.css": "af4e4b5af3dd0c69fbd729cd507007f263b0d3ee381754fe9fa9d9fd160b3434",
+    "src/features/editor/toolbar/index.ts": "0549e75dc229b3ce8adc894a7bcfc049a79bc8289f60da60536a52e0d33047aa",
+    "src/features/editor/toolbar/EditorToolbar.test.tsx": "7aabb1e8c7f041f84f6e0cf06cbb1d91d41ccaf9879914303a89bb04a76a9f01"
+  },
+  "checks": [
+    "npm run test:unit -- src/features/editor/toolbar/EditorToolbar.test.tsx: passed (3 tests)",
+    "npm run typecheck: passed"
+  ],
+  "risks": [
+    "Controlled toolbar component only; composed with C01 model and EditorView in A07 and wired into Workspace in Codex C04."
+  ],
+  "review": "pending"
+}

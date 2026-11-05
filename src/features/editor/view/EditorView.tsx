@@ -17,6 +17,36 @@ export const DEFAULT_ANNOTATION_STYLE: Readonly<AnnotationStyle> = {
   opacity: 1,
 };
 
+let moduleAnnotationSequence = 0;
+
+export function allocateAnnotationId(
+  existingAnnotations: readonly Annotation[],
+): string {
+  const existingIds = new Set(existingAnnotations.map((item) => item.id));
+  for (const item of existingAnnotations) {
+    const match = /^annotation-(\d+)$|^draft-(\d+)$/.exec(item.id);
+    if (match) {
+      const parsed = Number(match[1] ?? match[2]);
+      if (Number.isSafeInteger(parsed) && parsed > moduleAnnotationSequence) {
+        moduleAnnotationSequence = parsed;
+      }
+    }
+  }
+
+  const randomPart =
+    typeof globalThis.crypto?.randomUUID === "function"
+      ? globalThis.crypto.randomUUID().slice(0, 8)
+      : Math.random().toString(36).slice(2, 10);
+
+  let candidate = "";
+  do {
+    moduleAnnotationSequence += 1;
+    candidate = `annotation-${moduleAnnotationSequence}-${randomPart}`;
+  } while (existingIds.has(candidate));
+
+  return candidate;
+}
+
 export function isSupportedCreationTool(
   tool: AnnotationTool,
 ): tool is SupportedCreationTool {
@@ -67,9 +97,80 @@ export function pointsToNormalizedRect(start: Point, end: Point): Rect {
   return { x, y, width, height };
 }
 
+export function computeArrowHeadPoints(
+  start: Point,
+  end: Point,
+  strokeWidth: number,
+): readonly [Point, Point, Point] {
+  const dx = end.x - start.x;
+  const dy = end.y - start.y;
+  const angle = Math.atan2(dy, dx);
+  const headLength = Math.max(10, strokeWidth * 4);
+  const spread = Math.PI / 6;
+
+  const wing1: Point = {
+    x: Math.round((end.x - headLength * Math.cos(angle - spread)) * 100) / 100,
+    y: Math.round((end.y - headLength * Math.sin(angle - spread)) * 100) / 100,
+  };
+  const wing2: Point = {
+    x: Math.round((end.x - headLength * Math.cos(angle + spread)) * 100) / 100,
+    y: Math.round((end.y - headLength * Math.sin(angle + spread)) * 100) / 100,
+  };
+
+  return [end, wing1, wing2];
+}
+
+export function appendUniqueEndpoint(
+  points: readonly Point[],
+  endPoint: Point,
+): readonly Point[] {
+  if (points.length === 0) {
+    return [endPoint];
+  }
+  const last = points[points.length - 1];
+  if (last && last.x === endPoint.x && last.y === endPoint.y) {
+    return points;
+  }
+  return [...points, endPoint];
+}
+
 interface DraftGesture {
+  readonly pointerId: number;
   readonly tool: SupportedCreationTool;
   readonly points: readonly Point[];
+}
+
+function trySetPointerCapture(
+  element: SVGSVGElement | null,
+  pointerId: number,
+): void {
+  if (!element || typeof element.setPointerCapture !== "function") {
+    return;
+  }
+  try {
+    element.setPointerCapture(pointerId);
+  } catch {
+    // Ignore synthetic test environments where pointerId is not an active hardware pointer
+  }
+}
+
+function tryReleasePointerCapture(
+  element: SVGSVGElement | null,
+  pointerId: number,
+): void {
+  if (!element || typeof element.releasePointerCapture !== "function") {
+    return;
+  }
+  try {
+    if (
+      typeof element.hasPointerCapture !== "function" ||
+      element.hasPointerCapture(pointerId)
+    ) {
+      element.releasePointerCapture(pointerId);
+    }
+  } catch {
+    // Ignore synthetic test environments
+  }
 }
 
 function renderAnnotationShape(
@@ -77,7 +178,7 @@ function renderAnnotationShape(
   onSelect?: (event: React.MouseEvent<SVGElement>) => void,
 ): React.JSX.Element | null {
   const { id, tool, points, style } = annotation;
-  if (points.length === 0) {
+  if (points.length === 0 || !isSupportedCreationTool(tool)) {
     return null;
   }
 
@@ -111,42 +212,40 @@ function renderAnnotationShape(
   if (tool === "arrow") {
     const first = points[0];
     const last = points[points.length - 1] ?? first;
+    const headPoints = computeArrowHeadPoints(first, last, style.strokeWidth);
+    const polygonPoints = headPoints
+      .map((pt) => `${pt.x},${pt.y}`)
+      .join(" ");
     return (
-      <line
-        key={id}
-        {...commonProps}
-        x1={first.x}
-        y1={first.y}
-        x2={last.x}
-        y2={last.y}
-        strokeLinecap="round"
-      />
+      <g key={id} {...commonProps}>
+        <line
+          data-testid={`annotation-${id}-shaft`}
+          x1={first.x}
+          y1={first.y}
+          x2={last.x}
+          y2={last.y}
+          strokeLinecap="round"
+        />
+        <polygon
+          data-testid={`annotation-${id}-head`}
+          points={polygonPoints}
+          fill={style.color}
+          stroke={style.color}
+          strokeLinejoin="round"
+        />
+      </g>
     );
   }
 
-  if (tool === "pen") {
-    const pointStr = points.map((pt) => `${pt.x},${pt.y}`).join(" ");
-    return (
-      <polyline
-        key={id}
-        {...commonProps}
-        points={pointStr}
-        fill="none"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    );
-  }
-
-  const anchor = points[0];
+  const pointStr = points.map((pt) => `${pt.x},${pt.y}`).join(" ");
   return (
-    <circle
+    <polyline
       key={id}
       {...commonProps}
-      cx={anchor.x}
-      cy={anchor.y}
-      r={Math.max(4, style.strokeWidth * 2)}
+      points={pointStr}
       fill="none"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
   );
 }
@@ -161,10 +260,17 @@ export function EditorView({
   onAnnotationSelect,
 }: EditorViewProps): React.JSX.Element {
   const svgRef = useRef<SVGSVGElement | null>(null);
-  const nextIdCounterRef = useRef(1);
   const [draft, setDraft] = useState<DraftGesture | null>(null);
 
-  const unsupportedTool = tool !== "select" && !isSupportedCreationTool(tool);
+  const unsupportedActiveTool =
+    tool !== "select" && !isSupportedCreationTool(tool);
+  const unsupportedSuppliedTools = Array.from(
+    new Set(
+      annotations
+        .filter((item) => !isSupportedCreationTool(item.tool))
+        .map((item) => item.tool),
+    ),
+  );
 
   const resolvePoint = (
     event: React.PointerEvent<SVGSVGElement>,
@@ -185,7 +291,7 @@ export function EditorView({
   };
 
   const handlePointerDown = (event: React.PointerEvent<SVGSVGElement>) => {
-    if (event.button !== 0) {
+    if (event.button !== 0 || draft !== null) {
       return;
     }
     if (tool === "select") {
@@ -199,25 +305,27 @@ export function EditorView({
     }
 
     const startPoint = resolvePoint(event);
+    trySetPointerCapture(svgRef.current, event.pointerId);
     setDraft({
+      pointerId: event.pointerId,
       tool,
       points: [startPoint],
     });
   };
 
   const handlePointerMove = (event: React.PointerEvent<SVGSVGElement>) => {
-    if (!draft) {
+    if (!draft || event.pointerId !== draft.pointerId) {
       return;
     }
     const currentPoint = resolvePoint(event);
     setDraft((prev) => {
-      if (!prev) {
-        return null;
+      if (!prev || prev.pointerId !== event.pointerId) {
+        return prev;
       }
       if (prev.tool === "pen") {
         return {
           ...prev,
-          points: [...prev.points, currentPoint],
+          points: appendUniqueEndpoint(prev.points, currentPoint),
         };
       }
       return {
@@ -228,15 +336,14 @@ export function EditorView({
   };
 
   const handlePointerUp = (event: React.PointerEvent<SVGSVGElement>) => {
-    if (!draft) {
+    if (!draft || event.pointerId !== draft.pointerId) {
       return;
     }
+    tryReleasePointerCapture(svgRef.current, draft.pointerId);
     const endPoint = resolvePoint(event);
     const finalPoints =
       draft.tool === "pen"
-        ? draft.points.length > 1
-          ? draft.points
-          : [draft.points[0], endPoint]
+        ? appendUniqueEndpoint(draft.points, endPoint)
         : [draft.points[0], endPoint];
 
     setDraft(null);
@@ -245,14 +352,14 @@ export function EditorView({
     const end = finalPoints[finalPoints.length - 1] ?? start;
     const moved =
       Math.hypot(end.x - start.x, end.y - start.y) > 0 ||
-      (draft.tool === "pen" && finalPoints.length > 2);
+      (draft.tool === "pen" && finalPoints.length >= 2);
 
     if (!moved) {
       return;
     }
 
     const created: Annotation = {
-      id: `draft-${nextIdCounterRef.current++}`,
+      id: allocateAnnotationId(annotations),
       tool: draft.tool,
       points: finalPoints,
       style: { ...DEFAULT_ANNOTATION_STYLE },
@@ -260,16 +367,28 @@ export function EditorView({
     onAnnotationCreate(created);
   };
 
-  const handleCancel = () => {
-    if (draft) {
-      setDraft(null);
+  const handlePointerCancel = (event: React.PointerEvent<SVGSVGElement>) => {
+    if (!draft || event.pointerId !== draft.pointerId) {
+      return;
     }
+    tryReleasePointerCapture(svgRef.current, draft.pointerId);
+    setDraft(null);
+  };
+
+  const handleLostPointerCapture = (
+    event: React.PointerEvent<SVGSVGElement>,
+  ) => {
+    if (!draft || event.pointerId !== draft.pointerId) {
+      return;
+    }
+    setDraft(null);
   };
 
   const handleKeyDown = (event: React.KeyboardEvent<SVGSVGElement>) => {
     if (event.key === "Escape") {
       event.preventDefault();
       if (draft) {
+        tryReleasePointerCapture(svgRef.current, draft.pointerId);
         setDraft(null);
       } else if (tool === "select") {
         onAnnotationSelect(null);
@@ -288,10 +407,16 @@ export function EditorView({
 
   return (
     <div className="ferby-editor-view" data-tool={tool}>
-      {unsupportedTool && (
+      {unsupportedActiveTool && (
         <p className="ferby-editor-view__banner" role="status">
           Tool &ldquo;{tool}&rdquo; is not supported for interactive creation in
           this view yet.
+        </p>
+      )}
+      {unsupportedSuppliedTools.length > 0 && (
+        <p className="ferby-editor-view__banner" role="status">
+          Unsupported annotation tool(s) omitted from rendering:{" "}
+          {unsupportedSuppliedTools.join(", ")}.
         </p>
       )}
 
@@ -315,7 +440,8 @@ export function EditorView({
           onPointerDown={handlePointerDown}
           onPointerMove={handlePointerMove}
           onPointerUp={handlePointerUp}
-          onPointerCancel={handleCancel}
+          onPointerCancel={handlePointerCancel}
+          onLostPointerCapture={handleLostPointerCapture}
           onKeyDown={handleKeyDown}
         >
           {annotations.map((annotation) =>
@@ -334,4 +460,3 @@ export function EditorView({
     </div>
   );
 }
-

@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "id": "20261105T134122-antigravity-A29-f8382e31",
+  "created_at": "2026-11-05T13:41:22.051386+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A29",
+  "completion": "done",
+  "summary": "Refreshed A29 session-core snapshot after H01 formatting and re-verified cargo test.",
+  "files": [
+    "src-tauri/crates/session-core/Cargo.toml",
+    "src-tauri/crates/session-core/Cargo.lock",
+    "src-tauri/crates/session-core/src/lib.rs"
+  ],
+  "file_sha256": {
+    "src-tauri/crates/session-core/Cargo.toml": "ccc1adf5ff8855e192c8d647b44809428ce2d0297b11c4b8dd45a93b7e946abc",
+    "src-tauri/crates/session-core/Cargo.lock": "cab9cf9a3560702af911ef149f25f5fe29fbd37667034637881959d6541b356c",
+    "src-tauri/crates/session-core/src/lib.rs": "849588df1ed043ad34e8dc2094c77bbe082803eac46300078841a5d845054909"
+  },
+  "checks": [
+    "cargo test --manifest-path src-tauri/crates/session-core/Cargo.toml: passed (3 tests)",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Local Ferby session store design; root Tauri command wiring belongs to Codex."
+  ],
+  "review": "pending"
+}

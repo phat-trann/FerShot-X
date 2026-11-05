@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "id": "20261105T104312-copilot-P19-b6f2e4d9",
+  "created_at": "2026-11-05T10:43:12.191300+07:00",
+  "agent": "copilot",
+  "request": "BUILD-20261105",
+  "task": "P19",
+  "completion": "done",
+  "summary": "Fixed ImageDocument fixture and imported ImageSortMode in P19 test; current frontend typecheck is clean.",
+  "files": [
+    "src/features/image-sort/index.test.ts"
+  ],
+  "file_sha256": {
+    "src/features/image-sort/index.test.ts": "9f83a002d70c883ef40d96fc1e43f82345f18c454487dc830a914bd8df6d58ae"
+  },
+  "checks": [
+    "targeted Vitest passed: 2 tests; npm run typecheck passed"
+  ],
+  "risks": [
+    "No image-sort integration changes; P16 unused-import cleanup was required for shared typecheck"
+  ],
+  "review": "pending"
+}

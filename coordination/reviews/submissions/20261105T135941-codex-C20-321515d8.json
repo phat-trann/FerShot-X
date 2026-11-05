@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "id": "20261105T135941-codex-C20-321515d8",
+  "created_at": "2026-11-05T13:59:41.278277+07:00",
+  "agent": "codex",
+  "request": "BUILD-20261105",
+  "task": "C20",
+  "completion": "done",
+  "summary": "Implemented staged archive import/export with bounded metadata/JSON/bytes, immutable snapshots, deterministic collision remap, atomic revision guard and imported-only resource leases.",
+  "files": [
+    "src/features/archive-workflow/index.test.ts",
+    "src/features/archive-workflow/README.md",
+    "src/features/archive-workflow/index.ts"
+  ],
+  "file_sha256": {
+    "src/features/archive-workflow/index.test.ts": "d20867bf51b00e359c2ad156d8e4a754b6ec678e19cca317e0e32a4a37334da2",
+    "src/features/archive-workflow/README.md": "e6b43386862a80fbe11a9cbddba1caf83e9380d21ff7dbd876242cd26e491227",
+    "src/features/archive-workflow/index.ts": "102ca3a9734a500335731d443b5930e54d59206d6a268229bffa64a7700b79fd"
+  },
+  "checks": [
+    "8 focused Vitest tests passed",
+    "Owned C20 implementation/test TypeScript noEmit passed",
+    "Formatting/lint delegated to Copilot H01"
+  ],
+  "risks": [
+    "Independent Antigravity review and A29/C14 native archive adapters pending",
+    "Decoder/materializer must verify bytes match declared image metadata; root commit must be atomic and nonthrowing on success",
+    "No real disk archive/native acceptance or original archive compatibility tested"
+  ],
+  "review": "pending"
+}

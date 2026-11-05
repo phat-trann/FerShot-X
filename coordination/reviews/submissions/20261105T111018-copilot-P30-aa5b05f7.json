@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "20261105T111018-copilot-P30-aa5b05f7",
+  "created_at": "2026-11-05T11:10:18.074011+07:00",
+  "agent": "copilot",
+  "request": "BUILD-20261105",
+  "task": "P30",
+  "completion": "done",
+  "summary": "Added safe vertical stitch budget planning with overlap-aware output height, pixel cap and overflow validation.",
+  "files": [
+    "src/features/stitch-budget/index.ts",
+    "src/features/stitch-budget/index.test.ts"
+  ],
+  "file_sha256": {
+    "src/features/stitch-budget/index.ts": "91596e9a0a019ed4ca94231ab9ed2d42db5945de1457f76bd251573aed6e3b1c",
+    "src/features/stitch-budget/index.test.ts": "4c6624155dde197ebe841961b1e956355a4965cd32990699941e7927e989074c"
+  },
+  "checks": [
+    "targeted Vitest passed: 2 tests"
+  ],
+  "risks": [
+    "No frame bytes, capture, or native stitching performed."
+  ],
+  "review": "pending"
+}

@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "20261105T110738-copilot-P26-af25afd4",
+  "created_at": "2026-11-05T11:07:38.533584+07:00",
+  "agent": "copilot",
+  "request": "BUILD-20261105",
+  "task": "P26",
+  "completion": "done",
+  "summary": "Implemented shared-delta point translation with edge clamping, relative-geometry preservation and impossible-fit validation.",
+  "files": [
+    "src/features/move-points/index.ts",
+    "src/features/move-points/index.test.ts"
+  ],
+  "file_sha256": {
+    "src/features/move-points/index.ts": "80699398634661208a21374beb2602fc0f6641b07cfae4f921a929b1af318a60",
+    "src/features/move-points/index.test.ts": "435cb584b7c4653ad18cbfd2c34b2da966a1340a2eec0f4b392f9f8086cec576"
+  },
+  "checks": [
+    "targeted Vitest passed: 3 tests"
+  ],
+  "risks": [
+    "No editor renderer/model integration."
+  ],
+  "review": "pending"
+}

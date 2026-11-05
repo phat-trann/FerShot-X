@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "20261105T103459-copilot-P10-03853eb4",
+  "created_at": "2026-11-05T10:34:59.185577+07:00",
+  "agent": "copilot",
+  "request": "BUILD-20261105",
+  "task": "P10",
+  "completion": "done",
+  "summary": "Rejected null and non-object pin options while preserving absent-field defaults",
+  "files": [
+    "src/features/pin-values/index.ts",
+    "src/features/pin-values/index.test.ts"
+  ],
+  "file_sha256": {
+    "src/features/pin-values/index.ts": "c8df7e2c5037caf5d3dce95cfef340a977ddec5d74dff475e53fd7ea79484bce",
+    "src/features/pin-values/index.test.ts": "0f7adb59a101a9d653d42512f561db00faa671c11fcc087dc5bfe39bd58ab0f2"
+  },
+  "checks": [
+    "targeted Vitest passed (3 tests)"
+  ],
+  "risks": [
+    "No pin component integration"
+  ],
+  "review": "pending"
+}

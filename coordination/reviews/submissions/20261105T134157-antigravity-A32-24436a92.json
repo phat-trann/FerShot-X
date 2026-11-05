@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "id": "20261105T134157-antigravity-A32-24436a92",
+  "created_at": "2026-11-05T13:41:57.024544+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A32",
+  "completion": "done",
+  "summary": "Refreshed A32 SelectionHandlesOverlay snapshot after H01 formatting and re-verified RTL unit tests.",
+  "files": [
+    "src/features/selection-handles/SelectionHandlesOverlay.tsx",
+    "src/features/selection-handles/SelectionHandlesOverlay.css",
+    "src/features/selection-handles/index.ts",
+    "src/features/selection-handles/SelectionHandlesOverlay.test.tsx"
+  ],
+  "file_sha256": {
+    "src/features/selection-handles/SelectionHandlesOverlay.tsx": "23639f3aa35f95bfc3e92006ebdf6c17a9d3fca42c42d7cedf995721cfdfbbe6",
+    "src/features/selection-handles/SelectionHandlesOverlay.css": "1c677cb73995317a6fdccc7184ceb4e312a438f4ec5d2b4ff9af57b7dea68616",
+    "src/features/selection-handles/index.ts": "69390b7dffef9ff8b87896fac2e373274fa6f2308f9dec57b581f89009414d73",
+    "src/features/selection-handles/SelectionHandlesOverlay.test.tsx": "f76d12ea9885325bf9e0eb89e9df96b02ffd70b4f15fac193a48cc67484eec70"
+  },
+  "checks": [
+    "npm run test:unit -- src/features/selection-handles/SelectionHandlesOverlay.test.tsx: passed (2 tests)",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Frozen EditorViewProps contract unchanged; exported SelectionHandlesAdapterProposal for Codex integration."
+  ],
+  "review": "pending"
+}

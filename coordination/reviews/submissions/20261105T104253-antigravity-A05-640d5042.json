@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "id": "20261105T104253-antigravity-A05-640d5042",
+  "created_at": "2026-11-05T10:42:53.047141+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A05",
+  "completion": "done",
+  "summary": "Refreshed current file snapshots for controlled PinPreviewCard presentation component after verifying A01-A10 queue completion.",
+  "files": [
+    "src/features/pin/PinPreviewCard.tsx",
+    "src/features/pin/PinPreviewCard.css",
+    "src/features/pin/PinPreviewCard.test.tsx"
+  ],
+  "file_sha256": {
+    "src/features/pin/PinPreviewCard.tsx": "e17ca4daaf8a8d9bf0e8358ad8b8c2d62920ddc99bcf74c94cdebacdd65273cc",
+    "src/features/pin/PinPreviewCard.css": "d2a498257f61ee966ba48678a612056f6a0c3c0b8d83990d0a3fbd4cfde139fb",
+    "src/features/pin/PinPreviewCard.test.tsx": "97b494f347297edf2bf7ec55e46e057b1322663301d340d41ef7fec01629fa1a"
+  },
+  "checks": [
+    "npm run test:unit -- src/features/pin/PinPreviewCard.test.tsx: passed (3 tests)",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Controlled presentation component only; native always-on-top pin window wiring remains a separate Codex milestone."
+  ],
+  "review": "pending"
+}

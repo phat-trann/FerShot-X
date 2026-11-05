@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "id": "20261105T101353-codex-COORD02-6c5a3932",
+  "created_at": "2026-11-05T10:13:53.952658+07:00",
+  "agent": "codex",
+  "request": "BUILD-20261105",
+  "task": "COORD02",
+  "completion": "done",
+  "summary": "Applied current Ferby scope rules; delegated 5 new medium tasks to Antigravity and 6 bounded tasks to Copilot; published evidence-linked weighted MVP progress at 43.75% with regeneration/check tooling and updated kickoff prompts.",
+  "files": [
+    "AGENTS.md",
+    "README.md",
+    "coordination/BUILD-QUEUE.md",
+    "coordination/START-HERE.md",
+    "coordination/build-tasks.json",
+    "coordination/prompts/antigravity.md",
+    "coordination/prompts/copilot.md",
+    "coordination/prompts/codex.md",
+    "coordination/progress.json",
+    "coordination/PROGRESS.md",
+    "scripts/project_progress.py",
+    "docs/implementation/ARCHITECTURE.md",
+    "docs/agents/codex/COORD02-allocation-progress.md",
+    "coordination/messages/antigravity/20261105-codex-round2-allocation.md",
+    "coordination/messages/copilot/20261105-codex-round2-allocation.md"
+  ],
+  "file_sha256": {
+    "AGENTS.md": "3ed5c090b5d09a382572e38780b4d0c0538910e05af5b495346c4919682cff5b",
+    "README.md": "367f1ae72581ea5c07b578a0f9db47ecf0c2bcae67b603e57fb11454a875458c",
+    "coordination/BUILD-QUEUE.md": "6ae173cff31075d43468ce13a94784b5a6aacbda9ede586af11ed6cd8110b834",
+    "coordination/START-HERE.md": "8e452054245ce3bcc91438ae2603bd0733be9bbd493eb55e81d72e3bf9b3e5a3",
+    "coordination/build-tasks.json": "22a469c7dc7de67603a1fb513ff6460d2919e6e58a138db2b188a41a7682fbfb",
+    "coordination/prompts/antigravity.md": "dc4eb72db134a2da4f660b41fb9b60449258b1a4edbefd13c0a2b9ca1089cf3c",
+    "coordination/prompts/copilot.md": "734d2f18c503cb643d9d9c9651fe57115c433e255e608a02cfab0e6c360c37c1",
+    "coordination/prompts/codex.md": "a24b813566ffff77fc8d1b901b06355bdd190213ce953f09707c2bd96633d59e",
+    "coordination/progress.json": "e04756e21fd12a81eb7f154ace854dff6d8cda6732645fd500fd51c980acb8b2",
+    "coordination/PROGRESS.md": "31b4112779336411e1cccd0de28d05fb2b927474b4d1ee10ac160c51a46389fa",
+    "scripts/project_progress.py": "ea3ccff0ab815e306528ba3ad13b44bb44e7402a61aab637cc94a34842c1f680",
+    "docs/implementation/ARCHITECTURE.md": "5f744203ea9e2eca41dc3f91df70a73cdb83fac009e985c7b6504e7e085a84f4",
+    "docs/agents/codex/COORD02-allocation-progress.md": "7e5ca8e4b8a78182f535fc07b4faad6e1c98971dabdb92aa9010e5b5ff6b8323",
+    "coordination/messages/antigravity/20261105-codex-round2-allocation.md": "7c4a6a8178f1a427f9282c52a71d94d10cd834dacbe0ff07269293af016cb3ab",
+    "coordination/messages/copilot/20261105-codex-round2-allocation.md": "73813eb54877dd56c680062f4d12a1520735fff5ad59993f0ff33265b95fe284"
+  },
+  "checks": [
+    "26 unique task definitions and owned-path parity with role prompts: passed",
+    "Progress renderer --check, milestone weights/evidence paths and local Markdown links: passed",
+    "Review workflow Python suite: 5 passed",
+    "git diff --check and ignored development/artifact paths: passed",
+    "C05 closed separately: 51 unit, 6 E2E, 6 root Rust tests, strict clippy and debug macOS app bundle passed"
+  ],
+  "risks": [
+    "43.75% is a planning score against the explicitly declared MVP, not full Shottr parity or a remaining-hours estimate",
+    "Native GUI acceptance, OCR/native pin and integration of corrected/current worker snapshots remain incomplete",
+    "Antigravity/Copilot require the user to paste prompts; no automatic external-client dispatcher is installed",
+    "No additional dependencies were required for this coordination request"
+  ],
+  "review": "pending"
+}

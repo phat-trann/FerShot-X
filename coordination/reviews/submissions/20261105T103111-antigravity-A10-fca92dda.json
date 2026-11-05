@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "id": "20261105T103111-antigravity-A10-fca92dda",
+  "created_at": "2026-11-05T10:31:11.912134+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A10",
+  "completion": "done",
+  "summary": "Implemented controlled ExportPanel for PNG/JPEG local export options with clamped JPEG quality, suggested basename editing, busy double-submit guard, accessible cancelled/success/error announcements, no upload or licensing controls, and RTL unit tests.",
+  "files": [
+    "src/features/export-panel/ExportPanel.tsx",
+    "src/features/export-panel/ExportPanel.css",
+    "src/features/export-panel/index.ts",
+    "src/features/export-panel/ExportPanel.test.tsx"
+  ],
+  "file_sha256": {
+    "src/features/export-panel/ExportPanel.tsx": "760792da38f23dc2a07f308a8702745d8fd5afc5b0a0fb882cd6cf86a24f05f9",
+    "src/features/export-panel/ExportPanel.css": "29e25afcd127f21efc229d497c6f82efde8170acdc921c8c4e21116a2b7a089a",
+    "src/features/export-panel/index.ts": "b3095b64501cb39d1c564127a92f64ad2ffbd4b981c9aeea3e1b313785ec09a0",
+    "src/features/export-panel/ExportPanel.test.tsx": "aa5510433311cf64974cbb331f11491c1dd3c36f1821a5f24601f6af34ab1b0c"
+  },
+  "checks": [
+    "npm run test:unit -- src/features/export-panel/ExportPanel.test.tsx: passed (3 tests)",
+    "npm run test:unit -- src/features/capture src/features/library src/features/settings src/features/editor/view src/features/pin src/features/editor/toolbar src/features/editor/workbench src/features/editor/render src/features/export-panel: passed (9 test files, 30 tests)",
+    "npm run typecheck: passed",
+    "npm run build: passed"
+  ],
+  "risks": [
+    "Controlled UI component only; file save dialog and native image encoding wiring belong to Codex C04 integration."
+  ],
+  "review": "pending"
+}

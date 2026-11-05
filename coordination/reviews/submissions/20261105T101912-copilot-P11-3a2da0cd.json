@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "id": "20261105T101912-copilot-P11-3a2da0cd",
+  "created_at": "2026-11-05T10:19:12.441520+07:00",
+  "agent": "copilot",
+  "request": "BUILD-20261105",
+  "task": "P11",
+  "completion": "done",
+  "summary": "Wrote bounded NOT EXECUTED macOS acceptance checklist for capture, permission, crop/resize and save-dialog behavior",
+  "files": [
+    "docs/qa/copilot-native-checklist.md"
+  ],
+  "file_sha256": {
+    "docs/qa/copilot-native-checklist.md": "2929ced739215c58ed296afcbf51d597dc9444a1d3fe6bca746ed992fbdcc318"
+  },
+  "checks": [
+    "Checklist review completed; no app launch or native CLI operation performed"
+  ],
+  "risks": [
+    "Real GUI acceptance, permissions and native save dialog remain unverified"
+  ],
+  "review": "pending"
+}

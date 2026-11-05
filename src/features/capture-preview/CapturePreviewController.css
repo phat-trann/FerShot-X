@@ -1,0 +1,64 @@
+.ferby-capture-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 0.875rem;
+  border: 1px solid #334155;
+  border-radius: 0.5rem;
+  background: #0f172a;
+  color: #f8fafc;
+}
+
+.ferby-capture-preview__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.ferby-capture-preview__title {
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.ferby-capture-preview__meta {
+  font-size: 0.75rem;
+  color: #94a3b8;
+}
+
+.ferby-capture-preview__body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+  border-radius: 0.375rem;
+  background: #020617;
+}
+
+.ferby-capture-preview__img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.25rem;
+}
+
+.ferby-capture-preview__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.ferby-capture-preview__btn {
+  padding: 0.375rem 0.625rem;
+  border-radius: 0.375rem;
+  border: 1px solid #475569;
+  background: #1e293b;
+  color: #f8fafc;
+  font-size: 0.8125rem;
+  cursor: pointer;
+}
+
+.ferby-capture-preview__btn--primary {
+  background: #2563eb;
+  border-color: #3b82f6;
+}
+

@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "20261105T103631-copilot-P16-dc326d23",
+  "created_at": "2026-11-05T10:36:31.909162+07:00",
+  "agent": "copilot",
+  "request": "BUILD-20261105",
+  "task": "P16",
+  "completion": "done",
+  "summary": "Added geometric annotation point bounds with stroke padding and explicit renderer-limit documentation",
+  "files": [
+    "src/features/annotation-bounds/index.ts",
+    "src/features/annotation-bounds/index.test.ts"
+  ],
+  "file_sha256": {
+    "src/features/annotation-bounds/index.ts": "df132c7a5475e70f8267b45a8b22c48d16048da8151d7ca39f537750ba7e132d",
+    "src/features/annotation-bounds/index.test.ts": "e800a20a966cd3e6900fa5b9d49d70d6488d42312c5e3a55c377ea9029948ea3"
+  },
+  "checks": [
+    "targeted Vitest passed (2 tests)"
+  ],
+  "risks": [
+    "Arrowheads and text glyphs are intentionally excluded"
+  ],
+  "review": "pending"
+}

@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "id": "20261105T114851-antigravity-A15-d4483a2c",
+  "created_at": "2026-11-05T11:48:51.838761+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A15",
+  "completion": "done",
+  "summary": "Refreshed A15 CapturePreviewController snapshot after H01 formatting and re-verified RTL unit tests.",
+  "files": [
+    "src/features/capture-preview/CapturePreviewController.tsx",
+    "src/features/capture-preview/CapturePreviewController.css",
+    "src/features/capture-preview/index.ts",
+    "src/features/capture-preview/CapturePreviewController.test.tsx"
+  ],
+  "file_sha256": {
+    "src/features/capture-preview/CapturePreviewController.tsx": "23595aa6261f30470d3a7f120670a3fa4bdb74bc730fb45149e7f9d456477451",
+    "src/features/capture-preview/CapturePreviewController.css": "a69b0d1e979a26c7bb43aa4b44d334d87ebd94bdc8157ea671dc76ba03ca6e59",
+    "src/features/capture-preview/index.ts": "57b1777fe82351ecc08c956eacdb9eab9846991df8c65acc27876423537ffeb8",
+    "src/features/capture-preview/CapturePreviewController.test.tsx": "063a1cc3d0054b293dab99f902dc1a1e35740c6595457aa7e9f4becad9e0888e"
+  },
+  "checks": [
+    "npm run test:unit -- src/features/capture-preview/CapturePreviewController.test.tsx: passed (3 tests)",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Controlled preview/timeout UI only; native window lifecycle belongs to Codex."
+  ],
+  "review": "pending"
+}

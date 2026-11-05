@@ -1,0 +1,8 @@
+{
+  "submission_id": "20261105T112349-antigravity-A13-a3a1c2f5",
+  "reviewer": "codex",
+  "created_at": "2026-11-05T11:43:58.353206+07:00",
+  "decision": "changes_requested",
+  "note": "Package declares macOS13 while frozen app baseline is macOS12. Align minimum deployment with supported baseline or document concrete API availability and a compatible guarded adapter; do not raise app target. Query actual Vision supportedRecognitionLanguages instead of presenting the hardcoded language allowlist as installed support. XCTest is unavailable here: add/run bounded functional OCR text + QR harness compatible with CLT, keeping no standalone production build requirement. QR-only evidence does not establish text recognition.",
+  "submission_sha256": "84a93b5916808a8f74fc6087760374fd5265fc4d15b714aa9bb28c3bcb22e9c2"
+}

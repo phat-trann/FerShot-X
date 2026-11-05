@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "20261105T134025-copilot-P43-97da281d",
+  "created_at": "2026-11-05T13:40:25.553197+07:00",
+  "agent": "copilot",
+  "request": "P43-source-grounded-capture-cases",
+  "task": "P43",
+  "completion": "done",
+  "summary": "Added four bounded source-grounded parity cases for F01 fullscreen, area cancellation, window capture, and F02 scrolling preferences. Cases use only the supplied brief and CapturePanel public API, preserve null expected target results, mark both sides NOT_EXECUTED, cite UI/resource references, and identify C11 integration ownership.",
+  "files": [
+    "docs/qa/parity/P43.json",
+    "docs/qa/parity/P43.md"
+  ],
+  "file_sha256": {
+    "docs/qa/parity/P43.json": "9feae60de6a7d48cdbe24d878f6bf5ca393ddbf0aad7e36d4c850fca161d1036",
+    "docs/qa/parity/P43.md": "eb22df2b85ceb408f9b2d14df2ee1a5026b8c65a2dca40fa099d1055f8c4ff54"
+  },
+  "checks": [
+    "Python JSON schema validation: 4 cases passed; rtk proxy git diff --check passed"
+  ],
+  "risks": [
+    "No target runtime, Ferby UI, native capture, or scrolling behavior was executed; API exports do not prove wiring."
+  ],
+  "review": "pending"
+}

@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "id": "20261105T102444-antigravity-A07-40619bbb",
+  "created_at": "2026-11-05T10:24:44.255127+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A07",
+  "completion": "done",
+  "summary": "Composed C01 editor model, A06 EditorToolbar, and A04 EditorView into EditorWorkbench with per-image isolated histories, undo branching, select/delete consistency, and immutable annotation export callbacks.",
+  "files": [
+    "src/features/editor/workbench/EditorWorkbench.tsx",
+    "src/features/editor/workbench/EditorWorkbench.css",
+    "src/features/editor/workbench/index.ts",
+    "src/features/editor/workbench/EditorWorkbench.test.tsx"
+  ],
+  "file_sha256": {
+    "src/features/editor/workbench/EditorWorkbench.tsx": "8ba3b23c4dae05ebc465a7d5d47dce2c6fc4e79df3ed4dde4d9f5a81f4837e7c",
+    "src/features/editor/workbench/EditorWorkbench.css": "c6d70f73102c29465f28c2dca6554146876f179b975d2e42a2d3af090129f209",
+    "src/features/editor/workbench/index.ts": "9293e9e5eab2033a0618b310d7cf823eb51d883a1328340ac139649ee2c27675",
+    "src/features/editor/workbench/EditorWorkbench.test.tsx": "6e273eac91099f0db0ff7a852b9147a033f603c70b8c4244fd522034b1d3e4c2"
+  },
+  "checks": [
+    "npm run test:unit -- src/features/editor/workbench/EditorWorkbench.test.tsx: passed (2 tests)",
+    "npm run typecheck: passed"
+  ],
+  "risks": [
+    "Composed workbench component ready for Codex C04 integration into src/Workspace.tsx."
+  ],
+  "review": "pending"
+}

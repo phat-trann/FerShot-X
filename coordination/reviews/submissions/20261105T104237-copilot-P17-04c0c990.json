@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "20261105T104237-copilot-P17-04c0c990",
+  "created_at": "2026-11-05T10:42:37.910102+07:00",
+  "agent": "copilot",
+  "request": "BUILD-20261105",
+  "task": "P17",
+  "completion": "done",
+  "summary": "Preserved empty-string selected IDs and added regression while retaining duplicate/missing-ID behavior.",
+  "files": [
+    "src/features/session-selection/index.ts",
+    "src/features/session-selection/index.test.ts"
+  ],
+  "file_sha256": {
+    "src/features/session-selection/index.ts": "1367aecad809281a62ae9d40d9f9313add98fc62002e7af535d8705a2f15d84a",
+    "src/features/session-selection/index.test.ts": "a18ba5ce959972da3249b4b6d819c780c94bbfa8cfaa7fd48bdc6356a8fd6cd5"
+  },
+  "checks": [
+    "targeted Vitest passed: 3 tests"
+  ],
+  "risks": [
+    "IDs remain caller-defined strings; duplicates are rejected"
+  ],
+  "review": "pending"
+}

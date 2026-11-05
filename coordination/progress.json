@@ -1,0 +1,278 @@
+{
+  "schema_version": 1,
+  "updated": "2026-11-05",
+  "scope": "Ferby macOS MVP v0.1: local capture/import, basic annotations, crop/resize, PNG/JPEG save, session library, settings, native pin and local OCR.",
+  "excluded": "Cloud/S3/upload, FTP (deferred), scrolling capture/stitching, advanced tools and full Shottr parity. Scope expansion must create a new baseline.",
+  "milestones": [
+    {
+      "id": "foundation",
+      "title": "Runnable foundation",
+      "weight": 10,
+      "gates": [
+        {
+          "name": "Tauri/React toolchain and contracts",
+          "done": true,
+          "evidence": "docs/agents/codex/C05-validation.md"
+        },
+        {
+          "name": "Session import/preview/close",
+          "done": true,
+          "evidence": "docs/agents/codex/C05-validation.md"
+        },
+        {
+          "name": "Isolated claims and immutable review workflow",
+          "done": true,
+          "evidence": "docs/agents/codex/C05-validation.md"
+        },
+        {
+          "name": "Production frontend and local app build",
+          "done": true,
+          "evidence": "docs/agents/codex/C05-validation.md"
+        }
+      ]
+    },
+    {
+      "id": "capture",
+      "title": "Native capture",
+      "weight": 15,
+      "gates": [
+        {
+          "name": "Fake-runner capture core",
+          "done": true,
+          "evidence": "docs/agents/codex/C04-integration.md"
+        },
+        {
+          "name": "Typed user-action native wiring",
+          "done": true,
+          "evidence": "docs/agents/codex/C04-integration.md"
+        },
+        {
+          "name": "Real mode/cancel acceptance",
+          "done": false,
+          "evidence": "Not accepted yet"
+        },
+        {
+          "name": "Real permission/error/window restoration acceptance",
+          "done": false,
+          "evidence": "Not accepted yet"
+        }
+      ]
+    },
+    {
+      "id": "editor",
+      "title": "Annotations and history",
+      "weight": 20,
+      "gates": [
+        {
+          "name": "Immutable model with tested history",
+          "done": true,
+          "evidence": "src/features/editor/model/README.md"
+        },
+        {
+          "name": "Reviewed gestures and composed UI",
+          "done": true,
+          "evidence": "docs/agents/codex/C07-editor-integration.md"
+        },
+        {
+          "name": "Bitmap renderer with real browser pixels",
+          "done": true,
+          "evidence": "docs/agents/codex/C07-editor-integration.md"
+        },
+        {
+          "name": "Annotated export end-to-end acceptance",
+          "done": false,
+          "evidence": "Not accepted yet"
+        }
+      ]
+    },
+    {
+      "id": "transform",
+      "title": "Crop and resize",
+      "weight": 10,
+      "gates": [
+        {
+          "name": "Synthetic bounded Rust transforms",
+          "done": true,
+          "evidence": "docs/agents/codex/C05-validation.md"
+        },
+        {
+          "name": "Non-destructive workspace wiring",
+          "done": true,
+          "evidence": "docs/agents/codex/C05-validation.md"
+        },
+        {
+          "name": "Browser regression with real canvas and mocked IPC",
+          "done": true,
+          "evidence": "docs/agents/codex/C05-validation.md"
+        },
+        {
+          "name": "Native GUI transform acceptance",
+          "done": false,
+          "evidence": "Not accepted yet"
+        }
+      ]
+    },
+    {
+      "id": "export",
+      "title": "PNG/JPEG export",
+      "weight": 10,
+      "gates": [
+        {
+          "name": "Bounded codecs and non-clobber save core",
+          "done": true,
+          "evidence": "docs/agents/codex/C05-validation.md"
+        },
+        {
+          "name": "Typed dialog wiring with cancellation checks",
+          "done": true,
+          "evidence": "docs/agents/codex/C05-validation.md"
+        },
+        {
+          "name": "Real dialog/existing-file acceptance",
+          "done": false,
+          "evidence": "Not accepted yet"
+        },
+        {
+          "name": "Annotated-pixel export acceptance",
+          "done": false,
+          "evidence": "Not accepted yet"
+        }
+      ]
+    },
+    {
+      "id": "library",
+      "title": "Session library",
+      "weight": 5,
+      "gates": [
+        {
+          "name": "Multi-image session selection",
+          "done": true,
+          "evidence": "docs/agents/codex/C05-validation.md"
+        },
+        {
+          "name": "Close/reimport and URL lifecycle regression",
+          "done": true,
+          "evidence": "docs/agents/codex/C05-validation.md"
+        },
+        {
+          "name": "Reviewed search/list-grid panel integrated",
+          "done": true,
+          "evidence": "docs/agents/codex/C04-library-checkpoint.md"
+        },
+        {
+          "name": "Integrated library keyboard and empty-state acceptance",
+          "done": true,
+          "evidence": "docs/agents/codex/C04-library-checkpoint.md"
+        }
+      ]
+    },
+    {
+      "id": "settings",
+      "title": "Ferby settings",
+      "weight": 5,
+      "gates": [
+        {
+          "name": "Reviewed controlled settings UI",
+          "done": true,
+          "evidence": "docs/agents/codex/C04-library-checkpoint.md"
+        },
+        {
+          "name": "Standalone persistence tested",
+          "done": true,
+          "evidence": "docs/agents/codex/C04-modules-current.md"
+        },
+        {
+          "name": "Native integration and preference application",
+          "done": false,
+          "evidence": "Not accepted yet"
+        },
+        {
+          "name": "Restart/invalid-settings acceptance",
+          "done": false,
+          "evidence": "Not accepted yet"
+        }
+      ]
+    },
+    {
+      "id": "pin",
+      "title": "Native pin and preview",
+      "weight": 5,
+      "gates": [
+        {
+          "name": "Controlled pin presentation reviewed",
+          "done": true,
+          "evidence": "src/features/pin/PinPreviewCard.tsx"
+        },
+        {
+          "name": "Restricted native pin window",
+          "done": true,
+          "evidence": "docs/agents/codex/C09-pin-integration.md"
+        },
+        {
+          "name": "Clipboard and controls integration",
+          "done": true,
+          "evidence": "docs/agents/codex/C09-pin-integration.md"
+        },
+        {
+          "name": "Native pin acceptance",
+          "done": false,
+          "evidence": "Not accepted yet"
+        }
+      ]
+    },
+    {
+      "id": "ocr",
+      "title": "Local OCR",
+      "weight": 10,
+      "gates": [
+        {
+          "name": "Bounded engine contract/core",
+          "done": false,
+          "evidence": "Not accepted yet"
+        },
+        {
+          "name": "Synthetic text recognition tests",
+          "done": false,
+          "evidence": "Not accepted yet"
+        },
+        {
+          "name": "UI/copy integration",
+          "done": false,
+          "evidence": "Not accepted yet"
+        },
+        {
+          "name": "Native acceptance and failure handling",
+          "done": false,
+          "evidence": "Not accepted yet"
+        }
+      ]
+    },
+    {
+      "id": "release",
+      "title": "Quality and release",
+      "weight": 10,
+      "gates": [
+        {
+          "name": "Automated frontend/Rust regression baseline",
+          "done": true,
+          "evidence": "docs/agents/codex/C05-validation.md"
+        },
+        {
+          "name": "Local debug app bundle",
+          "done": true,
+          "evidence": "docs/agents/codex/C05-validation.md"
+        },
+        {
+          "name": "Native manual acceptance matrix",
+          "done": false,
+          "evidence": "Not accepted yet"
+        },
+        {
+          "name": "Release build/signing/distribution decision",
+          "done": false,
+          "evidence": "Not accepted yet"
+        }
+      ]
+    }
+  ]
+}

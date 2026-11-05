@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "id": "20261105T114036-antigravity-A23-920d084e",
+  "created_at": "2026-11-05T11:40:36.056938+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A23",
+  "completion": "done",
+  "summary": "Implemented controlled ScrollCapturePanel with max-height/speed/reverse options, duplicate start guards, Stop/Cancel/Escape handlers, native C11 contract proposal, and RTL tests.",
+  "files": [
+    "src/features/scroll-panel/ScrollCapturePanel.tsx",
+    "src/features/scroll-panel/ScrollCapturePanel.css",
+    "src/features/scroll-panel/index.ts",
+    "src/features/scroll-panel/ScrollCapturePanel.test.tsx"
+  ],
+  "file_sha256": {
+    "src/features/scroll-panel/ScrollCapturePanel.tsx": "5ef1e1dd94c6a4a3674ca4a63e14779a2017a7e72af44a9a13ca65ff5f1bb17f",
+    "src/features/scroll-panel/ScrollCapturePanel.css": "98ed8191a2e574cd70865308f71bd8b1c7cd550cf9697db1f8d791f8d26831eb",
+    "src/features/scroll-panel/index.ts": "61449896dcdf309874e717e2ee983e8ab422da1ef8d6cb58b1f8ac012dc39972",
+    "src/features/scroll-panel/ScrollCapturePanel.test.tsx": "92d519c785566a52face03b83f96332c8b404a0e73d6adf9bb3e7f2c0912fc78"
+  },
+  "checks": [
+    "npm run test:unit -- src/features/scroll-panel/ScrollCapturePanel.test.tsx: passed (2 tests)",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Controlled UI only; native scrolling capture orchestration belongs to Codex C11."
+  ],
+  "review": "pending"
+}

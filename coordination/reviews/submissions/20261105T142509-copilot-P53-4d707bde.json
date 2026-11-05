@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "20261105T142509-copilot-P53-4d707bde",
+  "created_at": "2026-11-05T14:25:09.839399+07:00",
+  "agent": "copilot",
+  "request": "P53-output-jobs-regressions",
+  "task": "P53",
+  "completion": "done",
+  "summary": "Added four public-API regression tests for cancellation and late artifact cleanup, immutable request snapshots, pending/completed intent deduplication, and uncertain handler outcomes. One timing fixture was corrected so cancellation occurs after injected rendering starts; all tests now pass.",
+  "files": [
+    "src/testing/copilot-output-jobs.test.ts",
+    "docs/qa/copilot-P53.md"
+  ],
+  "file_sha256": {
+    "src/testing/copilot-output-jobs.test.ts": "09bbf238232f7f1eb30846eac4242190e9f5a1a5d8580d699fe0af0f971c4095",
+    "docs/qa/copilot-P53.md": "38ca93391c6f936f4a200377d3ab02b207543f310f09bfb623910abcd5c02d05"
+  },
+  "checks": [
+    "Node 26.13.0: npm run test:unit -- src/testing/copilot-output-jobs.test.ts (4 tests passed); rtk proxy git diff --check passed."
+  ],
+  "risks": [
+    "No native output, clipboard, filesystem, print, drag or producer implementation was exercised."
+  ],
+  "review": "pending"
+}

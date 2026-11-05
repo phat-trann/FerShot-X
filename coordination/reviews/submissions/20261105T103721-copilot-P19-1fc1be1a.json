@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "20261105T103721-copilot-P19-1fc1be1a",
+  "created_at": "2026-11-05T10:37:21.062382+07:00",
+  "agent": "copilot",
+  "request": "BUILD-20261105",
+  "task": "P19",
+  "completion": "done",
+  "summary": "Implemented stable case-insensitive code-point session image sorting with copied arrays",
+  "files": [
+    "src/features/image-sort/index.ts",
+    "src/features/image-sort/index.test.ts"
+  ],
+  "file_sha256": {
+    "src/features/image-sort/index.ts": "0d092903ed09f61384a50754d598748584c7b38d1c541240dd0cfdba3a9eac8f",
+    "src/features/image-sort/index.test.ts": "a9151ca87f060c3c8526ec29d5535a684d5b2eca22eb52b95a8be7543fc9c6b5"
+  },
+  "checks": [
+    "targeted Vitest passed (2 tests)"
+  ],
+  "risks": [
+    "No filesystem timestamps or locale collation used"
+  ],
+  "review": "pending"
+}

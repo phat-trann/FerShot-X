@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "20261105T142646-copilot-P54-79ce7a4e",
+  "created_at": "2026-11-05T14:26:46.894070+07:00",
+  "agent": "copilot",
+  "request": "P54-archive-workflow-regressions",
+  "task": "P54",
+  "completion": "done",
+  "summary": "Added four public-API regression tests for cancellation before staging, lease cleanup on compare-and-swap conflict, duplicate-ID remapping without mutating the original library, and export serialization that omits source URLs. Tests use synthetic injected archive adapters only.",
+  "files": [
+    "src/testing/copilot-archive-workflow.test.ts",
+    "docs/qa/copilot-P54.md"
+  ],
+  "file_sha256": {
+    "src/testing/copilot-archive-workflow.test.ts": "92f29f236f4d9793b645fb4ae6d26fde1a41002f004add0b33d00038f709c859",
+    "docs/qa/copilot-P54.md": "1768a76d308dd503db78ed815b75fbfbc03f87ce6874298e84ea5659b5ffdfa6"
+  },
+  "checks": [
+    "Node 26.13.0: npm run test:unit -- src/testing/copilot-archive-workflow.test.ts (4 tests passed); rtk proxy git diff --check passed."
+  ],
+  "risks": [
+    "No filesystem, network, OS archive operation or producer implementation was exercised."
+  ],
+  "review": "pending"
+}

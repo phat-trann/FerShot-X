@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "id": "20261105T115038-antigravity-A25-5e88bd32",
+  "created_at": "2026-11-05T11:50:38.895527+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A25",
+  "completion": "done",
+  "summary": "Refreshed A25 HotkeyPanel snapshot after H01 formatting and re-verified RTL unit tests.",
+  "files": [
+    "src/features/hotkey-panel/HotkeyPanel.tsx",
+    "src/features/hotkey-panel/HotkeyPanel.css",
+    "src/features/hotkey-panel/index.ts",
+    "src/features/hotkey-panel/HotkeyPanel.test.tsx"
+  ],
+  "file_sha256": {
+    "src/features/hotkey-panel/HotkeyPanel.tsx": "02bc43a964779e45699774c1bdde7fa1f0e3ee1b6cb5bd9037599b5e26b111ef",
+    "src/features/hotkey-panel/HotkeyPanel.css": "191887817e3ae8fac2141f0134409c774d6bf9aff2857ba417d7ef93a25e79bd",
+    "src/features/hotkey-panel/index.ts": "fedd54178b7b10d471ba433e5cc79ee3bb0bd9e9ecfe0ea9c9a092f6871eb9c6",
+    "src/features/hotkey-panel/HotkeyPanel.test.tsx": "1da82405044fa075aa60c3cae2d903349aff40c7b26214b358e4a19d71b9ee03"
+  },
+  "checks": [
+    "npm run test:unit -- src/features/hotkey-panel/HotkeyPanel.test.tsx: passed (2 tests)",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Local shortcut proposals only; Tauri global shortcut registration belongs to Codex C13."
+  ],
+  "review": "pending"
+}

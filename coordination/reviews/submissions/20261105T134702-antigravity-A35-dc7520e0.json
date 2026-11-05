@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "id": "20261105T134702-antigravity-A35-dc7520e0",
+  "created_at": "2026-11-05T13:47:02.982222+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A35",
+  "completion": "done",
+  "summary": "Implemented composed CaptureWorkflowController integrating A24 PostCapturePlanner and A15 CapturePreviewController with operation isolation, late-result cancellation, partial-failure retry without duplicate side effects, and RTL tests.",
+  "files": [
+    "src/features/capture-workflow/CaptureWorkflowController.tsx",
+    "src/features/capture-workflow/CaptureWorkflowController.css",
+    "src/features/capture-workflow/index.ts",
+    "src/features/capture-workflow/CaptureWorkflowController.test.tsx"
+  ],
+  "file_sha256": {
+    "src/features/capture-workflow/CaptureWorkflowController.tsx": "e99521fe151b17d8cb8e6d15a07032c8ce63094bc7a0d8aaf6c4a6e27b65375f",
+    "src/features/capture-workflow/CaptureWorkflowController.css": "be14117bd32774f3c21e70fcac693db765959481d5ca2a530355b4ca8b9fae6d",
+    "src/features/capture-workflow/index.ts": "64294080ce59bf3c38b2e45313cb516d806edde3e3eaa86724823e8e167ed08f",
+    "src/features/capture-workflow/CaptureWorkflowController.test.tsx": "446109825affa366be73ea272344ca00a20e3619e3120d9228c31a70e2d44237"
+  },
+  "checks": [
+    "npm run test:unit -- src/features/capture-workflow/CaptureWorkflowController.test.tsx: passed (1 test)",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Target Shottr post-capture scheduling semantics are UNKNOWN; documented deterministic Ferby ordering and idempotency ledger."
+  ],
+  "review": "pending"
+}

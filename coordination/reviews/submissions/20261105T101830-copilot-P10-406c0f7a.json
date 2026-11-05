@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "20261105T101830-copilot-P10-406c0f7a",
+  "created_at": "2026-11-05T10:18:30.794919+07:00",
+  "agent": "copilot",
+  "request": "BUILD-20261105",
+  "task": "P10",
+  "completion": "done",
+  "summary": "Implemented pure pin scale/opacity normalization with finite validation, bounds and fresh outputs",
+  "files": [
+    "src/features/pin-values/index.ts",
+    "src/features/pin-values/index.test.ts"
+  ],
+  "file_sha256": {
+    "src/features/pin-values/index.ts": "e8aa66e70bd305c3ffc584d47b61e115221bda617d5bd41007144a915e69a181",
+    "src/features/pin-values/index.test.ts": "21cec1744d59f7e94a2aa6ee6a55ce69a202cc8d831aadbb226a32707d98bc29"
+  },
+  "checks": [
+    "targeted Vitest: passed (3 tests)"
+  ],
+  "risks": [
+    "No pin component integration; defaults apply only when fields are absent"
+  ],
+  "review": "pending"
+}

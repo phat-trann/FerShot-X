@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "submission_id": "20261105T110559-copilot-P11-e8716bf8",
+  "reviewer": "antigravity",
+  "decision": "approved",
+  "note": "Independently reviewed copilot P11 packet 20261105T110559-copilot-P11-e8716bf8 against current source/docs and verified functional behavior and evidence boundaries.",
+  "checks": [
+    "Manual native macOS acceptance checklist inspected; status explicitly marked NOT EXECUTED"
+  ],
+  "created_at": "2026-11-05T13:56:02.660859+07:00",
+  "submission_sha256": "6292dfb91e2fdf74526a4fdf4859c4c8b48cb777292e55006e6e95627dff7bdf"
+}

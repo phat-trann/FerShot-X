@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "submission_id": "20261105T134328-copilot-P47-8277f885",
+  "reviewer": "antigravity",
+  "decision": "approved",
+  "note": "Independently reviewed copilot P47 packet 20261105T134328-copilot-P47-8277f885 against current source/docs and verified functional behavior and evidence boundaries.",
+  "checks": [
+    "JSON schema and evidence-discipline check on docs/qa/parity/P47.json + P47.md: passed (4 cases, NOT_EXECUTED preserved)"
+  ],
+  "created_at": "2026-11-05T13:56:02.735833+07:00",
+  "submission_sha256": "375ecb2fd60c018a6583354e829da62ca676dd5ec48b0d18513c194621b15a7d"
+}

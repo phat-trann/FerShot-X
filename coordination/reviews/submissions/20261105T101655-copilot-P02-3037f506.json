@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "20261105T101655-copilot-P02-3037f506",
+  "created_at": "2026-11-05T10:16:55.382034+07:00",
+  "agent": "copilot",
+  "request": "BUILD-20261105",
+  "task": "P02",
+  "completion": "done",
+  "summary": "Added finite-result guards for rectangle deltas and pixel conversion, with overflow regressions",
+  "files": [
+    "src/features/measurement/measurement.ts",
+    "src/features/measurement/measurement.test.ts"
+  ],
+  "file_sha256": {
+    "src/features/measurement/measurement.ts": "06d944bbb77db4298330bfc3d0a798e56037f057413c7c63ebbd281b9701593a",
+    "src/features/measurement/measurement.test.ts": "835eaa4a98c785fda5fe40a7aab8b1a06fef924e0050e78adc2611deb2e797bb"
+  },
+  "checks": [
+    "targeted Vitest: passed (4 tests)"
+  ],
+  "risks": [
+    "Large finite inputs now reject overflow rather than returning Infinity"
+  ],
+  "review": "pending"
+}

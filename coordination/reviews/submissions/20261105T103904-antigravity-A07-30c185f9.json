@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "id": "20261105T103904-antigravity-A07-30c185f9",
+  "created_at": "2026-11-05T10:39:04.519713+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A07",
+  "completion": "done",
+  "summary": "Replaced plain-object per-image history map with ReadonlyMap<string, EditorState> in EditorWorkbench so Object.prototype keys like toString and __proto__ work safely; refreshed current file snapshots.",
+  "files": [
+    "src/features/editor/workbench/EditorWorkbench.tsx",
+    "src/features/editor/workbench/EditorWorkbench.css",
+    "src/features/editor/workbench/index.ts",
+    "src/features/editor/workbench/EditorWorkbench.test.tsx"
+  ],
+  "file_sha256": {
+    "src/features/editor/workbench/EditorWorkbench.tsx": "051b90b4d32dabfa4a4590fa1dfa1d135f6d6607efe5902a7d3d0458416ccc40",
+    "src/features/editor/workbench/EditorWorkbench.css": "8a232ee467ccac4abb3ce95c5701b8a146ad13c95073d0fc8a5d567da76f9b9b",
+    "src/features/editor/workbench/index.ts": "2b87630e33836fb49ced9ceeb603f3d3deec23590fc3bd172bfc9109b567568d",
+    "src/features/editor/workbench/EditorWorkbench.test.tsx": "bbe33bf335f79ec511936e5c873b0e0639187bb3daad349b5fb81d10a163dbe5"
+  },
+  "checks": [
+    "npm run test:unit -- src/features/editor/workbench/EditorWorkbench.test.tsx: passed (3 tests)",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Requires Codex C04 integration to mount EditorWorkbench inside src/Workspace.tsx."
+  ],
+  "review": "pending"
+}

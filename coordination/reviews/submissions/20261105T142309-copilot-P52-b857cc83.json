@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "20261105T142309-copilot-P52-b857cc83",
+  "created_at": "2026-11-05T14:23:09.129569+07:00",
+  "agent": "copilot",
+  "request": "P52-recognition-workflow-regressions",
+  "task": "P52",
+  "completion": "done",
+  "summary": "Added four public-API regression tests for stale recognition suppression, deselected-source cancellation, immutable source snapshots with OCR line-break formatting, and stale language-list suppression. Tests use deferred synthetic backends only and do not modify producer code or perform native operations.",
+  "files": [
+    "src/testing/copilot-recognition-workflow.test.ts",
+    "docs/qa/copilot-P52.md"
+  ],
+  "file_sha256": {
+    "src/testing/copilot-recognition-workflow.test.ts": "2236580b2e9d34facc52da6e2e3a9b3bd0e70b5aeef162327b5b22b7f6e23ce6",
+    "docs/qa/copilot-P52.md": "8a8b2ded6c4d8ceaf47658c385d1b1d6fa55fc916a16cb3cf38a746b73cbb651"
+  },
+  "checks": [
+    "Node 26.13.0: npm run test:unit -- src/testing/copilot-recognition-workflow.test.ts (4 tests passed); rtk proxy git diff --check passed."
+  ],
+  "risks": [
+    "No native OCR, clipboard, URL, network or producer implementation was exercised."
+  ],
+  "review": "pending"
+}

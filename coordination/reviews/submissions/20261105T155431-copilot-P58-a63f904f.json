@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "20261105T155431-copilot-P58-a63f904f",
+  "created_at": "2026-11-05T15:54:31.371615+07:00",
+  "agent": "copilot",
+  "request": "P58-advanced-workbench-regressions",
+  "task": "P58",
+  "completion": "done",
+  "summary": "Added three independent regressions for public AdvancedWorkbench APIs: degenerate/unsupported item validation, redo clearing after a branched edit, and selection preservation while switching tools. Checked current A34 packet hash and producer claim; no producer code changed.",
+  "files": [
+    "src/testing/copilot-advanced-workbench.test.tsx",
+    "docs/qa/copilot-P58.md"
+  ],
+  "file_sha256": {
+    "src/testing/copilot-advanced-workbench.test.tsx": "5e8043edbeddceeaedfabda5b719f26c2529607665e6ab5e61fe3931642893ed",
+    "docs/qa/copilot-P58.md": "7a85c3ee23173b6e594befdeb4e977e1901a2096fcba25ed29c06082e7a4ab76"
+  },
+  "checks": [
+    "Node 26.13.0: npm run test:unit -- src/testing/copilot-advanced-workbench.test.tsx src/features/editor/advanced-workbench/AdvancedWorkbench.test.tsx (2 files, 4 tests passed); rtk proxy git diff --check passed."
+  ],
+  "risks": [
+    "No OS actions, build, producer edits or Antigravity review performed."
+  ],
+  "review": "pending"
+}

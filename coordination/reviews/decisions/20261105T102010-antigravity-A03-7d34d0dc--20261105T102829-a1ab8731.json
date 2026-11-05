@@ -1,0 +1,8 @@
+{
+  "submission_id": "20261105T102010-antigravity-A03-7d34d0dc",
+  "reviewer": "codex",
+  "created_at": "2026-11-05T10:28:29.927120+07:00",
+  "decision": "approved",
+  "note": "Reviewed controlled immutable settings updates, quality clamp and accessible controls. Accepted presentation only; downscale/preview/persistence remain unwired and should not be exposed as functional preferences yet.",
+  "submission_sha256": "b2cef45cefc9f4980ad5703d8a06267329a31b24c26a0796e4763c4b80e8d4a9"
+}

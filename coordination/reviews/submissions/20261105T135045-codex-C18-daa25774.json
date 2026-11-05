@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "id": "20261105T135045-codex-C18-daa25774",
+  "created_at": "2026-11-05T13:50:45.454866+07:00",
+  "agent": "codex",
+  "request": "BUILD-20261105",
+  "task": "C18",
+  "completion": "done",
+  "summary": "Implemented injected OCR/QR workflow with revision-bound stale-result isolation, runtime language validation, immutable bounded results and separate raw/display text.",
+  "files": [
+    "src/features/recognition-workflow/index.test.ts",
+    "src/features/recognition-workflow/README.md",
+    "src/features/recognition-workflow/index.ts"
+  ],
+  "file_sha256": {
+    "src/features/recognition-workflow/index.test.ts": "278ecd8b98b1b06e4a0c2ccfb3d6d34057f0ad6235c11307aa6be8265d3f072b",
+    "src/features/recognition-workflow/README.md": "669b90e7f11c73ae225451849d026539beef0e00ad26d4f34f2a1a2d83d79c64",
+    "src/features/recognition-workflow/index.ts": "a74e9918d2141c0dd1eab2844d9993d26c87e6da292b325448c2e3a51e537410"
+  },
+  "checks": [
+    "7 focused Vitest tests passed",
+    "TypeScript noEmit passed after correcting typed test mock signature",
+    "Formatting/lint delegated to Copilot H01"
+  ],
+  "risks": [
+    "Independent Antigravity review and C08/A33 native adapter integration pending",
+    "Cooperative backend cancellation; no real OCR/QR native acceptance or target parity asserted"
+  ],
+  "review": "pending"
+}

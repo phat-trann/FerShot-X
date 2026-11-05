@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "20261105T134444-copilot-P50-133bf388",
+  "created_at": "2026-11-05T13:44:44.848897+07:00",
+  "agent": "copilot",
+  "request": "P50-source-grounded-lifecycle-exclusion-cases",
+  "task": "P50",
+  "completion": "done",
+  "summary": "Added five bounded source-grounded parity cases covering grouped F27-F29 network exclusions, F30 shortcuts, F31 lifecycle preferences, F32 deep-link boundary, and grouped F33-F34 licensing/telemetry exclusions. Cases use only the supplied brief and app-preferences exports, preserve null target results, mark exclusions explicitly, and avoid credentials, OS actions, URLs, licensing or telemetry.",
+  "files": [
+    "docs/qa/parity/P50.json",
+    "docs/qa/parity/P50.md"
+  ],
+  "file_sha256": {
+    "docs/qa/parity/P50.json": "e2b1ccecda13b9ad07b8423b78edaa741894f63066045797d1685f8ea2272ad3",
+    "docs/qa/parity/P50.md": "d327c638361c9b0dbeba10e18276c9d0b9d3dc227b417fa31081fc2ac09966ab"
+  },
+  "checks": [
+    "Python JSON field/coverage validation: 5 cases passed; rtk proxy git diff --check passed"
+  ],
+  "risks": [
+    "No target or Ferby runtime, network, OS binding, URL, licensing, telemetry or product code execution was performed."
+  ],
+  "review": "pending"
+}

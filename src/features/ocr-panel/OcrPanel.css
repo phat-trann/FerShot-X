@@ -1,0 +1,112 @@
+.ferby-ocr-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 0.875rem;
+  border: 1px solid #334155;
+  border-radius: 0.5rem;
+  background: #0f172a;
+  color: #f8fafc;
+}
+
+.ferby-ocr-panel__controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.ferby-ocr-panel__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.ferby-ocr-panel__label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #cbd5e1;
+}
+
+.ferby-ocr-panel__select {
+  padding: 0.375rem 0.5rem;
+  border-radius: 0.375rem;
+  border: 1px solid #475569;
+  background: #1e293b;
+  color: #f8fafc;
+}
+
+.ferby-ocr-panel__checkbox-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.ferby-ocr-panel__checkbox-label {
+  font-size: 0.875rem;
+  color: #e2e8f0;
+}
+
+.ferby-ocr-panel__actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-left: auto;
+}
+
+.ferby-ocr-panel__btn {
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.375rem;
+  border: 1px solid #475569;
+  background: #1e293b;
+  color: #f8fafc;
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+.ferby-ocr-panel__btn--primary {
+  background: #2563eb;
+  border-color: #3b82f6;
+}
+
+.ferby-ocr-panel__btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.ferby-ocr-panel__status {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: #93c5fd;
+}
+
+.ferby-ocr-panel__error {
+  margin: 0;
+  padding: 0.5rem;
+  border-radius: 0.375rem;
+  background: rgba(239, 68, 68, 0.15);
+  color: #fca5a5;
+  font-size: 0.8125rem;
+}
+
+.ferby-ocr-panel__result {
+  padding: 0.625rem;
+  border-radius: 0.375rem;
+  background: #020617;
+  border: 1px solid #1e293b;
+}
+
+.ferby-ocr-panel__text {
+  margin: 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.8125rem;
+  color: #f1f5f9;
+}
+
+.ferby-ocr-panel__empty {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: #94a3b8;
+}
+

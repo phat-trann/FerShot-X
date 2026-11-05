@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "20261105T134412-copilot-P49-18c927cf",
+  "created_at": "2026-11-05T13:44:12.417051+07:00",
+  "agent": "copilot",
+  "request": "P49-source-grounded-output-cases",
+  "task": "P49",
+  "completion": "done",
+  "summary": "Added three bounded source-grounded parity cases for F23 post-capture actions, F24 copy/save/print/drag boundaries, and F25 save preferences. Cases use only the supplied brief and post-capture public exports, retain null target results and NOT_EXECUTED statuses, identify C08/C10 ownership, and document native filesystem/output limitations.",
+  "files": [
+    "docs/qa/parity/P49.json",
+    "docs/qa/parity/P49.md"
+  ],
+  "file_sha256": {
+    "docs/qa/parity/P49.json": "e47c0b04da7f55a3127a32c95a263dd91ee4089acb93599152e6949c15d88177",
+    "docs/qa/parity/P49.md": "ec2a672e8a4f62f44052fd6cd2d5eaccdf7f312cfdd49b85d9032aa8a969b53c"
+  },
+  "checks": [
+    "Python JSON field/coverage validation: 3 cases passed; rtk proxy git diff --check passed"
+  ],
+  "risks": [
+    "No target or Ferby runtime, native output, OS filesystem/clipboard/print/drag operation, or product code execution was performed."
+  ],
+  "review": "pending"
+}

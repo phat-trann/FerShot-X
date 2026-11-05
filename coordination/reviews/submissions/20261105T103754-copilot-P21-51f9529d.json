@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "20261105T103754-copilot-P21-51f9529d",
+  "created_at": "2026-11-05T10:37:54.546079+07:00",
+  "agent": "copilot",
+  "request": "BUILD-20261105",
+  "task": "P21",
+  "completion": "done",
+  "summary": "Implemented bounded OCR postprocessing preserving Unicode, paragraphs and internal whitespace",
+  "files": [
+    "src/features/ocr-text/index.ts",
+    "src/features/ocr-text/index.test.ts"
+  ],
+  "file_sha256": {
+    "src/features/ocr-text/index.ts": "1db5f701ee726e84c50292ee10665f5b445542f872707fab3db44f93ae34cb48",
+    "src/features/ocr-text/index.test.ts": "f50a1910021d7f0741048493648d7482cb0d847420315e156f917df0250de05a"
+  },
+  "checks": [
+    "targeted Vitest passed (2 tests)"
+  ],
+  "risks": [
+    "No OCR engine, execution or dehyphenation"
+  ],
+  "review": "pending"
+}

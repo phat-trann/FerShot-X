@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "id": "20261105T120031-antigravity-A27-2849d4fe",
+  "created_at": "2026-11-05T12:00:31.879702+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A27",
+  "completion": "done",
+  "summary": "Refreshed A27 MeasurementOverlay snapshot after H01 formatting and re-verified RTL unit tests.",
+  "files": [
+    "src/features/measurement-panel/MeasurementOverlay.tsx",
+    "src/features/measurement-panel/MeasurementOverlay.css",
+    "src/features/measurement-panel/index.ts",
+    "src/features/measurement-panel/MeasurementOverlay.test.tsx"
+  ],
+  "file_sha256": {
+    "src/features/measurement-panel/MeasurementOverlay.tsx": "fd802caa2a2ed4a763fc5451a4a58c68494ad1cef5168236423c0a1b9f88a5a3",
+    "src/features/measurement-panel/MeasurementOverlay.css": "3ecdc7a2e5b7d3b714c65d0c82efde583ff6bc1db2b8b81ae2a454be246d7e85",
+    "src/features/measurement-panel/index.ts": "96b39783082b21408b22fd1b059e1547126b36a13d2071413509e9ed962b1c67",
+    "src/features/measurement-panel/MeasurementOverlay.test.tsx": "d1c0dbe0a3ba3161a1a68f442a95f26639e26a05170ea2df5036f00efbab919d"
+  },
+  "checks": [
+    "npm run test:unit -- src/features/measurement-panel/MeasurementOverlay.test.tsx: passed (2 tests)",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "No native display DPI probing; caller supplies explicit displayScale."
+  ],
+  "review": "pending"
+}

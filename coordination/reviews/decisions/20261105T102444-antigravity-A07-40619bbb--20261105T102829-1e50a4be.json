@@ -1,0 +1,8 @@
+{
+  "submission_id": "20261105T102444-antigravity-A07-40619bbb",
+  "reviewer": "codex",
+  "created_at": "2026-11-05T10:28:29.931544+07:00",
+  "decision": "changes_requested",
+  "note": "Composition inspected; root integration waits on corrected A04/A06. Also historiesByImageId uses plain object property lookup, so a later imageId=toString/__proto__ resolves inherited data and crashes when destructuring present. Use Map or own-property checks/null-prototype map, test switching to reserved-property IDs, and resubmit current snapshots.",
+  "submission_sha256": "a7d428fdeadbe3e9c48644171260a335634007f785c05dd9cc7d0cac02aefcc4"
+}

@@ -19,8 +19,10 @@ describe("measurement utilities", () => {
 
   it("rejects non-finite values and invalid dimensions/scales", () => {
     expect(() => normalizeRect({ x: NaN, y: 0 }, { x: 1, y: 1 })).toThrow(TypeError);
+    expect(() => normalizeRect({ x: -1e308, y: 0 }, { x: 1e308, y: 1 })).toThrow(RangeError);
     expect(() => clampPointToImage({ x: 0, y: 0 }, 0, 100)).toThrow(RangeError);
     expect(() => pixelsToPoints(Infinity, 1)).toThrow(TypeError);
     expect(() => pixelsToPoints(1, -1)).toThrow(RangeError);
+    expect(() => pixelsToPoints(1, Number.MIN_VALUE)).toThrow(RangeError);
   });
 });

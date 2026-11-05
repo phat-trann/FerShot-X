@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "id": "20261105T112746-antigravity-A16-b5d227b2",
+  "created_at": "2026-11-05T11:27:46.066323+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A16",
+  "completion": "done",
+  "summary": "Implemented ellipse and plain line shape primitives (computeEllipseGeometry, computeLineGeometry, ShapesOverlay, and SHAPE_CONTRACT_ADAPTER_PROPOSAL) with reverse-drag handling, zero-size rejection, Escape cancellation, and RTL tests.",
+  "files": [
+    "src/features/shapes/shapes.tsx",
+    "src/features/shapes/index.ts",
+    "src/features/shapes/shapes.test.tsx"
+  ],
+  "file_sha256": {
+    "src/features/shapes/shapes.tsx": "4ebe92823b78fb4487b55069a0d0e1993d05f6779af970790f9deb114728fa08",
+    "src/features/shapes/index.ts": "d9ada286aa996b3a4bfa59b6d534d7d5a1a204e9189ad4105dcc110aad0f1e06",
+    "src/features/shapes/shapes.test.tsx": "843c1f8eb2d7cc94d6490cc8e525b90702d3e78401411ac9aafb70d63ad37508"
+  },
+  "checks": [
+    "npm run test:unit -- src/features/shapes/shapes.test.tsx: passed (3 tests)",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Plain line primitive requires Codex C12 to extend AnnotationTool with line rather than mapping to arrow."
+  ],
+  "review": "pending"
+}

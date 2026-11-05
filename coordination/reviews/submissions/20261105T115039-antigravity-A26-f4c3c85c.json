@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "id": "20261105T115039-antigravity-A26-f4c3c85c",
+  "created_at": "2026-11-05T11:50:39.835480+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A26",
+  "completion": "done",
+  "summary": "Refreshed A26 window-appearance snapshot after H01 formatting and re-verified unit tests.",
+  "files": [
+    "src/features/window-appearance/window-appearance.ts",
+    "src/features/window-appearance/index.ts",
+    "src/features/window-appearance/window-appearance.test.ts",
+    "tests/e2e/antigravity-window-appearance.spec.ts"
+  ],
+  "file_sha256": {
+    "src/features/window-appearance/window-appearance.ts": "9c8869108ca24d093dcfbd60f6b8c609d529a0ff15e2c29822d9e5a8262c27f2",
+    "src/features/window-appearance/index.ts": "ab9175b6facaaf2932f6031053cafb295f977e5ad835de07e5c09a7a82438e8b",
+    "src/features/window-appearance/window-appearance.test.ts": "ad9b9d262de41730432503a4faee3b68f55f208bffaca50482b232a44a9b29b5",
+    "tests/e2e/antigravity-window-appearance.spec.ts": "2cfc65d628c974dbfb34d8999d82b822a9028203816da53693ac65766b0820e6"
+  },
+  "checks": [
+    "npm run test:unit -- src/features/window-appearance/window-appearance.test.ts: passed (2 tests)",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Shadow-trim uses explicit caller-provided insets; target Shottr auto-trim heuristic is not invented."
+  ],
+  "review": "pending"
+}

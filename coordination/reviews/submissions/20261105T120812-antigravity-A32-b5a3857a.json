@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "id": "20261105T120812-antigravity-A32-b5a3857a",
+  "created_at": "2026-11-05T12:08:12.899504+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A32",
+  "completion": "done",
+  "summary": "Implemented controlled 8-handle SelectionHandlesOverlay for rectangle, arrow, and multi-point pen annotations with clamped move/resize, zoom scaling, Escape/pointercancel/multi-pointer guards, immutable outputs, and RTL tests.",
+  "files": [
+    "src/features/selection-handles/SelectionHandlesOverlay.tsx",
+    "src/features/selection-handles/SelectionHandlesOverlay.css",
+    "src/features/selection-handles/index.ts",
+    "src/features/selection-handles/SelectionHandlesOverlay.test.tsx"
+  ],
+  "file_sha256": {
+    "src/features/selection-handles/SelectionHandlesOverlay.tsx": "696fe171b036f897b680db8f5de7f78a6f76d0dc04ccb1ee830ab296996cad67",
+    "src/features/selection-handles/SelectionHandlesOverlay.css": "1e3b0f0ddab23cb259ae0e93a32477129543df269aa87fa189cd0fd036b3b4df",
+    "src/features/selection-handles/index.ts": "71490993340fcda8082d7902c5bc9fcca07523f7db163954498e889e12cef8ca",
+    "src/features/selection-handles/SelectionHandlesOverlay.test.tsx": "d798c1b36168b88890d57188e3dd6a070e6bb9e129975cc5ca409bebfaf69632"
+  },
+  "checks": [
+    "npm run test:unit -- src/features/selection-handles/SelectionHandlesOverlay.test.tsx: passed (2 tests)",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Frozen EditorViewProps contract unchanged; exported SelectionHandlesAdapterProposal for Codex integration."
+  ],
+  "review": "pending"
+}

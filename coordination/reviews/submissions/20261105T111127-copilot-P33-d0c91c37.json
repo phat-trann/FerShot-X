@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "20261105T111127-copilot-P33-d0c91c37",
+  "created_at": "2026-11-05T11:11:27.039748+07:00",
+  "agent": "copilot",
+  "request": "BUILD-20261105",
+  "task": "P33",
+  "completion": "done",
+  "summary": "Added pure bounded text annotation option validation preserving Unicode/newlines and rejecting unsafe controls.",
+  "files": [
+    "src/features/text-values/index.ts",
+    "src/features/text-values/index.test.ts"
+  ],
+  "file_sha256": {
+    "src/features/text-values/index.ts": "2faad77eda5ebcc288df42e98dac04e921524fc45c8edb205593725e06815c76",
+    "src/features/text-values/index.test.ts": "6bcb270965e6590183138ec190563b5f62070b10176e8fd1c2ae846adf1a0c00"
+  },
+  "checks": [
+    "targeted Vitest passed: 2 tests"
+  ],
+  "risks": [
+    "No HTML rendering or editor integration."
+  ],
+  "review": "pending"
+}

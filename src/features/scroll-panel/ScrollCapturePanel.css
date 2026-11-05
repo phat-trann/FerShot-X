@@ -1,0 +1,68 @@
+.ferby-scroll-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 0.875rem;
+  border: 1px solid #334155;
+  border-radius: 0.5rem;
+  background: #0f172a;
+  color: #f8fafc;
+}
+
+.ferby-scroll-panel__controls,
+.ferby-scroll-panel__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.ferby-scroll-panel__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.75rem;
+}
+
+.ferby-scroll-panel__checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.8125rem;
+}
+
+.ferby-scroll-panel__btn {
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.375rem;
+  border: 1px solid #475569;
+  background: #1e293b;
+  color: #f8fafc;
+  font-size: 0.8125rem;
+  cursor: pointer;
+}
+
+.ferby-scroll-panel__btn--primary {
+  background: #2563eb;
+  border-color: #3b82f6;
+}
+
+.ferby-scroll-panel__btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.ferby-scroll-panel__status {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: #93c5fd;
+}
+
+.ferby-scroll-panel__error {
+  margin: 0;
+  padding: 0.5rem;
+  border-radius: 0.375rem;
+  background: rgba(239, 68, 68, 0.15);
+  color: #fca5a5;
+  font-size: 0.8125rem;
+}
+

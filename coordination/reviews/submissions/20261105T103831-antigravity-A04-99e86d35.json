@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "id": "20261105T103831-antigravity-A04-99e86d35",
+  "created_at": "2026-11-05T10:38:31.856104+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A04",
+  "completion": "done",
+  "summary": "Fixed pen pointerup release endpoint retention/deduplication, ignored secondary pointerdown during active draft, and omitted unsupported supplied annotation tools with explicit status notice instead of placeholder shapes.",
+  "files": [
+    "src/features/editor/view/EditorView.tsx",
+    "src/features/editor/view/EditorView.css",
+    "src/features/editor/view/EditorView.test.tsx"
+  ],
+  "file_sha256": {
+    "src/features/editor/view/EditorView.tsx": "d460e4cd15739f793eaf33ca310463b0c43a4ddb1ed93c5d62b7182a17e8033d",
+    "src/features/editor/view/EditorView.css": "e87486916a07dc82d032d6e4eb454feb15315eb03982165e20f82a383571e7fb",
+    "src/features/editor/view/EditorView.test.tsx": "e7a8becb9cc9605a6b354e7d6383cdb086a90e13154ca85f5227b90950f1234f"
+  },
+  "checks": [
+    "npm run test:unit -- src/features/editor/view/EditorView.test.tsx: passed (5 tests)",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Supports rectangle, arrow, and pen only; unsupported tools are explicitly reported and omitted."
+  ],
+  "review": "pending"
+}

@@ -1,0 +1,8 @@
+{
+  "submission_id": "20261105T102327-antigravity-A06-4c256f6c",
+  "reviewer": "codex",
+  "created_at": "2026-11-05T10:28:29.929471+07:00",
+  "decision": "changes_requested",
+  "note": "Toolbar drops KeyboardEvent.isComposing when calling matchEditorShortcut. Pass composition state through and test composing R does not switch tool. Current key handler can bypass the accepted P03 composition guard.",
+  "submission_sha256": "d18931a1d87381224d5f1163b3057b7874f757238e5435820355298051ef7a72"
+}

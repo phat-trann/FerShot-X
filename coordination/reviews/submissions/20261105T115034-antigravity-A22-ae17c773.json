@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "id": "20261105T115034-antigravity-A22-ae17c773",
+  "created_at": "2026-11-05T11:50:34.521723+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A22",
+  "completion": "done",
+  "summary": "Refreshed A22 scroll-core snapshot after H01 formatting and re-verified cargo test.",
+  "files": [
+    "src-tauri/crates/scroll-core/Cargo.toml",
+    "src-tauri/crates/scroll-core/Cargo.lock",
+    "src-tauri/crates/scroll-core/src/lib.rs"
+  ],
+  "file_sha256": {
+    "src-tauri/crates/scroll-core/Cargo.toml": "70c79a68c527b29f9a9c3cd8eb977135d1b4b797c6e7f91fc41d3307af1df200",
+    "src-tauri/crates/scroll-core/Cargo.lock": "55d65b00b5af4e6eaef939e814c073056dcccbd6f2c56bca92efa0af4053e1b8",
+    "src-tauri/crates/scroll-core/src/lib.rs": "fac8e7e2e36bce5c58fb61a3624cf3e057206802801032126fadae410fed2d25"
+  },
+  "checks": [
+    "cargo test --manifest-path src-tauri/crates/scroll-core/Cargo.toml: passed (2 tests)",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Deterministic row-correlation stitcher; does not claim arbitrary-app compatibility."
+  ],
+  "review": "pending"
+}

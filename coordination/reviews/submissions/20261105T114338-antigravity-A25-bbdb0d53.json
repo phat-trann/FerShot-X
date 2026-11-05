@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "id": "20261105T114338-antigravity-A25-bbdb0d53",
+  "created_at": "2026-11-05T11:43:38.119789+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A25",
+  "completion": "done",
+  "summary": "Implemented controlled HotkeyPanel with modifier/reserved/conflict validation, IME composition guards, Escape cancel, Clear binding, missing-permission status, and RTL tests.",
+  "files": [
+    "src/features/hotkey-panel/HotkeyPanel.tsx",
+    "src/features/hotkey-panel/HotkeyPanel.css",
+    "src/features/hotkey-panel/index.ts",
+    "src/features/hotkey-panel/HotkeyPanel.test.tsx"
+  ],
+  "file_sha256": {
+    "src/features/hotkey-panel/HotkeyPanel.tsx": "15d35bc7c490f9663992c8ab4a511fdc19544b9352d643863a9a105cd17fd6fe",
+    "src/features/hotkey-panel/HotkeyPanel.css": "303d79983b3e24f3a2dcfcf0a00b9e81a8f9d0b39bcbb5de5b62d61778132018",
+    "src/features/hotkey-panel/index.ts": "fb6c913e50443dc7422215fcf683da9e46b05b3d8ddc6cbe9f34741bec1f23ec",
+    "src/features/hotkey-panel/HotkeyPanel.test.tsx": "52b3b9648ff8c95e02030c89b45f2bc75498a51b15969a44c756faecb7e9db54"
+  },
+  "checks": [
+    "npm run test:unit -- src/features/hotkey-panel/HotkeyPanel.test.tsx: passed (2 tests)",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Local shortcut proposals only; Tauri global shortcut registration belongs to Codex C13."
+  ],
+  "review": "pending"
+}

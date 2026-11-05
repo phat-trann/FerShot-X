@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "20261105T111729-copilot-P40-fb3e13e4",
+  "created_at": "2026-11-05T11:17:29.954575+07:00",
+  "agent": "copilot",
+  "request": "BUILD-20261105",
+  "task": "P40",
+  "completion": "done",
+  "summary": "Corrected invalid-printable-area fixture and verified explicit print geometry behavior.",
+  "files": [
+    "src/features/print-geometry/index.ts",
+    "src/features/print-geometry/index.test.ts"
+  ],
+  "file_sha256": {
+    "src/features/print-geometry/index.ts": "b3e08babd55174576eed00b31819fb1845410e822ad591ea2673d1e8583a71a8",
+    "src/features/print-geometry/index.test.ts": "3da9c685592778be6847cace707a03c214573cfd181c8108e45dba523b7bafdf"
+  },
+  "checks": [
+    "fresh targeted Vitest passed: 2 tests"
+  ],
+  "risks": [
+    "Earlier fixture-only failure superseded; no printer/native integration."
+  ],
+  "review": "pending"
+}

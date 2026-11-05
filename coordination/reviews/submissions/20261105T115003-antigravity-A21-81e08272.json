@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "id": "20261105T115003-antigravity-A21-81e08272",
+  "created_at": "2026-11-05T11:50:03.235604+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A21",
+  "completion": "done",
+  "summary": "Refreshed A21 multi-image composition snapshot after H01 formatting and re-verified unit tests.",
+  "files": [
+    "src/features/composition/composition.ts",
+    "src/features/composition/index.ts",
+    "src/features/composition/composition.test.ts",
+    "tests/e2e/antigravity-composition.spec.ts"
+  ],
+  "file_sha256": {
+    "src/features/composition/composition.ts": "f034316a7ebc14957f2c5e8ca4d9723bb192944a294cd6c5b2090ce27b8cc472",
+    "src/features/composition/index.ts": "22363fa6b4017139f356596855f957968cb57621510e6d57470bede08471a9e3",
+    "src/features/composition/composition.test.ts": "3e079528b86a480702ee88ed1f5225c603491469080d5c052b87c974b136fdc2",
+    "tests/e2e/antigravity-composition.spec.ts": "efd91714108006cca0e41d5b1563d99d2e00c2af59efc951992089c3e3ec154e"
+  },
+  "checks": [
+    "npm run test:unit -- src/features/composition/composition.test.ts: passed (2 tests)",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Uses deterministic Ferby edge snapping rule; does not claim recovered Shottr similarity algorithm."
+  ],
+  "review": "pending"
+}

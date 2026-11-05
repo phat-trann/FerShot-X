@@ -10,11 +10,14 @@ afterEach(() => {
 });
 
 describe("CapturePanel", () => {
-  it("invokes onCapture with fullscreen, area, and window modes", () => {
+  it("invokes onCapture with fullscreen, area, and window modes and describes main display", () => {
     const onCapture = vi.fn<(mode: CaptureMode) => void>();
     render(<CapturePanel onCapture={onCapture} busy={false} />);
 
-    fireEvent.click(screen.getByRole("button", { name: /capture fullscreen/i }));
+    const fullscreenButton = screen.getByRole("button", { name: /capture fullscreen/i });
+    expect(fullscreenButton).toHaveTextContent(/entire main display/i);
+
+    fireEvent.click(fullscreenButton);
     fireEvent.click(screen.getByRole("button", { name: /capture area/i }));
     fireEvent.click(screen.getByRole("button", { name: /capture window/i }));
 

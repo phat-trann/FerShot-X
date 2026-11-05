@@ -4,9 +4,9 @@ A local screenshot/image workspace built with **Tauri 2 + Rust + React/TypeScrip
 
 ## What works now
 
-The foundation imports local PNG/JPEG/WebP/GIF images, keeps a session-only image list, previews dimensions, zooms/fits and closes images, and handles invalid files. A typed native `app_info` command connects the frontend to Rust. No image is uploaded.
+The foundation imports local PNG/JPEG/WebP/GIF images, keeps a searchable session-only image library with list/grid views, previews dimensions, zooms/fits and closes images, and handles invalid files. Inspect color samples a decoded image pixel as HEX/RGBA via click or keyboard-entered coordinates, accounting for display zoom. A typed native `app_info` command connects the frontend to Rust. No image is uploaded.
 
-Capture, drawing, OCR, export and persistent library features are assigned in the build queue; they are not implemented by the foundation. The current app bundle is a local development build, not a signed/notarized release.
+User-triggered native capture (main display/area/window), non-destructive crop/resize and PNG/JPEG export through a native save dialog are wired. Existing export files are refused. Copy image is wired to the macOS image clipboard after an explicit button click; it copies the current raster, with native paste acceptance still pending. Browser mode reports that these actions require the desktop app. Synthetic/mock checks pass; real capture permissions and native dialog interaction still require manual acceptance. Rectangle/arrow/pen editing, per-image undo/redo, original-preserving merge and annotated copy/save/transform are wired. Native owner-bound pin actions, clipboard image import and explicit format/quality preference persistence are also wired; actual OS GUI acceptance remains pending. Rust OCR/QR and broader parity remain incomplete; the Swift prototype is inactive. Persistent archives are not integrated. The current app bundle is a local development build, not a signed/notarized release.
 
 ## Start development
 
@@ -28,15 +28,22 @@ Output: `src-tauri/target/debug/bundle/macos/Ferby Shottr.app`. It was built suc
 
 ## Parallel agents and mandatory summaries
 
+- [Full continuous work lists and selector](coordination/CONTINUOUS.md).
+- [Feature-to-task coverage](coordination/FUNCTION-MAP.md).
 - [Copyable kickoff prompts](coordination/START-HERE.md): one queue per client.
-- [Build queue](coordination/BUILD-QUEUE.md): 15 prompts, separate ownership and independent work.
+- [Current pixel integration and build blocker](docs/agents/codex/C04-pixel-checkpoint.md).
+- [Clipboard implementation/checks](docs/agents/codex/C06-clipboard.md).
+- [Project progress](coordination/PROGRESS.md): weighted MVP acceptance gates, evidence and remaining work.
+- [Build queue](coordination/BUILD-QUEUE.md): Continuous roadmap: Antigravity A01-A33 (A13 superseded), Copilot P01-P42 + H01, and Codex native/root integration.
 - [Architecture/contracts](docs/implementation/ARCHITECTURE.md): integration seams and validation commands.
 - [One review inbox](coordination/reviews/INDEX.md): completion packets plus historical handoffs for Codex.
 - [Completion protocol](coordination/reviews/README.md): required after EVERY agent request/task, including partial or blocked work.
 
-Codex owns the largest domain/native/integration scope; Antigravity builds medium-sized presentation modules; Copilot handles small utility/test pairs. Agents submit independent immutable packets and continue the next owned task without waiting for review. Only Codex edits root wiring, shared contracts and review decisions. Files do not automatically launch or notify another client.
+Codex focuses on review and shared/native wiring; Antigravity builds editor composition, bitmap rendering, presentation and standalone settings persistence; Copilot handles small utility/test pairs. Agents submit independent immutable packets and continue the next owned task without waiting for review. Only Codex edits root wiring, shared contracts and review decisions. Files do not automatically launch or notify another client.
 
 ## Validation
+
+Copilot owns formatting/lint (H01). Codex runs functional/integration checks and builds. Antigravity runs scoped functional tests, with no formatting/lint or standalone builds/packaging. Follow the current [ownership policy](AGENTS.md); delegated checks are recorded without blocking feature work. The clippy example below belongs to Copilot only.
 
 ```sh
 rtk proxy npm run build
@@ -48,7 +55,7 @@ rtk proxy python3 -m unittest discover -s scripts -p test_review_queue.py -v
 
 Select the Node/Cargo environment as above before commands. E2E tests use installed macOS Chrome when available, otherwise Playwright Chromium; set `FERBY_CHROME_PATH` to an existing executable or install Chromium with `rtk proxy npx playwright install chromium`. `npm run test:unit -- <owned-scope>` runs future feature-specific Vitest tests; no feature test should be reported as passing before it exists.
 
-See [foundation validation](docs/implementation/VALIDATION.md) for actual checks and limitations. Browser tests do not prove every WKWebView/native behavior. Screen Recording/Accessibility permission for the REA host was denied during target research; no OS privacy settings were changed by installing development tools.
+See [C05 validation](docs/agents/codex/C05-validation.md) for the latest implementation checks and [foundation validation](docs/implementation/VALIDATION.md) for actual checks and limitations. Browser tests do not prove every WKWebView/native behavior. Screen Recording/Accessibility permission for the REA host was denied during target research; no OS privacy settings were changed by installing development tools.
 
 ## Preserved investigation
 
@@ -60,3 +67,5 @@ See [foundation validation](docs/implementation/VALIDATION.md) for actual checks
 Research collection/projection scripts remain available under `scripts/`. Do not recollect over another agent's evidence or treat a static label/import as tested behavior.
 
 Git remains on `main` with the existing INIT commit. No new commit, staging or remote change was performed for this request. `.vscode/`, captures, raw evidence, application copies, node_modules, Rust target directories and build/test output remain ignored; source and lockfiles are reviewable.
+
+Native language update: no Swift implementation/compiler/runtime helpers. A33 Rust Vision replaces A13; the old Swift source is preserved as reference only.

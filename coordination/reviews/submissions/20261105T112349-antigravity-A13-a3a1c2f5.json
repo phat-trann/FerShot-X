@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "id": "20261105T112349-antigravity-A13-a3a1c2f5",
+  "created_at": "2026-11-05T11:23:49.822649+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A13",
+  "completion": "blocked",
+  "summary": "Implemented standalone macOS FerbyVisionCore Swift package (Codable v1 OCR/QR models, Vision recognizer, input/dimension/language bounds, README C08 bridge proposal) and verified runtime QR recognition via swiftc, but swift test is blocked because only CommandLineTools (/Library/Developer/CommandLineTools) is installed without Xcode XCTest.framework.",
+  "files": [
+    "native/vision-core/Package.swift",
+    "native/vision-core/Sources/FerbyVisionCore/FerbyVisionCore.swift",
+    "native/vision-core/Tests/FerbyVisionCoreTests/FerbyVisionCoreTests.swift",
+    "native/vision-core/README.md"
+  ],
+  "file_sha256": {
+    "native/vision-core/Package.swift": "c344f6c3c92b307257c9cd207b923e02f0e566c74fe60a332d0e0ace2fef475f",
+    "native/vision-core/Sources/FerbyVisionCore/FerbyVisionCore.swift": "1b4cd61ea6578a472f6c275811a1cbccecd96b919cd5b0d6796d030f4c735fba",
+    "native/vision-core/Tests/FerbyVisionCoreTests/FerbyVisionCoreTests.swift": "b11ae445b75980514dfffb5d7eb4256eb0e7115dba86ca4c56620d9ada41c987",
+    "native/vision-core/README.md": "2fcd887d197450c2ad72cd07d5166c26f7c43832dd27898cdfaf3f6224a4a33b"
+  },
+  "checks": [
+    "swift test --package-path native/vision-core: blocked (error: no such module XCTest under /Library/Developer/CommandLineTools)",
+    "swiftc functional Vision QR harness: passed (SWIFT_VISION_HARNESS_OK)",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Host has CommandLineTools without full Xcode XCTest SDK so swift test cannot run until Xcode is installed; Rust bridge wiring belongs to Codex C08."
+  ],
+  "review": "pending"
+}

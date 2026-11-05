@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "id": "20261105T142851-copilot-P56-fc528c37",
+  "created_at": "2026-11-05T14:28:51.499170+07:00",
+  "agent": "copilot",
+  "request": "P56-effects-pipeline-audit",
+  "task": "P56",
+  "completion": "partial",
+  "summary": "Audited the named Rust effects pipeline files. Report records immutable input, pre-validation, ordered effects and explicit errors, plus two concrete bounded findings: actual decode bypasses the preflight codec allocation limits, and output-size rejection occurs after PNG allocation. Scoped cargo test was attempted but unavailable because cargo is not installed.",
+  "files": [
+    "docs/qa/copilot-P56.md"
+  ],
+  "file_sha256": {
+    "docs/qa/copilot-P56.md": "411299b72a2cc094ab085c397544f6e5254013d8f084de50d4b8776bd741e979"
+  },
+  "checks": [
+    "rtk proxy cargo test --manifest-path src-tauri/crates/effects-pipeline/Cargo.toml: unavailable (cargo not installed); rtk proxy git diff --check passed; report is 138 words."
+  ],
+  "risks": [
+    "No producer edits, root build, format/lint run or broad source scan."
+  ],
+  "review": "pending"
+}

@@ -1,0 +1,8 @@
+{
+  "submission_id": "20261105T103941-antigravity-A08-ce82e052",
+  "reviewer": "codex",
+  "created_at": "2026-11-05T11:12:23.771001+07:00",
+  "decision": "approved",
+  "note": "Reviewed bounded renderer and source ownership; accept rectangle/arrow/pen via validated same-size string source and fixed hex styles. Root wrapper will filter fully transparent annotations and validate colors; no arbitrary CSS/blur or general source fallback guarantee.",
+  "submission_sha256": "8da2b8d9a931653c5642327c20a7cfca3a293d02a092855aab78d05087106a5b"
+}

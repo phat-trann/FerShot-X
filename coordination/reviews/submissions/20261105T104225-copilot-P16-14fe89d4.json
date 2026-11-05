@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "20261105T104225-copilot-P16-14fe89d4",
+  "created_at": "2026-11-05T10:42:25.160610+07:00",
+  "agent": "copilot",
+  "request": "BUILD-20261105",
+  "task": "P16",
+  "completion": "done",
+  "summary": "Added finite derived-width/height guards and iterative point extrema to avoid spread overflow.",
+  "files": [
+    "src/features/annotation-bounds/index.ts",
+    "src/features/annotation-bounds/index.test.ts"
+  ],
+  "file_sha256": {
+    "src/features/annotation-bounds/index.ts": "fabed8146197db150cf1621bb2f335ffc08ab93ef9df9bd66075d6044b75e887",
+    "src/features/annotation-bounds/index.test.ts": "1c7b0bbc4853aed536d1b4cee5b87861a80a0c7d8767c27aab648080aa6cbe9e"
+  },
+  "checks": [
+    "targeted Vitest passed: 2 tests"
+  ],
+  "risks": [
+    "Geometric bounds remain distinct from painted-pixel bounds"
+  ],
+  "review": "pending"
+}

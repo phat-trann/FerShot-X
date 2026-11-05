@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "id": "20261105T110857-antigravity-A12-f3c832d9",
+  "created_at": "2026-11-05T11:08:57.561921+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A12",
+  "completion": "done",
+  "summary": "Implemented controlled QrPanel with inert payload text rendering, keyboard roving selection, copy/scan callbacks, busy/error/empty states, and RTL tests.",
+  "files": [
+    "src/features/qr-panel/QrPanel.tsx",
+    "src/features/qr-panel/QrPanel.css",
+    "src/features/qr-panel/index.ts",
+    "src/features/qr-panel/QrPanel.test.tsx"
+  ],
+  "file_sha256": {
+    "src/features/qr-panel/QrPanel.tsx": "90b0ab2203b2aaeda8d944fa3a7ab8ec6024cbfd6d0b838aa46ebb466c1bdc0a",
+    "src/features/qr-panel/QrPanel.css": "10c6bba66c5452c3752a859b3283fb8966b163bae99543825e0a8e2dc46f28c3",
+    "src/features/qr-panel/index.ts": "8affc48807dea581567b978800184049c244d48df0ce9e55fc3d7dfbf1c1bd37",
+    "src/features/qr-panel/QrPanel.test.tsx": "1d88c4c1244fd52d44e261365c57d3773c920b221a827242f496e5a418bd1bab"
+  },
+  "checks": [
+    "npm run test:unit -- src/features/qr-panel/QrPanel.test.tsx: passed (3 tests)",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Controlled presentation component only; native Vision QR detection invocation belongs to Codex C08 integration."
+  ],
+  "review": "pending"
+}

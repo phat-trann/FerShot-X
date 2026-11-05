@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "20261105T103706-copilot-P18-a8531d62",
+  "created_at": "2026-11-05T10:37:06.380825+07:00",
+  "agent": "copilot",
+  "request": "BUILD-20261105",
+  "task": "P18",
+  "completion": "done",
+  "summary": "Implemented IEC byte formatting with one-decimal rounding and strict nonnegative safe-integer input",
+  "files": [
+    "src/features/byte-format/index.ts",
+    "src/features/byte-format/index.test.ts"
+  ],
+  "file_sha256": {
+    "src/features/byte-format/index.ts": "c0ef1c86c6039b838460b906b56a3d516c11d8e59e072e2ca7cbe42616ba0870",
+    "src/features/byte-format/index.test.ts": "bef036fb8c3d5ec4d6cfa512b126b7b5a0fd6f1b7bb94270c4dfa3c0bca48ec1"
+  },
+  "checks": [
+    "targeted Vitest passed (2 tests)"
+  ],
+  "risks": [
+    "No localization or LibraryPanel integration"
+  ],
+  "review": "pending"
+}

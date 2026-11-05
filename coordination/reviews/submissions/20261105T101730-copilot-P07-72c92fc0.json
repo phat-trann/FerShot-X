@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "20261105T101730-copilot-P07-72c92fc0",
+  "created_at": "2026-11-05T10:17:30.848973+07:00",
+  "agent": "copilot",
+  "request": "BUILD-20261105",
+  "task": "P07",
+  "completion": "done",
+  "summary": "Implemented overflow-safe integer crop validation with immutable result copies",
+  "files": [
+    "src/features/crop/validate.ts",
+    "src/features/crop/validate.test.ts"
+  ],
+  "file_sha256": {
+    "src/features/crop/validate.ts": "43e5f1ad543ddb7b48a44998ae3f5477a0ea03e2d723763130bc3b727f4bf29e",
+    "src/features/crop/validate.test.ts": "b4d2288be9fdcec59013327adbf915929b4f58ff7c286dfe11b8df3975095dd8"
+  },
+  "checks": [
+    "targeted Vitest: passed (3 tests)"
+  ],
+  "risks": [
+    "No crop UI/native integration; fractional inputs are rejected rather than rounded"
+  ],
+  "review": "pending"
+}

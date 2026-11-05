@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "id": "20261105T160151-codex-COORD10-fd5c0b4e",
+  "created_at": "2026-11-05T16:01:51.106314+07:00",
+  "agent": "codex",
+  "request": "TAKEOVER-20261105",
+  "task": "COORD10",
+  "completion": "done",
+  "summary": "Published production takeover and bounded Copilot follow-up: P53/P54 compile fixes, P62/P63 A35 regressions and exact H01 A35/A37 handoff",
+  "files": [
+    "AGENTS.md",
+    "coordination/TWO-LANE.md",
+    "coordination/START-HERE.md",
+    "coordination/BUILD-QUEUE.md",
+    "coordination/DELIVERY-PLAN.md",
+    "coordination/CONTINUOUS.md",
+    "coordination/build-tasks.json",
+    "coordination/prompts/codex.md",
+    "coordination/prompts/copilot.md",
+    "docs/agents/codex/COORD10-production-takeover.md",
+    "coordination/messages/copilot/20261105T1601-codex-A35-and-typecheck-handoff.md"
+  ],
+  "file_sha256": {
+    "AGENTS.md": "12dc4d8e69f711189c76d6e389cad16b5190701ad242829fc0ec77a5b83501ec",
+    "coordination/TWO-LANE.md": "4acaad479184fd343c3ad28eb0bec0b18d0260c822f7ff1f10dd53822d3ec983",
+    "coordination/START-HERE.md": "b90aa9cfd79c0a906b7153fddaf52ca5b8091403197af99ad90cc01cafb24355",
+    "coordination/BUILD-QUEUE.md": "fbf9fa130f305b524e97d45378862d27774e0f27b75b44955fc142dcf1778f21",
+    "coordination/DELIVERY-PLAN.md": "197fdfe74774601a3b13f8bda9447fd2ec7a29ccc328a28921fea8faba96ca39",
+    "coordination/CONTINUOUS.md": "350ac287a817cf7f5373f31a9176408bb65dfaf6bbf82b792af98a514b0e5d95",
+    "coordination/build-tasks.json": "c07f04ea020d359ba57d9f4e9aaf47b2ed66a57fc299c0219dd65f384f4e1518",
+    "coordination/prompts/codex.md": "7ffbebe8546e49db382b130338358096c1d24dd1132ff278706535fe0095189b",
+    "coordination/prompts/copilot.md": "8c64388502ccc6ea920a1dbc08cb1001affc9dc4f151cd1aa6c41e1f24d754a0",
+    "docs/agents/codex/COORD10-production-takeover.md": "d36ec7b0817b1b96c1a0997b25b54d46e81c9817a9cb8329f4d37055c0fd3d9a",
+    "coordination/messages/copilot/20261105T1601-codex-A35-and-typecheck-handoff.md": "684606dc9d8b9d65414a84740b0c4d7b021140315b6a3e4d7c5fedadbeb502b5"
+  },
+  "checks": [
+    "Dispatcher tests: 12 passed; task IDs and named source/test inputs verified",
+    "A35 scoped Vitest: 17 passed tests across four files; implementation packet submitted separately",
+    "Global typecheck attempted and failed in A37/P53/P54; assigned exact corrections, no global build pass claimed",
+    "Ignored paths verified; Formatting/lint delegated to Copilot H01"
+  ],
+  "risks": [
+    "Existing shared integration claims remain occupied; no pre-existing claims inherited or removed",
+    "New Codex-written A35 snapshot still requires independent approval; native/parity/final release gates remain open"
+  ],
+  "review": "pending"
+}

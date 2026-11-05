@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "id": "20261105T103151-codex-C04-832ef404",
+  "created_at": "2026-11-05T10:31:51.446375+07:00",
+  "agent": "codex",
+  "request": "BUILD-20261105",
+  "task": "C04",
+  "completion": "partial",
+  "summary": "Reviewed five fresh Antigravity packets; integrated A02 searchable keyboard-accessible session library and approved A03 controlled settings presentation. Requested A04/A06/A07 gesture/composition/history fixes. Accepted MVP gates raise progress from 43.75% to 47.5%.",
+  "files": [
+    "src/Workspace.tsx",
+    "src/Workspace.css",
+    "tests/e2e/codex-library.spec.ts",
+    "tests/e2e/codex-clipboard.spec.ts",
+    "tests/e2e/codex-regressions.spec.ts",
+    "tests/e2e/workspace.spec.ts",
+    "docs/agents/codex/C04-library-checkpoint.md",
+    "coordination/messages/antigravity/20261105-codex-C04-editor-followups.md",
+    "coordination/progress.json",
+    "coordination/PROGRESS.md",
+    "scripts/project_progress.py",
+    "coordination/reviews/decisions/20261105T102010-antigravity-A02-8771127f--20261105T102829-c4e44af5.json",
+    "coordination/reviews/decisions/20261105T102010-antigravity-A03-7d34d0dc--20261105T102829-a1ab8731.json",
+    "coordination/reviews/decisions/20261105T102158-antigravity-A04-0be4366d--20261105T102829-ebb5a909.json",
+    "coordination/reviews/decisions/20261105T102327-antigravity-A06-4c256f6c--20261105T102829-f7da470e.json",
+    "coordination/reviews/decisions/20261105T102444-antigravity-A07-40619bbb--20261105T102829-1e50a4be.json"
+  ],
+  "file_sha256": {
+    "src/Workspace.tsx": "4fcf454521ca5111748ecca6830741eb3e8bfed76dbf3ffb7ec3e441034b96bf",
+    "src/Workspace.css": "bef8e7524090dee21474434435d06c2a9937f228bf54c7ba063b0e06aa56dc32",
+    "tests/e2e/codex-library.spec.ts": "cfbea34178a093bbc943612bbb3e1b7800496ac47fd5beffd18cf6ed62094a23",
+    "tests/e2e/codex-clipboard.spec.ts": "7776c0f3cebe6681f31ff07274c926d377e18e697aab360049c98dd29f167fdc",
+    "tests/e2e/codex-regressions.spec.ts": "2b5c7ae88aeaf2b5912879aabbe7e0c5d1d7fcf6338092ccd6b4aad0f8bfa5c5",
+    "tests/e2e/workspace.spec.ts": "5155ea08db355713c5c31f7b164f534b5bd0ec9e8817cf3a87d7ec34913d5edf",
+    "docs/agents/codex/C04-library-checkpoint.md": "cbdefac999135e542018420bd7e9b1af5086839e7d04856028e2eb04396517d6",
+    "coordination/messages/antigravity/20261105-codex-C04-editor-followups.md": "b4a2c90cd2ee7dc44b4ecfb4f2b678fcc657ddb626fc79ef4c3eaae733e098d3",
+    "coordination/progress.json": "0202164512123754cc7deeaf11dcc1c3799f04464e13980560b84c19b0852383",
+    "coordination/PROGRESS.md": "a47f64ad9c7c2e3d1e4ed5e2e10a54ba341ecafb525edacd7891f7138839e465",
+    "scripts/project_progress.py": "66a7cc5e846207196f64f8a4565e56dd69f8febf97dc6740e38525821c877d55",
+    "coordination/reviews/decisions/20261105T102010-antigravity-A02-8771127f--20261105T102829-c4e44af5.json": "1b7f02188b1265b97e32ea73f0996862729ccabff4cec096de210a0ddbfdd1e1",
+    "coordination/reviews/decisions/20261105T102010-antigravity-A03-7d34d0dc--20261105T102829-a1ab8731.json": "70a0847a5a9a379c6ecf4e76e02ff3f481a01c5ac68c9c26001c26e4e0c9843a",
+    "coordination/reviews/decisions/20261105T102158-antigravity-A04-0be4366d--20261105T102829-ebb5a909.json": "be9969af3dd9d8c92f75e309a64dbf0ec7cab1d559f95fe2e0913fad6ec41682",
+    "coordination/reviews/decisions/20261105T102327-antigravity-A06-4c256f6c--20261105T102829-f7da470e.json": "917e89b4ef6679b67351605368cec4bfcfd77b945fda0a25d5b5c0b2d3a6aa81",
+    "coordination/reviews/decisions/20261105T102444-antigravity-A07-40619bbb--20261105T102829-1e50a4be.json": "86d78478d26709a58932a73ebd1c2f0b10ce05a8e7a81918bfe8e96072a849cc"
+  },
+  "checks": [
+    "Candidate scoped Vitest checkpoint: 21 tests across 6 files passed",
+    "Frontend TypeScript/Vite build passed; 10 selected Codex/baseline E2E tests passed including two new library interaction tests",
+    "macOS debug .app bundle built with current integration",
+    "Accepted A02/A03 snapshots remain current; weighted progress/source links/task definitions validated",
+    "git diff --check passed; ignored development/artifact paths confirmed"
+  ],
+  "risks": [
+    "Editor integration remains pending current corrected source reviews",
+    "A03 approval covers controlled UI only, not native settings persistence/downscale/preview behavior",
+    "No real capture, clipboard or native save dialog acceptance performed; earlier Rust source unchanged and checks not repeated"
+  ],
+  "review": "pending"
+}

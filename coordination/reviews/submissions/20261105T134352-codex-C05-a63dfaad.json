@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "id": "20261105T134352-codex-C05-a63dfaad",
+  "created_at": "2026-11-05T13:43:52.058499+07:00",
+  "agent": "codex",
+  "request": "BUILD-20261105",
+  "task": "C05",
+  "completion": "done",
+  "summary": "Preserved completed hardening and refreshed current IPC/import snapshot with browser, unit, type and root Rust checks.",
+  "files": [
+    "src/platform/image-limits.ts",
+    "src/platform/import-image.ts",
+    "src/platform/import-image.test.ts",
+    "src/platform/native.ts",
+    "src/platform/native.test.ts",
+    "src-tauri/src/imaging.rs",
+    "tests/e2e/codex-regressions.spec.ts",
+    "docs/agents/codex/C05-validation.md",
+    "docs/agents/codex/C05-snapshot-refresh.md",
+    "src-tauri/tauri.conf.json",
+    "src-tauri/capabilities/default.json"
+  ],
+  "file_sha256": {
+    "src/platform/image-limits.ts": "806cc4e857e34b214637b5007f427c3e12ca54e03920c5acbc337e2b4bb8d668",
+    "src/platform/import-image.ts": "e84d791906e521cecbc0a08807ad37037031e460e067a319256ce92f8e5e47f0",
+    "src/platform/import-image.test.ts": "b41bd68c03c6a6dfc96db8981b60e799a5454e48ebfba675e2f192d813d6a85e",
+    "src/platform/native.ts": "b9e151642a0ca4329f271285c2d48f123feeb501d43c1eb6818bceb2d388ce99",
+    "src/platform/native.test.ts": "ec6a04e3051973b709a842af24f6881256cf1da6f63930591cb29149466c0ab2",
+    "src-tauri/src/imaging.rs": "b847d6e115f4b9473d3238e306d6628b40e265ec7c8a3719aa07b5d174b6ba90",
+    "tests/e2e/codex-regressions.spec.ts": "6e98285e3388eb257371b8510503724c0fbe8a58d16f2f5517fd0a6b0df70686",
+    "docs/agents/codex/C05-validation.md": "fe91a010435b5e7233b619c126279d6bf031687fa99a82ce7313ab3560ab3663",
+    "docs/agents/codex/C05-snapshot-refresh.md": "87dadafcb0b70a8f51ed957de2a5837e3767ff3107d69d8cbe445f3f3302d972",
+    "src-tauri/tauri.conf.json": "0b774238ae65c5ff4bb5e3f7b1821032c8ab20ea81464e1c50cb733e0dc642fb",
+    "src-tauri/capabilities/default.json": "c1954c7629eb7c4b063bf7a9c382d2bd5298713ddb482157149ccb2e72809f21"
+  },
+  "checks": [
+    "6 Playwright regression/workspace tests passed",
+    "8 native/import Vitest tests passed; TypeScript noEmit passed",
+    "Root cargo test --locked: 16 tests passed; native wiring compiled",
+    "Formatting/lint delegated to Copilot H01"
+  ],
+  "risks": [
+    "No real native capture/clipboard/dialog acceptance; no new bundle generated",
+    "Independent Antigravity peer review pending"
+  ],
+  "review": "pending"
+}

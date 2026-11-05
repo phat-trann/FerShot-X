@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "20261105T103649-copilot-P17-b3b2ecfd",
+  "created_at": "2026-11-05T10:36:49.527479+07:00",
+  "agent": "copilot",
+  "request": "BUILD-20261105",
+  "task": "P17",
+  "completion": "done",
+  "summary": "Implemented immutable-order session selection transition with adjacent survivor and duplicate validation",
+  "files": [
+    "src/features/session-selection/index.ts",
+    "src/features/session-selection/index.test.ts"
+  ],
+  "file_sha256": {
+    "src/features/session-selection/index.ts": "80a1029acb5039cdc1cb98755ae3731b105b8dd8c5712fa5caf17cf273766b58",
+    "src/features/session-selection/index.test.ts": "cb9056c188dde171f6b459439e87ba370cd3b65fcf009c941d35db0a81f8ec02"
+  },
+  "checks": [
+    "targeted Vitest passed (2 tests)"
+  ],
+  "risks": [
+    "Missing removed IDs preserve only valid selected IDs"
+  ],
+  "review": "pending"
+}

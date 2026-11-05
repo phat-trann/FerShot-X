@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "id": "20261105T095331-antigravity-A05-0bc72b2a",
+  "created_at": "2026-11-05T09:53:31.017982+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A05",
+  "completion": "done",
+  "summary": "Updated AGENTS.md per explicit user instruction to skip Upload features for now (FTP upload deferred) and omit all licensing checks so all features are unlocked by default.",
+  "files": [
+    "AGENTS.md"
+  ],
+  "file_sha256": {
+    "AGENTS.md": "f98881fe15430af8726ec3b555f2219542f9c64101bbaa20d9ff76ba0d41f97d"
+  },
+  "checks": [
+    "rtk git diff --check: passed"
+  ],
+  "risks": [
+    "None; aligns scope in AGENTS.md with user product requirements."
+  ],
+  "review": "pending"
+}

@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "id": "20261105T101810-copilot-P09-be758793",
+  "created_at": "2026-11-05T10:18:10.359809+07:00",
+  "agent": "copilot",
+  "request": "BUILD-20261105",
+  "task": "P09",
+  "completion": "done",
+  "summary": "Added public-API history regression coverage for undo snapshots, redo branching, counter allocation and selection",
+  "files": [
+    "src/testing/copilot-history.test.ts"
+  ],
+  "file_sha256": {
+    "src/testing/copilot-history.test.ts": "4e92b0c0df8c080b11708d49a175f146b44594ab156eb37d9cb54801d93ea2ce"
+  },
+  "checks": [
+    "targeted Vitest: passed (4 tests)"
+  ],
+  "risks": [
+    "Tests expose current public behavior only; no model implementation changes"
+  ],
+  "review": "pending"
+}

@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "20261105T101750-copilot-P08-add83c1e",
+  "created_at": "2026-11-05T10:17:50.101011+07:00",
+  "agent": "copilot",
+  "request": "BUILD-20261105",
+  "task": "P08",
+  "completion": "done",
+  "summary": "Implemented strict version-1 settings JSON codec with unknown-key rejection, size cap and fresh values",
+  "files": [
+    "src/features/settings-codec/index.ts",
+    "src/features/settings-codec/index.test.ts"
+  ],
+  "file_sha256": {
+    "src/features/settings-codec/index.ts": "f064ec61138d07eaa91d836e5fc5f9e8b6f7bc119756729f4066ff43641920b5",
+    "src/features/settings-codec/index.test.ts": "bd6a51db505e1a364d72e8be5ffaa256d68f2c0b782561cc4dec862ba51aeef7"
+  },
+  "checks": [
+    "targeted Vitest: passed (4 tests)"
+  ],
+  "risks": [
+    "Codec is not wired to storage or native settings"
+  ],
+  "review": "pending"
+}

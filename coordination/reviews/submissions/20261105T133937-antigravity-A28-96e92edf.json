@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "id": "20261105T133937-antigravity-A28-96e92edf",
+  "created_at": "2026-11-05T13:39:37.675482+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A28",
+  "completion": "done",
+  "summary": "Refreshed A28 AppPreferencesPanel snapshot after H01 formatting and re-verified RTL unit tests.",
+  "files": [
+    "src/features/app-preferences/AppPreferencesPanel.tsx",
+    "src/features/app-preferences/AppPreferencesPanel.css",
+    "src/features/app-preferences/index.ts",
+    "src/features/app-preferences/AppPreferencesPanel.test.tsx"
+  ],
+  "file_sha256": {
+    "src/features/app-preferences/AppPreferencesPanel.tsx": "23dbe94e4b89a4d0ca27445a44c7eeb7c628430a77a28fb1b9003513994682fb",
+    "src/features/app-preferences/AppPreferencesPanel.css": "d54a7e83eb395c508833d47da5b853cbf26a726fce256ef18344c2d4f39fcd5b",
+    "src/features/app-preferences/index.ts": "5b7663a242b7d5dff0c08d6b2c6d439800523a5f1a75440cbb6d1115cb16a321",
+    "src/features/app-preferences/AppPreferencesPanel.test.tsx": "33550fc842ad611ff88392013a6f2aefe5347e82380baca3efda84c66949a885"
+  },
+  "checks": [
+    "npm run test:unit -- src/features/app-preferences/AppPreferencesPanel.test.tsx: passed (1 test)",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Proposed local preference schema; unsupported backend options disabled via capability props."
+  ],
+  "review": "pending"
+}

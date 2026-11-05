@@ -1,0 +1,8 @@
+{
+  "submission_id": "20261105T142509-copilot-P53-4d707bde",
+  "reviewer": "codex",
+  "created_at": "2026-11-05T15:59:01.575871+07:00",
+  "decision": "changes_requested",
+  "note": "Integration typecheck fails at src/testing/copilot-output-jobs.test.ts:78 (TS2540): structuredClone preserves readonly OutputRequest.source.name typing, so mutation fixture does not compile. Build an explicitly mutable caller fixture assignable to OutputRequest without any, semantic suppressions, or removing the mutation assertion. Own only the P53 test/report; rerun targeted functional tests and publish fresh packet. This is a compile defect, not formatting.",
+  "submission_sha256": "605b6a90d003ba2139a3cf6a8ea468acd293e8daf775842a3c52152efad037e8"
+}

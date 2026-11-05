@@ -12,7 +12,7 @@ const CAPTURE_OPTIONS: readonly CaptureOption[] = [
   {
     mode: "fullscreen",
     label: "Capture Fullscreen",
-    description: "Entire active display",
+    description: "Entire main display",
   },
   {
     mode: "area",

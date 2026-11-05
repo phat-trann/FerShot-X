@@ -11,7 +11,12 @@
       "work": "Implement an immutable annotation state/reducer with add/update/delete/select, bounded undo/redo and counter allocation. Use source-image pixel coordinates. Preserve readonly contract inputs; do not render UI or wire the shell.",
       "acceptance": "Tests cover undo branching after a new edit, deletion/selection consistency, counter allocation and a bounded history. Export an index with API examples.",
       "dependency": "independent",
-      "state": "READY"
+      "state": "DONE",
+      "validation_policy": "Functional checks and integration builds as relevant; formatting/lint delegated to Copilot H01.",
+      "reviewers": [
+        "antigravity"
+      ],
+      "work_kind": "implementation"
     },
     {
       "id": "C02",
@@ -22,7 +27,12 @@
       "work": "Create standalone ferby-capture-core Rust library. Define mode/result/error types and an injectable command runner. Use a fixed /usr/sbin/screencapture executable with explicit arguments, internally generated output paths and cleanup on cancellation/failure. Clearly reject unsupported platforms. No actual screen capture in tests.",
       "acceptance": "Cargo tests cover command arguments, path safety, cancel/permission/failure classification with fake runner, and cleanup. Do not change the root Cargo manifest or Tauri registrations.",
       "dependency": "independent",
-      "state": "READY"
+      "state": "DONE",
+      "validation_policy": "Functional checks and integration builds as relevant; formatting/lint delegated to Copilot H01.",
+      "reviewers": [
+        "antigravity"
+      ],
+      "work_kind": "implementation"
     },
     {
       "id": "C03",
@@ -33,7 +43,12 @@
       "work": "Create standalone ferby-image-core Rust library for bounded image decoding, crop, aspect-preserving resize and PNG/JPEG encoding. Choose documented library APIs from primary sources. Keep input immutable, validate dimensions/overflow and avoid overwriting existing outputs.",
       "acceptance": "Cargo tests use synthetic pixels for exact crop dimensions/colors, invalid/out-of-bounds/zero/overflow cases, resize aspect ratio and decoded output headers. Own dependencies and lockfile stay inside this crate.",
       "dependency": "independent",
-      "state": "READY"
+      "state": "DONE",
+      "validation_policy": "Functional checks and integration builds as relevant; formatting/lint delegated to Copilot H01.",
+      "reviewers": [
+        "antigravity"
+      ],
+      "work_kind": "implementation"
     },
     {
       "id": "C04",
@@ -42,9 +57,15 @@
       "owned_paths": "src/Workspace.*; src/platform/**; src-tauri/src/**; root manifests/configs/lockfiles",
       "inputs": "coordination/reviews/INDEX.md",
       "work": "Refresh review inbox. Review available packets against actual code/tests and record approved/changes_requested decisions. Integrate only reviewed modules through frozen contracts and typed Tauri commands. Keep native work off the UI thread, use constrained capabilities, and do not pretend pending modules are functional.",
-      "acceptance": "Run relevant frontend tests/build and Rust checks plus meaningful IPC tests. If modules are absent, record partial and proceed to C05 without polling. Never approve a stale snapshot.",
+      "acceptance": "Run relevant frontend tests/build and Rust functional tests plus meaningful IPC tests. If modules are absent, record partial and proceed to C05 without polling. Never approve a stale snapshot.",
       "dependency": "available-reviewed-modules",
-      "state": "WHEN_AVAILABLE"
+      "state": "PARTIAL",
+      "validation_policy": "Functional checks and integration builds as relevant; formatting/lint delegated to Copilot H01.",
+      "shared_claim": "root-wiring",
+      "reviewers": [
+        "antigravity"
+      ],
+      "work_kind": "review"
     },
     {
       "id": "C05",
@@ -55,7 +76,13 @@
       "work": "Add bounded regression coverage for baseline multi-image selection/close/reimport/error recovery and inspect the native command boundary. Fix actual defects only in Codex-owned files. Check capability/CSP scope and document native-vs-browser coverage honestly.",
       "acceptance": "Run targeted E2E and Rust command tests/build. No capture, cloud, telemetry or permission changes. Preserve unfinished worker files.",
       "dependency": "independent",
-      "state": "READY"
+      "state": "DONE",
+      "validation_policy": "Functional checks and integration builds as relevant; formatting/lint delegated to Copilot H01.",
+      "shared_claim": "root-wiring",
+      "reviewers": [
+        "antigravity"
+      ],
+      "work_kind": "implementation"
     },
     {
       "id": "A01",
@@ -66,7 +93,12 @@
       "work": "Implement CapturePanel.tsx and scoped CSS using CapturePanelProps: fullscreen/area/window actions, busy/error states, keyboard focus and accessible names. Buttons call onCapture only. No native invoke, root wiring, global shortcuts or real capture.",
       "acceptance": "Use React Testing Library tests with jsdom for callback mode values, disabled/busy behavior and announced errors. Keep fixtures synthetic; report that native behavior is unwired.",
       "dependency": "independent",
-      "state": "READY"
+      "state": "APPROVED_INTEGRATED",
+      "validation_policy": "Functional tests only. No formatting/lint or standalone builds. Record delegations in packet; do not wait.",
+      "reviewers": [
+        "codex"
+      ],
+      "work_kind": "implementation"
     },
     {
       "id": "A02",
@@ -77,7 +109,12 @@
       "work": "Implement LibraryPanel.tsx using LibraryPanelProps. Add local query filtering, selection, remove affordance, list/grid presentation and empty/no-match states. Operate only on provided images; no filesystem/database access or root wiring.",
       "acceptance": "Test query/selection/removal callbacks, selected state, empty results and keyboard operability. Do not revoke parent-owned object URLs.",
       "dependency": "independent",
-      "state": "READY"
+      "state": "APPROVED_INTEGRATED",
+      "validation_policy": "Functional tests only. No formatting/lint or standalone builds. Record delegations in packet; do not wait.",
+      "reviewers": [
+        "codex"
+      ],
+      "work_kind": "implementation"
     },
     {
       "id": "A03",
@@ -88,7 +125,12 @@
       "work": "Implement controlled SettingsPanel.tsx for Ferby save format, JPEG quality, downscale and preview preferences. Validate ranges and call onChange with a new value. No persistence, native calls or changes to Shottr preferences.",
       "acceptance": "Test immutable updates, PNG/JPEG quality visibility, bounds and accessible controls. Use only frozen defaults; label unimplemented persistence honestly in the packet.",
       "dependency": "independent",
-      "state": "READY"
+      "state": "APPROVED_PRESENTATION",
+      "validation_policy": "Functional tests only. No formatting/lint or standalone builds. Record delegations in packet; do not wait.",
+      "reviewers": [
+        "codex"
+      ],
+      "work_kind": "implementation"
     },
     {
       "id": "A04",
@@ -99,7 +141,12 @@
       "work": "Implement EditorView.tsx with source-image-coordinate pointer mapping and an SVG/canvas annotation overlay. Support select, rectangle, arrow and pen creation through callbacks, and render supplied annotations. Implement local gesture helpers; do not depend on C01 reducer, mutate annotations or claim export/blur behavior.",
       "acceptance": "Test zoom-to-image coordinate mapping, drag direction, cancellation and out-of-image clamping. Add component behavior tests where practical. Report unsupported tools explicitly; do not modify the shared contract.",
       "dependency": "independent",
-      "state": "READY"
+      "state": "APPROVED_VIEW",
+      "validation_policy": "Functional tests only. No formatting/lint or standalone builds. Record delegations in packet; do not wait.",
+      "reviewers": [
+        "codex"
+      ],
+      "work_kind": "implementation"
     },
     {
       "id": "A05",
@@ -110,7 +157,12 @@
       "work": "Create a presentation component for an ImageDocument with scale/opacity controls and edit/copy/close callback props defined locally. Use controlled state/callbacks. No Tauri window creation, clipboard access, persistent storage or always-on-top claims.",
       "acceptance": "Test callback boundaries, scale/opacity limits and accessible labels. Native pin wiring is a Codex integration follow-up, not a blocker to this component.",
       "dependency": "independent",
-      "state": "READY"
+      "state": "APPROVED_PRESENTATION",
+      "validation_policy": "Functional tests only. No formatting/lint or standalone builds. Record delegations in packet; do not wait.",
+      "reviewers": [
+        "codex"
+      ],
+      "work_kind": "implementation"
     },
     {
       "id": "P01",
@@ -121,7 +173,12 @@
       "work": "Implement rgbToHex and hexToRgb for integer RGB channels and #RGB/#RRGGBB. Validate ranges and reject unsupported alpha/malformed input. Pure functions only.",
       "acceptance": "At most 2 implementation/test files; test boundaries, round trips and invalid input. Run targeted Vitest. Summary at most 150 words.",
       "dependency": "independent",
-      "state": "READY"
+      "state": "APPROVED",
+      "reviewers": [
+        "codex",
+        "antigravity"
+      ],
+      "work_kind": "implementation"
     },
     {
       "id": "P02",
@@ -132,7 +189,12 @@
       "work": "Implement normalizeRect, clampPointToImage and pixelsToPoints using explicit positive display scale. Use image-pixel coordinates and reject non-finite/invalid dimensions. No display API or UI.",
       "acceptance": "At most 2 implementation/test files; test reverse drag, bounds, 1x/2x scaling and invalid inputs. Run targeted Vitest. Summary at most 150 words.",
       "dependency": "independent",
-      "state": "READY"
+      "state": "APPROVED",
+      "reviewers": [
+        "codex",
+        "antigravity"
+      ],
+      "work_kind": "implementation"
     },
     {
       "id": "P03",
@@ -143,7 +205,12 @@
       "work": "Define small editor tool key descriptors and a pure matcher returning an AnnotationTool or null. Ignore input/contenteditable focus, composition, repeats and unexpected modifiers. Do not register global listeners or OS shortcuts.",
       "acceptance": "At most 2 implementation/test files; test text-input safety, composition/repeats and modifier cases. Run targeted Vitest. Summary at most 150 words.",
       "dependency": "independent",
-      "state": "READY"
+      "state": "APPROVED",
+      "reviewers": [
+        "codex",
+        "antigravity"
+      ],
+      "work_kind": "implementation"
     },
     {
       "id": "P04",
@@ -154,7 +221,12 @@
       "work": "Implement a pure safeExportName utility for PNG/JPEG: sanitize path separators/control characters, reject empty/dot-only names, normalize extension and bound filename length while preserving reasonable Unicode. No disk IO or overwrite behavior.",
       "acceptance": "Only named files; test traversal-like names, duplicate extensions, Unicode, long names and invalid cases. Run targeted Vitest. Summary at most 150 words.",
       "dependency": "independent",
-      "state": "READY"
+      "state": "APPROVED",
+      "reviewers": [
+        "codex",
+        "antigravity"
+      ],
+      "work_kind": "implementation"
     },
     {
       "id": "P05",
@@ -165,7 +237,2102 @@
       "work": "Review only the runnable baseline for accessible names, focus order, disabled/error states, image alt text and narrow-window behavior. Do not scan the whole repo or modify product code.",
       "acceptance": "Report at most 5 actionable findings with file/line, severity, evidence and proposed fix, at most 250 words. Separate static findings from browser-tested facts.",
       "dependency": "independent",
-      "state": "READY"
+      "state": "APPROVED_STATIC",
+      "reviewers": [
+        "codex",
+        "antigravity"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "A06",
+      "agent": "antigravity",
+      "title": "Editor toolbar",
+      "owned_paths": "src/features/editor/toolbar/**",
+      "inputs": "src/contracts/editor.ts; src/features/shortcuts/editor-shortcuts.ts (read only)",
+      "work": "Build controlled EditorToolbar with selected tool, allowed tools, undo/redo enabled state and delete-selected callbacks. Support only select/rectangle/arrow/pen by default; disable or omit unsupported tools. Local props, scoped CSS, no global listeners or native calls.",
+      "acceptance": "RTL tests: callback values, pressed state, undo/redo/delete disabled guards and keyboard access. No root wiring.",
+      "dependency": "independent",
+      "state": "NEEDS_FRESH_PACKET",
+      "validation_policy": "Functional tests only. No formatting/lint or standalone builds. Record delegations in packet; do not wait.",
+      "reviewers": [
+        "codex"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "A07",
+      "agent": "antigravity",
+      "title": "Composed editor workbench",
+      "owned_paths": "src/features/editor/workbench/**",
+      "inputs": "src/contracts/editor.ts; src/features/editor/model/index.ts; src/features/editor/view/EditorView.tsx; A06 exports",
+      "work": "Compose C01 model and your view/toolbar behind a local Workbench component. Keep histories isolated per image ID; selection, undo/redo, delete and new edits must remain consistent. Export annotations through callback for future export wiring. Do not import Workspace or edit another module. May test current candidate UI locally; root integration still requires fresh approved packets.",
+      "acceptance": "Synthetic interaction tests prove isolation for two images, undo branching, select/delete, no callback/state mutation and no lost original image. If A06 is absent skip and continue A08.",
+      "dependency": "A06 export exists; C01 model exists",
+      "state": "NEEDS_FRESH_PACKET",
+      "validation_policy": "Functional tests only. No formatting/lint or standalone builds. Record delegations in packet; do not wait.",
+      "reviewers": [
+        "codex"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "A08",
+      "agent": "antigravity",
+      "title": "Annotation bitmap renderer",
+      "owned_paths": "src/features/editor/render/**; tests/e2e/antigravity-render.spec.ts",
+      "inputs": "src/contracts/editor.ts; src/platform/image-limits.ts (read only)",
+      "work": "Implement a browser-side canvas renderer for source-image-pixel rectangle, arrow (visible head) and pen annotations into a NEW PNG Blob. Validate dimensions/coordinates/styles, bound point counts/work, reject unsupported annotation tools explicitly, preserve the source and do not claim blur/redaction support. Prefer existing DOM/Canvas APIs; no native invocation or root wiring.",
+      "acceptance": "Real browser synthetic-pixel tests in tests/e2e/antigravity-render.spec.ts using existing Playwright configuration; run npm run test:e2e -- tests/e2e/antigravity-render.spec.ts. Verify dimensions, visible arrowhead/pen/rectangle pixels, alpha, unsupported rejection and immutable inputs. Unit canvas mocks alone do not establish rendering correctness.",
+      "dependency": "independent",
+      "state": "NEEDS_FRESH_PACKET",
+      "validation_policy": "Functional tests only. No formatting/lint or standalone builds. Record delegations in packet; do not wait.",
+      "reviewers": [
+        "codex"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "A09",
+      "agent": "antigravity",
+      "title": "Standalone settings persistence crate",
+      "owned_paths": "src-tauri/crates/settings-core/**",
+      "inputs": "src/contracts/settings.ts; docs/implementation/ARCHITECTURE.md",
+      "work": "Build standalone ferby-settings-core Rust library with serde settings schema matching frozen contract, versioned JSON, explicit defaults, strict bounds and atomic replacement within a caller-provided Ferby-only directory. Cap file bytes; reject malformed/unknown versions and symlink/nonregular targets with typed errors. No platform home discovery, Tauri registration, Shottr preferences, root Cargo changes or generic frontend path API.",
+      "acceptance": "Own Cargo.toml/Cargo.lock. Tempdir tests: defaults/missing, round-trip, invalid/truncated/oversized/version, invalid quality, preservation on failed write and symlink target. Run cargo test only; formatting/clippy delegated to Copilot H01 and standalone builds delegated to Codex. Document concurrency and atomicity limits. Propose integration only in packet.",
+      "dependency": "independent",
+      "state": "NEEDS_FRESH_PACKET",
+      "validation_policy": "Functional tests only. No formatting/lint or standalone builds. Record delegations in packet; do not wait.",
+      "reviewers": [
+        "codex"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "A10",
+      "agent": "antigravity",
+      "title": "Controlled export options panel",
+      "owned_paths": "src/features/export-panel/**",
+      "inputs": "src/contracts/settings.ts; src/contracts/media.ts",
+      "work": "Build props-driven PNG/JPEG export options with JPEG quality, suggested basename, busy/error/cancelled/success feedback and onExport callback. Local exported props, no file dialog/IO/native invocation. Keep all features available without licensing controls; omit upload controls.",
+      "acceptance": "RTL tests: immutable settings, quality bounds, busy double-submit guard, accessible errors/status and PNG/JPEG options. No manifests/global CSS changes.",
+      "dependency": "independent",
+      "state": "NEEDS_FRESH_PACKET",
+      "validation_policy": "Functional tests only. No formatting/lint or standalone builds. Record delegations in packet; do not wait.",
+      "reviewers": [
+        "codex"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "P06",
+      "agent": "copilot",
+      "title": "Fit-to-viewport utility",
+      "owned_paths": "src/features/viewport/fit.ts; src/features/viewport/fit.test.ts",
+      "inputs": "src/contracts/editor.ts (dimensions only)",
+      "work": "Implement pure fitImage(width,height,viewportWidth,viewportHeight,allowUpscale=false) returning a finite positive scale and fitted dimensions. Validate finite positive dimensions and derived arithmetic; preserve aspect ratio, no DOM/OS calls.",
+      "acceptance": "Two files maximum; targeted Vitest for portrait/landscape, no-upscale, opt-in upscale, zero/NaN/Infinity and overflow/underflow rejection. Packet summary <=150 words.",
+      "dependency": "independent",
+      "state": "APPROVED",
+      "reviewers": [
+        "codex",
+        "antigravity"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "P07",
+      "agent": "copilot",
+      "title": "Crop request validation helper",
+      "owned_paths": "src/features/crop/validate.ts; src/features/crop/validate.test.ts",
+      "inputs": "src/contracts/editor.ts",
+      "work": "Implement pure validateCrop(rect,imageWidth,imageHeight) returning an owned safe-integer crop copy or throwing. Validate positive dimensions, nonnegative origin and overflow-safe bounds. Do not round silently; no UI/native call.",
+      "acceptance": "Two files; tests for exact edge, reverse/negative/fractional/zero, safe-integer boundaries, overflow and readonly input preservation. Targeted Vitest; <=150-word summary.",
+      "dependency": "independent",
+      "state": "APPROVED_INTEGRATED",
+      "reviewers": [
+        "codex",
+        "antigravity"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "P08",
+      "agent": "copilot",
+      "title": "Settings JSON codec",
+      "owned_paths": "src/features/settings-codec/index.ts; src/features/settings-codec/index.test.ts",
+      "inputs": "src/contracts/settings.ts",
+      "work": "Implement pure parseSettingsJson(text) and serializeSettings(value) for version 1 envelope with frozen settings fields. Reject unknown version, wrong types/nonfinite/noninteger quality/out-of-range, cap input length. No storage or UI; document strict unknown-key policy. Return fresh values and never mutate defaults.",
+      "acceptance": "Two files; round-trip/default-copy independence, malformed/version/type/quality/length tests. No browser localStorage/native IO. Targeted Vitest; <=150-word summary.",
+      "dependency": "independent",
+      "state": "APPROVED",
+      "reviewers": [
+        "codex",
+        "antigravity"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "P09",
+      "agent": "copilot",
+      "title": "Independent history regression tests",
+      "owned_paths": "src/testing/copilot-history.test.ts",
+      "inputs": "src/features/editor/model/index.ts; src/contracts/editor.ts",
+      "work": "Add tests ONLY against public model API: update/delete undo restores original snapshot, redo invalidated by new edit, counter allocation after undo branch, selection after delete. No implementation edits or repository scan.",
+      "acceptance": "One test file; report exact targeted Vitest command, >=4 meaningful assertions on public behavior with immutable inputs. If API defect found report it; do not repair Codex files. <=150-word summary.",
+      "dependency": "independent",
+      "state": "APPROVED",
+      "reviewers": [
+        "codex",
+        "antigravity"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "P10",
+      "agent": "copilot",
+      "title": "Pin parameter utilities",
+      "owned_paths": "src/features/pin-values/index.ts; src/features/pin-values/index.test.ts",
+      "inputs": "No evidence or native APIs needed",
+      "work": "Implement pure normalizePinOptions for scale/opacity. Export explicit finite bounds scale 0.1..4 and opacity 0.1..1. Reject NaN/Infinity/wrong types; clamp finite numeric values; return a fresh value. No changes to Antigravity pin component.",
+      "acceptance": "Two files; default values 1/1, clamp boundaries, invalids and input immutability. Targeted Vitest; <=150-word summary. Integration remains Codex review.",
+      "dependency": "independent",
+      "state": "APPROVED",
+      "reviewers": [
+        "codex",
+        "antigravity"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "P11",
+      "agent": "copilot",
+      "title": "Native acceptance checklist",
+      "owned_paths": "docs/qa/copilot-native-checklist.md",
+      "inputs": "docs/agents/codex/C04-integration.md; docs/agents/codex/C05-validation.md",
+      "work": "Write a <=300-word manual macOS acceptance checklist for user-triggered capture modes/cancel/permission error, crop/resize original preservation, PNG/JPEG dialog cancel and existing-file refusal. Mark NOT EXECUTED. Synthetic/isolated windows only. No actual screenshot, permission change or CLI operation of Shottr.",
+      "acceptance": "Explicit expected result per step and evidence fields to fill later; distinguish browser/mock coverage. No invented passes or full repo scans.",
+      "dependency": "independent",
+      "state": "CHANGES_REQUESTED",
+      "reviewers": [
+        "codex",
+        "antigravity"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "C06",
+      "agent": "codex",
+      "title": "Native image clipboard copy",
+      "owned_paths": "src/Workspace.*; src/platform/**; src-tauri/src/**; src-tauri/Cargo.toml; src-tauri/Cargo.lock; src-tauri/crates/image-core/src/lib.rs; tests/e2e/codex-clipboard.spec.ts",
+      "inputs": "src/platform/native.ts; src-tauri/src/imaging.rs; approved C03 raster core",
+      "work": "Add explicit-user-action macOS image clipboard copy with arboard, bounded decode, main-window caller restriction, serialized blocking work and injected sink tests. Extend Raster only with an immutable RGBA byte accessor; do not rebuild completed modules or edit worker code.",
+      "acceptance": "Fake sink validates pixels/errors and rejects invalid bytes without writes; browser mock tests verify copy busy/success/failure/retry; no actual clipboard read/write during validation. Native GUI paste acceptance remains manual.",
+      "dependency": "independent",
+      "state": "DONE",
+      "validation_policy": "Functional checks and integration builds as relevant; formatting/lint delegated to Copilot H01.",
+      "shared_claim": "root-wiring",
+      "reviewers": [
+        "antigravity"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "P12",
+      "agent": "copilot",
+      "title": "PNG metadata header validation",
+      "owned_paths": "src/features/png-header/index.ts; src/features/png-header/index.test.ts",
+      "inputs": "No raw evidence; Uint8Array/DataView only",
+      "work": "Implement readPngHeader(bytes) returning positive width/height from a complete PNG signature and 13-byte IHDR header. Validate signature, first chunk type/length, enough bytes, legal PNG dimension bounds <=2^31-1 and configurable image pixel limits using safe arithmetic. Do not allocate from claimed dimensions. State explicitly this validates a header only, not CRC/compressed pixels/full PNG validity.",
+      "acceptance": "Tests: real synthetic header, truncated/false signature/wrong first chunk, zero/huge dimensions and caller limits; do not claim successful decode.",
+      "dependency": "independent",
+      "state": "CHANGES_REQUESTED",
+      "reviewers": [
+        "codex",
+        "antigravity"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "P13",
+      "agent": "copilot",
+      "title": "RGBA pixel sampling",
+      "owned_paths": "src/features/pixel-sample/index.ts; src/features/pixel-sample/index.test.ts",
+      "inputs": "src/features/color/color.ts if present (optional read only)",
+      "work": "Implement sampleRgba(bytes,width,height,x,y) returning owned integer r/g/b/a. Require Uint8Array, positive safe integer dimensions, exact width*height*4 length and integer in-bounds coordinates. Use overflow-safe arithmetic; never mutate source. No canvas, display APIs or clipboard.",
+      "acceptance": "Tests: row-major channel order, transparency, last pixel, invalid byte lengths/coordinates, huge dimensions and source unchanged.",
+      "dependency": "independent",
+      "state": "APPROVED_INTEGRATED",
+      "reviewers": [
+        "codex",
+        "antigravity"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "P14",
+      "agent": "copilot",
+      "title": "Client to image coordinate mapping",
+      "owned_paths": "src/features/point-map/index.ts; src/features/point-map/index.test.ts",
+      "inputs": "src/contracts/editor.ts",
+      "work": "Implement mapClientPoint(point,bounds,imageSize) for explicit finite positive CSS bounds/image dimensions. Return clamped source-image coordinates without arbitrary rounding. Reject invalid/overflowing intermediate results; no DOM globals or display-scale guessing.",
+      "acceptance": "Tests: offset/scaled coordinates, outside clamping, fractional zoom, zero/nonfinite/overflow and input immutability.",
+      "dependency": "independent",
+      "state": "APPROVED_INTEGRATED",
+      "reviewers": [
+        "codex",
+        "antigravity"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "P15",
+      "agent": "copilot",
+      "title": "Rectangle intersection",
+      "owned_paths": "src/features/rect-intersection/index.ts; src/features/rect-intersection/index.test.ts",
+      "inputs": "src/contracts/editor.ts",
+      "work": "Implement intersectRects(a,b) returning a fresh positive intersection Rect or null for disjoint/edge-only contact. Require finite coordinates and nonnegative sizes, reject overflow in edges. Pure source-pixel geometry; do not import UI.",
+      "acceptance": "Tests: contained/partial/touching/disjoint/zero/reversed-invalid/extreme arithmetic; source inputs frozen.",
+      "dependency": "independent",
+      "state": "APPROVED",
+      "reviewers": [
+        "codex",
+        "antigravity"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "P16",
+      "agent": "copilot",
+      "title": "Annotation bounds",
+      "owned_paths": "src/features/annotation-bounds/index.ts; src/features/annotation-bounds/index.test.ts",
+      "inputs": "src/contracts/editor.ts",
+      "work": "Implement annotationBounds(annotation) for rectangle/arrow/pen returning finite geometric point bounds or null for no points. Validate supported tool, points and strokeWidth; include half-stroke padding. Explicitly document that arrowhead/text glyph bounds are not computed, so result is not a guaranteed painted-pixel/selection hit area. Reject unsupported tools.",
+      "acceptance": "Tests: reverse points, multi-point pen, single point, stroke padding, unsupported/NaN/overflow and immutable inputs. No renderer edits.",
+      "dependency": "independent",
+      "state": "CHANGES_REQUESTED",
+      "reviewers": [
+        "codex",
+        "antigravity"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "P17",
+      "agent": "copilot",
+      "title": "Session selection transitions",
+      "owned_paths": "src/features/session-selection/index.ts; src/features/session-selection/index.test.ts",
+      "inputs": "src/contracts/media.ts",
+      "work": "Implement pure nextSelectionAfterRemove(ids,selectedId,removedId): preserve a selected survivor; if selected removed choose previous adjacent survivor, else next adjacent, else null. Reject duplicate IDs; do not mutate order. Document handling missing selected/removed IDs. No URLs, React or IO.",
+      "acceptance": "Tests: first/middle/last/only selected removal, nonselected removal, stale IDs, duplicates and frozen list. Scope at most two files.",
+      "dependency": "independent",
+      "state": "CHANGES_REQUESTED",
+      "reviewers": [
+        "codex",
+        "antigravity"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "P18",
+      "agent": "copilot",
+      "title": "Byte-size display formatting",
+      "owned_paths": "src/features/byte-format/index.ts; src/features/byte-format/index.test.ts",
+      "inputs": "No target evidence required",
+      "work": "Implement formatByteSize(bytes) using explicit IEC units B/KiB/MiB/GiB, at most one fractional digit and no localization dependency. Require nonnegative safe integers; choose/document rounding policy near boundaries; zero -> 0 B. No changes to LibraryPanel.",
+      "acceptance": "Tests: zero/units/exact boundaries/rounding/MAX_SAFE_INTEGER/negative/fractional/NaN. Two files only.",
+      "dependency": "independent",
+      "state": "READY",
+      "reviewers": [
+        "codex",
+        "antigravity"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "P19",
+      "agent": "copilot",
+      "title": "Stable session image sorting",
+      "owned_paths": "src/features/image-sort/index.ts; src/features/image-sort/index.test.ts",
+      "inputs": "src/contracts/media.ts",
+      "work": "Implement sortSessionImages(images, mode) for name-asc, name-desc and original order. Return copied array retaining original document references; deterministic code-point comparison of normalized case-insensitive names, ties preserve input order. No filesystem timestamps or mutation; no locale-dependent assertions.",
+      "acceptance": "Tests: stable ties, Unicode/case, reverse order, empty and frozen inputs; original mode preserves original sequence.",
+      "dependency": "independent",
+      "state": "READY",
+      "reviewers": [
+        "codex",
+        "antigravity"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "P20",
+      "agent": "copilot",
+      "title": "Explicit output-dimension planning",
+      "owned_paths": "src/features/output-size/index.ts; src/features/output-size/index.test.ts",
+      "inputs": "No native display API; plain scalar inputs only",
+      "work": "Implement planOutputSize(width,height,displayScale,downscale) returning positive integer output dimensions. Require safe integer source dimensions and explicit finite positive scale. Downscale only when enabled and scale>1; use documented max(1,floor(source/scale)); never infer Retina scale from dimensions. Reject unsafe/underflow arithmetic.",
+      "acceptance": "Tests: 1x/2x/1.5x, disabled downscale, small-image minimum, invalid/huge values; do not call native screen APIs.",
+      "dependency": "independent",
+      "state": "READY",
+      "reviewers": [
+        "codex",
+        "antigravity"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "P21",
+      "agent": "copilot",
+      "title": "OCR text normalization",
+      "owned_paths": "src/features/ocr-text/index.ts; src/features/ocr-text/index.test.ts",
+      "inputs": "No OCR engine, evidence or network required",
+      "work": "Implement normalizeOcrText(text) preserving Unicode content and paragraph structure: normalize CRLF/CR to LF, trim trailing spaces/tabs per line and trim outer blank lines. Do not collapse internal spaces, dehyphenate, execute text or alter punctuation. Cap input length and document policy.",
+      "acceptance": "Tests: Vietnamese/emoji, paragraphs, internal whitespace, newline variants, empty and oversize/wrong-type. This is postprocessing only, not working OCR.",
+      "dependency": "independent",
+      "state": "READY",
+      "reviewers": [
+        "codex",
+        "antigravity"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "P22",
+      "agent": "copilot",
+      "title": "Clipboard adapter invalid-input regressions",
+      "owned_paths": "src/testing/copilot-clipboard-boundary.test.ts",
+      "inputs": "src/platform/native.ts; src/platform/image-limits.ts; src/contracts/media.ts",
+      "work": "Add tests only for copyImage adapter using mocked Tauri invoke/isTauri and synthetic image metadata. Cover browser desktop_required, invalid dimensions rejected before decode/invoke, synthetic decoder rejection never invoking native, native structured error preservation. Never instantiate/read/write actual system clipboard. Do not modify adapter source.",
+      "acceptance": "One test file with meaningful negative-path assertions, scoped Vitest command, restored stubs after each test. If defects found report instead of editing Codex files.",
+      "dependency": "independent",
+      "state": "READY",
+      "reviewers": [
+        "codex",
+        "antigravity"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "A11",
+      "agent": "antigravity",
+      "title": "OCR result controls",
+      "owned_paths": "src/features/ocr-panel/**",
+      "inputs": "src/contracts/media.ts",
+      "work": "Controlled OCR result/language/line-break options with busy/error/empty text and onRecognize/onCopy callbacks. Render recognized strings as text only. Local exported props; no engine/native calls.",
+      "acceptance": "RTL covers callbacks, inert text/XSS payload, busy guards, accessible labels and empty/error states.",
+      "dependency": "independent local module; no root/native integration required",
+      "requires": [],
+      "state": "READY",
+      "validation_policy": "Scoped functional tests only; no formatting/lint or standalone build/package. Build to Codex, hygiene to Copilot H01.",
+      "reviewers": [
+        "codex"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "A12",
+      "agent": "antigravity",
+      "title": "QR recognition controls",
+      "owned_paths": "src/features/qr-panel/**",
+      "inputs": "src/contracts/media.ts",
+      "work": "Controlled QR result list with selection/copy callbacks. Display decoded payloads as inert text; do not open URLs or execute content. Explicit empty/error/busy states.",
+      "acceptance": "RTL covers multiple payloads, malicious schemes as inert text, keyboard selection and disabled controls.",
+      "dependency": "independent local module; no root/native integration required",
+      "requires": [],
+      "state": "READY",
+      "validation_policy": "Scoped functional tests only; no formatting/lint or standalone build/package. Build to Codex, hygiene to Copilot H01.",
+      "reviewers": [
+        "codex"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "A13",
+      "agent": "antigravity",
+      "title": "Local Vision OCR/QR core",
+      "owned_paths": "native/vision-core/**",
+      "inputs": "docs/implementation/ARCHITECTURE.md",
+      "work": "Standalone macOS Swift package using system Vision for text/QR from explicit bounded image bytes. Define versioned Codable request/result/error models and language/options validation. No screen capture, clipboard, network, Tauri registration or external commands. Document minimum OS/API compatibility and a proposed Rust bridge; do not raise existing versions.",
+      "acceptance": "swift test with generated nonprivate text/QR images; cap input pixels/bytes/results; malformed input/language/error cases; no standalone build/package. If SDK absent record blocker and continue.",
+      "dependency": "independent local module; no root/native integration required",
+      "requires": [],
+      "state": "SUPERSEDED",
+      "validation_policy": "Scoped functional tests only; no formatting/lint or standalone build/package. Build to Codex, hygiene to Copilot H01.",
+      "superseded_by": "A33",
+      "note": "User explicitly requested no Swift implementation/build; historical prototype remains reference-only.",
+      "reviewers": [
+        "codex"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "A14",
+      "agent": "antigravity",
+      "title": "Clipboard image import core",
+      "owned_paths": "src-tauri/crates/clipboard-import-core/**",
+      "inputs": "src-tauri/crates/image-core/src/lib.rs (read only)",
+      "work": "Standalone Rust clipboard read/decode adapter with injectable reader, bounds and typed not-image/unavailable errors. Production backend may use already-selected arboard version; never access real clipboard in tests. Owned bytes only, no paths/JS bridge/root Cargo edits.",
+      "acceptance": "cargo test with fake reader, malformed/oversize RGBA, alpha, no-image/failure cases; owned nested manifests/lockfile; propose root integration only.",
+      "dependency": "independent local module; no root/native integration required",
+      "requires": [],
+      "state": "READY",
+      "validation_policy": "Scoped functional tests only; no formatting/lint or standalone build/package. Build to Codex, hygiene to Copilot H01.",
+      "reviewers": [
+        "codex"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "A15",
+      "agent": "antigravity",
+      "title": "Post-capture preview controller",
+      "owned_paths": "src/features/capture-preview/**",
+      "inputs": "src/features/pin/PinPreviewCard.tsx (read only)",
+      "work": "Controlled preview/timeout controller with edit/copy/save/OCR/pin/close callbacks and explicit cancellation. Reuse presentation exports if available, otherwise local props. Never create native windows or auto-trigger IO.",
+      "acceptance": "RTL/fake-time tests cover timeout cleanup, no duplicate callbacks, keyboard close and unmount; synthetic images only.",
+      "dependency": "independent local module; no root/native integration required",
+      "requires": [],
+      "state": "READY",
+      "validation_policy": "Scoped functional tests only; no formatting/lint or standalone build/package. Build to Codex, hygiene to Copilot H01.",
+      "reviewers": [
+        "codex"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "A16",
+      "agent": "antigravity",
+      "title": "Ellipse and line drawing primitives",
+      "owned_paths": "src/features/shapes/**",
+      "inputs": "src/contracts/editor.ts (read only)",
+      "work": "Implement local exported shape types and bounded pointer geometry/rendering for ellipse and plain line. Keep frozen AnnotationTool unchanged; export a documented adapter proposal for Codex. No fake arrow-as-line mapping.",
+      "acceptance": "Synthetic pointer/geometry tests, reverse drags, zero size, finite bounds, cancellation and source immutability. No shared view/model edits.",
+      "dependency": "independent local module; no root/native integration required",
+      "requires": [],
+      "state": "READY",
+      "validation_policy": "Scoped functional tests only; no formatting/lint or standalone build/package. Build to Codex, hygiene to Copilot H01.",
+      "reviewers": [
+        "codex"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "A17",
+      "agent": "antigravity",
+      "title": "Text and counter annotation controls",
+      "owned_paths": "src/features/text-counter/**",
+      "inputs": "src/contracts/editor.ts",
+      "work": "Controlled text/counter placement and style controls using existing text/counter Annotation variants and callbacks. Treat strings literally, bound text length/size and validate positive safe counter values. No history allocation duplication or root model edits.",
+      "acceptance": "RTL verifies text-only rendering, values, callback copies, bounds, cancel and keyboard operation; allocation remains C01 responsibility.",
+      "dependency": "independent local module; no root/native integration required",
+      "requires": [],
+      "state": "READY",
+      "validation_policy": "Scoped functional tests only; no formatting/lint or standalone build/package. Build to Codex, hygiene to Copilot H01.",
+      "reviewers": [
+        "codex"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "A18",
+      "agent": "antigravity",
+      "title": "Highlight spotlight magnifier renderer",
+      "owned_paths": "src/features/emphasis/**; tests/e2e/antigravity-emphasis.spec.ts",
+      "inputs": "src/contracts/editor.ts (read only)",
+      "work": "Separate bounded canvas renderer with local types for highlight/spotlight/magnifier; explicit source coordinates and clipped lens sampling. Produce a new bitmap without mutating source. Propose shared contract extensions instead of editing frozen types.",
+      "acceptance": "Actual browser synthetic pixels verify effects/clipping/alpha and rejected invalid requests; no native calls or unsupported privacy claims.",
+      "dependency": "independent local module; no root/native integration required",
+      "requires": [],
+      "state": "READY",
+      "validation_policy": "Scoped functional tests only; no formatting/lint or standalone build/package. Build to Codex, hygiene to Copilot H01.",
+      "reviewers": [
+        "codex"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "A19",
+      "agent": "antigravity",
+      "title": "Concealment and erase pixel core",
+      "owned_paths": "src-tauri/crates/effects-core/**",
+      "inputs": "src-tauri/crates/image-core/src/lib.rs (read only)",
+      "work": "Standalone bounded Rust pixel effects for blur/mosaic, explicit solid-color covering and transparent erase regions. Immutable outputs, strict rectangle/radius/work limits; no false claim that blur is secure redaction. Reuse pinned image crate rather than custom codec.",
+      "acceptance": "cargo test with exact synthetic cover/erase pixels, bounded blur behavior, alpha, invalid/overflow/work caps and original preservation. No actual user images.",
+      "dependency": "independent local module; no root/native integration required",
+      "requires": [],
+      "state": "READY",
+      "validation_policy": "Scoped functional tests only; no formatting/lint or standalone build/package. Build to Codex, hygiene to Copilot H01.",
+      "reviewers": [
+        "codex"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "A20",
+      "agent": "antigravity",
+      "title": "Backdrop composition renderer",
+      "owned_paths": "src/features/backdrop/**; tests/e2e/antigravity-backdrop.spec.ts",
+      "inputs": "src/contracts/media.ts",
+      "work": "Bounded canvas backdrop for solid/linear/radial gradients or explicit caller-owned image, with inset/shadow/radii/aspect/recenter options. No asset downloads, proprietary resources or URL fetch policy additions. Local types exported for integration.",
+      "acceptance": "Real browser pixels/dimensions for inset/aspect/radii/source preservation; invalid colors/limits rejected. Keep shadows bounded; no broader UI polish.",
+      "dependency": "independent local module; no root/native integration required",
+      "requires": [],
+      "state": "READY",
+      "validation_policy": "Scoped functional tests only; no formatting/lint or standalone build/package. Build to Codex, hygiene to Copilot H01.",
+      "reviewers": [
+        "codex"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "A21",
+      "agent": "antigravity",
+      "title": "Multi-image composition",
+      "owned_paths": "src/features/composition/**; tests/e2e/antigravity-composition.spec.ts",
+      "inputs": "src/contracts/media.ts",
+      "work": "Local model and canvas compositor for placing multiple provided images with explicit z-order/transforms and bounded canvas/placements. Add/snap-to-edges callbacks and a deterministic documented Ferby snapping rule; do not claim recovered Shottr similarity algorithm.",
+      "acceptance": "Browser fixtures verify overlap order/output pixels, immutable sources, bounds and cancellation; no filesystem/global state.",
+      "dependency": "independent local module; no root/native integration required",
+      "requires": [],
+      "state": "READY",
+      "validation_policy": "Scoped functional tests only; no formatting/lint or standalone build/package. Build to Codex, hygiene to Copilot H01.",
+      "reviewers": [
+        "codex"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "A22",
+      "agent": "antigravity",
+      "title": "Scrolling frame stitching core",
+      "owned_paths": "src-tauri/crates/scroll-core/**",
+      "inputs": "docs/implementation/ARCHITECTURE.md",
+      "work": "Standalone bounded Rust frame stitcher for supplied synthetic/raw image frames, known/estimated vertical overlap and explicit no-match result. Bound frames/output pixels/work, handle duplicate/reversed frames deterministically. No real scrolling/capture automation.",
+      "acceptance": "cargo test exact synthetic row patterns, overlap/no-match/duplicates/reverse/height-limit and source preservation; document algorithm limits, not arbitrary-app compatibility.",
+      "dependency": "independent local module; no root/native integration required",
+      "requires": [],
+      "state": "READY",
+      "validation_policy": "Scoped functional tests only; no formatting/lint or standalone build/package. Build to Codex, hygiene to Copilot H01.",
+      "reviewers": [
+        "codex"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "A23",
+      "agent": "antigravity",
+      "title": "Scrolling capture controls",
+      "owned_paths": "src/features/scroll-panel/**",
+      "inputs": "src/contracts/media.ts",
+      "work": "Controlled start/stop/cancel/progress panel with max-height/speed/reverse options and callbacks. No OS scrolling or capture calls. Define local explicit states and errors, propose native contract.",
+      "acceptance": "RTL state transitions, invalid bounds, duplicate start guards, cancellation and keyboard access.",
+      "dependency": "independent local module; no root/native integration required",
+      "requires": [],
+      "state": "READY",
+      "validation_policy": "Scoped functional tests only; no formatting/lint or standalone build/package. Build to Codex, hygiene to Copilot H01.",
+      "reviewers": [
+        "codex"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "A24",
+      "agent": "antigravity",
+      "title": "Post-capture action planner",
+      "owned_paths": "src/features/post-capture/**",
+      "inputs": "src/contracts/settings.ts (read only)",
+      "work": "Pure plan plus controlled preferences for show/edit/preview/copy/save actions. Explicit ordered async callback runner, single operation token and cancellation; no IO backend. Do not invoke anything by merely rendering the panel.",
+      "acceptance": "Fake callback tests prove order, stop-on-error/cancel, no duplicate work, independent requests and immutable options.",
+      "dependency": "independent local module; no root/native integration required",
+      "requires": [],
+      "state": "READY",
+      "validation_policy": "Scoped functional tests only; no formatting/lint or standalone build/package. Build to Codex, hygiene to Copilot H01.",
+      "reviewers": [
+        "codex"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "A25",
+      "agent": "antigravity",
+      "title": "Shortcut assignment controls",
+      "owned_paths": "src/features/hotkey-panel/**",
+      "inputs": "src/features/shortcuts/editor-shortcuts.ts (read only)",
+      "work": "Controlled shortcut editor with conflict/reserved/missing permission states and callbacks. Local proposals for global bindings; never register shortcuts or alter macOS settings. Ignore IME/text-entry conflicts.",
+      "acceptance": "RTL tests assignment/clear/cancel, modifier and composition guards, conflict display and keyboard interaction.",
+      "dependency": "independent local module; no root/native integration required",
+      "requires": [],
+      "state": "READY",
+      "validation_policy": "Scoped functional tests only; no formatting/lint or standalone build/package. Build to Codex, hygiene to Copilot H01.",
+      "reviewers": [
+        "codex"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "A26",
+      "agent": "antigravity",
+      "title": "Window capture appearance core",
+      "owned_paths": "src/features/window-appearance/**; tests/e2e/antigravity-window-appearance.spec.ts",
+      "inputs": "src/contracts/media.ts",
+      "work": "Bounded pixel composition for caller-provided window raster: transparent/solid/caller-provided wallpaper background and explicit shadow-trim crop. No wallpaper discovery/native capture; no invention of target auto-trim algorithm.",
+      "acceptance": "Browser synthetic alpha/background/crop dimensions and immutable inputs; bad bounds/work caps rejected.",
+      "dependency": "independent local module; no root/native integration required",
+      "requires": [],
+      "state": "READY",
+      "validation_policy": "Scoped functional tests only; no formatting/lint or standalone build/package. Build to Codex, hygiene to Copilot H01.",
+      "reviewers": [
+        "codex"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "A27",
+      "agent": "antigravity",
+      "title": "Measurement overlay controls",
+      "owned_paths": "src/features/measurement-panel/**",
+      "inputs": "src/contracts/editor.ts; src/features/measurement/measurement.ts (read only)",
+      "work": "Controlled selection-size PX/PT overlay with explicit positive display scale, source-pixel bounds and imprint callback. No DPI guessing or native display probing. Do not modify Copilot helpers.",
+      "acceptance": "RTL/synthetic geometry tests for 1x/2x/fractional scale, reverse selection, invalid bounds and accessible values.",
+      "dependency": "independent local module; no root/native integration required",
+      "requires": [],
+      "state": "READY",
+      "validation_policy": "Scoped functional tests only; no formatting/lint or standalone build/package. Build to Codex, hygiene to Copilot H01.",
+      "reviewers": [
+        "codex"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "A28",
+      "agent": "antigravity",
+      "title": "Application preference controls",
+      "owned_paths": "src/features/app-preferences/**",
+      "inputs": "src/contracts/settings.ts (read only)",
+      "work": "Controlled Ferby-only controls for post-capture behavior, default zoom, window-on-top and notifications/launch/menu preferences. Export local proposed settings schema; unsupported backend options must be clearly disabled by capability props. No telemetry/cloud/license gates.",
+      "acceptance": "RTL verifies capability gating, immutable updates, bounds and no native/system calls at render or toggle.",
+      "dependency": "independent local module; no root/native integration required",
+      "requires": [],
+      "state": "READY",
+      "validation_policy": "Scoped functional tests only; no formatting/lint or standalone build/package. Build to Codex, hygiene to Copilot H01.",
+      "reviewers": [
+        "codex"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "A29",
+      "agent": "antigravity",
+      "title": "Local session archive core",
+      "owned_paths": "src-tauri/crates/session-core/**",
+      "inputs": "src/contracts/media.ts (read only)",
+      "work": "Standalone versioned local session manifest/store for explicit caller-provided Ferby directory and image bytes. Bound files/bytes, reject traversal/symlinks and unknown versions, preserve source originals, no automatic filesystem scanning. Local archive is Ferby design, not assumed Shottr storage.",
+      "acceptance": "cargo test tempdir round-trip, malformed/oversized manifests, traversal/symlink cases, failed-write cleanup and preservation. Propose root API only.",
+      "dependency": "independent local module; no root/native integration required",
+      "requires": [],
+      "state": "READY",
+      "validation_policy": "Scoped functional tests only; no formatting/lint or standalone build/package. Build to Codex, hygiene to Copilot H01.",
+      "reviewers": [
+        "codex"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "A30",
+      "agent": "antigravity",
+      "title": "Local output and print presentation",
+      "owned_paths": "src/features/local-output/**; tests/e2e/antigravity-local-output.spec.ts",
+      "inputs": "src/contracts/media.ts",
+      "work": "Props-driven print-sheet sizing/margins and drag/export preview for supplied raster, local image-only payload producer. No automatic print/dialog/clipboard/filesystem. Expose callbacks for Codex native print and user-initiated drag integration.",
+      "acceptance": "Browser synthetic page dimensions, image aspect and drag MIME boundary tests; verify no dialog is invoked automatically; document unverified OS behavior.",
+      "dependency": "independent local module; no root/native integration required",
+      "requires": [],
+      "state": "READY",
+      "validation_policy": "Scoped functional tests only; no formatting/lint or standalone build/package. Build to Codex, hygiene to Copilot H01.",
+      "reviewers": [
+        "codex"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "P23",
+      "agent": "copilot",
+      "title": "OCR language option validation",
+      "owned_paths": "src/features/ocr-languages/index.ts; src/features/ocr-languages/index.test.ts",
+      "inputs": "No repository-wide context; explicit caller-supplied language list only",
+      "work": "Validate caller-supplied OCR language identifiers against an explicit provided supported list; no invented installed languages. Fresh normalized list, finite size/length caps; duplicates normalized with documented case policy.",
+      "acceptance": "Supported/unsupported/duplicates/empty/malformed/length/type cases; no engine/native access.",
+      "dependency": "independent local module; no root/native integration required",
+      "requires": [],
+      "state": "READY",
+      "validation_policy": "Scoped functional tests; no root wiring; hygiene only through H01.",
+      "reviewers": [
+        "codex",
+        "antigravity"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "P24",
+      "agent": "copilot",
+      "title": "QR payload classification",
+      "owned_paths": "src/features/qr-payload/index.ts; src/features/qr-payload/index.test.ts",
+      "inputs": "No engine/native input; plain string API only",
+      "work": "Pure classifyQrPayload(text): inert text plus safe scheme category for http/https/mailto/plain/unsupported; never execute/open anything. Cap input and reject control-character URL tricks; preserve display text.",
+      "acceptance": "Mixed-case schemes, javascript/data/file, whitespace/control and Unicode tests; no automatic links.",
+      "dependency": "independent local module; no root/native integration required",
+      "requires": [],
+      "state": "READY",
+      "validation_policy": "Scoped functional tests; no root wiring; hygiene only through H01.",
+      "reviewers": [
+        "codex",
+        "antigravity"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "P25",
+      "agent": "copilot",
+      "title": "Rectangle handle resize geometry",
+      "owned_paths": "src/features/resize-handles/index.ts; src/features/resize-handles/index.test.ts",
+      "inputs": "src/contracts/editor.ts",
+      "work": "Pure bounded source-image rectangle resizing by one of eight handles; explicit min size and image bounds. No DOM or shared model edits. Reject nonfinite/overflow inputs.",
+      "acceptance": "Every handle, reverse crossing policy, clamping/minsize/frozen input and extremes.",
+      "dependency": "independent local module; no root/native integration required",
+      "requires": [],
+      "state": "READY",
+      "validation_policy": "Scoped functional tests; no root wiring; hygiene only through H01.",
+      "reviewers": [
+        "codex",
+        "antigravity"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "P26",
+      "agent": "copilot",
+      "title": "Move annotation point geometry",
+      "owned_paths": "src/features/move-points/index.ts; src/features/move-points/index.test.ts",
+      "inputs": "src/contracts/editor.ts",
+      "work": "Pure translate/clamp readonly points within explicit image bounds using one shared delta that preserves relative geometry; reject nonfinite/overflow and impossible fit.",
+      "acceptance": "Relative distances preserved, edge clamp, multi-point and immutable input; at most two files.",
+      "dependency": "independent local module; no root/native integration required",
+      "requires": [],
+      "state": "READY",
+      "validation_policy": "Scoped functional tests; no root wiring; hygiene only through H01.",
+      "reviewers": [
+        "codex",
+        "antigravity"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "P27",
+      "agent": "copilot",
+      "title": "Counter label formatting",
+      "owned_paths": "src/features/counter-label/index.ts; src/features/counter-label/index.test.ts",
+      "inputs": "src/contracts/editor.ts (counter field only)",
+      "work": "Pure positive-safe-integer counter labels with optional explicit decimal prefix/suffix; bound string length and reject invalid values. No allocation/history logic.",
+      "acceptance": "1/max-safe, invalid/fractional, Unicode prefix/suffix and size bounds.",
+      "dependency": "independent local module; no root/native integration required",
+      "requires": [],
+      "state": "READY",
+      "validation_policy": "Scoped functional tests; no root wiring; hygiene only through H01.",
+      "reviewers": [
+        "codex",
+        "antigravity"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "P28",
+      "agent": "copilot",
+      "title": "Annotation style value validation",
+      "owned_paths": "src/features/style-values/index.ts; src/features/style-values/index.test.ts",
+      "inputs": "src/contracts/editor.ts (AnnotationStyle only)",
+      "work": "Validate/copy color/strokeWidth/opacity from existing AnnotationStyle. Use explicit supported color syntax matching current renderer; no CSS execution/variable references.",
+      "acceptance": "Finite ranges, malformed color, zero/huge widths, alpha bounds and frozen input.",
+      "dependency": "independent local module; no root/native integration required",
+      "requires": [],
+      "state": "READY",
+      "validation_policy": "Scoped functional tests; no root wiring; hygiene only through H01.",
+      "reviewers": [
+        "codex",
+        "antigravity"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "P29",
+      "agent": "copilot",
+      "title": "Snapping candidate distances",
+      "owned_paths": "src/features/snap-distance/index.ts; src/features/snap-distance/index.test.ts",
+      "inputs": "src/contracts/editor.ts (Point/Rect only)",
+      "work": "Pure nearest alignment candidate with explicit finite tolerance and deterministic tie order; no hidden object similarity inference. Bound candidate count.",
+      "acceptance": "Exact/tolerance/no-match/ties/overflow and immutable arrays.",
+      "dependency": "independent local module; no root/native integration required",
+      "requires": [],
+      "state": "READY",
+      "validation_policy": "Scoped functional tests; no root wiring; hygiene only through H01.",
+      "reviewers": [
+        "codex",
+        "antigravity"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "P30",
+      "agent": "copilot",
+      "title": "Stitch frame budget planning",
+      "owned_paths": "src/features/stitch-budget/index.ts; src/features/stitch-budget/index.test.ts",
+      "inputs": "No frame bytes/native APIs; explicit integer budget inputs",
+      "work": "Pure frame/output-height/pixel budget planner using explicit dimensions/overlap; safe integer arithmetic, reject overlimits or invalid overlap. No image bytes or capture.",
+      "acceptance": "Known overlap sums, one/many frames, zero, near-safe-integer and hard cap cases.",
+      "dependency": "independent local module; no root/native integration required",
+      "requires": [],
+      "state": "READY",
+      "validation_policy": "Scoped functional tests; no root wiring; hygiene only through H01.",
+      "reviewers": [
+        "codex",
+        "antigravity"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "P31",
+      "agent": "copilot",
+      "title": "Backdrop output sizing",
+      "owned_paths": "src/features/backdrop-size/index.ts; src/features/backdrop-size/index.test.ts",
+      "inputs": "src/contracts/media.ts (dimensions only)",
+      "work": "Pure aspect/inset output dimension planner, documented rounding and pixel/work caps; never change source aspect silently.",
+      "acceptance": "Aspect/inset/exact bounds/overflow/fraction/invalid options; two files.",
+      "dependency": "independent local module; no root/native integration required",
+      "requires": [],
+      "state": "READY",
+      "validation_policy": "Scoped functional tests; no root wiring; hygiene only through H01.",
+      "reviewers": [
+        "codex",
+        "antigravity"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "P32",
+      "agent": "copilot",
+      "title": "Color averaging helper",
+      "owned_paths": "src/features/average-rgba/index.ts; src/features/average-rgba/index.test.ts",
+      "inputs": "src/features/pixel-sample/index.ts (read only)",
+      "work": "Pure bounded RGBA region averaging from explicit bytes; document arithmetic mean and alpha handling, not perceptual/color-managed averaging. Reuse safe input principles of P13.",
+      "acceptance": "Synthetic opaque/transparent pixels, nonmutating region, invalid bounds and work cap.",
+      "dependency": "independent local module; no root/native integration required",
+      "requires": [],
+      "state": "READY",
+      "validation_policy": "Scoped functional tests; no root wiring; hygiene only through H01.",
+      "reviewers": [
+        "codex",
+        "antigravity"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "P33",
+      "agent": "copilot",
+      "title": "Annotation text value bounds",
+      "owned_paths": "src/features/text-values/index.ts; src/features/text-values/index.test.ts",
+      "inputs": "src/contracts/editor.ts (text/style fields only)",
+      "work": "Pure text/font-size/alignment normalization for local text annotation options. Preserve literal Unicode and newlines; reject controls except tab/newline and cap bytes/characters. No HTML rendering.",
+      "acceptance": "Vietnamese/emoji/newlines, caps, font size/type/NaN and input preservation.",
+      "dependency": "independent local module; no root/native integration required",
+      "requires": [],
+      "state": "READY",
+      "validation_policy": "Scoped functional tests; no root wiring; hygiene only through H01.",
+      "reviewers": [
+        "codex",
+        "antigravity"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "P34",
+      "agent": "copilot",
+      "title": "Capture action transition helper",
+      "owned_paths": "src/features/capture-state/index.ts; src/features/capture-state/index.test.ts",
+      "inputs": "src/contracts/media.ts (CaptureMode only)",
+      "work": "Pure reducer for idle/selecting/processing/ready/cancelled/failed with explicit job token; late results from old tokens are ignored. No native invocation.",
+      "acceptance": "Cancellation, stale completion, retry, duplicate starts and immutable states.",
+      "dependency": "independent local module; no root/native integration required",
+      "requires": [],
+      "state": "READY",
+      "validation_policy": "Scoped functional tests; no root wiring; hygiene only through H01.",
+      "reviewers": [
+        "codex",
+        "antigravity"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "P35",
+      "agent": "copilot",
+      "title": "Clipboard import negative-path tests",
+      "owned_paths": "docs/qa/copilot-P35-clipboard-import.md",
+      "inputs": "src-tauri/crates/clipboard-import-core/src/lib.rs (read only)",
+      "work": "Review only A14 public injectable API and propose at most five negative-path regression cases, with exact API call/expected error. Never open real clipboard or edit the crate. If A14 absent record blocked once and continue.",
+      "acceptance": "<=200 words; unavailable/not-image/oversize/invalid RGBA cases; static proposal only, no claimed execution.",
+      "dependency": "requires the named local exports; skip if absent",
+      "requires": [
+        "src-tauri/crates/clipboard-import-core/src/lib.rs"
+      ],
+      "state": "READY",
+      "validation_policy": "Scoped functional tests; no root wiring; hygiene only through H01.",
+      "reviewers": [
+        "codex",
+        "antigravity"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "P36",
+      "agent": "copilot",
+      "title": "Settings compatibility fixtures",
+      "owned_paths": "src/testing/copilot-settings-compat.test.ts",
+      "inputs": "src/features/settings-codec/index.ts; src/contracts/settings.ts",
+      "work": "Bounded independent fixtures/tests for P08 public JSON codec: exact v1 fields, frozen defaults, unknown versions/types. Do not edit codec or native store.",
+      "acceptance": "Round-trip/malformed/Unicode/type/limit tests and explicit version boundary.",
+      "dependency": "independent local module; no root/native integration required",
+      "requires": [],
+      "state": "READY",
+      "validation_policy": "Scoped functional tests; no root wiring; hygiene only through H01.",
+      "reviewers": [
+        "codex",
+        "antigravity"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "P37",
+      "agent": "copilot",
+      "title": "Deep-link request parser",
+      "owned_paths": "src/features/deep-link-parser/index.ts; src/features/deep-link-parser/index.test.ts",
+      "inputs": "No Shottr URL contract assumed; local Ferby intent types only",
+      "work": "Pure parser for explicitly documented Ferby-only capture/editor route requests, strict mode/ID allowlists. Return inert proposed intent requiring UI confirmation; reject arbitrary paths, remote URLs, credentials and unknown parameters. Do not claim Shottr URL compatibility.",
+      "acceptance": "Traversal, encoding, duplicate keys, malicious schemes, unknown commands and size caps.",
+      "dependency": "independent local module; no root/native integration required",
+      "requires": [],
+      "state": "READY",
+      "validation_policy": "Scoped functional tests; no root wiring; hygiene only through H01.",
+      "reviewers": [
+        "codex",
+        "antigravity"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "P38",
+      "agent": "copilot",
+      "title": "Export name collision sequence",
+      "owned_paths": "src/features/export-sequence/index.ts; src/features/export-sequence/index.test.ts",
+      "inputs": "src/features/export/names.ts",
+      "work": "Pure suggested-basename sequence generator with explicit starting suffix and max attempts; use P04 name sanitizer. Never inspect disk or promise reservation/nonoverwrite.",
+      "acceptance": "Extensions/Unicode/caps/sequence exhaustion/invalid counters and immutable inputs.",
+      "dependency": "independent local module; no root/native integration required",
+      "requires": [],
+      "state": "READY",
+      "validation_policy": "Scoped functional tests; no root wiring; hygiene only through H01.",
+      "reviewers": [
+        "codex",
+        "antigravity"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "P39",
+      "agent": "copilot",
+      "title": "Preview timeout state",
+      "owned_paths": "src/features/preview-timer/index.ts; src/features/preview-timer/index.test.ts",
+      "inputs": "No timers/globals; injected time scalars only",
+      "work": "Pure deadline planner from injected current time/timeout, pause/resume/remaining bounds and explicit expired result. No real timers/globals.",
+      "acceptance": "Clock jumps/nonfinite/zero timeout/pause/resume and overflow handling.",
+      "dependency": "independent local module; no root/native integration required",
+      "requires": [],
+      "state": "READY",
+      "validation_policy": "Scoped functional tests; no root wiring; hygiene only through H01.",
+      "reviewers": [
+        "codex",
+        "antigravity"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "P40",
+      "agent": "copilot",
+      "title": "Print page geometry",
+      "owned_paths": "src/features/print-geometry/index.ts; src/features/print-geometry/index.test.ts",
+      "inputs": "src/contracts/editor.ts (dimensions only)",
+      "work": "Pure fit to explicit page size/margins in points using explicit pixel-to-point scale. Preserve aspect, positive printable area, no printer queries.",
+      "acceptance": "Portrait/landscape/margins/1x2x/overflow and invalid inputs.",
+      "dependency": "independent local module; no root/native integration required",
+      "requires": [],
+      "state": "READY",
+      "validation_policy": "Scoped functional tests; no root wiring; hygiene only through H01.",
+      "reviewers": [
+        "codex",
+        "antigravity"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "P41",
+      "agent": "copilot",
+      "title": "Parity test case inventory",
+      "owned_paths": "src/testing/parity-cases.json; src/testing/copilot-parity-cases.test.ts",
+      "inputs": "coordination/FUNCTION-MAP.md (feature IDs only)",
+      "work": "Write bounded machine-readable case descriptors for F01-F26 and F30-F32 from FUNCTION-MAP; IDs, synthetic fixture, trigger, expected evidence and NOT_EXECUTED native status. No execution or assumed target equivalence.",
+      "acceptance": "Validate unique IDs/feature coverage/explicit exclusions; one JSON data file plus one scoped validation test.",
+      "dependency": "independent local module; no root/native integration required",
+      "requires": [],
+      "state": "READY",
+      "validation_policy": "Scoped functional tests; no root wiring; hygiene only through H01.",
+      "reviewers": [
+        "codex",
+        "antigravity"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "P42",
+      "agent": "copilot",
+      "title": "Functional regression triage",
+      "owned_paths": "docs/qa/copilot-P42-triage.md",
+      "inputs": "coordination/messages/copilot/20261105-codex-C04-P19-typeblock.md and latest exact Codex functional blocker message only",
+      "work": "Read only latest exact Codex functional blocker messages and produce a <=250-word triage report with task owner, reproduction command, source location and current known/not-rechecked status. Fix only own Pxx scope under its own claim; otherwise report. No repository-wide scan or native operation.",
+      "acceptance": "No invented passes; exact blocked vs fixed evidence. Keep historical reports/packets immutable.",
+      "dependency": "independent local module; no root/native integration required",
+      "requires": [],
+      "state": "READY",
+      "validation_policy": "Scoped functional tests; no root wiring; hygiene only through H01.",
+      "reviewers": [
+        "codex",
+        "antigravity"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "C07",
+      "agent": "codex",
+      "title": "Editor and raster-export integration",
+      "owned_paths": "src/Workspace.*; src/platform/**; src/contracts/**; src-tauri/src/**; root manifests/capabilities/configs/lockfiles; tests/e2e/codex-*.spec.ts",
+      "inputs": "A04/A06/A07/A08/A10",
+      "work": "Review current packets and actual functionality first; integrate only approved module APIs, typed main-window IPC and constrained native capabilities. Keep heavy work off UI thread. Stay at 0.1.0 and existing versions; no telemetry/upload/license gates. Preserve originals and never invoke OS actions in automated tests without injected fakes.",
+      "acceptance": "Scoped functional/IPC/browser checks and integration build. Separate browser/fake validation from real native acceptance. Native acceptance uses explicit user-triggered synthetic scenarios; no automatic privacy changes. Missing modules -> partial, skip and continue.",
+      "dependency": "requires the named local exports; skip if absent",
+      "requires": [
+        "src/features/editor/workbench/index.ts",
+        "src/features/editor/render/index.ts"
+      ],
+      "state": "PARTIAL_EDITOR_WIRED",
+      "validation_policy": "Functional review/tests and integration build; no formatting/lint.",
+      "shared_claim": "root-wiring",
+      "reviewers": [
+        "antigravity"
+      ],
+      "work_kind": "integration",
+      "requires_reviewed_tasks": [
+        "A34",
+        "C19"
+      ]
+    },
+    {
+      "id": "C08",
+      "agent": "codex",
+      "title": "Native clipboard import and local OCR bridge",
+      "owned_paths": "src/Workspace.*; src/platform/**; src/contracts/**; src-tauri/src/**; root manifests/capabilities/configs/lockfiles; tests/e2e/codex-*.spec.ts",
+      "inputs": "A33 Rust Vision core; A14 clipboard core; P23/P24",
+      "work": "Review current packets and actual functionality first; integrate only approved module APIs, typed main-window IPC and constrained native capabilities. Keep heavy work off UI thread. Stay at 0.1.0 and existing versions; no telemetry/upload/license gates. Preserve originals and never invoke OS actions in automated tests without injected fakes.",
+      "acceptance": "Scoped functional/IPC/browser checks and integration build. Separate browser/fake validation from real native acceptance. Native acceptance uses explicit user-triggered synthetic scenarios; no automatic privacy changes. Missing modules -> partial, skip and continue.",
+      "dependency": "current approved A33 Rust core for OCR/QR; clipboard slice already integrated",
+      "requires": [
+        "src-tauri/crates/vision-core/Cargo.toml",
+        "src-tauri/crates/clipboard-import-core/Cargo.toml"
+      ],
+      "state": "PARTIAL_AWAITING_RUST_A33",
+      "validation_policy": "Functional review/tests and integration build; no formatting/lint.",
+      "shared_claim": "root-wiring",
+      "requires_reviewed_tasks": [
+        "A33",
+        "C18"
+      ],
+      "reviewers": [
+        "antigravity"
+      ],
+      "work_kind": "integration"
+    },
+    {
+      "id": "C09",
+      "agent": "codex",
+      "title": "Restricted pin/preview windows",
+      "owned_paths": "src/Workspace.*; src/platform/**; src/contracts/**; src-tauri/src/**; root manifests/capabilities/configs/lockfiles; tests/e2e/codex-*.spec.ts; src/App.tsx",
+      "inputs": "A05/A15/P10/P39",
+      "work": "Review current packets and actual functionality first; integrate only approved module APIs, typed main-window IPC and constrained native capabilities. Keep heavy work off UI thread. Stay at 0.1.0 and existing versions; no telemetry/upload/license gates. Preserve originals and never invoke OS actions in automated tests without injected fakes.",
+      "acceptance": "Scoped functional/IPC/browser checks and integration build. Separate browser/fake validation from real native acceptance. Native acceptance uses explicit user-triggered synthetic scenarios; no automatic privacy changes. Missing modules -> partial, skip and continue.",
+      "dependency": "requires the named local exports; skip if absent",
+      "requires": [
+        "src/features/pin/PinPreviewCard.tsx"
+      ],
+      "state": "PARTIAL_PIN_WIRED",
+      "validation_policy": "Functional review/tests and integration build; no formatting/lint.",
+      "shared_claim": "root-wiring",
+      "reviewers": [
+        "antigravity"
+      ],
+      "work_kind": "integration",
+      "requires_reviewed_tasks": [
+        "A35"
+      ]
+    },
+    {
+      "id": "C10",
+      "agent": "codex",
+      "title": "Settings persistence and actual preference effects",
+      "owned_paths": "src/Workspace.*; src/platform/**; src/contracts/**; src-tauri/src/**; root manifests/capabilities/configs/lockfiles; tests/e2e/codex-*.spec.ts",
+      "inputs": "A03/A09/A24/A28/P08",
+      "work": "Review current packets and actual functionality first; integrate only approved module APIs, typed main-window IPC and constrained native capabilities. Keep heavy work off UI thread. Stay at 0.1.0 and existing versions; no telemetry/upload/license gates. Preserve originals and never invoke OS actions in automated tests without injected fakes.",
+      "acceptance": "Scoped functional/IPC/browser checks and integration build. Separate browser/fake validation from real native acceptance. Native acceptance uses explicit user-triggered synthetic scenarios; no automatic privacy changes. Missing modules -> partial, skip and continue.",
+      "dependency": "requires the named local exports; skip if absent",
+      "requires": [
+        "src-tauri/crates/settings-core/Cargo.toml"
+      ],
+      "state": "PARTIAL_PREFERENCES_WIRED",
+      "validation_policy": "Functional review/tests and integration build; no formatting/lint.",
+      "shared_claim": "root-wiring",
+      "reviewers": [
+        "antigravity"
+      ],
+      "work_kind": "integration",
+      "requires_reviewed_tasks": [
+        "A37"
+      ]
+    },
+    {
+      "id": "C11",
+      "agent": "codex",
+      "title": "User-triggered scrolling and capture modes",
+      "owned_paths": "src/Workspace.*; src/platform/**; src/contracts/**; src-tauri/src/**; root manifests/capabilities/configs/lockfiles; tests/e2e/codex-*.spec.ts",
+      "inputs": "A22/A23/P30/P34",
+      "work": "Review current packets and actual functionality first; integrate only approved module APIs, typed main-window IPC and constrained native capabilities. Keep heavy work off UI thread. Stay at 0.1.0 and existing versions; no telemetry/upload/license gates. Preserve originals and never invoke OS actions in automated tests without injected fakes.",
+      "acceptance": "Scoped functional/IPC/browser checks and integration build. Separate browser/fake validation from real native acceptance. Native acceptance uses explicit user-triggered synthetic scenarios; no automatic privacy changes. Missing modules -> partial, skip and continue.",
+      "dependency": "requires the named local exports; skip if absent",
+      "requires": [
+        "src-tauri/crates/scroll-core/Cargo.toml"
+      ],
+      "state": "READY",
+      "validation_policy": "Functional review/tests and integration build; no formatting/lint.",
+      "shared_claim": "root-wiring",
+      "reviewers": [
+        "antigravity"
+      ],
+      "work_kind": "integration",
+      "requires_reviewed_tasks": [
+        "C17",
+        "A22",
+        "A23"
+      ]
+    },
+    {
+      "id": "C12",
+      "agent": "codex",
+      "title": "Annotation/effect/backdrop/composition integration",
+      "owned_paths": "src/Workspace.*; src/platform/**; src/contracts/**; src-tauri/src/**; root manifests/capabilities/configs/lockfiles; tests/e2e/codex-*.spec.ts",
+      "inputs": "A16-A21/A26/A27",
+      "work": "Review current packets and actual functionality first; integrate only approved module APIs, typed main-window IPC and constrained native capabilities. Keep heavy work off UI thread. Stay at 0.1.0 and existing versions; no telemetry/upload/license gates. Preserve originals and never invoke OS actions in automated tests without injected fakes.",
+      "acceptance": "Scoped functional/IPC/browser checks and integration build. Separate browser/fake validation from real native acceptance. Native acceptance uses explicit user-triggered synthetic scenarios; no automatic privacy changes. Missing modules -> partial, skip and continue.",
+      "dependency": "requires the named local exports; skip if absent",
+      "requires": [
+        "src/features/shapes/index.ts"
+      ],
+      "state": "READY",
+      "validation_policy": "Functional review/tests and integration build; no formatting/lint.",
+      "shared_claim": "root-wiring",
+      "reviewers": [
+        "antigravity"
+      ],
+      "work_kind": "integration",
+      "requires_reviewed_tasks": [
+        "A34",
+        "A36",
+        "C22"
+      ]
+    },
+    {
+      "id": "C13",
+      "agent": "codex",
+      "title": "Global shortcut and app lifecycle wiring",
+      "owned_paths": "src/Workspace.*; src/platform/**; src/contracts/**; src-tauri/src/**; root manifests/capabilities/configs/lockfiles; tests/e2e/codex-*.spec.ts",
+      "inputs": "A25/A28",
+      "work": "Review current packets and actual functionality first; integrate only approved module APIs, typed main-window IPC and constrained native capabilities. Keep heavy work off UI thread. Stay at 0.1.0 and existing versions; no telemetry/upload/license gates. Preserve originals and never invoke OS actions in automated tests without injected fakes.",
+      "acceptance": "Scoped functional/IPC/browser checks and integration build. Separate browser/fake validation from real native acceptance. Native acceptance uses explicit user-triggered synthetic scenarios; no automatic privacy changes. Missing modules -> partial, skip and continue.",
+      "dependency": "requires the named local exports; skip if absent",
+      "requires": [
+        "src/features/hotkey-panel/index.ts"
+      ],
+      "state": "READY",
+      "validation_policy": "Functional review/tests and integration build; no formatting/lint.",
+      "shared_claim": "root-wiring",
+      "reviewers": [
+        "antigravity"
+      ],
+      "work_kind": "integration",
+      "requires_reviewed_tasks": [
+        "C21"
+      ]
+    },
+    {
+      "id": "C14",
+      "agent": "codex",
+      "title": "Explicit local archive integration",
+      "owned_paths": "src/Workspace.*; src/platform/**; src/contracts/**; src-tauri/src/**; root manifests/capabilities/configs/lockfiles; tests/e2e/codex-*.spec.ts",
+      "inputs": "A29",
+      "work": "Review current packets and actual functionality first; integrate only approved module APIs, typed main-window IPC and constrained native capabilities. Keep heavy work off UI thread. Stay at 0.1.0 and existing versions; no telemetry/upload/license gates. Preserve originals and never invoke OS actions in automated tests without injected fakes.",
+      "acceptance": "Scoped functional/IPC/browser checks and integration build. Separate browser/fake validation from real native acceptance. Native acceptance uses explicit user-triggered synthetic scenarios; no automatic privacy changes. Missing modules -> partial, skip and continue.",
+      "dependency": "requires the named local exports; skip if absent",
+      "requires": [
+        "src-tauri/crates/session-core/Cargo.toml"
+      ],
+      "state": "READY",
+      "validation_policy": "Functional review/tests and integration build; no formatting/lint.",
+      "shared_claim": "root-wiring",
+      "reviewers": [
+        "antigravity"
+      ],
+      "work_kind": "integration",
+      "requires_reviewed_tasks": [
+        "A29",
+        "C20"
+      ]
+    },
+    {
+      "id": "C15",
+      "agent": "codex",
+      "title": "Deep links, print and user-initiated drag",
+      "owned_paths": "src/Workspace.*; src/platform/**; src/contracts/**; src-tauri/src/**; root manifests/capabilities/configs/lockfiles; tests/e2e/codex-*.spec.ts",
+      "inputs": "A30/P37/P40",
+      "work": "Review current packets and actual functionality first; integrate only approved module APIs, typed main-window IPC and constrained native capabilities. Keep heavy work off UI thread. Stay at 0.1.0 and existing versions; no telemetry/upload/license gates. Preserve originals and never invoke OS actions in automated tests without injected fakes.",
+      "acceptance": "Scoped functional/IPC/browser checks and integration build. Separate browser/fake validation from real native acceptance. Native acceptance uses explicit user-triggered synthetic scenarios; no automatic privacy changes. Missing modules -> partial, skip and continue.",
+      "dependency": "requires the named local exports; skip if absent",
+      "requires": [
+        "src/features/local-output/index.ts"
+      ],
+      "state": "READY",
+      "validation_policy": "Functional review/tests and integration build; no formatting/lint.",
+      "shared_claim": "root-wiring",
+      "reviewers": [
+        "antigravity"
+      ],
+      "work_kind": "integration",
+      "requires_reviewed_tasks": [
+        "A30",
+        "C19",
+        "C21"
+      ]
+    },
+    {
+      "id": "C16",
+      "agent": "codex",
+      "title": "Functional parity acceptance and release gate",
+      "owned_paths": "src/Workspace.*; src/platform/**; src/contracts/**; src-tauri/src/**; root manifests/capabilities/configs/lockfiles; tests/e2e/codex-*.spec.ts; coordination/release/input-manifest.json",
+      "inputs": "all feature-map owners",
+      "work": "Review current packets and actual functionality first; integrate only approved module APIs, typed main-window IPC and constrained native capabilities. Keep heavy work off UI thread. Stay at 0.1.0 and existing versions; no telemetry/upload/license gates. Preserve originals and never invoke OS actions in automated tests without injected fakes. For final acceptance, write coordination/release/input-manifest.json containing an explicit individual product/config/manifest/lockfile/test evidence file list with SHA-256 and feature gate references. Include those exact candidate files in the C16 packet. Never mark native/unexecuted gates accepted. This is P57 input, not final approval.",
+      "acceptance": "Scoped functional/IPC/browser checks and integration build. Separate browser/fake validation from real native acceptance. Native acceptance uses explicit user-triggered synthetic scenarios; no automatic privacy changes. Missing modules -> partial, skip and continue.",
+      "dependency": "requires the named local exports; skip if absent",
+      "requires": [
+        "coordination/FUNCTION-MAP.md"
+      ],
+      "state": "PARTIAL_NATIVE_ACCEPTANCE_PENDING",
+      "validation_policy": "Functional review/tests and integration build; no formatting/lint.",
+      "shared_claim": "root-wiring",
+      "reviewers": [
+        "antigravity"
+      ],
+      "work_kind": "acceptance",
+      "requires_reviewed_tasks": [
+        "C07",
+        "C08",
+        "C09",
+        "C10",
+        "C11",
+        "C12",
+        "C13",
+        "C14",
+        "C15"
+      ]
+    },
+    {
+      "id": "A31",
+      "agent": "antigravity",
+      "title": "Non-destructive automatic image adjustment",
+      "owned_paths": "src/features/auto-adjust/**; tests/e2e/antigravity-auto-adjust.spec.ts",
+      "inputs": "src/contracts/editor.ts; src/contracts/media.ts (read only)",
+      "work": "Bounded canvas automatic tonal adjustment with a documented deterministic Ferby rule, reset and immutable original preservation. Export local options and preview/result API. Exact Shottr algorithm remains UNKNOWN; do not claim recovered equivalence. No native capture or global state.",
+      "acceptance": "Synthetic real-browser flat/gradient/alpha fixtures, clamped channels, deterministic dimensions/work limits and reset preservation.",
+      "dependency": "independent local module",
+      "requires": [],
+      "state": "READY",
+      "validation_policy": "Scoped functional tests only; no formatting/lint or standalone build/package. Build to Codex, hygiene to Copilot H01.",
+      "reviewers": [
+        "codex"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "A32",
+      "agent": "antigravity",
+      "title": "Selection move and resize handles",
+      "owned_paths": "src/features/selection-handles/**",
+      "inputs": "src/contracts/editor.ts; src/contracts/media.ts (read only)",
+      "work": "Controlled image-pixel selection handles for existing rectangle/arrow/pen annotations with onMove/onResize callbacks. Keep model/view contracts unchanged; local exported props plus adapter proposal. Preserve relative geometry and implement pointer capture/cancel/Escape/multi-pointer guards.",
+      "acceptance": "RTL or owned local browser tests for eight handles/move/clamp/zoom/cancel and immutable callback inputs. No history/model/root edits.",
+      "dependency": "independent local module",
+      "requires": [],
+      "state": "READY",
+      "validation_policy": "Scoped functional tests only; no formatting/lint or standalone build/package. Build to Codex, hygiene to Copilot H01.",
+      "reviewers": [
+        "codex"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "A33",
+      "agent": "antigravity",
+      "title": "Rust-only local Vision OCR and QR core",
+      "owned_paths": "src-tauri/crates/vision-core/**",
+      "inputs": "src-tauri/crates/image-core/src/lib.rs; docs/implementation/RUST-VISION.md; src/features/ocr-panel and src/features/qr-panel exported types if present (read only)",
+      "work": "Replace the active Swift plan with a standalone ferby-vision-core Rust crate calling system Vision through objc2-vision bindings. No Swift source/compiler/CLI/helper, XCTest, subprocess OCR or proprietary code. Pin objc2-vision 0.3.2 and reuse currently locked objc2 0.6.5/objc2-foundation/core-graphics 0.3.2; choose minimal feature flags and do not upgrade existing versions. Target the frozen macOS12 baseline using available Objective-C Vision APIs/revisions and explicit availability checks. Export owned serde request/result/error and runtime supported-language discovery. Limit input bytes/dimensions/pixels, results and UTF-8 output size. Keep unsafe FFI small/documented and native retained objects within one autoreleasepool/worker; only owned Rust data crosses threads. Reject unsupported hosts clearly. Do not edit root manifests/register commands or implement UI.",
+      "acceptance": "cargo test only (compilation intrinsic to tests allowed). Include fake-runner/pure validation cases and real local OCR text + QR recognition using generated synthetic images, including malformed/oversized inputs, unsupported language, no-result and result caps. No actual screen capture, clipboard, external content, network or OS preference changes. Document capabilities/limitations and a Rust/Tauri blocking-call integration example. No formatter/lint or standalone build/package; delegate H01/build as instructed.",
+      "dependency": "independent standalone crate; no Swift/XCTest required",
+      "requires": [],
+      "queue_priority": 1,
+      "state": "READY",
+      "validation_policy": "Scoped Rust functional tests only; no formatting/lint or standalone build/package. Root registration/build stays Codex-owned.",
+      "reviewers": [
+        "codex"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "A34",
+      "agent": "antigravity",
+      "title": "Composed advanced editor module",
+      "owned_paths": "src/features/editor/advanced-workbench/**; tests/e2e/antigravity-advanced-workbench.spec.ts",
+      "inputs": "src/features/editor/workbench/index.ts; src/contracts/editor.ts; named exported APIs under shapes/text-counter/emphasis/selection-handles (read only)",
+      "work": "Compose existing A07/A16/A17/A18/A32 APIs in a standalone AdvancedWorkbench with controlled source image, local extended annotation state and injected output callbacks. Provide line/ellipse, text/counter and emphasis tool workflows, selection/move/resize, undo/redo and explicit export raster generation. Reuse producer modules; do not modify them or shared contracts. Where APIs differ, implement an owned adapter and document lossless/lossy conversions. Never silently drop unsupported annotation kinds. Export a root integration example; no native invoke, main Workspace or global styles.",
+      "acceptance": "Scoped interaction and real-browser synthetic raster checks cover creating/editing at least line, ellipse, text and one emphasis effect; undo/redo and unsupported-kind rejection. Verify exported pixels and preserved source coordinates with zoom. If a required producer is unavailable, submit a partial adapter plus exact gap; do not absorb its scope.",
+      "dependency": "existing local producer exports; no Codex approval/wiring required to develop isolated composition",
+      "requires": [
+        "src/features/editor/workbench/index.ts",
+        "src/features/shapes/index.ts",
+        "src/features/text-counter/index.ts",
+        "src/features/emphasis/index.ts",
+        "src/features/selection-handles/index.ts"
+      ],
+      "state": "READY",
+      "validation_policy": "Scoped functional tests only; build delegated to Codex; formatting/lint delegated to Copilot H01. No Swift.",
+      "reviewers": [
+        "codex"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "A35",
+      "agent": "antigravity",
+      "title": "Composed post-capture workflow",
+      "owned_paths": "src/features/capture-workflow/**",
+      "inputs": "src/features/post-capture/index.ts; src/features/capture-preview/index.ts; src/contracts/media.ts",
+      "work": "Compose A24 planner and A15 preview into a standalone controller with injected capture/show/copy/save/pin/recognition callbacks and controlled preferences. Explicit user start only; model cancellation, unmount, late completion, operation identity, partial output failure and retries. Prevent duplicate saves/copies and stale preview actions from targeting a newer image. No actual capture/clipboard/window/OS calls, global state or root wiring. Preserve upstream APIs using owned adapters and export an integration example.",
+      "acceptance": "Injected deferred promises and fake timers prove cancellation/late-result isolation, failure/retry behavior, no duplicate side effects, preview dismissal and valid source lifetime. Record target scheduling/order as UNKNOWN; chosen Ferby semantics are not inferred Shottr behavior.",
+      "dependency": "existing local producer exports; no Codex approval/wiring required to develop isolated composition",
+      "requires": [
+        "src/features/post-capture/index.ts",
+        "src/features/capture-preview/index.ts"
+      ],
+      "state": "READY",
+      "validation_policy": "Scoped functional tests only; build delegated to Codex; formatting/lint delegated to Copilot H01. No Swift.",
+      "reviewers": [
+        "codex"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "A36",
+      "agent": "antigravity",
+      "title": "Composed image layout workspace",
+      "owned_paths": "src/features/layout-workspace/**; tests/e2e/antigravity-layout-workspace.spec.ts",
+      "inputs": "src/features/composition/index.ts; src/features/backdrop/index.ts; src/features/window-appearance/index.ts; src/features/measurement-panel/index.ts",
+      "work": "Build a standalone controlled workspace composing A20/A21/A26/A27: ordered caller-owned images, explicit layout and snapping, backdrop/inset/shadow and PX/PT measurement. Use injected explicit display scale; never infer Retina scale. Render final PNG through existing producers using owned adapters, enforce their budgets and expose size/errors before export. No root wiring/native calls, proprietary templates or producer edits. Export index and a root integration example.",
+      "acceptance": "Synthetic real-browser checks verify output dimensions/pixels/layer order, transparent inputs, explicit scale and oversize rejection. Record documented Ferby choices and unresolved Shottr snapping/shadow/text-color semantics. Do not fabricate target reference PNGs.",
+      "dependency": "existing local producer exports; no Codex approval/wiring required to develop isolated composition",
+      "requires": [
+        "src/features/composition/index.ts",
+        "src/features/backdrop/index.ts",
+        "src/features/window-appearance/index.ts",
+        "src/features/measurement-panel/index.ts"
+      ],
+      "state": "READY",
+      "validation_policy": "Scoped functional tests only; build delegated to Codex; formatting/lint delegated to Copilot H01. No Swift.",
+      "reviewers": [
+        "codex"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "A37",
+      "agent": "antigravity",
+      "title": "Composed capability-aware preferences workspace",
+      "owned_paths": "src/features/preferences-workspace/**",
+      "inputs": "src/features/settings/SettingsPanel.tsx; src/features/app-preferences/index.ts; src/features/hotkey-panel/index.ts; src/features/export-panel/index.ts",
+      "work": "Compose A03/A10/A25/A28 into a standalone preferences workspace with injected load/save and capability props. Include dirty state, save error/retry, external reload conflicts, unsupported-setting explanation and safe preservation of unknown/disabled settings. Native registration, disk persistence and actual OS effects remain injected. Export owned view-model adapters and an integration example; no new defaults inferred from Shottr, root settings schema changes, dependency additions or producer edits.",
+      "acceptance": "Functional component checks cover failed save retaining edits, duplicate-submit suppression, capability-disabled changes, reload conflict and unknown-field preservation. Preserve frozen contracts; document incompatible fields rather than silently coercing them. No standalone type/build/package, lint or format.",
+      "dependency": "existing local producer exports; no Codex approval/wiring required to develop isolated composition",
+      "requires": [
+        "src/features/settings/SettingsPanel.tsx",
+        "src/features/app-preferences/index.ts",
+        "src/features/hotkey-panel/index.ts",
+        "src/features/export-panel/index.ts"
+      ],
+      "state": "READY",
+      "validation_policy": "Scoped functional tests only; build delegated to Codex; formatting/lint delegated to Copilot H01. No Swift.",
+      "reviewers": [
+        "codex"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "P43",
+      "agent": "copilot",
+      "title": "Source-grounded parity cases: capture",
+      "owned_paths": "docs/qa/parity/P43.json; docs/qa/parity/P43.md",
+      "inputs": "coordination/reference-briefs/P43.md; src/features/capture/CapturePanel.tsx (public API only)",
+      "work": "Extend P41 coarse feature inventory into 3-6 source-grounded comparison cases for F01, F02. Follow coordination/ORIGIN-PARITY.md case schema supplied in the dispatcher protocol. Use only the named brief/API; no full REA or repository scans. Include exact resource references, original-vs-Ferby observation procedure, null expected target result, explicit UNKNOWN or EXCLUDED status and integration owner. Existing exports are not proof of application integration. Do not execute Shottr or change product code. Report API limitations without guessing runtime behavior.",
+      "acceptance": "One JSON case pack plus <=150-word report. Required JSON case fields: id, feature_id, source_reference, source_evidence_level, fixture, trigger, target_observation_needed, ferby_observation_needed, expected_target_result (null), acceptance_rule, target_status (NOT_EXECUTED or EXCLUDED), ferby_status (NOT_EXECUTED), owner, limitations. Unique case IDs and valid assigned feature IDs. JSON parsing and field validation with standard Python is sufficient; do not add mirror tests or count cases as passed. Publish exact snapshots then continue.",
+      "dependency": "independent bounded reference specification; does not wait for producer review or runtime permissions",
+      "requires": [
+        "coordination/reference-briefs/P43.md",
+        "src/features/capture/CapturePanel.tsx"
+      ],
+      "state": "READY",
+      "validation_policy": "Read-only specification; validate JSON/links, no product build. H01 hygiene remains separate. No Swift.",
+      "reviewers": [
+        "codex",
+        "antigravity"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "P44",
+      "agent": "copilot",
+      "title": "Source-grounded parity cases: recognition-import",
+      "owned_paths": "docs/qa/parity/P44.json; docs/qa/parity/P44.md",
+      "inputs": "coordination/reference-briefs/P44.md; src/features/ocr-panel/index.ts (public API only)",
+      "work": "Extend P41 coarse feature inventory into 3-6 source-grounded comparison cases for F03, F04, F05. Follow coordination/ORIGIN-PARITY.md case schema supplied in the dispatcher protocol. Use only the named brief/API; no full REA or repository scans. Include exact resource references, original-vs-Ferby observation procedure, null expected target result, explicit UNKNOWN or EXCLUDED status and integration owner. Existing exports are not proof of application integration. Do not execute Shottr or change product code. Report API limitations without guessing runtime behavior.",
+      "acceptance": "One JSON case pack plus <=150-word report. Required JSON case fields: id, feature_id, source_reference, source_evidence_level, fixture, trigger, target_observation_needed, ferby_observation_needed, expected_target_result (null), acceptance_rule, target_status (NOT_EXECUTED or EXCLUDED), ferby_status (NOT_EXECUTED), owner, limitations. Unique case IDs and valid assigned feature IDs. JSON parsing and field validation with standard Python is sufficient; do not add mirror tests or count cases as passed. Publish exact snapshots then continue.",
+      "dependency": "independent bounded reference specification; does not wait for producer review or runtime permissions",
+      "requires": [
+        "coordination/reference-briefs/P44.md",
+        "src/features/ocr-panel/index.ts"
+      ],
+      "state": "READY",
+      "validation_policy": "Read-only specification; validate JSON/links, no product build. H01 hygiene remains separate. No Swift.",
+      "reviewers": [
+        "codex",
+        "antigravity"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "P45",
+      "agent": "copilot",
+      "title": "Source-grounded parity cases: annotation-history",
+      "owned_paths": "docs/qa/parity/P45.json; docs/qa/parity/P45.md",
+      "inputs": "coordination/reference-briefs/P45.md; src/contracts/editor.ts (public API only)",
+      "work": "Extend P41 coarse feature inventory into 3-6 source-grounded comparison cases for F06, F07, F10, F11, F13, F15. Follow coordination/ORIGIN-PARITY.md case schema supplied in the dispatcher protocol. Use only the named brief/API; no full REA or repository scans. Include exact resource references, original-vs-Ferby observation procedure, null expected target result, explicit UNKNOWN or EXCLUDED status and integration owner. Existing exports are not proof of application integration. Do not execute Shottr or change product code. Report API limitations without guessing runtime behavior.",
+      "acceptance": "One JSON case pack plus <=150-word report. Required JSON case fields: id, feature_id, source_reference, source_evidence_level, fixture, trigger, target_observation_needed, ferby_observation_needed, expected_target_result (null), acceptance_rule, target_status (NOT_EXECUTED or EXCLUDED), ferby_status (NOT_EXECUTED), owner, limitations. Unique case IDs and valid assigned feature IDs. JSON parsing and field validation with standard Python is sufficient; do not add mirror tests or count cases as passed. Publish exact snapshots then continue.",
+      "dependency": "independent bounded reference specification; does not wait for producer review or runtime permissions",
+      "requires": [
+        "coordination/reference-briefs/P45.md",
+        "src/contracts/editor.ts"
+      ],
+      "state": "READY",
+      "validation_policy": "Read-only specification; validate JSON/links, no product build. H01 hygiene remains separate. No Swift.",
+      "reviewers": [
+        "codex",
+        "antigravity"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "P46",
+      "agent": "copilot",
+      "title": "Source-grounded parity cases: effects-colors",
+      "owned_paths": "docs/qa/parity/P46.json; docs/qa/parity/P46.md",
+      "inputs": "coordination/reference-briefs/P46.md; src/features/emphasis/index.ts (public API only)",
+      "work": "Extend P41 coarse feature inventory into 3-6 source-grounded comparison cases for F08, F09, F12, F16, F17. Follow coordination/ORIGIN-PARITY.md case schema supplied in the dispatcher protocol. Use only the named brief/API; no full REA or repository scans. Include exact resource references, original-vs-Ferby observation procedure, null expected target result, explicit UNKNOWN or EXCLUDED status and integration owner. Existing exports are not proof of application integration. Do not execute Shottr or change product code. Report API limitations without guessing runtime behavior.",
+      "acceptance": "One JSON case pack plus <=150-word report. Required JSON case fields: id, feature_id, source_reference, source_evidence_level, fixture, trigger, target_observation_needed, ferby_observation_needed, expected_target_result (null), acceptance_rule, target_status (NOT_EXECUTED or EXCLUDED), ferby_status (NOT_EXECUTED), owner, limitations. Unique case IDs and valid assigned feature IDs. JSON parsing and field validation with standard Python is sufficient; do not add mirror tests or count cases as passed. Publish exact snapshots then continue.",
+      "dependency": "independent bounded reference specification; does not wait for producer review or runtime permissions",
+      "requires": [
+        "coordination/reference-briefs/P46.md",
+        "src/features/emphasis/index.ts"
+      ],
+      "state": "READY",
+      "validation_policy": "Read-only specification; validate JSON/links, no product build. H01 hygiene remains separate. No Swift.",
+      "reviewers": [
+        "codex",
+        "antigravity"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "P47",
+      "agent": "copilot",
+      "title": "Source-grounded parity cases: composition-background",
+      "owned_paths": "docs/qa/parity/P47.json; docs/qa/parity/P47.md",
+      "inputs": "coordination/reference-briefs/P47.md; src/features/composition/index.ts (public API only)",
+      "work": "Extend P41 coarse feature inventory into 3-6 source-grounded comparison cases for F14, F18, F19, F26. Follow coordination/ORIGIN-PARITY.md case schema supplied in the dispatcher protocol. Use only the named brief/API; no full REA or repository scans. Include exact resource references, original-vs-Ferby observation procedure, null expected target result, explicit UNKNOWN or EXCLUDED status and integration owner. Existing exports are not proof of application integration. Do not execute Shottr or change product code. Report API limitations without guessing runtime behavior.",
+      "acceptance": "One JSON case pack plus <=150-word report. Required JSON case fields: id, feature_id, source_reference, source_evidence_level, fixture, trigger, target_observation_needed, ferby_observation_needed, expected_target_result (null), acceptance_rule, target_status (NOT_EXECUTED or EXCLUDED), ferby_status (NOT_EXECUTED), owner, limitations. Unique case IDs and valid assigned feature IDs. JSON parsing and field validation with standard Python is sufficient; do not add mirror tests or count cases as passed. Publish exact snapshots then continue.",
+      "dependency": "independent bounded reference specification; does not wait for producer review or runtime permissions",
+      "requires": [
+        "coordination/reference-briefs/P47.md",
+        "src/features/composition/index.ts"
+      ],
+      "state": "READY",
+      "validation_policy": "Read-only specification; validate JSON/links, no product build. H01 hygiene remains separate. No Swift.",
+      "reviewers": [
+        "codex",
+        "antigravity"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "P48",
+      "agent": "copilot",
+      "title": "Source-grounded parity cases: pin-library-preview",
+      "owned_paths": "docs/qa/parity/P48.json; docs/qa/parity/P48.md",
+      "inputs": "coordination/reference-briefs/P48.md; src/features/pin/PinPreviewCard.tsx (public API only)",
+      "work": "Extend P41 coarse feature inventory into 3-6 source-grounded comparison cases for F20, F21, F22. Follow coordination/ORIGIN-PARITY.md case schema supplied in the dispatcher protocol. Use only the named brief/API; no full REA or repository scans. Include exact resource references, original-vs-Ferby observation procedure, null expected target result, explicit UNKNOWN or EXCLUDED status and integration owner. Existing exports are not proof of application integration. Do not execute Shottr or change product code. Report API limitations without guessing runtime behavior.",
+      "acceptance": "One JSON case pack plus <=150-word report. Required JSON case fields: id, feature_id, source_reference, source_evidence_level, fixture, trigger, target_observation_needed, ferby_observation_needed, expected_target_result (null), acceptance_rule, target_status (NOT_EXECUTED or EXCLUDED), ferby_status (NOT_EXECUTED), owner, limitations. Unique case IDs and valid assigned feature IDs. JSON parsing and field validation with standard Python is sufficient; do not add mirror tests or count cases as passed. Publish exact snapshots then continue.",
+      "dependency": "independent bounded reference specification; does not wait for producer review or runtime permissions",
+      "requires": [
+        "coordination/reference-briefs/P48.md",
+        "src/features/pin/PinPreviewCard.tsx"
+      ],
+      "state": "READY",
+      "validation_policy": "Read-only specification; validate JSON/links, no product build. H01 hygiene remains separate. No Swift.",
+      "reviewers": [
+        "codex",
+        "antigravity"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "P49",
+      "agent": "copilot",
+      "title": "Source-grounded parity cases: output",
+      "owned_paths": "docs/qa/parity/P49.json; docs/qa/parity/P49.md",
+      "inputs": "coordination/reference-briefs/P49.md; src/features/post-capture/index.ts (public API only)",
+      "work": "Extend P41 coarse feature inventory into 3-6 source-grounded comparison cases for F23, F24, F25. Follow coordination/ORIGIN-PARITY.md case schema supplied in the dispatcher protocol. Use only the named brief/API; no full REA or repository scans. Include exact resource references, original-vs-Ferby observation procedure, null expected target result, explicit UNKNOWN or EXCLUDED status and integration owner. Existing exports are not proof of application integration. Do not execute Shottr or change product code. Report API limitations without guessing runtime behavior.",
+      "acceptance": "One JSON case pack plus <=150-word report. Required JSON case fields: id, feature_id, source_reference, source_evidence_level, fixture, trigger, target_observation_needed, ferby_observation_needed, expected_target_result (null), acceptance_rule, target_status (NOT_EXECUTED or EXCLUDED), ferby_status (NOT_EXECUTED), owner, limitations. Unique case IDs and valid assigned feature IDs. JSON parsing and field validation with standard Python is sufficient; do not add mirror tests or count cases as passed. Publish exact snapshots then continue.",
+      "dependency": "independent bounded reference specification; does not wait for producer review or runtime permissions",
+      "requires": [
+        "coordination/reference-briefs/P49.md",
+        "src/features/post-capture/index.ts"
+      ],
+      "state": "READY",
+      "validation_policy": "Read-only specification; validate JSON/links, no product build. H01 hygiene remains separate. No Swift.",
+      "reviewers": [
+        "codex",
+        "antigravity"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "P50",
+      "agent": "copilot",
+      "title": "Source-grounded parity cases: lifecycle-exclusions",
+      "owned_paths": "docs/qa/parity/P50.json; docs/qa/parity/P50.md",
+      "inputs": "coordination/reference-briefs/P50.md; src/features/app-preferences/index.ts (public API only)",
+      "work": "Extend P41 coarse feature inventory into 3-6 source-grounded comparison cases for F27, F28, F29, F30, F31, F32, F33, F34. Follow coordination/ORIGIN-PARITY.md case schema supplied in the dispatcher protocol. Use only the named brief/API; no full REA or repository scans. Include exact resource references, original-vs-Ferby observation procedure, null expected target result, explicit UNKNOWN or EXCLUDED status and integration owner. Existing exports are not proof of application integration. Do not execute Shottr or change product code. Report API limitations without guessing runtime behavior.",
+      "acceptance": "One JSON case pack plus <=150-word report. Required JSON case fields: id, feature_id, source_reference, source_evidence_level, fixture, trigger, target_observation_needed, ferby_observation_needed, expected_target_result (null), acceptance_rule, target_status (NOT_EXECUTED or EXCLUDED), ferby_status (NOT_EXECUTED), owner, limitations. Unique case IDs and valid assigned feature IDs. JSON parsing and field validation with standard Python is sufficient; do not add mirror tests or count cases as passed. Publish exact snapshots then continue.",
+      "dependency": "independent bounded reference specification; does not wait for producer review or runtime permissions",
+      "requires": [
+        "coordination/reference-briefs/P50.md",
+        "src/features/app-preferences/index.ts"
+      ],
+      "state": "READY",
+      "validation_policy": "Read-only specification; validate JSON/links, no product build. H01 hygiene remains separate. No Swift.",
+      "reviewers": [
+        "codex",
+        "antigravity"
+      ],
+      "work_kind": "implementation"
+    },
+    {
+      "id": "C17",
+      "agent": "codex",
+      "title": "Capture session controller",
+      "owned_paths": "src/features/capture-session/**",
+      "inputs": "src/contracts/media.ts; src/features/stitch-budget/index.ts",
+      "work": "Implement a headless capture-session controller with injected frame acquisition and stitching adapters, explicit user-start, stop/cancel, monotonic operation IDs, bounded frame count/bytes/pixels, repeat-area state bound to explicit display geometry and invalidation on display change. Manual frames and an injected scheduler only; no real screenshot, scrolling, global listener or OS calls. Own local request/state types and integration example for C11; do not rewrite capture-core or A22 stitcher. Export the public API through index.ts in the owned directory.",
+      "acceptance": "Deferred fake frame/stitch promises prove stale result rejection after stop/new session, duplicate-stop safety, budget failure cleanup, stable frame order and repeat-area invalidation. Tests use synthetic frames and no timers that wait in real time.",
+      "requires": [
+        "src/contracts/media.ts",
+        "src/features/stitch-budget/index.ts"
+      ],
+      "dependency": "independent implementation using public contracts/API; no producer approval or root wiring needed",
+      "state": "READY",
+      "work_kind": "implementation",
+      "reviewers": [
+        "antigravity"
+      ],
+      "validation_policy": "Scoped functional tests; Codex may run necessary type/build checks. Formatting/lint delegated to Copilot H01. No Swift."
+    },
+    {
+      "id": "C18",
+      "agent": "codex",
+      "title": "Recognition job controller",
+      "owned_paths": "src/features/recognition-workflow/**",
+      "inputs": "src/features/ocr-panel/index.ts; src/features/qr-panel/index.ts",
+      "work": "Implement an injected async OCR/QR controller independent of the native Vision crate: validate owned request bounds, selected image identity, allowed runtime languages, operation generation, cancellation and bounded output. Preserve raw recognized text and return display-normalization separately. QR values stay inert data; never auto-open a URL or write clipboard. Export typed adapter proposal for C08; do not change native.ts/contracts or worker panels. Export the public API through index.ts in the owned directory.",
+      "acceptance": "Fake backend tests cover overlapping requests completing out of order, closing image mid-request, language discovery errors, invalid/oversize payloads, empty result and rejection recovery; output remains associated with exact source and no duplicate callbacks.",
+      "requires": [
+        "src/features/ocr-panel/index.ts",
+        "src/features/qr-panel/index.ts"
+      ],
+      "dependency": "independent implementation using public contracts/API; no producer approval or root wiring needed",
+      "state": "READY",
+      "work_kind": "implementation",
+      "reviewers": [
+        "antigravity"
+      ],
+      "validation_policy": "Scoped functional tests; Codex may run necessary type/build checks. Formatting/lint delegated to Copilot H01. No Swift."
+    },
+    {
+      "id": "C19",
+      "agent": "codex",
+      "title": "Output job orchestration",
+      "owned_paths": "src/features/output-jobs/**",
+      "inputs": "src/contracts/media.ts; src/features/export/names.ts",
+      "work": "Implement a headless output job coordinator with injected render/copy/save/print/drag handlers and explicit user intent. Freeze document revision and export options at start, limit concurrent jobs, manage temporary raster lifetime, suppress duplicate actions, preserve user cancellation and original image on failure. No actual clipboard, disk, dialogs, OS print/drag or native registration. Export integration examples for C07/C15; do not replace existing name or output-size helpers. Export the public API through index.ts in the owned directory.",
+      "acceptance": "Injected deferred-handler tests prove exact-once cleanup on success/failure/cancel, unchanged original, stale source isolation, frozen format/quality and no duplicate save/print requests. Distinguish partial success from retryable failure without repeating a completed side effect.",
+      "requires": [
+        "src/contracts/media.ts",
+        "src/features/export/names.ts"
+      ],
+      "dependency": "independent implementation using public contracts/API; no producer approval or root wiring needed",
+      "state": "READY",
+      "work_kind": "implementation",
+      "reviewers": [
+        "antigravity"
+      ],
+      "validation_policy": "Scoped functional tests; Codex may run necessary type/build checks. Formatting/lint delegated to Copilot H01. No Swift."
+    },
+    {
+      "id": "C20",
+      "agent": "codex",
+      "title": "Local archive workflow controller",
+      "owned_paths": "src/features/archive-workflow/**",
+      "inputs": "src/contracts/media.ts; src/features/session-selection/index.ts",
+      "work": "Implement staged archive import/export workflow with injected bounded decoder/encoder and user-approved IO callbacks. Validate metadata/count/aggregate budgets before committing a candidate library, preserve old library on any invalid entry or cancellation, release owned object URLs exactly once and produce a deterministic ID-collision remap proposal. Do not implement ZIP parsing, touch disk, edit A29 session-core, serialize URLs as image content or rewrite the root session library. Export the public API through index.ts in the owned directory.",
+      "acceptance": "Synthetic archive tests cover mixed-validity atomic rejection, conflicting IDs, cancellation/late decoder results, resource cleanup, immutable snapshots and preserving active document/annotations. Document native A29 adapter and C14 integration obligations.",
+      "requires": [
+        "src/contracts/media.ts",
+        "src/features/session-selection/index.ts"
+      ],
+      "dependency": "independent implementation using public contracts/API; no producer approval or root wiring needed",
+      "state": "READY",
+      "work_kind": "implementation",
+      "reviewers": [
+        "antigravity"
+      ],
+      "validation_policy": "Scoped functional tests; Codex may run necessary type/build checks. Formatting/lint delegated to Copilot H01. No Swift."
+    },
+    {
+      "id": "C21",
+      "agent": "codex",
+      "title": "Application lifecycle and action policy",
+      "owned_paths": "src/features/lifecycle-policy/**",
+      "inputs": "src/features/deep-link-parser/index.ts; src/features/shortcuts/editor-shortcuts.ts",
+      "work": "Implement pure application action arbitration for explicit allowed hotkey/deep-link intents, busy/closing state, editable focus, duplicate activation and unsaved-document decisions. Emit declarative effects only through injected handlers; never register OS shortcuts, launch URLs, start captures, persist preferences or alter global state. Fail closed on malformed/unknown intents, separate caller-specified preferences from platform capabilities and expose local integration example for C13/C15. Export the public API through index.ts in the owned directory.",
+      "acceptance": "Table-driven functional cases cover repeated intent IDs, busy state, editable focus, close/save/cancel transitions, unrecognized routes, unsupported capabilities and no destructive action before an explicit confirmation decision. No global listeners or OS state changes.",
+      "requires": [
+        "src/features/deep-link-parser/index.ts",
+        "src/features/shortcuts/editor-shortcuts.ts"
+      ],
+      "dependency": "independent implementation using public contracts/API; no producer approval or root wiring needed",
+      "state": "READY",
+      "work_kind": "implementation",
+      "reviewers": [
+        "antigravity"
+      ],
+      "validation_policy": "Scoped functional tests; Codex may run necessary type/build checks. Formatting/lint delegated to Copilot H01. No Swift."
+    },
+    {
+      "id": "C22",
+      "agent": "codex",
+      "title": "Bounded native image effects pipeline",
+      "owned_paths": "src-tauri/crates/effects-pipeline/**",
+      "inputs": "src-tauri/crates/image-core/src/lib.rs; src-tauri/crates/effects-core/src/lib.rs",
+      "work": "Implement standalone Rust orchestration crate reusing image-core and A19 effects-core through owned adapters. Validate ordered effect requests and aggregate decode/output/work budgets, decode once where APIs permit, preserve immutable source, return owned encoded output and typed errors. No new blur/erase algorithm, native command registration, root manifest edits, Swift or dependency version changes. Use only existing dependency versions and path dependencies; propose root adapter for C12.",
+      "acceptance": "Synthetic pixel tests cover ordering of mixed effects, transparent inputs, out-of-bounds regions, malformed images, pixel/output budgets, failure preserving original and deterministic bounded results. Tests call no OS APIs; do not claim target concealment algorithm or privacy equivalence.",
+      "requires": [
+        "src-tauri/crates/image-core/src/lib.rs",
+        "src-tauri/crates/effects-core/src/lib.rs"
+      ],
+      "dependency": "independent implementation using public contracts/API; no producer approval or root wiring needed",
+      "state": "READY",
+      "work_kind": "implementation",
+      "reviewers": [
+        "antigravity"
+      ],
+      "validation_policy": "Scoped functional tests; Codex may run necessary type/build checks. Formatting/lint delegated to Copilot H01. No Swift."
+    },
+    {
+      "id": "A38",
+      "agent": "antigravity",
+      "title": "Recurring independent review of Codex and Copilot packets",
+      "owned_paths": "coordination/reviews/peer/** (new antigravity records only); docs/agents/antigravity/A38-*.md",
+      "inputs": "scripts/peer_review.py list --reviewer antigravity; exact selected packet files and relevant targeted checks",
+      "work": "At implementation exhaustion, review fresh completed Codex/Copilot packets independently against actual source, named tests and original evidence limitations. Record one immutable peer review per packet with --reviewer antigravity and actual checks. Never review own work, edit producer code, modify old records or write legacy Codex decisions. Report functional corrections to the producer; missing/build/hygiene delegation is not a functional failure. Submit an A38 completion packet per review batch and continue independent work without waiting.",
+      "acceptance": "Approval requires current done packet hashes, actual code review and scoped functional checks or explicitly justified limits. No standalone build, lint or formatting. Existing snapshots are never silently reapproved. Review idle slot has no polling and is skipped when no fresh packet exists.",
+      "requires": [],
+      "dependency": "fresh current completed non-self packets",
+      "state": "READY_RECURRING",
+      "work_kind": "review",
+      "recurring_peer_review": true,
+      "queue_priority": 3,
+      "reviewers": [
+        "codex"
+      ],
+      "validation_policy": "Scoped functional checks only; build to Codex; hygiene to Copilot H01. No Swift."
+    },
+    {
+      "id": "P51",
+      "agent": "copilot",
+      "title": "Independent capture-session negative-path regressions",
+      "owned_paths": "src/testing/copilot-capture-session.test.ts; docs/qa/copilot-P51.md",
+      "inputs": "src/features/capture-session/index.ts; src/contracts/media.ts",
+      "work": "Read only the named public API/contract; write bounded public-API regression tests for C17. Cover 3-5 meaningful external invariants from its acceptance, especially cancellation/out-of-order failure, immutable original and duplicate side-effect suppression where applicable. Use deferred fake adapters and synthetic content. Do not read/write implementation internals or duplicate a producer test line-for-line. Do not fix producer code; report the smallest reproducible functional defect.",
+      "acceptance": "One targeted Vitest file plus <=150-word report; run only that test, state actual outcome and missing exports precisely. No real OS/clipboard/network/capture or root changes. API absence causes skip; test failure is a correction handoff, not permission to change producer files.",
+      "requires": [
+        "src/features/capture-session/index.ts"
+      ],
+      "dependency": "producer index export exists; approval not needed for independent tests",
+      "state": "READY",
+      "work_kind": "implementation",
+      "reviewers": [
+        "codex",
+        "antigravity"
+      ],
+      "validation_policy": "Scoped functional tests; H01 remains separate. No Swift."
+    },
+    {
+      "id": "P52",
+      "agent": "copilot",
+      "title": "Independent recognition-workflow negative-path regressions",
+      "owned_paths": "src/testing/copilot-recognition-workflow.test.ts; docs/qa/copilot-P52.md",
+      "inputs": "src/features/recognition-workflow/index.ts; src/features/ocr-panel/index.ts",
+      "work": "Read only the named public API/contract; write bounded public-API regression tests for C18. Cover 3-5 meaningful external invariants from its acceptance, especially cancellation/out-of-order failure, immutable original and duplicate side-effect suppression where applicable. Use deferred fake adapters and synthetic content. Do not read/write implementation internals or duplicate a producer test line-for-line. Do not fix producer code; report the smallest reproducible functional defect.",
+      "acceptance": "One targeted Vitest file plus <=150-word report; run only that test, state actual outcome and missing exports precisely. No real OS/clipboard/network/capture or root changes. API absence causes skip; test failure is a correction handoff, not permission to change producer files.",
+      "requires": [
+        "src/features/recognition-workflow/index.ts"
+      ],
+      "dependency": "producer index export exists; approval not needed for independent tests",
+      "state": "READY",
+      "work_kind": "implementation",
+      "reviewers": [
+        "codex",
+        "antigravity"
+      ],
+      "validation_policy": "Scoped functional tests; H01 remains separate. No Swift."
+    },
+    {
+      "id": "P53",
+      "agent": "copilot",
+      "title": "Independent output-jobs negative-path regressions",
+      "owned_paths": "src/testing/copilot-output-jobs.test.ts; docs/qa/copilot-P53.md",
+      "inputs": "src/features/output-jobs/index.ts; src/contracts/media.ts",
+      "work": "Read only the named public API/contract; write bounded public-API regression tests for C19. Cover 3-5 meaningful external invariants from its acceptance, especially cancellation/out-of-order failure, immutable original and duplicate side-effect suppression where applicable. Use deferred fake adapters and synthetic content. Do not read/write implementation internals or duplicate a producer test line-for-line. Do not fix producer code; report the smallest reproducible functional defect.",
+      "acceptance": "One targeted Vitest file plus <=150-word report; run only that test, state actual outcome and missing exports precisely. No real OS/clipboard/network/capture or root changes. API absence causes skip; test failure is a correction handoff, not permission to change producer files.",
+      "requires": [
+        "src/features/output-jobs/index.ts"
+      ],
+      "dependency": "producer index export exists; approval not needed for independent tests",
+      "state": "READY",
+      "work_kind": "implementation",
+      "reviewers": [
+        "codex",
+        "antigravity"
+      ],
+      "validation_policy": "Scoped functional tests; H01 remains separate. No Swift."
+    },
+    {
+      "id": "P54",
+      "agent": "copilot",
+      "title": "Independent archive-workflow negative-path regressions",
+      "owned_paths": "src/testing/copilot-archive-workflow.test.ts; docs/qa/copilot-P54.md",
+      "inputs": "src/features/archive-workflow/index.ts; src/contracts/media.ts",
+      "work": "Read only the named public API/contract; write bounded public-API regression tests for C20. Cover 3-5 meaningful external invariants from its acceptance, especially cancellation/out-of-order failure, immutable original and duplicate side-effect suppression where applicable. Use deferred fake adapters and synthetic content. Do not read/write implementation internals or duplicate a producer test line-for-line. Do not fix producer code; report the smallest reproducible functional defect.",
+      "acceptance": "One targeted Vitest file plus <=150-word report; run only that test, state actual outcome and missing exports precisely. No real OS/clipboard/network/capture or root changes. API absence causes skip; test failure is a correction handoff, not permission to change producer files.",
+      "requires": [
+        "src/features/archive-workflow/index.ts"
+      ],
+      "dependency": "producer index export exists; approval not needed for independent tests",
+      "state": "READY",
+      "work_kind": "implementation",
+      "reviewers": [
+        "codex",
+        "antigravity"
+      ],
+      "validation_policy": "Scoped functional tests; H01 remains separate. No Swift."
+    },
+    {
+      "id": "P55",
+      "agent": "copilot",
+      "title": "Independent lifecycle-policy negative-path regressions",
+      "owned_paths": "src/testing/copilot-lifecycle-policy.test.ts; docs/qa/copilot-P55.md",
+      "inputs": "src/features/lifecycle-policy/index.ts; src/features/deep-link-parser/index.ts",
+      "work": "Read only the named public API/contract; write bounded public-API regression tests for C21. Cover 3-5 meaningful external invariants from its acceptance, especially cancellation/out-of-order failure, immutable original and duplicate side-effect suppression where applicable. Use deferred fake adapters and synthetic content. Do not read/write implementation internals or duplicate a producer test line-for-line. Do not fix producer code; report the smallest reproducible functional defect.",
+      "acceptance": "One targeted Vitest file plus <=150-word report; run only that test, state actual outcome and missing exports precisely. No real OS/clipboard/network/capture or root changes. API absence causes skip; test failure is a correction handoff, not permission to change producer files.",
+      "requires": [
+        "src/features/lifecycle-policy/index.ts"
+      ],
+      "dependency": "producer index export exists; approval not needed for independent tests",
+      "state": "READY",
+      "work_kind": "implementation",
+      "reviewers": [
+        "codex",
+        "antigravity"
+      ],
+      "validation_policy": "Scoped functional tests; H01 remains separate. No Swift."
+    },
+    {
+      "id": "P56",
+      "agent": "copilot",
+      "title": "Independent Rust effects pipeline acceptance audit",
+      "owned_paths": "docs/qa/copilot-P56.md",
+      "inputs": "src-tauri/crates/effects-pipeline/src/lib.rs; src-tauri/crates/effects-pipeline/Cargo.toml",
+      "work": "Review only these two files for immutable input, bounded allocation/output, ordered operations, error paths and existing-version reuse. Run the producer crate scoped functional tests if available. Report concrete uncovered failure cases and actual commands/results in <=150 words. No producer edits, root build, broad source scan or invented test result.",
+      "acceptance": "Bounded report with symbols/lines, actual scoped cargo test result or explicit unavailable reason, and up to four actionable findings. Formatting/lint only via H01.",
+      "requires": [
+        "src-tauri/crates/effects-pipeline/src/lib.rs",
+        "src-tauri/crates/effects-pipeline/Cargo.toml"
+      ],
+      "dependency": "C22 source exists",
+      "state": "READY",
+      "work_kind": "implementation",
+      "reviewers": [
+        "codex",
+        "antigravity"
+      ],
+      "validation_policy": "Scoped functional audit; no new dependencies or Swift."
+    },
+    {
+      "id": "P57",
+      "agent": "copilot",
+      "title": "Frozen final release candidate evidence manifest",
+      "owned_paths": "coordination/release/candidate.json; docs/qa/copilot-P57.md",
+      "inputs": "coordination/release/input-manifest.json; coordination/DELIVERY-PLAN.md",
+      "work": "After current C16 final acceptance is done and independently approved, prepare a release candidate manifest that lists exact product/config/manifest/lockfile/test evidence paths with SHA-256, accepted feature gate references and explicit exclusions. Require no active implementation/root-wiring claims and no unresolved functional corrections. Snapshot individual relevant files, never raw captures/personal files or build output directories. Include those exact files in the P57 completion packet so both Codex and Antigravity review the same candidate. Never label unexecuted native tests accepted. Read/hash only the exact files in the reviewed C16 input manifest; do not discover or scan the checkout. Reject any hash mismatch or missing evidence. Manifest preparation does not waive feature acceptance.",
+      "acceptance": "The same current P57 packet must receive independent Codex and Antigravity approval before final merge/release acceptance. Manifest must identify actual native/product checks, known limitations and evidence paths; absent/failed gates mean partial, never 100%. No Git commit/push/deployment or app installation.",
+      "requires": [
+        "coordination/release/input-manifest.json"
+      ],
+      "requires_reviewed_tasks": [
+        "C16"
+      ],
+      "dependency": "C16 done, current and independently approved; all in-scope feature acceptance gates complete",
+      "state": "READY",
+      "work_kind": "acceptance",
+      "reviewers": [
+        "codex",
+        "antigravity"
+      ],
+      "validation_policy": "Hash/JSON/evidence verification; no full raw evidence scan or OS mutation."
+    },
+    {
+      "id": "P58",
+      "agent": "copilot",
+      "title": "Independent advanced-workbench regressions during two-agent staffing",
+      "owned_paths": "src/testing/copilot-advanced-workbench.test.tsx; docs/qa/copilot-P58.md",
+      "inputs": "src/features/editor/advanced-workbench/AdvancedWorkbench.tsx; src/features/editor/advanced-workbench/AdvancedWorkbench.test.tsx",
+      "work": "Read only the two named source/test inputs initially; consult exact imported types only if needed. Inspect the current A34 packet hashes and producer claim before testing. Add independent regressions for adversarial selection/tool/history and controlled state behavior based on actual exported APIs; do not invent target behavior. Do not edit producer code. Report functional defects with reproducible failures to Codex; no cosmetic changes under this task. This is independent QA evidence, not Antigravity approval.",
+      "acceptance": "Run only the new test and relevant named producer test with Node 26; record actual results and limits. Snapshot test/report files, summary <=150 words. No real OS actions, standalone build, version changes or broad scans. Submit, release and select next.",
+      "requires": [
+        "src/features/editor/advanced-workbench/AdvancedWorkbench.tsx",
+        "src/features/editor/advanced-workbench/AdvancedWorkbench.test.tsx"
+      ],
+      "state": "READY",
+      "work_kind": "implementation",
+      "queue_priority": 2,
+      "reviewers": [
+        "codex",
+        "antigravity"
+      ],
+      "validation_policy": "Targeted functional tests; H01 hygiene remains separate."
+    },
+    {
+      "id": "P59",
+      "agent": "copilot",
+      "title": "Independent capture-workflow regressions during two-agent staffing",
+      "owned_paths": "src/testing/copilot-capture-workflow.test.ts; docs/qa/copilot-P59.md",
+      "inputs": "src/features/capture-workflow/CaptureWorkflowController.tsx; src/features/capture-workflow/CaptureWorkflowController.test.tsx",
+      "work": "Read only the two named source/test inputs initially; consult exact imported types only if needed. Inspect the current A35 packet hashes and producer claim before testing. Add independent regressions for cancellation, replacement, late completion and resource cleanup based on actual exported APIs; do not invent target behavior. Do not edit producer code. Report functional defects with reproducible failures to Codex; no cosmetic changes under this task. This is independent QA evidence, not Antigravity approval.",
+      "acceptance": "Run only the new test and relevant named producer test with Node 26; record actual results and limits. Snapshot test/report files, summary <=150 words. No real OS actions, standalone build, version changes or broad scans. Submit, release and select next.",
+      "requires": [
+        "src/features/capture-workflow/CaptureWorkflowController.tsx",
+        "src/features/capture-workflow/CaptureWorkflowController.test.tsx"
+      ],
+      "state": "READY",
+      "work_kind": "implementation",
+      "queue_priority": 2,
+      "reviewers": [
+        "codex",
+        "antigravity"
+      ],
+      "validation_policy": "Targeted functional tests; H01 hygiene remains separate."
+    },
+    {
+      "id": "P60",
+      "agent": "copilot",
+      "title": "Independent layout-workspace regressions during two-agent staffing",
+      "owned_paths": "src/testing/copilot-layout-workspace.test.tsx; docs/qa/copilot-P60.md",
+      "inputs": "src/features/layout-workspace/LayoutWorkspace.tsx; src/features/layout-workspace/LayoutWorkspace.test.tsx",
+      "work": "Read only the two named source/test inputs initially; consult exact imported types only if needed. Inspect the current A36 packet hashes and producer claim before testing. Add independent regressions for invalid dimensions, composition/backdrop transitions and measurement state based on actual exported APIs; do not invent target behavior. Do not edit producer code. Report functional defects with reproducible failures to Codex; no cosmetic changes under this task. This is independent QA evidence, not Antigravity approval.",
+      "acceptance": "Run only the new test and relevant named producer test with Node 26; record actual results and limits. Snapshot test/report files, summary <=150 words. No real OS actions, standalone build, version changes or broad scans. Submit, release and select next.",
+      "requires": [
+        "src/features/layout-workspace/LayoutWorkspace.tsx",
+        "src/features/layout-workspace/LayoutWorkspace.test.tsx"
+      ],
+      "state": "READY",
+      "work_kind": "implementation",
+      "queue_priority": 2,
+      "reviewers": [
+        "codex",
+        "antigravity"
+      ],
+      "validation_policy": "Targeted functional tests; H01 hygiene remains separate."
+    },
+    {
+      "id": "P61",
+      "agent": "copilot",
+      "title": "Independent preferences-workspace regressions during two-agent staffing",
+      "owned_paths": "src/testing/copilot-preferences-workspace.test.tsx; docs/qa/copilot-P61.md",
+      "inputs": "src/features/preferences-workspace/PreferencesWorkspace.tsx; src/features/preferences-workspace/PreferencesWorkspace.test.tsx",
+      "work": "Read only the two named source/test inputs initially; consult exact imported types only if needed. Inspect the current A37 packet hashes and producer claim before testing. Add independent regressions for capability restrictions, preference changes and controlled callbacks based on actual exported APIs; do not invent target behavior. Do not edit producer code. Report functional defects with reproducible failures to Codex; no cosmetic changes under this task. This is independent QA evidence, not Antigravity approval.",
+      "acceptance": "Run only the new test and relevant named producer test with Node 26; record actual results and limits. Snapshot test/report files, summary <=150 words. No real OS actions, standalone build, version changes or broad scans. Submit, release and select next.",
+      "requires": [
+        "src/features/preferences-workspace/PreferencesWorkspace.tsx",
+        "src/features/preferences-workspace/PreferencesWorkspace.test.tsx"
+      ],
+      "state": "READY",
+      "work_kind": "implementation",
+      "queue_priority": 2,
+      "reviewers": [
+        "codex",
+        "antigravity"
+      ],
+      "validation_policy": "Targeted functional tests; H01 hygiene remains separate."
+    },
+    {
+      "id": "P62",
+      "agent": "copilot",
+      "title": "Independent A35 asynchronous preview action failures",
+      "owned_paths": "src/testing/copilot-capture-preview-actions.test.tsx; docs/qa/copilot-P62.md",
+      "inputs": "src/features/capture-workflow/CaptureWorkflowController.tsx; src/features/capture-workflow/CaptureWorkflowController.test.tsx",
+      "requires": [
+        "docs/agents/codex/A35-workflow-hardening.md",
+        "src/features/capture-workflow/CaptureWorkflowController.tsx",
+        "src/features/capture-workflow/CaptureWorkflowController.test.tsx"
+      ],
+      "state": "READY",
+      "work_kind": "implementation",
+      "queue_priority": 2,
+      "work": "Test rejected and synchronously throwing preview Copy/Save/Edit/OCR/Pin callbacks, retry availability after failure, duplicate-click suppression while pending, and late success/failure after supersession. Do not duplicate P59 capture acquisition coverage. Inspect the current completed Codex A35 packet and skip if A35 is claimed. Read only the two named inputs initially; follow exact imported types only if necessary. Own one independent test file and report; do not modify producer code or claim Antigravity approval.",
+      "acceptance": "Run targeted new and named producer tests with Node 26. Report real failures/limitations, <=150 words. Submit exact snapshots after this task; release claims and select again. No OS actions, Swift, versions, full repository scan or standalone build.",
+      "reviewers": [
+        "codex",
+        "antigravity"
+      ]
+    },
+    {
+      "id": "P63",
+      "agent": "copilot",
+      "title": "Independent A35 resource lifecycle regressions",
+      "owned_paths": "src/testing/copilot-capture-workflow-lifecycle.test.tsx; docs/qa/copilot-P63.md",
+      "inputs": "src/features/capture-workflow/CaptureWorkflowController.tsx; src/features/capture-workflow/CaptureWorkflowController.test.tsx",
+      "requires": [
+        "docs/agents/codex/A35-workflow-hardening.md",
+        "src/features/capture-workflow/CaptureWorkflowController.tsx",
+        "src/features/capture-workflow/CaptureWorkflowController.test.tsx"
+      ],
+      "state": "READY",
+      "work_kind": "implementation",
+      "queue_priority": 2,
+      "work": "Test release callback identity changes during rerender, source lifetime during pending actions, timeout/close/unmount exactly-once cleanup, and distinct capture operations returning the same document ID. Use fake timers/injected callbacks only. Focus lifecycle, leaving P62 preview callback errors separate. Inspect the current completed Codex A35 packet and skip if A35 is claimed. Read only the two named inputs initially; follow exact imported types only if necessary. Own one independent test file and report; do not modify producer code or claim Antigravity approval.",
+      "acceptance": "Run targeted new and named producer tests with Node 26. Report real failures/limitations, <=150 words. Submit exact snapshots after this task; release claims and select again. No OS actions, Swift, versions, full repository scan or standalone build.",
+      "reviewers": [
+        "codex",
+        "antigravity"
+      ]
     }
-  ]
+  ],
+  "allocation": "Three implementation lanes: Codex C17-C22 + C07-C15 shared integration; Antigravity A01-A37 + recurring A38 independent review; Copilot P01-P57 + H01. Implementation and review have separate completion states. Codex and Antigravity jointly approve a frozen final P57 candidate before final acceptance.",
+  "validation_ownership": {
+    "codex": "Functional review/tests and integration typecheck/build; no formatting/lint.",
+    "antigravity": "Scoped functional tests; no formatting/lint, standalone builds or packaging.",
+    "copilot": "Scoped tests and recurring H01 formatting/lint for safely handed-off completed scopes."
+  },
+  "hygiene_task": {
+    "id": "H01",
+    "agent": "copilot",
+    "title": "Recurring formatting and lint handoff",
+    "owned_paths": "docs/qa/copilot-H01/**; explicitly handed-off completed files only",
+    "inputs": "AGENTS.md validation ownership; exact task/file lists and current claims",
+    "work": "Own formatting/lint including Rust fmt/clippy and whitespace checks. Claim H01 and producer scope before cosmetic writes; skip active/unfinished scopes. Root/shared writes need explicit file-list handoff. No business logic changes, mass checkout formatting, diagnostic suppressions or immutable packet edits. Report missing frontend tools and propose installation/config rather than changing root manifests.",
+    "acceptance": "Submit exact snapshots, tool commands/results or missing-tool reasons, functional regression checks appropriate to changed files and stale-hash impact. Continue independent tasks without waiting.",
+    "state": "READY_RECURRING"
+  },
+  "continuous_dispatch": {
+    "order": "functional corrections; stale implementation snapshots; independent implementation; peer review; reviewed integration; final acceptance",
+    "antigravity": "A01-A38 (A13 superseded by A33); A38 recurring cross-review",
+    "copilot": "P01-P57 plus H01",
+    "codex": "C01-C22; preserve completed work; implement C17-C22 before review/integration backlog",
+    "helper": "scripts/next_task.py",
+    "no_automatic_clients": true
+  },
+  "implementation_language_policy": "Tauri + Rust native code and React/TypeScript frontend. No Swift implementation/build/runtime helper; historical native/vision-core prototype is reference-only.",
+  "review_policy": {
+    "independent": true,
+    "codex_producer_reviewer": "antigravity",
+    "antigravity_producer_reviewer": "codex",
+    "copilot_producer_reviewers": [
+      "codex",
+      "antigravity"
+    ],
+    "peer_helper": "scripts/peer_review.py",
+    "final_candidate": "P57 current same packet approved by both codex and antigravity",
+    "no_self_approval": true,
+    "stale_invalidates": true,
+    "merge_owner": "codex; local integration after reviewed inputs; no automatic Git operations"
+  },
+  "temporary_staffing": {
+    "effective": "2026-11-05",
+    "until": "Antigravity quota returns after this week; explicit resumption",
+    "active_agents": [
+      "codex",
+      "copilot"
+    ],
+    "inactive_agent": "antigravity",
+    "policy": "coordination/TWO-LANE.md (expanded user authorization: Codex executes Anti production too)",
+    "claims": "Preserve all pre-existing claims; no age-based reclamation.",
+    "review_gate": "Existing independent and final P57 review requirements remain in force; Copilot audit reports do not impersonate Antigravity signoff.",
+    "production_executor": "codex for C01-C22 and explicitly claimed free A01-A37; original agent metadata preserves provenance"
+  }
 }

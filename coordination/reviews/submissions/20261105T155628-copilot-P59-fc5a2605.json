@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "20261105T155628-copilot-P59-fc5a2605",
+  "created_at": "2026-11-05T15:56:28.874972+07:00",
+  "agent": "copilot",
+  "request": "P59-capture-workflow-regressions",
+  "task": "P59",
+  "completion": "done",
+  "summary": "Added three independent regressions for late completion after unmount, replacement cleanup with stale-preview suppression, and explicit cancellation preventing copy/save side effects. Checked current A35 packet/claim; corrected the test to use the actual Cancel Workflow accessible label. No producer code changed.",
+  "files": [
+    "src/testing/copilot-capture-workflow.test.tsx",
+    "docs/qa/copilot-P59.md"
+  ],
+  "file_sha256": {
+    "src/testing/copilot-capture-workflow.test.tsx": "7c8e909820c0e4e35ab10ab183047f10e8337cfa91671f88a78e7f1276886a4c",
+    "docs/qa/copilot-P59.md": "33951d07f341f4303944d58f2e57cc0f43098ad25068fcda9b54817babdb16d3"
+  },
+  "checks": [
+    "Node 26.13.0: npm run test:unit -- src/testing/copilot-capture-workflow.test.tsx src/features/capture-workflow/CaptureWorkflowController.test.tsx (2 files, 4 tests passed); rtk proxy git diff --check passed."
+  ],
+  "risks": [
+    "No OS actions, build, producer edits or Antigravity review performed."
+  ],
+  "review": "pending"
+}

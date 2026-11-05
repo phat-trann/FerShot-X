@@ -8,6 +8,14 @@ Every agent must submit a completion packet to `coordination/reviews/submissions
 
 For implementation tasks, use the claim/release commands in that protocol. Work only in the queue's owned paths, submit actual checks and limitations, release, then continue your next independent task. Do not poll for another agent, rerun unchanged blocked work or wait for Codex review before starting an unrelated owned module. No agent may change root dependencies/contracts/wiring to bypass another task's boundary.
 
+## Validation ownership
+
+Follow the current AGENTS.md table: Copilot owns formatting/lint (H01); Codex owns integration builds; Antigravity performs functional tests only and no standalone builds/packaging. Test-intrinsic compilation is permitted. Never wait on delegated hygiene before submitting a functional packet. H01 is the only narrow exception allowing Copilot to acquire a completed producer scope for cosmetic-only changes; follow the explicit claim/file-list handoff rules.
+
+## Continuous selection
+
+Follow coordination/CONTINUOUS.md and use `rtk proxy python3 scripts/next_task.py --agent <role> --claim` once per real task transition. The returned task/claims are authoritative; submit then release every returned claim. Shared source requires root-wiring plus task ownership; H01 shared handoffs also acquire it. No wait/poll loops or client auto-restarts. A newer submitted correction supersedes older decisions. Blocked tasks need an explicit RETRY after prerequisite change.
+
 ## Accept and claim work
 
 1. Read `AGENTS.md`, the board and the latest relevant handoff. Check local Git changes before editing.
@@ -79,3 +87,7 @@ rtk proxy zsh -lc 'source "$HOME/.nvm/nvm.sh"; nvm use 26.13.0; npx --yes rea-ag
 ```
 
 Use the client-connected REA tools when available; a successful CLI call does not prove that a client's current chat has loaded MCP tools.
+
+## Three-lane delivery and independent review (current policy)
+
+Follow [delivery plan](DELIVERY-PLAN.md). Codex implements C17-C22 before its review/integration backlog. Antigravity A38 independently reviews completed Codex/Copilot packets using `scripts/peer_review.py`; only Codex writes legacy integration decisions. Neither helper permits self-approval. Fresh peer corrections reopen producer work; changed snapshots invalidate approval. Final P57 candidate requires both independent reviewers on the same hash-bound packet. DONE/implementation-ready, reviewed, integrated and accepted are separate states. No automatic Git operations, version changes or Swift.

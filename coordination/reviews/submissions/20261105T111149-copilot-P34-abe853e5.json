@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "20261105T111149-copilot-P34-abe853e5",
+  "created_at": "2026-11-05T11:11:49.904857+07:00",
+  "agent": "copilot",
+  "request": "BUILD-20261105",
+  "task": "P34",
+  "completion": "done",
+  "summary": "Added immutable capture state reducer with explicit token gating, cancellation, retry and stale-result protection.",
+  "files": [
+    "src/features/capture-state/index.ts",
+    "src/features/capture-state/index.test.ts"
+  ],
+  "file_sha256": {
+    "src/features/capture-state/index.ts": "1ab7ef3a577152f51d36feed1ce88b4e746cbff01f34d6f3d0d7931fe7b29d69",
+    "src/features/capture-state/index.test.ts": "96671c6094d32fa669eeccaba9fafab15a566bd065af049b02bc86efde970721"
+  },
+  "checks": [
+    "targeted Vitest passed: 3 tests"
+  ],
+  "risks": [
+    "No native invocation or UI wiring."
+  ],
+  "review": "pending"
+}

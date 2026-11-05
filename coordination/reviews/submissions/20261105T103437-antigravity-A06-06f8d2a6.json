@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "id": "20261105T103437-antigravity-A06-06f8d2a6",
+  "created_at": "2026-11-05T10:34:37.191414+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A06",
+  "completion": "done",
+  "summary": "Forwarded IME isComposing state into matchEditorShortcut in EditorToolbar and added regression test coverage.",
+  "files": [
+    "src/features/editor/toolbar/EditorToolbar.tsx",
+    "src/features/editor/toolbar/EditorToolbar.css",
+    "src/features/editor/toolbar/index.ts",
+    "src/features/editor/toolbar/EditorToolbar.test.tsx"
+  ],
+  "file_sha256": {
+    "src/features/editor/toolbar/EditorToolbar.tsx": "f1fd05706e248da8586d61874f748db6e1e683414c2ece3a03674099f372a9d8",
+    "src/features/editor/toolbar/EditorToolbar.css": "af4e4b5af3dd0c69fbd729cd507007f263b0d3ee381754fe9fa9d9fd160b3434",
+    "src/features/editor/toolbar/index.ts": "0549e75dc229b3ce8adc894a7bcfc049a79bc8289f60da60536a52e0d33047aa",
+    "src/features/editor/toolbar/EditorToolbar.test.tsx": "219e55c93b629ad2be77961d6cb548bfc31db1e6bcbde7cb4414558a381d160a"
+  },
+  "checks": [
+    "npm run test:unit -- src/features/editor/toolbar/EditorToolbar.test.tsx: passed (3 tests)",
+    "npm run typecheck: passed"
+  ],
+  "risks": [
+    "Only exposes tools implemented in the active canvas/renderer slice."
+  ],
+  "review": "pending"
+}

@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "id": "20261105T103851-copilot-P22-2d225515",
+  "created_at": "2026-11-05T10:38:51.542331+07:00",
+  "agent": "copilot",
+  "request": "BUILD-20261105",
+  "task": "P22",
+  "completion": "done",
+  "summary": "Added mocked copyImage negative-path coverage for browser, invalid dimensions, decoder rejection and structured native errors",
+  "files": [
+    "src/testing/copilot-clipboard-boundary.test.ts"
+  ],
+  "file_sha256": {
+    "src/testing/copilot-clipboard-boundary.test.ts": "01a902a9b55f2186399679e6960983a7c0db2401126f05cef263802cee60ba86"
+  },
+  "checks": [
+    "targeted Vitest passed: 4 tests"
+  ],
+  "risks": [
+    "No real system clipboard or native capture was used"
+  ],
+  "review": "pending"
+}

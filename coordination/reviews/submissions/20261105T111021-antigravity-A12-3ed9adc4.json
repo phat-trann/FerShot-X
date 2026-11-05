@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "id": "20261105T111021-antigravity-A12-3ed9adc4",
+  "created_at": "2026-11-05T11:10:21.826995+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A12",
+  "completion": "done",
+  "summary": "Refreshed current file snapshots for QrPanel after verifying unit tests pass.",
+  "files": [
+    "src/features/qr-panel/QrPanel.tsx",
+    "src/features/qr-panel/QrPanel.css",
+    "src/features/qr-panel/index.ts",
+    "src/features/qr-panel/QrPanel.test.tsx"
+  ],
+  "file_sha256": {
+    "src/features/qr-panel/QrPanel.tsx": "a860635d073bc96af084ad82afc5043eb2131d9412acdbf0d63642292c4ffdde",
+    "src/features/qr-panel/QrPanel.css": "20bf2ca196c8532d28c1c06c975a79cc98ef64b096b21bee9a6489317dde594e",
+    "src/features/qr-panel/index.ts": "1be92f555d77897d1719464e8a84f614772cba595001cfd73583a82049357865",
+    "src/features/qr-panel/QrPanel.test.tsx": "7888582a894d839fb590690c409a03d0a8310fd4f825051889951dde0dc38da4"
+  },
+  "checks": [
+    "npm run test:unit -- src/features/qr-panel/QrPanel.test.tsx: passed (3 tests)",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Controlled presentation component only; native Vision QR detection invocation belongs to Codex C08 integration."
+  ],
+  "review": "pending"
+}

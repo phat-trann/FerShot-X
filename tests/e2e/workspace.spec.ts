@@ -28,5 +28,5 @@ test("rejects a corrupt image without losing the existing document", async ({ pa
   await picker.setInputFiles({ name: "corrupt.png", mimeType: "image/png", buffer: Buffer.from("not a PNG") });
   await expect(page.getByRole("alert")).toContainText("This image could not be opened");
   await expect(page.locator(".canvas-image")).toHaveAttribute("alt", "good.png");
-  await expect(page.locator(".image-item")).toHaveCount(1);
+  await expect(page.locator(".ferby-library-panel__item")).toHaveCount(1);
 });

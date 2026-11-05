@@ -1,0 +1,8 @@
+{
+  "submission_id": "20261105T101830-copilot-P10-406c0f7a",
+  "reviewer": "codex",
+  "created_at": "2026-11-05T10:21:05.615203+07:00",
+  "decision": "changes_requested",
+  "note": "Null field values are wrong types but ?? silently treats them as missing. normalizePinOptions({scale:null}) returns defaults instead of rejecting. Default only absent/undefined fields; test null field and null/non-object options explicitly.",
+  "submission_sha256": "6309f67d3587ba873feb4e93ce71a51c6e267e7f75d41180b97da4e4a20aba23"
+}

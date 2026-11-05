@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "id": "20261105T103151-codex-COORD03-c5c6e0eb",
+  "created_at": "2026-11-05T10:31:51.453294+07:00",
+  "agent": "codex",
+  "request": "BUILD-20261105",
+  "task": "COORD03",
+  "completion": "done",
+  "summary": "Doubled entire Copilot queue from 11 to 22 tasks by adding independent P12-P22 with exact 1-2 file scopes, named inputs, bounded checks and updated dispatcher/kickoff prompts.",
+  "files": [
+    "coordination/build-tasks.json",
+    "coordination/BUILD-QUEUE.md",
+    "coordination/START-HERE.md",
+    "coordination/prompts/copilot.md",
+    "coordination/prompts/antigravity.md",
+    "coordination/messages/copilot/20261105-codex-double-queue.md",
+    "docs/agents/codex/COORD03-double-copilot.md",
+    "README.md"
+  ],
+  "file_sha256": {
+    "coordination/build-tasks.json": "ddcdde8d2df122ad5ff5a2d0138f96be24c56daf294f6c1d42e9178d2f15d0e9",
+    "coordination/BUILD-QUEUE.md": "d5d5a544f0fd08b3cda935b0ebd48dae49ced08a02f9a7b71750706356e62f00",
+    "coordination/START-HERE.md": "30d2166696d4faf9385bfd84258591c1cbbce31ccf237dfdf5d63d82d8bfc883",
+    "coordination/prompts/copilot.md": "77a2c006d8a3f72a572fa6b2a98fd0eb0bfdb258fde7e4768cdc41c32b3354ae",
+    "coordination/prompts/antigravity.md": "d22ac00e8541c74311398bba5fca0121c11313d6833131dd24c14c34ac3e6cd2",
+    "coordination/messages/copilot/20261105-codex-double-queue.md": "340e770928d4762b4bdb298e31b7ed0d4ede999c4116aa442cbf61e228c7ae5b",
+    "docs/agents/codex/COORD03-double-copilot.md": "7e2e7d51dcb6970c552887ce81f80d0c2f5694da869420b3d27ab98ad77818c8",
+    "README.md": "ac3ba3ff7dc0f8372a00365a7b6d102f7a87118f7e6578926da677a2b2b768e7"
+  },
+  "checks": [
+    "22 unique Copilot task IDs and 38 total task definitions validated",
+    "All eleven new task scopes independent/READY, <=2 files each and exact prompt/table ownership parity verified",
+    "Local Markdown links and progress renderer --check passed",
+    "git diff --check passed"
+  ],
+  "risks": [
+    "Task count doubled, not provider quota or guaranteed effort; already accepted work is skipped",
+    "User must paste dispatcher into Copilot; files do not start or notify external clients automatically",
+    "Allocation alone earns no project acceptance credit; per-task results still require review"
+  ],
+  "review": "pending"
+}

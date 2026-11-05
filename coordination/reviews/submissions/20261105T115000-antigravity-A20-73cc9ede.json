@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "id": "20261105T115000-antigravity-A20-73cc9ede",
+  "created_at": "2026-11-05T11:50:00.712464+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A20",
+  "completion": "done",
+  "summary": "Refreshed A20 backdrop-renderer snapshot after H01 formatting and re-verified unit tests.",
+  "files": [
+    "src/features/backdrop/backdrop-renderer.ts",
+    "src/features/backdrop/index.ts",
+    "src/features/backdrop/backdrop-renderer.test.ts",
+    "tests/e2e/antigravity-backdrop.spec.ts"
+  ],
+  "file_sha256": {
+    "src/features/backdrop/backdrop-renderer.ts": "d05fdd60636d624bbed2c2cfb0341fd9ce50e488074e8b7d52cf2781b4641971",
+    "src/features/backdrop/index.ts": "9535964f0e74b88b6fc227bb87a623f8a90b1fd2f48e61543f80a80e1e0f05d0",
+    "src/features/backdrop/backdrop-renderer.test.ts": "00071cc5a4365c214488bd9c226ddcd67bdecacc0ddcd2a912acbfe4b1ba82c9",
+    "tests/e2e/antigravity-backdrop.spec.ts": "1442a3b9dc7f6e822c7ae52b30c3d2ef2ce0b11181fbc327f88e0911a02c2eab"
+  },
+  "checks": [
+    "npm run test:unit -- src/features/backdrop/backdrop-renderer.test.ts: passed (2 tests)",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Caller supplies owned image sources; no remote URL fetching."
+  ],
+  "review": "pending"
+}

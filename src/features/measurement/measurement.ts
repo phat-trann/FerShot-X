@@ -9,17 +9,24 @@ function assertPositive(value: number, name: string): void {
   if (value <= 0) throw new RangeError(`${name} must be positive`);
 }
 
+function assertFiniteResult(value: number, name: string): void {
+  if (!Number.isFinite(value)) throw new RangeError(`${name} result must be finite`);
+}
+
 export function normalizeRect(start: Point, end: Point): Rect {
   assertFinite(start.x, "start.x");
   assertFinite(start.y, "start.y");
   assertFinite(end.x, "end.x");
   assertFinite(end.y, "end.y");
-  return {
+  const rect = {
     x: Math.min(start.x, end.x),
     y: Math.min(start.y, end.y),
     width: Math.abs(end.x - start.x),
     height: Math.abs(end.y - start.y),
   };
+  assertFiniteResult(rect.width, "width");
+  assertFiniteResult(rect.height, "height");
+  return rect;
 }
 
 export function clampPointToImage(point: Point, imageWidth: number, imageHeight: number): Point {
@@ -36,5 +43,7 @@ export function clampPointToImage(point: Point, imageWidth: number, imageHeight:
 export function pixelsToPoints(pixels: number, displayScale: number): number {
   assertFinite(pixels, "pixels");
   assertPositive(displayScale, "displayScale");
-  return pixels / displayScale;
+  const points = pixels / displayScale;
+  assertFiniteResult(points, "pixelsToPoints");
+  return points;
 }

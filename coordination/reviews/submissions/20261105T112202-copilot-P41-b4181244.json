@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "20261105T112202-copilot-P41-b4181244",
+  "created_at": "2026-11-05T11:22:02.901878+07:00",
+  "agent": "copilot",
+  "request": "P41-parity-inventory",
+  "task": "P41",
+  "completion": "done",
+  "summary": "Added bounded parity descriptors for F01-F26 and F30-F32 with synthetic fixtures, triggers, expected evidence, and explicit NOT_EXECUTED native status. Added tests for exact coverage, uniqueness, required fields, and exclusions by omission.",
+  "files": [
+    "src/testing/parity-cases.json",
+    "src/testing/copilot-parity-cases.test.ts"
+  ],
+  "file_sha256": {
+    "src/testing/parity-cases.json": "5d0d1e4ed35ccb359a922965cf56e74779fe876c7fddd2d08471e49b6f46634a",
+    "src/testing/copilot-parity-cases.test.ts": "880f7f2f7b4aa636c689a526994fd15762ec535fa6dbe86bffe9d758ca74747a"
+  },
+  "checks": [
+    "Node 26.13.0: npm run test:unit -- src/testing/copilot-parity-cases.test.ts (2 tests passed)"
+  ],
+  "risks": [
+    "Inventory is bounded to FUNCTION-MAP parity IDs; native execution remains NOT_EXECUTED."
+  ],
+  "review": "pending"
+}

@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "id": "20261105T114819-antigravity-A13-e3e8f7c1",
+  "created_at": "2026-11-05T11:48:19.101585+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A13",
+  "completion": "blocked",
+  "summary": "Updated Package.swift baseline to macOS 12 and dynamic supportedRecognitionLanguages query in source; marked blocked/deferred per explicit user instruction to continue without using Swift (proposed pure-Rust crate alternatives for C08).",
+  "files": [
+    "native/vision-core/Package.swift",
+    "native/vision-core/Sources/FerbyVisionCore/FerbyVisionCore.swift",
+    "native/vision-core/Tests/FerbyVisionCoreTests/FerbyVisionCoreTests.swift",
+    "native/vision-core/README.md"
+  ],
+  "file_sha256": {
+    "native/vision-core/Package.swift": "7da0b4dfe795d58a44dd2817ad9e2290e33e3ebf14d5fc6e5e74cf05f18b0d32",
+    "native/vision-core/Sources/FerbyVisionCore/FerbyVisionCore.swift": "29c41c2539314c002e2323ac0324e4cc4940379ab3e3c9fa670fd8f68ade03b3",
+    "native/vision-core/Tests/FerbyVisionCoreTests/FerbyVisionCoreTests.swift": "b11ae445b75980514dfffb5d7eb4256eb0e7115dba86ca4c56620d9ada41c987",
+    "native/vision-core/README.md": "c51166c687aea53ab3614b01871cac7042ba59feceae157d394f5d3f51ce53bb"
+  },
+  "checks": [
+    "User explicitly instructed to continue without using Swift; no swift/swiftc commands executed",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Swift execution skipped per user instruction; proposed pure-Rust QR/OCR crates (rqrr/ocrs/objc2-vision) for C08 integration."
+  ],
+  "review": "pending"
+}

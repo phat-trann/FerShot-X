@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "id": "20261105T112628-antigravity-A15-3a8f7df4",
+  "created_at": "2026-11-05T11:26:28.536675+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A15",
+  "completion": "done",
+  "summary": "Implemented controlled CapturePreviewController with timeout management, explicit Keep Open cancellation, single-fire action guard per document ID, Escape keyboard close, and RTL fake-timer tests.",
+  "files": [
+    "src/features/capture-preview/CapturePreviewController.tsx",
+    "src/features/capture-preview/CapturePreviewController.css",
+    "src/features/capture-preview/index.ts",
+    "src/features/capture-preview/CapturePreviewController.test.tsx"
+  ],
+  "file_sha256": {
+    "src/features/capture-preview/CapturePreviewController.tsx": "1ee0a5c11e017313201529087917bc7bd2c0cae3e08677ef6a798ac50c559837",
+    "src/features/capture-preview/CapturePreviewController.css": "91945b0d2362355ba246b10d5adad3cfceb2e6b288c6439457245ac2f5f0f6bb",
+    "src/features/capture-preview/index.ts": "404fb68b0d9cdb3532597db0f5ef1a24f76321c095f0b1dfc04695516291369d",
+    "src/features/capture-preview/CapturePreviewController.test.tsx": "49e30ddaa12649547f27c1e6495c45bb4289d90ef94268ba3d8f4969ee4595a6"
+  },
+  "checks": [
+    "npm run test:unit -- src/features/capture-preview/CapturePreviewController.test.tsx: passed (3 tests)",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Controlled UI controller only; native preview window management belongs to Codex C09 integration."
+  ],
+  "review": "pending"
+}

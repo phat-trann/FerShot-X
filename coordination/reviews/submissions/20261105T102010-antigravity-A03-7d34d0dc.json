@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "id": "20261105T102010-antigravity-A03-7d34d0dc",
+  "created_at": "2026-11-05T10:20:10.844989+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A03",
+  "completion": "done",
+  "summary": "Fresh current-snapshot packet for controlled SettingsPanel (saveFormat, clamped jpegQuality 1-100 conditionally shown for JPEG, downscaleRetina, showPreview, reset to DEFAULT_SETTINGS, and unit tests).",
+  "files": [
+    "src/features/settings/SettingsPanel.tsx",
+    "src/features/settings/SettingsPanel.css",
+    "src/features/settings/SettingsPanel.test.tsx"
+  ],
+  "file_sha256": {
+    "src/features/settings/SettingsPanel.tsx": "2d69143c3eef3bc6474f628465a51752cea3db43cd251bbea87256630e7861b7",
+    "src/features/settings/SettingsPanel.css": "0aa12208f5a5fb71fc0d2bd7b6e86c8bc4868e7b4ddabfa64c5cdfe0030b7c65",
+    "src/features/settings/SettingsPanel.test.tsx": "3404a30ed1c9c178da6c6513ca54bb8b85617bb6cde1d08f8bdc9fec11654f13"
+  },
+  "checks": [
+    "npm run test:unit -- src/features/settings/SettingsPanel.test.tsx: passed (3 tests)",
+    "npm run typecheck: passed"
+  ],
+  "risks": [
+    "Controlled UI component only; settings persistence (A09) and root Workspace wiring belong to Codex C04 integration."
+  ],
+  "review": "pending"
+}

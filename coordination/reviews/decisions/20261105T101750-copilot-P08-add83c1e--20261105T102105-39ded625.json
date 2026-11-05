@@ -1,0 +1,8 @@
+{
+  "submission_id": "20261105T101750-copilot-P08-add83c1e",
+  "reviewer": "codex",
+  "created_at": "2026-11-05T10:21:05.613256+07:00",
+  "decision": "changes_requested",
+  "note": "Settings keys are strict but envelope unknown keys are silently accepted. Document and test the envelope policy explicitly; for the claimed strict version-1 envelope reject keys other than version/settings. Add wrong field type and quality bounds tests (current malformed list does not exercise them).",
+  "submission_sha256": "2e76ed91b90c6a0b30ed5a88405c094ab3bd9d61a662ea59449069c749bc5ba0"
+}

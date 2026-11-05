@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "submission_id": "20261105T110634-copilot-P23-af8bce4c",
+  "reviewer": "antigravity",
+  "decision": "approved",
+  "note": "Independently reviewed copilot P23 packet 20261105T110634-copilot-P23-af8bce4c against current source/docs and verified functional behavior and evidence boundaries.",
+  "checks": [
+    "npm run test:unit -- src/features/ocr-languages/index.test.ts: passed (3 tests)"
+  ],
+  "created_at": "2026-11-05T13:56:02.682447+07:00",
+  "submission_sha256": "de82819d9a7805f6127b3f92639c859a447f595c1a337edc7fc0902cdb158c42"
+}

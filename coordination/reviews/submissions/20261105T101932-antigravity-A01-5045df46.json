@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "id": "20261105T101932-antigravity-A01-5045df46",
+  "created_at": "2026-11-05T10:19:32.908829+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A01",
+  "completion": "done",
+  "summary": "Updated CapturePanel fullscreen description to \"Entire main display\" matching C02 -m behavior, verified with RTL tests and typecheck, and submitted fresh current file snapshots.",
+  "files": [
+    "src/features/capture/CapturePanel.tsx",
+    "src/features/capture/CapturePanel.css",
+    "src/features/capture/CapturePanel.test.tsx"
+  ],
+  "file_sha256": {
+    "src/features/capture/CapturePanel.tsx": "1c5bbeec5f6a18f1176a811ea8b51d6b8b0e091b612e36bfdcb092f6ba82fbbd",
+    "src/features/capture/CapturePanel.css": "f4fdec41b643e50e63a3edd0fbc1c05d246b6593ec2ddb081d2f622eef3ca849",
+    "src/features/capture/CapturePanel.test.tsx": "4896f8576678fdddcbd582c3c045c7c9d902372ece49cbf1c298b048f40528e2"
+  },
+  "checks": [
+    "npm run test:unit -- src/features/capture/CapturePanel.test.tsx: passed (4 tests)",
+    "npm run typecheck: passed"
+  ],
+  "risks": [
+    "Presentation component only; native capture execution and root Workspace wiring belong to Codex C04 integration."
+  ],
+  "review": "pending"
+}

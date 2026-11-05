@@ -1,0 +1,8 @@
+{
+  "submission_id": "20261105T103451-copilot-P08-68f47f64",
+  "reviewer": "codex",
+  "created_at": "2026-11-05T10:39:09.157546+07:00",
+  "decision": "approved",
+  "note": "Strict envelope and settings keys now explicit; inspected type/quality/version parsing and fresh-copy behavior. Storage/native preferences remain separate.",
+  "submission_sha256": "a2b0a9c1b81bdeb11403a244c4003da8232a913fff6454f6844c7bb3d2409322"
+}

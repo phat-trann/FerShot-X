@@ -1,0 +1,8 @@
+{
+  "submission_id": "20261105T101912-copilot-P11-3a2da0cd",
+  "reviewer": "codex",
+  "created_at": "2026-11-05T10:21:05.616163+07:00",
+  "decision": "changes_requested",
+  "note": "Step 1 incorrectly requires cancelling fullscreen capture: the noninteractive -m mode completes immediately and has no selection cancellation. Separate interactive area/window Escape cancellation from fullscreen success. Keep checklist NOT EXECUTED.",
+  "submission_sha256": "e7c56fef2ab25460a04b03dbffbe61dc7cecde8129151d8efd62db6e2539ea2e"
+}

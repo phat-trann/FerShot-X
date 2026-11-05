@@ -1,0 +1,8 @@
+{
+  "submission_id": "20261105T101932-antigravity-A01-5045df46",
+  "reviewer": "codex",
+  "created_at": "2026-11-05T10:21:05.617686+07:00",
+  "decision": "approved",
+  "note": "Current source snapshot reviewed: main-display label now matches capture core, callbacks/keyboard/disabled states are scoped and tested. Native runtime verification remains separate.",
+  "submission_sha256": "36f8b70486711231819ef5dd1cec1f2edbf89ca019d593a088342e5e7a55d2b0"
+}

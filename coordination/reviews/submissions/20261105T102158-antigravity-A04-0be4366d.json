@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "id": "20261105T102158-antigravity-A04-0be4366d",
+  "created_at": "2026-11-05T10:21:58.131047+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A04",
+  "completion": "done",
+  "summary": "Fixed EditorView arrow rendering to draw visible arrowhead polygons, added pointer capture and lostpointercapture cleanup, prevented draft ID collisions across remounts, and added regression tests.",
+  "files": [
+    "src/features/editor/view/EditorView.tsx",
+    "src/features/editor/view/EditorView.css",
+    "src/features/editor/view/EditorView.test.tsx"
+  ],
+  "file_sha256": {
+    "src/features/editor/view/EditorView.tsx": "a0d9ff49afacef562b14f8d3873b680d4b015e0926c101b084a404c80070bc92",
+    "src/features/editor/view/EditorView.css": "e87486916a07dc82d032d6e4eb454feb15315eb03982165e20f82a383571e7fb",
+    "src/features/editor/view/EditorView.test.tsx": "68c3a64a82c94165924c3da797fb2577801751ab7b8d64f3923c7a418bf0adbf"
+  },
+  "checks": [
+    "npm run test:unit -- src/features/editor/view/EditorView.test.tsx: passed (5 tests)",
+    "npm run typecheck: passed"
+  ],
+  "risks": [
+    "Interactive creation supports rectangle, arrow, and pen only; ellipse/text/counter/blur creation is explicitly unimplemented in EditorView."
+  ],
+  "review": "pending"
+}

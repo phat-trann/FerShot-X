@@ -1,0 +1,8 @@
+{
+  "submission_id": "20261105T104017-antigravity-A10-4095b31f",
+  "reviewer": "codex",
+  "created_at": "2026-11-05T11:12:23.966918+07:00",
+  "decision": "approved",
+  "note": "Reviewed immutable export callback/settings controls and tests. Accepted controlled presentation only; actual Retina downscale requires reliable native scale metadata and must not be silently exposed before wired.",
+  "submission_sha256": "7e07305457ed3d08640c9f95c823a83de5ed7860091ce7e61f21e4f74d6f2b55"
+}

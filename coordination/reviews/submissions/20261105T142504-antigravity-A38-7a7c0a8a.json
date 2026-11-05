@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "id": "20261105T142504-antigravity-A38-7a7c0a8a",
+  "created_at": "2026-11-05T14:25:04.807554+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A38",
+  "completion": "done",
+  "summary": "Executed A38 independent peer review batch across newly submitted Codex (C20, C21, C22) and Copilot (P51, P52) packets with scoped Vitest unit tests and Rust crate tests.",
+  "files": [
+    "docs/agents/antigravity/A38-20261105T1424.md",
+    "coordination/reviews/peer/20261105T135941-codex-C20-321515d8--antigravity--2d8b98b47de0.json",
+    "coordination/reviews/peer/20261105T140355-codex-C21-a0317c2e--antigravity--0e648c88e64f.json",
+    "coordination/reviews/peer/20261105T141014-codex-C22-40156c74--antigravity--4c499f9f13eb.json",
+    "coordination/reviews/peer/20261105T142202-copilot-P51-e187d248--antigravity--49ae0240e13c.json",
+    "coordination/reviews/peer/20261105T142309-copilot-P52-b857cc83--antigravity--1da8617345ef.json"
+  ],
+  "file_sha256": {
+    "docs/agents/antigravity/A38-20261105T1424.md": "37a49e1ea9d63c8dcea3a619edc75c526aec1ee8fb4e86c11025ecb153a517dc",
+    "coordination/reviews/peer/20261105T135941-codex-C20-321515d8--antigravity--2d8b98b47de0.json": "0acd2001f61523b6990e1b78db0a898149d9232a45252e917ed705073d0d66aa",
+    "coordination/reviews/peer/20261105T140355-codex-C21-a0317c2e--antigravity--0e648c88e64f.json": "f36a25303e2350e169e12014543d982139fc938e86583374438e099a07301df7",
+    "coordination/reviews/peer/20261105T141014-codex-C22-40156c74--antigravity--4c499f9f13eb.json": "92033d3ef4a83ab1e020a32a391513c118491acd6e1c1c39283596e32afc20d0",
+    "coordination/reviews/peer/20261105T142202-copilot-P51-e187d248--antigravity--49ae0240e13c.json": "7b0496fe0401ec1eb53e8554f586a421177ce79830c67dfa93585e23fb4a9a0e",
+    "coordination/reviews/peer/20261105T142309-copilot-P52-b857cc83--antigravity--1da8617345ef.json": "af8f1e6e85ddeaa31e5b2a27986545f9c103dcb8a24ce8915cddb5b8a35356cb"
+  },
+  "checks": [
+    "npm run test:unit -- src/features/archive-workflow/index.test.ts src/features/lifecycle-policy/index.test.ts src/testing/copilot-capture-session.test.ts src/testing/copilot-recognition-workflow.test.ts: passed (27 tests)",
+    "cargo test --manifest-path src-tauri/crates/effects-pipeline/Cargo.toml: passed (8 tests)",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Reviewed current done snapshots only; future refreshed or newly submitted packets will be reviewed in subsequent A38 passes."
+  ],
+  "review": "pending"
+}

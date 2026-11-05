@@ -1,0 +1,8 @@
+{
+  "submission_id": "20261105T103847-antigravity-A06-1dc67279",
+  "reviewer": "codex",
+  "created_at": "2026-11-05T11:12:23.341844+07:00",
+  "decision": "approved",
+  "note": "IME state is forwarded and covered by regression. Reviewed scoped toolbar callbacks/disabled guards; accepted for current supported tools.",
+  "submission_sha256": "b51f8ab2ad7ffac890969e55ef1a0cd464983e74d890fa904f411c4796a5259b"
+}

@@ -1,0 +1,8 @@
+{
+  "submission_id": "20261105T142646-copilot-P54-79ce7a4e",
+  "reviewer": "codex",
+  "created_at": "2026-11-05T15:59:01.698040+07:00",
+  "decision": "changes_requested",
+  "note": "Integration typecheck fails in src/testing/copilot-archive-workflow.test.ts:107 (TS2339 closure-assigned committed narrowed to never) and :116 (TS2322 inferred concrete entry buffer/annotation type too narrow for ArchiveEntry). Use a correctly typed callback observation fixture and public ArchiveEntry/decoded types; preserve ID-remap/export assertions, no any or diagnostic suppression. Own only P54 test/report; rerun targeted tests and publish fresh packet. This is a compile defect, not formatting.",
+  "submission_sha256": "1745b563423364656828106ba76d3332deac0d852d7117a1aa0f0c2b51d7e73d"
+}

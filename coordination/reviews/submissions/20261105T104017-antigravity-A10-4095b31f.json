@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "id": "20261105T104017-antigravity-A10-4095b31f",
+  "created_at": "2026-11-05T10:40:17.677619+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A10",
+  "completion": "done",
+  "summary": "Controlled ExportPanel for PNG/JPEG local export options with clamped JPEG quality, suggested basename editing, busy double-submit guard, accessible cancelled/success/error announcements, no upload or licensing controls, and RTL unit tests; refreshed current file snapshots.",
+  "files": [
+    "src/features/export-panel/ExportPanel.tsx",
+    "src/features/export-panel/ExportPanel.css",
+    "src/features/export-panel/index.ts",
+    "src/features/export-panel/ExportPanel.test.tsx"
+  ],
+  "file_sha256": {
+    "src/features/export-panel/ExportPanel.tsx": "1dcebbe70cdf8faf0ae8f735b62565fb0304f2da33099218e996e5a612e89d43",
+    "src/features/export-panel/ExportPanel.css": "cc5de510e290c9d06e92cf071f771dacee3a4298f3bb52ce57f99e255677c00e",
+    "src/features/export-panel/index.ts": "5631981510e8a90f20074321803aed4d131bfb4acd16892038dac9b42cf6ebf2",
+    "src/features/export-panel/ExportPanel.test.tsx": "408bbe8a85dd0410d402045be6e345558e86d8c1d9e83dc2b0f25d7ba2d05854"
+  },
+  "checks": [
+    "npm run test:unit -- src/features/export-panel/ExportPanel.test.tsx: passed (3 tests)",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Controlled UI component only; file save dialog and native image encoding wiring belong to Codex C04 integration."
+  ],
+  "review": "pending"
+}

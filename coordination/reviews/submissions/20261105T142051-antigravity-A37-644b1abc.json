@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "id": "20261105T142051-antigravity-A37-644b1abc",
+  "created_at": "2026-11-05T14:20:51.616098+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A37",
+  "completion": "done",
+  "summary": "Refreshed A37 PreferencesWorkspace snapshot after H01 formatting; verified unit tests.",
+  "files": [
+    "src/features/preferences-workspace/PreferencesWorkspace.tsx",
+    "src/features/preferences-workspace/PreferencesWorkspace.css",
+    "src/features/preferences-workspace/index.ts",
+    "src/features/preferences-workspace/PreferencesWorkspace.test.tsx"
+  ],
+  "file_sha256": {
+    "src/features/preferences-workspace/PreferencesWorkspace.tsx": "e074e8163e20d68862a86b53f97d86e1c88879315ddc95ff2837b0efac04a7a8",
+    "src/features/preferences-workspace/PreferencesWorkspace.css": "26190f258cd439ebae6144907fa0a545f1e1e49276ac0ede6d5f159b5b02eed4",
+    "src/features/preferences-workspace/index.ts": "608eb94702cb7d8aa1924576471f4180483feb8222a8cc55d7a1fd086d9003e5",
+    "src/features/preferences-workspace/PreferencesWorkspace.test.tsx": "0aa678c498d035afa1641e201ec36372430e5c47e699f5e0572c34f617f14f95"
+  },
+  "checks": [
+    "npm run test:unit -- src/features/preferences-workspace/PreferencesWorkspace.test.tsx: passed (1 test)",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Preserved frozen AppSettings contract; extended and unknown fields live in PreferencesWorkspaceSnapshot adapter."
+  ],
+  "review": "pending"
+}

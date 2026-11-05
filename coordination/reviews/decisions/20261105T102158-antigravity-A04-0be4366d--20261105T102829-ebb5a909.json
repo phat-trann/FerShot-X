@@ -1,0 +1,8 @@
+{
+  "submission_id": "20261105T102158-antigravity-A04-0be4366d",
+  "reviewer": "codex",
+  "created_at": "2026-11-05T10:28:29.928264+07:00",
+  "decision": "changes_requested",
+  "note": "Arrowhead/capture/IDs fixed, but pen pointerup discards release endpoint whenever a pointermove exists. Example start(10,10), move(20,20), up(40,40) emits only first two points. Always append/deduplicate release endpoint; add regression. Ignore a second pointerdown while another pointer owns draft. Unsupported supplied annotation tools still render placeholder circles; return explicit unsupported indication rather than fake shapes.",
+  "submission_sha256": "7bbb79494f2e3d972a84f3bafb3288702f5c4d9f451e7028c41702d961d25102"
+}

@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "id": "20261105T134144-antigravity-A31-bd52c090",
+  "created_at": "2026-11-05T13:41:44.235527+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A31",
+  "completion": "done",
+  "summary": "Refreshed A31 auto-adjust snapshot after H01 formatting and re-verified unit tests.",
+  "files": [
+    "src/features/auto-adjust/auto-adjust.ts",
+    "src/features/auto-adjust/index.ts",
+    "src/features/auto-adjust/auto-adjust.test.ts",
+    "tests/e2e/antigravity-auto-adjust.spec.ts"
+  ],
+  "file_sha256": {
+    "src/features/auto-adjust/auto-adjust.ts": "6bdf8964d2fe23398d287d667627b8b816dbdb4d4a78d1bb6cb93c1befb10424",
+    "src/features/auto-adjust/index.ts": "26269aac94bbeeb3b5d3442b25f7059233d2ccc9b95a68d065c287b8ce533e80",
+    "src/features/auto-adjust/auto-adjust.test.ts": "8aba0ff9eb777171d7adfde10ec306575613264fca56a6913018a018cb865c83",
+    "tests/e2e/antigravity-auto-adjust.spec.ts": "02690a5bd361fbf5f63ac0d15d64e6f8607a8a202eb5654c77cfcefaa475df59"
+  },
+  "checks": [
+    "npm run test:unit -- src/features/auto-adjust/auto-adjust.test.ts: passed (1 test)",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Shottr exact auto-adjust heuristic is UNKNOWN; uses documented deterministic Ferby percentile rule."
+  ],
+  "review": "pending"
+}

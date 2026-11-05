@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "id": "20261105T142049-antigravity-A36-13a856a5",
+  "created_at": "2026-11-05T14:20:49.715536+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A36",
+  "completion": "done",
+  "summary": "Refreshed A36 LayoutWorkspace snapshot after H01 formatting; verified unit and real-browser Playwright pixel tests.",
+  "files": [
+    "src/features/layout-workspace/LayoutWorkspace.tsx",
+    "src/features/layout-workspace/LayoutWorkspace.css",
+    "src/features/layout-workspace/index.ts",
+    "src/features/layout-workspace/LayoutWorkspace.test.tsx",
+    "tests/e2e/antigravity-layout-workspace.spec.ts"
+  ],
+  "file_sha256": {
+    "src/features/layout-workspace/LayoutWorkspace.tsx": "d48a951561333ba83e0fdde53d26402a4d685e68b8aa631883cd3477a3416f2e",
+    "src/features/layout-workspace/LayoutWorkspace.css": "5d2707793289b237ece42cd637904a8129a67c3d6888293c880ad1df361a8365",
+    "src/features/layout-workspace/index.ts": "1d0bd211d86a2d456752ff7fee91a2ef52b6d033461edea6a31361c73c394529",
+    "src/features/layout-workspace/LayoutWorkspace.test.tsx": "e1a2cddfa950874a9a72997a4d093d96c55f314a297805a3411fdfdb84d255ae",
+    "tests/e2e/antigravity-layout-workspace.spec.ts": "7df098a2c35d72ab2c3b7284e087f133eccf47de2d7f8b773b31e926e3e4c4b9"
+  },
+  "checks": [
+    "npm run test:unit -- src/features/layout-workspace/LayoutWorkspace.test.tsx: passed (1 test)",
+    "npm run test:e2e -- tests/e2e/antigravity-layout-workspace.spec.ts: passed (1 real-browser test)",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Documented Ferby geometric snapping and explicit shadow-trim; Shottr internal heuristics remain UNKNOWN."
+  ],
+  "review": "pending"
+}

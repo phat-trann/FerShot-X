@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "id": "20261105T133921-copilot-P35-c07fc971",
+  "created_at": "2026-11-05T13:39:21.769261+07:00",
+  "agent": "copilot",
+  "request": "P35-clipboard-import-negative-paths",
+  "task": "P35",
+  "completion": "done",
+  "summary": "Reviewed the named clipboard-import-core public injectable API and proposed five deterministic negative-path cases: unavailable reader, non-image clipboard, zero dimensions, oversized dimensions, and malformed RGBA length. Exact calls and expected ClipboardImportError values are recorded. No real clipboard access or test execution is claimed.",
+  "files": [
+    "docs/qa/copilot-P35-clipboard-import.md"
+  ],
+  "file_sha256": {
+    "docs/qa/copilot-P35-clipboard-import.md": "19033e83b7ec8c51b49d2b9d84967bba637171c857c3eac22d98172cc1d05b8d"
+  },
+  "checks": [
+    "rtk proxy git diff --check (passed); static proposal only per task scope"
+  ],
+  "risks": [
+    "No runtime or real OS clipboard validation performed."
+  ],
+  "review": "pending"
+}

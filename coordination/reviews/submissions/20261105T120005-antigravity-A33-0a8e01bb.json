@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "id": "20261105T120005-antigravity-A33-0a8e01bb",
+  "created_at": "2026-11-05T12:00:05.158825+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A33",
+  "completion": "done",
+  "summary": "Implemented pure-Rust ferby-vision-core crate using objc2-vision 0.3.2 on macOS 12+ baseline with runtime supported-language discovery, strict byte/dimension/pixel/output bounds, single autoreleasepool FFI boundary, and cargo test suite verifying synthetic OCR text and QR recognition.",
+  "files": [
+    "src-tauri/crates/vision-core/Cargo.toml",
+    "src-tauri/crates/vision-core/Cargo.lock",
+    "src-tauri/crates/vision-core/src/lib.rs",
+    "src-tauri/crates/vision-core/README.md"
+  ],
+  "file_sha256": {
+    "src-tauri/crates/vision-core/Cargo.toml": "b190ea55a12e88f4838015fc5f0358e12afe8c5ca4f4cce51dcb16026c3693b0",
+    "src-tauri/crates/vision-core/Cargo.lock": "1c162fdae78154bd2c7ac822f03297ec7c3780fcdbf1de17ec2a47daf83c0957",
+    "src-tauri/crates/vision-core/src/lib.rs": "bd106c3937c82c9525e674945d6f07c9efe2f4a1dc80861de28756b93e66084e",
+    "src-tauri/crates/vision-core/README.md": "91bf725100208e7cc828c24f7e43157c7b3c1d25542359d24a05ec5417a116c8"
+  },
+  "checks": [
+    "cargo test --manifest-path src-tauri/crates/vision-core/Cargo.toml: passed (2 tests, including real macOS Vision OCR + QR recognition on synthetic images)",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Synchronous Vision performRequests_error should be offloaded via tauri::async_runtime::spawn_blocking in C08."
+  ],
+  "review": "pending"
+}

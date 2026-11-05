@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "id": "20261105T120128-antigravity-A28-3b5fe820",
+  "created_at": "2026-11-05T12:01:28.770992+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A28",
+  "completion": "done",
+  "summary": "Implemented controlled AppPreferencesPanel with capability gating for always-on-top/notifications/launch-at-login/menu-bar, default zoom clamping, post-capture behavior selection, immutable updates, and RTL tests.",
+  "files": [
+    "src/features/app-preferences/AppPreferencesPanel.tsx",
+    "src/features/app-preferences/AppPreferencesPanel.css",
+    "src/features/app-preferences/index.ts",
+    "src/features/app-preferences/AppPreferencesPanel.test.tsx"
+  ],
+  "file_sha256": {
+    "src/features/app-preferences/AppPreferencesPanel.tsx": "368ec487bbefde4422777eceb565f982216c36fb8800cb5cec0835e1bcd30d16",
+    "src/features/app-preferences/AppPreferencesPanel.css": "7510e345fc2d6459207deb03904a6d933ee04a290229fb0b91935de55e0b3d58",
+    "src/features/app-preferences/index.ts": "ba787e554b4a2c455bdb767572cd88da4e1c4f74bf908512e8b40502427f6744",
+    "src/features/app-preferences/AppPreferencesPanel.test.tsx": "df7a509379bcf21094822e6e1173de5f79de31c209c50258b119f3918242db8e"
+  },
+  "checks": [
+    "npm run test:unit -- src/features/app-preferences/AppPreferencesPanel.test.tsx: passed (1 test)",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Proposed local preference schema; unsupported backend options disabled via capability props."
+  ],
+  "review": "pending"
+}

@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "20261105T110714-copilot-P25-485351f6",
+  "created_at": "2026-11-05T11:07:14.107983+07:00",
+  "agent": "copilot",
+  "request": "BUILD-20261105",
+  "task": "P25",
+  "completion": "done",
+  "summary": "Implemented bounded eight-handle rectangle resizing with explicit minimum size, image bounds and no-flip crossing policy.",
+  "files": [
+    "src/features/resize-handles/index.ts",
+    "src/features/resize-handles/index.test.ts"
+  ],
+  "file_sha256": {
+    "src/features/resize-handles/index.ts": "900c3c2a388d4b0b60cb920d11f33829a52390d55407a3ef0c08ab6c1d18fe22",
+    "src/features/resize-handles/index.test.ts": "b9ae4d71715d34542b3a36e0deb3b6ae4acaeb34ce6b18cf90a5cf95c125081b"
+  },
+  "checks": [
+    "targeted Vitest passed: 2 tests"
+  ],
+  "risks": [
+    "Pure source-image geometry; no DOM or editor-model integration."
+  ],
+  "review": "pending"
+}

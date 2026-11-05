@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "20261105T155750-copilot-P60-2f0ad7cc",
+  "created_at": "2026-11-05T15:57:50.518735+07:00",
+  "agent": "copilot",
+  "request": "P60-layout-workspace-regressions",
+  "task": "P60",
+  "completion": "done",
+  "summary": "Added three independent regressions for invalid canvas dimensions/export disablement, backdrop-driven output recomputation, and measurement unit switching. Checked current A36 packet/claim; corrected the invalid-dimension assertion to the actual public error text. No producer code changed.",
+  "files": [
+    "src/testing/copilot-layout-workspace.test.tsx",
+    "docs/qa/copilot-P60.md"
+  ],
+  "file_sha256": {
+    "src/testing/copilot-layout-workspace.test.tsx": "da124b1c7f0a2de13e911218369adc546f547993f7fff2de264083f4e342ee9e",
+    "docs/qa/copilot-P60.md": "b218b4f02c43d81c891016c734ecc25c02ff176552546bcdb1e8bcb707f3331f"
+  },
+  "checks": [
+    "Node 26.13.0: npm run test:unit -- src/testing/copilot-layout-workspace.test.tsx src/features/layout-workspace/LayoutWorkspace.test.tsx (2 files, 4 tests passed); rtk proxy git diff --check passed."
+  ],
+  "risks": [
+    "No OS actions, build, producer edits or Antigravity review performed."
+  ],
+  "review": "pending"
+}

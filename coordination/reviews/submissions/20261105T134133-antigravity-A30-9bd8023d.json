@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "id": "20261105T134133-antigravity-A30-9bd8023d",
+  "created_at": "2026-11-05T13:41:33.945881+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A30",
+  "completion": "done",
+  "summary": "Refreshed A30 LocalOutputPanel snapshot after H01 formatting and re-verified unit tests.",
+  "files": [
+    "src/features/local-output/local-output.tsx",
+    "src/features/local-output/LocalOutputPanel.css",
+    "src/features/local-output/index.ts",
+    "src/features/local-output/local-output.test.tsx",
+    "tests/e2e/antigravity-local-output.spec.ts"
+  ],
+  "file_sha256": {
+    "src/features/local-output/local-output.tsx": "d76b73142bdd832f46767167dcd21d794cca2cf4e12ef9e845ccc21e2829b86e",
+    "src/features/local-output/LocalOutputPanel.css": "763a191c8c4b60eeb313c7ec63691cbd684203d3432350550ae70fd605b4b8eb",
+    "src/features/local-output/index.ts": "6e851bed1b35f38451e0713bf207ff96ce854be701d480edca7260d21c89b8d1",
+    "src/features/local-output/local-output.test.tsx": "cbf43506e62fb3cd3bae79ce9557359427cc46b0e5e2b537912c211f28afa144",
+    "tests/e2e/antigravity-local-output.spec.ts": "452ffe7a7693f1ba3547e400f83a37242aedf1e6bf3c69b07c05e920f8d70db9"
+  },
+  "checks": [
+    "npm run test:unit -- src/features/local-output/local-output.test.tsx: passed (1 test)",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Native macOS print dialog and native file-promise drag-out remain unverified at OS level until Codex integration."
+  ],
+  "review": "pending"
+}

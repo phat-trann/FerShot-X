@@ -95,6 +95,12 @@ impl Raster {
         dimensions(decoded.width(), decoded.height())?;
         Ok(Self(decoded))
     }
+    /// An owned, row-major RGBA8 copy with straight (not premultiplied) alpha.
+    /// Dimensions and allocation bounds were validated when decoding this raster.
+    pub fn rgba_bytes(&self) -> Vec<u8> {
+        self.0.to_rgba8().into_raw()
+    }
+
     pub fn dimensions(&self) -> (u32, u32) {
         (self.0.width(), self.0.height())
     }

@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "id": "20261105T114515-antigravity-A26-b9b3334f",
+  "created_at": "2026-11-05T11:45:15.820667+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A26",
+  "completion": "done",
+  "summary": "Implemented bounded window capture appearance compositor supporting transparent, solid, and caller-provided wallpaper backgrounds plus explicit shadow-trim crop insets with unit and real-browser Playwright pixel tests.",
+  "files": [
+    "src/features/window-appearance/window-appearance.ts",
+    "src/features/window-appearance/index.ts",
+    "src/features/window-appearance/window-appearance.test.ts",
+    "tests/e2e/antigravity-window-appearance.spec.ts"
+  ],
+  "file_sha256": {
+    "src/features/window-appearance/window-appearance.ts": "efe730c4b00e800dae05222067ffbb8d2d5203097fd31b622121cb1c33c9f823",
+    "src/features/window-appearance/index.ts": "c25cb558a7bc587689402b41451f95b4a8165313957b20a2fcdbe602170166b8",
+    "src/features/window-appearance/window-appearance.test.ts": "c4b23c8482c9ab6c168d886c5b2a9a17404b80d50470701442bea9396a78ac09",
+    "tests/e2e/antigravity-window-appearance.spec.ts": "d1f967fbd295067b76df20845b9bb4a8b3c00d39021449c735a20643bf5e0dd4"
+  },
+  "checks": [
+    "npm run test:unit -- src/features/window-appearance/window-appearance.test.ts: passed (2 tests)",
+    "npm run test:e2e -- tests/e2e/antigravity-window-appearance.spec.ts: passed (1 real-browser test)",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Shadow-trim uses explicit caller-provided insets; target Shottr auto-trim heuristic is not invented."
+  ],
+  "review": "pending"
+}

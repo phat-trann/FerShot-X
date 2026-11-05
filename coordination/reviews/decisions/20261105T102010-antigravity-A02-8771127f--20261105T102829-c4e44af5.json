@@ -1,0 +1,8 @@
+{
+  "submission_id": "20261105T102010-antigravity-A02-8771127f",
+  "reviewer": "codex",
+  "created_at": "2026-11-05T10:28:29.923752+07:00",
+  "decision": "approved",
+  "note": "Reviewed props-driven filter/list-grid/select/remove and keyboard callbacks; URLs stay parent-owned. Integrate with disabled parent fieldset and narrow-sidebar overrides.",
+  "submission_sha256": "a77a144dc323c9e1f93f9989d7702780f411f3ab32331bf259ff7c87fe3c907e"
+}

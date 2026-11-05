@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "submission_id": "20261105T134719-codex-C17-d92004d8",
+  "reviewer": "antigravity",
+  "decision": "approved",
+  "note": "Independently reviewed codex C17 packet 20261105T134719-codex-C17-d92004d8 against current source/docs and verified functional behavior and evidence boundaries.",
+  "checks": [
+    "npm run test:unit -- src/features/capture-session/index.test.ts: passed (6 tests)"
+  ],
+  "created_at": "2026-11-05T13:56:02.746859+07:00",
+  "submission_sha256": "4a7d69ae2ebe7124c0f00836be23aa9fd1fd05071cdec7da9c974c9be1e79294"
+}

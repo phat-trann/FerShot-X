@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "id": "20261105T114311-codex-C09-0a061f65",
+  "created_at": "2026-11-05T11:43:11.351855+07:00",
+  "agent": "codex",
+  "request": "BUILD-20261105",
+  "task": "C09",
+  "completion": "partial",
+  "summary": "Wired bounded owner-only native pin windows and reviewed scale/image-opacity/copy/edit/close UI. Timed capture preview, desktop transparency and real native acceptance remain incomplete.",
+  "files": [
+    "src/App.tsx",
+    "src/Workspace.tsx",
+    "src/Workspace.pin.tsx",
+    "src/Workspace.css",
+    "src/platform/native.ts",
+    "src/platform/pins.test.ts",
+    "src-tauri/src/imaging.rs",
+    "src-tauri/src/lib.rs",
+    "src-tauri/src/pins.rs",
+    "tests/e2e/codex-pins.spec.ts",
+    "tests/e2e/codex-regressions.spec.ts",
+    "docs/agents/codex/C09-pin-integration.md",
+    "coordination/progress.json",
+    "coordination/PROGRESS.md",
+    "coordination/build-tasks.json",
+    "coordination/prompts/codex.md",
+    "coordination/messages/antigravity/20261105-codex-C09-A16-types.md"
+  ],
+  "file_sha256": {
+    "src/App.tsx": "83b99a333612614e3153d75a1672558f570845fdbdfb3d27754269d4e3cf7638",
+    "src/Workspace.tsx": "45dff8713a3cf6a500e58372a8bb6e48046c8d6924bc6f1c563dc0bcc2bcced2",
+    "src/Workspace.pin.tsx": "a4d0341b01a62953cde002da7a8d093075bae83e0e03ae4612d3e3f5fbb5a38f",
+    "src/Workspace.css": "43449311fc6f8d41517d8493eae386d6bdc3cbe153e1c86635da96c9ddac52a0",
+    "src/platform/native.ts": "141c1c4015f3e511ad9008a00f6dd3aa4c968cb0d89d79efb639e11cfae3085c",
+    "src/platform/pins.test.ts": "feb43751bd34a391ddd6025c373bd7bd2a316bdaa2264c8701c284cad0b656dc",
+    "src-tauri/src/imaging.rs": "b847d6e115f4b9473d3238e306d6628b40e265ec7c8a3719aa07b5d174b6ba90",
+    "src-tauri/src/lib.rs": "c68eceb580665b0a6a8f31142f24adc8c8cc25be744892e7d74105ea71f27451",
+    "src-tauri/src/pins.rs": "6a9e5a12b13fd2b1b891cd51a88f301ec4775b0aff43fcad671da4a809dae0fd",
+    "tests/e2e/codex-pins.spec.ts": "87c97d186a52c143e46b00d54ba3a85dc95acda104a8a8617b66d0ce1c4ef48b",
+    "tests/e2e/codex-regressions.spec.ts": "6e98285e3388eb257371b8510503724c0fbe8a58d16f2f5517fd0a6b0df70686",
+    "docs/agents/codex/C09-pin-integration.md": "0260e263a1053606dcc512255de115fd66c75f865c2acf7878477ce3401d539c",
+    "coordination/progress.json": "e4608e4c42728dc90a191472da51d2fe1708c7fb79d03cdfd45515077c17ff1b",
+    "coordination/PROGRESS.md": "b44f6b43ad2ef2584d24bbcf935e520172574caeb04e7f26c84e10bedf9e1689",
+    "coordination/build-tasks.json": "d11c671a34a2853445c0664de8a797d60d014a0f52e0761d9d19e703b5bf5f47",
+    "coordination/prompts/codex.md": "a3aca3da0ae1c11fae45a68709969668a46bf1991f98cb8079256ff7cb67a4e4",
+    "coordination/messages/antigravity/20261105-codex-C09-A16-types.md": "7e8c8e6f11f71569c5c469c4084d9e2e700d8229f8c79ddda2d084535fb66f7a"
+  },
+  "checks": [
+    "Root Rust: 14 tests passed; pin adapter: 3 passed",
+    "Pin UI mock E2E: initial 2 passed; broader 19-case run passed 18 including third root request case, failed old selector ambiguity now corrected",
+    "Scoped strict App.tsx import-closure typecheck passed",
+    "Global build blocked by A16 worker tuple defects; actual review correction recorded",
+    "Formatting/lint delegated to Copilot H01; no real native clipboard/window action performed"
+  ],
+  "risks": [
+    "Native pin lifecycle/stacking/edit events/clipboard require manual acceptance; no GUI window created in tests",
+    "Image opacity only, no whole-window native transparency guarantee",
+    "A15 timed post-capture preview remains unintegrated; C09 not complete",
+    "Other worker type errors are preserved and reported, not silently bypassed"
+  ],
+  "review": "pending"
+}

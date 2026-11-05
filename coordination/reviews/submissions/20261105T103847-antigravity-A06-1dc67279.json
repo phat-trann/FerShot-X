@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "id": "20261105T103847-antigravity-A06-1dc67279",
+  "created_at": "2026-11-05T10:38:47.428824+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A06",
+  "completion": "done",
+  "summary": "Forwarded IME isComposing state into matchEditorShortcut in EditorToolbar and added regression test coverage with fresh current file snapshots.",
+  "files": [
+    "src/features/editor/toolbar/EditorToolbar.tsx",
+    "src/features/editor/toolbar/EditorToolbar.css",
+    "src/features/editor/toolbar/index.ts",
+    "src/features/editor/toolbar/EditorToolbar.test.tsx"
+  ],
+  "file_sha256": {
+    "src/features/editor/toolbar/EditorToolbar.tsx": "f1fd05706e248da8586d61874f748db6e1e683414c2ece3a03674099f372a9d8",
+    "src/features/editor/toolbar/EditorToolbar.css": "7ac2083f555b313503cd2ca30bdcd958462d4ac355faa95352d7bccfe2bd4a96",
+    "src/features/editor/toolbar/index.ts": "c4f7414b6db5ddb05d55a09fa98ce261f27342e42099f9a32581de17652e8a23",
+    "src/features/editor/toolbar/EditorToolbar.test.tsx": "219e55c93b629ad2be77961d6cb548bfc31db1e6bcbde7cb4414558a381d160a"
+  },
+  "checks": [
+    "npm run test:unit -- src/features/editor/toolbar/EditorToolbar.test.tsx: passed (3 tests)",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Only exposes tools implemented in the active canvas/renderer slice."
+  ],
+  "review": "pending"
+}

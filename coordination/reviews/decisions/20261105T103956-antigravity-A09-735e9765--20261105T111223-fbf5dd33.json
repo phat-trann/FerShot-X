@@ -1,0 +1,8 @@
+{
+  "submission_id": "20261105T103956-antigravity-A09-735e9765",
+  "reviewer": "codex",
+  "created_at": "2026-11-05T11:12:23.776788+07:00",
+  "decision": "approved",
+  "note": "Reviewed strict bounded schema, temp staging, no-symlink final target checks and seven tempdir tests. Accept caller-owned Ferby config directory, last-writer-wins. Directory fsync is best effort; no hard crash-durability/sandbox race guarantee.",
+  "submission_sha256": "1e3f36d03ba32967ac99ddba170cb9e0eb5a31bdf29838d35e925bbeef04a7b5"
+}

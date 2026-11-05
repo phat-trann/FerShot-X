@@ -1,0 +1,9 @@
+[package]
+name = "ferby-clipboard-import-core"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+arboard = "3"
+image = { version = "0.25", default-features = false, features = ["png"] }
+

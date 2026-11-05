@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "id": "20261105T142037-antigravity-A34-13ce7fff",
+  "created_at": "2026-11-05T14:20:37.443303+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A34",
+  "completion": "done",
+  "summary": "Refreshed A34 AdvancedWorkbench snapshot after H01 formatting; verified unit and real-browser Playwright pixel tests.",
+  "files": [
+    "src/features/editor/advanced-workbench/AdvancedWorkbench.tsx",
+    "src/features/editor/advanced-workbench/AdvancedWorkbench.css",
+    "src/features/editor/advanced-workbench/index.ts",
+    "src/features/editor/advanced-workbench/AdvancedWorkbench.test.tsx",
+    "tests/e2e/antigravity-advanced-workbench.spec.ts"
+  ],
+  "file_sha256": {
+    "src/features/editor/advanced-workbench/AdvancedWorkbench.tsx": "5f75c722d34bbf7d3da51d3d424f4816811ad359879d08f5c632c6f9f2d403cb",
+    "src/features/editor/advanced-workbench/AdvancedWorkbench.css": "9a9e029e39ff7b7c5d13d090ed0b1540351f94c1262d7f802d9d441ba258dc44",
+    "src/features/editor/advanced-workbench/index.ts": "9eed12b5412128fb460bb15af7869071a2c59abcb17732370c3a1c096c97ca74",
+    "src/features/editor/advanced-workbench/AdvancedWorkbench.test.tsx": "727e8b9f939fa0bad2ad4aa41a25196975dd84b4fee8d08f9b426bacbd138373",
+    "tests/e2e/antigravity-advanced-workbench.spec.ts": "dc417101831a955a0f9142508459312611403e4d22250cd1dbc50281d5be7d4d"
+  },
+  "checks": [
+    "npm run test:unit -- src/features/editor/advanced-workbench/AdvancedWorkbench.test.tsx: passed (1 test)",
+    "npm run test:e2e -- tests/e2e/antigravity-advanced-workbench.spec.ts: passed (1 real-browser test)",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Preserved frozen EditorViewProps contract and explicit UnsupportedAnnotationKindError."
+  ],
+  "review": "pending"
+}

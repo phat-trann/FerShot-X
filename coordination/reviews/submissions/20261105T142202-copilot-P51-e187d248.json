@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "20261105T142202-copilot-P51-e187d248",
+  "created_at": "2026-11-05T14:22:02.529560+07:00",
+  "agent": "copilot",
+  "request": "P51-capture-session-regressions",
+  "task": "P51",
+  "completion": "done",
+  "summary": "Added four public-API regression tests for late-frame release after cancellation, stale-session suppression after a newer start, immutable stitch snapshots with single-release cleanup, and duplicate acquisition suppression. Tests use deferred synthetic adapters and no producer or OS changes.",
+  "files": [
+    "src/testing/copilot-capture-session.test.ts",
+    "docs/qa/copilot-P51.md"
+  ],
+  "file_sha256": {
+    "src/testing/copilot-capture-session.test.ts": "3b002010a30b1d525609cd2b3e563d7fe1cc996fb00859506cc456296be0a5ef",
+    "docs/qa/copilot-P51.md": "97bed635fce73f9848912daeb2866f794488876b60a475b13236821f6bd6ae91"
+  },
+  "checks": [
+    "Node 26.13.0: npm run test:unit -- src/testing/copilot-capture-session.test.ts (4 tests passed); targeted npm run lint unavailable because package has no lint script; rtk proxy git diff --check passed."
+  ],
+  "risks": [
+    "No real OS capture, clipboard, network or producer implementation was exercised. Lint could not run because no lint script exists."
+  ],
+  "review": "pending"
+}

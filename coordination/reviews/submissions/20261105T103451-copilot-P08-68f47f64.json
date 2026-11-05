@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "20261105T103451-copilot-P08-68f47f64",
+  "created_at": "2026-11-05T10:34:51.057532+07:00",
+  "agent": "copilot",
+  "request": "BUILD-20261105",
+  "task": "P08",
+  "completion": "done",
+  "summary": "Enforced strict version-1 envelope keys and expanded type/quality-bound tests",
+  "files": [
+    "src/features/settings-codec/index.ts",
+    "src/features/settings-codec/index.test.ts"
+  ],
+  "file_sha256": {
+    "src/features/settings-codec/index.ts": "5166717948de725c5eb6d5917748e6822df42643c4479ecc6b7b471a544e916e",
+    "src/features/settings-codec/index.test.ts": "b8c2fe50098162871ecbf263e63aae1b779d3204f89ab6237ce40ab836f41a75"
+  },
+  "checks": [
+    "targeted Vitest passed (4 tests)"
+  ],
+  "risks": [
+    "Strict unknown-key policy applies to envelope and settings object"
+  ],
+  "review": "pending"
+}

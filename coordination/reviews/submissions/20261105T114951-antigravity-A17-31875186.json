@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "id": "20261105T114951-antigravity-A17-31875186",
+  "created_at": "2026-11-05T11:49:51.672855+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A17",
+  "completion": "done",
+  "summary": "Refreshed A17 TextCounterControls snapshot after H01 formatting and re-verified RTL unit tests.",
+  "files": [
+    "src/features/text-counter/TextCounterControls.tsx",
+    "src/features/text-counter/TextCounterControls.css",
+    "src/features/text-counter/index.ts",
+    "src/features/text-counter/TextCounterControls.test.tsx"
+  ],
+  "file_sha256": {
+    "src/features/text-counter/TextCounterControls.tsx": "16d5d04edd2a75812bb0c48e74b067373d553f4f376c116537e73a0749fda752",
+    "src/features/text-counter/TextCounterControls.css": "270829c1867e5f98b4deba4088847843389a0a3c353268ba9939908ca66356e2",
+    "src/features/text-counter/index.ts": "de9afbd9656849779b3afc8ead11a1c4c68b1c4cdf3a2fbf4a7bff25a8cc129c",
+    "src/features/text-counter/TextCounterControls.test.tsx": "06f42ed4884d268852008308eab08a7bd58d464a1f4d5865c50deeea74dc2848"
+  },
+  "checks": [
+    "npm run test:unit -- src/features/text-counter/TextCounterControls.test.tsx: passed (2 tests)",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Allocation/history remains C01 responsibility."
+  ],
+  "review": "pending"
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "id": "20261105T114958-antigravity-A19-4e753689",
+  "created_at": "2026-11-05T11:49:58.595146+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A19",
+  "completion": "done",
+  "summary": "Refreshed A19 effects-core snapshot after H01 formatting and re-verified cargo test.",
+  "files": [
+    "src-tauri/crates/effects-core/Cargo.toml",
+    "src-tauri/crates/effects-core/Cargo.lock",
+    "src-tauri/crates/effects-core/src/lib.rs"
+  ],
+  "file_sha256": {
+    "src-tauri/crates/effects-core/Cargo.toml": "7f3db8176875dbccd4bcd20b67abf4a3f83aca2f5397f087fabda9d828340aea",
+    "src-tauri/crates/effects-core/Cargo.lock": "5c98b5166caa5c3204dd02bac6b172bc6cc34d8089ddf2101dd50d76b2abc890",
+    "src-tauri/crates/effects-core/src/lib.rs": "aac9d66fdef14ce965d44ec837c053e1bf6949e92cd4ae4c78fe1f8b04c57980"
+  },
+  "checks": [
+    "cargo test --manifest-path src-tauri/crates/effects-core/Cargo.toml: passed (3 tests)",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Blur/mosaic are visual concealment only, not cryptographic redaction."
+  ],
+  "review": "pending"
+}

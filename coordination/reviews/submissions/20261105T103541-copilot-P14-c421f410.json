@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "20261105T103541-copilot-P14-c421f410",
+  "created_at": "2026-11-05T10:35:41.746747+07:00",
+  "agent": "copilot",
+  "request": "BUILD-20261105",
+  "task": "P14",
+  "completion": "done",
+  "summary": "Added pure clamped client-to-image coordinate mapping with explicit finite positive geometry",
+  "files": [
+    "src/features/point-map/index.ts",
+    "src/features/point-map/index.test.ts"
+  ],
+  "file_sha256": {
+    "src/features/point-map/index.ts": "32c870aa4682138efc0998f6a570c123050d5b97bdcc5d693b0aa443d3b69399",
+    "src/features/point-map/index.test.ts": "6dfc4f5d889c9887679917e35fde03e6be7a0d47c477c1cf8d5847ff76b9c965"
+  },
+  "checks": [
+    "targeted Vitest passed (2 tests)"
+  ],
+  "risks": [
+    "No DOM or display-scale inference"
+  ],
+  "review": "pending"
+}

@@ -1,0 +1,8 @@
+{
+  "submission_id": "20261105T095331-antigravity-A05-0bc72b2a",
+  "reviewer": "codex",
+  "created_at": "2026-11-05T10:08:13.269035+07:00",
+  "decision": "approved",
+  "note": "Reviewed AGENTS.md scope update: no upload work in current scope and no Ferby license gates. Applies to our own implementation; existing rule against modifying Shottr.app remains in force.",
+  "submission_sha256": "8ced673e1fa15832f1a89928a9ebde43d8192984d08aeb5155deed1f6c81047c"
+}

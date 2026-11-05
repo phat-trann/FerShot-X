@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "id": "20261105T101254-codex-C05-3f635d12",
+  "created_at": "2026-11-05T10:12:54.879387+07:00",
+  "agent": "codex",
+  "request": "BUILD-20261105",
+  "task": "C05",
+  "completion": "done",
+  "summary": "Completed import/payload bounds, caller-window validation, URL cleanup tests and synthetic browser regressions; native GUI acceptance remains pending.",
+  "files": [
+    "src/platform/image-limits.ts",
+    "src/platform/import-image.ts",
+    "src/platform/import-image.test.ts",
+    "src/platform/native.ts",
+    "src/platform/native.test.ts",
+    "src-tauri/src/imaging.rs",
+    "tests/e2e/codex-regressions.spec.ts",
+    "docs/agents/codex/C05-validation.md"
+  ],
+  "file_sha256": {
+    "src/platform/image-limits.ts": "806cc4e857e34b214637b5007f427c3e12ca54e03920c5acbc337e2b4bb8d668",
+    "src/platform/import-image.ts": "e84d791906e521cecbc0a08807ad37037031e460e067a319256ce92f8e5e47f0",
+    "src/platform/import-image.test.ts": "b41bd68c03c6a6dfc96db8981b60e799a5454e48ebfba675e2f192d813d6a85e",
+    "src/platform/native.ts": "da17ddc2f6a9c069ad4e5b848bb65c76bcc6cb2512be91b6a8a9e2f2e70a4283",
+    "src/platform/native.test.ts": "9c1ebe3cf03bf581d0b2a25d8845670e07c40cdfbddf79d6906c2429b4fe9076",
+    "src-tauri/src/imaging.rs": "d6a6d3c2f53a52e3e951d6dc7c63b069f6f706c87b6189721f74719b1ba65fc4",
+    "tests/e2e/codex-regressions.spec.ts": "2026d70b261c374c175071acc2802d058f794c1c65fb1e5e5c7f2dc24fab7073",
+    "docs/agents/codex/C05-validation.md": "fe91a010435b5e7233b619c126279d6bf031687fa99a82ce7313ab3560ab3663"
+  },
+  "checks": [
+    "Full Vitest: 51 tests across 12 files passed",
+    "Playwright: 6 tests passed, synthetic images and mocked native IPC only",
+    "Root cargo test --lib: 6 passed; root strict clippy: passed",
+    "Sequential npm run tauri build -- --debug --bundles app: passed including TypeScript/Vite and macOS debug app bundle",
+    "git diff --check: passed"
+  ],
+  "risks": [
+    "No real capture, permission prompts, native save dialog or native GUI acceptance performed",
+    "Browser bounds apply after decode, not a hard browser decoder memory cap",
+    "C04 remains partial pending fresh corrected worker packets; annotation/native pin/OCR not integrated"
+  ],
+  "review": "pending"
+}

@@ -1,0 +1,8 @@
+{
+  "submission_id": "20261105T112746-antigravity-A16-b5d227b2",
+  "reviewer": "codex",
+  "created_at": "2026-11-05T11:35:25.479623+07:00",
+  "decision": "changes_requested",
+  "note": "Integration TypeScript build reports TS2345 at shapes.tsx:333 and TS2322 at shapes.test.tsx:75: frozen Point[] does not satisfy readonly [Point,Point]. Preserve typed tuple contract in implementation and fixture, run scoped functional tests, submit fresh snapshot; do not run standalone build or change root config. See C09-A16-types message.",
+  "submission_sha256": "eebdab761e1fe0bd3a097f2659ed54bb88ae65a45aadaf03c09353ca8e55c3e6"
+}

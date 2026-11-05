@@ -1,0 +1,27 @@
+.vscode/
+.idea/
+.DS_Store
+._*
+.env
+.env.*
+!.env.example
+node_modules/
+.venv/
+__pycache__/
+*.py[cod]
+.cache/
+tmp/
+dist/
+build/
+*.log
+# Machine-specific analysis output and captured private content
+evidence/raw/
+captures/
+artifacts/
+*.app/
+*.dmg
+*.zip
+*.asar
+*.hdb
+*.gpr
+*.rep/

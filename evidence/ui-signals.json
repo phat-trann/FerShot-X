@@ -1,0 +1,3851 @@
+{
+  "source": "REA decode_interface_builder output; deterministic projection of recognized text fields and action nodes",
+  "evidence_id": "ev_7a54c59efe5ad259d8b8b7c187965d29df9ca99f3686ffa068c92add599df2ca",
+  "raw_file": "evidence/raw/interface-builder.json",
+  "raw_file_sha256": "cf38421b8287f46cdb8ab5a31958dc966bb319f9259eebf5d2ff61d051c0364e",
+  "resource_root": {
+    "caller_path": "/Applications/Shottr.app",
+    "canonical_path": "/Applications/Shottr.app",
+    "info_plist_path": "/Applications/Shottr.app/Contents/Info.plist",
+    "layout": "contents",
+    "executable_sha256": null
+  },
+  "executable_sha256_in_resource_evidence": null,
+  "graph_truncated": true,
+  "coverage": [
+    {
+      "facet": "objects:Contents/Resources/Base.lproj/Main.storyboardc/BackdropViewController.nib",
+      "status": "complete",
+      "reason": null,
+      "examined": 4,
+      "omitted": 0
+    },
+    {
+      "facet": "connections:Contents/Resources/Base.lproj/Main.storyboardc/BackdropViewController.nib",
+      "status": "complete",
+      "reason": null,
+      "examined": 2,
+      "omitted": 0
+    },
+    {
+      "facet": "hierarchy:Contents/Resources/Base.lproj/Main.storyboardc/BackdropViewController.nib",
+      "status": "complete",
+      "reason": null,
+      "examined": 4,
+      "omitted": 0
+    },
+    {
+      "facet": "classes:Contents/Resources/Base.lproj/Main.storyboardc/BackdropViewController.nib",
+      "status": "complete",
+      "reason": null,
+      "examined": 12,
+      "omitted": 0
+    },
+    {
+      "facet": "objects:Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib",
+      "status": "complete",
+      "reason": null,
+      "examined": 226,
+      "omitted": 0
+    },
+    {
+      "facet": "connections:Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib",
+      "status": "complete",
+      "reason": null,
+      "examined": 80,
+      "omitted": 0
+    },
+    {
+      "facet": "hierarchy:Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib",
+      "status": "complete",
+      "reason": null,
+      "examined": 120,
+      "omitted": 0
+    },
+    {
+      "facet": "classes:Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib",
+      "status": "complete",
+      "reason": null,
+      "examined": 17,
+      "omitted": 0
+    },
+    {
+      "facet": "objects:Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib",
+      "status": "complete",
+      "reason": null,
+      "examined": 591,
+      "omitted": 0
+    },
+    {
+      "facet": "connections:Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib",
+      "status": "partial",
+      "reason": "unsupported_connection_type",
+      "examined": 85,
+      "omitted": 0
+    },
+    {
+      "facet": "hierarchy:Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib",
+      "status": "complete",
+      "reason": null,
+      "examined": 352,
+      "omitted": 0
+    },
+    {
+      "facet": "classes:Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib",
+      "status": "complete",
+      "reason": null,
+      "examined": 49,
+      "omitted": 0
+    },
+    {
+      "facet": "objects:Contents/Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib",
+      "status": "complete",
+      "reason": null,
+      "examined": 169,
+      "omitted": 0
+    },
+    {
+      "facet": "connections:Contents/Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib",
+      "status": "partial",
+      "reason": "unsupported_connection_type",
+      "examined": 20,
+      "omitted": 0
+    },
+    {
+      "facet": "hierarchy:Contents/Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib",
+      "status": "complete",
+      "reason": null,
+      "examined": 114,
+      "omitted": 0
+    },
+    {
+      "facet": "classes:Contents/Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib",
+      "status": "complete",
+      "reason": null,
+      "examined": 30,
+      "omitted": 0
+    },
+    {
+      "facet": "objects:Contents/Resources/Base.lproj/Main.storyboardc/t3D-RU-alS-view-Yr0-zl-Dzc.nib",
+      "status": "complete",
+      "reason": null,
+      "examined": 258,
+      "omitted": 0
+    },
+    {
+      "facet": "connections:Contents/Resources/Base.lproj/Main.storyboardc/t3D-RU-alS-view-Yr0-zl-Dzc.nib",
+      "status": "partial",
+      "reason": "unsupported_connection_type",
+      "examined": 40,
+      "omitted": 0
+    },
+    {
+      "facet": "hierarchy:Contents/Resources/Base.lproj/Main.storyboardc/t3D-RU-alS-view-Yr0-zl-Dzc.nib",
+      "status": "complete",
+      "reason": null,
+      "examined": 192,
+      "omitted": 0
+    },
+    {
+      "facet": "classes:Contents/Resources/Base.lproj/Main.storyboardc/t3D-RU-alS-view-Yr0-zl-Dzc.nib",
+      "status": "complete",
+      "reason": null,
+      "examined": 39,
+      "omitted": 0
+    },
+    {
+      "facet": "objects:Contents/Resources/Library.storyboardc/NSViewController-bU7-R8-ocO.nib",
+      "status": "complete",
+      "reason": null,
+      "examined": 4,
+      "omitted": 0
+    },
+    {
+      "facet": "connections:Contents/Resources/Library.storyboardc/NSViewController-bU7-R8-ocO.nib",
+      "status": "complete",
+      "reason": null,
+      "examined": 2,
+      "omitted": 0
+    },
+    {
+      "facet": "hierarchy:Contents/Resources/Library.storyboardc/NSViewController-bU7-R8-ocO.nib",
+      "status": "complete",
+      "reason": null,
+      "examined": 4,
+      "omitted": 0
+    },
+    {
+      "facet": "classes:Contents/Resources/Library.storyboardc/NSViewController-bU7-R8-ocO.nib",
+      "status": "complete",
+      "reason": null,
+      "examined": 12,
+      "omitted": 0
+    },
+    {
+      "facet": "objects:Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib",
+      "status": "complete",
+      "reason": null,
+      "examined": 219,
+      "omitted": 0
+    },
+    {
+      "facet": "connections:Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib",
+      "status": "partial",
+      "reason": "unsupported_connection_type",
+      "examined": 36,
+      "omitted": 0
+    },
+    {
+      "facet": "hierarchy:Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib",
+      "status": "complete",
+      "reason": null,
+      "examined": 153,
+      "omitted": 0
+    },
+    {
+      "facet": "classes:Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib",
+      "status": "complete",
+      "reason": null,
+      "examined": 45,
+      "omitted": 0
+    },
+    {
+      "facet": "objects:Contents/Resources/Pin.storyboardc/Ma0-De-PqN-view-rnf-7n-jyj.nib",
+      "status": "complete",
+      "reason": null,
+      "examined": 72,
+      "omitted": 0
+    },
+    {
+      "facet": "connections:Contents/Resources/Pin.storyboardc/Ma0-De-PqN-view-rnf-7n-jyj.nib",
+      "status": "partial",
+      "reason": "unsupported_connection_type",
+      "examined": 17,
+      "omitted": 0
+    },
+    {
+      "facet": "hierarchy:Contents/Resources/Pin.storyboardc/Ma0-De-PqN-view-rnf-7n-jyj.nib",
+      "status": "complete",
+      "reason": null,
+      "examined": 50,
+      "omitted": 0
+    },
+    {
+      "facet": "classes:Contents/Resources/Pin.storyboardc/Ma0-De-PqN-view-rnf-7n-jyj.nib",
+      "status": "complete",
+      "reason": null,
+      "examined": 26,
+      "omitted": 0
+    },
+    {
+      "facet": "objects:Contents/Resources/Pin.storyboardc/NSWindowController-0Tw-K1-gZ6.nib",
+      "status": "complete",
+      "reason": null,
+      "examined": 24,
+      "omitted": 0
+    },
+    {
+      "facet": "connections:Contents/Resources/Pin.storyboardc/NSWindowController-0Tw-K1-gZ6.nib",
+      "status": "complete",
+      "reason": null,
+      "examined": 14,
+      "omitted": 0
+    },
+    {
+      "facet": "hierarchy:Contents/Resources/Pin.storyboardc/NSWindowController-0Tw-K1-gZ6.nib",
+      "status": "complete",
+      "reason": null,
+      "examined": 18,
+      "omitted": 0
+    },
+    {
+      "facet": "classes:Contents/Resources/Pin.storyboardc/NSWindowController-0Tw-K1-gZ6.nib",
+      "status": "complete",
+      "reason": null,
+      "examined": 21,
+      "omitted": 0
+    },
+    {
+      "facet": "objects:Contents/Resources/Preferences.storyboardc/6sQ-om-XCe-view-qXZ-XU-bNz.nib",
+      "status": "complete",
+      "reason": null,
+      "examined": 161,
+      "omitted": 0
+    },
+    {
+      "facet": "connections:Contents/Resources/Preferences.storyboardc/6sQ-om-XCe-view-qXZ-XU-bNz.nib",
+      "status": "complete",
+      "reason": null,
+      "examined": 14,
+      "omitted": 0
+    },
+    {
+      "facet": "hierarchy:Contents/Resources/Preferences.storyboardc/6sQ-om-XCe-view-qXZ-XU-bNz.nib",
+      "status": "complete",
+      "reason": null,
+      "examined": 138,
+      "omitted": 0
+    },
+    {
+      "facet": "classes:Contents/Resources/Preferences.storyboardc/6sQ-om-XCe-view-qXZ-XU-bNz.nib",
+      "status": "complete",
+      "reason": null,
+      "examined": 25,
+      "omitted": 0
+    },
+    {
+      "facet": "objects:Contents/Resources/Preferences.storyboardc/NSWindowController-3cz-fX-Ya1.nib",
+      "status": "complete",
+      "reason": null,
+      "examined": 47,
+      "omitted": 0
+    },
+    {
+      "facet": "connections:Contents/Resources/Preferences.storyboardc/NSWindowController-3cz-fX-Ya1.nib",
+      "status": "complete",
+      "reason": null,
+      "examined": 17,
+      "omitted": 0
+    },
+    {
+      "facet": "hierarchy:Contents/Resources/Preferences.storyboardc/NSWindowController-3cz-fX-Ya1.nib",
+      "status": "complete",
+      "reason": null,
+      "examined": 25,
+      "omitted": 0
+    },
+    {
+      "facet": "classes:Contents/Resources/Preferences.storyboardc/NSWindowController-3cz-fX-Ya1.nib",
+      "status": "complete",
+      "reason": null,
+      "examined": 25,
+      "omitted": 0
+    },
+    {
+      "facet": "objects:Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib",
+      "status": "complete",
+      "reason": null,
+      "examined": 176,
+      "omitted": 0
+    },
+    {
+      "facet": "connections:Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib",
+      "status": "complete",
+      "reason": null,
+      "examined": 31,
+      "omitted": 0
+    },
+    {
+      "facet": "hierarchy:Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib",
+      "status": "partial",
+      "reason": "serialized_view_hierarchy_incomplete",
+      "examined": 158,
+      "omitted": 25
+    },
+    {
+      "facet": "classes:Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib",
+      "status": "complete",
+      "reason": null,
+      "examined": 33,
+      "omitted": 0
+    },
+    {
+      "facet": "objects:Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib",
+      "status": "complete",
+      "reason": null,
+      "examined": 289,
+      "omitted": 0
+    },
+    {
+      "facet": "connections:Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib",
+      "status": "partial",
+      "reason": "unsupported_connection_type",
+      "examined": 47,
+      "omitted": 0
+    },
+    {
+      "facet": "hierarchy:Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib",
+      "status": "complete",
+      "reason": null,
+      "examined": 254,
+      "omitted": 0
+    },
+    {
+      "facet": "classes:Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib",
+      "status": "complete",
+      "reason": null,
+      "examined": 39,
+      "omitted": 0
+    },
+    {
+      "facet": "objects:Contents/Resources/Preferences.storyboardc/YPR-Ju-4pY-view-Mcz-Zk-Zk0.nib",
+      "status": "complete",
+      "reason": null,
+      "examined": 124,
+      "omitted": 0
+    },
+    {
+      "facet": "connections:Contents/Resources/Preferences.storyboardc/YPR-Ju-4pY-view-Mcz-Zk-Zk0.nib",
+      "status": "partial",
+      "reason": "unsupported_connection_type",
+      "examined": 15,
+      "omitted": 0
+    },
+    {
+      "facet": "hierarchy:Contents/Resources/Preferences.storyboardc/YPR-Ju-4pY-view-Mcz-Zk-Zk0.nib",
+      "status": "complete",
+      "reason": null,
+      "examined": 97,
+      "omitted": 0
+    },
+    {
+      "facet": "classes:Contents/Resources/Preferences.storyboardc/YPR-Ju-4pY-view-Mcz-Zk-Zk0.nib",
+      "status": "complete",
+      "reason": null,
+      "examined": 31,
+      "omitted": 0
+    },
+    {
+      "facet": "objects:Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib",
+      "status": "complete",
+      "reason": null,
+      "examined": 238,
+      "omitted": 0
+    },
+    {
+      "facet": "connections:Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib",
+      "status": "complete",
+      "reason": null,
+      "examined": 40,
+      "omitted": 0
+    },
+    {
+      "facet": "hierarchy:Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib",
+      "status": "complete",
+      "reason": null,
+      "examined": 205,
+      "omitted": 0
+    },
+    {
+      "facet": "classes:Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib",
+      "status": "complete",
+      "reason": null,
+      "examined": 38,
+      "omitted": 0
+    },
+    {
+      "facet": "objects:Contents/Resources/Preview.storyboardc/NJi-sV-KQJ-view-bhd-SB-Gtf.nib",
+      "status": "complete",
+      "reason": null,
+      "examined": 123,
+      "omitted": 0
+    },
+    {
+      "facet": "connections:Contents/Resources/Preview.storyboardc/NJi-sV-KQJ-view-bhd-SB-Gtf.nib",
+      "status": "partial",
+      "reason": "unsupported_connection_type",
+      "examined": 24,
+      "omitted": 0
+    },
+    {
+      "facet": "hierarchy:Contents/Resources/Preview.storyboardc/NJi-sV-KQJ-view-bhd-SB-Gtf.nib",
+      "status": "complete",
+      "reason": null,
+      "examined": 74,
+      "omitted": 0
+    },
+    {
+      "facet": "classes:Contents/Resources/Preview.storyboardc/NJi-sV-KQJ-view-bhd-SB-Gtf.nib",
+      "status": "complete",
+      "reason": null,
+      "examined": 29,
+      "omitted": 0
+    },
+    {
+      "facet": "objects:Contents/Resources/Preview.storyboardc/NSWindowController-1na-jt-6US.nib",
+      "status": "complete",
+      "reason": null,
+      "examined": 10,
+      "omitted": 0
+    },
+    {
+      "facet": "connections:Contents/Resources/Preview.storyboardc/NSWindowController-1na-jt-6US.nib",
+      "status": "complete",
+      "reason": null,
+      "examined": 5,
+      "omitted": 0
+    },
+    {
+      "facet": "hierarchy:Contents/Resources/Preview.storyboardc/NSWindowController-1na-jt-6US.nib",
+      "status": "complete",
+      "reason": null,
+      "examined": 8,
+      "omitted": 0
+    },
+    {
+      "facet": "classes:Contents/Resources/Preview.storyboardc/NSWindowController-1na-jt-6US.nib",
+      "status": "complete",
+      "reason": null,
+      "examined": 16,
+      "omitted": 0
+    },
+    {
+      "facet": "archive_decode",
+      "status": "complete",
+      "reason": null,
+      "examined": 17,
+      "omitted": 0
+    }
+  ],
+  "limitations": [
+    "Artifact identity is unavailable for this observation.",
+    "The graph reflects recognized Interface Builder archive fields and connections; omitted private or unrecognized archive fields remain unknown.",
+    "A target-action selector is an Interface Builder observation and does not prove that the binary contains a matching implementation.",
+    "Decoded constraints, runtime visibility, dynamic UI creation, and pixel geometry are not inferred from these archives.",
+    "Compiled Interface Builder archives are private serialized object graphs. The decoder reports only recognized keyed-archive objects and connections; unrecognized object classes and fields remain unknown.",
+    "Some serialized hierarchy links could not be projected within the bounded hierarchy; their parentage remains unknown."
+  ],
+  "documents": [
+    {
+      "id": "UI-01",
+      "relative_path": "Contents/Resources/Base.lproj/Main.storyboardc/BackdropViewController.nib",
+      "archive_sha256": "bd3588a94487acbb1eae501dd553201fc95cf8df953044d410488b297a45317a",
+      "document_kind": "storyboard_scene",
+      "object_count": 4,
+      "connection_count": 2,
+      "hierarchy_complete": true,
+      "labels": [],
+      "actions": []
+    },
+    {
+      "id": "UI-02",
+      "relative_path": "Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib",
+      "archive_sha256": "058ff01e60d9856e36feace3224524a111d703ed2680f1de142221ad8ee12e34",
+      "document_kind": "storyboard_scene",
+      "object_count": 226,
+      "connection_count": 80,
+      "hierarchy_complete": true,
+      "labels": [
+        {
+          "text": "Draw",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"10\"]"
+        },
+        {
+          "text": "Draw",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"25\"]"
+        },
+        {
+          "text": "Arrow",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"29\"]"
+        },
+        {
+          "text": "Text",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"34\"]"
+        },
+        {
+          "text": "Rectangle",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"39\"]"
+        },
+        {
+          "text": "Freehand Drawing",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"44\"]"
+        },
+        {
+          "text": "Magnifier",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"49\"]"
+        },
+        {
+          "text": "Highlighter",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"54\"]"
+        },
+        {
+          "text": "Blur",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"59\"]"
+        },
+        {
+          "text": "Spotlight",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"64\"]"
+        },
+        {
+          "text": "Counter",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"69\"]"
+        },
+        {
+          "text": "Oval",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"74\"]"
+        },
+        {
+          "text": "Line",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"79\"]"
+        },
+        {
+          "text": "Add Capture",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"84\"]"
+        },
+        {
+          "text": "Snap to Objects",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"89\"]"
+        },
+        {
+          "text": "Snap to Similar Objects",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"93\"]"
+        },
+        {
+          "text": "Main Menu",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"104\"]"
+        },
+        {
+          "text": "Shottr",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"109\"]"
+        },
+        {
+          "text": "Shottr",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"113\"]"
+        },
+        {
+          "text": "About Shottr",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"117\"]"
+        },
+        {
+          "text": "Preferences…",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"122\"]"
+        },
+        {
+          "text": "Services",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"128\"]"
+        },
+        {
+          "text": "Services",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"132\"]"
+        },
+        {
+          "text": "Hide Shottr",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"138\"]"
+        },
+        {
+          "text": "Hide Others",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"142\"]"
+        },
+        {
+          "text": "Show All",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"146\"]"
+        },
+        {
+          "text": "Quit Shottr",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"151\"]"
+        },
+        {
+          "text": "File",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"156\"]"
+        },
+        {
+          "text": "File",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"160\"]"
+        },
+        {
+          "text": "Copy Image",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"164\"]"
+        },
+        {
+          "text": "Save Image",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"169\"]"
+        },
+        {
+          "text": "Save Image As",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"173\"]"
+        },
+        {
+          "text": "Upload Image",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"178\"]"
+        },
+        {
+          "text": "Pin to Screen",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"183\"]"
+        },
+        {
+          "text": "Print",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"188\"]"
+        },
+        {
+          "text": "Show Annoying Fellow",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"193\"]"
+        },
+        {
+          "text": "Open File",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"198\"]"
+        },
+        {
+          "text": "Open From Clipboard",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"203\"]"
+        },
+        {
+          "text": "Close",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"209\"]"
+        },
+        {
+          "text": "Edit",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"214\"]"
+        },
+        {
+          "text": "Edit",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"218\"]"
+        },
+        {
+          "text": "Undo",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"222\"]"
+        },
+        {
+          "text": "Redo",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"227\"]"
+        },
+        {
+          "text": "Reset Crop",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"232\"]"
+        },
+        {
+          "text": "Rasterize (Merge) Image",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"236\"]"
+        },
+        {
+          "text": "Cut",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"241\"]"
+        },
+        {
+          "text": "Copy",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"246\"]"
+        },
+        {
+          "text": "Paste",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"250\"]"
+        },
+        {
+          "text": "Paste and Match Style",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"255\"]"
+        },
+        {
+          "text": "Delete",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"259\"]"
+        },
+        {
+          "text": "Select All",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"263\"]"
+        },
+        {
+          "text": "Find",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"268\"]"
+        },
+        {
+          "text": "Find",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"272\"]"
+        },
+        {
+          "text": "Find…",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"276\"]"
+        },
+        {
+          "text": "Find and Replace…",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"281\"]"
+        },
+        {
+          "text": "Find Next",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"285\"]"
+        },
+        {
+          "text": "Find Previous",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"290\"]"
+        },
+        {
+          "text": "Use Selection for Find",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"295\"]"
+        },
+        {
+          "text": "Jump to Selection",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"299\"]"
+        },
+        {
+          "text": "Spelling and Grammar",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"304\"]"
+        },
+        {
+          "text": "Spelling",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"308\"]"
+        },
+        {
+          "text": "Show Spelling and Grammar",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"313\"]"
+        },
+        {
+          "text": "Check Document Now",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"318\"]"
+        },
+        {
+          "text": "Check Spelling While Typing",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"324\"]"
+        },
+        {
+          "text": "Check Grammar With Spelling",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"328\"]"
+        },
+        {
+          "text": "Correct Spelling Automatically",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"332\"]"
+        },
+        {
+          "text": "Substitutions",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"336\"]"
+        },
+        {
+          "text": "Substitutions",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"340\"]"
+        },
+        {
+          "text": "Show Substitutions",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"344\"]"
+        },
+        {
+          "text": "Smart Copy/Paste",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"349\"]"
+        },
+        {
+          "text": "Smart Quotes",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"353\"]"
+        },
+        {
+          "text": "Smart Dashes",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"357\"]"
+        },
+        {
+          "text": "Smart Links",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"361\"]"
+        },
+        {
+          "text": "Data Detectors",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"365\"]"
+        },
+        {
+          "text": "Text Replacement",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"369\"]"
+        },
+        {
+          "text": "Transformations",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"373\"]"
+        },
+        {
+          "text": "Transformations",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"377\"]"
+        },
+        {
+          "text": "Make Upper Case",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"381\"]"
+        },
+        {
+          "text": "Make Lower Case",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"385\"]"
+        },
+        {
+          "text": "Capitalize",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"389\"]"
+        },
+        {
+          "text": "Speech",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"393\"]"
+        },
+        {
+          "text": "Speech",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"397\"]"
+        },
+        {
+          "text": "Start Speaking",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"401\"]"
+        },
+        {
+          "text": "Stop Speaking",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"405\"]"
+        },
+        {
+          "text": "Zoom",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"409\"]"
+        },
+        {
+          "text": "Zoom",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"413\"]"
+        },
+        {
+          "text": "Zoom In",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"417\"]"
+        },
+        {
+          "text": "Zoom Out",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"422\"]"
+        },
+        {
+          "text": "Zoom To Fit",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"428\"]"
+        },
+        {
+          "text": "Zoom To 100%",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"433\"]"
+        },
+        {
+          "text": "Zoom To Selection",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"439\"]"
+        },
+        {
+          "text": "Selection Top Left",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"444\"]"
+        },
+        {
+          "text": "Selection Bottom Right",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"449\"]"
+        },
+        {
+          "text": "Enter Full Screen",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"454\"]"
+        },
+        {
+          "text": "Help",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"458\"]"
+        },
+        {
+          "text": "Help",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"462\"]"
+        },
+        {
+          "text": "Shottr Help",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"466\"]"
+        },
+        {
+          "text": "Frequently Asked Questions",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"471\"]"
+        },
+        {
+          "text": "How to Take Precise Screenshots",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"475\"]"
+        },
+        {
+          "text": "Cloud Uploading",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"479\"]"
+        },
+        {
+          "text": "Release Notes and New Versions",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":object:[\"483\"]"
+        }
+      ],
+      "actions": [
+        {
+          "selector": "menuArrow:",
+          "source_id": "28",
+          "destination_id": "7",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":action:[\"28:connection:0\"]"
+        },
+        {
+          "selector": "menuText:",
+          "source_id": "33",
+          "destination_id": "7",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":action:[\"33:connection:0\"]"
+        },
+        {
+          "selector": "menuRectangle:",
+          "source_id": "38",
+          "destination_id": "7",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":action:[\"38:connection:0\"]"
+        },
+        {
+          "selector": "menuFreehand:",
+          "source_id": "43",
+          "destination_id": "7",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":action:[\"43:connection:0\"]"
+        },
+        {
+          "selector": "menuMagnifier:",
+          "source_id": "48",
+          "destination_id": "7",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":action:[\"48:connection:0\"]"
+        },
+        {
+          "selector": "menuHighlighter:",
+          "source_id": "53",
+          "destination_id": "7",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":action:[\"53:connection:0\"]"
+        },
+        {
+          "selector": "menuBlur:",
+          "source_id": "58",
+          "destination_id": "7",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":action:[\"58:connection:0\"]"
+        },
+        {
+          "selector": "menuSpotlight:",
+          "source_id": "63",
+          "destination_id": "7",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":action:[\"63:connection:0\"]"
+        },
+        {
+          "selector": "menuCounter:",
+          "source_id": "68",
+          "destination_id": "7",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":action:[\"68:connection:0\"]"
+        },
+        {
+          "selector": "menuOval:",
+          "source_id": "73",
+          "destination_id": "7",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":action:[\"73:connection:0\"]"
+        },
+        {
+          "selector": "menuLine:",
+          "source_id": "78",
+          "destination_id": "7",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":action:[\"78:connection:0\"]"
+        },
+        {
+          "selector": "menuAddCapture:",
+          "source_id": "83",
+          "destination_id": "7",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":action:[\"83:connection:0\"]"
+        },
+        {
+          "selector": "menuSnap:",
+          "source_id": "88",
+          "destination_id": "7",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":action:[\"88:connection:0\"]"
+        },
+        {
+          "selector": "menuSnapSimilar:",
+          "source_id": "92",
+          "destination_id": "7",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":action:[\"92:connection:0\"]"
+        },
+        {
+          "selector": "orderFrontStandardAboutPanel:",
+          "source_id": "116",
+          "destination_id": null,
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":action:[\"116:connection:0\"]"
+        },
+        {
+          "selector": "showPreferences:",
+          "source_id": "121",
+          "destination_id": "7",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":action:[\"121:connection:0\"]"
+        },
+        {
+          "selector": "hide:",
+          "source_id": "137",
+          "destination_id": null,
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":action:[\"137:connection:0\"]"
+        },
+        {
+          "selector": "hideOtherApplications:",
+          "source_id": "141",
+          "destination_id": null,
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":action:[\"141:connection:0\"]"
+        },
+        {
+          "selector": "unhideAllApplications:",
+          "source_id": "145",
+          "destination_id": null,
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":action:[\"145:connection:0\"]"
+        },
+        {
+          "selector": "terminate:",
+          "source_id": "150",
+          "destination_id": null,
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":action:[\"150:connection:0\"]"
+        },
+        {
+          "selector": "menuCopy:",
+          "source_id": "163",
+          "destination_id": "7",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":action:[\"163:connection:0\"]"
+        },
+        {
+          "selector": "menuSave:",
+          "source_id": "168",
+          "destination_id": "7",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":action:[\"168:connection:0\"]"
+        },
+        {
+          "selector": "menuSaveAs:",
+          "source_id": "172",
+          "destination_id": "7",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":action:[\"172:connection:0\"]"
+        },
+        {
+          "selector": "menuUpload:",
+          "source_id": "177",
+          "destination_id": "7",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":action:[\"177:connection:0\"]"
+        },
+        {
+          "selector": "menuPin:",
+          "source_id": "182",
+          "destination_id": "7",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":action:[\"182:connection:0\"]"
+        },
+        {
+          "selector": "menuPrint:",
+          "source_id": "187",
+          "destination_id": "7",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":action:[\"187:connection:0\"]"
+        },
+        {
+          "selector": "menuShotty:",
+          "source_id": "192",
+          "destination_id": "7",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":action:[\"192:connection:0\"]"
+        },
+        {
+          "selector": "menuOpenFile:",
+          "source_id": "197",
+          "destination_id": "7",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":action:[\"197:connection:0\"]"
+        },
+        {
+          "selector": "menuOpenFromClipboard:",
+          "source_id": "202",
+          "destination_id": "7",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":action:[\"202:connection:0\"]"
+        },
+        {
+          "selector": "performClose:",
+          "source_id": "208",
+          "destination_id": null,
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":action:[\"208:connection:0\"]"
+        },
+        {
+          "selector": "undo:",
+          "source_id": "221",
+          "destination_id": null,
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":action:[\"221:connection:0\"]"
+        },
+        {
+          "selector": "redo:",
+          "source_id": "226",
+          "destination_id": null,
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":action:[\"226:connection:0\"]"
+        },
+        {
+          "selector": "menuUncrop:",
+          "source_id": "231",
+          "destination_id": "7",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":action:[\"231:connection:0\"]"
+        },
+        {
+          "selector": "menuRasterize:",
+          "source_id": "235",
+          "destination_id": "7",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":action:[\"235:connection:0\"]"
+        },
+        {
+          "selector": "cut:",
+          "source_id": "240",
+          "destination_id": null,
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":action:[\"240:connection:0\"]"
+        },
+        {
+          "selector": "copy:",
+          "source_id": "245",
+          "destination_id": null,
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":action:[\"245:connection:0\"]"
+        },
+        {
+          "selector": "paste:",
+          "source_id": "249",
+          "destination_id": null,
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":action:[\"249:connection:0\"]"
+        },
+        {
+          "selector": "pasteAsPlainText:",
+          "source_id": "254",
+          "destination_id": null,
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":action:[\"254:connection:0\"]"
+        },
+        {
+          "selector": "delete:",
+          "source_id": "258",
+          "destination_id": null,
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":action:[\"258:connection:0\"]"
+        },
+        {
+          "selector": "selectAll:",
+          "source_id": "262",
+          "destination_id": null,
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":action:[\"262:connection:0\"]"
+        },
+        {
+          "selector": "performFindPanelAction:",
+          "source_id": "275",
+          "destination_id": null,
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":action:[\"275:connection:0\"]"
+        },
+        {
+          "selector": "performTextFinderAction:",
+          "source_id": "280",
+          "destination_id": null,
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":action:[\"280:connection:0\"]"
+        },
+        {
+          "selector": "performFindPanelAction:",
+          "source_id": "284",
+          "destination_id": null,
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":action:[\"284:connection:0\"]"
+        },
+        {
+          "selector": "performFindPanelAction:",
+          "source_id": "289",
+          "destination_id": null,
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":action:[\"289:connection:0\"]"
+        },
+        {
+          "selector": "performFindPanelAction:",
+          "source_id": "294",
+          "destination_id": null,
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":action:[\"294:connection:0\"]"
+        },
+        {
+          "selector": "centerSelectionInVisibleArea:",
+          "source_id": "298",
+          "destination_id": null,
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":action:[\"298:connection:0\"]"
+        },
+        {
+          "selector": "showGuessPanel:",
+          "source_id": "312",
+          "destination_id": null,
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":action:[\"312:connection:0\"]"
+        },
+        {
+          "selector": "checkSpelling:",
+          "source_id": "317",
+          "destination_id": null,
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":action:[\"317:connection:0\"]"
+        },
+        {
+          "selector": "toggleContinuousSpellChecking:",
+          "source_id": "323",
+          "destination_id": null,
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":action:[\"323:connection:0\"]"
+        },
+        {
+          "selector": "toggleGrammarChecking:",
+          "source_id": "327",
+          "destination_id": null,
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":action:[\"327:connection:0\"]"
+        },
+        {
+          "selector": "toggleAutomaticSpellingCorrection:",
+          "source_id": "331",
+          "destination_id": null,
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":action:[\"331:connection:0\"]"
+        },
+        {
+          "selector": "orderFrontSubstitutionsPanel:",
+          "source_id": "343",
+          "destination_id": null,
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":action:[\"343:connection:0\"]"
+        },
+        {
+          "selector": "toggleSmartInsertDelete:",
+          "source_id": "348",
+          "destination_id": null,
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":action:[\"348:connection:0\"]"
+        },
+        {
+          "selector": "toggleAutomaticQuoteSubstitution:",
+          "source_id": "352",
+          "destination_id": null,
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":action:[\"352:connection:0\"]"
+        },
+        {
+          "selector": "toggleAutomaticDashSubstitution:",
+          "source_id": "356",
+          "destination_id": null,
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":action:[\"356:connection:0\"]"
+        },
+        {
+          "selector": "toggleAutomaticLinkDetection:",
+          "source_id": "360",
+          "destination_id": null,
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":action:[\"360:connection:0\"]"
+        },
+        {
+          "selector": "toggleAutomaticDataDetection:",
+          "source_id": "364",
+          "destination_id": null,
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":action:[\"364:connection:0\"]"
+        },
+        {
+          "selector": "toggleAutomaticTextReplacement:",
+          "source_id": "368",
+          "destination_id": null,
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":action:[\"368:connection:0\"]"
+        },
+        {
+          "selector": "uppercaseWord:",
+          "source_id": "380",
+          "destination_id": null,
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":action:[\"380:connection:0\"]"
+        },
+        {
+          "selector": "lowercaseWord:",
+          "source_id": "384",
+          "destination_id": null,
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":action:[\"384:connection:0\"]"
+        },
+        {
+          "selector": "capitalizeWord:",
+          "source_id": "388",
+          "destination_id": null,
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":action:[\"388:connection:0\"]"
+        },
+        {
+          "selector": "startSpeaking:",
+          "source_id": "400",
+          "destination_id": null,
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":action:[\"400:connection:0\"]"
+        },
+        {
+          "selector": "stopSpeaking:",
+          "source_id": "404",
+          "destination_id": null,
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":action:[\"404:connection:0\"]"
+        },
+        {
+          "selector": "menuZoomIn:",
+          "source_id": "416",
+          "destination_id": "7",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":action:[\"416:connection:0\"]"
+        },
+        {
+          "selector": "menuZoomOut:",
+          "source_id": "421",
+          "destination_id": "7",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":action:[\"421:connection:0\"]"
+        },
+        {
+          "selector": "menuZoomToFit:",
+          "source_id": "427",
+          "destination_id": "7",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":action:[\"427:connection:0\"]"
+        },
+        {
+          "selector": "menuZoomTo100:",
+          "source_id": "432",
+          "destination_id": "7",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":action:[\"432:connection:0\"]"
+        },
+        {
+          "selector": "menuZoomToSelection:",
+          "source_id": "438",
+          "destination_id": "7",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":action:[\"438:connection:0\"]"
+        },
+        {
+          "selector": "menuSelectionTopLeft:",
+          "source_id": "443",
+          "destination_id": "7",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":action:[\"443:connection:0\"]"
+        },
+        {
+          "selector": "menuSelectionBottomRight:",
+          "source_id": "448",
+          "destination_id": "7",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":action:[\"448:connection:0\"]"
+        },
+        {
+          "selector": "toggleFullScreen:",
+          "source_id": "453",
+          "destination_id": null,
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":action:[\"453:connection:0\"]"
+        },
+        {
+          "selector": "showHelp:",
+          "source_id": "465",
+          "destination_id": null,
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":action:[\"465:connection:0\"]"
+        },
+        {
+          "selector": "menuHelpFAQ:",
+          "source_id": "470",
+          "destination_id": "7",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":action:[\"470:connection:0\"]"
+        },
+        {
+          "selector": "menuHelpPrecision:",
+          "source_id": "474",
+          "destination_id": "7",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":action:[\"474:connection:0\"]"
+        },
+        {
+          "selector": "menuHelpUpload:",
+          "source_id": "478",
+          "destination_id": "7",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":action:[\"478:connection:0\"]"
+        },
+        {
+          "selector": "menuHelpReleases:",
+          "source_id": "482",
+          "destination_id": "7",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/MainMenu.nib\":action:[\"482:connection:0\"]"
+        }
+      ]
+    },
+    {
+      "id": "UI-03",
+      "relative_path": "Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib",
+      "archive_sha256": "3cf372b4c468bafaad79e90055413aa57721b013668f3cb1c1b00587757c2842",
+      "document_kind": "storyboard_scene",
+      "object_count": 591,
+      "connection_count": 85,
+      "hierarchy_complete": true,
+      "labels": [
+        {
+          "text": "Copy (Esc or ⌘C)",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":object:[\"50\"]"
+        },
+        {
+          "text": "Save (⌘S)",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":object:[\"57\"]"
+        },
+        {
+          "text": "Pin to Screen (⌘P)",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":object:[\"64\"]"
+        },
+        {
+          "text": "Crop",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":object:[\"90\"]"
+        },
+        {
+          "text": "Autoadjust (A)",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":object:[\"102\"]"
+        },
+        {
+          "text": "Resize ( ⇧+] )",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":object:[\"109\"]"
+        },
+        {
+          "text": "Recognize Text or QR (⌘O)",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":object:[\"116\"]"
+        },
+        {
+          "text": "Imprint Selection Size",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":object:[\"123\"]"
+        },
+        {
+          "text": "Erase (Del)",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":object:[\"130\"]"
+        },
+        {
+          "text": "Cut Out",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":object:[\"137\"]"
+        },
+        {
+          "text": "Reset Selection (Esc)",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":object:[\"144\"]"
+        },
+        {
+          "text": "×",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":object:[\"188\"]"
+        },
+        {
+          "text": "px",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":object:[\"201\"]"
+        },
+        {
+          "text": "Resize",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":object:[\"208\"]"
+        },
+        {
+          "text": "Blur",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":object:[\"308\"]"
+        },
+        {
+          "text": "Blur Text",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":object:[\"312\"]"
+        },
+        {
+          "text": "Erase",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":object:[\"316\"]"
+        },
+        {
+          "text": "Erase Text",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":object:[\"320\"]"
+        },
+        {
+          "text": "PX",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":object:[\"329\"]"
+        },
+        {
+          "text": "PT",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":object:[\"333\"]"
+        },
+        {
+          "text": "Label",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":object:[\"428\"]"
+        },
+        {
+          "text": "Label",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":object:[\"436\"]"
+        },
+        {
+          "text": "Button",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":object:[\"478\"]"
+        },
+        {
+          "text": "Shottr",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":object:[\"493\"]"
+        },
+        {
+          "text": "Buttons",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":object:[\"502\"]"
+        },
+        {
+          "text": "Buttons",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":object:[\"505\"]"
+        },
+        {
+          "text": "Info",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":object:[\"510\"]"
+        },
+        {
+          "text": "Info",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":object:[\"513\"]"
+        },
+        {
+          "text": "#FFFFFF",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":object:[\"525\"]"
+        },
+        {
+          "text": "Box",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":object:[\"539\"]"
+        },
+        {
+          "text": "Tab to copy",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":object:[\"549\"]"
+        },
+        {
+          "text": "Title",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":object:[\"569\"]"
+        },
+        {
+          "text": "Title",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":object:[\"576\"]"
+        },
+        {
+          "text": "1550%",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":object:[\"582\"]"
+        },
+        {
+          "text": "Zoom",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":object:[\"588\"]"
+        },
+        {
+          "text": "5160×2880px",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":object:[\"600\"]"
+        },
+        {
+          "text": "Selection Size",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":object:[\"606\"]"
+        },
+        {
+          "text": "Copy Pixel Color",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":object:[\"720\"]"
+        },
+        {
+          "text": "Hover mouse over any pixel and press Tab",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":object:[\"727\"]"
+        },
+        {
+          "text": "Copy Text Color",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":object:[\"733\"]"
+        },
+        {
+          "text": "Press Shift+Tab to copy the darkest color in the 20px area around the cursor",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":object:[\"739\"]"
+        },
+        {
+          "text": "Copy Average Color",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":object:[\"745\"]"
+        },
+        {
+          "text": "Select an area and press C to copy its average color",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":object:[\"751\"]"
+        },
+        {
+          "text": "Title",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":object:[\"787\"]"
+        },
+        {
+          "text": "Color Format",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":object:[\"801\"]"
+        },
+        {
+          "text": "Use the keyboard",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":object:[\"825\"]"
+        },
+        {
+          "text": "Hold a ⓵ or ⓶ key, or an arrow key, and move your mouse over the area which you want to measure",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":object:[\"845\"]"
+        },
+        {
+          "text": "Got  it!",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":object:[\"855\"]"
+        },
+        {
+          "text": "One logical point is equal two physical pixels on Retina displays. Use shortcut P to switch modes.",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":object:[\"876\"]"
+        },
+        {
+          "text": "Title",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":object:[\"884\"]"
+        },
+        {
+          "text": "25%",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":object:[\"891\"]"
+        },
+        {
+          "text": "33%",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":object:[\"895\"]"
+        },
+        {
+          "text": "50%",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":object:[\"899\"]"
+        },
+        {
+          "text": "1×",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":object:[\"903\"]"
+        },
+        {
+          "text": "2×",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":object:[\"907\"]"
+        },
+        {
+          "text": "4×",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":object:[\"911\"]"
+        },
+        {
+          "text": "Show Size in Logical Points",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":object:[\"917\"]"
+        },
+        {
+          "text": "Resize Image",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":object:[\"925\"]"
+        },
+        {
+          "text": "(can't be undone!)",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":object:[\"936\"]"
+        },
+        {
+          "text": "100%",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":object:[\"984\"]"
+        },
+        {
+          "text": "Hello world",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":object:[\"1139\"]"
+        },
+        {
+          "text": "The message is going to go here",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":object:[\"1146\"]"
+        },
+        {
+          "text": "Drag'n'Drop Image",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":object:[\"1239\"]"
+        },
+        {
+          "text": "Update the app",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":object:[\"1243\"]"
+        }
+      ],
+      "actions": [
+        {
+          "selector": "scExportClick:",
+          "source_id": "40",
+          "destination_id": "488",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":action:[\"40:connection:0\"]"
+        },
+        {
+          "selector": "clickBtnCrop:",
+          "source_id": "83",
+          "destination_id": "488",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":action:[\"83:connection:0\"]"
+        },
+        {
+          "selector": "scSelectionClick:",
+          "source_id": "93",
+          "destination_id": "488",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":action:[\"93:connection:0\"]"
+        },
+        {
+          "selector": "clickBtnUpdate:",
+          "source_id": "147",
+          "destination_id": "488",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":action:[\"147:connection:0\"]"
+        },
+        {
+          "selector": "changeWidth:",
+          "source_id": "168",
+          "destination_id": "659",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":action:[\"168:connection:0\"]"
+        },
+        {
+          "selector": "changeHeight:",
+          "source_id": "193",
+          "destination_id": "659",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":action:[\"193:connection:0\"]"
+        },
+        {
+          "selector": "clickResize:",
+          "source_id": "204",
+          "destination_id": "659",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":action:[\"204:connection:0\"]"
+        },
+        {
+          "selector": "editorUnselect:",
+          "source_id": "231",
+          "destination_id": "659",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":action:[\"231:connection:0\"]"
+        },
+        {
+          "selector": "editorPickColor:",
+          "source_id": "241",
+          "destination_id": "659",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":action:[\"241:connection:0\"]"
+        },
+        {
+          "selector": "editorSetSize:",
+          "source_id": "249",
+          "destination_id": "659",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":action:[\"249:connection:0\"]"
+        },
+        {
+          "selector": "editorSetLineType:",
+          "source_id": "257",
+          "destination_id": "659",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":action:[\"257:connection:0\"]"
+        },
+        {
+          "selector": "editorSetArrowType:",
+          "source_id": "271",
+          "destination_id": "659",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":action:[\"271:connection:0\"]"
+        },
+        {
+          "selector": "editorChangeArrowStyle:",
+          "source_id": "292",
+          "destination_id": "659",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":action:[\"292:connection:0\"]"
+        },
+        {
+          "selector": "editorSetConcealType:",
+          "source_id": "302",
+          "destination_id": "659",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":action:[\"302:connection:0\"]"
+        },
+        {
+          "selector": "editorSetRulerPixels:",
+          "source_id": "323",
+          "destination_id": "659",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":action:[\"323:connection:0\"]"
+        },
+        {
+          "selector": "editorSetFill:",
+          "source_id": "336",
+          "destination_id": "659",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":action:[\"336:connection:0\"]"
+        },
+        {
+          "selector": "editorSetShape:",
+          "source_id": "357",
+          "destination_id": "659",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":action:[\"357:connection:0\"]"
+        },
+        {
+          "selector": "editorSetText:",
+          "source_id": "370",
+          "destination_id": "659",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":action:[\"370:connection:0\"]"
+        },
+        {
+          "selector": "editorSetCorrection:",
+          "source_id": "383",
+          "destination_id": "659",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":action:[\"383:connection:0\"]"
+        },
+        {
+          "selector": "editorSetTransparency:",
+          "source_id": "394",
+          "destination_id": "659",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":action:[\"394:connection:0\"]"
+        },
+        {
+          "selector": "editorGIF:",
+          "source_id": "403",
+          "destination_id": "659",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":action:[\"403:connection:0\"]"
+        },
+        {
+          "selector": "colorBoxClicked:",
+          "source_id": "519",
+          "destination_id": "488",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":action:[\"519:connection:0\"]"
+        },
+        {
+          "selector": "zoomBoxClicked:",
+          "source_id": "577",
+          "destination_id": "488",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":action:[\"577:connection:0\"]"
+        },
+        {
+          "selector": "sizeBoxClicked:",
+          "source_id": "595",
+          "destination_id": "488",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":action:[\"595:connection:0\"]"
+        },
+        {
+          "selector": "changeColorFormat:",
+          "source_id": "788",
+          "destination_id": "659",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":action:[\"788:connection:0\"]"
+        },
+        {
+          "selector": "clickCloseHelp:",
+          "source_id": "848",
+          "destination_id": "659",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":action:[\"848:connection:0\"]"
+        },
+        {
+          "selector": "selectSize:",
+          "source_id": "885",
+          "destination_id": "659",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":action:[\"885:connection:0\"]"
+        },
+        {
+          "selector": "changeRealPixels:",
+          "source_id": "928",
+          "destination_id": "659",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":action:[\"928:connection:0\"]"
+        },
+        {
+          "selector": "clickZoomOut:",
+          "source_id": "969",
+          "destination_id": "659",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":action:[\"969:connection:0\"]"
+        },
+        {
+          "selector": "clickZoomIn:",
+          "source_id": "988",
+          "destination_id": "659",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":action:[\"988:connection:0\"]"
+        },
+        {
+          "selector": "clickZoomPercentage:",
+          "source_id": "1009",
+          "destination_id": "659",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":action:[\"1009:connection:0\"]"
+        }
+      ]
+    },
+    {
+      "id": "UI-04",
+      "relative_path": "Contents/Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib",
+      "archive_sha256": "d92cb78b5fdb56ee31ba533b6357bdd74cfefa22b0273e3f710bd1ffbfd4a248",
+      "document_kind": "storyboard_scene",
+      "object_count": 169,
+      "connection_count": 20,
+      "hierarchy_complete": true,
+      "labels": [
+        {
+          "text": "Update Shottr",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib\":object:[\"19\"]"
+        },
+        {
+          "text": "Next Time",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib\":object:[\"32\"]"
+        },
+        {
+          "text": "Run at Startup",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib\":object:[\"56\"]"
+        },
+        {
+          "text": "Setup Hotkeys",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib\":object:[\"66\"]"
+        },
+        {
+          "text": "Maybe Later",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib\":object:[\"78\"]"
+        },
+        {
+          "text": "Yes",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib\":object:[\"105\"]"
+        },
+        {
+          "text": "Purchase Shottr",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib\":object:[\"142\"]"
+        },
+        {
+          "text": "Later",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib\":object:[\"157\"]"
+        },
+        {
+          "text": "Hi! I’m the world’s most annoying salesperson. Do you want to buy Shottr?",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib\":object:[\"293\"]"
+        }
+      ],
+      "actions": [
+        {
+          "selector": "clickIntroNewVersion:",
+          "source_id": "9",
+          "destination_id": "327",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib\":action:[\"9:connection:0\"]"
+        },
+        {
+          "selector": "clickIntroNextTime:",
+          "source_id": "25",
+          "destination_id": "327",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib\":action:[\"25:connection:0\"]"
+        },
+        {
+          "selector": "runAtStartup:",
+          "source_id": "49",
+          "destination_id": "327",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib\":action:[\"49:connection:0\"]"
+        },
+        {
+          "selector": "setupHotkeys:",
+          "source_id": "59",
+          "destination_id": "327",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib\":action:[\"59:connection:0\"]"
+        },
+        {
+          "selector": "clickIntroPurchaseLater:",
+          "source_id": "73",
+          "destination_id": "327",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib\":action:[\"73:connection:0\"]"
+        },
+        {
+          "selector": "clickShottyPurchase:",
+          "source_id": "104",
+          "destination_id": "327",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib\":action:[\"104:connection:0\"]"
+        },
+        {
+          "selector": "clickIntroPurchase:",
+          "source_id": "135",
+          "destination_id": "327",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib\":action:[\"135:connection:0\"]"
+        },
+        {
+          "selector": "clickShottySkip:",
+          "source_id": "151",
+          "destination_id": "327",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib\":action:[\"151:connection:0\"]"
+        }
+      ]
+    },
+    {
+      "id": "UI-05",
+      "relative_path": "Contents/Resources/Base.lproj/Main.storyboardc/t3D-RU-alS-view-Yr0-zl-Dzc.nib",
+      "archive_sha256": "7c6384e4ce6679848da2173641c14339224e0ac81b26f6dce5276ada543742e9",
+      "document_kind": "storyboard_scene",
+      "object_count": 258,
+      "connection_count": 40,
+      "hierarchy_complete": true,
+      "labels": [
+        {
+          "text": "•••",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/t3D-RU-alS-view-Yr0-zl-Dzc.nib\":object:[\"17\"]"
+        },
+        {
+          "text": "•••",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/t3D-RU-alS-view-Yr0-zl-Dzc.nib\":object:[\"29\"]"
+        },
+        {
+          "text": "Reset",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/t3D-RU-alS-view-Yr0-zl-Dzc.nib\":object:[\"44\"]"
+        },
+        {
+          "text": "1:1",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/t3D-RU-alS-view-Yr0-zl-Dzc.nib\":object:[\"48\"]"
+        },
+        {
+          "text": "4:3",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/t3D-RU-alS-view-Yr0-zl-Dzc.nib\":object:[\"52\"]"
+        },
+        {
+          "text": "3:2",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/t3D-RU-alS-view-Yr0-zl-Dzc.nib\":object:[\"56\"]"
+        },
+        {
+          "text": "16:9",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/t3D-RU-alS-view-Yr0-zl-Dzc.nib\":object:[\"60\"]"
+        },
+        {
+          "text": "Twitter",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/t3D-RU-alS-view-Yr0-zl-Dzc.nib\":object:[\"64\"]"
+        },
+        {
+          "text": "Facebook",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/t3D-RU-alS-view-Yr0-zl-Dzc.nib\":object:[\"68\"]"
+        },
+        {
+          "text": "YouTube",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/t3D-RU-alS-view-Yr0-zl-Dzc.nib\":object:[\"72\"]"
+        },
+        {
+          "text": "LinkedIn",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/t3D-RU-alS-view-Yr0-zl-Dzc.nib\":object:[\"76\"]"
+        },
+        {
+          "text": "Pinterest",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/t3D-RU-alS-view-Yr0-zl-Dzc.nib\":object:[\"80\"]"
+        },
+        {
+          "text": "Backdrop",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/t3D-RU-alS-view-Yr0-zl-Dzc.nib\":object:[\"94\"]"
+        },
+        {
+          "text": "Shadow",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/t3D-RU-alS-view-Yr0-zl-Dzc.nib\":object:[\"108\"]"
+        },
+        {
+          "text": "Inset",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/t3D-RU-alS-view-Yr0-zl-Dzc.nib\":object:[\"136\"]"
+        },
+        {
+          "text": "Recenter",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/t3D-RU-alS-view-Yr0-zl-Dzc.nib\":object:[\"154\"]"
+        },
+        {
+          "text": "Outer Radius",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/t3D-RU-alS-view-Yr0-zl-Dzc.nib\":object:[\"177\"]"
+        },
+        {
+          "text": "Inner Radius",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/t3D-RU-alS-view-Yr0-zl-Dzc.nib\":object:[\"183\"]"
+        },
+        {
+          "text": "Solid",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/t3D-RU-alS-view-Yr0-zl-Dzc.nib\":object:[\"211\"]"
+        },
+        {
+          "text": "Colormix",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/t3D-RU-alS-view-Yr0-zl-Dzc.nib\":object:[\"215\"]"
+        },
+        {
+          "text": "Image",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/t3D-RU-alS-view-Yr0-zl-Dzc.nib\":object:[\"219\"]"
+        },
+        {
+          "text": "Ok",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/t3D-RU-alS-view-Yr0-zl-Dzc.nib\":object:[\"263\"]"
+        },
+        {
+          "text": "→",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/t3D-RU-alS-view-Yr0-zl-Dzc.nib\":object:[\"269\"]"
+        },
+        {
+          "text": "Mesh gradient",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/t3D-RU-alS-view-Yr0-zl-Dzc.nib\":object:[\"304\"]"
+        },
+        {
+          "text": "Mesh gradient",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/t3D-RU-alS-view-Yr0-zl-Dzc.nib\":object:[\"308\"]"
+        },
+        {
+          "text": "Vertical gradient",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/t3D-RU-alS-view-Yr0-zl-Dzc.nib\":object:[\"313\"]"
+        },
+        {
+          "text": "Diagonal gradient",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/t3D-RU-alS-view-Yr0-zl-Dzc.nib\":object:[\"317\"]"
+        },
+        {
+          "text": "Radial gradient",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/t3D-RU-alS-view-Yr0-zl-Dzc.nib\":object:[\"321\"]"
+        },
+        {
+          "text": "Button",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/t3D-RU-alS-view-Yr0-zl-Dzc.nib\":object:[\"330\"]"
+        },
+        {
+          "text": "Button",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/t3D-RU-alS-view-Yr0-zl-Dzc.nib\":object:[\"343\"]"
+        },
+        {
+          "text": "Image Blur",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/t3D-RU-alS-view-Yr0-zl-Dzc.nib\":object:[\"371\"]"
+        },
+        {
+          "text": "Ok",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/t3D-RU-alS-view-Yr0-zl-Dzc.nib\":object:[\"414\"]"
+        },
+        {
+          "text": "Remove",
+          "field": "NSDev",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/t3D-RU-alS-view-Yr0-zl-Dzc.nib\":object:[\"421\"]"
+        }
+      ],
+      "actions": [
+        {
+          "selector": "pickAspect:",
+          "source_id": "12",
+          "destination_id": "471",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/t3D-RU-alS-view-Yr0-zl-Dzc.nib\":action:[\"12:connection:0\"]"
+        },
+        {
+          "selector": "slidePadding:",
+          "source_id": "83",
+          "destination_id": "471",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/t3D-RU-alS-view-Yr0-zl-Dzc.nib\":action:[\"83:connection:0\"]"
+        },
+        {
+          "selector": "slideShadow:",
+          "source_id": "113",
+          "destination_id": "471",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/t3D-RU-alS-view-Yr0-zl-Dzc.nib\":action:[\"113:connection:0\"]"
+        },
+        {
+          "selector": "slideInset:",
+          "source_id": "139",
+          "destination_id": "471",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/t3D-RU-alS-view-Yr0-zl-Dzc.nib\":action:[\"139:connection:0\"]"
+        },
+        {
+          "selector": "clickAutocrop:",
+          "source_id": "144",
+          "destination_id": "471",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/t3D-RU-alS-view-Yr0-zl-Dzc.nib\":action:[\"144:connection:0\"]"
+        },
+        {
+          "selector": "slideOuterRadius:",
+          "source_id": "170",
+          "destination_id": "471",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/t3D-RU-alS-view-Yr0-zl-Dzc.nib\":action:[\"170:connection:0\"]"
+        },
+        {
+          "selector": "slideInnerRadius:",
+          "source_id": "186",
+          "destination_id": "471",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/t3D-RU-alS-view-Yr0-zl-Dzc.nib\":action:[\"186:connection:0\"]"
+        },
+        {
+          "selector": "tabPickMode:",
+          "source_id": "205",
+          "destination_id": "471",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/t3D-RU-alS-view-Yr0-zl-Dzc.nib\":action:[\"205:connection:0\"]"
+        },
+        {
+          "selector": "clickGradFrom:",
+          "source_id": "251",
+          "destination_id": "471",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/t3D-RU-alS-view-Yr0-zl-Dzc.nib\":action:[\"251:connection:0\"]"
+        },
+        {
+          "selector": "clickCustomGradOk:",
+          "source_id": "257",
+          "destination_id": "471",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/t3D-RU-alS-view-Yr0-zl-Dzc.nib\":action:[\"257:connection:0\"]"
+        },
+        {
+          "selector": "clickGradTo:",
+          "source_id": "272",
+          "destination_id": "471",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/t3D-RU-alS-view-Yr0-zl-Dzc.nib\":action:[\"272:connection:0\"]"
+        },
+        {
+          "selector": "pickGradientType:",
+          "source_id": "300",
+          "destination_id": "471",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/t3D-RU-alS-view-Yr0-zl-Dzc.nib\":action:[\"300:connection:0\"]"
+        },
+        {
+          "selector": "clickRandomize:",
+          "source_id": "324",
+          "destination_id": "471",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/t3D-RU-alS-view-Yr0-zl-Dzc.nib\":action:[\"324:connection:0\"]"
+        },
+        {
+          "selector": "clickReverse:",
+          "source_id": "337",
+          "destination_id": "471",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/t3D-RU-alS-view-Yr0-zl-Dzc.nib\":action:[\"337:connection:0\"]"
+        },
+        {
+          "selector": "slideBlur:",
+          "source_id": "374",
+          "destination_id": "471",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/t3D-RU-alS-view-Yr0-zl-Dzc.nib\":action:[\"374:connection:0\"]"
+        },
+        {
+          "selector": "clickOk:",
+          "source_id": "408",
+          "destination_id": "471",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/t3D-RU-alS-view-Yr0-zl-Dzc.nib\":action:[\"408:connection:0\"]"
+        },
+        {
+          "selector": "clickReset:",
+          "source_id": "417",
+          "destination_id": "471",
+          "node_id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/t3D-RU-alS-view-Yr0-zl-Dzc.nib\":action:[\"417:connection:0\"]"
+        }
+      ]
+    },
+    {
+      "id": "UI-06",
+      "relative_path": "Contents/Resources/Library.storyboardc/NSViewController-bU7-R8-ocO.nib",
+      "archive_sha256": "429f5bcbfe95e453ec7b86e2a2668ef67c7b9fdc2088f1b13ddaf9808bdb77c1",
+      "document_kind": "storyboard_scene",
+      "object_count": 4,
+      "connection_count": 2,
+      "hierarchy_complete": true,
+      "labels": [],
+      "actions": []
+    },
+    {
+      "id": "UI-07",
+      "relative_path": "Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib",
+      "archive_sha256": "1698e22f0030cd0d7d6088aab2440bd31ee8b7d71cfd2feab310ac0088ce9b77",
+      "document_kind": "storyboard_scene",
+      "object_count": 219,
+      "connection_count": 36,
+      "hierarchy_complete": true,
+      "labels": [
+        {
+          "text": "Button",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib\":object:[\"28\"]"
+        },
+        {
+          "text": "Label",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib\":object:[\"79\"]"
+        },
+        {
+          "text": "Cancel",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib\":object:[\"89\"]"
+        },
+        {
+          "text": "Label",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib\":object:[\"93\"]"
+        },
+        {
+          "text": "search",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib\":object:[\"130\"]"
+        },
+        {
+          "text": "clear",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib\":object:[\"138\"]"
+        },
+        {
+          "text": "Label",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib\":object:[\"177\"]"
+        },
+        {
+          "text": "Button",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib\":object:[\"186\"]"
+        },
+        {
+          "text": "Label",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib\":object:[\"244\"]"
+        },
+        {
+          "text": "File List",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib\":object:[\"264\"]"
+        },
+        {
+          "text": "File List",
+          "field": "NSTitle",
+          "node_id": "ib:\"Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib\":object:[\"267\"]"
+        },
+        {
+          "text": "Small Tiles",
+          "field": "NSTitle",
+          "node_id": "ib:\"Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib\":object:[\"282\"]"
+        },
+        {
+          "text": "Medium Tiles",
+          "field": "NSTitle",
+          "node_id": "ib:\"Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib\":object:[\"287\"]"
+        },
+        {
+          "text": "Large Tiles",
+          "field": "NSTitle",
+          "node_id": "ib:\"Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib\":object:[\"292\"]"
+        },
+        {
+          "text": "Label",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib\":object:[\"374\"]"
+        },
+        {
+          "text": "Label",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib\":object:[\"378\"]"
+        }
+      ],
+      "actions": [
+        {
+          "selector": "clickMore:",
+          "source_id": "20",
+          "destination_id": "409",
+          "node_id": "ib:\"Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib\":action:[\"20:connection:0\"]"
+        },
+        {
+          "selector": "clickProgressAction:",
+          "source_id": "82",
+          "destination_id": "409",
+          "node_id": "ib:\"Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib\":action:[\"82:connection:0\"]"
+        },
+        {
+          "selector": "search:",
+          "source_id": "123",
+          "destination_id": "409",
+          "node_id": "ib:\"Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib\":action:[\"123:connection:0\"]"
+        },
+        {
+          "selector": "clickMessageAction:",
+          "source_id": "181",
+          "destination_id": "409",
+          "node_id": "ib:\"Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib\":action:[\"181:connection:0\"]"
+        },
+        {
+          "selector": "clickSettings:",
+          "source_id": "247",
+          "destination_id": "409",
+          "node_id": "ib:\"Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib\":action:[\"247:connection:0\"]"
+        },
+        {
+          "selector": "selectLayout:",
+          "source_id": "258",
+          "destination_id": "409",
+          "node_id": "ib:\"Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib\":action:[\"258:connection:0\"]"
+        },
+        {
+          "selector": "changePopoverSize:",
+          "source_id": "297",
+          "destination_id": "409",
+          "node_id": "ib:\"Contents/Resources/Library.storyboardc/bU7-R8-ocO-view-tOy-S4-hL0.nib\":action:[\"297:connection:0\"]"
+        }
+      ]
+    },
+    {
+      "id": "UI-08",
+      "relative_path": "Contents/Resources/Pin.storyboardc/Ma0-De-PqN-view-rnf-7n-jyj.nib",
+      "archive_sha256": "6a6624b888f29a3fe211a3a0c8866db39f0cfcceba9dc76e916f9f3b5f3dcdb1",
+      "document_kind": "storyboard_scene",
+      "object_count": 72,
+      "connection_count": 17,
+      "hierarchy_complete": true,
+      "labels": [
+        {
+          "text": "Label",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Pin.storyboardc/Ma0-De-PqN-view-rnf-7n-jyj.nib\":object:[\"55\"]"
+        }
+      ],
+      "actions": [
+        {
+          "selector": "clickEdit:",
+          "source_id": "27",
+          "destination_id": "145",
+          "node_id": "ib:\"Contents/Resources/Pin.storyboardc/Ma0-De-PqN-view-rnf-7n-jyj.nib\":action:[\"27:connection:0\"]"
+        },
+        {
+          "selector": "clickCopy:",
+          "source_id": "39",
+          "destination_id": "145",
+          "node_id": "ib:\"Contents/Resources/Pin.storyboardc/Ma0-De-PqN-view-rnf-7n-jyj.nib\":action:[\"39:connection:0\"]"
+        },
+        {
+          "selector": "close:",
+          "source_id": "80",
+          "destination_id": "145",
+          "node_id": "ib:\"Contents/Resources/Pin.storyboardc/Ma0-De-PqN-view-rnf-7n-jyj.nib\":action:[\"80:connection:0\"]"
+        }
+      ]
+    },
+    {
+      "id": "UI-09",
+      "relative_path": "Contents/Resources/Pin.storyboardc/NSWindowController-0Tw-K1-gZ6.nib",
+      "archive_sha256": "243babefea3cd82f7d8f76bdfbb1ab24759074cca3452839953a98f04541c5b4",
+      "document_kind": "storyboard_scene",
+      "object_count": 24,
+      "connection_count": 14,
+      "hierarchy_complete": true,
+      "labels": [
+        {
+          "text": "Edit",
+          "field": "NSTitle",
+          "node_id": "ib:\"Contents/Resources/Pin.storyboardc/NSWindowController-0Tw-K1-gZ6.nib\":object:[\"32\"]"
+        },
+        {
+          "text": "Copy",
+          "field": "NSTitle",
+          "node_id": "ib:\"Contents/Resources/Pin.storyboardc/NSWindowController-0Tw-K1-gZ6.nib\":object:[\"43\"]"
+        },
+        {
+          "text": "50%",
+          "field": "NSTitle",
+          "node_id": "ib:\"Contents/Resources/Pin.storyboardc/NSWindowController-0Tw-K1-gZ6.nib\":object:[\"46\"]"
+        },
+        {
+          "text": "100%",
+          "field": "NSTitle",
+          "node_id": "ib:\"Contents/Resources/Pin.storyboardc/NSWindowController-0Tw-K1-gZ6.nib\":object:[\"48\"]"
+        },
+        {
+          "text": "200%",
+          "field": "NSTitle",
+          "node_id": "ib:\"Contents/Resources/Pin.storyboardc/NSWindowController-0Tw-K1-gZ6.nib\":object:[\"50\"]"
+        },
+        {
+          "text": "Semi-transparent",
+          "field": "NSTitle",
+          "node_id": "ib:\"Contents/Resources/Pin.storyboardc/NSWindowController-0Tw-K1-gZ6.nib\":object:[\"52\"]"
+        },
+        {
+          "text": "Close",
+          "field": "NSTitle",
+          "node_id": "ib:\"Contents/Resources/Pin.storyboardc/NSWindowController-0Tw-K1-gZ6.nib\":object:[\"55\"]"
+        }
+      ],
+      "actions": [
+        {
+          "selector": "menuEdit:",
+          "source_id": "32",
+          "destination_id": "23",
+          "node_id": "ib:\"Contents/Resources/Pin.storyboardc/NSWindowController-0Tw-K1-gZ6.nib\":action:[\"32:connection:0\"]"
+        },
+        {
+          "selector": "menuCopy:",
+          "source_id": "43",
+          "destination_id": "23",
+          "node_id": "ib:\"Contents/Resources/Pin.storyboardc/NSWindowController-0Tw-K1-gZ6.nib\":action:[\"43:connection:0\"]"
+        },
+        {
+          "selector": "menu50:",
+          "source_id": "46",
+          "destination_id": "23",
+          "node_id": "ib:\"Contents/Resources/Pin.storyboardc/NSWindowController-0Tw-K1-gZ6.nib\":action:[\"46:connection:0\"]"
+        },
+        {
+          "selector": "menu100:",
+          "source_id": "48",
+          "destination_id": "23",
+          "node_id": "ib:\"Contents/Resources/Pin.storyboardc/NSWindowController-0Tw-K1-gZ6.nib\":action:[\"48:connection:0\"]"
+        },
+        {
+          "selector": "menu200:",
+          "source_id": "50",
+          "destination_id": "23",
+          "node_id": "ib:\"Contents/Resources/Pin.storyboardc/NSWindowController-0Tw-K1-gZ6.nib\":action:[\"50:connection:0\"]"
+        },
+        {
+          "selector": "menuTransparency:",
+          "source_id": "52",
+          "destination_id": "23",
+          "node_id": "ib:\"Contents/Resources/Pin.storyboardc/NSWindowController-0Tw-K1-gZ6.nib\":action:[\"52:connection:0\"]"
+        },
+        {
+          "selector": "menuClose:",
+          "source_id": "55",
+          "destination_id": "23",
+          "node_id": "ib:\"Contents/Resources/Pin.storyboardc/NSWindowController-0Tw-K1-gZ6.nib\":action:[\"55:connection:0\"]"
+        }
+      ]
+    },
+    {
+      "id": "UI-10",
+      "relative_path": "Contents/Resources/Preferences.storyboardc/6sQ-om-XCe-view-qXZ-XU-bNz.nib",
+      "archive_sha256": "612e1d4c546d55d52d74a03b19fb72938bdffd085c0ef329c483f7abbc2c2b37",
+      "document_kind": "storyboard_scene",
+      "object_count": 161,
+      "connection_count": 14,
+      "hierarchy_complete": true,
+      "labels": [
+        {
+          "text": "Reassign Default",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/6sQ-om-XCe-view-qXZ-XU-bNz.nib\":object:[\"21\"]"
+        },
+        {
+          "text": "Reassign default shortcuts",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/6sQ-om-XCe-view-qXZ-XU-bNz.nib\":object:[\"46\"]"
+        },
+        {
+          "text": "Steps to assign ⌘⇧4 to Shottr",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/6sQ-om-XCe-view-qXZ-XU-bNz.nib\":object:[\"58\"]"
+        },
+        {
+          "text": "1. Go to System Settings → Keyboard → Keyboard Shortcuts",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/6sQ-om-XCe-view-qXZ-XU-bNz.nib\":object:[\"78\"]"
+        },
+        {
+          "text": "2. Select \"Screenshots\" and uncheck checkboxes for system shortcuts",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/6sQ-om-XCe-view-qXZ-XU-bNz.nib\":object:[\"82\"]"
+        },
+        {
+          "text": "Open System Settings",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/6sQ-om-XCe-view-qXZ-XU-bNz.nib\":object:[\"87\"]"
+        },
+        {
+          "text": "3. Put ⌘⇧3 into Fullscreen and ⌘⇧4 into Area fields below ",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/6sQ-om-XCe-view-qXZ-XU-bNz.nib\":object:[\"91\"]"
+        },
+        {
+          "text": "How to reassign default shortcuts",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/6sQ-om-XCe-view-qXZ-XU-bNz.nib\":object:[\"95\"]"
+        },
+        {
+          "text": "Title",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/6sQ-om-XCe-view-qXZ-XU-bNz.nib\":object:[\"118\"]"
+        },
+        {
+          "text": "Fullscreen screenshot",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/6sQ-om-XCe-view-qXZ-XU-bNz.nib\":object:[\"123\"]"
+        },
+        {
+          "text": "Area screenshot",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/6sQ-om-XCe-view-qXZ-XU-bNz.nib\":object:[\"132\"]"
+        },
+        {
+          "text": "Active window screenshot",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/6sQ-om-XCe-view-qXZ-XU-bNz.nib\":object:[\"141\"]"
+        },
+        {
+          "text": "Scrolling screenshot",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/6sQ-om-XCe-view-qXZ-XU-bNz.nib\":object:[\"150\"]"
+        },
+        {
+          "text": "Title",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/6sQ-om-XCe-view-qXZ-XU-bNz.nib\":object:[\"167\"]"
+        },
+        {
+          "text": "Instant Text/QR Recognition",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/6sQ-om-XCe-view-qXZ-XU-bNz.nib\":object:[\"170\"]"
+        },
+        {
+          "text": "Repeat area screenshot",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/6sQ-om-XCe-view-qXZ-XU-bNz.nib\":object:[\"184\"]"
+        },
+        {
+          "text": "Any window screenshot",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/6sQ-om-XCe-view-qXZ-XU-bNz.nib\":object:[\"188\"]"
+        },
+        {
+          "text": "Show Shottr",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/6sQ-om-XCe-view-qXZ-XU-bNz.nib\":object:[\"197\"]"
+        }
+      ],
+      "actions": [
+        {
+          "selector": "clickReassignDefault:",
+          "source_id": "14",
+          "destination_id": "255",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/6sQ-om-XCe-view-qXZ-XU-bNz.nib\":action:[\"14:connection:0\"]"
+        },
+        {
+          "selector": "clickOpenPreferences:",
+          "source_id": "84",
+          "destination_id": "255",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/6sQ-om-XCe-view-qXZ-XU-bNz.nib\":action:[\"84:connection:0\"]"
+        }
+      ]
+    },
+    {
+      "id": "UI-11",
+      "relative_path": "Contents/Resources/Preferences.storyboardc/NSWindowController-3cz-fX-Ya1.nib",
+      "archive_sha256": "5a397bcb2d33d8ee7351ad756a614c5741c69b46e3df00f12a6ea9249b5c153b",
+      "document_kind": "storyboard_scene",
+      "object_count": 47,
+      "connection_count": 17,
+      "hierarchy_complete": true,
+      "labels": [
+        {
+          "text": "Uploading",
+          "field": "NSTitle",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NSWindowController-3cz-fX-Ya1.nib\":object:[\"19\"]"
+        },
+        {
+          "text": "Hotkeys",
+          "field": "NSTitle",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NSWindowController-3cz-fX-Ya1.nib\":object:[\"33\"]"
+        },
+        {
+          "text": "General",
+          "field": "NSTitle",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NSWindowController-3cz-fX-Ya1.nib\":object:[\"44\"]"
+        },
+        {
+          "text": "License",
+          "field": "NSTitle",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NSWindowController-3cz-fX-Ya1.nib\":object:[\"55\"]"
+        },
+        {
+          "text": "Advanced",
+          "field": "NSTitle",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NSWindowController-3cz-fX-Ya1.nib\":object:[\"66\"]"
+        }
+      ],
+      "actions": []
+    },
+    {
+      "id": "UI-12",
+      "relative_path": "Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib",
+      "archive_sha256": "7e5bef014e15e3c2af1708bb53703394e887aeff233d0d3abb527047ef8d2665",
+      "document_kind": "storyboard_scene",
+      "object_count": 176,
+      "connection_count": 31,
+      "hierarchy_complete": false,
+      "labels": [
+        {
+          "text": "Primary OCR language",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"14\"]"
+        },
+        {
+          "text": "English",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"32\"]"
+        },
+        {
+          "text": "English",
+          "field": "NSTitle",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"36\"]"
+        },
+        {
+          "text": "OCR line breaks",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"51\"]"
+        },
+        {
+          "text": "Remove line breaks",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"57\"]"
+        },
+        {
+          "text": "Menubar icon",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"64\"]"
+        },
+        {
+          "text": "Hide menubar icon",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"72\"]"
+        },
+        {
+          "text": "Splash window",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"91\"]"
+        },
+        {
+          "text": "Don't show splash",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"98\"]"
+        },
+        {
+          "text": "Main window",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"116\"]"
+        },
+        {
+          "text": "Always on top",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"121\"]"
+        },
+        {
+          "text": "Zoom with mouse wheel",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"125\"]"
+        },
+        {
+          "text": "Reverse scroll direction",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"130\"]"
+        },
+        {
+          "text": "Scrolling capture",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"134\"]"
+        },
+        {
+          "text": "Reverse scroll direction",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"141\"]"
+        },
+        {
+          "text": "Default zoom level",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"158\"]"
+        },
+        {
+          "text": "Prefer 100%",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"165\"]"
+        },
+        {
+          "text": "Action when hiding with Esc",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"183\"]"
+        },
+        {
+          "text": "Copy Image",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"190\"]"
+        },
+        {
+          "text": "Save Image",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"195\"]"
+        },
+        {
+          "text": "Confirmation style",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"207\"]"
+        },
+        {
+          "text": "Custom Notification",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"214\"]"
+        },
+        {
+          "text": "Custom Notification",
+          "field": "NSTitle",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"216\"]"
+        },
+        {
+          "text": "System Notification",
+          "field": "NSTitle",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"219\"]"
+        },
+        {
+          "text": "None",
+          "field": "NSTitle",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"221\"]"
+        },
+        {
+          "text": "URL Scheme API",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"225\"]"
+        },
+        {
+          "text": "Enable deep links",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"230\"]"
+        },
+        {
+          "text": "Diagnostics information",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"234\"]"
+        },
+        {
+          "text": "Allow collection",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"239\"]"
+        },
+        {
+          "text": "We DO collect: performance metrics, error codes, frequency of feature usage; OS version, screen resolution and internationalization preferences.\nWe DON'T collect: any personal information, IP address, any images or text. Screenshots never leave the computer unless you upload them to the cloud.",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":object:[\"243\"]"
+        }
+      ],
+      "actions": [
+        {
+          "selector": "updatePrimaryOCR:",
+          "source_id": "27",
+          "destination_id": "317",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":action:[\"27:connection:0\"]"
+        },
+        {
+          "selector": "updateRemoveBreaksOCR:",
+          "source_id": "53",
+          "destination_id": "317",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":action:[\"53:connection:0\"]"
+        },
+        {
+          "selector": "updateHideMenubar:",
+          "source_id": "69",
+          "destination_id": "317",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":action:[\"69:connection:0\"]"
+        },
+        {
+          "selector": "helpHideMenubar:",
+          "source_id": "74",
+          "destination_id": "317",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":action:[\"74:connection:0\"]"
+        },
+        {
+          "selector": "updateHideSplash:",
+          "source_id": "95",
+          "destination_id": "317",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":action:[\"95:connection:0\"]"
+        },
+        {
+          "selector": "helpHideMenubar:",
+          "source_id": "100",
+          "destination_id": "317",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":action:[\"100:connection:0\"]"
+        },
+        {
+          "selector": "updateAlwaysOnTop:",
+          "source_id": "118",
+          "destination_id": "317",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":action:[\"118:connection:0\"]"
+        },
+        {
+          "selector": "updateReverseScroll:",
+          "source_id": "127",
+          "destination_id": "317",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":action:[\"127:connection:0\"]"
+        },
+        {
+          "selector": "updateReverseAutoscroll:",
+          "source_id": "138",
+          "destination_id": "317",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":action:[\"138:connection:0\"]"
+        },
+        {
+          "selector": "helpReverseAutoscroll:",
+          "source_id": "142",
+          "destination_id": "317",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":action:[\"142:connection:0\"]"
+        },
+        {
+          "selector": "updateLargerWindow:",
+          "source_id": "162",
+          "destination_id": "317",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":action:[\"162:connection:0\"]"
+        },
+        {
+          "selector": "helpLargerWindow:",
+          "source_id": "167",
+          "destination_id": "317",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":action:[\"167:connection:0\"]"
+        },
+        {
+          "selector": "updateEscCopy:",
+          "source_id": "187",
+          "destination_id": "317",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":action:[\"187:connection:0\"]"
+        },
+        {
+          "selector": "updateEscSave:",
+          "source_id": "192",
+          "destination_id": "317",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":action:[\"192:connection:0\"]"
+        },
+        {
+          "selector": "updateNotificationType:",
+          "source_id": "209",
+          "destination_id": "317",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":action:[\"209:connection:0\"]"
+        },
+        {
+          "selector": "updateDeeplinks:",
+          "source_id": "227",
+          "destination_id": "317",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":action:[\"227:connection:0\"]"
+        },
+        {
+          "selector": "updateTelemetry:",
+          "source_id": "236",
+          "destination_id": "317",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/NTL-U4-RCY-view-jEA-Ft-qg2.nib\":action:[\"236:connection:0\"]"
+        }
+      ]
+    },
+    {
+      "id": "UI-13",
+      "relative_path": "Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib",
+      "archive_sha256": "eb90eab04a353717809395c758d63445ba8c0f79fff53b10ee80586834df785f",
+      "document_kind": "storyboard_scene",
+      "object_count": 289,
+      "connection_count": 47,
+      "hierarchy_complete": true,
+      "labels": [
+        {
+          "text": "Image Uploading & Link Sharing",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"15\"]"
+        },
+        {
+          "text": "Disable Uploading",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"32\"]"
+        },
+        {
+          "text": "Disable Uploading",
+          "field": "NSTitle",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"36\"]"
+        },
+        {
+          "text": "Shottr Cloud",
+          "field": "NSTitle",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"50\"]"
+        },
+        {
+          "text": "S3 (Amazon, Cloudflare, Backblaze, etc.)",
+          "field": "NSTitle",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"53\"]"
+        },
+        {
+          "text": "Requires Activation",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"62\"]"
+        },
+        {
+          "text": "Access key",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"88\"]"
+        },
+        {
+          "text": "Secret key",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"111\"]"
+        },
+        {
+          "text": "Bucket",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"129\"]"
+        },
+        {
+          "text": "Service",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"147\"]"
+        },
+        {
+          "text": "Amazon (AWS)",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"155\"]"
+        },
+        {
+          "text": "Other",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"163\"]"
+        },
+        {
+          "text": "Region",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"179\"]"
+        },
+        {
+          "text": "Endpoint",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"197\"]"
+        },
+        {
+          "text": "Key prefix (path)",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"215\"]"
+        },
+        {
+          "text": "Optional",
+          "field": "NSPlaceholderString",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"221\"]"
+        },
+        {
+          "text": "Test Connection",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"237\"]"
+        },
+        {
+          "text": "Checking",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"244\"]"
+        },
+        {
+          "text": "Title",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"270\"]"
+        },
+        {
+          "text": "Link sharing",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"277\"]"
+        },
+        {
+          "text": "Don't Generate URL",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"284\"]"
+        },
+        {
+          "text": "Don't Generate URL",
+          "field": "NSTitle",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"286\"]"
+        },
+        {
+          "text": "Generate Presigned URL",
+          "field": "NSTitle",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"289\"]"
+        },
+        {
+          "text": "Generate Public Bucket URL",
+          "field": "NSTitle",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"292\"]"
+        },
+        {
+          "text": "Link Expiration",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"306\"]"
+        },
+        {
+          "text": "N days",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"315\"]"
+        },
+        {
+          "text": "Presigned URLs are only valid for up to 7 days",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"319\"]"
+        },
+        {
+          "text": "Public bucket URL",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"337\"]"
+        },
+        {
+          "text": "Will only work if your bucket is public",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"348\"]"
+        },
+        {
+          "text": "Token",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"404\"]"
+        },
+        {
+          "text": "Learn More",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"424\"]"
+        },
+        {
+          "text": "Get a Token",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"429\"]"
+        },
+        {
+          "text": "To upload images to Shottr Cloud, you need a security token. Think of it as a secret code that grants access to your uploads.",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"441\"]"
+        },
+        {
+          "text": "Shottr allows you to upload an image online and generate a shareable link. Use the dropdown above to enable this functionality.",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":object:[\"460\"]"
+        }
+      ],
+      "actions": [
+        {
+          "selector": "changeUploadMode:",
+          "source_id": "28",
+          "destination_id": "514",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":action:[\"28:connection:0\"]"
+        },
+        {
+          "selector": "requiresActivation:",
+          "source_id": "56",
+          "destination_id": "514",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":action:[\"56:connection:0\"]"
+        },
+        {
+          "selector": "editS3Access:",
+          "source_id": "90",
+          "destination_id": "514",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":action:[\"90:connection:0\"]"
+        },
+        {
+          "selector": "editS3Secret:",
+          "source_id": "113",
+          "destination_id": "514",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":action:[\"113:connection:0\"]"
+        },
+        {
+          "selector": "editS3Bucket:",
+          "source_id": "131",
+          "destination_id": "514",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":action:[\"131:connection:0\"]"
+        },
+        {
+          "selector": "pickS3RegionOrEndpoint:",
+          "source_id": "151",
+          "destination_id": "514",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":action:[\"151:connection:0\"]"
+        },
+        {
+          "selector": "pickS3RegionOrEndpoint:",
+          "source_id": "159",
+          "destination_id": "514",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":action:[\"159:connection:0\"]"
+        },
+        {
+          "selector": "editS3Region:",
+          "source_id": "181",
+          "destination_id": "514",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":action:[\"181:connection:0\"]"
+        },
+        {
+          "selector": "editS3Endpoint:",
+          "source_id": "199",
+          "destination_id": "514",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":action:[\"199:connection:0\"]"
+        },
+        {
+          "selector": "editS3Prefix:",
+          "source_id": "217",
+          "destination_id": "514",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":action:[\"217:connection:0\"]"
+        },
+        {
+          "selector": "clickS3Test:",
+          "source_id": "234",
+          "destination_id": "514",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":action:[\"234:connection:0\"]"
+        },
+        {
+          "selector": "changeS3Sharing:",
+          "source_id": "279",
+          "destination_id": "514",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":action:[\"279:connection:0\"]"
+        },
+        {
+          "selector": "changeS3Expiration:",
+          "source_id": "308",
+          "destination_id": "514",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":action:[\"308:connection:0\"]"
+        },
+        {
+          "selector": "editS3PublicURL:",
+          "source_id": "339",
+          "destination_id": "514",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":action:[\"339:connection:0\"]"
+        },
+        {
+          "selector": "editCloudToken:",
+          "source_id": "406",
+          "destination_id": "514",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":action:[\"406:connection:0\"]"
+        },
+        {
+          "selector": "clickLearnMore:",
+          "source_id": "421",
+          "destination_id": "514",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":action:[\"421:connection:0\"]"
+        },
+        {
+          "selector": "clickGetToken:",
+          "source_id": "426",
+          "destination_id": "514",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/PA4-Wk-i8P-view-ifL-La-miy.nib\":action:[\"426:connection:0\"]"
+        }
+      ]
+    },
+    {
+      "id": "UI-14",
+      "relative_path": "Contents/Resources/Preferences.storyboardc/YPR-Ju-4pY-view-Mcz-Zk-Zk0.nib",
+      "archive_sha256": "87170dd496570588f48f57e1b7e5468a5dad33cc942d7b1d6221ccf741fa9dea",
+      "document_kind": "storyboard_scene",
+      "object_count": 124,
+      "connection_count": 15,
+      "hierarchy_complete": true,
+      "labels": [
+        {
+          "text": "Activate Shottr",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/YPR-Ju-4pY-view-Mcz-Zk-Zk0.nib\":object:[\"38\"]"
+        },
+        {
+          "text": "Thank you for making app development possible",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/YPR-Ju-4pY-view-Mcz-Zk-Zk0.nib\":object:[\"54\"]"
+        },
+        {
+          "text": "License Number",
+          "field": "NSPlaceholderString",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/YPR-Ju-4pY-view-Mcz-Zk-Zk0.nib\":object:[\"75\"]"
+        },
+        {
+          "text": "Your license number is in the confirmation email that you receive after purchasing Shottr",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/YPR-Ju-4pY-view-Mcz-Zk-Zk0.nib\":object:[\"85\"]"
+        },
+        {
+          "text": "Activate",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/YPR-Ju-4pY-view-Mcz-Zk-Zk0.nib\":object:[\"92\"]"
+        },
+        {
+          "text": "Purchase Shottr",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/YPR-Ju-4pY-view-Mcz-Zk-Zk0.nib\":object:[\"125\"]"
+        },
+        {
+          "text": "Regular tier. Purchase Shottr and get rid of the Annoying Fellow.",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/YPR-Ju-4pY-view-Mcz-Zk-Zk0.nib\":object:[\"129\"]"
+        },
+        {
+          "text": "Purchase License",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/YPR-Ju-4pY-view-Mcz-Zk-Zk0.nib\":object:[\"135\"]"
+        },
+        {
+          "text": "Thank you for purchasing\nan extended license!",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/YPR-Ju-4pY-view-Mcz-Zk-Zk0.nib\":object:[\"165\"]"
+        },
+        {
+          "text": "Explore hidden features",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/YPR-Ju-4pY-view-Mcz-Zk-Zk0.nib\":object:[\"170\"]"
+        },
+        {
+          "text": "Box",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/YPR-Ju-4pY-view-Mcz-Zk-Zk0.nib\":object:[\"180\"]"
+        },
+        {
+          "text": "Learn More",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/YPR-Ju-4pY-view-Mcz-Zk-Zk0.nib\":object:[\"190\"]"
+        },
+        {
+          "text": "Restore License",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/YPR-Ju-4pY-view-Mcz-Zk-Zk0.nib\":object:[\"195\"]"
+        }
+      ],
+      "actions": [
+        {
+          "selector": "clickActivate:",
+          "source_id": "87",
+          "destination_id": "239",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/YPR-Ju-4pY-view-Mcz-Zk-Zk0.nib\":action:[\"87:connection:0\"]"
+        },
+        {
+          "selector": "clickPurchase:",
+          "source_id": "131",
+          "destination_id": "239",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/YPR-Ju-4pY-view-Mcz-Zk-Zk0.nib\":action:[\"131:connection:0\"]"
+        },
+        {
+          "selector": "clickFriendsClub:",
+          "source_id": "167",
+          "destination_id": "239",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/YPR-Ju-4pY-view-Mcz-Zk-Zk0.nib\":action:[\"167:connection:0\"]"
+        },
+        {
+          "selector": "clickLearnMore:",
+          "source_id": "184",
+          "destination_id": "239",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/YPR-Ju-4pY-view-Mcz-Zk-Zk0.nib\":action:[\"184:connection:0\"]"
+        },
+        {
+          "selector": "clickRestoreLicense:",
+          "source_id": "192",
+          "destination_id": "239",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/YPR-Ju-4pY-view-Mcz-Zk-Zk0.nib\":action:[\"192:connection:0\"]"
+        }
+      ]
+    },
+    {
+      "id": "UI-15",
+      "relative_path": "Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib",
+      "archive_sha256": "8aa20a6fba6c453e9e02f47a6c5683f7c15293c3d76e1e7ec94bde02f2dc5e29",
+      "document_kind": "storyboard_scene",
+      "object_count": 238,
+      "connection_count": 40,
+      "hierarchy_complete": true,
+      "labels": [
+        {
+          "text": "Window Screenshot Background",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"17\"]"
+        },
+        {
+          "text": "Wallpaper",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"78\"]"
+        },
+        {
+          "text": "Transparent",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"83\"]"
+        },
+        {
+          "text": "Solid Color",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"87\"]"
+        },
+        {
+          "text": "Trim shadow",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"91\"]"
+        },
+        {
+          "text": "#C4C6C8",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"98\"]"
+        },
+        {
+          "text": "Title",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"140\"]"
+        },
+        {
+          "text": "Screenshots folder",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"146\"]"
+        },
+        {
+          "text": "Auto (PNG/JPEG)",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"151\"]"
+        },
+        {
+          "text": "Save format",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"157\"]"
+        },
+        {
+          "text": "Resize retina screenshots",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"161\"]"
+        },
+        {
+          "text": "Downscale to 1× when saving",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"166\"]"
+        },
+        {
+          "text": "PNG",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"173\"]"
+        },
+        {
+          "text": "Select Folder",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"178\"]"
+        },
+        {
+          "text": "Title",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"209\"]"
+        },
+        {
+          "text": "Scrolling screenshot max height",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"263\"]"
+        },
+        {
+          "text": "px",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"267\"]"
+        },
+        {
+          "text": "Scrolling screenshot speed",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"274\"]"
+        },
+        {
+          "text": "Title",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"295\"]"
+        },
+        {
+          "text": "Launch at startup",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"301\"]"
+        },
+        {
+          "text": "Thumbnail",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"306\"]"
+        },
+        {
+          "text": "After Area Crop, show",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"310\"]"
+        },
+        {
+          "text": "Autostart",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"314\"]"
+        },
+        {
+          "text": "Editor",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"319\"]"
+        },
+        {
+          "text": "Show",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"324\"]"
+        },
+        {
+          "text": "Copy",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"329\"]"
+        },
+        {
+          "text": "Save",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"334\"]"
+        },
+        {
+          "text": "After screenshot",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"338\"]"
+        },
+        {
+          "text": "Automatically (click outside)",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"343\"]"
+        },
+        {
+          "text": "Automatically (click outside)",
+          "field": "NSTitle",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"346\"]"
+        },
+        {
+          "text": "Manually (close button)",
+          "field": "NSTitle",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"358\"]"
+        },
+        {
+          "text": "Hide preview thumbnail",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":object:[\"362\"]"
+        }
+      ],
+      "actions": [
+        {
+          "selector": "riWinBackground:",
+          "source_id": "30",
+          "destination_id": "423",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":action:[\"30:connection:0\"]"
+        },
+        {
+          "selector": "riWinBackground:",
+          "source_id": "46",
+          "destination_id": "423",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":action:[\"46:connection:0\"]"
+        },
+        {
+          "selector": "riWinBackground:",
+          "source_id": "56",
+          "destination_id": "423",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":action:[\"56:connection:0\"]"
+        },
+        {
+          "selector": "riWinBackground:",
+          "source_id": "66",
+          "destination_id": "423",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":action:[\"66:connection:0\"]"
+        },
+        {
+          "selector": "updateSolidColor:",
+          "source_id": "93",
+          "destination_id": "423",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":action:[\"93:connection:0\"]"
+        },
+        {
+          "selector": "helpWindowBG:",
+          "source_id": "102",
+          "destination_id": "423",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":action:[\"102:connection:0\"]"
+        },
+        {
+          "selector": "changeSaveFormat:",
+          "source_id": "148",
+          "destination_id": "423",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":action:[\"148:connection:0\"]"
+        },
+        {
+          "selector": "changeDownscale:",
+          "source_id": "163",
+          "destination_id": "423",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":action:[\"163:connection:0\"]"
+        },
+        {
+          "selector": "changeSaveFormat:",
+          "source_id": "170",
+          "destination_id": "423",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":action:[\"170:connection:0\"]"
+        },
+        {
+          "selector": "clickSaveFolder:",
+          "source_id": "175",
+          "destination_id": "423",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":action:[\"175:connection:0\"]"
+        },
+        {
+          "selector": "helpSaveFormat:",
+          "source_id": "180",
+          "destination_id": "423",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":action:[\"180:connection:0\"]"
+        },
+        {
+          "selector": "updateScrollingMax:",
+          "source_id": "212",
+          "destination_id": "423",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":action:[\"212:connection:0\"]"
+        },
+        {
+          "selector": "updateScrollingSpeed:",
+          "source_id": "269",
+          "destination_id": "423",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":action:[\"269:connection:0\"]"
+        },
+        {
+          "selector": "updateLunchAtStartup:",
+          "source_id": "298",
+          "destination_id": "423",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":action:[\"298:connection:0\"]"
+        },
+        {
+          "selector": "changeAreaCropBehavior:",
+          "source_id": "303",
+          "destination_id": "423",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":action:[\"303:connection:0\"]"
+        },
+        {
+          "selector": "changeAreaCropBehavior:",
+          "source_id": "316",
+          "destination_id": "423",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":action:[\"316:connection:0\"]"
+        },
+        {
+          "selector": "updateAfterGrabShow:",
+          "source_id": "321",
+          "destination_id": "423",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":action:[\"321:connection:0\"]"
+        },
+        {
+          "selector": "updateAfterGrabCopy:",
+          "source_id": "326",
+          "destination_id": "423",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":action:[\"326:connection:0\"]"
+        },
+        {
+          "selector": "updateAfterGrabSave:",
+          "source_id": "331",
+          "destination_id": "423",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":action:[\"331:connection:0\"]"
+        },
+        {
+          "selector": "selectThumbnailClosing:",
+          "source_id": "340",
+          "destination_id": "423",
+          "node_id": "ib:\"Contents/Resources/Preferences.storyboardc/vXi-bH-nTd-view-fki-md-Men.nib\":action:[\"340:connection:0\"]"
+        }
+      ]
+    },
+    {
+      "id": "UI-16",
+      "relative_path": "Contents/Resources/Preview.storyboardc/NJi-sV-KQJ-view-bhd-SB-Gtf.nib",
+      "archive_sha256": "9e2b908f96838ad4f3205cb712a08af1d7cb2186e976c83ff05108847a5ffba5",
+      "document_kind": "storyboard_scene",
+      "object_count": 123,
+      "connection_count": 24,
+      "hierarchy_complete": true,
+      "labels": [
+        {
+          "text": "Label",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preview.storyboardc/NJi-sV-KQJ-view-bhd-SB-Gtf.nib\":object:[\"104\"]"
+        },
+        {
+          "text": "Label",
+          "field": "NSContents",
+          "node_id": "ib:\"Contents/Resources/Preview.storyboardc/NJi-sV-KQJ-view-bhd-SB-Gtf.nib\":object:[\"119\"]"
+        }
+      ],
+      "actions": [
+        {
+          "selector": "clickEdit:",
+          "source_id": "9",
+          "destination_id": "245",
+          "node_id": "ib:\"Contents/Resources/Preview.storyboardc/NJi-sV-KQJ-view-bhd-SB-Gtf.nib\":action:[\"9:connection:0\"]"
+        },
+        {
+          "selector": "clickCopy:",
+          "source_id": "27",
+          "destination_id": "245",
+          "node_id": "ib:\"Contents/Resources/Preview.storyboardc/NJi-sV-KQJ-view-bhd-SB-Gtf.nib\":action:[\"27:connection:0\"]"
+        },
+        {
+          "selector": "clickSave:",
+          "source_id": "37",
+          "destination_id": "245",
+          "node_id": "ib:\"Contents/Resources/Preview.storyboardc/NJi-sV-KQJ-view-bhd-SB-Gtf.nib\":action:[\"37:connection:0\"]"
+        },
+        {
+          "selector": "clickUpload:",
+          "source_id": "47",
+          "destination_id": "245",
+          "node_id": "ib:\"Contents/Resources/Preview.storyboardc/NJi-sV-KQJ-view-bhd-SB-Gtf.nib\":action:[\"47:connection:0\"]"
+        },
+        {
+          "selector": "clickOCR:",
+          "source_id": "57",
+          "destination_id": "245",
+          "node_id": "ib:\"Contents/Resources/Preview.storyboardc/NJi-sV-KQJ-view-bhd-SB-Gtf.nib\":action:[\"57:connection:0\"]"
+        },
+        {
+          "selector": "btnPin:",
+          "source_id": "67",
+          "destination_id": "245",
+          "node_id": "ib:\"Contents/Resources/Preview.storyboardc/NJi-sV-KQJ-view-bhd-SB-Gtf.nib\":action:[\"67:connection:0\"]"
+        },
+        {
+          "selector": "btnClose:",
+          "source_id": "142",
+          "destination_id": "245",
+          "node_id": "ib:\"Contents/Resources/Preview.storyboardc/NJi-sV-KQJ-view-bhd-SB-Gtf.nib\":action:[\"142:connection:0\"]"
+        }
+      ]
+    },
+    {
+      "id": "UI-17",
+      "relative_path": "Contents/Resources/Preview.storyboardc/NSWindowController-1na-jt-6US.nib",
+      "archive_sha256": "f4691d6261202360e58a6b4237deddac960dd660d49b9a69bc4df473f27ebff4",
+      "document_kind": "storyboard_scene",
+      "object_count": 10,
+      "connection_count": 5,
+      "hierarchy_complete": true,
+      "labels": [],
+      "actions": []
+    }
+  ]
+}

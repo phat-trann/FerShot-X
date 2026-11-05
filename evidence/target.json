@@ -1,0 +1,99 @@
+{
+  "collected_at": "2026-11-05T01:42:15.929110+00:00",
+  "app_path": "/Applications/Shottr.app",
+  "bundle_id": "cc.ffitch.shottr",
+  "version": "1.9.3",
+  "build": "137",
+  "minimum_macos": "12",
+  "executable": "/Applications/Shottr.app/Contents/MacOS/Shottr",
+  "executable_sha256": "4a1ea879e1079b81b1c501e7ef0c399cf7d0890c2b33fc79f97c4124620360a3",
+  "info_plist_sha256": "6d33bc838b1588405f797c6f918e238eaab3148f5b32c5ddbc65d5ae9b6fb9c5",
+  "rea_version": "6.8.0",
+  "collection_mode": "static; no target launch, user preferences, screenshot library or keychain access",
+  "operations": {
+    "plist": {
+      "command": [
+        "inspect-plist",
+        "/Applications/Shottr.app"
+      ],
+      "exit_code": 0,
+      "path": "evidence/raw/plist.json",
+      "evidence_id": "ev_873e89b3dfe28175d06beecfaef6a625b85d61fd7e7f79c50888494f39633abd",
+      "top_level_keys": [
+        "evidence_id",
+        "subject",
+        "provider",
+        "analysis_profile",
+        "predicate_type",
+        "operation",
+        "parameters",
+        "raw_result",
+        "normalized_result",
+        "confidence",
+        "authority",
+        "environment",
+        "limitations",
+        "relationship_coverage",
+        "locations",
+        "evidence_links",
+        "caller_input_path"
+      ]
+    },
+    "interface-builder": {
+      "command": [
+        "decode-interface-builder",
+        "/Applications/Shottr.app"
+      ],
+      "exit_code": 0,
+      "path": "evidence/raw/interface-builder.json",
+      "evidence_id": "ev_7a54c59efe5ad259d8b8b7c187965d29df9ca99f3686ffa068c92add599df2ca",
+      "top_level_keys": [
+        "evidence_id",
+        "subject",
+        "provider",
+        "analysis_profile",
+        "predicate_type",
+        "operation",
+        "parameters",
+        "raw_result",
+        "normalized_result",
+        "confidence",
+        "authority",
+        "environment",
+        "limitations",
+        "relationship_coverage",
+        "locations",
+        "evidence_links",
+        "caller_input_path"
+      ]
+    },
+    "macho": {
+      "command": [
+        "inspect-macho",
+        "/Applications/Shottr.app"
+      ],
+      "exit_code": 0,
+      "path": "evidence/raw/macho.json",
+      "evidence_id": "ev_325b2de5ec4707dfddd3ebd3c0886f97143495651e250254894ce3e29af0863f",
+      "top_level_keys": [
+        "evidence_id",
+        "subject",
+        "provider",
+        "analysis_profile",
+        "predicate_type",
+        "operation",
+        "parameters",
+        "raw_result",
+        "normalized_result",
+        "confidence",
+        "authority",
+        "environment",
+        "limitations",
+        "relationship_coverage",
+        "locations",
+        "evidence_links",
+        "caller_input_path"
+      ]
+    }
+  }
+}

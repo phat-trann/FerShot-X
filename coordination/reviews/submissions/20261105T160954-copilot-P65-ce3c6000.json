@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "20261105T160954-copilot-P65-ce3c6000",
+  "created_at": "2026-11-05T16:09:54.044907+07:00",
+  "agent": "copilot",
+  "request": "P65-scroll-boundary-regressions",
+  "task": "P65",
+  "completion": "partial",
+  "summary": "Added Rust integration regressions using tiny RGBA row bands for malformed buffers/source preservation, mismatched widths, invalid options, and tolerance at versus above max_channel_diff. Required cargo test is blocked because cargo is unavailable; no producer or manifest changes.",
+  "files": [
+    "src-tauri/crates/scroll-core/tests/copilot_p65.rs",
+    "docs/qa/copilot-P65.md"
+  ],
+  "file_sha256": {
+    "src-tauri/crates/scroll-core/tests/copilot_p65.rs": "86ceb317f09b87a430320d61fafc84bc688bfafb8b38ce6e446fc4d889d5da67",
+    "docs/qa/copilot-P65.md": "eae99ece3bed697df361932a657aa784a545c1479deb09c354d8001d335f7869"
+  },
+  "checks": [
+    "Required command attempted: cargo test --locked --manifest-path src-tauri/crates/scroll-core/Cargo.toml --test copilot_p65; blocked with cargo: No such file or directory. rtk proxy git diff --check passed."
+  ],
+  "risks": [
+    "Test compilation remains unverified until Cargo is available; producer behavior was not changed."
+  ],
+  "review": "pending"
+}

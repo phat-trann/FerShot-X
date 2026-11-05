@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "20261105T165136-copilot-P68-c5ed5dd4",
+  "created_at": "2026-11-05T16:51:36.971360+07:00",
+  "agent": "copilot",
+  "request": "P68-vision-adapter-regressions",
+  "task": "P68",
+  "completion": "done",
+  "summary": "Added independent C23 public adapter regressions for lease source/revision mismatch, malformed Unicode/result validation, transport byte-copy isolation, and abort after a late resolver result. Injected ports and synthetic metadata only; producer code untouched.",
+  "files": [
+    "src/testing/copilot-vision-backend-adapter.test.ts",
+    "docs/qa/copilot-P68.md"
+  ],
+  "file_sha256": {
+    "src/testing/copilot-vision-backend-adapter.test.ts": "a2a51095f383f20b17c353bbf305e080eda01db17d85e532c4691e0480a52d77",
+    "docs/qa/copilot-P68.md": "0263aa1042ab77216bcdc6619a490b512deba411c017f3e6b88c2b43fb5ee4bf"
+  },
+  "checks": [
+    "Node 26.13.0: npm run test:unit -- src/testing/copilot-vision-backend-adapter.test.ts (1 file, 4 tests passed); rtk proxy git diff --check passed."
+  ],
+  "risks": [
+    "No known defect in covered C23 adapter behavior; native/Tauri integration remains outside scope."
+  ],
+  "review": "pending"
+}

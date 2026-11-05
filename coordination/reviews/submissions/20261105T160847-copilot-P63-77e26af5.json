@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "20261105T160847-copilot-P63-77e26af5",
+  "created_at": "2026-11-05T16:08:47.871972+07:00",
+  "agent": "copilot",
+  "request": "P63-lifecycle-regressions",
+  "task": "P63",
+  "completion": "done",
+  "summary": "Added independent A35 lifecycle regressions for latest release callback during a pending action, timeout cleanup exactly once across unmount, and two captures reusing one document ID with independent release. Synthetic documents/timers/callbacks only; producer code untouched.",
+  "files": [
+    "src/testing/copilot-capture-workflow-lifecycle.test.tsx",
+    "docs/qa/copilot-P63.md"
+  ],
+  "file_sha256": {
+    "src/testing/copilot-capture-workflow-lifecycle.test.tsx": "e1a6d68512fd97b9d392178a56be1a2f0733b38ed319c71122f37fb492afde16",
+    "docs/qa/copilot-P63.md": "2293c495b82510aa7f2f288a536964aa58aef598101da791509d08669c9fe5e5"
+  },
+  "checks": [
+    "Node 26.13.0: npm run test:unit -- src/testing/copilot-capture-workflow-lifecycle.test.tsx src/features/capture-workflow/CaptureWorkflowController.test.tsx (2 files, 12 tests passed); rtk proxy git diff --check passed."
+  ],
+  "risks": [
+    "No known lifecycle defect found in the covered A35 public behavior."
+  ],
+  "review": "pending"
+}

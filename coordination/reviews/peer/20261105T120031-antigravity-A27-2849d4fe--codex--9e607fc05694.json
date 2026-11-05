@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "submission_id": "20261105T120031-antigravity-A27-2849d4fe",
+  "reviewer": "codex",
+  "decision": "approved",
+  "note": "Read unchanged measurement component, helper seam, styles and tests. Validated reverse/clamped source-pixel geometry, explicit scale conversion, readonly callbacks and invalid/busy guards. Approval covers controlled measurement UI and Ferby explicit-scale math; no Shottr runtime equivalence or imprint integration is claimed.",
+  "checks": [
+    "Node 26 targeted A27 and P02 functional tests: 8 passed"
+  ],
+  "created_at": "2026-11-05T16:43:51.499165+07:00",
+  "submission_sha256": "6f4cbcff07b64eb9b6154ed59e2bcecd8d4a7a04457ebe318983166da5772553"
+}

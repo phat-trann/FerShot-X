@@ -1,6 +1,15 @@
 # Copilot implementation prompts
 
-> Latest user allocation: Codex also executes free A01-A37 producer/fix scopes as codex; Copilot owns P58-P63 independent bounded tests. See TWO-LANE.md. No self-approval.
+## Implementation-first priority (latest user instruction, 2026-11-05)
+
+Codex and the existing Copilot client work in parallel on distinct file claims. Prioritize completing in-scope function logic/configuration and provisional app wiring. New tests, broad regression batches, hygiene and validation-only backlog are deferred until the implementation pass is ready; record tests as NOT RUN rather than passed. Necessary syntax/type/compile checks remain allowed. Do not stop implementation solely to refresh unrelated stale broad snapshots.
+
+Current done/hash-bound producer sources may be provisionally wired while independent review is pending. This is UNREVIEWED development integration, not self-approval, acceptance or permission to ship. Known functional rejections, stale/incomplete inputs and active producer claims still block consumption. C16/P57 final acceptance and actual native/target parity gates retain their original independent/evidence requirements. No product/dependency upgrades, Swift, cloud/uploads, real captures in automated checks or proprietary-code/resource copying. Unknown original behavior remains UNKNOWN; use explicit Ferby decisions without claiming Shottr equivalence.
+
+Copilot: finish its currently claimed task, then implement P70 RecognitionWorkspace and P71 LocalOutputWorkspace in their isolated folders using the exact queue props. Codex owns C08 native OCR/QR transport, recognition source/jobs and root integration, then broader C11-C15. No second Copilot client is started while an existing claim is active. 'Data' means in-scope feature data/configuration and logic; personal-data migration is not added by this priority change.
+
+
+> Latest user allocation: Codex also executes free A01-A37 producer/fix scopes as codex; Copilot owns P58-P69 independent bounded tests. See TWO-LANE.md. No self-approval.
 
 > Staffing update: read [TWO-LANE.md](../TWO-LANE.md) first. Antigravity is unavailable this week. Continue independent regressions P58-P61 through the selector after current P tasks; preserve H01 claims and final P57 review gates.
 

@@ -1340,7 +1340,8 @@
       "requires_reviewed_tasks": [
         "A34",
         "C19"
-      ]
+      ],
+      "implementation_ready": true
     },
     {
       "id": "C08",
@@ -1348,7 +1349,7 @@
       "title": "Native clipboard import and local OCR bridge",
       "owned_paths": "src/Workspace.*; src/platform/**; src/contracts/**; src-tauri/src/**; root manifests/capabilities/configs/lockfiles; tests/e2e/codex-*.spec.ts",
       "inputs": "A33 Rust Vision core; A14 clipboard core; P23/P24",
-      "work": "Review current packets and actual functionality first; integrate only approved module APIs, typed main-window IPC and constrained native capabilities. Keep heavy work off UI thread. Stay at 0.1.0 and existing versions; no telemetry/upload/license gates. Preserve originals and never invoke OS actions in automated tests without injected fakes.",
+      "work": "Review current packets and actual functionality first; integrate only approved module APIs, typed main-window IPC and constrained native capabilities. Keep heavy work off UI thread. Stay at 0.1.0 and existing versions; no telemetry/upload/license gates. Preserve originals and never invoke OS actions in automated tests without injected fakes. Latest user priority: source-ready provisional integration may proceed before independent review in implementation-first mode; mark it UNREVIEWED and do not mark acceptance/release approved. Stale, incomplete, active or functionally rejected producer snapshots remain blocked. Defer broad tests and UI polish.",
       "acceptance": "Scoped functional/IPC/browser checks and integration build. Separate browser/fake validation from real native acceptance. Native acceptance uses explicit user-triggered synthetic scenarios; no automatic privacy changes. Missing modules -> partial, skip and continue.",
       "dependency": "current approved A33 Rust core for OCR/QR; clipboard slice already integrated",
       "requires": [
@@ -1419,7 +1420,7 @@
       "title": "User-triggered scrolling and capture modes",
       "owned_paths": "src/Workspace.*; src/platform/**; src/contracts/**; src-tauri/src/**; root manifests/capabilities/configs/lockfiles; tests/e2e/codex-*.spec.ts",
       "inputs": "A22/A23/P30/P34",
-      "work": "Review current packets and actual functionality first; integrate only approved module APIs, typed main-window IPC and constrained native capabilities. Keep heavy work off UI thread. Stay at 0.1.0 and existing versions; no telemetry/upload/license gates. Preserve originals and never invoke OS actions in automated tests without injected fakes.",
+      "work": "Review current packets and actual functionality first; integrate only approved module APIs, typed main-window IPC and constrained native capabilities. Keep heavy work off UI thread. Stay at 0.1.0 and existing versions; no telemetry/upload/license gates. Preserve originals and never invoke OS actions in automated tests without injected fakes. Latest user priority: source-ready provisional integration may proceed before independent review in implementation-first mode; mark it UNREVIEWED and do not mark acceptance/release approved. Stale, incomplete, active or functionally rejected producer snapshots remain blocked. Defer broad tests and UI polish.",
       "acceptance": "Scoped functional/IPC/browser checks and integration build. Separate browser/fake validation from real native acceptance. Native acceptance uses explicit user-triggered synthetic scenarios; no automatic privacy changes. Missing modules -> partial, skip and continue.",
       "dependency": "requires the named local exports; skip if absent",
       "requires": [
@@ -1444,7 +1445,7 @@
       "title": "Annotation/effect/backdrop/composition integration",
       "owned_paths": "src/Workspace.*; src/platform/**; src/contracts/**; src-tauri/src/**; root manifests/capabilities/configs/lockfiles; tests/e2e/codex-*.spec.ts",
       "inputs": "A16-A21/A26/A27",
-      "work": "Review current packets and actual functionality first; integrate only approved module APIs, typed main-window IPC and constrained native capabilities. Keep heavy work off UI thread. Stay at 0.1.0 and existing versions; no telemetry/upload/license gates. Preserve originals and never invoke OS actions in automated tests without injected fakes.",
+      "work": "Review current packets and actual functionality first; integrate only approved module APIs, typed main-window IPC and constrained native capabilities. Keep heavy work off UI thread. Stay at 0.1.0 and existing versions; no telemetry/upload/license gates. Preserve originals and never invoke OS actions in automated tests without injected fakes. Latest user priority: source-ready provisional integration may proceed before independent review in implementation-first mode; mark it UNREVIEWED and do not mark acceptance/release approved. Stale, incomplete, active or functionally rejected producer snapshots remain blocked. Defer broad tests and UI polish.",
       "acceptance": "Scoped functional/IPC/browser checks and integration build. Separate browser/fake validation from real native acceptance. Native acceptance uses explicit user-triggered synthetic scenarios; no automatic privacy changes. Missing modules -> partial, skip and continue.",
       "dependency": "requires the named local exports; skip if absent",
       "requires": [
@@ -1469,7 +1470,7 @@
       "title": "Global shortcut and app lifecycle wiring",
       "owned_paths": "src/Workspace.*; src/platform/**; src/contracts/**; src-tauri/src/**; root manifests/capabilities/configs/lockfiles; tests/e2e/codex-*.spec.ts",
       "inputs": "A25/A28",
-      "work": "Review current packets and actual functionality first; integrate only approved module APIs, typed main-window IPC and constrained native capabilities. Keep heavy work off UI thread. Stay at 0.1.0 and existing versions; no telemetry/upload/license gates. Preserve originals and never invoke OS actions in automated tests without injected fakes.",
+      "work": "Review current packets and actual functionality first; integrate only approved module APIs, typed main-window IPC and constrained native capabilities. Keep heavy work off UI thread. Stay at 0.1.0 and existing versions; no telemetry/upload/license gates. Preserve originals and never invoke OS actions in automated tests without injected fakes. Latest user priority: source-ready provisional integration may proceed before independent review in implementation-first mode; mark it UNREVIEWED and do not mark acceptance/release approved. Stale, incomplete, active or functionally rejected producer snapshots remain blocked. Defer broad tests and UI polish.",
       "acceptance": "Scoped functional/IPC/browser checks and integration build. Separate browser/fake validation from real native acceptance. Native acceptance uses explicit user-triggered synthetic scenarios; no automatic privacy changes. Missing modules -> partial, skip and continue.",
       "dependency": "requires the named local exports; skip if absent",
       "requires": [
@@ -1492,7 +1493,7 @@
       "title": "Explicit local archive integration",
       "owned_paths": "src/Workspace.*; src/platform/**; src/contracts/**; src-tauri/src/**; root manifests/capabilities/configs/lockfiles; tests/e2e/codex-*.spec.ts",
       "inputs": "A29",
-      "work": "Review current packets and actual functionality first; integrate only approved module APIs, typed main-window IPC and constrained native capabilities. Keep heavy work off UI thread. Stay at 0.1.0 and existing versions; no telemetry/upload/license gates. Preserve originals and never invoke OS actions in automated tests without injected fakes.",
+      "work": "Review current packets and actual functionality first; integrate only approved module APIs, typed main-window IPC and constrained native capabilities. Keep heavy work off UI thread. Stay at 0.1.0 and existing versions; no telemetry/upload/license gates. Preserve originals and never invoke OS actions in automated tests without injected fakes. Latest user priority: source-ready provisional integration may proceed before independent review in implementation-first mode; mark it UNREVIEWED and do not mark acceptance/release approved. Stale, incomplete, active or functionally rejected producer snapshots remain blocked. Defer broad tests and UI polish.",
       "acceptance": "Scoped functional/IPC/browser checks and integration build. Separate browser/fake validation from real native acceptance. Native acceptance uses explicit user-triggered synthetic scenarios; no automatic privacy changes. Missing modules -> partial, skip and continue.",
       "dependency": "requires the named local exports; skip if absent",
       "requires": [
@@ -1516,7 +1517,7 @@
       "title": "Deep links, print and user-initiated drag",
       "owned_paths": "src/Workspace.*; src/platform/**; src/contracts/**; src-tauri/src/**; root manifests/capabilities/configs/lockfiles; tests/e2e/codex-*.spec.ts",
       "inputs": "A30/P37/P40",
-      "work": "Review current packets and actual functionality first; integrate only approved module APIs, typed main-window IPC and constrained native capabilities. Keep heavy work off UI thread. Stay at 0.1.0 and existing versions; no telemetry/upload/license gates. Preserve originals and never invoke OS actions in automated tests without injected fakes.",
+      "work": "Review current packets and actual functionality first; integrate only approved module APIs, typed main-window IPC and constrained native capabilities. Keep heavy work off UI thread. Stay at 0.1.0 and existing versions; no telemetry/upload/license gates. Preserve originals and never invoke OS actions in automated tests without injected fakes. Latest user priority: source-ready provisional integration may proceed before independent review in implementation-first mode; mark it UNREVIEWED and do not mark acceptance/release approved. Stale, incomplete, active or functionally rejected producer snapshots remain blocked. Defer broad tests and UI polish.",
       "acceptance": "Scoped functional/IPC/browser checks and integration build. Separate browser/fake validation from real native acceptance. Native acceptance uses explicit user-triggered synthetic scenarios; no automatic privacy changes. Missing modules -> partial, skip and continue.",
       "dependency": "requires the named local exports; skip if absent",
       "requires": [
@@ -1724,7 +1725,8 @@
         "codex",
         "antigravity"
       ],
-      "work_kind": "implementation"
+      "work_kind": "implementation",
+      "defer_during_implementation": true
     },
     {
       "id": "P44",
@@ -1745,7 +1747,8 @@
         "codex",
         "antigravity"
       ],
-      "work_kind": "implementation"
+      "work_kind": "implementation",
+      "defer_during_implementation": true
     },
     {
       "id": "P45",
@@ -1766,7 +1769,8 @@
         "codex",
         "antigravity"
       ],
-      "work_kind": "implementation"
+      "work_kind": "implementation",
+      "defer_during_implementation": true
     },
     {
       "id": "P46",
@@ -1787,7 +1791,8 @@
         "codex",
         "antigravity"
       ],
-      "work_kind": "implementation"
+      "work_kind": "implementation",
+      "defer_during_implementation": true
     },
     {
       "id": "P47",
@@ -1808,7 +1813,8 @@
         "codex",
         "antigravity"
       ],
-      "work_kind": "implementation"
+      "work_kind": "implementation",
+      "defer_during_implementation": true
     },
     {
       "id": "P48",
@@ -1829,7 +1835,8 @@
         "codex",
         "antigravity"
       ],
-      "work_kind": "implementation"
+      "work_kind": "implementation",
+      "defer_during_implementation": true
     },
     {
       "id": "P49",
@@ -1850,7 +1857,8 @@
         "codex",
         "antigravity"
       ],
-      "work_kind": "implementation"
+      "work_kind": "implementation",
+      "defer_during_implementation": true
     },
     {
       "id": "P50",
@@ -1871,7 +1879,8 @@
         "codex",
         "antigravity"
       ],
-      "work_kind": "implementation"
+      "work_kind": "implementation",
+      "defer_during_implementation": true
     },
     {
       "id": "C17",
@@ -2030,7 +2039,8 @@
         "codex",
         "antigravity"
       ],
-      "validation_policy": "Scoped functional tests; H01 remains separate. No Swift."
+      "validation_policy": "Scoped functional tests; H01 remains separate. No Swift.",
+      "defer_during_implementation": true
     },
     {
       "id": "P52",
@@ -2050,7 +2060,8 @@
         "codex",
         "antigravity"
       ],
-      "validation_policy": "Scoped functional tests; H01 remains separate. No Swift."
+      "validation_policy": "Scoped functional tests; H01 remains separate. No Swift.",
+      "defer_during_implementation": true
     },
     {
       "id": "P53",
@@ -2070,7 +2081,8 @@
         "codex",
         "antigravity"
       ],
-      "validation_policy": "Scoped functional tests; H01 remains separate. No Swift."
+      "validation_policy": "Scoped functional tests; H01 remains separate. No Swift.",
+      "defer_during_implementation": true
     },
     {
       "id": "P54",
@@ -2090,7 +2102,8 @@
         "codex",
         "antigravity"
       ],
-      "validation_policy": "Scoped functional tests; H01 remains separate. No Swift."
+      "validation_policy": "Scoped functional tests; H01 remains separate. No Swift.",
+      "defer_during_implementation": true
     },
     {
       "id": "P55",
@@ -2110,7 +2123,8 @@
         "codex",
         "antigravity"
       ],
-      "validation_policy": "Scoped functional tests; H01 remains separate. No Swift."
+      "validation_policy": "Scoped functional tests; H01 remains separate. No Swift.",
+      "defer_during_implementation": true
     },
     {
       "id": "P56",
@@ -2131,7 +2145,8 @@
         "codex",
         "antigravity"
       ],
-      "validation_policy": "Scoped functional audit; no new dependencies or Swift."
+      "validation_policy": "Scoped functional audit; no new dependencies or Swift.",
+      "defer_during_implementation": true
     },
     {
       "id": "P57",
@@ -2154,7 +2169,8 @@
         "codex",
         "antigravity"
       ],
-      "validation_policy": "Hash/JSON/evidence verification; no full raw evidence scan or OS mutation."
+      "validation_policy": "Hash/JSON/evidence verification; no full raw evidence scan or OS mutation.",
+      "defer_during_implementation": true
     },
     {
       "id": "P58",
@@ -2175,7 +2191,8 @@
         "codex",
         "antigravity"
       ],
-      "validation_policy": "Targeted functional tests; H01 hygiene remains separate."
+      "validation_policy": "Targeted functional tests; H01 hygiene remains separate.",
+      "defer_during_implementation": true
     },
     {
       "id": "P59",
@@ -2196,7 +2213,8 @@
         "codex",
         "antigravity"
       ],
-      "validation_policy": "Targeted functional tests; H01 hygiene remains separate."
+      "validation_policy": "Targeted functional tests; H01 hygiene remains separate.",
+      "defer_during_implementation": true
     },
     {
       "id": "P60",
@@ -2217,7 +2235,8 @@
         "codex",
         "antigravity"
       ],
-      "validation_policy": "Targeted functional tests; H01 hygiene remains separate."
+      "validation_policy": "Targeted functional tests; H01 hygiene remains separate.",
+      "defer_during_implementation": true
     },
     {
       "id": "P61",
@@ -2238,7 +2257,8 @@
         "codex",
         "antigravity"
       ],
-      "validation_policy": "Targeted functional tests; H01 hygiene remains separate."
+      "validation_policy": "Targeted functional tests; H01 hygiene remains separate.",
+      "defer_during_implementation": true
     },
     {
       "id": "P62",
@@ -2259,7 +2279,8 @@
       "reviewers": [
         "codex",
         "antigravity"
-      ]
+      ],
+      "defer_during_implementation": true
     },
     {
       "id": "P63",
@@ -2279,6 +2300,243 @@
       "acceptance": "Run targeted new and named producer tests with Node 26. Report real failures/limitations, <=150 words. Submit exact snapshots after this task; release claims and select again. No OS actions, Swift, versions, full repository scan or standalone build.",
       "reviewers": [
         "codex",
+        "antigravity"
+      ],
+      "defer_during_implementation": true
+    },
+    {
+      "id": "P64",
+      "agent": "copilot",
+      "title": "Injected Vision backend boundary regressions",
+      "producer_task": "A33",
+      "owned_paths": "src-tauri/crates/vision-core/tests/copilot_p64.rs; docs/qa/copilot-P64.md",
+      "inputs": "src-tauri/crates/vision-core/src/lib.rs; src-tauri/crates/vision-core/Cargo.toml",
+      "requires": [
+        "src-tauri/crates/vision-core/src/lib.rs",
+        "src-tauri/crates/vision-core/Cargo.toml",
+        "src-tauri/crates/vision-core/Cargo.lock"
+      ],
+      "state": "RETRY",
+      "work_kind": "implementation",
+      "queue_priority": 2,
+      "work": "Use a counting fake VisionBackend only. Cover invalid requests rejected before execute, supported_languages failures, backend execute failures and UTF-8/result caps at the public recognize_with_backend boundary. Generate tiny synthetic PNGs with the existing image dependency. Never invoke recognize, runtime_supported_languages, MacOsVisionBackend or existing macos native tests. Assert the public contract; report mismatches without modifying the producer. Initially read only the two named inputs; inspect the current producer claim before work and skip occupied/unfinished scopes. If producer is occupied, publish a blocked packet for this task, release owned claims and select another independent task without waiting. Own only the new integration test and report. Do not edit lib.rs, Cargo.toml, Cargo.lock, root wiring, dependencies, existing tests or producer packets. Report functional failures with a minimal reproducer; do not self-approve or impersonate Antigravity. Existing producer code remains Codex execution scope. Environment recovery verified by Codex: source \"$HOME/.cargo/env\" in the task shell before invoking rtk proxy cargo; Cargo stable is installed. Codex ran this exact integration target successfully (4 tests). Recheck current hashes, run the target and publish a fresh done packet; old partial packet is not rewritten.",
+      "acceptance": "Add 3-5 meaningful independent public-API regressions. Run cargo test --locked --manifest-path src-tauri/crates/vision-core/Cargo.toml --test copilot_p64. This exact integration-test target is required; do not run the entire crate/native test suite or standalone build. Compilation intrinsic to tests is allowed. Use existing dependency versions; if --locked fails, report the blocker without rewriting lockfiles. Record actual test count/failures and limitations in <=150 words. Submit test/report snapshots, release claims and select again. No real OS capture/clipboard/Vision, Swift, version upgrades, full repository scans or semantic auto-fixes. Formatting/lint remains separately claimed H01 work.",
+      "reviewers": [
+        "codex",
+        "antigravity"
+      ],
+      "validation_policy": "Injected/synthetic functional tests only; no native backend or standalone app build; temp directories allowed only for P66/P67.",
+      "defer_during_implementation": true
+    },
+    {
+      "id": "P65",
+      "agent": "copilot",
+      "title": "Scrolling stitch boundary regressions",
+      "producer_task": "A22",
+      "owned_paths": "src-tauri/crates/scroll-core/tests/copilot_p65.rs; docs/qa/copilot-P65.md",
+      "inputs": "src-tauri/crates/scroll-core/src/lib.rs; src-tauri/crates/scroll-core/Cargo.toml",
+      "requires": [
+        "src-tauri/crates/scroll-core/src/lib.rs",
+        "src-tauri/crates/scroll-core/Cargo.toml",
+        "src-tauri/crates/scroll-core/Cargo.lock"
+      ],
+      "state": "RETRY",
+      "work_kind": "implementation",
+      "queue_priority": 2,
+      "work": "Use tiny synthetic RGBA row bands. Cover malformed buffers, mismatched widths, invalid option boundaries, tolerance matching at versus above max_channel_diff, and source preservation on failure. Use public stitch_frames/ScrollFrame/StitchOptions APIs. No screenshots, real scrolling, large allocations or hand-written alternate stitching algorithm. Initially read only the two named inputs; inspect the current producer claim before work and skip occupied/unfinished scopes. If producer is occupied, publish a blocked packet for this task, release owned claims and select another independent task without waiting. Own only the new integration test and report. Do not edit lib.rs, Cargo.toml, Cargo.lock, root wiring, dependencies, existing tests or producer packets. Report functional failures with a minimal reproducer; do not self-approve or impersonate Antigravity. Existing producer code remains Codex execution scope. Environment recovery verified by Codex: source \"$HOME/.cargo/env\" in the task shell before invoking rtk proxy cargo; Cargo stable is installed. Codex ran this exact integration target successfully (4 tests). Recheck current hashes, run the target and publish a fresh done packet; old partial packet is not rewritten.",
+      "acceptance": "Add 3-5 meaningful independent public-API regressions. Run cargo test --locked --manifest-path src-tauri/crates/scroll-core/Cargo.toml --test copilot_p65. This exact integration-test target is required; do not run the entire crate/native test suite or standalone build. Compilation intrinsic to tests is allowed. Use existing dependency versions; if --locked fails, report the blocker without rewriting lockfiles. Record actual test count/failures and limitations in <=150 words. Submit test/report snapshots, release claims and select again. No real OS capture/clipboard/Vision, Swift, version upgrades, full repository scans or semantic auto-fixes. Formatting/lint remains separately claimed H01 work.",
+      "reviewers": [
+        "codex",
+        "antigravity"
+      ],
+      "validation_policy": "Injected/synthetic functional tests only; no native backend or standalone app build; temp directories allowed only for P66/P67.",
+      "defer_during_implementation": true
+    },
+    {
+      "id": "P66",
+      "agent": "copilot",
+      "title": "Session archive integrity regressions",
+      "producer_task": "A29",
+      "owned_paths": "src-tauri/crates/session-core/tests/copilot_p66.rs; docs/qa/copilot-P66.md",
+      "inputs": "src-tauri/crates/session-core/src/lib.rs; src-tauri/crates/session-core/Cargo.toml",
+      "requires": [
+        "src-tauri/crates/session-core/src/lib.rs",
+        "src-tauri/crates/session-core/Cargo.toml",
+        "src-tauri/crates/session-core/Cargo.lock"
+      ],
+      "state": "RETRY",
+      "work_kind": "implementation",
+      "queue_priority": 2,
+      "work": "Use parse_session_manifest_str and public save/load APIs with tiny synthetic payloads in tempfile directories only. Cover inconsistent metadata/payloads, duplicate IDs or filenames, selected-ID integrity and failed import/save preserving existing archive contents. Read the declared validation behavior first; distinguish unsupported checks from guarantees. Never read real user archives or profiles. Initially read only the two named inputs; inspect the current producer claim before work and skip occupied/unfinished scopes. If producer is occupied, publish a blocked packet for this task, release owned claims and select another independent task without waiting. Own only the new integration test and report. Do not edit lib.rs, Cargo.toml, Cargo.lock, root wiring, dependencies, existing tests or producer packets. Report functional failures with a minimal reproducer; do not self-approve or impersonate Antigravity. Existing producer code remains Codex execution scope. Environment recovery verified by Codex: source \"$HOME/.cargo/env\" in the task shell before invoking rtk proxy cargo; Cargo stable is installed. Codex ran this exact integration target successfully (4 tests). Recheck current hashes, run the target and publish a fresh done packet; old partial packet is not rewritten.",
+      "acceptance": "Add 3-5 meaningful independent public-API regressions. Run cargo test --locked --manifest-path src-tauri/crates/session-core/Cargo.toml --test copilot_p66. This exact integration-test target is required; do not run the entire crate/native test suite or standalone build. Compilation intrinsic to tests is allowed. Use existing dependency versions; if --locked fails, report the blocker without rewriting lockfiles. Record actual test count/failures and limitations in <=150 words. Submit test/report snapshots, release claims and select again. No real OS capture/clipboard/Vision, Swift, version upgrades, full repository scans or semantic auto-fixes. Formatting/lint remains separately claimed H01 work.",
+      "reviewers": [
+        "codex",
+        "antigravity"
+      ],
+      "validation_policy": "Injected/synthetic functional tests only; no native backend or standalone app build; temp directories allowed only for P66/P67.",
+      "defer_during_implementation": true
+    },
+    {
+      "id": "P67",
+      "agent": "copilot",
+      "title": "Settings byte and persistence boundary regressions",
+      "producer_task": "A09",
+      "owned_paths": "src-tauri/crates/settings-core/tests/copilot_p67.rs; docs/qa/copilot-P67.md",
+      "inputs": "src-tauri/crates/settings-core/src/lib.rs; src-tauri/crates/settings-core/Cargo.toml",
+      "requires": [
+        "src-tauri/crates/settings-core/src/lib.rs",
+        "src-tauri/crates/settings-core/Cargo.toml",
+        "src-tauri/crates/settings-core/Cargo.lock"
+      ],
+      "state": "RETRY",
+      "work_kind": "implementation",
+      "queue_priority": 2,
+      "work": "Use parse_settings_str/serialize_settings_string and public load/save APIs. Cover UTF-8 byte-size versus character-count boundaries, malformed field types/schema versions, quality boundary round trips and invalid-save preservation of existing valid settings. Use only tempfile directories for persistence, never application settings/profile paths. Prefer cases beyond the existing broad happy-path tests; do not weaken assertions to make a bug pass. Initially read only the two named inputs; inspect the current producer claim before work and skip occupied/unfinished scopes. If producer is occupied, publish a blocked packet for this task, release owned claims and select another independent task without waiting. Own only the new integration test and report. Do not edit lib.rs, Cargo.toml, Cargo.lock, root wiring, dependencies, existing tests or producer packets. Report functional failures with a minimal reproducer; do not self-approve or impersonate Antigravity. Existing producer code remains Codex execution scope. Environment recovery verified by Codex: source \"$HOME/.cargo/env\" in the task shell before invoking rtk proxy cargo; Cargo stable is installed. Codex ran this exact integration target successfully (4 tests). Recheck current hashes, run the target and publish a fresh done packet; old partial packet is not rewritten.",
+      "acceptance": "Add 3-5 meaningful independent public-API regressions. Run cargo test --locked --manifest-path src-tauri/crates/settings-core/Cargo.toml --test copilot_p67. This exact integration-test target is required; do not run the entire crate/native test suite or standalone build. Compilation intrinsic to tests is allowed. Use existing dependency versions; if --locked fails, report the blocker without rewriting lockfiles. Record actual test count/failures and limitations in <=150 words. Submit test/report snapshots, release claims and select again. No real OS capture/clipboard/Vision, Swift, version upgrades, full repository scans or semantic auto-fixes. Formatting/lint remains separately claimed H01 work.",
+      "reviewers": [
+        "codex",
+        "antigravity"
+      ],
+      "validation_policy": "Injected/synthetic functional tests only; no native backend or standalone app build; temp directories allowed only for P66/P67.",
+      "defer_during_implementation": true
+    },
+    {
+      "id": "C23",
+      "agent": "codex",
+      "title": "Bounded injected Vision backend adapter for recognition controller",
+      "owned_paths": "src/features/vision-backend-adapter/**",
+      "inputs": "src/features/recognition-workflow/index.ts; src-tauri/crates/vision-core/src/lib.rs",
+      "requires": [
+        "src/features/recognition-workflow/index.ts",
+        "src-tauri/crates/vision-core/src/lib.rs"
+      ],
+      "work": "Implement a headless RecognitionBackend adapter using an injected source-byte resolver and injected language/recognition transport; no Tauri import, command registration or native action. Map text/qr intent to A33 request fields, bound and copy source bytes, bind each response to the requested source id/revision/dimensions, validate schema/result/UTF-8 limits from unknown transport data, generate stable owned QR observation IDs, and suppress transport dispatch/results after cancellation. Preserve the source and copied response. Expose an index.ts and document the future C08 root seam and absent native commands. Do not change shared contracts or producer modules. Local transport DTOs are proposals derived from the Rust serde contract; do not claim an existing application command.",
+      "acceptance": "Targeted functional tests cover malformed/over-budget requests/results, byte aliasing, source revision mismatch at resolver boundary, abort before dispatch and late completion, language failure and deterministic QR IDs. Include a bounded README integration example. No native Vision, clipboard, filesystem or root edits. Submit exact files and actual checks; Formatting/lint delegated to Copilot H01.",
+      "state": "READY",
+      "work_kind": "implementation",
+      "queue_priority": 2,
+      "reviewers": [
+        "antigravity"
+      ]
+    },
+    {
+      "id": "C24",
+      "agent": "codex",
+      "title": "Bounded injected RGBA stitching adapter for capture sessions",
+      "owned_paths": "src/features/stitch-backend-adapter/**",
+      "inputs": "src/features/capture-session/index.ts; src-tauri/crates/scroll-core/src/lib.rs",
+      "requires": [
+        "src/features/capture-session/index.ts",
+        "src-tauri/crates/scroll-core/src/lib.rs"
+      ],
+      "work": "Implement a headless stitching adapter compatible with CaptureSessionAdapters using caller-injected acquisition and a local injected stitch port. Validate exact RGBA byte lengths, dimensions, frame count, aggregate bytes/pixels and explicit direction/overlap/tolerance before transport. Copy transferred buffers, verify returned dimensions/output byte budget, reject malformed responses and release owned output artifacts exactly once on cancellation/late result. Reuse existing capture controller and stitch core responsibilities; do not implement another stitch algorithm. Port is an explicit local adapter proposal, not an invented existing Tauri/serde API; A22 ScrollFrame types are not currently a registered command. Document C11 integration ownership and frame/output leases. No real acquisition, scroll, native command or root changes.",
+      "acceptance": "Targeted injected-port tests for malformed RGBA, width mismatch, count/byte/output budgets, source mutation, abort before/after transport and exactly-once owned output cleanup. Tiny synthetic frames only. Expose index.ts plus bounded README, submit exact snapshots and actual checks. Formatting/lint delegated to Copilot H01.",
+      "state": "READY",
+      "work_kind": "implementation",
+      "queue_priority": 2,
+      "reviewers": [
+        "antigravity"
+      ]
+    },
+    {
+      "id": "P68",
+      "agent": "copilot",
+      "title": "Independent vision-backend-adapter regressions",
+      "owned_paths": "src/testing/copilot-vision-backend-adapter.test.ts; docs/qa/copilot-P68.md",
+      "inputs": "src/features/vision-backend-adapter/index.ts; src/features/vision-backend-adapter/README.md",
+      "requires": [
+        "src/features/vision-backend-adapter/index.ts",
+        "src/features/vision-backend-adapter/README.md"
+      ],
+      "requires_reviewed_tasks": [],
+      "dependency": "Current done C23 producer packet and free producer claim; skip and record blocked if not available",
+      "producer_task": "C23",
+      "work": "Inspect the current C23 done packet and producer claim before reading source. Add 3-5 independent public-API regressions for source-revision/response mismatch, malformed UTF-8/result bounds, buffer aliasing and abort around injected recognition transport. Read only the two named exports/README inputs initially; consult exact imported types only if needed. No producer edits, Tauri/native calls, broad scans or copied implementation tests. If the producer is active or has no current done packet, submit blocked and continue another independent task.",
+      "acceptance": "Run only the new named Vitest file and relevant named producer unit tests if required. Report actual failures/limitations in <=150 words; submit immutable test/report snapshots and release claims. Tests are QA evidence, not an Antigravity signature or native parity acceptance.",
+      "state": "READY",
+      "work_kind": "implementation",
+      "queue_priority": 2,
+      "reviewers": [
+        "codex",
+        "antigravity"
+      ],
+      "defer_during_implementation": true
+    },
+    {
+      "id": "P69",
+      "agent": "copilot",
+      "title": "Independent stitch-backend-adapter regressions",
+      "owned_paths": "src/testing/copilot-stitch-backend-adapter.test.ts; docs/qa/copilot-P69.md",
+      "inputs": "src/features/stitch-backend-adapter/index.ts; src/features/stitch-backend-adapter/README.md",
+      "requires": [
+        "src/features/stitch-backend-adapter/index.ts",
+        "src/features/stitch-backend-adapter/README.md"
+      ],
+      "requires_reviewed_tasks": [],
+      "dependency": "Current done C24 producer packet and free producer claim; skip and record blocked if not available",
+      "producer_task": "C24",
+      "work": "Inspect the current C24 done packet and producer claim before reading source. Add 3-5 independent public-API regressions for malformed frame/output RGBA, aggregate budget rejection before transport and cancellation/late-output lease cleanup. Read only the two named exports/README inputs initially; consult exact imported types only if needed. No producer edits, Tauri/native calls, broad scans or copied implementation tests. If the producer is active or has no current done packet, submit blocked and continue another independent task.",
+      "acceptance": "Run only the new named Vitest file and relevant named producer unit tests if required. Report actual failures/limitations in <=150 words; submit immutable test/report snapshots and release claims. Tests are QA evidence, not an Antigravity signature or native parity acceptance.",
+      "state": "RETRY",
+      "work_kind": "implementation",
+      "queue_priority": 2,
+      "reviewers": [
+        "codex",
+        "antigravity"
+      ],
+      "defer_during_implementation": true
+    },
+    {
+      "id": "P70",
+      "agent": "copilot",
+      "title": "Controlled OCR and QR workspace composition for C08",
+      "owned_paths": "src/features/recognition-workspace/**",
+      "inputs": "src/features/ocr-panel/OcrPanel.tsx; src/features/qr-panel/QrPanel.tsx",
+      "requires": [
+        "src/features/ocr-panel/OcrPanel.tsx",
+        "src/features/qr-panel/QrPanel.tsx"
+      ],
+      "work": "Implement and export RecognitionWorkspace in index.ts using existing OcrPanel and QrPanel. Agree exactly this local controlled props interface: languages: readonly string[]; language: string; preserveLineBreaks: boolean; text: string; codes: readonly QrCodeItem[]; busy: boolean; error: string | null; onLanguageChange(language:string):void; onPreserveLineBreaksChange(value:boolean):void; onRecognize(kind:\"text\"|\"qr\",language?:string):void; onCopy(text:string):void; onCancel():void. Own QR selection locally and reset invalid selection when codes change. Root owns native jobs, source bytes, language discovery and cancellation. Pass explicit runtime language labels as code strings; no claiming default OCR languages are installed. Disable text recognition when runtime languages are absent, but preserve QR usability. Clear/reset source result state is root responsibility. Add concise README with the public props and integration seam. No root imports/edits, native calls, new dependencies or expanded tests. Source-ready implementation, not native acceptance.",
+      "acceptance": "Deliver usable exported component and README. Tests deferred by latest user instruction; record no new suite run. Submit exact current files, release P70 and immediately select P71. Any necessary source type defect may be fixed; root build is Codex-owned.",
+      "state": "READY",
+      "work_kind": "implementation",
+      "queue_priority": 1,
+      "reviewers": [
+        "codex",
+        "antigravity"
+      ]
+    },
+    {
+      "id": "P71",
+      "agent": "copilot",
+      "title": "Controlled local-output workspace composition for C15",
+      "owned_paths": "src/features/local-output-workspace/**",
+      "inputs": "src/features/local-output/local-output.tsx; src/features/local-output/index.ts",
+      "requires": [
+        "src/features/local-output/local-output.tsx",
+        "src/features/local-output/index.ts"
+      ],
+      "work": "Compose existing local-output primitives into exported LocalOutputWorkspace with local print options and controlled capabilities. Props: image: ImageDocument; busy:boolean; canPrint:boolean; canDrag:boolean; onCopy():void; onSave():void; onPrint(options:PrintSheetOptions):void; onDrag(payload:LocalDragImagePayload):void. Reuse public local-output helpers and frozen media contract. Expose typed props and concise README. Root owns all actual clipboard/save/print/drag/native work and annotation raster generation. Do not claim a browser callback implements native printing/drag. Disable unavailable actions through explicit capability props; source data/URLs remain caller-owned. No new dependencies, root writes or expanded tests; mark original print/drag runtime semantics unverified.",
+      "acceptance": "Deliver source exports and integration README; tests deferred by user instruction. Submit exact files and limitations, release task and select again. Build delegated to Codex; no speculative native side effects.",
+      "state": "READY",
+      "work_kind": "implementation",
+      "queue_priority": 1,
+      "reviewers": [
+        "codex",
+        "antigravity"
+      ]
+    },
+    {
+      "id": "C25",
+      "agent": "codex",
+      "title": "Completed worker export-entry integration handoff",
+      "owned_paths": "src/features/recognition-workspace/index.ts; src/features/recognition-workspace/RecognitionWorkspace.tsx; src/features/local-output-workspace/index.ts; src/features/local-output-workspace/LocalOutputWorkspace.tsx",
+      "inputs": "completed P70/P71 source packets; exact existing entry files",
+      "work": "Syntax-only relocation of completed worker JSX implementations from .ts to .tsx and plain index.ts re-exports. Preserve component bodies/authorship. Acquire root-wiring, C25 and both ordinary producer claims before changes; skip occupied scope. Record fresh source-ready unreviewed snapshot for app consumption. No new tests per implementation-first user priority.",
+      "state": "BLOCKED_WORKER_OWNS_EXPORT_FIX",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "reviewers": [
         "antigravity"
       ]
     }
@@ -2302,8 +2560,8 @@
   "continuous_dispatch": {
     "order": "functional corrections; stale implementation snapshots; independent implementation; peer review; reviewed integration; final acceptance",
     "antigravity": "A01-A38 (A13 superseded by A33); A38 recurring cross-review",
-    "copilot": "P01-P57 plus H01",
-    "codex": "C01-C22; preserve completed work; implement C17-C22 before review/integration backlog",
+    "copilot": "Implementation-first: P70/P71 production, functional compile corrections, then deferred validation later; preserve active claims",
+    "codex": "C01-C24; C23/C24 are isolated injected adapter proposals; shared integration retains root-wiring protocol",
     "helper": "scripts/next_task.py",
     "no_automatic_clients": true
   },
@@ -2333,6 +2591,15 @@
     "policy": "coordination/TWO-LANE.md (expanded user authorization: Codex executes Anti production too)",
     "claims": "Preserve all pre-existing claims; no age-based reclamation.",
     "review_gate": "Existing independent and final P57 review requirements remain in force; Copilot audit reports do not impersonate Antigravity signoff.",
-    "production_executor": "codex for C01-C22 and explicitly claimed free A01-A37; original agent metadata preserves provenance"
+    "production_executor": "codex for C01-C22 and explicitly claimed free A01-A37; original agent metadata preserves provenance",
+    "copilot_followup": "P53/P54 compile fixes; P62/P63 A35 regressions; P64-P67 independent standalone Rust integration tests"
+  },
+  "execution_phase": {
+    "mode": "implementation-first",
+    "effective": "2026-11-05",
+    "allow_provisional_integration": true,
+    "validation": "Defer new/expanded functional suites and hygiene; report not-run explicitly. Keep only necessary parsing/type/compile checks. Final acceptance remains unapproved until later review/tests/native evidence.",
+    "parallel": "Existing Codex and Copilot clients execute distinct claims; do not spawn a duplicate Copilot while its claim is active.",
+    "data_scope": "In-scope feature logic/configuration/workflows; no personal Shottr library/preferences migration or proprietary code/resources."
   }
 }

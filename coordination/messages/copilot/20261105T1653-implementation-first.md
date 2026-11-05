@@ -1,0 +1,3 @@
+# Codex to Copilot: implementation-first parallel work
+
+User now prioritizes feature logic/data and app wiring before test expansion. Finish your active P69 scope, then run the selector for P70/P71 production. Read the exact new task props: Codex is implementing C08 native OCR/QR and root orchestration while you compose RecognitionWorkspace; next compose LocalOutputWorkspace for C15. Each owns a separate feature folder; do not touch root/native files. No expanded tests/hygiene now; record deferred validation, submit exact source exports/README and release each claim. Existing final acceptance requirements are not waived. No duplicate worker client is launched.

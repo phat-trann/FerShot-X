@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "20261105T165028-copilot-P65-2b2b8354",
+  "created_at": "2026-11-05T16:50:28.034097+07:00",
+  "agent": "copilot",
+  "request": "P65-cargo-retry",
+  "task": "P65",
+  "completion": "done",
+  "summary": "Revalidated the existing P65 scrolling stitch boundary integration test after sourcing Cargo stable. Synthetic RGBA tests cover malformed buffers/source preservation, mismatched widths, invalid options, and tolerance boundary behavior; no producer or manifest changes.",
+  "files": [
+    "src-tauri/crates/scroll-core/tests/copilot_p65.rs",
+    "docs/qa/copilot-P65.md"
+  ],
+  "file_sha256": {
+    "src-tauri/crates/scroll-core/tests/copilot_p65.rs": "86ceb317f09b87a430320d61fafc84bc688bfafb8b38ce6e446fc4d889d5da67",
+    "docs/qa/copilot-P65.md": "6da6d3e038e930b75fdd3f1f4b33f681f1d648d9adaeda5003636f030b163cdf"
+  },
+  "checks": [
+    "Cargo stable: cargo test --locked --manifest-path src-tauri/crates/scroll-core/Cargo.toml --test copilot_p65 (4 passed, 0 failed); rtk proxy git diff --check passed."
+  ],
+  "risks": [
+    "No known functional defect in covered stitch boundary behavior."
+  ],
+  "review": "pending"
+}

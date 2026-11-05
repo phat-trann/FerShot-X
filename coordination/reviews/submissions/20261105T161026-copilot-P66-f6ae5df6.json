@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "20261105T161026-copilot-P66-f6ae5df6",
+  "created_at": "2026-11-05T16:10:26.780935+07:00",
+  "agent": "copilot",
+  "request": "P66-session-integrity-regressions",
+  "task": "P66",
+  "completion": "partial",
+  "summary": "Added Rust integration regressions with temporary synthetic archives for payload-size mismatch, duplicate IDs, unknown selected IDs, selected-ID/load round-trip integrity, and failed-save preservation. Required cargo test is blocked because cargo is unavailable; no producer or manifest changes.",
+  "files": [
+    "src-tauri/crates/session-core/tests/copilot_p66.rs",
+    "docs/qa/copilot-P66.md"
+  ],
+  "file_sha256": {
+    "src-tauri/crates/session-core/tests/copilot_p66.rs": "4f335aeb90c757d130858c0bfbbd9b041d1fd19d0ff66dc8e585fe8c5201595d",
+    "docs/qa/copilot-P66.md": "cef6c7282e692e050413f9f5db2e9f120b2d5ffc8846ca4f48c3b26ddd16bbf3"
+  },
+  "checks": [
+    "Required command attempted: cargo test --locked --manifest-path src-tauri/crates/session-core/Cargo.toml --test copilot_p66; blocked with cargo: No such file or directory. rtk proxy git diff --check passed."
+  ],
+  "risks": [
+    "Test compilation remains unverified until Cargo is available; producer behavior was not changed."
+  ],
+  "review": "pending"
+}

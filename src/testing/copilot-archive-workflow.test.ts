@@ -2,7 +2,9 @@ import { describe, expect, it } from "vitest";
 import {
   ArchiveWorkflow,
   type ArchiveAdapters,
+  type ArchiveEntry,
   type ArchiveLibrary,
+  type DecodedArchive,
 } from "../features/archive-workflow";
 
 const library: ArchiveLibrary = {
@@ -20,7 +22,7 @@ const library: ArchiveLibrary = {
   annotations: { original: { note: "keep" } },
 };
 
-function entry(id = "imported") {
+function entry(id = "imported"): ArchiveEntry {
   return {
     id,
     name: "imported",
@@ -48,8 +50,8 @@ function adapters(overrides: Partial<ArchiveAdapters> = {}): ArchiveAdapters {
 describe("ArchiveWorkflow public invariants", () => {
   it("releases staged leases when import is cancelled", async () => {
     let releases = 0;
-    let resolveDecode!: (value: { entries: ReturnType<typeof entry>[]; selectedId: string }) => void;
-    const pending = new Promise<{ entries: ReturnType<typeof entry>[]; selectedId: string }>((resolve) => {
+    let resolveDecode!: (value: DecodedArchive) => void;
+    const pending = new Promise<DecodedArchive>((resolve) => {
       resolveDecode = resolve;
     });
     const workflow = new ArchiveWorkflow(adapters({
@@ -91,11 +93,11 @@ describe("ArchiveWorkflow public invariants", () => {
   });
 
   it("remaps duplicate IDs without mutating the original library", async () => {
-    let committed: ArchiveLibrary | null = null;
+    const committed: { value: ArchiveLibrary | null } = { value: null };
     const workflow = new ArchiveWorkflow(adapters({
       decode: async () => ({ entries: [entry("original")], selectedId: "original" }),
       commit: (candidate) => {
-        committed = candidate;
+        committed.value = candidate;
         return true;
       },
     }));
@@ -104,13 +106,13 @@ describe("ArchiveWorkflow public invariants", () => {
 
     expect(result.status).toBe("committed");
     expect(result.remap.original).toBe("original~import-1");
-    expect(committed?.images).toHaveLength(2);
+    expect(committed.value?.images).toHaveLength(2);
     expect(library.images).toHaveLength(1);
     expect(library.selectedId).toBe("original");
   });
 
   it("does not serialize source URLs during export", async () => {
-    let encodedEntries: readonly ReturnType<typeof entry>[] = [];
+    let encodedEntries: readonly ArchiveEntry[] = [];
     const workflow = new ArchiveWorkflow(adapters({
       encode: async (decoded) => {
         encodedEntries = decoded.entries;

@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "20261105T160802-copilot-P62-0d5c7c35",
+  "created_at": "2026-11-05T16:08:02.183583+07:00",
+  "agent": "copilot",
+  "request": "P62-preview-regressions",
+  "task": "P62",
+  "completion": "done",
+  "summary": "Added independent A35 preview-action regressions covering rejected and synchronous Copy/Save/Edit/OCR/Pin callbacks, duplicate-click suppression while pending, and stale completion after capture supersession. Synthetic callbacks/documents only; producer code untouched.",
+  "files": [
+    "src/testing/copilot-capture-preview-actions.test.tsx",
+    "docs/qa/copilot-P62.md"
+  ],
+  "file_sha256": {
+    "src/testing/copilot-capture-preview-actions.test.tsx": "bb493422c629c992f7c2ebec54e5d12d2c2cc1dd9c787d5a79be0951f95b1152",
+    "docs/qa/copilot-P62.md": "d4accb04c6ee8e3805c5f3a3b5baf8b680ba9fbe54fb28c018ce21e2fa5ad7f9"
+  },
+  "checks": [
+    "Node 26.13.0: npm run test:unit -- src/testing/copilot-capture-preview-actions.test.tsx src/features/capture-workflow/CaptureWorkflowController.test.tsx (2 files, 12 tests passed); rtk proxy git diff --check passed."
+  ],
+  "risks": [
+    "No known functional defect found in the covered A35 public behavior."
+  ],
+  "review": "pending"
+}

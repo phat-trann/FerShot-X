@@ -278,23 +278,28 @@ pub fn recognize_with_backend<B: VisionBackend>(
         });
     }
 
+    let separator = if request.preserve_line_breaks { "\n" } else { " " };
+    total_utf8_bytes = total_utf8_bytes.saturating_add(
+        text_blocks.len().saturating_sub(1).saturating_mul(separator.len()),
+    );
+    if total_utf8_bytes > MAX_UTF8_OUTPUT_BYTES {
+        return Err(VisionError::OutputTooLarge(total_utf8_bytes));
+    }
+
     let mut qr_codes = Vec::new();
     for qr in raw_qr_codes.into_iter().take(request.max_results) {
         if qr.payload.is_empty() {
             continue;
         }
-        total_utf8_bytes = total_utf8_bytes.saturating_add(qr.payload.len());
+        total_utf8_bytes = total_utf8_bytes
+            .saturating_add(qr.payload.len())
+            .saturating_add(qr.symbology.len());
         if total_utf8_bytes > MAX_UTF8_OUTPUT_BYTES {
             return Err(VisionError::OutputTooLarge(total_utf8_bytes));
         }
         qr_codes.push(qr);
     }
 
-    let separator = if request.preserve_line_breaks {
-        "\n"
-    } else {
-        " "
-    };
     let recognized_text = text_blocks
         .iter()
         .map(|b| b.text.as_str())

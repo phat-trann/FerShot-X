@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "20261105T165707-copilot-P70-7691df69",
+  "created_at": "2026-11-05T16:57:07.271834+07:00",
+  "agent": "copilot",
+  "request": "P70-recognition-workspace",
+  "task": "P70",
+  "completion": "done",
+  "summary": "Implemented and exported RecognitionWorkspace composing OcrPanel and QrPanel with the exact controlled props contract. Runtime language codes are displayed explicitly; OCR controls are disabled when no languages are available while QR remains usable. QR selection is local and resets when its item disappears. Added integration README; no root/native changes.",
+  "files": [
+    "src/features/recognition-workspace/index.ts",
+    "src/features/recognition-workspace/README.md"
+  ],
+  "file_sha256": {
+    "src/features/recognition-workspace/index.ts": "02bff988fe9217e17e3419ed227b6a183760d6ee5255ffa2ba694401fb329da2",
+    "src/features/recognition-workspace/README.md": "571b72152e2a66b5ae18fe25da5dc54cb58d9c226ca9f88a8b80ddd8184cf63f"
+  },
+  "checks": [
+    "No new suite run per task instruction; rtk proxy git diff --check passed."
+  ],
+  "risks": [
+    "Root build/typecheck remains Codex-owned; native recognition and source state wiring are intentionally outside this component."
+  ],
+  "review": "pending"
+}

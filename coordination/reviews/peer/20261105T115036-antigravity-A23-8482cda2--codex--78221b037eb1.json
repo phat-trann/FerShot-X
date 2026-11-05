@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "submission_id": "20261105T115036-antigravity-A23-8482cda2",
+  "reviewer": "codex",
+  "decision": "approved",
+  "note": "Inspected controlled scroll panel source, exported proposal and functional tests. Props/callbacks, clamped max height, busy guards and Escape/error behavior are valid presentation scope. Proposed commands/speed control do not establish real scrolling or native integration.",
+  "checks": [
+    "Node 26 targeted ScrollCapturePanel Vitest: 2 tests passed; no native actions"
+  ],
+  "created_at": "2026-11-05T16:33:56.856960+07:00",
+  "submission_sha256": "73b8fdfa3aa1902a3bacf6e15ce827ecb31bde0552b9da96c5d010b172c4d226"
+}

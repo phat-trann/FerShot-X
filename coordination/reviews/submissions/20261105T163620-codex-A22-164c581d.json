@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "id": "20261105T163620-codex-A22-164c581d",
+  "created_at": "2026-11-05T16:36:20.890999+07:00",
+  "agent": "codex",
+  "request": "BUILD-20261105",
+  "task": "A22",
+  "completion": "done",
+  "summary": "Fixed first/single scrolling frame bypass of MAX_OUTPUT_PIXELS before buffer validation or output clone, with allocation-free boundary regressions",
+  "files": [
+    "src-tauri/crates/scroll-core/src/lib.rs",
+    "src-tauri/crates/scroll-core/Cargo.toml",
+    "src-tauri/crates/scroll-core/Cargo.lock",
+    "src-tauri/crates/scroll-core/tests/codex_first_frame_budget.rs",
+    "docs/agents/codex/A22-first-frame-budget.md"
+  ],
+  "file_sha256": {
+    "src-tauri/crates/scroll-core/src/lib.rs": "10adb56218bfbb41d3d990db5c2213e65303652c1353c34b9a490d47fb9312d0",
+    "src-tauri/crates/scroll-core/Cargo.toml": "70c79a68c527b29f9a9c3cd8eb977135d1b4b797c6e7f91fc41d3307af1df200",
+    "src-tauri/crates/scroll-core/Cargo.lock": "55d65b00b5af4e6eaef939e814c073056dcccbd6f2c56bca92efa0af4053e1b8",
+    "src-tauri/crates/scroll-core/tests/codex_first_frame_budget.rs": "539021caebb11a56fc843cb6cb14dd0e0e6bc1a47012e6d5ea02fc8c6ea425ca",
+    "docs/agents/codex/A22-first-frame-budget.md": "593e0131776278f366a262abb861c8508ba1f4c39c5acb68cb3db5d9d60532a2"
+  },
+  "checks": [
+    "Before fix: new target 1 failed/1 passed, reproducing first-frame pixel-budget bypass without a large buffer",
+    "After fix: cargo --locked --lib --test codex_first_frame_budget --test copilot_p65 passed 8 tests",
+    "Formatting/lint delegated to Copilot H01"
+  ],
+  "risks": [
+    "New Codex-owned core requires independent approval before C11 integration; original Anti authorship preserved",
+    "No OS scrolling/capture, native acceptance, root dependency or version change occurred"
+  ],
+  "review": "pending"
+}

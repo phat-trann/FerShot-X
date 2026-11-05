@@ -1,0 +1,7 @@
+# C24: Injected RGBA stitching adapter
+
+Implemented a local C17-compatible capture/stitch adapter with caller-injected acquisition and an explicit A22-derived stitch port. Validates frame ownership descriptors, exact RGBA geometry/byteSize, batch count and aggregate input/output budgets; snapshots input pixels and options before dispatch. Unknown output must match width, height, overlap/duplicate accounting and exact RGBA size. Returned output owns an idempotent release; malformed and cancelled late outputs release immediately. Inputs remain C17-owned, including during pending stitching.
+
+No native command, serde contract, scroll algorithm or OS capture was added. C11 must implement real serialization, permissions, blocking native dispatch and acceptance. All frame dimensions match C17; budgets use the C17/A22 intersection. Ports must eventually settle; cancellation cannot preempt a hung/synchronous native port. Direct acquire callers own returned frames; C17 handles late acquisition cleanup.
+
+Targeted Vitest: 36 passed tests across C24, C17 and independent capture-session tests. The first run exposed an incorrect test API call (finish instead of public stop); the test was corrected, then the complete suite passed. Global typecheck was attempted; existing A37/P61 errors remain outside this scope, while new C24 type diagnostics were corrected. Scoped typecheck result is in the packet. No native APIs or app build were run. Formatting/lint delegated to Copilot H01. P69 supplies independent regressions; independent approval/native parity remain pending.

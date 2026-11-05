@@ -12,6 +12,8 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def candidates(root, agent):
     data = json.loads((root / "coordination/build-tasks.json").read_text())
+    phase = data.get("execution_phase", {})
+    implementation_first = phase.get("mode") == "implementation-first"
     packets = q.packets(root)
     latest = {}
     for packet in sorted(packets, key=lambda p: p["created_at"]):
@@ -44,6 +46,7 @@ def candidates(root, agent):
             continue
         reviewed_inputs = []
         unready = []
+        provisional = implementation_first and phase.get("allow_provisional_integration") is True and task.get("work_kind") == "integration"
         for required in task.get("requires_reviewed_tasks", []):
             matches = [p for p in packets if p["task"] == required]
             producer = max(matches, key=lambda p: p["created_at"]) if matches else None
@@ -54,17 +57,20 @@ def candidates(root, agent):
             if producer and producer['agent'] == 'codex':
                 decision = peer_approval
             rejected = any(r['decision'] == 'changes_requested' for r in independent)
+            legacy = decisions.get(producer['id']) if producer else None
+            if legacy and legacy['decision'] == 'changes_requested':
+                rejected = True
             if decision and producer:
                 packet_path = root / 'coordination/reviews/submissions' / (producer['id'] + '.json')
                 if decision.get('submission_sha256') != q.digest(packet_path):
                     decision = None
             if (not producer or producer["completion"] != "done" or q.stale(root, producer)
-                or not decision or decision["decision"] != "approved"
+                or (not provisional and (not decision or decision["decision"] != "approved"))
                 or rejected
                 or (root / "coordination/claims" / required).exists()):
                 unready.append(required)
             else:
-                reviewed_inputs.append({"created_at": max(producer["created_at"], decision["created_at"])})
+                reviewed_inputs.append({"created_at": max(producer["created_at"], decision["created_at"] if decision else producer["created_at"])})
         if unready:
             skipped.append({"id": ident, "reason": "requires current reviewed input", "tasks": unready})
             continue
@@ -91,7 +97,7 @@ def candidates(root, agent):
                 action, priority = "resume_reviewed_input", 1
             elif q.stale(root, packet):
                 action, priority = "check_and_refresh_snapshot", 1
-            elif task.get("state") == "RETRY":
+            elif task.get("state") == "RETRY" and packet["completion"] in ("partial", "blocked"):
                 action = "resume"
             else:
                 skipped.append({"id": ident, "reason": "current submission exists; continue other work", "packet": packet["id"]})
@@ -99,10 +105,18 @@ def candidates(root, agent):
         elif task.get("state", "").startswith(("DONE", "APPROVED")):
             skipped.append({"id": ident, "reason": "already accepted/completed"})
             continue
+        if implementation_first and task.get("defer_during_implementation") and action != 'fix_review':
+            skipped.append({"id": ident, "reason": "validation expansion deferred during implementation-first phase"})
+            continue
+        if implementation_first and action == 'check_and_refresh_snapshot' and (packet['completion'] == 'done' or task.get('implementation_ready')):
+            skipped.append({"id": ident, "reason": "snapshot-only refresh deferred to validation phase", "packet": packet['id']})
+            continue
         if action != 'fix_review':
             kind = task.get('work_kind', 'implementation')
             if kind in ('review', 'integration', 'acceptance'):
                 priority = {'review': 3, 'integration': 4, 'acceptance': 5}[kind]
+                if implementation_first and kind == 'review':
+                    priority = 6
         ready.append({"task": task, "action": action, "priority": priority,
                       "latest_packet": packet["id"] if packet else None, "review_note": note})
     ready.sort(key=lambda item: (item["priority"], int(re.search(r"[0-9]+$", item["task"]["id"]).group())))

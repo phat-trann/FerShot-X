@@ -98,6 +98,14 @@ class NextTaskTests(unittest.TestCase):
         self.save()
         self.assertEqual(dispatcher.choose(self.root, 'codex')['next']['task']['id'], 'C17')
 
+    def test_retry_stops_after_a_fresh_complete_submission(self):
+        self.packet(status="blocked")
+        self.tasks[0]["state"] = "RETRY"
+        self.save()
+        self.assertEqual(dispatcher.choose(self.root, "copilot")["next"]["action"], "resume")
+        self.packet(status="done")
+        self.assertEqual(dispatcher.choose(self.root, "copilot")["next"]["task"]["id"], "P02")
+
     def test_recurring_peer_review_skips_empty_and_resumes_for_fresh_packet(self):
         self.tasks = [{'id': 'A38', 'agent': 'antigravity', 'work_kind': 'review',
                        'recurring_peer_review': True}]

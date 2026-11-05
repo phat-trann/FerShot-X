@@ -1,5 +1,14 @@
 # Agent instructions
 
+## Implementation-first priority (latest user instruction, 2026-11-05)
+
+Codex and the existing Copilot client work in parallel on distinct file claims. Prioritize completing in-scope function logic/configuration and provisional app wiring. New tests, broad regression batches, hygiene and validation-only backlog are deferred until the implementation pass is ready; record tests as NOT RUN rather than passed. Necessary syntax/type/compile checks remain allowed. Do not stop implementation solely to refresh unrelated stale broad snapshots.
+
+Current done/hash-bound producer sources may be provisionally wired while independent review is pending. This is UNREVIEWED development integration, not self-approval, acceptance or permission to ship. Known functional rejections, stale/incomplete inputs and active producer claims still block consumption. C16/P57 final acceptance and actual native/target parity gates retain their original independent/evidence requirements. No product/dependency upgrades, Swift, cloud/uploads, real captures in automated checks or proprietary-code/resource copying. Unknown original behavior remains UNKNOWN; use explicit Ferby decisions without claiming Shottr equivalence.
+
+Copilot: finish its currently claimed task, then implement P70 RecognitionWorkspace and P71 LocalOutputWorkspace in their isolated folders using the exact queue props. Codex owns C08 native OCR/QR transport, recognition source/jobs and root integration, then broader C11-C15. No second Copilot client is started while an existing claim is active. 'Data' means in-scope feature data/configuration and logic; personal-data migration is not added by this priority change.
+
+
 ## Scope
 
 The user has selected **Tauri 2 + Rust**, with React/TypeScript for the frontend, to build Ferby Shottr. The earlier investigation-only restriction is superseded. Preserve the Shottr investigation as reference; do not invent unknown target behavior or copy proprietary resources/code. Omit cloud/S3 upload features for now (FTP upload is deferred to a later phase), and bypass all licensing/activation checks or nag prompts so that every feature is unlocked by default.
@@ -32,7 +41,7 @@ All Markdown is written in English. Reply to the user in their requested languag
 
 ## Coordination and ownership
 
-Temporary staffing update (2026-11-05): follow `coordination/TWO-LANE.md` while Antigravity is unavailable this week. Codex and Copilot remain active; Copilot additionally owns P58-P63 bounded independent regressions. The latest user request authorizes Codex to execute free Antigravity A01-A37 producer scopes under its own identity and ordinary task claims; independent self-review remains forbidden. Existing review/acceptance gates and all pre-existing claims are preserved.
+Temporary staffing update (2026-11-05): follow `coordination/TWO-LANE.md` while Antigravity is unavailable this week. Codex and Copilot remain active; Copilot additionally owns P58-P69 bounded independent regressions. The latest user request authorizes Codex to execute free Antigravity A01-A37 producer scopes under its own identity and ordinary task claims; independent self-review remains forbidden. Existing review/acceptance gates and all pre-existing claims are preserved.
 
 - The full delivery allocation and 100% gate are in `coordination/DELIVERY-PLAN.md`. Codex also implements C17-C22. The continuous known roadmap is `coordination/CONTINUOUS.md`, with feature coverage in `coordination/FUNCTION-MAP.md`. Use `scripts/next_task.py` to select available work from current packets/claims. Role ranges are Antigravity A01-A38 (A13 superseded) and Copilot P01-P57 plus H01; old fixed-range dispatcher text is superseded. No client auto-launch/restart or polling is installed.
 - All root/shared-source writers acquire the shared `root-wiring` claim plus their task claim. H01 root/shared handoffs also require `root-wiring` and the producer claim before cosmetic writes. Acquire H01, then root-wiring (shared scopes only), then the producer claim; if any claim is occupied, release already acquired own claims and skip without waiting. Release only owned claims after packet publication.

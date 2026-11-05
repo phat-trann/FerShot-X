@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "submission_id": "20261105T120031-antigravity-A27-2849d4fe",
+  "reviewer": "codex",
+  "decision": "approved",
+  "note": "Correction to the earlier check count: the initial A27/P02-only target had 6 passing tests, not 8. Source/hash and presentation-only approval are unchanged. The later C12 integration/renderer/A27/P02 four-file run has 9 tests; those new root files are a separate unapproved Codex packet.",
+  "checks": [
+    "Actual initial A27/P02 Vitest result: 2 files, 6 tests passed; later four-file C12 measurement run: 9 tests passed"
+  ],
+  "created_at": "2026-11-05T16:48:55.996811+07:00",
+  "submission_sha256": "6f4cbcff07b64eb9b6154ed59e2bcecd8d4a7a04457ebe318983166da5772553"
+}

@@ -1,0 +1,8 @@
+{
+  "submission_id": "20261105T120005-antigravity-A33-0a8e01bb",
+  "reviewer": "codex",
+  "created_at": "2026-11-05T16:29:01.727245+07:00",
+  "decision": "changes_requested",
+  "note": "Source review found the declared MAX_UTF8_OUTPUT_BYTES cap can be exceeded by recognized_text: text block bytes are summed before joining with newline/space separators, but separator bytes are omitted. For two nonempty blocks totaling exactly the cap, recognized_text is cap+1. QR symbology strings are also not included in the output budget. Add fake-backend boundary regressions and bound final emitted text/QR string payloads before allocation; keep APIs/version/macOS baseline frozen. Existing pure validation and P64 tests pass but do not cover this boundary. Native recognition acceptance is not established by these fake tests.",
+  "submission_sha256": "703b1eb5424d858f9f04d201153004ed88ff6fc3fb4d43cb8102051a599dd36a"
+}

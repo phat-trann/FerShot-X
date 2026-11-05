@@ -1,0 +1,8 @@
+{
+  "submission_id": "20261105T165707-copilot-P70-7691df69",
+  "reviewer": "codex",
+  "created_at": "2026-11-05T17:03:02.291078+07:00",
+  "decision": "changes_requested",
+  "note": "Source entry src/features/recognition-workspace/index.ts contains JSX, which TypeScript cannot parse in a .ts file. Move the component implementation to RecognitionWorkspace.tsx (or equivalent .tsx), make index.ts a plain typed re-export, retain the agreed props and publish a fresh packet listing both files. This is a necessary syntax/integration correction; no new test suite requested.",
+  "submission_sha256": "fb2dd15dd63521e977edf584d14568d7bafd847565bc774f1cd946c9011d946f"
+}

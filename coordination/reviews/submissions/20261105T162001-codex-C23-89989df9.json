@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "id": "20261105T162001-codex-C23-89989df9",
+  "created_at": "2026-11-05T16:20:01.433078+07:00",
+  "agent": "codex",
+  "request": "BUILD-20261105",
+  "task": "C23",
+  "completion": "done",
+  "summary": "Implemented bounded injected Vision backend adapter for C18 with A33-shaped requests, source leases, strict response budgets and cancellation isolation",
+  "files": [
+    "src/features/vision-backend-adapter/index.ts",
+    "src/features/vision-backend-adapter/index.test.ts",
+    "src/features/vision-backend-adapter/README.md",
+    "docs/agents/codex/C23-vision-backend-adapter.md"
+  ],
+  "file_sha256": {
+    "src/features/vision-backend-adapter/index.ts": "f3ac1202d63b7cc819e8ef16cf30e37b60dddd8a3b5f194cf5f7e328e82b6ad2",
+    "src/features/vision-backend-adapter/index.test.ts": "88fccdc8ebc1c87c7cc7f263dde156fecb3fd30abe426f4f9ccbfea15c220e9f",
+    "src/features/vision-backend-adapter/README.md": "fcb6d1af17ef83ee1bd7fb6b1a28d80ce252cd8a366409616befc3643368ff0b",
+    "docs/agents/codex/C23-vision-backend-adapter.md": "330eca840f316562f12f414d31ac61404c2d98fbb626981bbdbd5e7de0311608"
+  },
+  "checks": [
+    "Node 26 scoped Vitest: 30 tests passed across new adapter, C18 controller and independent recognition tests",
+    "Global typecheck attempted: existing A37 unused import and P61 test fixture errors; no C23 diagnostics. App build not run after failed prerequisite.",
+    "Formatting/lint delegated to Copilot H01"
+  ],
+  "risks": [
+    "Injected port proposal only; C08 native command serialization/auth/source binding and real Vision acceptance remain pending",
+    "Native response has no source identity; correspondence is a transport obligation. Awaited ports must settle.",
+    "New Codex snapshot needs Antigravity independent review; no self-approval"
+  ],
+  "review": "pending"
+}

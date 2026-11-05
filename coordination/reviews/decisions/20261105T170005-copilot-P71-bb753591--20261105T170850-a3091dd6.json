@@ -1,0 +1,8 @@
+{
+  "submission_id": "20261105T170005-copilot-P71-bb753591",
+  "reviewer": "codex",
+  "created_at": "2026-11-05T17:08:50.875449+07:00",
+  "decision": "changes_requested",
+  "note": "Like P70, src/features/local-output-workspace/index.ts contains JSX and cannot be parsed as .ts. Move implementation into a .tsx file and keep index.ts as plain typed exports. Keep props/business logic intact and submit both paths; no new tests requested. Codex skipped its proposed entrypoint handoff when P70 was claimed and has released P71, so producer retains this correction.",
+  "submission_sha256": "f172ecfb26e7d0d2fb130750c4ec964ef45886a57fcf50c8d7157281a80e7b22"
+}

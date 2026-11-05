@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "20261105T164956-copilot-P61-ecb69a2d",
+  "created_at": "2026-11-05T16:49:56.493201+07:00",
+  "agent": "copilot",
+  "request": "P61-typecheck-correction",
+  "task": "P61",
+  "completion": "done",
+  "summary": "Corrected P61 test typing by deriving the onSave mock from public PreferencesWorkspaceProps and removed the invalid null externalSnapshot value. Preserved all three behavioral assertions; no producer code changed.",
+  "files": [
+    "src/testing/copilot-preferences-workspace.test.tsx",
+    "docs/qa/copilot-P61.md"
+  ],
+  "file_sha256": {
+    "src/testing/copilot-preferences-workspace.test.tsx": "56b34de73f162511fdf42d50b4adf925fab2d0b12711500c3f4ce9c8e492c46e",
+    "docs/qa/copilot-P61.md": "60feb2eced0ee1e3c26ef9b79af2e82315069e08500f43beba255a0207857a90"
+  },
+  "checks": [
+    "Node 26.13.0: npm run test:unit -- src/testing/copilot-preferences-workspace.test.tsx src/features/preferences-workspace/PreferencesWorkspace.test.tsx (2 files, 4 tests passed); rtk proxy git diff --check passed."
+  ],
+  "risks": [
+    "Only P61 test/report changed; no known functional defect."
+  ],
+  "review": "pending"
+}

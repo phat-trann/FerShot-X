@@ -1,6 +1,6 @@
 # Product build queue
 
-> Temporary staffing (2026-11-05): use [the two-agent allocation](TWO-LANE.md). Only Codex and Copilot run while Antigravity is unavailable; Codex also takes over free Axx production/fixes; P58-P63 provide bounded independent QA. Existing independent/final acceptance gates remain unchanged.
+> Temporary staffing (2026-11-05): use [the two-agent allocation](TWO-LANE.md). Only Codex and Copilot run while Antigravity is unavailable; Codex also takes over free Axx production/fixes; P58-P69 provide bounded independent QA. Existing independent/final acceptance gates remain unchanged.
 
 
 0.1.0 function roadmap: **Antigravity A01-A38 (A13 superseded)**, **Copilot P01-P57 + H01**, Codex C01-C22 (preserve completed work). Version/dependency upgrades and broad UI polish remain gated on functional acceptance.

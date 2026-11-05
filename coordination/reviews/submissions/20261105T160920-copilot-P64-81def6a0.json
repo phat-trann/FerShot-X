@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "20261105T160920-copilot-P64-81def6a0",
+  "created_at": "2026-11-05T16:09:20.850677+07:00",
+  "agent": "copilot",
+  "request": "P64-vision-boundary-regressions",
+  "task": "P64",
+  "completion": "partial",
+  "summary": "Added Rust integration regressions with a counting fake VisionBackend and synthetic PNG for invalid-request pre-execution rejection, supported-language failure, execute failure, and UTF-8 output cap. Required cargo test is blocked because cargo is unavailable; no producer or manifest changes.",
+  "files": [
+    "src-tauri/crates/vision-core/tests/copilot_p64.rs",
+    "docs/qa/copilot-P64.md"
+  ],
+  "file_sha256": {
+    "src-tauri/crates/vision-core/tests/copilot_p64.rs": "d07736d043952ffd54fb884665cf8b718d9391a415362becd6c7a245ec366634",
+    "docs/qa/copilot-P64.md": "e23d2e068acc65c4b2362efe19eb85dbf5a9c31b4b7c6b626cf9adaa9e70f13b"
+  },
+  "checks": [
+    "Required command attempted: cargo test --locked --manifest-path src-tauri/crates/vision-core/Cargo.toml --test copilot_p64; blocked with cargo: No such file or directory. rtk proxy git diff --check passed."
+  ],
+  "risks": [
+    "Test compilation remains unverified until Cargo is available; producer behavior was not changed."
+  ],
+  "review": "pending"
+}

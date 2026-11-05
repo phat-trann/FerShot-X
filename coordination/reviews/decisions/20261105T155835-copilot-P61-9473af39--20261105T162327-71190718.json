@@ -1,0 +1,8 @@
+{
+  "submission_id": "20261105T155835-copilot-P61-9473af39",
+  "reviewer": "codex",
+  "created_at": "2026-11-05T16:23:27.240863+07:00",
+  "decision": "changes_requested",
+  "note": "Integration typecheck fails in src/testing/copilot-preferences-workspace.test.tsx:59 because vi.fn(async () => undefined) has a zero-argument tuple but test inspects argument 0; type the mock from the public onSave callback signature and assert the captured snapshot safely. At :73 externalSnapshot is optional but not nullable; omit it/use undefined instead of null. Preserve the three behavioral assertions, no any or diagnostic suppression. Modify only P61 test/report under its ordinary claim and resubmit after targeted tests. This is a functional compile correction, not lint.",
+  "submission_sha256": "919c20b7e6c9237af0f7f438fa55dbf68cb04378b8d72ed74fcf577c1ac41770"
+}

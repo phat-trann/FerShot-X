@@ -1,0 +1,3 @@
+# COORD05: Keep production ahead of snapshot-only refresh
+
+The implementation-first dispatcher now defers snapshot-only refreshes for completed tasks and explicit implementation-ready slices. This prevents every root Workspace edit from reopening completed clipboard/editor work before new features are wired. Stale status is preserved and no stale approval is granted; final validation still requires fresh exact snapshots. C07 is marked implementation-ready for its newly connected editor slice, with partial/unreviewed acceptance unchanged. Functional correction requests still reopen work first. JSON/selector syntax checked; functional tests deferred per user priority. Formatting/lint deferred to Copilot H01.

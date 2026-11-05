@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "20261105T160618-copilot-P53-16cf68e9",
+  "created_at": "2026-11-05T16:06:18.807875+07:00",
+  "agent": "copilot",
+  "request": "P53-typecheck-correction",
+  "task": "P53",
+  "completion": "done",
+  "summary": "Corrected the P53 mutation fixture using an explicit MutableOutputRequest mapped type and a mutable source copy. This preserves the mutation assertion without any casts, semantic suppressions, or producer edits.",
+  "files": [
+    "src/testing/copilot-output-jobs.test.ts",
+    "docs/qa/copilot-P53.md"
+  ],
+  "file_sha256": {
+    "src/testing/copilot-output-jobs.test.ts": "983d4036f9f9c5842067108cb059a15f2d5ce460cb5e6e204ce18906ef8bc65d",
+    "docs/qa/copilot-P53.md": "38ca93391c6f936f4a200377d3ab02b207543f310f09bfb623910abcd5c02d05"
+  },
+  "checks": [
+    "Node 26.13.0: npm run test:unit -- src/testing/copilot-output-jobs.test.ts (4 tests passed); rtk proxy git diff --check passed."
+  ],
+  "risks": [
+    "Only the owned P53 test fixture changed; no producer code or root wiring changed."
+  ],
+  "review": "pending"
+}

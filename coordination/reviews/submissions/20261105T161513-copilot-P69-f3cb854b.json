@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "id": "20261105T161513-copilot-P69-f3cb854b",
+  "created_at": "2026-11-05T16:15:13.876500+07:00",
+  "agent": "copilot",
+  "request": "queue-exhausted-20261105",
+  "task": "P69",
+  "completion": "blocked",
+  "summary": "Re-read the requested AGENTS.md, TWO-LANE.md, DELIVERY-PLAN.md and copilot prompt, then ran the required selector. No task was available (selector returned next: null, claimed: [], skipped_count: 69); P68/P69 were not claimed or modified. Prior P54/P62/P63 passed and P64-P67 were submitted partial because Cargo is unavailable.",
+  "files": [],
+  "file_sha256": {},
+  "checks": [
+    "rtk proxy python3 scripts/next_task.py --agent copilot --claim returned no available work; no code changes or tests run."
+  ],
+  "risks": [
+    "P68/P69 remain unavailable until their producer packets/claims make them READY; do not poll or self-claim."
+  ],
+  "review": "pending"
+}

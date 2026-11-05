@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "id": "20261105T170005-copilot-P71-bb753591",
+  "created_at": "2026-11-05T17:00:05.384043+07:00",
+  "agent": "copilot",
+  "request": "clarify-a-task-availability-20261105",
+  "task": "P71",
+  "completion": "blocked",
+  "summary": "Axx tasks exist in the repository, but under the current TWO-LANE staffing they are Codex producer scopes. The Copilot selector intentionally returns only Copilot-owned P/H work, and no such task is currently READY. Copilot must not impersonate Codex or self-claim shared/root/producer A scopes.",
+  "files": [],
+  "file_sha256": {},
+  "checks": [
+    "Queue selector previously returned next null, claimed empty, skipped_count 71."
+  ],
+  "risks": [
+    "A task requires Codex to claim it under --agent codex or an explicit bounded Copilot handoff with owned paths; no implementation performed."
+  ],
+  "review": "pending"
+}

@@ -21,6 +21,10 @@ const request: OutputRequest = {
   actions: ["copy", "save"],
 };
 
+type MutableOutputRequest = Omit<OutputRequest, "source"> & {
+  source: { -readonly [Key in keyof OutputRequest["source"]]: OutputRequest["source"][Key] };
+};
+
 function deferred<T>() {
   let resolve!: (value: T) => void;
   const promise = new Promise<T>((res) => {
@@ -71,7 +75,10 @@ describe("OutputCoordinator public invariants", () => {
         save: async () => ({ status: "completed" }),
       },
     };
-    const mutable = structuredClone(request);
+    const mutable: MutableOutputRequest = {
+      ...request,
+      source: { ...request.source },
+    };
     const controller = new OutputCoordinator(adapters);
     controller.select({ id: "image-1", revision: 1 });
     const run = controller.run(mutable);

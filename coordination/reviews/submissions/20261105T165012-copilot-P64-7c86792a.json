@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "20261105T165012-copilot-P64-7c86792a",
+  "created_at": "2026-11-05T16:50:12.062961+07:00",
+  "agent": "copilot",
+  "request": "P64-cargo-retry",
+  "task": "P64",
+  "completion": "done",
+  "summary": "Revalidated the existing P64 Vision backend boundary integration test after sourcing Cargo stable. The counting fake backend covers invalid request pre-execution rejection, supported-language failure, execute failure, and UTF-8 output cap; no producer or manifest changes.",
+  "files": [
+    "src-tauri/crates/vision-core/tests/copilot_p64.rs",
+    "docs/qa/copilot-P64.md"
+  ],
+  "file_sha256": {
+    "src-tauri/crates/vision-core/tests/copilot_p64.rs": "d07736d043952ffd54fb884665cf8b718d9391a415362becd6c7a245ec366634",
+    "docs/qa/copilot-P64.md": "26506ebbab983e42386edc8074e09e4fb5ce435e5810c1afcea6067c4236868d"
+  },
+  "checks": [
+    "Cargo stable: cargo test --locked --manifest-path src-tauri/crates/vision-core/Cargo.toml --test copilot_p64 (4 passed, 0 failed); rtk proxy git diff --check passed."
+  ],
+  "risks": [
+    "No known functional defect in covered public boundary behavior; native Vision runtime remains intentionally untested."
+  ],
+  "review": "pending"
+}

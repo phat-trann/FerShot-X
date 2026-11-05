@@ -100,6 +100,7 @@ fn validate_frame(frame: &ScrollFrame) -> Result<usize, StitchError> {
         || frame.height < MIN_OVERLAP_ROWS
         || frame.width > MAX_FRAME_WIDTH
         || frame.height > MAX_FRAME_HEIGHT
+        || u64::from(frame.width) * u64::from(frame.height) > MAX_OUTPUT_PIXELS
     {
         return Err(StitchError::InvalidFrameDimensions {
             width: frame.width,

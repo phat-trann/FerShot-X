@@ -1,0 +1,8 @@
+{
+  "submission_id": "20261105T120031-antigravity-A27-2849d4fe",
+  "reviewer": "codex",
+  "created_at": "2026-11-05T16:48:56.212543+07:00",
+  "decision": "approved",
+  "note": "Corrects prior test-count note: initial A27/P02 run had 6 passing tests, not 8. Actual source review and controlled-presentation approval unchanged; later C12 root integration has 9 scoped tests and still needs independent review. No original runtime parity or native acceptance claim.",
+  "submission_sha256": "6f4cbcff07b64eb9b6154ed59e2bcecd8d4a7a04457ebe318983166da5772553"
+}

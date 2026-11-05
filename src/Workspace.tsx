@@ -2,7 +2,8 @@ import { useEffect, useRef, useState, type MouseEvent, type FormEvent } from "re
 import { DEFAULT_SETTINGS, type AppSettings } from "./contracts/settings";
 import { PreferenceControls } from "./Workspace.preferences";
 import type { Annotation } from "./contracts/editor";
-import { withAnnotations, renderAnnotatedDocument } from "./platform/annotations";
+import { withWorkspaceAnnotations, renderWorkspaceDocument } from "./platform/annotations";
+import type { AdvancedEditorItem } from "./features/editor/advanced-workbench";
 import { WorkspaceEditor } from "./Workspace.editor";
 import type { CaptureMode, ImageDocument } from "./contracts/media";
 import { mapClientPoint } from "./features/point-map";
@@ -12,7 +13,12 @@ import { captureImage, copyImage, importClipboardImage, NativeOperationError, pi
 import { LibraryPanel } from "./features/library/LibraryPanel";
 import { CapturePanel } from "./features/capture/CapturePanel";
 import { TransformTools } from "./Workspace.tools";
+import { MeasurementTools } from "./Workspace.measurement";
+import { imprintMeasurement } from "./platform/measurement";
+import type { MeasurementReadout, MeasurementUnitMode } from "./features/measurement-panel";
 import "./Workspace.css";
+
+const EMPTY_ADVANCED_ITEMS: readonly AdvancedEditorItem[] = Object.freeze([]);
 
 export default function Workspace() {
   const [images, setImages] = useState<ImageDocument[]>([]);
@@ -29,7 +35,9 @@ export default function Workspace() {
   const [notice, setNotice] = useState("");
   const [inspecting, setInspecting] = useState(false);
   const [editing, setEditing] = useState(false);
+  const [measuring, setMeasuring] = useState(false);
   const [annotationsById, setAnnotationsById] = useState<ReadonlyMap<string, readonly Annotation[]>>(() => new Map());
+  const [advancedById, setAdvancedById] = useState<ReadonlyMap<string, readonly AdvancedEditorItem[]>>(() => new Map());
   const [pixel, setPixel] = useState<{ imageId: string; value: InspectedPixel } | null>(null);
   const picker = useRef<HTMLInputElement>(null);
   const liveImages = useRef<ImageDocument[]>([]);
@@ -37,6 +45,8 @@ export default function Workspace() {
   const mounted = useRef(true);
   const image = images.find((item) => item.id === selectedId);
   const annotations = image ? annotationsById.get(image.id) ?? [] : [];
+  const advancedItems = image ? advancedById.get(image.id) ?? EMPTY_ADVANCED_ITEMS : EMPTY_ADVANCED_ITEMS;
+  const withEdits = <T,>(source: ImageDocument, basic: readonly Annotation[], use: (document: ImageDocument) => Promise<T>) => withWorkspaceAnnotations(source, basic, advancedById.get(source.id) ?? EMPTY_ADVANCED_ITEMS, use);
 
   function addDocument(next: ImageDocument) {
     if (!mounted.current) { URL.revokeObjectURL(next.src); return; }
@@ -71,7 +81,7 @@ export default function Workspace() {
 
   function transform(options: ProcessOptions) {
     if (!image) return;
-    void operate(async () => { addDocument(await withAnnotations(image, annotations, (rendered) => transformImage(rendered, options))); setNotice("New image created; original preserved."); });
+    void operate(async () => { addDocument(await withEdits(image, annotations, (rendered) => transformImage(rendered, options))); setNotice("New image created; original preserved."); });
   }
 
   function samplePixel(point: { x: number; y: number }) {
@@ -102,17 +112,30 @@ export default function Workspace() {
     setAnnotationsById((previous) => new Map(previous).set(id, next));
   }
 
+  function updateAdvanced(id: string, items: readonly AdvancedEditorItem[]) {
+    if (!liveImages.current.some(document => document.id === id)) return;
+    setAdvancedById(previous => new Map(previous).set(id, items));
+  }
+
   function mergeAnnotations() {
     if (!image) return;
     void operate(async () => {
-      addDocument(await renderAnnotatedDocument(image, annotations));
+      addDocument(await renderWorkspaceDocument(image, annotations, advancedItems));
       setNotice("Merged image created; original and edit history preserved.");
+    });
+  }
+
+  function imprint(readout: MeasurementReadout, unit: MeasurementUnitMode) {
+    if (!image) return;
+    void operate(async () => {
+      addDocument(await withEdits(image, annotations, rendered => imprintMeasurement(rendered, readout.rectPx, readout.displayScale, unit)));
+      setNotice("Measured image created; original and edit history preserved.");
     });
   }
 
   function pin() {
     if (!image) return;
-    void operate(async () => { await withAnnotations(image, annotations, pinImage); setNotice("Image pinned."); });
+    void operate(async () => { await withEdits(image, annotations, pinImage); setNotice("Image pinned."); });
   }
 
   useEffect(() => {
@@ -129,7 +152,7 @@ export default function Workspace() {
           try { addDocument(documentFromPin(payload)); }
           catch (reason) { setError(reason instanceof Error ? reason.message : "Unable to restore pinned image."); return; }
         }
-        setEditing(true); setInspecting(false);
+        setEditing(true); setInspecting(false); setMeasuring(false);
       });
       if (!active) dispose(); else unlisten = dispose;
     }).catch(() => { /* Event support may be absent in browser/mock transports. */ });
@@ -138,12 +161,12 @@ export default function Workspace() {
 
   function copy() {
     if (!image) return;
-    void operate(async () => { await withAnnotations(image, annotations, copyImage); setNotice("Image copied to clipboard."); });
+    void operate(async () => { await withEdits(image, annotations, copyImage); setNotice("Image copied to clipboard."); });
   }
 
   function save() {
     if (!image) return;
-    void operate(async () => { const saved = await withAnnotations(image, annotations, (rendered) => saveImage(rendered, settings.saveFormat, settings.jpegQuality)); setNotice(saved ? "Image saved." : "Save cancelled."); });
+    void operate(async () => { const saved = await withEdits(image, annotations, (rendered) => saveImage(rendered, settings.saveFormat, settings.jpegQuality)); setNotice(saved ? "Image saved." : "Save cancelled."); });
   }
 
   function persistPreferences() {
@@ -194,6 +217,7 @@ export default function Workspace() {
     if (busyRef.current) return;
     const removed = liveImages.current.find((item) => item.id === id);
     if (removed) URL.revokeObjectURL(removed.src);
+    setAdvancedById(previous => { const next = new Map(previous); next.delete(id); return next; });
     setAnnotationsById((previous) => { const next = new Map(previous); next.delete(id); return next; });
     liveImages.current = liveImages.current.filter((item) => item.id !== id);
     setImages([...liveImages.current]);
@@ -218,10 +242,11 @@ export default function Workspace() {
       </aside>
       <main className="main-panel">
         <header className="topbar"><div className="document-title">{image?.name ?? "Your next great capture"}<span>{image ? `${image.width} × ${image.height} px` : "A little clarity goes a long way."}</span></div><PreferenceControls settings={settings} ready={preferencesReady} busy={busy} notice={preferenceNotice} onChange={setSettings} onSave={persistPreferences} /></header>
-        <div className="toolbar"><div><span>{editing ? "Annotations" : "Original preview"}</span>{image && <button className="inspect-toggle" disabled={busy} aria-pressed={editing} onClick={() => { setEditing((value) => !value); setInspecting(false); }}>Annotate image</button>}{image && <button className="inspect-toggle" disabled={busy} aria-pressed={inspecting} onClick={() => { setInspecting((value) => !value); setEditing(false); }}>Inspect color</button>}{image && <TransformTools key={image.id} image={image} busy={busy} onTransform={transform} />}</div>
+        <div className="toolbar"><div><span>{editing ? "Annotations" : "Original preview"}</span>{image && <button className="inspect-toggle" disabled={busy} aria-pressed={editing} onClick={() => { setEditing((value) => !value); setInspecting(false); setMeasuring(false); }}>Annotate image</button>}{image && <button className="inspect-toggle" disabled={busy} aria-pressed={inspecting} onClick={() => { setInspecting((value) => !value); setEditing(false); setMeasuring(false); }}>Inspect color</button>}{image && <button disabled={busy} aria-pressed={measuring} onClick={() => { setMeasuring(value => !value); setEditing(false); setInspecting(false); }}>Measure image</button>}{image && <TransformTools key={image.id} image={image} busy={busy} onTransform={transform} />}</div>
           <div className="zoom-controls"><button disabled={!image || busy} aria-label="Zoom out" onClick={() => setZoom((value) => Math.max(0.1, (value ?? 1) - 0.25))}>−</button><span>{zoom === null ? "Fit" : `${Math.round(zoom * 100)}%`}</span><button disabled={!image || busy} aria-label="Zoom in" onClick={() => setZoom((value) => Math.min(4, (value ?? 1) + 0.25))}>＋</button><button disabled={!image || busy} onClick={() => setZoom(null)}>Fit</button>{image && <button disabled={busy} onClick={() => removeImage(image.id)} aria-label={`Close ${image.name}`}>Close</button>}</div>
         </div>
-        {image && <div className="export-toolbar"><label>Export format<select aria-label="Export format" disabled={busy || !preferencesReady} value={settings.saveFormat} onChange={(event) => setSettings((previous) => ({ ...previous, saveFormat: event.target.value as AppSettings["saveFormat"] }))}><option value="png">PNG</option><option value="jpeg">JPEG</option></select></label><button disabled={busy} onClick={copy}>Copy image</button><button disabled={busy} onClick={pin}>Pin image</button><button disabled={busy || !annotations.length} onClick={mergeAnnotations}>Merge annotations</button><button disabled={busy} onClick={save}>Save image…</button><span>Original files are never overwritten.</span></div>}
+        {image && <div className="export-toolbar"><label>Export format<select aria-label="Export format" disabled={busy || !preferencesReady} value={settings.saveFormat} onChange={(event) => setSettings((previous) => ({ ...previous, saveFormat: event.target.value as AppSettings["saveFormat"] }))}><option value="png">PNG</option><option value="jpeg">JPEG</option></select></label><button disabled={busy} onClick={copy}>Copy image</button><button disabled={busy} onClick={pin}>Pin image</button><button disabled={busy || (!annotations.length && !advancedItems.length)} onClick={mergeAnnotations}>Merge annotations</button><button disabled={busy} onClick={save}>Save image…</button><span>Original files are never overwritten.</span></div>}
+        {image && measuring && <MeasurementTools key={image.id} image={image} busy={busy} onImprint={imprint} />}
         {image && inspecting && <div className="pixel-inspector">
           <form key={image.id} onSubmit={inspectCoordinates} aria-label="Inspect pixel coordinates">
             <label>X<input aria-label="Pixel X" type="number" name="x" defaultValue="0" min="0" max={image.width - 1} step="1" required disabled={busy} /></label>
@@ -235,7 +260,7 @@ export default function Workspace() {
         <section className={`stage ${dragging ? "dragging" : ""} ${image ? "has-image" : ""}`} aria-label="Image workspace" aria-busy={busy}
           onDragOver={(event) => { event.preventDefault(); setDragging(true); }} onDragLeave={() => setDragging(false)}
           onDrop={(event) => { event.preventDefault(); setDragging(false); void openFiles(Array.from(event.dataTransfer.files)); }}>
-          {image ? <div className="image-stage"><img hidden={editing} className={`canvas-image ${zoom === null ? "fit-image" : ""} ${inspecting ? "inspect-image" : ""}`} onClick={inspect} src={image.src} alt={image.name} style={zoom === null ? undefined : { width: image.width * zoom, maxWidth: "none", maxHeight: "none" }} /><WorkspaceEditor image={image} annotations={annotations} active={editing} busy={busy} zoom={zoom} onChange={updateAnnotations} /></div> :
+          {image ? <div className="image-stage"><img hidden={editing} className={`canvas-image ${zoom === null ? "fit-image" : ""} ${inspecting ? "inspect-image" : ""}`} onClick={inspect} src={image.src} alt={image.name} style={zoom === null ? undefined : { width: image.width * zoom, maxWidth: "none", maxHeight: "none" }} /><WorkspaceEditor image={image} annotations={annotations} advancedItems={advancedItems} active={editing} busy={busy} zoom={zoom} onChange={updateAnnotations} onAdvancedChange={updateAdvanced} /></div> :
             <div className="empty-state"><div className="empty-illustration" aria-hidden="true"><div className="picture-sun" /><div className="picture-mountain" /><span>＋</span></div><p className="eyebrow">A SPACE FOR YOUR IMAGES</p><h1>Bring the details into focus.</h1><p>Drop an image here to take a closer look,<br />or open one from your Mac.</p><button className="primary-button" onClick={() => picker.current?.click()} disabled={busy}>{busy ? "Opening…" : "Open an image"}<span aria-hidden="true">↗</span></button><small>PNG, JPEG, WebP or GIF · up to 20 MB</small></div>}
         </section>
         <footer className="statusbar"><span role="status" aria-live="polite">{busy ? "Working…" : notice || (image ? "Image · session only" : "Ready when you are")}</span><span>{images.length} {images.length === 1 ? "image" : "images"}</span></footer>

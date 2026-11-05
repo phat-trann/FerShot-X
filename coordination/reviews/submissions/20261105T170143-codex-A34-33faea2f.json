@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "id": "20261105T170143-codex-A34-33faea2f",
+  "created_at": "2026-11-05T17:01:43.904462+07:00",
+  "agent": "codex",
+  "request": "IMPLEMENT-FIRST-20261105",
+  "task": "A34",
+  "completion": "done",
+  "summary": "Completed advanced editor preview, selection/delete, per-image history and bitmap/canvas cleanup for provisional app integration",
+  "files": [
+    "src/features/editor/advanced-workbench/AdvancedWorkbench.tsx",
+    "src/features/editor/advanced-workbench/AdvancedWorkbench.css",
+    "src/features/editor/advanced-workbench/index.ts",
+    "docs/agents/codex/A34-implementation-pass.md"
+  ],
+  "file_sha256": {
+    "src/features/editor/advanced-workbench/AdvancedWorkbench.tsx": "9d783b02bb5ad43034c5c3712732a103bc0a3635aa68c88cbb483e5ae2cbf896",
+    "src/features/editor/advanced-workbench/AdvancedWorkbench.css": "9a9e029e39ff7b7c5d13d090ed0b1540351f94c1262d7f802d9d441ba258dc44",
+    "src/features/editor/advanced-workbench/index.ts": "9eed12b5412128fb460bb15af7869071a2c59abcb17732370c3a1c096c97ca74",
+    "docs/agents/codex/A34-implementation-pass.md": "cec47108f12b7dacebde53277752a95a4c1b6468b836c85b610449702f5d03af"
+  },
+  "checks": [
+    "Necessary scoped strict TypeScript compile passed with consuming root editor/renderer",
+    "Functional/browser expansion and formatting/lint deliberately deferred per user implementation-first priority"
+  ],
+  "risks": [
+    "Source-ready UNREVIEWED; no original runtime parity or native acceptance claim",
+    "Basic and advanced layers have explicit Ferby composition order; basic-mode view does not overlay separate advanced items"
+  ],
+  "review": "pending"
+}

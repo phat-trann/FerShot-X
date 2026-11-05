@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import type {
   Annotation,
   AnnotationStyle,
@@ -111,6 +111,7 @@ export interface AdvancedEditorSnapshot {
   readonly items: readonly AdvancedEditorItem[];
   readonly selectedId: string | null;
 }
+const EMPTY_ADVANCED_ITEMS: readonly AdvancedEditorItem[] = Object.freeze([]);
 
 export interface AdvancedWorkbenchProps {
   readonly imageId: string;
@@ -355,6 +356,7 @@ export async function renderAdvancedWorkbenchToPngBlob(options: {
   readonly items: readonly AdvancedEditorItem[];
 }): Promise<Blob> {
   const { source, width, height, items } = options;
+  if (!Number.isSafeInteger(width) || !Number.isSafeInteger(height) || width < 1 || height < 1 || width > 16384 || height > 16384 || width * height > 16777216) throw new RangeError("Advanced raster exceeds image limits.");
   for (const item of items) {
     validateAdvancedItem(item, width, height);
   }
@@ -374,6 +376,7 @@ export async function renderAdvancedWorkbenchToPngBlob(options: {
     throw new Error("2D canvas context unavailable.");
   }
 
+  try {
   if (emphasisEffects.length > 0) {
     const emphasisBlob = await renderEmphasisToPngBlob({
       source,
@@ -382,7 +385,7 @@ export async function renderAdvancedWorkbenchToPngBlob(options: {
       effects: emphasisEffects,
     });
     const bmp = await createImageBitmap(emphasisBlob);
-    ctx.drawImage(bmp, 0, 0, width, height);
+    try { ctx.drawImage(bmp, 0, 0, width, height); } finally { bmp.close(); }
   } else {
     ctx.drawImage(source, 0, 0, width, height);
   }
@@ -498,7 +501,7 @@ export async function renderAdvancedWorkbenchToPngBlob(options: {
     ctx.restore();
   }
 
-  return new Promise<Blob>((resolve, reject) => {
+  return await new Promise<Blob>((resolve, reject) => {
     outCanvas.toBlob((blob) => {
       if (!blob) {
         reject(new Error("Failed to encode AdvancedWorkbench canvas to PNG."));
@@ -507,6 +510,7 @@ export async function renderAdvancedWorkbenchToPngBlob(options: {
       resolve(blob);
     }, "image/png");
   });
+  } finally { outCanvas.width = 0; outCanvas.height = 0; }
 }
 
 interface HistoryStack {
@@ -522,7 +526,7 @@ export const AdvancedWorkbench: React.FC<AdvancedWorkbenchProps> = ({
   imageWidth,
   imageHeight,
   zoom = 1,
-  initialItems = [],
+  initialItems = EMPTY_ADVANCED_ITEMS,
   defaultTool = "select",
   onSnapshotChange,
   onExportRaster,
@@ -537,17 +541,34 @@ export const AdvancedWorkbench: React.FC<AdvancedWorkbenchProps> = ({
   );
   const [errorBanner, setErrorBanner] = useState<string | null>(null);
 
-  const [history, setHistory] = useState<HistoryStack>(() => ({
-    past: [],
-    present: Object.freeze({
-      items: Object.freeze([...initialItems]),
-      selectedId: initialItems[0]?.id ?? null,
-    }),
-    future: [],
-  }));
+  const [histories, setHistories] = useState<ReadonlyMap<string, HistoryStack>>(() => new Map());
+  const history = histories.get(imageId) ?? { past: [], present: Object.freeze({ items: initialItems, selectedId: initialItems[0]?.id ?? null }), future: [] };
+  const setHistory = (update: (previous: HistoryStack) => HistoryStack) => {
+    setHistories(previous => new Map(previous).set(imageId, update(previous.get(imageId) ?? history)));
+  };
+  const [previewSrc, setPreviewSrc] = useState<string | null>(null);
+  useEffect(() => {
+    let active = true;
+    let ownedUrl: string | undefined;
+    setPreviewSrc(null);
+    void (async () => {
+      let source = imageSourceElement;
+      if (!source) {
+        const decoded = new Image(); decoded.src = imageSrc; await decoded.decode();
+        if (decoded.naturalWidth !== imageWidth || decoded.naturalHeight !== imageHeight) throw new Error("Editor image dimensions changed.");
+        source = decoded;
+      }
+      const blob = await renderAdvancedWorkbenchToPngBlob({ source, width: imageWidth, height: imageHeight, items: history.present.items });
+      if (!active) return;
+      ownedUrl = URL.createObjectURL(blob);
+      setPreviewSrc(ownedUrl);
+    })().catch(error => { if (active) setErrorBanner(error instanceof Error ? error.message : "Preview unavailable."); });
+    return () => { active = false; if (ownedUrl) URL.revokeObjectURL(ownedUrl); };
+  }, [imageId, imageSrc, imageSourceElement, imageWidth, imageHeight, history.present.items]);
 
   const commitPresent = (nextPresent: AdvancedEditorSnapshot) => {
     try {
+      if (nextPresent.items.length > 1000) throw new RangeError("Advanced annotation limit reached.");
       for (const item of nextPresent.items) {
         validateAdvancedItem(item, imageWidth, imageHeight);
       }
@@ -564,7 +585,7 @@ export const AdvancedWorkbench: React.FC<AdvancedWorkbenchProps> = ({
       selectedId: nextPresent.selectedId,
     });
     setHistory((prev) => ({
-      past: Object.freeze([...prev.past, prev.present]),
+      past: Object.freeze([...prev.past, prev.present].slice(-100)),
       present: frozen,
       future: [],
     }));
@@ -572,30 +593,17 @@ export const AdvancedWorkbench: React.FC<AdvancedWorkbenchProps> = ({
   };
 
   const handleUndo = () => {
-    setHistory((prev) => {
-      if (prev.past.length === 0) return prev;
-      const previous = prev.past[prev.past.length - 1];
-      const nextPast = prev.past.slice(0, -1);
-      onSnapshotChange?.(previous);
-      return {
-        past: Object.freeze(nextPast),
-        present: previous,
-        future: Object.freeze([prev.present, ...prev.future]),
-      };
-    });
+    if (!history.past.length) return;
+    const previous = history.past[history.past.length - 1];
+    setHistory(() => ({ past: history.past.slice(0, -1), present: previous, future: [history.present, ...history.future].slice(0, 100) }));
+    onSnapshotChange?.(previous);
   };
 
   const handleRedo = () => {
-    setHistory((prev) => {
-      if (prev.future.length === 0) return prev;
-      const [next, ...restFuture] = prev.future;
-      onSnapshotChange?.(next);
-      return {
-        past: Object.freeze([...prev.past, prev.present]),
-        present: next,
-        future: Object.freeze(restFuture),
-      };
-    });
+    if (!history.future.length) return;
+    const [next, ...rest] = history.future;
+    setHistory(() => ({ past: [...history.past, history.present].slice(-100), present: next, future: rest }));
+    onSnapshotChange?.(next);
   };
 
   const appendItem = (item: AdvancedEditorItem) => {
@@ -621,13 +629,6 @@ export const AdvancedWorkbench: React.FC<AdvancedWorkbenchProps> = ({
     ? itemToSelectionProxyAnnotation(selectedItem)
     : null;
 
-  const shapesOnly: ShapePrimitiveAnnotation[] = history.present.items
-    .filter(
-      (i): i is Extract<AdvancedEditorItem, { itemKind: "shape" }> =>
-        i.itemKind === "shape",
-    )
-    .map((i) => i.shape);
-
   const textCounterAnnotations: Annotation[] = history.present.items
     .filter(
       (i): i is Extract<AdvancedEditorItem, { itemKind: "contract" }> =>
@@ -636,7 +637,7 @@ export const AdvancedWorkbench: React.FC<AdvancedWorkbenchProps> = ({
     .map((i) => i.annotation);
 
   const nextCounterVal =
-    textCounterAnnotations.filter((a) => a.tool === "counter").length + 1;
+    Math.max(0, ...textCounterAnnotations.filter(a => a.tool === "counter").map(a => a.counter ?? 0)) + 1;
 
   const activeShapeKind: ShapePrimitiveKind | null =
     tool === "line" || tool === "ellipse" ? tool : null;
@@ -686,6 +687,11 @@ export const AdvancedWorkbench: React.FC<AdvancedWorkbenchProps> = ({
           >
             Redo Advanced
           </button>
+          <label>Selected item<select aria-label="Advanced selection" value={history.present.selectedId ?? ""}
+            onChange={event => { const next = Object.freeze({ ...history.present, selectedId: event.target.value || null }); setHistory(previous => ({ ...previous, present: next })); }}>
+            <option value="">None</option>{history.present.items.map(item => <option key={item.id} value={item.id}>{item.itemKind}: {item.id}</option>)}
+          </select></label>
+          <button type="button" disabled={!history.present.selectedId} onClick={() => commitPresent({ items: history.present.items.filter(item => item.id !== history.present.selectedId), selectedId: null })}>Delete advanced item</button>
           <span aria-label="Advanced item count">
             {history.present.items.length} items
           </span>
@@ -805,10 +811,11 @@ export const AdvancedWorkbench: React.FC<AdvancedWorkbenchProps> = ({
           }
         }}
       >
+        <img src={previewSrc ?? imageSrc} alt="Advanced image preview" draggable={false} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", pointerEvents: "none" }} />
         <ShapesOverlay
           imageWidth={imageWidth}
           imageHeight={imageHeight}
-          shapes={shapesOnly}
+          shapes={[]}
           activeKind={activeShapeKind}
           style={style}
           onShapeCreate={(shape) =>

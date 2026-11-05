@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "id": "20261105T165037-codex-C06-e1da9b21",
+  "created_at": "2026-11-05T16:50:37.108949+07:00",
+  "agent": "codex",
+  "request": "BUILD-20261105",
+  "task": "C06",
+  "completion": "done",
+  "summary": "Refreshed clipboard integration snapshot after inspected C12 Workspace-only change; clipboard/native implementation unchanged and regression checks passed",
+  "files": [
+    "src-tauri/Cargo.toml",
+    "src-tauri/Cargo.lock",
+    "src-tauri/src/lib.rs",
+    "src-tauri/src/imaging.rs",
+    "src-tauri/crates/image-core/src/lib.rs",
+    "src/platform/native.ts",
+    "src/platform/native.test.ts",
+    "src/Workspace.tsx",
+    "src/Workspace.measurement.tsx",
+    "src/platform/measurement.ts",
+    "tests/e2e/codex-clipboard.spec.ts",
+    "docs/agents/codex/C06-measurement-refresh.md"
+  ],
+  "file_sha256": {
+    "src-tauri/Cargo.toml": "f693976d843acf66000c74bd720c65ad02bf1329188012511a9663bdad86d00a",
+    "src-tauri/Cargo.lock": "c9413c8ab442087120ec676155ccfe2917c0586e4a978a127666670f8b5859be",
+    "src-tauri/src/lib.rs": "a652f83a9d69b009c3f6d6ca4d44ee50a5729c65f8a187d6f77a9ab45171cc7a",
+    "src-tauri/src/imaging.rs": "b847d6e115f4b9473d3238e306d6628b40e265ec7c8a3719aa07b5d174b6ba90",
+    "src-tauri/crates/image-core/src/lib.rs": "c871e3f4c436b845e7ff3902be4e7ae0f1f40add1a506ed5f1e18348fbc113c1",
+    "src/platform/native.ts": "b9e151642a0ca4329f271285c2d48f123feeb501d43c1eb6818bceb2d388ce99",
+    "src/platform/native.test.ts": "ec6a04e3051973b709a842af24f6881256cf1da6f63930591cb29149466c0ab2",
+    "src/Workspace.tsx": "a3ec27f377ef17c362cf3e35282fe24b08f4119fe7e78e12bc74e72e103a03f7",
+    "src/Workspace.measurement.tsx": "494d7a9b8af9c2cfaee809a18a5b227c8a896c1acf9bda377c49200fc22a41d1",
+    "src/platform/measurement.ts": "707bcfeddd3a2b60b9ef9354db8c00bb4c8181aa9230c11432b1e2504acddf86",
+    "tests/e2e/codex-clipboard.spec.ts": "5f721d14a24ddebe7daed001389d45bf94fef0887f6a3db766b26d2467b96215",
+    "docs/agents/codex/C06-measurement-refresh.md": "61b4e56b8d56cc00fc664382ddaa5b9e6c0d14ed5348575144e2ec3a1c8b898a"
+  },
+  "checks": [
+    "Hash comparison against previous C06 packet: only src/Workspace.tsx changed among its snapshot files; diff inspected",
+    "Native frontend plus independent clipboard-boundary Vitest: 8 passed; root Rust --locked --lib: 16 passed",
+    "Current selected browser clipboard/editor/measurement/pin/preferences batch: 10 passed, native IPC mocked",
+    "Formatting/lint delegated to Copilot H01"
+  ],
+  "risks": [
+    "Fresh root hashes need independent review; no actual OS clipboard, global app build or parity acceptance",
+    "New measurement root files are also covered by separate partial C12 packet 20261105T164855-codex-C12-4c4fdfc9"
+  ],
+  "review": "pending"
+}

@@ -10,6 +10,7 @@ import {
   PreferencesWorkspace,
   applyGuardedPreferencePatch,
   fromRawPreferenceRecord,
+  type PreferencesWorkspaceProps,
 } from "../features/preferences-workspace/PreferencesWorkspace";
 
 const limitedCapabilities: FerbyPreferenceCapabilities = Object.freeze({
@@ -41,7 +42,9 @@ describe("PreferencesWorkspace independent regressions", () => {
   });
 
   it("emits the edited snapshot through the controlled save callback", async () => {
-    const onSave = vi.fn(async () => undefined);
+    const onSave: NonNullable<PreferencesWorkspaceProps["onSave"]> = vi.fn(
+      async (_snapshot) => undefined,
+    );
     render(
       <PreferencesWorkspace
         initialSnapshot={DEFAULT_PREFERENCES_WORKSPACE_SNAPSHOT}
@@ -70,7 +73,6 @@ describe("PreferencesWorkspace independent regressions", () => {
     const { rerender } = render(
       <PreferencesWorkspace
         initialSnapshot={DEFAULT_PREFERENCES_WORKSPACE_SNAPSHOT}
-        externalSnapshot={null}
         capabilities={limitedCapabilities}
       />,
     );

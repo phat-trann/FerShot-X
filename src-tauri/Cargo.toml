@@ -26,6 +26,7 @@ ferby-capture-core = { path = "crates/capture-core" }
 ferby-image-core = { path = "crates/image-core" }
 ferby-settings-core = { path = "crates/settings-core" }
 ferby-clipboard-import-core = { path = "crates/clipboard-import-core" }
+ferby-vision-core = { path = "crates/vision-core" }
 tauri-plugin-dialog = "2"
 
 [dev-dependencies]

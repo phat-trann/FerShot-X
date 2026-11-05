@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "id": "20261105T162536-codex-C24-17914720",
+  "created_at": "2026-11-05T16:25:36.774924+07:00",
+  "agent": "codex",
+  "request": "BUILD-20261105",
+  "task": "C24",
+  "completion": "done",
+  "summary": "Implemented bounded C17-compatible injected RGBA stitching adapter with A22-derived limits, copied buffers, output validation and exactly-once owned-output cleanup",
+  "files": [
+    "src/features/stitch-backend-adapter/index.ts",
+    "src/features/stitch-backend-adapter/index.test.ts",
+    "src/features/stitch-backend-adapter/README.md",
+    "docs/agents/codex/C24-stitch-backend-adapter.md"
+  ],
+  "file_sha256": {
+    "src/features/stitch-backend-adapter/index.ts": "b07b6cca59bd47b5eb31ef6ccf667acb73932cc7d746244237f9cdd9b83dd50d",
+    "src/features/stitch-backend-adapter/index.test.ts": "70377be147c96cebb4d2f4e80c57b4e2c41488a7dcf1791cd8f98ec7476f1dd3",
+    "src/features/stitch-backend-adapter/README.md": "ede7327fe2834b6db708a038e0d3d0f0aca9d75b5e15bb71f3f8363879bd5f8f",
+    "docs/agents/codex/C24-stitch-backend-adapter.md": "f3ac17bd9ab8a7224103f29ae06599702dc83d61cc3e077b67a4facb76565a50"
+  },
+  "checks": [
+    "Node 26 scoped Vitest: 36 tests passed across C24, C17 and independent capture-session tests",
+    "Scoped strict TypeScript check for C23/C24 source/tests passed; global typecheck still reports existing A37/P61 errors. No application build pass claimed.",
+    "Formatting/lint delegated to Copilot H01"
+  ],
+  "risks": [
+    "Local injected port only; C11 native serialization, capture, permissions and real scrolling acceptance remain pending",
+    "New snapshot requires independent review; awaited ports must settle for cancellation cleanup"
+  ],
+  "review": "pending"
+}

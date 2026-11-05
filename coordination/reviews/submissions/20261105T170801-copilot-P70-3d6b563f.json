@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "id": "20261105T170801-copilot-P70-3d6b563f",
+  "created_at": "2026-11-05T17:08:01.072552+07:00",
+  "agent": "copilot",
+  "request": "P70-tsx-correction",
+  "task": "P70",
+  "completion": "done",
+  "summary": "Moved JSX RecognitionWorkspace implementation from index.ts into RecognitionWorkspace.tsx and converted index.ts to a plain typed re-export. Props, runtime-language gating, QR selection reset and callbacks are unchanged.",
+  "files": [
+    "src/features/recognition-workspace/RecognitionWorkspace.tsx",
+    "src/features/recognition-workspace/index.ts",
+    "src/features/recognition-workspace/README.md"
+  ],
+  "file_sha256": {
+    "src/features/recognition-workspace/RecognitionWorkspace.tsx": "07b93b990c8c1397a774bb18e1e3befb14a261d803feae7b8ec840f30ae5258c",
+    "src/features/recognition-workspace/index.ts": "04efb112b3598c585f1a1af54b7da9c2bd809f522eb36e01aea237f6d127c9b3",
+    "src/features/recognition-workspace/README.md": "571b72152e2a66b5ae18fe25da5dc54cb58d9c226ca9f88a8b80ddd8184cf63f"
+  },
+  "checks": [
+    "No new suite run per correction acceptance; rtk proxy git diff --check passed."
+  ],
+  "risks": [
+    "This fixes TypeScript/JSX parsing; root build/typecheck remains Codex-owned."
+  ],
+  "review": "pending"
+}

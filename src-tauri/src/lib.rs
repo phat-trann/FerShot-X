@@ -3,6 +3,7 @@ mod imaging;
 mod preferences;
 mod pins;
 mod clipboard_import;
+mod recognition;
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
@@ -24,7 +25,10 @@ pub fn run() {
             pins::close_pin,
             pins::copy_pin,
             pins::edit_pin,
-            clipboard_import::import_clipboard
+            clipboard_import::import_clipboard,
+            recognition::recognition_languages,
+            recognition::recognize_image,
+            recognition::copy_recognized_text
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

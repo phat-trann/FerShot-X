@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "id": "20261105T160508-codex-COORD11-934ed2a2",
+  "created_at": "2026-11-05T16:05:08.673778+07:00",
+  "agent": "codex",
+  "request": "SPLIT-20261105",
+  "task": "COORD11",
+  "completion": "done",
+  "summary": "Added four bounded independent Copilot Rust QA tasks P64-P67 for Vision fake backend, scroll stitching, session integrity and settings boundaries",
+  "files": [
+    "AGENTS.md",
+    "coordination/START-HERE.md",
+    "coordination/TWO-LANE.md",
+    "coordination/build-tasks.json",
+    "coordination/BUILD-QUEUE.md",
+    "coordination/DELIVERY-PLAN.md",
+    "coordination/CONTINUOUS.md",
+    "coordination/prompts/copilot.md",
+    "docs/agents/codex/COORD11-bounded-rust-tasks.md"
+  ],
+  "file_sha256": {
+    "AGENTS.md": "286f94e801667916578594dc7cbd79ec9d775e75f20b3b0846bc276439bdc03a",
+    "coordination/START-HERE.md": "bd5fd4423847c4a22db080dea460c12d65fe3a3a39ac163c18bbf4a646e38567",
+    "coordination/TWO-LANE.md": "155762f71b8da41e3a9e66f2550fae443d93f859f4f64c75ff99eb8ca06500f0",
+    "coordination/build-tasks.json": "a0d57b10cf36556a9b5a8a8c01de1197917427221561cd4f7f54c8469f584881",
+    "coordination/BUILD-QUEUE.md": "eadac0a5f95bab655a1f5ee2faf70338009281b9c144bfaceaeaecdf587d5259",
+    "coordination/DELIVERY-PLAN.md": "7314ae78a04c96fabcc6fe295a657c9e5eb854fcee9ecb8fad35a3775914b409",
+    "coordination/CONTINUOUS.md": "cc92be95006249d1810ecd58905e379209392bbb09e8bcbfeefedf459570ff14",
+    "coordination/prompts/copilot.md": "bd54601d9ecf7c17f02f46cfbebd6906c84a85f9640193b4f35a9e927b945f39",
+    "docs/agents/codex/COORD11-bounded-rust-tasks.md": "ab895e31e6475d6bfab7ed9fe18f62f237982bf9378c3403d08d6a4468d46fe6"
+  },
+  "checks": [
+    "Dispatcher unit tests: 12 passed",
+    "Queue JSON and unique task IDs verified; all P64-P67 named inputs and frozen lockfiles exist; output paths are unique and absent",
+    "Selector exposes P53/P54 fixes followed by P62-P67; required ignored paths verified",
+    "Product tests not run: coordination-only allocation; new worker integration tests are not implemented yet",
+    "Formatting/lint delegated to Copilot H01"
+  ],
+  "risks": [
+    "No worker clients launched or external notifications sent; tasks are discoverable through the existing selector",
+    "Producer fixes remain Codex-owned; existing root claims and independent/native/final acceptance gates are unchanged"
+  ],
+  "review": "pending"
+}

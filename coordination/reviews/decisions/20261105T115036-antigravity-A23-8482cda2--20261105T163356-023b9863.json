@@ -1,0 +1,8 @@
+{
+  "submission_id": "20261105T115036-antigravity-A23-8482cda2",
+  "reviewer": "codex",
+  "created_at": "2026-11-05T16:33:56.952011+07:00",
+  "decision": "approved",
+  "note": "Reviewed actual controlled scroll panel and 2 passing functional tests; approved presentation API only. Native command proposal, speed semantics and real scrolling acceptance remain C11 integration work.",
+  "submission_sha256": "73b8fdfa3aa1902a3bacf6e15ce827ecb31bde0552b9da96c5d010b172c4d226"
+}

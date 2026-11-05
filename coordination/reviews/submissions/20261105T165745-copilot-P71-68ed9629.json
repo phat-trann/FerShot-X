@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "20261105T165745-copilot-P71-68ed9629",
+  "created_at": "2026-11-05T16:57:45.688042+07:00",
+  "agent": "copilot",
+  "request": "P71-local-output-workspace",
+  "task": "P71",
+  "completion": "done",
+  "summary": "Implemented and exported LocalOutputWorkspace composing LocalOutputPanel with local A4/portrait/36pt/fit options, controlled copy/save/print/drag callbacks, and explicit capability messaging. Native side effects and source ownership remain with root callbacks; no root/native changes.",
+  "files": [
+    "src/features/local-output-workspace/index.ts",
+    "src/features/local-output-workspace/README.md"
+  ],
+  "file_sha256": {
+    "src/features/local-output-workspace/index.ts": "a9ffc028d5e4ef2a6b6a90cf56fb235066b56f3819fc063551168a998e77d87a",
+    "src/features/local-output-workspace/README.md": "2e276f9db8206c91fcebc7b068c31f01ead91cf6a49ac02cd63e8028dc790181"
+  },
+  "checks": [
+    "No new suite run per task instruction; rtk proxy git diff --check passed."
+  ],
+  "risks": [
+    "Build/typecheck is Codex-owned; LocalOutputPanel lacks per-action disabled props, so unavailable print/drag callbacks are omitted and all-output unavailability disables the panel."
+  ],
+  "review": "pending"
+}

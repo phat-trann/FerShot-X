@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "20261105T161059-copilot-P67-96dd021e",
+  "created_at": "2026-11-05T16:10:59.777617+07:00",
+  "agent": "copilot",
+  "request": "P67-settings-boundary-regressions",
+  "task": "P67",
+  "completion": "partial",
+  "summary": "Added Rust integration regressions for UTF-8 byte-size boundaries, malformed setting types/schema versions, JPEG quality boundary round trips, and invalid-save preservation using temporary persistence only. Required cargo test is blocked because cargo is unavailable; no producer or manifest changes.",
+  "files": [
+    "src-tauri/crates/settings-core/tests/copilot_p67.rs",
+    "docs/qa/copilot-P67.md"
+  ],
+  "file_sha256": {
+    "src-tauri/crates/settings-core/tests/copilot_p67.rs": "0af8fccd548f9413f6027a22789443fdf743887a75e5fbd0ada911b634270c2e",
+    "docs/qa/copilot-P67.md": "e283337432dfaa39abcae6b9e81d056a838869b745bc2f6da5ccdfb1a394b36d"
+  },
+  "checks": [
+    "Required command attempted: cargo test --locked --manifest-path src-tauri/crates/settings-core/Cargo.toml --test copilot_p67; blocked with cargo: No such file or directory. rtk proxy git diff --check passed."
+  ],
+  "risks": [
+    "Test compilation remains unverified until Cargo is available; producer behavior was not changed."
+  ],
+  "review": "pending"
+}

@@ -1,5 +1,14 @@
 # Temporary two-agent allocation — 2026-11-05
 
+## Implementation-first priority (latest user instruction, 2026-11-05)
+
+Codex and the existing Copilot client work in parallel on distinct file claims. Prioritize completing in-scope function logic/configuration and provisional app wiring. New tests, broad regression batches, hygiene and validation-only backlog are deferred until the implementation pass is ready; record tests as NOT RUN rather than passed. Necessary syntax/type/compile checks remain allowed. Do not stop implementation solely to refresh unrelated stale broad snapshots.
+
+Current done/hash-bound producer sources may be provisionally wired while independent review is pending. This is UNREVIEWED development integration, not self-approval, acceptance or permission to ship. Known functional rejections, stale/incomplete inputs and active producer claims still block consumption. C16/P57 final acceptance and actual native/target parity gates retain their original independent/evidence requirements. No product/dependency upgrades, Swift, cloud/uploads, real captures in automated checks or proprietary-code/resource copying. Unknown original behavior remains UNKNOWN; use explicit Ferby decisions without claiming Shottr equivalence.
+
+Copilot: finish its currently claimed task, then implement P70 RecognitionWorkspace and P71 LocalOutputWorkspace in their isolated folders using the exact queue props. Codex owns C08 native OCR/QR transport, recognition source/jobs and root integration, then broader C11-C15. No second Copilot client is started while an existing claim is active. 'Data' means in-scope feature data/configuration and logic; personal-data migration is not added by this priority change.
+
+
 The user reports that Antigravity has exhausted its quota until the end of this week. Run Codex and Copilot only until Antigravity explicitly resumes. This staffing update supersedes older instructions to start three clients. It does not waive independent acceptance or change product/dependency versions.
 
 ## Persisted Antigravity checkpoint
@@ -38,3 +47,24 @@ Codex now executes both Cxx production/integration and available Axx production/
 Copilot retains P58-P61 and receives P62/P63 for small independent A35 preview-failure and lifecycle regressions after the Codex hardening packet is published. Each owns one test file and one report, reads two named inputs, and may not modify producer code. Run each after the producer claim is free. Do not spawn replacement clients automatically.
 
 Integration typecheck during the A35 takeover found two independent Copilot compile corrections. P53 must use a mutable caller fixture for its deliberate source-mutation regression (TS2540); P54 must correct callback observation narrowing and use public archive entry types (TS2339/TS2322). Fresh Codex changes-requested decisions reopen the ordinary P53/P54 tasks, retaining their exact owned files; fix these before new independent tests. Antigravity's earlier runtime test approvals do not establish TypeScript compilation.
+
+## Additional bounded Rust QA wave (P64-P67)
+
+P58-P61 have completion packets; P53/P54 compile corrections and P62/P63 remain actionable at this checkpoint. New P64-P67 each own one integration-test file inside a different standalone crate and one <=150-word report. Inputs are exactly that crate's `src/lib.rs` and `Cargo.toml`, with the existing lockfile required for `--locked` tests.
+
+| Task | Producer | Independent scope | Test target |
+| --- | --- | --- | --- |
+| P64 | A33 | Vision request/backend/result boundaries using fake backend only | `vision-core/tests/copilot_p64.rs` |
+| P65 | A22 | RGBA stitching validation, tolerance and source preservation | `scroll-core/tests/copilot_p65.rs` |
+| P66 | A29 | Session manifest/payload integrity and failed-write preservation | `session-core/tests/copilot_p66.rs` |
+| P67 | A09 | Settings UTF-8 byte limits, schema/types and persistence boundaries | `settings-core/tests/copilot_p67.rs` |
+
+All paths in the table are relative to `src-tauri/crates/`. Run only the exact integration-test target named in the task, with `cargo test --locked --manifest-path ... --test copilot_pNN`; never run native Vision library tests. No source/manifest/lockfile changes, new dependencies or native actions are delegated. P66/P67 may use isolated tempfile directories. If producer scope is occupied, publish a blocked packet and continue another task, without reading active files. Findings go to Codex, which owns producer fixes. Tests passing do not approve native integration or original runtime parity.
+
+## Production adapter wave and progress checkpoint
+
+On 2026-11-05 the accepted MVP ledger remains 61.25%; no new native/manual gate was credited. Full Shottr parity has no accepted percentage. Eight Copilot tasks (P53/P54 fixes and P62-P67) were ready with no Copilot claim at this checkpoint; adding tasks does not start a client.
+
+C23 and C24 now give Codex isolated production work even while the pre-existing root-wiring claim is occupied. C23 adapts C18 recognition jobs to injected A33-shaped Vision ports, with strict source/revision/result checks. C24 adapts C17 capture sessions to an injected RGBA stitch port derived from A22 limits and owned leases. Each owns a separate feature folder, tests and README. No application command or native runtime integration is implied. Root/native wiring remains C08/C11 work under existing claim/review gates.
+
+P68/P69 independently test those adapters after current done producer packets and exports appear; skip active producer claims. Existing P53/P54 corrections stay first. Detailed two-file inputs and exact owned outputs are in build-tasks.json. These adapters/tests do not change the acceptance denominator or lift final independent signatures.

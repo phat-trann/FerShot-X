@@ -1,5 +1,16 @@
 # Codex implementation prompts
 
+## Implementation-first priority (latest user instruction, 2026-11-05)
+
+Codex and the existing Copilot client work in parallel on distinct file claims. Prioritize completing in-scope function logic/configuration and provisional app wiring. New tests, broad regression batches, hygiene and validation-only backlog are deferred until the implementation pass is ready; record tests as NOT RUN rather than passed. Necessary syntax/type/compile checks remain allowed. Do not stop implementation solely to refresh unrelated stale broad snapshots.
+
+Current done/hash-bound producer sources may be provisionally wired while independent review is pending. This is UNREVIEWED development integration, not self-approval, acceptance or permission to ship. Known functional rejections, stale/incomplete inputs and active producer claims still block consumption. C16/P57 final acceptance and actual native/target parity gates retain their original independent/evidence requirements. No product/dependency upgrades, Swift, cloud/uploads, real captures in automated checks or proprietary-code/resource copying. Unknown original behavior remains UNKNOWN; use explicit Ferby decisions without claiming Shottr equivalence.
+
+Copilot: finish its currently claimed task, then implement P70 RecognitionWorkspace and P71 LocalOutputWorkspace in their isolated folders using the exact queue props. Codex owns C08 native OCR/QR transport, recognition source/jobs and root integration, then broader C11-C15. No second Copilot client is started while an existing claim is active. 'Data' means in-scope feature data/configuration and logic; personal-data migration is not added by this priority change.
+
+
+> Additional production: C23/C24 implement isolated injected Vision/stitch adapters in their own feature folders; inspect exact queue inputs. Neither task needs root-wiring or performs native actions. They do not bypass later C08/C11 review/integration.
+
 > Latest user allocation: Codex also executes free A01-A37 producer/fix scopes as codex; Copilot owns P58-P63 independent bounded tests. See TWO-LANE.md. No self-approval.
 
 > Staffing update: read [TWO-LANE.md](../TWO-LANE.md) first. Antigravity is unavailable this week. Review current A34-A37/P51-P56, then continue reviewed integration when existing shared claims are released; preserve pending independent signoff.

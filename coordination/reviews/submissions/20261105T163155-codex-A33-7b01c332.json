@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "id": "20261105T163155-codex-A33-7b01c332",
+  "created_at": "2026-11-05T16:31:55.511423+07:00",
+  "agent": "codex",
+  "request": "BUILD-20261105",
+  "task": "A33",
+  "completion": "done",
+  "summary": "Fixed Vision output budget to include text separators and QR symbology, with fake-backend boundary reproduction and exact-cap regressions",
+  "files": [
+    "src-tauri/crates/vision-core/src/lib.rs",
+    "src-tauri/crates/vision-core/Cargo.toml",
+    "src-tauri/crates/vision-core/Cargo.lock",
+    "src-tauri/crates/vision-core/tests/codex_output_budget.rs",
+    "docs/agents/codex/A33-output-budget-hardening.md"
+  ],
+  "file_sha256": {
+    "src-tauri/crates/vision-core/src/lib.rs": "4fe3829a11c7aec6b11ec4794aeec93c1661badd42afed3d25c9b9dd1dd741ab",
+    "src-tauri/crates/vision-core/Cargo.toml": "b190ea55a12e88f4838015fc5f0358e12afe8c5ca4f4cce51dcb16026c3693b0",
+    "src-tauri/crates/vision-core/Cargo.lock": "1c162fdae78154bd2c7ac822f03297ec7c3780fcdbf1de17ec2a47daf83c0957",
+    "src-tauri/crates/vision-core/tests/codex_output_budget.rs": "9e7f06c770673b315f2f35a86043f944fe2890c3c5e41abb919aebe5978efa8f",
+    "docs/agents/codex/A33-output-budget-hardening.md": "956f9606fd9da9657b583aba0b0a4532d60a5f39c6960d6efba3f0411d555d01"
+  },
+  "checks": [
+    "Before fix: codex_output_budget had 2 failures/2 passes; separator and symbology overflow reproduced",
+    "After fix: --locked --test codex_output_budget --test copilot_p64 passed 8 tests, fake backends only",
+    "Named pure-validation test previously passed; native runtime test was filtered out",
+    "Formatting/lint delegated to Copilot H01"
+  ],
+  "risks": [
+    "Changed Codex-owned native core requires independent review before integration; no self-approval",
+    "No actual Vision recognition, native GUI acceptance or serialized JSON body bound is claimed"
+  ],
+  "review": "pending"
+}

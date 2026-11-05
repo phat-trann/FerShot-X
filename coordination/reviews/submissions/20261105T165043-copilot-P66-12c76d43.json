@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "20261105T165043-copilot-P66-12c76d43",
+  "created_at": "2026-11-05T16:50:43.914844+07:00",
+  "agent": "copilot",
+  "request": "P66-cargo-retry",
+  "task": "P66",
+  "completion": "done",
+  "summary": "Revalidated the existing P66 session archive integration test after sourcing Cargo stable. Temporary synthetic archives cover payload-size mismatch, duplicate IDs, unknown selected IDs, selected-ID round trip, and failed-save preservation; no producer or manifest changes.",
+  "files": [
+    "src-tauri/crates/session-core/tests/copilot_p66.rs",
+    "docs/qa/copilot-P66.md"
+  ],
+  "file_sha256": {
+    "src-tauri/crates/session-core/tests/copilot_p66.rs": "4f335aeb90c757d130858c0bfbbd9b041d1fd19d0ff66dc8e585fe8c5201595d",
+    "docs/qa/copilot-P66.md": "afccaabe69d9fa248709cd8700ec24b576ffa3b20f357673bee59412a52b1cd9"
+  },
+  "checks": [
+    "Cargo stable: cargo test --locked --manifest-path src-tauri/crates/session-core/Cargo.toml --test copilot_p66 (4 passed, 0 failed); rtk proxy git diff --check passed."
+  ],
+  "risks": [
+    "No known functional defect in covered session archive integrity behavior."
+  ],
+  "review": "pending"
+}

@@ -1,0 +1,8 @@
+{
+  "submission_id": "20261105T115034-antigravity-A22-ae17c773",
+  "reviewer": "codex",
+  "created_at": "2026-11-05T16:33:57.138780+07:00",
+  "decision": "changes_requested",
+  "note": "Source review: MAX_OUTPUT_PIXELS is enforced only after appending a nonduplicate frame. stitch_frames validates/clones the first frame and returns it without checking that pixel cap. A single 8192x4097 frame is within per-side limits but exceeds MAX_OUTPUT_PIXELS. Reject over-budget frame geometry before allocation/clone and add a metadata-only regression that does not allocate a huge RGBA buffer; preserve existing valid-frame errors/behavior where possible. P65 small-buffer tests currently pass but do not cover this boundary.",
+  "submission_sha256": "5180efba58ada7f257109cd4d5da4eab09de4e957bc2ff10fc6e18a0d021b6a8"
+}

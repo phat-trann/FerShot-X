@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "20261105T165218-copilot-P69-26dd16ca",
+  "created_at": "2026-11-05T16:52:18.327997+07:00",
+  "agent": "copilot",
+  "request": "P69-stitch-adapter-regressions",
+  "task": "P69",
+  "completion": "done",
+  "summary": "Added independent C24 public adapter regressions for malformed frame geometry, aggregate input budget rejection before transport, malformed output RGBA lease cleanup, and late output cleanup after cancellation. Injected ports and synthetic RGBA only; producer code untouched.",
+  "files": [
+    "src/testing/copilot-stitch-backend-adapter.test.ts",
+    "docs/qa/copilot-P69.md"
+  ],
+  "file_sha256": {
+    "src/testing/copilot-stitch-backend-adapter.test.ts": "783d80028b69132ab3ad4449691b8343217a5c86748cf35178de92f82ddb34e5",
+    "docs/qa/copilot-P69.md": "70dac01541a4d55fa1895e30947c5259cffedb59335c364530374f25f4ba3d95"
+  },
+  "checks": [
+    "Node 26.13.0: npm run test:unit -- src/testing/copilot-stitch-backend-adapter.test.ts (1 file, 4 tests passed); rtk proxy git diff --check passed."
+  ],
+  "risks": [
+    "No known defect in covered C24 adapter behavior; native/Tauri integration remains outside scope."
+  ],
+  "review": "pending"
+}

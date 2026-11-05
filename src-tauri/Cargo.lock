@@ -851,12 +851,26 @@ dependencies = [
  "ferby-clipboard-import-core",
  "ferby-image-core",
  "ferby-settings-core",
+ "ferby-vision-core",
  "serde",
  "serde_json",
  "tauri",
  "tauri-build",
  "tauri-plugin-dialog",
  "tempfile",
+]
+
+[[package]]
+name = "ferby-vision-core"
+version = "0.1.0"
+dependencies = [
+ "image",
+ "objc2",
+ "objc2-foundation",
+ "objc2-vision",
+ "serde",
+ "serde_json",
+ "thiserror 2.0.21",
 ]
 
 [[package]]
@@ -2227,6 +2241,16 @@ name = "objc2-user-notifications"
 version = "0.3.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9df9128cbbfef73cda168416ccf7f837b62737d748333bfe9ab71c245d76613e"
+dependencies = [
+ "objc2",
+ "objc2-foundation",
+]
+
+[[package]]
+name = "objc2-vision"
+version = "0.3.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "bfc194758a2d5d7540b1ad283bfb9ca318ec608991892326e95b428230b2689b"
 dependencies = [
  "objc2",
  "objc2-foundation",

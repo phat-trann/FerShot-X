@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "id": "20261105T160811-codex-COORD12-89b13071",
+  "created_at": "2026-11-05T16:08:11.395414+07:00",
+  "agent": "codex",
+  "request": "PROGRESS-WORK-20261105",
+  "task": "COORD12",
+  "completion": "done",
+  "summary": "Verified accepted MVP score remains 61.25%; added isolated C23/C24 adapter production and P68/P69 independent regressions",
+  "files": [
+    "AGENTS.md",
+    "coordination/START-HERE.md",
+    "coordination/TWO-LANE.md",
+    "coordination/build-tasks.json",
+    "coordination/BUILD-QUEUE.md",
+    "coordination/DELIVERY-PLAN.md",
+    "coordination/CONTINUOUS.md",
+    "coordination/prompts/codex.md",
+    "coordination/prompts/copilot.md",
+    "docs/agents/codex/COORD12-progress-and-production-wave.md"
+  ],
+  "file_sha256": {
+    "AGENTS.md": "74395e9965badf9cfd8575cc842a784ac2c5749941b78e0ed6502a325361c12c",
+    "coordination/START-HERE.md": "a6cc26ee0b59d3a42cff957d13430683c7bae657100661b76ddea89c7a4847a5",
+    "coordination/TWO-LANE.md": "b1cea0f2a0628071834dfbbbec13913d09d60ab99598674543839727d3f82139",
+    "coordination/build-tasks.json": "a66fac9cb06be4eeb2983a8a6a696f41ffa39164e4ede36013aadcffa572ebf9",
+    "coordination/BUILD-QUEUE.md": "1bb76d54e639fc02d0eb58348d18bdbf6df21ec3427ebd0f06dd3dd739b01e6c",
+    "coordination/DELIVERY-PLAN.md": "5e62f7767b28f3221fdf256e14254d3afb5ea1901eb3aa5da9bfd531b867ac43",
+    "coordination/CONTINUOUS.md": "d2401c5872ddc4a88a57b640ef3d37de01a0f7a62aa3fc2e9f9dec9d63bd2215",
+    "coordination/prompts/codex.md": "3aa01ca32a17b247c1ec1b4ba3a85a6290243b015cecd23dd21c0324ff282977",
+    "coordination/prompts/copilot.md": "7ea0c69aadb20f35d3010eb9dabf3082a557feac7d39dcaec27f252f6cd42536",
+    "docs/agents/codex/COORD12-progress-and-production-wave.md": "7d7ac71dd0c0d634c7dff1ec51d58c5ef7902a15f756475931495c2f81bd9e6f"
+  },
+  "checks": [
+    "MVP score independently recomputed from progress.json: 61.25%; project_progress.py --check passed; no acceptance gates changed",
+    "Dispatcher unit tests: 12 passed",
+    "Queue JSON, unique IDs, C23/C24 actual input paths and absence of shared claims verified; selector exposes both production tasks",
+    "P68/P69 correctly blocked on absent producer exports; required ignored paths verified",
+    "Product tests not run for coordination-only allocation; adapters and worker tests are not claimed implemented",
+    "Formatting/lint delegated to Copilot H01"
+  ],
+  "risks": [
+    "Full Shottr parity has no accepted percentage; standalone tests and task counts do not increase the MVP ledger",
+    "Existing root integration claims, independent reviews and native/manual/final acceptance gates remain unchanged"
+  ],
+  "review": "pending"
+}

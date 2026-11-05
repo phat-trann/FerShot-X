@@ -5,6 +5,7 @@ import type { CaptureMode, ImageDocument } from "../contracts/media";
 import { validateCrop } from "../features/crop/validate";
 import { safeExportName, type ExportFormat } from "../features/export/names";
 import { assertImageDimensions, MAX_NATIVE_BYTES } from "./image-limits";
+import type { VisionPortRequest } from "../features/vision-backend-adapter";
 export { MAX_NATIVE_BYTES } from "./image-limits";
 export interface AppInfo { name: string; version: string; platform: string }
 export async function readAppInfo(): Promise<AppInfo | null> {
@@ -140,4 +141,24 @@ export async function editPinnedImage(): Promise<void> { await nativeCall<void>(
 
 export async function importClipboardImage(): Promise<ImageDocument> {
   return documentFromPayload(await nativeCall<ImagePayload>("import_clipboard", {}), `Clipboard-${Date.now()}.png`);
+}
+
+export async function readRecognitionLanguages(): Promise<unknown> {
+  return nativeCall<unknown>("recognition_languages", {});
+}
+
+export async function recognizeRaster(request: Readonly<VisionPortRequest>): Promise<unknown> {
+  requireDesktop();
+  if (!(request.imageBytes instanceof Uint8Array) || !request.imageBytes.length || request.imageBytes.length > MAX_NATIVE_BYTES) throw new NativeOperationError("recognition_limit", "Recognition image exceeds bounds.");
+  const chunks: string[] = [];
+  for (let offset = 0; offset < request.imageBytes.length; offset += 8192) {
+    chunks.push(String.fromCharCode(...request.imageBytes.subarray(offset, offset + 8192)));
+  }
+  const pngBase64 = btoa(chunks.join(""));
+  return nativeCall<unknown>("recognize_image", { request: { pngBase64, mode: request.mode, languages: [...request.languages], preserveLineBreaks: request.preserveLineBreaks, maxResults: request.maxResults } });
+}
+
+export async function copyRecognizedText(text: string): Promise<void> {
+  if (typeof text !== "string" || !text || text.length > 256 * 1024 || new TextEncoder().encode(text).length > 256 * 1024) throw new NativeOperationError("recognition_limit", "Choose bounded recognized text to copy.");
+  await nativeCall<void>("copy_recognized_text", { request: { text } });
 }

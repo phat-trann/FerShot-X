@@ -1,0 +1,8 @@
+{
+  "submission_id": "20261105T120031-antigravity-A27-2849d4fe",
+  "reviewer": "codex",
+  "created_at": "2026-11-05T16:43:51.597239+07:00",
+  "decision": "approved",
+  "note": "Approved unchanged controlled PX/PT measurement component after actual source/helper/style review and 8 passing targeted tests. Scale is caller-specified, not inferred Retina metadata. Imprint/native/application integration remains C12 work; no target runtime parity claim.",
+  "submission_sha256": "6f4cbcff07b64eb9b6154ed59e2bcecd8d4a7a04457ebe318983166da5772553"
+}

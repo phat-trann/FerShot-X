@@ -6,7 +6,20 @@ import { RecognitionController, type RecognitionBackendResult } from "../feature
 
 const ports = vi.hoisted(() => ({ languages: vi.fn(), copy: vi.fn() }));
 vi.mock("../platform/recognition", () => ({ discoverRecognitionLanguages: ports.languages, createRecognitionSession: vi.fn() }));
-vi.mock("../platform/native", () => ({ copyRecognizedText: ports.copy }));
+vi.mock("../platform/native", () => ({
+  copyRecognizedText: ports.copy,
+  readRecognitionPreferences: vi.fn().mockResolvedValue({
+    mode: "both",
+    languages: ["en-us"],
+    preserveLineBreaks: true,
+  }),
+  saveRecognitionPreferences: vi.fn().mockResolvedValue({
+    mode: "both",
+    languages: ["en-us"],
+    preserveLineBreaks: true,
+  }),
+  supportsNativeOutput: vi.fn(() => false),
+}));
 interface ViewProps { text: string; busy: boolean; error: string | null; onRecognize: (kind: "text", language: string) => void; onCopy: (text: string) => void; onCancel: () => void }
 vi.mock("../features/recognition-workspace", () => ({ RecognitionWorkspace: (props: ViewProps) => <section>
   <output data-testid="result">{props.text}</output><output data-testid="busy">{String(props.busy)}</output><output data-testid="error">{props.error}</output>

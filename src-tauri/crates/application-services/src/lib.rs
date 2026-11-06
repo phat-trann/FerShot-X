@@ -50,7 +50,7 @@ pub fn is_packaged_app() -> bool {
 /// Queries the current launch-at-login state.
 ///
 /// In unpackaged development environments, returns `supported: false` with `enabled: false`.
-pub fn login_state(app: &tauri::AppHandle) -> Result<LoginState, String> {
+pub fn login_state<R: tauri::Runtime>(app: &tauri::AppHandle<R>) -> Result<LoginState, String> {
     if !is_packaged_app() {
         return Ok(LoginState {
             enabled: false,
@@ -69,7 +69,7 @@ pub fn login_state(app: &tauri::AppHandle) -> Result<LoginState, String> {
 /// Explicitly configures launch-at-login for the application.
 ///
 /// Returns the resulting enabled status, or an error if invoked outside a packaged bundle.
-pub fn set_launch_at_login(app: &tauri::AppHandle, enabled: bool) -> Result<bool, String> {
+pub fn set_launch_at_login<R: tauri::Runtime>(app: &tauri::AppHandle<R>, enabled: bool) -> Result<bool, String> {
     if !is_packaged_app() {
         return Err("Launch at login is only supported for packaged applications.".to_string());
     }
@@ -87,8 +87,8 @@ pub fn set_launch_at_login(app: &tauri::AppHandle, enabled: bool) -> Result<bool
 /// Dispatches a native static system notification upon capture completion.
 ///
 /// Contains static status messages only; never leaks captured pixels, OCR text, or dynamic filenames.
-pub fn notify_capture_completed(
-    app: &tauri::AppHandle,
+pub fn notify_capture_completed<R: tauri::Runtime>(
+    app: &tauri::AppHandle<R>,
     action: CaptureCompletion,
 ) -> Result<(), String> {
     app.notification()

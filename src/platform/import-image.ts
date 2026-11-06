@@ -11,7 +11,14 @@ function imageMime(header: Uint8Array): string | null {
 
 export async function importImage(file: File): Promise<ImageDocument> {
   if (!file.size || file.size > MAX_IMPORTED_BYTES) throw new Error("Choose a nonempty image no larger than 20 MB.");
-  const mimeType = imageMime(new Uint8Array(await file.slice(0, 12).arrayBuffer()));
+  let mimeType = imageMime(new Uint8Array(await file.slice(0, 12).arrayBuffer()));
+  if (!mimeType && ["image/png", "image/jpeg", "image/webp", "image/gif"].includes(file.type)) {
+    mimeType = file.type;
+  }
+  if (!mimeType && /\.(png|jpe?g|webp|gif)$/i.test(file.name)) {
+    const ext = file.name.split(".").pop()!.toLowerCase();
+    mimeType = ext === "jpg" ? "image/jpeg" : `image/${ext}`;
+  }
   if (!mimeType) throw new Error("Choose a PNG, JPEG, WebP or GIF image.");
   const src = URL.createObjectURL(new Blob([file], { type: mimeType }));
   try {

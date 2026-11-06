@@ -1093,6 +1093,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "ferby-application-services"
+version = "0.1.0"
+dependencies = [
+ "serde",
+ "serde_json",
+ "tauri",
+ "tauri-plugin-autostart",
+ "tauri-plugin-notification",
+]
+
+[[package]]
 name = "ferby-capture-core"
 version = "0.1.0"
 dependencies = [
@@ -5609,15 +5620,4 @@ dependencies = [
  "serde",
  "syn 3.0.9",
  "winnow 1.0.5",
-]
-
-[[package]]
-name = "ferby-application-services"
-version = "0.1.0"
-dependencies = [
- "serde",
- "serde_json",
- "tauri",
- "tauri-plugin-autostart",
- "tauri-plugin-notification",
 ]

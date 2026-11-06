@@ -408,7 +408,7 @@ export const LocalOutputPanel: React.FC<LocalOutputPanelProps> = ({
           Print Image…
         </button>
 
-        {nativeDragControls ?? <div
+        <div
           role="button"
           tabIndex={busy || !dragPayload || !onInitiateImageDrag ? -1 : 0}
           draggable={!busy && dragPayload !== null && Boolean(onInitiateImageDrag)}
@@ -429,7 +429,8 @@ export const LocalOutputPanel: React.FC<LocalOutputPanelProps> = ({
           }}
         >
           Drag {dragPayload ? dragPayload.fileName : "Image"}
-        </div>}
+        </div>
+        {nativeDragControls}
       </div>
     </section>
   );

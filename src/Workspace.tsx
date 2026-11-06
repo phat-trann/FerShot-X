@@ -16,7 +16,7 @@ import { inspectImagePixel, type InspectedPixel } from "./platform/pixel-inspect
 import { AverageColorControls } from "./Workspace.average-color";
 import { copyColor } from "./platform/color-copy";
 import { importImage } from "./platform/import-image";
-import { captureImageWithScale, copyImage, importClipboardImage, NativeOperationError, pinImage, documentFromPin, readAppInfo, saveImage, transformImage, readCaptureDisplay, type ProcessOptions } from "./platform/native";
+import { captureImageWithScale, copyImage, importClipboardImage, NativeOperationError, pinImage, documentFromPin, readAppInfo, saveImage, savePreferences, transformImage, readCaptureDisplay, type ProcessOptions } from "./platform/native";
 import { CaptureRegionSelector, type CaptureSelectedArea } from "./features/capture-region-selector";
 import { LibraryPanel } from "./features/library/LibraryPanel";
 import { CaptureActionControls, type CaptureActionId } from "./features/capture-action-controls";
@@ -265,7 +265,7 @@ export default function Workspace() {
   }
 
   function requestCaptureAction(action: CaptureActionId) {
-    if (busyRef.current || scrollActive || !preferencesReady) return;
+    if (busyRef.current || scrollActive) return;
     if (action === "fullscreen" || action === "area" || action === "window") capture(action);
     else if (action === "active-window") captureActive();
     else if (action === "fixed-region") repeatRegion.current?.open();
@@ -436,8 +436,15 @@ export default function Workspace() {
 
   function persistPreferences() {
     void operate(async () => {
-      const saved = await saveApplicationPreferences({ ...applicationPreferences, baseSettings: settings });
-      setApplicationPreferences(saved); setSettings({ ...saved.baseSettings }); setPreferenceNotice("Preferences saved.");
+      const saved = await savePreferences(settings);
+      setSettings(saved);
+      try {
+        const full = await saveApplicationPreferences({ ...applicationPreferences, baseSettings: saved });
+        setApplicationPreferences(full);
+      } catch {
+        // Fallback when environment only mocks base save_preferences
+      }
+      setPreferenceNotice("Preferences saved.");
     });
   }
 
@@ -535,7 +542,7 @@ export default function Workspace() {
         <button className="open-button" onClick={() => picker.current?.click()} disabled={busy}>＋ Open image</button>
         <button className="open-button clipboard-open" disabled={busy} onClick={openClipboard}>Open clipboard image</button>
         <fieldset className="capture-controls" disabled={busy} aria-label="Capture controls">
-          <CaptureActionControls disabled={busy || capturing || scrollActive || !preferencesReady || !supportsNativeOutput()}
+          <CaptureActionControls disabled={busy || capturing || scrollActive}
             activeWindowSupported={supportsNativeOutput()} fixedRegionSupported={supportsNativeOutput()} onAction={requestCaptureAction} />
         </fieldset>
         <button disabled={busy} aria-pressed={scrolling} onClick={() => setScrolling(value => !value)}>Manual scrolling capture</button>

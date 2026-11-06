@@ -71,5 +71,6 @@ pub fn validate_pin_limits(
     if current_bytes.saturating_add(new_bytes) > MAX_PIN_BYTES {
         return Err("Pinned image memory limit exceeded.");
     }
-    Ok}
+    Ok(())
+}
 

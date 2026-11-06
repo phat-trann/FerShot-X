@@ -29,25 +29,25 @@ interface ActionDescriptor {
 const ACTIONS: readonly ActionDescriptor[] = [
   {
     id: "fullscreen",
-    label: "Fullscreen",
+    label: "Capture Fullscreen",
     description: "Capture entire primary display",
     isSupported: () => true,
   },
   {
     id: "area",
-    label: "Area",
+    label: "Capture Area",
     description: "Select a custom rectangular region",
     isSupported: () => true,
   },
   {
     id: "window",
-    label: "Window",
+    label: "Capture Window",
     description: "Select an open application window",
     isSupported: () => true,
   },
   {
     id: "active-window",
-    label: "Active Window",
+    label: "Capture Active Window",
     description: "Capture the currently focused window",
     isSupported: (props) => props.activeWindowSupported,
   },
@@ -65,13 +65,13 @@ const ACTIONS: readonly ActionDescriptor[] = [
   },
   {
     id: "scrolling",
-    label: "Scrolling",
+    label: "Capture Scrolling Area",
     description: "Capture long scrollable content",
     isSupported: () => true,
   },
   {
     id: "ocr",
-    label: "OCR / Text",
+    label: "OCR / Text Recognition",
     description: "Capture screen region for text and QR recognition",
     isSupported: () => true,
   },

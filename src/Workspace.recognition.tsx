@@ -5,7 +5,7 @@ import { RecognitionWorkspace } from "./features/recognition-workspace";
 import { RecognitionProfilePanel } from "./features/recognition-profile-panel";
 import type { QrCodeItem } from "./features/qr-panel";
 import { createRecognitionSession, discoverRecognitionLanguages } from "./platform/recognition";
-import { copyRecognizedText, readRecognitionPreferences, saveRecognitionPreferences, supportsNativeOutput } from "./platform/native";
+import { copyRecognizedText, readRecognitionPreferences, saveRecognitionPreferences } from "./platform/native";
 import { DEFAULT_RECOGNITION_PREFERENCES, type RecognitionPreferences } from "./features/recognition-preferences-codec";
 
 export function WorkspaceRecognition({ image, revision, prepare }: {
@@ -55,7 +55,7 @@ export function WorkspaceRecognition({ image, revision, prepare }: {
   }, [sourceKey]);
 
   async function recognize(kind: RecognitionKind | "both", selectedLanguage?: string) {
-    if (running.current || copying.current || preferenceLock.current || !preferencesReady) return;
+    if (running.current || copying.current || preferenceLock.current) return;
     const token = ++sequence.current;
     const operation = new AbortController(); abort.current = operation;
     running.current = true; setBusy(true); setError(null); setResult(null);
@@ -115,7 +115,7 @@ export function WorkspaceRecognition({ image, revision, prepare }: {
       <RecognitionProfilePanel
         value={profile}
         supportedLanguages={languages}
-        busy={busy || savingPreferences || !preferencesReady}
+        busy={busy || savingPreferences}
         onChange={setProfile}
         onSave={() => {
           void saveProfile();
@@ -145,7 +145,7 @@ export function WorkspaceRecognition({ image, revision, prepare }: {
         preserveLineBreaks={preserve}
         text={visible?.text ?? ""}
         codes={visible?.codes ?? []}
-        busy={busy || savingPreferences || !preferencesReady}
+        busy={busy || savingPreferences}
         error={error}
         onLanguageChange={setLanguage}
         onPreserveLineBreaksChange={setPreserve}

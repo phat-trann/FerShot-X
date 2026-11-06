@@ -14,4 +14,6 @@
     <key>CFBundleURLName</key><string>dev.ferby.shottr.links</string>
     <key>CFBundleURLSchemes</key><array><string>ferby</string></array>
   </dict></array>
+  <key>NSScreenCaptureUsageDescription</key>
+  <string>Ferby Shottr requires screen recording permission to capture your screen, windows, and selected regions.</string>
 </dict></plist>

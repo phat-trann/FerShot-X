@@ -42,19 +42,39 @@ pub fn advance_auto_scroll(token: String, pixels: i32, window: tauri::WebviewWin
     }
     active_window::confirm(target.pid, target.window)?;
     #[cfg(target_os = "macos")] {
-        use core_graphics::{event::{CGEvent, ScrollEventUnit}, event_source::{CGEventSource, CGEventSourceStateID}, geometry::CGPoint};
-        use foreign_types::ForeignType;
+        use core_graphics::geometry::CGPoint;
         #[link(name = "CoreGraphics", kind = "framework")]
         unsafe extern "C" {
             fn CGPreflightPostEventAccess() -> bool;
+            fn CGEventCreateScrollWheelEvent2(
+                source: *mut std::ffi::c_void,
+                units: u32,
+                wheel_count: u32,
+                wheel1: i32,
+                wheel2: i32,
+                wheel3: i32,
+            ) -> *mut std::ffi::c_void;
             fn CGEventSetLocation(event: *mut std::ffi::c_void, point: CGPoint);
+            fn CGEventPostToPid(pid: i32, event: *mut std::ffi::c_void);
+            fn CFRelease(cf: *const std::ffi::c_void);
         }
         if !unsafe { CGPreflightPostEventAccess() } { return Err(error("macOS has not granted permission to send scrolling events. Use manual capture instead.")); }
-        let source = CGEventSource::new(CGEventSourceStateID::HIDSystemState).map_err(|_| error("Scroll event source unavailable."))?;
-        let event = CGEvent::new_scroll_event(source, ScrollEventUnit::PIXEL, 1, pixels, 0, 0).map_err(|_| error("Scroll event creation failed."))?;
-        // The binding lacks this public setter; the C signature is CGEventRef + CGPoint.
-        unsafe { CGEventSetLocation(event.as_ptr().cast(), CGPoint::new(target.x, target.y)); }
-        event.post_to_pid(target.pid as i32);
+        let event = unsafe {
+            CGEventCreateScrollWheelEvent2(
+                std::ptr::null_mut(),
+                0, // kCGScrollEventUnitPixel = 0
+                1,
+                pixels,
+                0,
+                0,
+            )
+        };
+        if event.is_null() { return Err(error("Scroll event creation failed.")); }
+        unsafe {
+            CGEventSetLocation(event, CGPoint::new(target.x, target.y));
+            CGEventPostToPid(target.pid as i32, event);
+            CFRelease(event);
+        }
         Ok(())
     }
     #[cfg(not(target_os = "macos"))] { Err(error("Automatic scrolling requires macOS.")) }

@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "id": "20261106T144754-antigravity-A101-707eac87",
+  "created_at": "2026-11-06T14:47:54.167574+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A101",
+  "completion": "done",
+  "summary": "Full test & build verification: 598 tests passed (469 vitest + 91 cargo + 38 playwright), tsc & vite build succeeded cleanly.",
+  "files": [
+    "docs/agents/antigravity/A101-validation-report.md"
+  ],
+  "file_sha256": {
+    "docs/agents/antigravity/A101-validation-report.md": "3e0042dd77dd0e17e1034e7bb53b3ef92a741e342e72cda81682ca7e7ad30d3b"
+  },
+  "checks": [
+    "469 vitest unit tests passed (100%)",
+    "91 cargo backend tests passed (100%)",
+    "38 playwright e2e tests passed (100%)",
+    "tsc & vite build passed (100%)"
+  ],
+  "risks": [
+    "All automated suites green; native OS manual acceptance matrix remains open."
+  ],
+  "review": "pending"
+}

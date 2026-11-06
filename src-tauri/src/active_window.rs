@@ -17,7 +17,8 @@ mod macos {
     impl Drop for Observer {
         fn drop(&mut self) {
             // This exact token was returned by this center and stays on its owning main thread.
-            unsafe { self.center.removeObserver(self.token.as_ref().as_ref()); }
+            let observer: &objc2::runtime::AnyObject = self.token.as_ref();
+            unsafe { self.center.removeObserver(observer); }
         }
     }
     thread_local! { static OBSERVER: RefCell<Option<Observer>> = const { RefCell::new(None) }; }

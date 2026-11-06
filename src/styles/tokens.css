@@ -1,1 +1,61 @@
-:root { color-scheme: dark; --surface: #20241e; --sidebar: #1b1f19; --border: #33392e; --text: #e9eee3; --muted: #939d87; --accent: #bedc92; }
+:root {
+  color-scheme: dark;
+
+  /* macOS Dark Surfaces & Elevated Layers */
+  --surface: #0e1015;
+  --surface-card: #161820;
+  --surface-elevated: #20232d;
+  --surface-glass: rgba(22, 24, 32, 0.85);
+  --sidebar: #13141a;
+
+  /* Borders & Dividers */
+  --border: rgba(255, 255, 255, 0.08);
+  --border-subtle: rgba(255, 255, 255, 0.04);
+  --border-strong: rgba(255, 255, 255, 0.16);
+  --border-focus: #0a84ff;
+
+  /* High-Contrast Typography */
+  --text: #f5f5f7;
+  --text-secondary: #c7c9d4;
+  --muted: #8c909e;
+  --text-tertiary: #5d6170;
+
+  /* Apple System Blue & Vibrant Accents */
+  --accent: #0a84ff;
+  --accent-hover: #409cff;
+  --accent-subtle: rgba(10, 132, 255, 0.14);
+  --accent-gradient: linear-gradient(135deg, #0a84ff 0%, #5e5ce6 100%);
+  --accent-glow: 0 0 20px rgba(10, 132, 255, 0.35);
+
+  /* Status & Semantics */
+  --danger: #ff453a;
+  --danger-bg: rgba(255, 69, 58, 0.14);
+  --danger-border: rgba(255, 69, 58, 0.3);
+  --success: #30d158;
+  --success-bg: rgba(48, 209, 88, 0.14);
+  --warning: #ffd60a;
+
+  /* Apple Style Elevations */
+  --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.25);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.5);
+  --shadow-window: 0 24px 64px -12px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.1);
+
+  /* Geometric Radii */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 18px;
+
+  /* Component mappings */
+  --ferby-surface-bg: var(--surface-card);
+  --ferby-sidebar-bg: var(--sidebar);
+  --ferby-text-color: var(--text);
+  --ferby-muted-color: var(--muted);
+  --ferby-border-color: var(--border);
+  --ferby-button-bg: #21252f;
+  --ferby-button-border: var(--border);
+  --ferby-button-hover-bg: #2b313e;
+  --ferby-button-active-bg: #1a1e27;
+  --ferby-accent: var(--accent);
+}

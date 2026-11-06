@@ -1,0 +1,12 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "pin-window",
+  "description": "Local pin preview windows; native commands additionally enforce owned pin labels.",
+  "windows": [
+    "pin-*"
+  ],
+  "permissions": [
+    "core:default"
+  ]
+}
+

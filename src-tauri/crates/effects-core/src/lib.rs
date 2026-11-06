@@ -5,7 +5,7 @@
 //! Use `PixelEffect::SolidCover` or `PixelEffect::TransparentErase` to overwrite source pixels completely.
 use image::{
     codecs::png::PngEncoder, imageops, DynamicImage, ExtendedColorType, GenericImage,
-    GenericImageView, ImageEncoder, Rgba, RgbaImage,
+    ImageEncoder, Rgba, RgbaImage,
 };
 use std::fmt;
 

@@ -4,13 +4,10 @@ import { formatShortcutBinding } from "../hotkey-panel/HotkeyPanel";
 import {
   GLOBAL_ACTIONS_V2,
   ACTION_LABELS_V2,
-  emptyGlobalBindingsV2,
   type GlobalActionIdV2,
   type GlobalBindingsV2,
 } from "./types";
 import {
-  bindingsEqual,
-  parseGlobalShortcutsV2Json,
   serializeGlobalShortcutsV2Json,
 } from "./codec";
 import "./GlobalShortcutsV2Panel.css";

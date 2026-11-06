@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "20261106T110638-copilot-P96-defce3cf",
+  "created_at": "2026-11-06T11:06:38.699570+07:00",
+  "agent": "copilot",
+  "request": "COPILOT-20261106-CORRECT",
+  "task": "P96",
+  "completion": "done",
+  "summary": "Extended local-output regression coverage for actual-size selection, explicit callback and disabled print scale control while busy/unavailable",
+  "files": [
+    "src/testing/copilot-local-output-workspace.test.tsx",
+    "docs/qa/copilot-P96.md"
+  ],
+  "file_sha256": {
+    "src/testing/copilot-local-output-workspace.test.tsx": "0942a8218583d83e4ab2fc31467b00c1970b12d6cf2e5a6ba33f752c072373b7",
+    "docs/qa/copilot-P96.md": "860d24ff42b44ab35d380168423145b612a2f10b31724ac215b1d1d2ff310d43"
+  },
+  "checks": [
+    "Node 26 targeted P96 Vitest: 1 file, 6 tests passed"
+  ],
+  "risks": [
+    "UI callback/capability coverage only; no native printing/drag parity; build delegated to Codex"
+  ],
+  "review": "pending"
+}

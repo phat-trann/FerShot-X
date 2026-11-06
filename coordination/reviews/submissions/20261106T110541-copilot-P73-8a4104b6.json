@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "id": "20261106T110541-copilot-P73-8a4104b6",
+  "created_at": "2026-11-06T11:05:41.683886+07:00",
+  "agent": "copilot",
+  "request": "COPILOT-20261106-CORRECT",
+  "task": "P73",
+  "completion": "done",
+  "summary": "Aligned editor-session codec guards with confirmed model requirements for nonblank ids/colors, positive stroke widths and safe positive nonexhausted counters; validated advanced contract annotations through the same boundary",
+  "files": [
+    "src/features/editor-session-codec/codec.ts",
+    "src/features/editor-session-codec/index.ts",
+    "src/features/editor-session-codec/README.md",
+    "docs/qa/copilot-P73.md"
+  ],
+  "file_sha256": {
+    "src/features/editor-session-codec/codec.ts": "a436f6692354028bc02ba6202a438d221f70e1c8cca70db04fc4cdb51922c010",
+    "src/features/editor-session-codec/index.ts": "f676fe90a42e98fd2941ed9afddccb6fcaf3010664efbbf6a4303c840a05b1fe",
+    "src/features/editor-session-codec/README.md": "1a0d925d4314eaec60378430758dfde1ab576fd9b623837f41b01634596f4c3b",
+    "docs/qa/copilot-P73.md": "e35f3fa1513e8e33045bca446e823a216b28f197953770d35b2576673b60598f"
+  },
+  "checks": [
+    "Node 26 P95 targeted Vitest: 1 file, 8 tests passed under separate P95 claim"
+  ],
+  "risks": [
+    "Strict JSON behavior preserved; build delegated to Codex; no root/model/renderer/native edits"
+  ],
+  "review": "pending"
+}

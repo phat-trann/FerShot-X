@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "id": "20261106T134435-antigravity-A77-82b24080",
+  "created_at": "2026-11-06T13:44:35.214824+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A77",
+  "completion": "done",
+  "summary": "F04 app/native integration: Integrated RecognitionProfilePanel into WorkspaceRecognition with full mode, language, line break, and persistence wiring.",
+  "files": [
+    "src/Workspace.recognition.tsx",
+    "coordination/handoffs/antigravity/A77-integration.json",
+    "docs/agents/antigravity/A77.md"
+  ],
+  "file_sha256": {
+    "src/Workspace.recognition.tsx": "2f12293cdec1fdbcc1ec15dc646510e4dfe4188ab0e668cb50be74db3e6b66f6",
+    "coordination/handoffs/antigravity/A77-integration.json": "24b2dca84e79e7d24f032c45fd1195b12a7d49d6f5ea0c2b8332ad1b86ea0e3d",
+    "docs/agents/antigravity/A77.md": "1e5aac323e624b09bbf1ad7fdda37a0c243f1524ae52e68984a80bcf1d5a7ceb"
+  },
+  "checks": [
+    "Tests/builds/setup NOT RUN — deferred by user",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "OCR profile management, language tags, and persistence flow integrated."
+  ],
+  "review": "pending"
+}

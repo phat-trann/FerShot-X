@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "id": "20261106T102609-codex-C12-09ff91a1",
+  "created_at": "2026-11-06T10:26:09.068464+07:00",
+  "agent": "codex",
+  "request": "IMPLEMENT-FIRST-20261106",
+  "task": "C12",
+  "completion": "partial",
+  "summary": "Integrated multi-image placement/stacking/snapping, backdrop and tonal adjustment with edited-raster input, bounded new PNG output and temporary resource cleanup",
+  "files": [
+    "src/Workspace.tsx",
+    "src/Workspace.layout.tsx",
+    "src/platform/layout.ts",
+    "src/platform/auto-adjust.ts",
+    "coordination/build-tasks.json",
+    "docs/agents/codex/C12-layout-auto-adjust.md"
+  ],
+  "file_sha256": {
+    "src/Workspace.tsx": "187f4c50908ee1dcb0f14c1b4fc0e08e2666f7cda55a555bcd375b36a47a2c0c",
+    "src/Workspace.layout.tsx": "9572c20a290f92b053510facba1fb3fd83413bc3a076632810a1e34367dfbc80",
+    "src/platform/layout.ts": "f5f01791ddd3dd8c0050a0537c8a7a7661dede4c9480874dd67417eb736fec7e",
+    "src/platform/auto-adjust.ts": "06b97c7ef76c9e4817a7dbdd5172c722ad88503d7937022e6c7ea95a20ed3dd2",
+    "coordination/build-tasks.json": "7af89a64726f859b148a6b9a1a5989285adda04ce6b927c21332031e24509178",
+    "docs/agents/codex/C12-layout-auto-adjust.md": "2ae5ee6d8389fbc60e2872b0a35ee66db0669b2933d40aba60177167cb6d9724"
+  },
+  "checks": [
+    "Scoped strict TypeScript production compilation passed after final source edits",
+    "No new Rust/dependencies in this slice; C13 locked/offline native compile passed earlier in this request",
+    "Product tests/browser pixels/native acceptance deferred per user implementation-first priority",
+    "Formatting/lint delegated to Copilot H01"
+  ],
+  "risks": [
+    "Unreviewed source integration; window trim, richer backdrop options and functional/native acceptance remain pending; MVP acceptance 61.25 percent unchanged"
+  ],
+  "review": "pending"
+}

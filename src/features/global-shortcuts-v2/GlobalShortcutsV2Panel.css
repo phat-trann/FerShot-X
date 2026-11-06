@@ -1,0 +1,82 @@
+.ferby-shortcuts-v2-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+  background: var(--ferby-surface, #1e1e24);
+  color: var(--ferby-text, #ffffff);
+  border-radius: 8px;
+}
+
+.ferby-shortcuts-v2-panel__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ferby-shortcuts-v2-panel__title {
+  font-size: 15px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.ferby-shortcuts-v2-panel__list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ferby-shortcuts-v2-panel__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 6px;
+  border: 1px solid var(--ferby-border, #334155);
+}
+
+.ferby-shortcuts-v2-panel__label {
+  font-size: 13px;
+}
+
+.ferby-shortcuts-v2-panel__binding-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ferby-shortcuts-v2-panel__btn {
+  padding: 6px 12px;
+  border-radius: 4px;
+  border: 1px solid var(--ferby-border, #334155);
+  background: var(--ferby-button-bg, #27272a);
+  color: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.ferby-shortcuts-v2-panel__btn--recording {
+  border-color: var(--ferby-accent, #38bdf8);
+  background: rgba(56, 189, 248, 0.2);
+  color: var(--ferby-accent, #38bdf8);
+}
+
+.ferby-shortcuts-v2-panel__btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.ferby-shortcuts-v2-panel__error {
+  font-size: 12px;
+  color: var(--ferby-error, #f87171);
+}
+
+.ferby-shortcuts-v2-panel__footer {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  border-top: 1px solid var(--ferby-border, #334155);
+  padding-top: 12px;
+}
+

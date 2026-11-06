@@ -81,6 +81,7 @@ export interface LocalOutputPanelProps {
   }) => void;
   readonly onRequestNativePrint?: (layout: PrintSheetLayout) => void;
   readonly onInitiateImageDrag?: (payload: LocalDragImagePayload) => void;
+  readonly nativeDragControls?: React.ReactNode;
 }
 
 export function computePrintSheetLayout(
@@ -274,6 +275,7 @@ export const LocalOutputPanel: React.FC<LocalOutputPanelProps> = ({
   onOptionsChange,
   onRequestNativePrint,
   onInitiateImageDrag,
+  nativeDragControls,
 }) => {
   let layout: PrintSheetLayout | null = null;
   let dragPayload: LocalDragImagePayload | null = null;
@@ -288,7 +290,7 @@ export const LocalOutputPanel: React.FC<LocalOutputPanelProps> = ({
       marginPt,
       scaleMode,
     });
-    dragPayload = createDragImagePayload(doc);
+    dragPayload = onInitiateImageDrag ? createDragImagePayload(doc) : null;
   } catch (err) {
     errorText = err instanceof Error ? err.message : "Invalid local output state.";
   }
@@ -397,24 +399,24 @@ export const LocalOutputPanel: React.FC<LocalOutputPanelProps> = ({
       <div className="ferby-local-output-panel__actions">
         <button
           type="button"
-          disabled={busy || !layout}
+          disabled={busy || !layout || !onRequestNativePrint}
           onClick={() => {
-            if (!layout || busy) return;
+            if (!layout || busy || !onRequestNativePrint) return;
             onRequestNativePrint?.(Object.freeze({ ...layout }));
           }}
         >
           Print Image…
         </button>
 
-        <div
+        {nativeDragControls ?? <div
           role="button"
-          tabIndex={busy || !dragPayload ? -1 : 0}
-          draggable={!busy && dragPayload !== null}
-          aria-disabled={busy || !dragPayload}
+          tabIndex={busy || !dragPayload || !onInitiateImageDrag ? -1 : 0}
+          draggable={!busy && dragPayload !== null && Boolean(onInitiateImageDrag)}
+          aria-disabled={busy || !dragPayload || !onInitiateImageDrag}
           aria-label="Drag image payload"
           className="ferby-local-output-panel__drag-chip"
           onDragStart={(e) => {
-            if (!dragPayload || busy) {
+            if (!dragPayload || busy || !onInitiateImageDrag) {
               e.preventDefault();
               return;
             }
@@ -422,12 +424,12 @@ export const LocalOutputPanel: React.FC<LocalOutputPanelProps> = ({
             onInitiateImageDrag?.(Object.freeze({ ...dragPayload }));
           }}
           onClick={() => {
-            if (!dragPayload || busy) return;
+            if (!dragPayload || busy || !onInitiateImageDrag) return;
             onInitiateImageDrag?.(Object.freeze({ ...dragPayload }));
           }}
         >
           Drag {dragPayload ? dragPayload.fileName : "Image"}
-        </div>
+        </div>}
       </div>
     </section>
   );

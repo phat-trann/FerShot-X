@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "id": "20261106T103635-copilot-P79-bcba980e",
+  "created_at": "2026-11-06T10:36:35.812782+07:00",
+  "agent": "copilot",
+  "request": "P79",
+  "task": "P79",
+  "completion": "done",
+  "summary": "Corrected app preference sidecar validation per review: baseSettings.jpegQuality now requires a finite integer in the frozen 1..100 range, rejecting zero and fractional values without coercion. No other schema behavior changed.",
+  "files": [
+    "src/features/app-preferences-codec/codec.ts"
+  ],
+  "file_sha256": {
+    "src/features/app-preferences-codec/codec.ts": "e104fbc4aef56d3957e721bae125a8e0f311a11ae11fc7b68e51eeb514f61479"
+  },
+  "checks": [
+    "Node 26 npx tsc --noEmit --pretty false: P79 correction produced no diagnostics; command is blocked only by pre-existing unused DEFAULT_SETTINGS in PreferencesWorkspace.tsx."
+  ],
+  "risks": [
+    "No tests added per task acceptance; build/integration remains Codex-owned."
+  ],
+  "review": "pending"
+}

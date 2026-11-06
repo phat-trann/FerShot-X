@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "id": "20261106T122712-codex-P71-23d7850f",
+  "created_at": "2026-11-06T12:27:12.617014+07:00",
+  "agent": "codex",
+  "request": "NATIVE-DRAG-20261106",
+  "task": "P71",
+  "completion": "done",
+  "summary": "Pass optional native drag controls through LocalOutputWorkspace and remove contradictory unavailable status when native controls are supplied.",
+  "files": [
+    "src/features/local-output-workspace/LocalOutputWorkspace.tsx",
+    "docs/agents/codex/C15-native-drag.md"
+  ],
+  "file_sha256": {
+    "src/features/local-output-workspace/LocalOutputWorkspace.tsx": "c2b1c17e34f45127285ed6ad88808ec4e201b3fc3ec0a401bf49c9b4193f57b1",
+    "docs/agents/codex/C15-native-drag.md": "fc4f6b57d86a68fb452f257678a9bad564ae5ccf5498ab68b8762270b17ae7b8"
+  },
+  "checks": [
+    "TypeScript no-emit passed. Tests NOT RUN — deferred by user.",
+    "Formatting/lint delegated to Copilot H01."
+  ],
+  "risks": [
+    "Codex takeover under free producer claim; historical authorship preserved. USER_WAIVED_REVIEW; later overall review required."
+  ],
+  "review": "pending"
+}

@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "id": "20261106T103839-copilot-P86-42bb1704",
+  "created_at": "2026-11-06T10:38:39.036252+07:00",
+  "agent": "copilot",
+  "request": "P86",
+  "task": "P86",
+  "completion": "done",
+  "summary": "Added output-preferences regressions with mocked transform boundary: null/unity/disabled scaling preserves the original document, Retina scaling preserves id/name while using transformed dimensions, and resized object URLs are revoked after both successful and failed consumers.",
+  "files": [
+    "src/testing/copilot-output-preferences.test.ts"
+  ],
+  "file_sha256": {
+    "src/testing/copilot-output-preferences.test.ts": "76465ef27ae27e583b39325abfdb3f7b35ad9ad712b02633272a38ff48035600"
+  },
+  "checks": [
+    "Node 26 vitest run src/testing/copilot-output-preferences.test.ts: 1 file passed, 3 tests passed."
+  ],
+  "risks": [
+    "No clipboard/save or native transform execution; only injected boundary behavior is tested."
+  ],
+  "review": "pending"
+}

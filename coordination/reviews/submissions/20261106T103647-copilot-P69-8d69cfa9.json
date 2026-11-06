@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "id": "20261106T103647-copilot-P69-8d69cfa9",
+  "created_at": "2026-11-06T10:36:47.730431+07:00",
+  "agent": "copilot",
+  "request": "P69",
+  "task": "P69",
+  "completion": "done",
+  "summary": "Refreshed the existing independent stitch-backend-adapter regression snapshot. Public API still rejects malformed frame/output RGBA and aggregate budgets before transport, and releases late output leases after cancellation.",
+  "files": [
+    "src/testing/copilot-stitch-backend-adapter.test.ts"
+  ],
+  "file_sha256": {
+    "src/testing/copilot-stitch-backend-adapter.test.ts": "783d80028b69132ab3ad4449691b8343217a5c86748cf35178de92f82ddb34e5"
+  },
+  "checks": [
+    "Node 26 vitest run src/testing/copilot-stitch-backend-adapter.test.ts: 1 file passed, 4 tests passed."
+  ],
+  "risks": [
+    "No producer changes; native scrolling, capture permissions and IPC remain outside this test."
+  ],
+  "review": "pending"
+}

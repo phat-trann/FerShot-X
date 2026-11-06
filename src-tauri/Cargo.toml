@@ -18,21 +18,36 @@ crate-type = ["staticlib", "cdylib", "rlib"]
 tauri-build = { version = "2", features = [] }
 
 [dependencies]
-tauri = { version = "2", features = [] }
+tauri = { version = "2", features = ["tray-icon"] }
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 base64 = "0.22"
 ferby-capture-core = { path = "crates/capture-core" }
 ferby-image-core = { path = "crates/image-core" }
 ferby-settings-core = { path = "crates/settings-core" }
+ferby-application-services = { path = "crates/application-services" }
 ferby-clipboard-import-core = { path = "crates/clipboard-import-core" }
 ferby-vision-core = { path = "crates/vision-core" }
+ferby-scroll-core = { path = "crates/scroll-core" }
+ferby-effects-pipeline = { path = "crates/effects-pipeline" }
+image = { version = "=0.25.10", default-features = false, features = ["png", "jpeg"] }
 tauri-plugin-dialog = "2"
+tauri-plugin-autostart = "=2.7.0"
+tauri-plugin-notification = "=2.8.0"
+tauri-plugin-global-shortcut = "=2.4.1"
 
 [dev-dependencies]
 tempfile = "=3.27.0"
 
 [target.'cfg(target_os = "macos")'.dependencies]
+block2 = "=0.6.2"
+foreign-types = "=0.5.0"
+core-foundation = "=0.10.1"
+core-graphics = { version = "=0.24.0", features = ["elcapitan"] }
+objc2 = "=0.6.5"
+objc2-app-kit = { version = "=0.3.2", default-features = false, features = ["NSWorkspace", "NSRunningApplication", "block2"] }
+objc2-foundation = { version = "=0.3.2", default-features = false, features = ["NSNotification", "NSOperation", "NSString", "block2"] }
+drag = "=2.1.1"
 arboard = { version = "3.7", default-features = false, features = ["image-data"] }
 
 # Read the optimization guideline for more details: https://tauri.app/concept/size/#cargo-configuration

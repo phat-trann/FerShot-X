@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "id": "20261106T133538-antigravity-A69-1d02a34d",
+  "created_at": "2026-11-06T13:35:38.009712+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A69",
+  "completion": "done",
+  "summary": "F22 complete production: Reconciled preview-window-core crate, CapturePreviewController floating card UI, auto-dismiss timing, and capture workflow integration.",
+  "files": [
+    "src/features/capture-preview/CapturePreviewController.tsx",
+    "src/features/capture-preview/index.ts",
+    "src/features/capture-workflow/CaptureWorkflowController.tsx",
+    "src/features/capture-workflow/index.ts",
+    "src-tauri/crates/preview-window-core/Cargo.toml",
+    "src-tauri/crates/preview-window-core/src/lib.rs",
+    "src-tauri/crates/preview-window-core/README.md",
+    "docs/agents/antigravity/A69.md"
+  ],
+  "file_sha256": {
+    "src/features/capture-preview/CapturePreviewController.tsx": "23595aa6261f30470d3a7f120670a3fa4bdb74bc730fb45149e7f9d456477451",
+    "src/features/capture-preview/index.ts": "57b1777fe82351ecc08c956eacdb9eab9846991df8c65acc27876423537ffeb8",
+    "src/features/capture-workflow/CaptureWorkflowController.tsx": "2f20318cbb4ff2f2397b958af7203d0e36c0564db84505f15af0fead404ec459",
+    "src/features/capture-workflow/index.ts": "94806968e543047cb74f9ae28ba757aac98dffbde1afc1f4a8e9562d2c0e2c23",
+    "src-tauri/crates/preview-window-core/Cargo.toml": "d7852ff33e77a47dadefc99fbfae983abad4938e999fd3121961191e3a4cf268",
+    "src-tauri/crates/preview-window-core/src/lib.rs": "2afe067c635bb165ecd00c304616d29583e070537c462edcdc93b908cb7d8f77",
+    "src-tauri/crates/preview-window-core/README.md": "526b9d27721e041df6f637447930639cf43333b515d4f7794f4c469ef403681e",
+    "docs/agents/antigravity/A69.md": "9f352ff9979a4df13526c99963ee7b39ac629eb5d565034937f1363e766cbf0a"
+  },
+  "checks": [
+    "Tests/builds/setup NOT RUN — deferred by user",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Preview window placement, auto-dismiss timing, and thumbnail action triggers logic complete."
+  ],
+  "review": "pending"
+}

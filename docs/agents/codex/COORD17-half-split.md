@@ -1,0 +1,3 @@
+# Equal source workstream split
+
+Created TWO-HALVES.md with five producer/consumer pairs and exact queue boundaries. External Anti owns A46–A50, Codex owns native consumers/final root assembly. Completed A43–A45 are preserved and ready for source review/integration. User explicitly requests source only; no tests, typechecks, builds or setup run. No client launched/impersonated. Native C29 is continued from this session after interruption; its incomplete state is preserved while A46 produces its standalone API. Formatting/lint delegated to Copilot H01. MVP acceptance remains68.75%; no new acceptance claimed.

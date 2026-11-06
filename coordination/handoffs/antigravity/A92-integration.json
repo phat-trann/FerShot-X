@@ -1,0 +1,17 @@
+{
+  "task": "A92",
+  "feature_id": "F20",
+  "feature_name": "Native pin image behavior",
+  "status": "integrated",
+  "verified_sources": [
+    "src/Workspace.tsx",
+    "src/platform/native.ts",
+    "src-tauri/src/pins.rs",
+    "src-tauri/crates/pin-window-core/src/lib.rs",
+    "src/features/pin/PinPreviewCard.tsx",
+    "src/features/pin-values/index.ts"
+  ],
+  "wiring_details": "Tauri native pin window creation (open_pin) is wired in Workspace.tsx via pinImage, with two-way ferby-pin-edit event restoration, toolbar action, preview card onPin action, and ferby-pin-window-core bounds calculation.",
+  "validation_status": "Tests/builds/setup NOT RUN — deferred by user. Standalone build delegated to Codex. Formatting/lint delegated to Copilot H01."
+}
+

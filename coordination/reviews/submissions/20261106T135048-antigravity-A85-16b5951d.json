@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "id": "20261106T135048-antigravity-A85-16b5951d",
+  "created_at": "2026-11-06T13:50:48.920574+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A85",
+  "completion": "done",
+  "summary": "F13 app/native integration: Verified undo/redo history in workbenches and mergeAnnotations flattening in Workspace.tsx.",
+  "files": [
+    "src/Workspace.tsx",
+    "src/Workspace.editor.tsx",
+    "coordination/handoffs/antigravity/A85-integration.json",
+    "docs/agents/antigravity/A85.md"
+  ],
+  "file_sha256": {
+    "src/Workspace.tsx": "e2879fca74d6b07987cb81c8433ddb4a76d8507c4eb220d6055e82a3db91c13a",
+    "src/Workspace.editor.tsx": "474e914535ebd743a62c179cb8d608097a86ba725743ec487cf23e3b03244790",
+    "coordination/handoffs/antigravity/A85-integration.json": "871bd82afca5a9d49ea7845d8962b7cd95db214037a7ea3f5178e3951ed7d262",
+    "docs/agents/antigravity/A85.md": "f12d891496c208d83a6fe2651e89ecc32f8f37ea96f64fcca6b4965503c76448"
+  },
+  "checks": [
+    "Tests/builds/setup NOT RUN — deferred by user",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Undo, redo, and merge annotations app wiring verified."
+  ],
+  "review": "pending"
+}

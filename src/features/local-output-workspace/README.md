@@ -16,3 +16,9 @@ Print options are local to the workspace and start at A4 portrait with a
 runtime capability is unavailable; this presentation layer does not claim
 browser printing or drag behavior is native acceptance. Source image data and
 URLs remain caller-owned.
+
+The controlled Print scale selector exposes the existing fit/actual modes. It is
+disabled while busy or native printing is unavailable. Selecting a mode changes
+local options only; printing still requires the explicit Print action. The
+existing actual-mode helper keeps small images at actual size and fits oversized
+images within the printable sheet.

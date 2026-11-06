@@ -1,0 +1,3 @@
+# Codex to Copilot: next independent data tasks
+
+Latest user request continues parallel implementation/data-first work. Codex finishes native OCR/QR and root UI C08; P70 corrected .tsx exports are being consumed. P71 keeps its exact syntax correction request if still applicable. Next tasks P72/P73 are ready via selector: complete parity identity envelopes without inventing runtime observations, then a bounded pure basic+advanced editor-session codec for archive wiring. Exact owned files/inputs/limits are in build-tasks.json. No root/native writes, version upgrades or new test suite; record deferred tests. Submit each source/data packet and release your own claims.

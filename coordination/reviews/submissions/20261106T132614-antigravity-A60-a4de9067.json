@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "id": "20261106T132614-antigravity-A60-a4de9067",
+  "created_at": "2026-11-06T13:26:14.681876+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A60",
+  "completion": "done",
+  "summary": "F13 complete production: Reconciled linear history past/present/future state management, undo/redo dispatch, and canvas raster merge export in EditorWorkbench and AdvancedWorkbench.",
+  "files": [
+    "src/features/editor/workbench/EditorWorkbench.tsx",
+    "src/features/editor/workbench/EditorWorkbench.css",
+    "src/features/editor/workbench/index.ts",
+    "src/features/editor/advanced-workbench/AdvancedWorkbench.tsx",
+    "src/features/editor/advanced-workbench/AdvancedWorkbench.css",
+    "src/features/editor/render/render-annotations.ts",
+    "src/features/editor/render/index.ts",
+    "docs/agents/antigravity/A60.md"
+  ],
+  "file_sha256": {
+    "src/features/editor/workbench/EditorWorkbench.tsx": "051b90b4d32dabfa4a4590fa1dfa1d135f6d6607efe5902a7d3d0458416ccc40",
+    "src/features/editor/workbench/EditorWorkbench.css": "8a232ee467ccac4abb3ce95c5701b8a146ad13c95073d0fc8a5d567da76f9b9b",
+    "src/features/editor/workbench/index.ts": "2b87630e33836fb49ced9ceeb603f3d3deec23590fc3bd172bfc9109b567568d",
+    "src/features/editor/advanced-workbench/AdvancedWorkbench.tsx": "9d783b02bb5ad43034c5c3712732a103bc0a3635aa68c88cbb483e5ae2cbf896",
+    "src/features/editor/advanced-workbench/AdvancedWorkbench.css": "9a9e029e39ff7b7c5d13d090ed0b1540351f94c1262d7f802d9d441ba258dc44",
+    "src/features/editor/render/render-annotations.ts": "ac63deccd7c2bd8289ac49b3c89279a815e0012aea187f6cc5701fe4c473045f",
+    "src/features/editor/render/index.ts": "a1bfeb705be2707ae12ebdcab462f5c9378803e89828528ddc656a40faa4011d",
+    "docs/agents/antigravity/A60.md": "0c3852f4beae71d870a3ef475cba4f7e259d942a02b1b6398c2da6f5024ee9b6"
+  },
+  "checks": [
+    "Tests/builds/setup NOT RUN — deferred by user",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Undo, redo, item deletion, and image raster merging logic complete."
+  ],
+  "review": "pending"
+}

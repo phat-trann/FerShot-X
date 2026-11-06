@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "id": "20261106T101910-copilot-P79-472bb7d7",
+  "created_at": "2026-11-06T10:19:10.953018+07:00",
+  "agent": "copilot",
+  "request": "P79",
+  "task": "P79",
+  "completion": "done",
+  "summary": "Added strict version-1 app preference sidecar codec for all FerbyAppPreferences fields, including nested legacy AppSettings. Validates exact fields, enum strings, booleans, zoom and JPEG ranges, rejects unknown schemas/fields, enforces 16,384-byte UTF-8 limit, and returns immutable owned values. Added exports and README documenting Ferby defaults and persistence seam.",
+  "files": [
+    "src/features/app-preferences-codec/codec.ts",
+    "src/features/app-preferences-codec/index.ts",
+    "src/features/app-preferences-codec/README.md"
+  ],
+  "file_sha256": {
+    "src/features/app-preferences-codec/codec.ts": "f16ac6a98f6a80cbc748a5919a733cd78eaeb7a098d19b2e5b7e4fef2c87875a",
+    "src/features/app-preferences-codec/index.ts": "ce92939373f63f5511ba5ddae0ae136e41626cc1abdd5ebe225fe00a26791d34",
+    "src/features/app-preferences-codec/README.md": "0cc6ecc69f271ace964029d09ad56222b4275bd7998653b3c9572ecf6433ed25"
+  },
+  "checks": [
+    "Node 26 npx tsc --noEmit --pretty false: P79 files produced no diagnostics; command is blocked by pre-existing PreferencesWorkspace errors."
+  ],
+  "risks": [
+    "No tests added per task acceptance; build/integration remains Codex-owned."
+  ],
+  "review": "pending"
+}

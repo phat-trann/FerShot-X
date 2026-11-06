@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "id": "20261106T135944-antigravity-A95-646a95fe",
+  "created_at": "2026-11-06T13:59:44.253226+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A95",
+  "completion": "done",
+  "summary": "F23 app/native integration: Verified finishCapture post-capture routing (copy-only, save-only, preview, editor) in Workspace.tsx.",
+  "files": [
+    "src/Workspace.tsx",
+    "coordination/handoffs/antigravity/A95-integration.json",
+    "docs/agents/antigravity/A95.md"
+  ],
+  "file_sha256": {
+    "src/Workspace.tsx": "e2879fca74d6b07987cb81c8433ddb4a76d8507c4eb220d6055e82a3db91c13a",
+    "coordination/handoffs/antigravity/A95-integration.json": "9bb32ee86ce3af144b0ea50062d6628a74ce6385b64d5c57cbfdef3006f14f55",
+    "docs/agents/antigravity/A95.md": "84237dc6b7e14dc3c1a0be5d0769f63b9edd24ba35f28ecd27fdaf27f928bf30"
+  },
+  "checks": [
+    "Tests/builds/setup NOT RUN — deferred by user",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Post-capture Show, Copy, and Save execution pipelines app wiring verified."
+  ],
+  "review": "pending"
+}

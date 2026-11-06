@@ -42,9 +42,7 @@ describe("PreferencesWorkspace independent regressions", () => {
   });
 
   it("emits the edited snapshot through the controlled save callback", async () => {
-    const onSave: NonNullable<PreferencesWorkspaceProps["onSave"]> = vi.fn(
-      async (_snapshot) => undefined,
-    );
+    const onSave = vi.fn<NonNullable<PreferencesWorkspaceProps["onSave"]>>();
     render(
       <PreferencesWorkspace
         initialSnapshot={DEFAULT_PREFERENCES_WORKSPACE_SNAPSHOT}

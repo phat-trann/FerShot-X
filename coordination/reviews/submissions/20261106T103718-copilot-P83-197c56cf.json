@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "id": "20261106T103718-copilot-P83-197c56cf",
+  "created_at": "2026-11-06T10:37:18.093920+07:00",
+  "agent": "copilot",
+  "request": "P83",
+  "task": "P83",
+  "completion": "done",
+  "summary": "Added jsdom/RTL lifecycle regressions with mocked native boundaries: close confirmation and cancel, duplicate confirmation suppression, busy close suppression, failed-close retry, stale revision invalidation, and explicit on-top invocation with error reporting.",
+  "files": [
+    "src/testing/copilot-workspace-lifecycle.test.tsx"
+  ],
+  "file_sha256": {
+    "src/testing/copilot-workspace-lifecycle.test.tsx": "11ec2e2c1e611fe9651942c436a795fee5be016f004b45c713882db1bf067091"
+  },
+  "checks": [
+    "Node 26 vitest run src/testing/copilot-workspace-lifecycle.test.tsx: 1 file passed, 4 tests passed."
+  ],
+  "risks": [
+    "Synthetic mocked platform only; no real window or native parity claim."
+  ],
+  "review": "pending"
+}

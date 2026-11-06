@@ -1,0 +1,71 @@
+{
+  "scope": "Implementation-first source/bundle checkpoint; not final acceptance or P57 candidate",
+  "acceptance_before": 68.75,
+  "acceptance_after": 68.75,
+  "tests": "NOT RUN \u2014 deferred by user",
+  "review_state": "USER_WAIVED_REVIEW; later overall review required",
+  "checks": [
+    "TypeScript no-emit passed",
+    "locked offline Rust library compilation passed",
+    "configured tsc/Vite build passed",
+    "unsigned debug macOS app bundle passed",
+    "12 additive locked packages; no pre-existing package removed/upgraded"
+  ],
+  "bundle": "src-tauri/target/debug/bundle/macos/Ferby Shottr.app",
+  "executable_sha256": "2ea76552feb45471d1562928f2c84ccdbc752085070edb8c074f1052715ddeb4",
+  "metadata": {
+    "CFBundleShortVersionString": "0.1.0",
+    "LSMinimumSystemVersion": "12.0",
+    "CFBundleURLTypes": [
+      {
+        "CFBundleTypeRole": "Viewer",
+        "CFBundleURLName": "dev.ferby.shottr.links",
+        "CFBundleURLSchemes": [
+          "ferby"
+        ]
+      }
+    ]
+  },
+  "remaining_source_work": [
+    "C29 native notifications and launch at login",
+    "C26 explicit active-window capture",
+    "C27/A43 recognition preference persistence",
+    "C28 native document-open integration"
+  ],
+  "limitations": [
+    "No test suite executed",
+    "No real capture, drag, clipboard, print, shortcut, URL or tray action executed",
+    "Original behavior remains UNKNOWN where only static declarations exist",
+    "Actual native and final acceptance remain open"
+  ],
+  "snapshots": {
+    "src-tauri/Cargo.toml": "3de079c83506055cfa2d4c3ce53ad4f1c33ac96d44431e590e93a29b4e2006a3",
+    "src-tauri/Cargo.lock": "39bc56dfa90d7e31716ce24cf4f59c26c97bd2d8e8dfbbb2abe718eedf3844e2",
+    "src-tauri/Info.plist": "640e8c4ae53d796b518b02967508131c2c80a0fd3d7a1aaeaa2b1678b5a46173",
+    "src-tauri/src/application_preferences.rs": "f0d4533ff3b085da7a257e921ab96847e9b1533a18b214a7d463fc09ddd0351e",
+    "src-tauri/src/preferences.rs": "8915a159a1c529db7b9d6528f4fb838cb911d397c5840986e3eeae88fe38d195",
+    "src-tauri/src/lib.rs": "113fa1b18e33bccbf328f7cc33850d652d02310e79aa3ed3b3ae0af4e540e7ca",
+    "src-tauri/src/shortcuts.rs": "fc33999aa62e123aa39bcccfe53b5f66e33618baa1716be4759c65a8c48a2d4d",
+    "src-tauri/src/deep_links.rs": "5244995d4ed19c3df97290e861a74f9865d2c3c9b9c9823b0db1a0b2cc117e5e",
+    "src-tauri/src/dragging.rs": "3ae2a9b83a3fd99ba0048920891c11f25a81f9633f9d519fb7f8bd8e1f453b9e",
+    "src-tauri/src/desktop_menu.rs": "2cb8484213079ef2da0077fc719d625a74edd1ecd51ee7b0247ee3d8b6477383",
+    "src-tauri/src/menu_bar.rs": "a913b8b57a5e2af7d0562567a16752843bc5d8c13f5deb291e36089acbcab95d",
+    "src-tauri/src/lifecycle.rs": "ece393ae9caab720709ae41f455342e771094577c5aed324ef5c6d2cce15ba09",
+    "src-tauri/src/imaging.rs": "28c3e6e15931e686fd2a60be73ddf49f92a918db000f223014e46759809d9573",
+    "src-tauri/src/scrolling.rs": "e33033d58fb548d13a4a01c750d48d631acf5b6397ac446e75eae35d3dd5340f",
+    "src/platform/native.ts": "53c98fa0ae6b88fce2d583404469b21a7eb437184cc1deed417e37b6c9478222",
+    "src/platform/shortcuts.ts": "3845bc18aa59d5eed2e36f45159ce558a3b3071b276cd506777c75fc7eac7047",
+    "src/platform/pixel-inspection.ts": "471bf9d00cbb71b50037e66873b4d7278a2162b204fa527913e020bb0ff5b833",
+    "src/Workspace.tsx": "4b6496479eacc9f8fa960af56a101679a5939e1496709b03b04619e89eaa51a4",
+    "src/Workspace.application-preferences.tsx": "ce83b6d8b5e7bc090beb8cc8663d7e5bbabecebd4302a47bd390fa2237771fd7",
+    "src/Workspace.lifecycle.tsx": "90c601a2980011870b984fdc8a7584f2077c1317c77d701b58208995a2168125",
+    "src/Workspace.average-color.tsx": "abf620debeafc33f76ecff10d58c738f076f635d442894100b41bcc0d4ddad4a",
+    "src/Workspace.deep-links.tsx": "c312adedb54a3831435e8bbec48484ef9da4daf095f108fee2f0e3f09c24a287",
+    "src/Workspace.drag.tsx": "9b24ade2e02b0742a1eb7566b1a862325e2592992430adff10c9bc2041a60895",
+    "src/Workspace.repeat-region.tsx": "847e43bccae47446553905663a9da37889e39e5812e40d93003fd002fa98669e",
+    "src/Workspace.shortcuts.tsx": "3d746493af503ffa6268601241320f19d975fd06582dfab012683cd7cd8b8256",
+    "src/features/capture-session/index.ts": "36f1e79fc2c171387db07e33dd7a68acbe09dae413b71175f3184fb28ace948b",
+    "src/features/local-output/local-output.tsx": "421d066bb03cbbbb460d605ecbca39ddaf5b6a9e5edc88595c78cc80418e06b0",
+    "src/features/local-output-workspace/LocalOutputWorkspace.tsx": "c2b1c17e34f45127285ed6ad88808ec4e201b3fc3ec0a401bf49c9b4193f57b1"
+  }
+}

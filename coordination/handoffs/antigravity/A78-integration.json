@@ -1,0 +1,18 @@
+{
+  "task": "A78",
+  "feature_id": "F06",
+  "feature_name": "Arrow / line / rectangle / ellipse / freehand",
+  "status": "integrated",
+  "verified_sources": [
+    "src/Workspace.tsx",
+    "src/Workspace.editor.tsx",
+    "src/features/shapes/shapes.tsx",
+    "src/features/shapes/index.ts",
+    "src/features/editor/workbench/EditorWorkbench.tsx",
+    "src/features/editor/advanced-workbench/AdvancedWorkbench.tsx",
+    "src/platform/annotations.ts"
+  ],
+  "wiring_details": "Vector arrow, plain line, rectangle, ellipse, and pen freehand annotations are wired through WorkspaceEditor, with dual EditorWorkbench and AdvancedWorkbench modes connected to annotationsById and advancedById state, session encoding, and raster rendering.",
+  "validation_status": "Tests/builds/setup NOT RUN — deferred by user. Standalone build delegated to Codex. Formatting/lint delegated to Copilot H01."
+}
+

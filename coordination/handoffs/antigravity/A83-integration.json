@@ -1,0 +1,18 @@
+{
+  "task": "A83",
+  "feature_id": "F11",
+  "feature_name": "Crop / selection / return to original",
+  "status": "integrated",
+  "verified_sources": [
+    "src/Workspace.tsx",
+    "src/Workspace.tools.tsx",
+    "src/features/selection-handles/SelectionHandlesOverlay.tsx",
+    "src/features/selection-handles/SelectionHandlesOverlay.css",
+    "src/features/selection-handles/index.ts",
+    "src/features/source-restore-controls/SourceRestoreControls.tsx",
+    "src/features/editor/advanced-workbench/AdvancedWorkbench.tsx"
+  ],
+  "wiring_details": "Cropping via TransformTools creates non-destructive derived documents linked to originalById, with 'Return to source image' restoration wired in Workspace.tsx. Interactive 8-point selection handles are wired in AdvancedWorkbench.",
+  "validation_status": "Tests/builds/setup NOT RUN — deferred by user. Standalone build delegated to Codex. Formatting/lint delegated to Copilot H01."
+}
+

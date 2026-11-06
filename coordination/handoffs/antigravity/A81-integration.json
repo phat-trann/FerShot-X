@@ -1,0 +1,18 @@
+{
+  "task": "A81",
+  "feature_id": "F09",
+  "feature_name": "Blur / conceal / erase",
+  "status": "integrated",
+  "verified_sources": [
+    "src/Workspace.tsx",
+    "src/features/effects-panel/EffectsPanel.tsx",
+    "src/features/effects-panel/EffectsPanel.css",
+    "src/features/effects-panel/index.ts",
+    "src/platform/native.ts",
+    "src-tauri/crates/effects-core/src/lib.rs",
+    "src-tauri/src/effects.rs"
+  ],
+  "wiring_details": "EffectsPanel is embedded directly in Workspace.tsx with button toggling and applyEffect callback, routing to applyImageEffect in src/platform/native.ts and effects-core in Rust to generate non-destructive derived documents.",
+  "validation_status": "Tests/builds/setup NOT RUN — deferred by user. Standalone build delegated to Codex. Formatting/lint delegated to Copilot H01."
+}
+

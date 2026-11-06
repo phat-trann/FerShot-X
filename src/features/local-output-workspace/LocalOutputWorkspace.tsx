@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import type { ImageDocument } from "../../contracts/media";
+import "./LocalOutputWorkspace.css";
 import {
   LocalOutputPanel,
   type LocalDragImagePayload,
@@ -18,6 +19,7 @@ export interface LocalOutputWorkspaceProps {
   readonly onSave: () => void;
   readonly onPrint: (options: PrintSheetOptions) => void;
   readonly onDrag: (payload: LocalDragImagePayload) => void;
+  readonly nativeDragControls?: React.ReactNode;
 }
 
 export function LocalOutputWorkspace({
@@ -29,6 +31,7 @@ export function LocalOutputWorkspace({
   onSave,
   onPrint,
   onDrag,
+  nativeDragControls,
 }: LocalOutputWorkspaceProps): React.JSX.Element {
   const [paper, setPaper] = useState<PrintPaperPreset>("a4");
   const [orientation, setOrientation] =
@@ -58,6 +61,22 @@ export function LocalOutputWorkspace({
           Save Image
         </button>
       </div>
+      <label>
+        Print scale
+        <select
+          aria-label="Print scale"
+          value={scaleMode}
+          disabled={busy || !canPrint}
+          onChange={(event) => {
+            if (busy || !canPrint) return;
+            const next = event.target.value;
+            if (next === "fit" || next === "actual") setScaleMode(next);
+          }}
+        >
+          <option value="fit">Fit to sheet</option>
+          <option value="actual">Actual size (fit oversized image)</option>
+        </select>
+      </label>
       <LocalOutputPanel
         document={image}
         paper={paper}
@@ -75,13 +94,14 @@ export function LocalOutputWorkspace({
           canPrint ? () => onPrint(printOptions) : undefined
         }
         onInitiateImageDrag={canDrag ? onDrag : undefined}
+        nativeDragControls={nativeDragControls}
       />
       {!canPrint && (
         <p role="status">
           Native printing is unavailable in the current runtime.
         </p>
       )}
-      {!canDrag && (
+      {!canDrag && !nativeDragControls && (
         <p role="status">
           Drag-out is unavailable in the current runtime.
         </p>

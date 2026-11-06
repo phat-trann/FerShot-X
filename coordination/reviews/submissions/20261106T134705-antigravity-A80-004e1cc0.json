@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "id": "20261106T134705-antigravity-A80-004e1cc0",
+  "created_at": "2026-11-06T13:47:05.031255+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A80",
+  "completion": "done",
+  "summary": "F08 app/native integration: Verified highlight, spotlight, and magnifier emphasis effects wired in AdvancedWorkbench and Workspace.editor.tsx.",
+  "files": [
+    "src/features/editor/advanced-workbench/AdvancedWorkbench.tsx",
+    "src/Workspace.editor.tsx",
+    "src/Workspace.tsx",
+    "coordination/handoffs/antigravity/A80-integration.json",
+    "docs/agents/antigravity/A80.md"
+  ],
+  "file_sha256": {
+    "src/features/editor/advanced-workbench/AdvancedWorkbench.tsx": "9d783b02bb5ad43034c5c3712732a103bc0a3635aa68c88cbb483e5ae2cbf896",
+    "src/Workspace.editor.tsx": "474e914535ebd743a62c179cb8d608097a86ba725743ec487cf23e3b03244790",
+    "src/Workspace.tsx": "e2879fca74d6b07987cb81c8433ddb4a76d8507c4eb220d6055e82a3db91c13a",
+    "coordination/handoffs/antigravity/A80-integration.json": "0611caa899f3074688805bb41be1b9f17aef7bfb96ead05c4db84dfdb1a4f5f9",
+    "docs/agents/antigravity/A80.md": "473b1cf45d4e49880a38bdf50186d9b2a67c0f2778540eefd4de4e5af5c255f8"
+  },
+  "checks": [
+    "Tests/builds/setup NOT RUN — deferred by user",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Emphasis layers and canvas composition app wiring verified."
+  ],
+  "review": "pending"
+}

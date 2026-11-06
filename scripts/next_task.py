@@ -6,6 +6,7 @@ from pathlib import Path
 import re
 import review_queue as q
 import peer_review as peer
+from review_policy import codex_review_credit
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -30,6 +31,10 @@ def candidates(root, agent):
         if task["agent"] != agent:
             continue
         ident = task["id"]
+        allowed = data.get("agent_task_allowlists", {}).get(agent)
+        if allowed is not None and ident not in allowed:
+            skipped.append({"id": ident, "reason": "outside current agent allocation"})
+            continue
         if task.get("superseded_by"):
             skipped.append({"id": ident, "reason": "superseded", "replacement": task["superseded_by"]})
             continue
@@ -56,6 +61,10 @@ def candidates(root, agent):
                                   and r['reviewer'] == 'antigravity'), None)
             if producer and producer['agent'] == 'codex':
                 decision = peer_approval
+                if not decision and codex_review_credit(root, producer):
+                    decision = {"decision": "approved", "created_at": producer['created_at'],
+                                "submission_sha256": q.digest(root / 'coordination/reviews/submissions' / (producer['id'] + '.json')),
+                                "basis": "USER_WAIVED_REVIEW"}
             rejected = any(r['decision'] == 'changes_requested' for r in independent)
             legacy = decisions.get(producer['id']) if producer else None
             if legacy and legacy['decision'] == 'changes_requested':
@@ -108,14 +117,14 @@ def candidates(root, agent):
         if implementation_first and task.get("defer_during_implementation") and action != 'fix_review':
             skipped.append({"id": ident, "reason": "validation expansion deferred during implementation-first phase"})
             continue
-        if implementation_first and action == 'check_and_refresh_snapshot' and (packet['completion'] == 'done' or task.get('implementation_ready')):
+        if phase.get('defer_snapshot_only_refresh', implementation_first) and action == 'check_and_refresh_snapshot' and task.get('state') != 'RETRY':
             skipped.append({"id": ident, "reason": "snapshot-only refresh deferred to validation phase", "packet": packet['id']})
             continue
         if action != 'fix_review':
             kind = task.get('work_kind', 'implementation')
             if kind in ('review', 'integration', 'acceptance'):
                 priority = {'review': 3, 'integration': 4, 'acceptance': 5}[kind]
-                if implementation_first and kind == 'review':
+                if phase.get('mode') in ('implementation-first', 'production-and-validation') and kind == 'review':
                     priority = 6
         ready.append({"task": task, "action": action, "priority": priority,
                       "latest_packet": packet["id"] if packet else None, "review_note": note})

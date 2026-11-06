@@ -20,7 +20,7 @@ test("explicit clipboard import recovers from no-image error and opens owned syn
   expect(await page.evaluate(() => (window as unknown as { __READS__: number }).__READS__)).toBe(0);
   const open = page.getByRole("button", { name: "Open clipboard image", exact: true });
   await open.click();
-  await expect(page.getByRole("alert")).toContainText("Clipboard does not contain an image");
+  await expect(page.locator(".error-banner")).toContainText("Clipboard does not contain an image");
   await expect(open).toBeEnabled(); await open.click();
   await expect(page.locator(".canvas-image")).toBeVisible();
   await expect(page.locator(".document-title")).toContainText("2 × 2 px");
@@ -31,6 +31,6 @@ test("explicit clipboard import recovers from no-image error and opens owned syn
 test("browser clipboard import reports desktop requirement without a clipboard read", async ({ page }) => {
   await page.goto("/");
   await page.getByRole("button", { name: "Open clipboard image", exact: true }).click();
-  await expect(page.getByRole("alert")).toContainText("Open the desktop app");
+  await expect(page.locator(".error-banner")).toContainText("Open the desktop app");
   await expect(page.locator(".ferby-library-panel__item")).toHaveCount(0);
 });

@@ -1,6 +1,6 @@
 # Project progress
 
-**61.25% accepted against the declared MVP baseline** (rounded: 61%). Updated: 2026-11-05.
+**68.75% accepted against the declared MVP baseline** (rounded: 69%). Updated: 2026-11-06.
 
 Ferby macOS MVP v0.1: local capture/import, basic annotations, crop/resize, PNG/JPEG save, session library, settings, native pin and local OCR.
 
@@ -18,18 +18,17 @@ This is an evidence-based delivery score, not elapsed time, token consumption or
 | Session library | 5% | 4/4 | 5% |
 | Ferby settings | 5% | 2/4 | 2.5% |
 | Native pin and preview | 5% | 3/4 | 3.75% |
-| Local OCR | 10% | 0/4 | 0% |
+| Local OCR | 10% | 3/4 | 7.5% |
 | Quality and release | 10% | 2/4 | 5% |
 
 ## Current work and blockers
 
-- C01-C03/C05/C06 are preserved. Current integration checkpoints: C07 editor/raster, C08 clipboard import, C09 native pin and C10 format/quality preferences; broader tasks remain partial.
-- Antigravity A33 Rust Vision replaces inactive Swift A13. Current reviewed editor/pin/settings/clipboard modules are connected; further feature modules await integration review.
-- Copilot continues P01-P42 and H01; immutable current packet decisions are authoritative, not historical table labels.
-- Codex verification: 195 frontend unit tests, 22 selected browser E2E and 16 root Rust tests passed at this checkpoint. Native manual acceptance remains open; source/version checks preserve the 0.1.0 baseline.
-- Progress rose from 47.5% to 61.25% through composed editor/rendering, tested settings persistence core and restricted pin/controls implementation. No native manual gate or OCR gate was credited.
-- Continuous task lists cover Antigravity A01-A33 (A13 superseded) and Copilot P01-P42 + H01. The selector skips submitted work and superseded tasks; clients are not auto-launched or restarted.
-- Scrolling/effects/global hotkeys/archive/print and Rust OCR/QR remain on the broader functional roadmap; review/integration and user-only native acceptance still prevent parity/release claims.
+- Accepted MVP score increased from 61.25% to 68.75% after bounded OCR core, actual Vision synthetic recognition and app UI/copy integration evidence. Final native OCR acceptance stays open.
+- User grants Codex review credit (USER_WAIVED_REVIEW); every Codex snapshot stays marked in reviews/INDEX.md for later overall review. This is not independent peer review.
+- Actual validation this request: 345 frontend tests in the earlier baseline run, 16 root Rust tests, 10 Vision tests (including real framework OCR/QR), 5 existing browser acceptance checks and 2 new recognition browser checks passed. Native OS actions were mocked except Vision on synthetic images.
+- Source review found the P79 JPEG-quality schema mismatch; Copilot corrected it, and five root preference-contract tests now pass. Global tsc blockers are tracked through P61/H01 handoffs; final build outcome is reported separately.
+- Copilot P83-P90 add eight bounded functional regressions; Codex continues reviews, functional fixes and C14/C15 integration without waiting for peer review.
+- Manual capture/permissions/export/native window acceptance, final candidate and overall review remain open. No original Shottr runtime parity or full feature completion is implied.
 
 See [build queue](BUILD-QUEUE.md), [kickoff prompts](START-HERE.md), [review inbox](reviews/INDEX.md) and [C05 checks](../docs/agents/codex/C05-validation.md).
 
@@ -93,9 +92,9 @@ See [build queue](BUILD-QUEUE.md), [kickoff prompts](START-HERE.md), [review inb
 
 ### Local OCR
 
-- [ ] Bounded engine contract/core.
-- [ ] Synthetic text recognition tests.
-- [ ] UI/copy integration.
+- [x] Bounded engine contract/core. [Evidence](../docs/agents/codex/C08-recognition-acceptance.md).
+- [x] Synthetic text recognition tests. [Evidence](../docs/agents/codex/C08-recognition-acceptance.md).
+- [x] UI/copy integration. [Evidence](../docs/agents/codex/C08-recognition-acceptance.md).
 - [ ] Native acceptance and failure handling.
 
 ### Quality and release

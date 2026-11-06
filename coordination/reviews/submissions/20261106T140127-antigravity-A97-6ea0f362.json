@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "id": "20261106T140127-antigravity-A97-6ea0f362",
+  "created_at": "2026-11-06T14:01:27.659014+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A97",
+  "completion": "done",
+  "summary": "F25 app/native integration: Verified withOutputPreferences (format, quality, retina downscale), WorkspaceDestination folder selection, and settings persistence in Workspace.tsx.",
+  "files": [
+    "src/Workspace.tsx",
+    "src/Workspace.destination.tsx",
+    "src/platform/output-preferences.ts",
+    "coordination/handoffs/antigravity/A97-integration.json",
+    "docs/agents/antigravity/A97.md"
+  ],
+  "file_sha256": {
+    "src/Workspace.tsx": "e2879fca74d6b07987cb81c8433ddb4a76d8507c4eb220d6055e82a3db91c13a",
+    "src/Workspace.destination.tsx": "f80d2af0d28a16f4323265d23aaff1924d21dd472454277e4bbc0273c43c3b7f",
+    "src/platform/output-preferences.ts": "958f4b9a4e4f5def024cd1f835e9ed8621e3d77a6781fd59361b4f76fd2155a3",
+    "coordination/handoffs/antigravity/A97-integration.json": "4229705ba1fe7c142bf4c273f12fd0be776fe6daf82b6160dd50adf27f955e62",
+    "docs/agents/antigravity/A97.md": "9c053bbfe81196f8b9712dc975089b7725fcc6e7b12999056368b10b137cebbd"
+  },
+  "checks": [
+    "Tests/builds/setup NOT RUN — deferred by user",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Output format, quality, retina downscale, and destination selection app wiring verified."
+  ],
+  "review": "pending"
+}

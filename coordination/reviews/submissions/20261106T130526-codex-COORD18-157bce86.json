@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "id": "20261106T130526-codex-COORD18-157bce86",
+  "created_at": "2026-11-06T13:05:26.771681+07:00",
+  "agent": "codex",
+  "request": "WINDOW-API-20261106",
+  "task": "COORD18",
+  "completion": "done",
+  "summary": "Clarify Anti A47 controlled options API so its panel does not fabricate CanvasImageSource; Codex owns decoded renderer input.",
+  "files": [
+    "coordination/build-tasks.json",
+    "coordination/messages/antigravity/20261106-A47-options-boundary.md",
+    "docs/agents/codex/COORD18-window-options.md"
+  ],
+  "file_sha256": {
+    "coordination/build-tasks.json": "7d7f14701f2452389f73b6a1f5695c096419a507c3102b9b5f78fe620ccae0b3",
+    "coordination/messages/antigravity/20261106-A47-options-boundary.md": "809ae9927ed58f95ba61c80456f6eb061cee853cbd9c41037e6e3538a898836c",
+    "docs/agents/codex/COORD18-window-options.md": "3cf419f4d53d3e4de1dfe05c585c9aa18a61526bad2586ad39df7dc8380ba6b6"
+  },
+  "checks": [
+    "Tests/builds/setup NOT RUN — deferred by user. Existing renderer source read only.",
+    "Formatting/lint delegated to Copilot H01."
+  ],
+  "risks": [
+    "A47 output remains external producer scope; no original behavior/acceptance inferred."
+  ],
+  "review": "pending"
+}

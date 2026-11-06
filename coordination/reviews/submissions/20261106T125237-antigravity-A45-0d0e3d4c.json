@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "id": "20261106T125237-antigravity-A45-0d0e3d4c",
+  "created_at": "2026-11-06T12:52:37.602326+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A45",
+  "completion": "done",
+  "summary": "Implemented controlled ExportDestinationPanel and validateBasename with 1-80 char bounds, slash/control char rejection, inline errors, and busy-guarded folder buttons.",
+  "files": [
+    "src/features/export-destination-panel/ExportDestinationPanel.tsx",
+    "src/features/export-destination-panel/ExportDestinationPanel.css",
+    "src/features/export-destination-panel/index.ts",
+    "src/features/export-destination-panel/README.md",
+    "docs/agents/antigravity/A45.md"
+  ],
+  "file_sha256": {
+    "src/features/export-destination-panel/ExportDestinationPanel.tsx": "f875f69d35c00cbcff140dfe7defcffd765eb8ea32d00938a0d7d21e74362e03",
+    "src/features/export-destination-panel/ExportDestinationPanel.css": "9ab9fa7997a7ff51a36736dae109c4a53f76b6a127ee907ade16925e94a23a6a",
+    "src/features/export-destination-panel/index.ts": "8110e735e0274989a13b2e4b86db8809b8621e4b3df2248f2024279def0a27b8",
+    "src/features/export-destination-panel/README.md": "95d49808a03db7d2b2ba36c5d20f8874f514ed45215b0fad54baf768691f2080",
+    "docs/agents/antigravity/A45.md": "a37c48aeeb5c85ed4b5c40546ed5591d0ecfdf8eb502ed2a54cc621a7dc4a46a"
+  },
+  "checks": [
+    "Tests/builds NOT RUN — deferred by user",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Isolated UI component only; native folder picker and persistence integration handled by Codex."
+  ],
+  "review": "pending"
+}

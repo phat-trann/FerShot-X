@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "id": "20261106T130656-codex-C34-d0d74791",
+  "created_at": "2026-11-06T13:06:56.932967+07:00",
+  "agent": "codex",
+  "request": "COLOR-COPY-20261106",
+  "task": "C34",
+  "completion": "partial",
+  "summary": "Prepare validated HEX/RGB/RGBA clipboard adapter and wire explicit pixel/average HEX copy into the app; external A50 owns full format controls.",
+  "files": [
+    "src/platform/color-copy.ts",
+    "src/Workspace.average-color.tsx",
+    "src/Workspace.tsx",
+    "docs/agents/codex/C34-color-copy.md"
+  ],
+  "file_sha256": {
+    "src/platform/color-copy.ts": "8c980859a71176e5d14ff47a8cf555c77be75dea96e357b5714a99d58e5caf00",
+    "src/Workspace.average-color.tsx": "9a24954d51a46ed9dadaf67ffc654168c96c4aa3d64689e36185314558628b5b",
+    "src/Workspace.tsx": "a782eeb9897aa04340a743391692523fee50cf9443263da2627e7fef4d3dffa8",
+    "docs/agents/codex/C34-color-copy.md": "632b737b48b14af23af3d0c08431e916372059915c121bf68d5843385e162ea2"
+  },
+  "checks": [
+    "Tests/typechecks/builds/setup NOT RUN — deferred by user. Source-only implementation.",
+    "Formatting/lint delegated to Copilot H01."
+  ],
+  "risks": [
+    "USER_WAIVED_REVIEW; later overall review required. Source uncompiled; actual clipboard and A50 presentation integration unverified. No original text-color algorithm inferred; acceptance68.75% unchanged."
+  ],
+  "review": "pending"
+}

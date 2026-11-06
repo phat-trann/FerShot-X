@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "id": "20261106T110919-codex-COORD11-d8b363c0",
+  "created_at": "2026-11-06T11:09:19.606738+07:00",
+  "agent": "codex",
+  "request": "SHORTCUT-20261106",
+  "task": "COORD11",
+  "completion": "done",
+  "summary": "Allocated bounded P97 canonical shortcut adapter to Copilot for existing C13 native registration seam",
+  "files": [
+    "coordination/build-tasks.json",
+    "docs/agents/codex/COORD11-shortcut-adapter.md"
+  ],
+  "file_sha256": {
+    "coordination/build-tasks.json": "a66f88e0c795dc2bd99ea8a5d9350cbb4b66e1679b88f3562bccb75d8229d094",
+    "docs/agents/codex/COORD11-shortcut-adapter.md": "ab4ce9570dd75c6815ebc63560430250d5687a948e666fcf2665265908c9ec98"
+  },
+  "checks": [
+    "Queue JSON and two current named source inputs inspected; no native actions performed",
+    "Formatting/lint delegated to Copilot H01"
+  ],
+  "risks": [
+    "Adapter is not native registration; root must validate native parser and preserve all frozen locked versions"
+  ],
+  "review": "pending"
+}

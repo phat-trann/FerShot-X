@@ -8,7 +8,7 @@ test("browser copy reports desktop requirement and keeps the image", async ({ pa
   await expect(page.getByRole("button", { name: "Copy image", exact: true })).toHaveCount(0);
   await page.locator('input[type="file"]').setInputFiles(fixture);
   await page.getByRole("button", { name: "Copy image", exact: true }).click();
-  await expect(page.getByRole("alert")).toContainText("Open the desktop app");
+  await expect(page.locator(".error-banner")).toContainText("Open the desktop app");
   await expect(page.locator(".canvas-image")).toHaveAttribute("alt", fixture.name);
   await expect(page.getByRole("button", { name: "Copy image", exact: true })).toBeEnabled();
 });
@@ -39,11 +39,11 @@ test("mock clipboard failure releases busy state and retry sends real rasterized
   await copy.click();
   await expect(copy).toBeDisabled();
   await expect(page.getByRole("button", { name: `Close ${fixture.name}`, exact: true })).toBeDisabled();
-  await expect(page.getByRole("alert")).toContainText("Synthetic clipboard busy");
+  await expect(page.locator(".error-banner")).toContainText("Synthetic clipboard busy");
   await expect(copy).toBeEnabled();
   await copy.click();
   await expect(page.locator(".statusbar")).toContainText("Image copied to clipboard.");
-  await expect(page.getByRole("alert")).toHaveCount(0);
+  await expect(page.locator(".error-banner")).toHaveCount(0);
   await expect(page.locator(".ferby-library-panel__item")).toHaveCount(1);
   const result = await page.evaluate(() => {
     const calls = (window as unknown as { __COPY_CALLS__: { pngBase64: string }[] }).__COPY_CALLS__;

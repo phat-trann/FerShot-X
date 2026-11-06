@@ -1,0 +1,3 @@
+# C29 producer handoff after interruption
+
+The latest user splits production into two halves. External Anti A46 now owns standalone application-services logic; Codex C29 retains plugin/command/root integration. Interrupted source state preserved: dependency declarations/lock exist, but no application_services.rs or runtime calls were added. Avoid a duplicate producer implementation. Native wrappers will consume the completed A46 API. Previous dependency acquisition is historical; this request performs no setup, test, typecheck or build. Formatting/lint delegated to Copilot H01. No native setting/notification action executed. MVP acceptance remains68.75%.

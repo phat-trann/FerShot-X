@@ -1,0 +1,7 @@
+# C13 window lifecycle (UNREVIEWED)
+
+Main-window native close requests now prevent destruction and request a C21-governed frontend confirmation. If the listener is not ready, the native request fails closed. Confirmation clearly discards the entire session; it does not imply Save image preserves editable session data. No save-before-close option is advertised. Busy image/scroll operations block close, native jobs gate final destruction, stale confirmations are invalidated by document/session revision changes, errors reset the close policy for retry. Pin windows retain their own lifecycle. Explicit on-top toggle applies through a main-only native command and is labeled session-only.
+
+The root caps library size at C21's 512-image limit, tracks library/edit revisions and reports scrolling activity to close controls. Listener cleanup handles late registration/unmount. No OS operations occur on render or in automated checks; actual close/on-top effects only follow user actions. Browser transport remains unavailable for native commands.
+
+Scoped strict TypeScript and locked/offline Rust compilation passed, with existing effects-core unused import left to Copilot H01. No tests/native acceptance executed per implementation-first priority. Global shortcut registration, persistent app/lifecycle preferences, launch/menu/notification behavior and original parity remain open. No dependency, capability, Swift or acceptance-gate changes. MVP acceptance before/after remains 61.25%.

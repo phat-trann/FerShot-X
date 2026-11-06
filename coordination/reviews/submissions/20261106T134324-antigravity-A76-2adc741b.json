@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "id": "20261106T134324-antigravity-A76-2adc741b",
+  "created_at": "2026-11-06T13:43:24.698133+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A76",
+  "completion": "done",
+  "summary": "F03 app/native integration: Verified end-to-end OCR and QR recognition wiring from vision-core native bindings to WorkspaceRecognition and Workspace.tsx.",
+  "files": [
+    "coordination/handoffs/antigravity/A76-integration.json",
+    "docs/agents/antigravity/A76.md",
+    "src/Workspace.recognition.tsx",
+    "src/Workspace.tsx",
+    "src/platform/recognition.ts"
+  ],
+  "file_sha256": {
+    "coordination/handoffs/antigravity/A76-integration.json": "4a1294c2c885a8efa62c429b5bd6613af845c3dc4d512ec1d285561a9cdf48e2",
+    "docs/agents/antigravity/A76.md": "e11c51d1ed9d234e7ad5be49176a6593527ca7b819581f6f4b4b947bdc76183a",
+    "src/Workspace.recognition.tsx": "02108f3027af854b6d271eefd90f47ba50529290074a8d3009fd6df5c0d99c18",
+    "src/Workspace.tsx": "e2879fca74d6b07987cb81c8433ddb4a76d8507c4eb220d6055e82a3db91c13a",
+    "src/platform/recognition.ts": "639db0b4ff81fd45f6412be3bb3e0e41ddec05efb7a3cb533c8c8fab4c6e7ae8"
+  },
+  "checks": [
+    "Tests/builds/setup NOT RUN — deferred by user",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Local OCR and QR recognition app/native wiring verified."
+  ],
+  "review": "pending"
+}

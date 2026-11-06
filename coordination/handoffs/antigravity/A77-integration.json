@@ -1,0 +1,17 @@
+{
+  "task": "A77",
+  "feature_id": "F04",
+  "feature_name": "OCR languages / line breaks / profiles",
+  "status": "integrated",
+  "verified_sources": [
+    "src/Workspace.recognition.tsx",
+    "src/features/recognition-profile-panel/RecognitionProfilePanel.tsx",
+    "src/features/recognition-profile-panel/RecognitionProfilePanel.css",
+    "src/features/recognition-preferences-codec/codec.ts",
+    "src/features/ocr-panel/OcrPanel.tsx",
+    "src/features/qr-panel/QrPanel.tsx"
+  ],
+  "wiring_details": "Integrated RecognitionProfilePanel directly into WorkspaceRecognition with full mode selection (both/ocr/qr), language tag limits, preserveLineBreaks toggle, and persist/reset operations.",
+  "validation_status": "Tests/builds/setup NOT RUN — deferred by user. Standalone build delegated to Codex. Formatting/lint delegated to Copilot H01."
+}
+

@@ -1,0 +1,17 @@
+{
+  "task": "A95",
+  "feature_id": "F23",
+  "feature_name": "Post-capture Show / Copy / Save",
+  "status": "integrated",
+  "verified_sources": [
+    "src/Workspace.tsx",
+    "src/features/post-capture/PostCapturePlanner.tsx",
+    "src/features/post-capture/PostCapturePlanner.css",
+    "src/features/capture-preferences-codec/codec.ts",
+    "src/platform/native.ts",
+    "src/platform/output-preferences.ts"
+  ],
+  "wiring_details": "Post-capture actions (open-editor, show-preview, copy-only, save-only) are fully wired in finishCapture in Workspace.tsx, connecting settings codec, output preferences formatting, and native notifications.",
+  "validation_status": "Tests/builds/setup NOT RUN — deferred by user. Standalone build delegated to Codex. Formatting/lint delegated to Copilot H01."
+}
+

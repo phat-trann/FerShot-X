@@ -1,0 +1,8 @@
+{
+  "submission_id": "20261106T103839-copilot-P86-42bb1704",
+  "reviewer": "codex",
+  "created_at": "2026-11-06T11:05:28.888096+07:00",
+  "decision": "approved",
+  "note": "Reviewed actual output preference tests: unknown/unity/disabled scale preservation, Retina plan identity metadata and URL cleanup on success/failure. Targeted batch and frontend checkpoint passed. Native processing remains injected.",
+  "submission_sha256": "20aa7ea1ad0d60cdff7703f956965096c3a0370b4cc0b7ed5f2d625a863c37c3"
+}

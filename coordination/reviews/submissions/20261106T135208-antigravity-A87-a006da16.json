@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "id": "20261106T135208-antigravity-A87-a006da16",
+  "created_at": "2026-11-06T13:52:08.997942+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A87",
+  "completion": "done",
+  "summary": "F15 app/native integration: Verified zoom controls, stage ResizeObserver fit calculations, and point mapping in Workspace.tsx.",
+  "files": [
+    "src/Workspace.tsx",
+    "src/Workspace.editor.tsx",
+    "coordination/handoffs/antigravity/A87-integration.json",
+    "docs/agents/antigravity/A87.md"
+  ],
+  "file_sha256": {
+    "src/Workspace.tsx": "e2879fca74d6b07987cb81c8433ddb4a76d8507c4eb220d6055e82a3db91c13a",
+    "src/Workspace.editor.tsx": "474e914535ebd743a62c179cb8d608097a86ba725743ec487cf23e3b03244790",
+    "coordination/handoffs/antigravity/A87-integration.json": "b291f226cb7488c5bdce45364a6745f470f15319d3f98a2a756fac43e58076b7",
+    "docs/agents/antigravity/A87.md": "b42609e5983c6f22423ac8607daadef89c5ae8538d8c1f2d0bd9420cb7fcaab4"
+  },
+  "checks": [
+    "Tests/builds/setup NOT RUN — deferred by user",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Zoom, pan, and viewport navigation app wiring verified."
+  ],
+  "review": "pending"
+}

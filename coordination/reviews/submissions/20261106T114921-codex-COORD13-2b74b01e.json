@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "id": "20261106T114921-codex-COORD13-2b74b01e",
+  "created_at": "2026-11-06T11:49:21.426171+07:00",
+  "agent": "codex",
+  "request": "ANTI-EXTERNAL-20261106",
+  "task": "COORD13",
+  "completion": "done",
+  "summary": "Stopped mistaken internal Anti worker, preserved the separate real AI/client allocation and enforced A39-A42 dispatcher scope",
+  "files": [
+    "scripts/next_task.py",
+    "scripts/test_next_task.py",
+    "coordination/build-tasks.json",
+    "AGENTS.md",
+    "coordination/TWO-LANE.md",
+    "coordination/START-HERE.md",
+    "coordination/prompts/antigravity.md",
+    "docs/agents/codex/COORD13-separate-anti.md"
+  ],
+  "file_sha256": {
+    "scripts/next_task.py": "d3fd77a975c6ca30e699a92b06fcf055b65dc448613da98fed386483a2942da7",
+    "scripts/test_next_task.py": "ca6517ec4b851d98993d8d3c228b6dd618233c38607a792417f865f1a0e612ac",
+    "coordination/build-tasks.json": "1780880a3d7b8f1d642c24f50fc34f7f9cd545c962a1d0f1301157b9bfb5c33e",
+    "AGENTS.md": "d625228fd74f9878c45f6b2b4457d1037e9dcfc79863b02db709a31715205ab0",
+    "coordination/TWO-LANE.md": "1406703ad4b29af6978341d9410e21a2ee9d9ca75ac50c4de003ef55fd09916a",
+    "coordination/START-HERE.md": "a7e5986486f8ad06c76c9cde64c1082678e26845c2ac953701a64f0c6cfc4932",
+    "coordination/prompts/antigravity.md": "241a22ec3880642db1891f4699da8e66e7f3f093d95d5247448bd0af219a1c99",
+    "docs/agents/codex/COORD13-separate-anti.md": "9549fac21632e72b53d5b61f647d63f59d4e1bb1c117d16405cd88e088c676ed"
+  },
+  "checks": [
+    "29 coordination tests passed, including allocation filtering against older high-priority corrections",
+    "No A39 test/report or Anti submission created; only owned worker claim cleanup authorized",
+    "MVP before/after 68.75 percent unchanged; formatting/lint delegated"
+  ],
+  "risks": [
+    "Real Antigravity must run its own client; queue assignment is not evidence of execution"
+  ],
+  "review": "pending"
+}

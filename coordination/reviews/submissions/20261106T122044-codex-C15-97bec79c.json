@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "id": "20261106T122044-codex-C15-97bec79c",
+  "created_at": "2026-11-06T12:20:44.453544+07:00",
+  "agent": "codex",
+  "request": "DEEP-LINK-20261106",
+  "task": "C15",
+  "completion": "partial",
+  "summary": "Implement dependency-free macOS Ferby deep-link event queue, bundle URL scheme and source-bound user confirmation before capture/editor actions.",
+  "files": [
+    "src-tauri/src/deep_links.rs",
+    "src-tauri/src/lib.rs",
+    "src-tauri/Info.plist",
+    "src/platform/native.ts",
+    "src/Workspace.deep-links.tsx",
+    "src/Workspace.tsx",
+    "docs/agents/codex/C15-deep-links.md"
+  ],
+  "file_sha256": {
+    "src-tauri/src/deep_links.rs": "5244995d4ed19c3df97290e861a74f9865d2c3c9b9c9823b0db1a0b2cc117e5e",
+    "src-tauri/src/lib.rs": "72414e18543741c867d84a96167b314c548f128994e525e2f8ac0921381a45cf",
+    "src-tauri/Info.plist": "640e8c4ae53d796b518b02967508131c2c80a0fd3d7a1aaeaa2b1678b5a46173",
+    "src/platform/native.ts": "2169c483108c912277be3c97f4187575996ebaf0b8b97ab7993ed051b109d854",
+    "src/Workspace.deep-links.tsx": "c312adedb54a3831435e8bbec48484ef9da4daf095f108fee2f0e3f09c24a287",
+    "src/Workspace.tsx": "c80b93c7e55a34817165246d9dd2ba310c6bf09a04b2bb6f962e7775c2bec79e",
+    "docs/agents/codex/C15-deep-links.md": "0ded401d42ca2f3fbf015619e4b951c2566e3f78f05e2d10e7996dd8f8a831ef"
+  },
+  "checks": [
+    "TypeScript no-emit and locked offline cargo check --lib passed; Info.plist parsed successfully.",
+    "Tests NOT RUN — deferred by user. Formatting/lint delegated to Copilot H01."
+  ],
+  "risks": [
+    "USER_WAIVED_REVIEW; later overall review required. Native OS URL delivery and drag integration remain open; Shottr route semantics UNKNOWN. MVP acceptance unchanged at 68.75%."
+  ],
+  "review": "pending"
+}

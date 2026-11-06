@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "id": "20261106T124531-codex-COORD16-8b90a9ac",
+  "created_at": "2026-11-06T12:45:31.320500+07:00",
+  "agent": "codex",
+  "request": "SOURCE-ONLY-20261106",
+  "task": "COORD16",
+  "completion": "done",
+  "summary": "Honor no-test/no-build production pass; assign external Anti isolated A43-A45 and retain explicit user-authorized C26/root claim handoff.",
+  "files": [
+    "AGENTS.md",
+    "coordination/build-tasks.json",
+    "coordination/prompts/codex.md",
+    "coordination/prompts/antigravity.md",
+    "coordination/START-HERE.md",
+    "coordination/TWO-LANE.md",
+    "coordination/reviews/README.md",
+    "coordination/messages/antigravity/20261106-source-only-A43-A45.md",
+    "docs/agents/codex/COORD16-source-only.md"
+  ],
+  "file_sha256": {
+    "AGENTS.md": "20d1841fd9f9326e811f7095a47f5882ec826639ace954ced9394b3fafdbaca1",
+    "coordination/build-tasks.json": "78be0f740b5efa6eb8b43b3dd9a0cb99f8e8263355d75dcc6073b812d66313ad",
+    "coordination/prompts/codex.md": "acedf7a3ea580ddf93eac76f35d575445433685235649df6f991c99a69133d80",
+    "coordination/prompts/antigravity.md": "9a5c0cbd3b7563bc309b3e000db9036fa309793a7ec4dc365e0878cfc67288f5",
+    "coordination/START-HERE.md": "2cfd9df7e1506f6ecb0966d40d842bd9a10ea3eb9046415a64220e7af8a20a72",
+    "coordination/TWO-LANE.md": "ec4f8a3179c50cb9305afad87b9fedab9b06a3ef8de4189b74f4edfe7e2691aa",
+    "coordination/reviews/README.md": "c124d1a0464177849a482ac3bcff74e6c4104540b90b3122b258c1f80e49ac8e",
+    "coordination/messages/antigravity/20261106-source-only-A43-A45.md": "c878789c5a8e9339eb4effc0a6279ad9390b7ef4b10a2c225faa5452c528d009",
+    "docs/agents/codex/COORD16-source-only.md": "296eb5baebf228eeff27722610b3f411625b8be7db34a3ffed7353cca27c69bf"
+  },
+  "checks": [
+    "Tests/typechecks/builds NOT RUN — deferred by user. Queue parsed during update.",
+    "Formatting/lint delegated to Copilot H01."
+  ],
+  "risks": [
+    "USER_WAIVED_REVIEW; later overall review required. MVP acceptance remains 68.75%."
+  ],
+  "review": "pending"
+}

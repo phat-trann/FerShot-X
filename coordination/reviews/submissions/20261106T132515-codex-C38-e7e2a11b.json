@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "id": "20261106T132515-codex-C38-e7e2a11b",
+  "created_at": "2026-11-06T13:25:15.833830+07:00",
+  "agent": "codex",
+  "request": "SHORTCUT-SOURCE-20261106",
+  "task": "C38",
+  "completion": "partial",
+  "summary": "Reconcile current five-action global assignment/persistence/native registration routes; retain explicit missing active-window/repeat/show schema extension rather than claim100%.",
+  "files": [
+    "src-tauri/src/shortcuts.rs",
+    "src/Workspace.shortcuts.tsx",
+    "src/platform/shortcuts.ts",
+    "docs/agents/codex/C38.md"
+  ],
+  "file_sha256": {
+    "src-tauri/src/shortcuts.rs": "fc33999aa62e123aa39bcccfe53b5f66e33618baa1716be4759c65a8c48a2d4d",
+    "src/Workspace.shortcuts.tsx": "3d746493af503ffa6268601241320f19d975fd06582dfab012683cd7cd8b8256",
+    "src/platform/shortcuts.ts": "3845bc18aa59d5eed2e36f45159ce558a3b3071b276cd506777c75fc7eac7047",
+    "docs/agents/codex/C38.md": "30b875fce583a9326145484cbf323e86206345f0aef97ff6d4c72008f660ed05"
+  },
+  "checks": [
+    "Tests/typechecks/builds/setup NOT RUN — deferred by user. Existing actual source read; no OS registration.",
+    "Formatting/lint delegated to Copilot H01."
+  ],
+  "risks": [
+    "F30 partial: three original observed action affordances not in current five-action codec. USER_WAIVED_REVIEW does not erase source gaps; acceptance68.75% unchanged."
+  ],
+  "review": "pending"
+}

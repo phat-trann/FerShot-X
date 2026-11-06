@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "id": "20261106T125210-codex-C28-c155db66",
+  "created_at": "2026-11-06T12:52:10.702668+07:00",
+  "agent": "codex",
+  "request": "SOURCE-ONLY-20261106",
+  "task": "C28",
+  "completion": "done",
+  "summary": "Implement native document-open metadata and separate bounded token delivery into existing PNG/JPEG/GIF/WebP browser import; cold-start retention, main-window authority and queue acknowledgement.",
+  "files": [
+    "src-tauri/src/document_open.rs",
+    "src-tauri/src/lib.rs",
+    "src-tauri/Info.plist",
+    "src/platform/native.ts",
+    "src/Workspace.document-open.tsx",
+    "src/Workspace.tsx",
+    "docs/agents/codex/C28-document-open.md"
+  ],
+  "file_sha256": {
+    "src-tauri/src/document_open.rs": "63dcb64b9909585502dfd274dddf53caebc817edaf8ec41f13fa485633a30570",
+    "src-tauri/src/lib.rs": "721c9548f62e0f17826e0400008135d7211ac783b44be22e02ebb3ace6d36b63",
+    "src-tauri/Info.plist": "afb77e5a43f26ab211b5ca5c43e5e804822ffcb5272c380aa8a4fd5949cec192",
+    "src/platform/native.ts": "0e8e779e84425643f041a11884a0bf366d64c76b35d7a7424b70c241f00f0cf9",
+    "src/Workspace.document-open.tsx": "a93afc4733dc598e7fe5ac77713fa7df94a96dd268f32465ff042e0d7e14c889",
+    "src/Workspace.tsx": "7135e17211923212732602821dba63b7b80bb257ca6e161e65213fb7b0c7e16c",
+    "docs/agents/codex/C28-document-open.md": "500dfdfb15170472cb3ddc3440b5a9ffcd226053df1b54f75ed51185a6b51c21"
+  },
+  "checks": [
+    "Tests/typechecks/builds NOT RUN — deferred by user. Source/API inspection only.",
+    "Formatting/lint delegated to Copilot H01."
+  ],
+  "risks": [
+    "USER_WAIVED_REVIEW; later overall review required. Compilation and installed-bundle file delivery unverified. Original decoding semantics UNKNOWN; acceptance remains68.75%."
+  ],
+  "review": "pending"
+}

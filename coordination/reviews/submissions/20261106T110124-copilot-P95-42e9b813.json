@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "20261106T110124-copilot-P95-42e9b813",
+  "created_at": "2026-11-06T11:01:24.268821+07:00",
+  "agent": "copilot",
+  "request": "COPILOT-20261106",
+  "task": "P95",
+  "completion": "done",
+  "summary": "Added five editor-session codec regressions for basic/advanced shape preservation, ownership, duplicate ids, geometry/schema and graph bounds with strict undefined policy",
+  "files": [
+    "src/testing/copilot-editor-session-codec.test.ts",
+    "docs/qa/copilot-P95.md"
+  ],
+  "file_sha256": {
+    "src/testing/copilot-editor-session-codec.test.ts": "7faa12332ae849c7d078c06c2b361b012f0357cbea4ad3b2bc1f3d1fa2f60293",
+    "docs/qa/copilot-P95.md": "5aca55bee988d8558d714ae05511956fca2cbb61be8d120b5f7d4c9580e495de"
+  },
+  "checks": [
+    "Node 26 vitest run src/testing/copilot-editor-session-codec.test.ts: 1 file, 5 tests passed"
+  ],
+  "risks": [
+    "Data codec only; no renderer/native/original storage parity accepted; build delegated to Codex"
+  ],
+  "review": "pending"
+}

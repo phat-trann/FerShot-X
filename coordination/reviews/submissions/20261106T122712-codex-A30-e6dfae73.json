@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "id": "20261106T122712-codex-A30-e6dfae73",
+  "created_at": "2026-11-06T12:27:12.347447+07:00",
+  "agent": "codex",
+  "request": "NATIVE-DRAG-20261106",
+  "task": "A30",
+  "completion": "done",
+  "summary": "Allow integrator-supplied native drag controls in the completed local-output panel; preserve fallback drag callbacks and historical producer identity.",
+  "files": [
+    "src/features/local-output/local-output.tsx",
+    "docs/agents/codex/C15-native-drag.md"
+  ],
+  "file_sha256": {
+    "src/features/local-output/local-output.tsx": "421d066bb03cbbbb460d605ecbca39ddaf5b6a9e5edc88595c78cc80418e06b0",
+    "docs/agents/codex/C15-native-drag.md": "fc4f6b57d86a68fb452f257678a9bad564ae5ccf5498ab68b8762270b17ae7b8"
+  },
+  "checks": [
+    "TypeScript no-emit passed. Tests NOT RUN — deferred by user.",
+    "Formatting/lint delegated to Copilot H01."
+  ],
+  "risks": [
+    "Codex takeover under free producer claim; USER_WAIVED_REVIEW, later overall review required. Native drag acceptance not asserted."
+  ],
+  "review": "pending"
+}

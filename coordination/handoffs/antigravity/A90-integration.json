@@ -1,0 +1,17 @@
+{
+  "task": "A90",
+  "feature_id": "F18",
+  "feature_name": "Backdrop / inset / shadow / recenter",
+  "status": "integrated",
+  "verified_sources": [
+    "src/Workspace.tsx",
+    "src/Workspace.layout.tsx",
+    "src/platform/layout.ts",
+    "src/features/backdrop/backdrop-renderer.ts",
+    "src/features/backdrop/index.ts",
+    "src/features/layout-workspace/LayoutWorkspace.tsx"
+  ],
+  "wiring_details": "Backdrop options (inset padding, rounded corner clipping, drop shadow, and recentering) are wired in Workspace.layout.tsx and platform/layout.ts via renderBackdropToPngBlob and planLayoutWorkspaceSummary, creating derived composed documents in Workspace.tsx.",
+  "validation_status": "Tests/builds/setup NOT RUN — deferred by user. Standalone build delegated to Codex. Formatting/lint delegated to Copilot H01."
+}
+

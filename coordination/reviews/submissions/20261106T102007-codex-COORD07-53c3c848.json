@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "id": "20261106T102007-codex-COORD07-53c3c848",
+  "created_at": "2026-11-06T10:20:07.881173+07:00",
+  "agent": "codex",
+  "request": "PROGRESS-20261106",
+  "task": "COORD07",
+  "completion": "done",
+  "summary": "Persisted before/after MVP acceptance reporting on every request; current canonical weighted gates remain 61.25 percent",
+  "files": [
+    "AGENTS.md",
+    "coordination/START-HERE.md",
+    "docs/agents/codex/COORD07-progress-reporting.md"
+  ],
+  "file_sha256": {
+    "AGENTS.md": "94e04b1f419162481537cadbba61271a45459cdeadefb13c449c8a62ab39df97",
+    "coordination/START-HERE.md": "b99f27dd9936c7b1f121d5fa21cf025e8b34bac6b137f92aa62aac2fbe079c8e",
+    "docs/agents/codex/COORD07-progress-reporting.md": "bb18e1b6305b453b1a93ad7e98b762e2fb11465fab701d76807ebb823c194d03"
+  },
+  "checks": [
+    "Calculated 61.25 percent directly from weighted progress.json gates; no gate changes",
+    "Instruction-only update; no product tests; formatting/lint delegated to Copilot H01"
+  ],
+  "risks": [
+    "Implementation progress is separate from acceptance; pending tests/reviews do not raise the ledger"
+  ],
+  "review": "pending"
+}

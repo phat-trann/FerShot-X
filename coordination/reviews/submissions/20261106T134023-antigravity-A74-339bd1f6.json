@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "id": "20261106T134023-antigravity-A74-339bd1f6",
+  "created_at": "2026-11-06T13:40:23.354120+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A74",
+  "completion": "done",
+  "summary": "F01 visual area-selection producer: Implemented CaptureRegionSelector, pointer drag selection, numeric pixel adjustment, and responsive CSS styling.",
+  "files": [
+    "src/features/capture-region-selector/CaptureRegionSelector.tsx",
+    "src/features/capture-region-selector/CaptureRegionSelector.css",
+    "src/features/capture-region-selector/index.ts",
+    "docs/agents/antigravity/A74.md"
+  ],
+  "file_sha256": {
+    "src/features/capture-region-selector/CaptureRegionSelector.tsx": "364938499fee08b7ed51275c47ed69818bd14c5af84eb028500ccb9e5c39b0ee",
+    "src/features/capture-region-selector/CaptureRegionSelector.css": "744a4f6e8f1b65f330e02d741a9fcdc9d7f6cb0d6ce3fd41dcf1f02afa22b3ed",
+    "src/features/capture-region-selector/index.ts": "39aaed475e36b9f03ddc72b80ecd6cbfc093a91a5162e8ab9316db1a16e0473c",
+    "docs/agents/antigravity/A74.md": "829a6e29c61e4513de8cc02595fea773913e1542f385e26151de48da3f2205d2"
+  },
+  "checks": [
+    "Tests/builds/setup NOT RUN — deferred by user",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Visual area selection component and coordinate mapping logic complete."
+  ],
+  "review": "pending"
+}

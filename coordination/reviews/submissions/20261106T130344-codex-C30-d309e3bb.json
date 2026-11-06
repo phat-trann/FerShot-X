@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "id": "20261106T130344-codex-C30-d309e3bb",
+  "created_at": "2026-11-06T13:03:44.040836+07:00",
+  "agent": "codex",
+  "request": "EXPORT-DESTINATION-20261106",
+  "task": "C30",
+  "completion": "done",
+  "summary": "Wire external A45 into persisted native folder/basename controls and PNG/JPEG destination saves with numbered atomic non-clobber output; retain Save dialog when no folder chosen.",
+  "files": [
+    "src-tauri/src/export_destination.rs",
+    "src-tauri/src/application_preferences.rs",
+    "src-tauri/src/preferences.rs",
+    "src-tauri/src/imaging.rs",
+    "src-tauri/src/lib.rs",
+    "src/platform/native.ts",
+    "src/Workspace.destination.tsx",
+    "src/Workspace.tsx",
+    "docs/agents/codex/C30-export-destination.md"
+  ],
+  "file_sha256": {
+    "src-tauri/src/export_destination.rs": "f91a8c4a9631c885c95d78883f0b02b4b9eedaebb68b05d6780c88427e553039",
+    "src-tauri/src/application_preferences.rs": "4e9188ed9b1fb339893bf26272d38c418332c2e67440c9f406ba1a4f6cca8502",
+    "src-tauri/src/preferences.rs": "c35d32c3113d49dca68817664ece3f366dd10544ae5579c1eb3b656e8d20f850",
+    "src-tauri/src/imaging.rs": "79f586a270cac354a3d5eb5f1473e69ab02c99256386adced0a11bcae99c3a6b",
+    "src-tauri/src/lib.rs": "4749e53e738c13f74f369f6410756690223680028aab7fcb23ce5878f06f1213",
+    "src/platform/native.ts": "87f535d7ba52495dbee3109260be57741e70e67d80c8cddc9a5e13bb1b184ed2",
+    "src/Workspace.destination.tsx": "f80d2af0d28a16f4323265d23aaff1924d21dd472454277e4bbc0273c43c3b7f",
+    "src/Workspace.tsx": "f9fb5e99c1f8ded4a0ad1456ddf0ab504c4d6471543c9906e57de3520aacf4a8",
+    "docs/agents/codex/C30-export-destination.md": "7dd9d6bcb38fb7da4ad62d148b780688785ec93d432914244c5f8f9d7085f6a0"
+  },
+  "checks": [
+    "Tests/typechecks/builds/setup NOT RUN — deferred by user. Source/API reading only.",
+    "Formatting/lint delegated to Copilot H01."
+  ],
+  "risks": [
+    "USER_WAIVED_REVIEW; later overall review required. Source uncompiled and native folder/save behavior unverified; original default naming/Auto rules UNKNOWN. Acceptance68.75% unchanged."
+  ],
+  "review": "pending"
+}

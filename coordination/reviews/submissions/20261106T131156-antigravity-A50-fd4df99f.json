@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "id": "20261106T131156-antigravity-A50-fd4df99f",
+  "created_at": "2026-11-06T13:11:56.299592+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A50",
+  "completion": "done",
+  "summary": "Implemented controlled ColorFormatControls component rendering HEX, RGB, and RGBA formats with channel validation, alpha preservation, empty/invalid states, and per-format copy callbacks.",
+  "files": [
+    "src/features/color-format-controls/ColorFormatControls.tsx",
+    "src/features/color-format-controls/ColorFormatControls.css",
+    "src/features/color-format-controls/index.ts",
+    "src/features/color-format-controls/README.md",
+    "docs/agents/antigravity/A50.md"
+  ],
+  "file_sha256": {
+    "src/features/color-format-controls/ColorFormatControls.tsx": "ac7173b4404caaae108410a5392665e29cb4d633c21f922ef7b27c65742d6c2f",
+    "src/features/color-format-controls/ColorFormatControls.css": "3afad6ea2be5db4b7224a39c78218ee500cb626b1f1e3cc23fba87599964b0bf",
+    "src/features/color-format-controls/index.ts": "2258359071412821a499b9b517111fa69740908587084d24d15d46d0ec55c579",
+    "src/features/color-format-controls/README.md": "7b34ebe7d8ccb53aa8d7f63ac397010757326b87fd5d2c0873ea141c44463e6a",
+    "docs/agents/antigravity/A50.md": "3a2ca2b94ef20b8c55c2a90a70a2d156ea69d0701b9e145c8eecdb60c3b0e65d"
+  },
+  "checks": [
+    "Tests/builds/setup NOT RUN — deferred by user",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Isolated UI component only; canvas pixel sampling and OS clipboard dispatch handled by Codex C34."
+  ],
+  "review": "pending"
+}

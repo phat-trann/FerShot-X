@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { OcrPanel, type OcrLanguageOption } from "../ocr-panel/OcrPanel";
 import { QrPanel, type QrCodeItem } from "../qr-panel/QrPanel";
+import "./RecognitionWorkspace.css";
 
 export interface RecognitionWorkspaceProps {
   readonly languages: readonly string[];

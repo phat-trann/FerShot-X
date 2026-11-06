@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "id": "20261106T134909-antigravity-A83-8c5fcf9c",
+  "created_at": "2026-11-06T13:49:09.596485+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A83",
+  "completion": "done",
+  "summary": "F11 app/native integration: Verified crop transformations, restoreOriginal lineage tracking, and SelectionHandlesOverlay integration.",
+  "files": [
+    "src/Workspace.tsx",
+    "src/Workspace.tools.tsx",
+    "coordination/handoffs/antigravity/A83-integration.json",
+    "docs/agents/antigravity/A83.md"
+  ],
+  "file_sha256": {
+    "src/Workspace.tsx": "e2879fca74d6b07987cb81c8433ddb4a76d8507c4eb220d6055e82a3db91c13a",
+    "src/Workspace.tools.tsx": "000c15783e9d14d9de80f94b3f641c0c41527f1ed699b89b5b22f519e8bc36e5",
+    "coordination/handoffs/antigravity/A83-integration.json": "7007d307c825693c7352207cc2a70acffdd38e08760a964cbd727d38b75d2cea",
+    "docs/agents/antigravity/A83.md": "332eb0e9bbcb2f6e36e8f257c035fbcf10975b55e8bcfdd5a7bc09d84898ac0a"
+  },
+  "checks": [
+    "Tests/builds/setup NOT RUN — deferred by user",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Crop, selection handles, and non-destructive return to original app wiring verified."
+  ],
+  "review": "pending"
+}

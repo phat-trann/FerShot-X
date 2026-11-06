@@ -1,5 +1,46 @@
 # Temporary two-agent allocation — 2026-11-05
 
+## Latest user authorization: Anti may integrate features (2026-11-06)
+
+External Antigravity may connect real features into the app and native backend, including Workspace/platform code, native commands, contracts, root manifests/lockfiles/capabilities/config and required functional CSS. Shared edits require BOTH its ordinary task claim and root-wiring. Acquire root-wiring before reading a shared file for modification; reread after acquiring it. If occupied, skip shared edits and continue independent module work; never remove/inherit another session claim or touch active producers. Source feature ownership and historical authorship stay preserved. Anti may update only its evidenced feature source/wiring rows under these claims; acceptance ledger and generated review index/legacy review decisions stay Codex-owned. No self-approval. Codex coordinates final assembly; root integration is no longer Codex-exclusive. Tests/builds/typechecks/setup remain NOT RUN — deferred by user. No Swift, upgrades, OS actions, uploads, telemetry or cosmetic cleanup. Older exclusive-root/producer-only text below is superseded.
+
+
+## Latest user priority: source implementation only (2026-11-06)
+
+Do not run tests, typechecks, compilation, builds, bundling, formatting or lint in this implementation pass. Record tests and builds NOT RUN — deferred by user. Implement and connect missing production functions, then publish/release and continue. Source review/reading APIs, evidence and dependency resolution are allowed; they are not validation or native acceptance. External Antigravity receives small independent production scopes A43–A45, never an internal impersonation. Codex reviews their actual source and keeps USER_WAIVED_REVIEW changes marked for later user overall review. Previous validation instructions below are superseded for this pass.
+
+
+## Latest user priority: features before tests (2026-11-06)
+
+The user explicitly defers test execution until the complete feature implementation pass is ready. Prioritize missing production logic and app/native wiring; do not create or execute validation-only work, test expansion, browser suites or acceptance batches in this pass. Record tests as NOT RUN — deferred by user. Necessary syntax/type/compile checks remain allowed, reported separately. Existing test evidence remains historical; this instruction does not fabricate acceptance, parity or completion. Codex review credit remains marked for later overall review. Antigravity is the external AI/client, never an internal impersonation. Preserve claims and immutable records.
+
+
+## Separate Antigravity client (2026-11-06 clarification)
+
+Antigravity is a separate AI/client operated by the user. Codex must not create an internal worker called Antigravity, submit Antigravity output or impersonate its reviews. Assign work through the repository queue/messages only; review the real client's published packets. The temporary Antigravity allocation is A39-A42, enforced by the dispatcher allowlist. Codex keeps complex feature implementation and auto-review credit marked for later user review. No automatic client launch is installed.
+
+
+## Current allocation: Codex lead and bounded Antigravity work (2026-11-06)
+
+Antigravity may resume only small independent tasks A39-A42 in the active queue. Codex reviews those actual test/report changes and owns feature logic, reverse-engineering comparison, native/root wiring, integration builds and complex corrections. Do not run A38 reviews of Codex. Codex snapshots auto-pass the review gate by explicit user authority, marked USER_WAIVED_REVIEW for later user overall review; do not fabricate peer approval or native acceptance. Codex may finish free former Copilot/Antigravity production scopes under ordinary producer claims as explicitly authorized by the user. Preserve old authorship/immutable records and skip occupied scopes. Keep the 0.1.0 stack, exclusions and privacy boundaries.
+
+Read the original Shottr logic/evidence for the specific function being cloned; names/selectors alone are not implementation proof. Bind evidence to target.json and distinguish static instructions from runtime equivalence. Complete useful work sequentially without waiting for Anti review. Report MVP acceptance percentage before/after; do not replace missing tests/behavior with auto-review credit.
+
+
+## User-authorized lead and active validation (2026-11-06)
+
+Codex is the lead integrator. The user explicitly grants Codex-authored packets review credit (`USER_WAIVED_REVIEW`, counts as reviewed) and requires them to stay marked for later overall review. This supersedes the requirement to wait for Antigravity review of Codex code. It is user authorization, not an independent or self-authored peer approval. Preserve immutable submissions/peer records. Current hashes, functional defects, incomplete work, tests and actual native acceptance remain distinct. Copilot work still receives actual Codex functional review; P57 is not a Codex-authored packet. See reviews/policy.json and the generated overall-review backlog in reviews/INDEX.md.
+
+Resume functional tests, browser acceptance with synthetic images/injected OS boundaries, integration checks and meaningful fixes alongside production. The user revoked the blanket test deferral. Do not end a request merely because a soft batch target is met; submit/release/select and continue useful available work. Keep formatting/lint delegated to Copilot H01. Report acceptance percentage before/after each request, changing only evidenced gates.
+
+
+## Sustained parallel production (2026-11-06)
+
+User requests more production work for both active clients while reviews wait. Aim for three useful Codex integration slices and four useful Copilot production tasks per request when inputs/scopes permit; this is scheduling guidance, not acceptance or a reason to generate filler. Finish one claim, publish/release and immediately take another independent source task. Prefer production panels/codecs and actual app/native wiring over test expansion, hygiene, review-only work or unrelated snapshot refreshes. Do not wait/poll for another client or start duplicate clients.
+
+Copilot queue now includes P73 editor-session codec and P74 archive panel, P75 manual scroll controls, P76 effect-region panel, P77 capture preference codec. Codex integrates preview/preferences/scrolling/effects/archive using the completed APIs. Keep exact file ownership and source-ready UNREVIEWED development status. Missing original behavior remains UNKNOWN; final/native/review acceptance is still deferred, not approved.
+
+
 ## Implementation-first priority (latest user instruction, 2026-11-05)
 
 Codex and the existing Copilot client work in parallel on distinct file claims. Prioritize completing in-scope function logic/configuration and provisional app wiring. New tests, broad regression batches, hygiene and validation-only backlog are deferred until the implementation pass is ready; record tests as NOT RUN rather than passed. Necessary syntax/type/compile checks remain allowed. Do not stop implementation solely to refresh unrelated stale broad snapshots.
@@ -68,3 +109,7 @@ On 2026-11-05 the accepted MVP ledger remains 61.25%; no new native/manual gate 
 C23 and C24 now give Codex isolated production work even while the pre-existing root-wiring claim is occupied. C23 adapts C18 recognition jobs to injected A33-shaped Vision ports, with strict source/revision/result checks. C24 adapts C17 capture sessions to an injected RGBA stitch port derived from A22 limits and owned leases. Each owns a separate feature folder, tests and README. No application command or native runtime integration is implied. Root/native wiring remains C08/C11 work under existing claim/review gates.
 
 P68/P69 independently test those adapters after current done producer packets and exports appear; skip active producer claims. Existing P53/P54 corrections stay first. Detailed two-file inputs and exact owned outputs are in build-tasks.json. These adapters/tests do not change the acceptance denominator or lift final independent signatures.
+
+## Production backlog refresh: P78-P81
+
+Continue available P78-P81 after current claims: auto-adjust controls and bounded app/hotkey/print preference codecs. Each task has two named inputs and isolated outputs in build-tasks.json. No review waiting, expanded tests or root writes; Codex performs integration.

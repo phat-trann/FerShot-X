@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "id": "20261106T133235-codex-COORD21-05cf841c",
+  "created_at": "2026-11-06T13:32:35.040735+07:00",
+  "agent": "codex",
+  "request": "SOURCE-PROGRESS-20261106",
+  "task": "COORD21",
+  "completion": "partial",
+  "summary": "Record six native/root feature source assessments: four implemented/wired, two explicit F01/F30 gaps; delegate bounded A74/A75 producers without changing the29-feature scope.",
+  "files": [
+    "coordination/build-tasks.json",
+    "coordination/COMPLETE-SCOPE.json",
+    "coordination/messages/antigravity/20261106-native-gap-producers-A74-A75.md",
+    "docs/agents/codex/COORD21-source-progress.md",
+    "src/Workspace.tsx",
+    "src/Workspace.repeat-region.tsx",
+    "src/Workspace.auto-scroll.tsx",
+    "src/Workspace.scroll.tsx",
+    "src/Workspace.deep-links.tsx",
+    "src/Workspace.application-preferences.tsx",
+    "src/platform/native.ts",
+    "src/platform/import-image.ts",
+    "src-tauri/src/lib.rs",
+    "src-tauri/src/auto_scroll.rs",
+    "src-tauri/src/application_services.rs",
+    "src-tauri/src/deep_links.rs",
+    "src-tauri/src/application_preferences.rs",
+    "src-tauri/Cargo.toml",
+    "src-tauri/Cargo.lock"
+  ],
+  "file_sha256": {
+    "coordination/build-tasks.json": "edb5dc623c71ed286ce0c737b42d89311e7f35cd2776866918b3f15b474cd5d1",
+    "coordination/COMPLETE-SCOPE.json": "e1aba2d587d0492d6f8d504d185132b3e86f5a8a15c7501b4a5d898d6d4c08fe",
+    "coordination/messages/antigravity/20261106-native-gap-producers-A74-A75.md": "a1253cc481be9dffee52873cc1baf9f5ed2c5bf42b60011536b943306f56adec",
+    "docs/agents/codex/COORD21-source-progress.md": "a7708f4c80be5fe74e2e5e56e5e503459349a6373c643a0aa5b2f6d492b2cc0e",
+    "src/Workspace.tsx": "e2879fca74d6b07987cb81c8433ddb4a76d8507c4eb220d6055e82a3db91c13a",
+    "src/Workspace.repeat-region.tsx": "acefec7e9b9a2a6c51d8370854ef870ccfd4475de9c4dcd34a52958c4b869e35",
+    "src/Workspace.auto-scroll.tsx": "1dadf5b5998185399df8591570a1951dc377f0508aa0c9d0127865b84ebcbf8f",
+    "src/Workspace.scroll.tsx": "081bfe44b914ee2efcc2b815be1e7a1c6eeec18ab96721eef2fd1a18915f97c0",
+    "src/Workspace.deep-links.tsx": "00f58c632745fc1de3ba5e8d6de192b3a70823906d4148192e65e1144facc678",
+    "src/Workspace.application-preferences.tsx": "0ad006d67108859199b74d364565edbe61ad75097951a5795196fe92bc75b840",
+    "src/platform/native.ts": "00595016d1600952cfc96e31b203505778797a55ca8b698f3364da68eb60abd0",
+    "src/platform/import-image.ts": "20903c504d4f318402b21102f5879b82fd2293fa0f91c27db04494c3a3a017f5",
+    "src-tauri/src/lib.rs": "7dc40ab95483d4ff38416491b0b048bddb84b619cfb3f683ccf448b3f28582c6",
+    "src-tauri/src/auto_scroll.rs": "fa393d5ca2153f9a968944d60cc439bcfc1d2570a720842b440207718e1a125c",
+    "src-tauri/src/application_services.rs": "4b23438a49a4c8884db627a0f72a90e0b6fab74b06620789163ed0fc1d24b7e7",
+    "src-tauri/src/deep_links.rs": "337b39c07888633b5e55bd5f6f131732fbde0cb4a168ae516815ed4cc9143a0b",
+    "src-tauri/src/application_preferences.rs": "74618a8f28c85859dc2dfe55ed06f2917c550bd4452e35eb8b2316c4f502c744",
+    "src-tauri/Cargo.toml": "8c11a6ae4341eb8945f4ffcd6737e0e1f55acba44b8b779d11bd4e5bac13713d",
+    "src-tauri/Cargo.lock": "56aedda42b616e1049aa0b485b95b87725c52678aad74b796b674ca407578662"
+  },
+  "checks": [
+    "Tests/typechecks/builds/setup NOT RUN — deferred by user. Source-only edits/read and JSON metadata publication.",
+    "Formatting/lint delegated to Copilot H01."
+  ],
+  "risks": [
+    "USER_WAIVED_REVIEW; later overall review required. Source uncompiled; actual native compatibility/behavior and original runtime parity unverified. Four reconciled closures are not an overall percentage; MVP acceptance68.75% unchanged."
+  ],
+  "review": "pending"
+}

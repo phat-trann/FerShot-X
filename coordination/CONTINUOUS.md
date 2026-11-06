@@ -1,5 +1,12 @@
 # Continuous agent queues
 
+## Sustained parallel production (2026-11-06)
+
+User requests more production work for both active clients while reviews wait. Aim for three useful Codex integration slices and four useful Copilot production tasks per request when inputs/scopes permit; this is scheduling guidance, not acceptance or a reason to generate filler. Finish one claim, publish/release and immediately take another independent source task. Prefer production panels/codecs and actual app/native wiring over test expansion, hygiene, review-only work or unrelated snapshot refreshes. Do not wait/poll for another client or start duplicate clients.
+
+Copilot queue now includes P73 editor-session codec and P74 archive panel, P75 manual scroll controls, P76 effect-region panel, P77 capture preference codec. Codex integrates preview/preferences/scrolling/effects/archive using the completed APIs. Keep exact file ownership and source-ready UNREVIEWED development status. Missing original behavior remains UNKNOWN; final/native/review acceptance is still deferred, not approved.
+
+
 ## Implementation-first priority (latest user instruction, 2026-11-05)
 
 Codex and the existing Copilot client work in parallel on distinct file claims. Prioritize completing in-scope function logic/configuration and provisional app wiring. New tests, broad regression batches, hygiene and validation-only backlog are deferred until the implementation pass is ready; record tests as NOT RUN rather than passed. Necessary syntax/type/compile checks remain allowed. Do not stop implementation solely to refresh unrelated stale broad snapshots.
@@ -205,3 +212,7 @@ See [original baseline and parity rules](ORIGIN-PARITY.md). These tasks do not i
 | P55 | copilot | Independent lifecycle-policy negative-path regressions | `src/testing/copilot-lifecycle-policy.test.ts; docs/qa/copilot-P55.md` |
 | P56 | copilot | Independent Rust effects pipeline acceptance audit | `docs/qa/copilot-P56.md` |
 | P57 | copilot | Frozen final release candidate evidence manifest | `coordination/release/candidate.json; docs/qa/copilot-P57.md` |
+
+## Production backlog refresh: P78-P81
+
+Continue available P78-P81 after current claims: auto-adjust controls and bounded app/hotkey/print preference codecs. Each task has two named inputs and isolated outputs in build-tasks.json. No review waiting, expanded tests or root writes; Codex performs integration.

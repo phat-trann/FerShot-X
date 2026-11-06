@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "id": "20261106T100858-codex-C12-323dcbd6",
+  "created_at": "2026-11-06T10:08:58.670168+07:00",
+  "agent": "codex",
+  "request": "IMPLEMENT-FIRST-20261106",
+  "task": "C12",
+  "completion": "partial",
+  "summary": "Wired blur/mosaic/solid-cover/transparent-erase region controls to bounded Rust pipeline and original-preserving app outputs; composition remains open",
+  "files": [
+    "src/Workspace.tsx",
+    "src/platform/native.ts",
+    "src-tauri/src/effects.rs",
+    "src-tauri/src/lib.rs",
+    "src-tauri/Cargo.toml",
+    "src-tauri/Cargo.lock",
+    "coordination/build-tasks.json",
+    "docs/agents/codex/C12-pixel-effects.md"
+  ],
+  "file_sha256": {
+    "src/Workspace.tsx": "4743eca500c7f040122c1f38688a4f4077d8e121620fab0a4ab4067420d28b65",
+    "src/platform/native.ts": "295fe6a446f5c8fed824830f8b2edd937601c34e0289552bf44c29408beab5d5",
+    "src-tauri/src/effects.rs": "15a25e03e2a0937125379e73654d417984ed139aef5ee257cba73138a7d0f138",
+    "src-tauri/src/lib.rs": "8295054a6917ce3135fbf1051fbd71a4fd108799978e7338aa62c4ca46be03cc",
+    "src-tauri/Cargo.toml": "28ebb3740a9b9836deb4f98b933bc9440a90b0223fc2dd772438d3c1166836b5",
+    "src-tauri/Cargo.lock": "cb89eba34ea710bcd20454bb7a0565ffa38f6f020d0143b1dc35aee520c6962a",
+    "coordination/build-tasks.json": "111e398ec8fa346011a2e198b1d855c698b6ad18460890436c490b4f700f1a9b",
+    "docs/agents/codex/C12-pixel-effects.md": "90d0640d6c1e390e2a24daaaea3f46e8a3e63767caa45165c92dc511f60d766d"
+  },
+  "checks": [
+    "Scoped strict TypeScript production compilation passed",
+    "Rust library compile passed; locked/offline final check passed",
+    "Lock comparison adds only local scroll/effects crates 0.1.0, no existing versions changed",
+    "Tests/native acceptance deferred per user priority; no OS actions executed",
+    "Formatting/lint delegated to Copilot H01"
+  ],
+  "risks": [
+    "Provisional unreviewed integration; composition/backdrop/auto-adjust and final acceptance still open"
+  ],
+  "review": "pending"
+}

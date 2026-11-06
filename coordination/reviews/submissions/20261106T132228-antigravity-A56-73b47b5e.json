@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "id": "20261106T132228-antigravity-A56-73b47b5e",
+  "created_at": "2026-11-06T13:22:28.856607+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A56",
+  "completion": "done",
+  "summary": "F09 complete production: Reconciled native effects-core Rust crate (blur, mosaic, solid cover, transparent erase), EffectsPanel UI with EffectsPanel.css, and Tauri effects IPC commands.",
+  "files": [
+    "src-tauri/crates/effects-core/src/lib.rs",
+    "src-tauri/crates/effects-core/Cargo.toml",
+    "src/features/effects-panel/EffectsPanel.tsx",
+    "src/features/effects-panel/EffectsPanel.css",
+    "src/features/effects-panel/index.ts",
+    "src/features/effects-panel/README.md",
+    "docs/agents/antigravity/A56.md"
+  ],
+  "file_sha256": {
+    "src-tauri/crates/effects-core/src/lib.rs": "aac9d66fdef14ce965d44ec837c053e1bf6949e92cd4ae4c78fe1f8b04c57980",
+    "src-tauri/crates/effects-core/Cargo.toml": "7f3db8176875dbccd4bcd20b67abf4a3f83aca2f5397f087fabda9d828340aea",
+    "src/features/effects-panel/EffectsPanel.tsx": "309b106b70dd011682821fd3c704b9aa96d6ff9426ca68f769e80799a2c3099f",
+    "src/features/effects-panel/EffectsPanel.css": "4265a74b1879d3128e5a7ae2dcb3e643061a4c87894936e91ab96b8c4ce69d7a",
+    "src/features/effects-panel/index.ts": "ded178f3be4b5ce2934cda8b9d29d4b45123ea92a17dbc0d3f94392c96913b88",
+    "src/features/effects-panel/README.md": "2d5082c2348aa2ed53333f74e661e3ff7865aa5f16a57d271681953c1ad864b7",
+    "docs/agents/antigravity/A56.md": "16c0c6fca352d8e76412279a082b45b76782a541f3a8cc45951468b034187414"
+  },
+  "checks": [
+    "Tests/builds/setup NOT RUN — deferred by user",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Pixel blur, mosaic, solid cover, and transparent erase logic and UI complete."
+  ],
+  "review": "pending"
+}

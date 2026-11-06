@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated": "2026-11-05",
+  "updated": "2026-11-06",
   "scope": "Ferby macOS MVP v0.1: local capture/import, basic annotations, crop/resize, PNG/JPEG save, session library, settings, native pin and local OCR.",
   "excluded": "Cloud/S3/upload, FTP (deferred), scrolling capture/stitching, advanced tools and full Shottr parity. Scope expansion must create a new baseline.",
   "milestones": [
@@ -227,18 +227,18 @@
       "gates": [
         {
           "name": "Bounded engine contract/core",
-          "done": false,
-          "evidence": "Not accepted yet"
+          "done": true,
+          "evidence": "docs/agents/codex/C08-recognition-acceptance.md"
         },
         {
           "name": "Synthetic text recognition tests",
-          "done": false,
-          "evidence": "Not accepted yet"
+          "done": true,
+          "evidence": "docs/agents/codex/C08-recognition-acceptance.md"
         },
         {
           "name": "UI/copy integration",
-          "done": false,
-          "evidence": "Not accepted yet"
+          "done": true,
+          "evidence": "docs/agents/codex/C08-recognition-acceptance.md"
         },
         {
           "name": "Native acceptance and failure handling",
@@ -274,5 +274,13 @@
         }
       ]
     }
+  ],
+  "checkpoint_notes": [
+    "- Accepted MVP score increased from 61.25% to 68.75% after bounded OCR core, actual Vision synthetic recognition and app UI/copy integration evidence. Final native OCR acceptance stays open.",
+    "- User grants Codex review credit (USER_WAIVED_REVIEW); every Codex snapshot stays marked in reviews/INDEX.md for later overall review. This is not independent peer review.",
+    "- Actual validation this request: 345 frontend tests in the earlier baseline run, 16 root Rust tests, 10 Vision tests (including real framework OCR/QR), 5 existing browser acceptance checks and 2 new recognition browser checks passed. Native OS actions were mocked except Vision on synthetic images.",
+    "- Source review found the P79 JPEG-quality schema mismatch; Copilot corrected it, and five root preference-contract tests now pass. Global tsc blockers are tracked through P61/H01 handoffs; final build outcome is reported separately.",
+    "- Copilot P83-P90 add eight bounded functional regressions; Codex continues reviews, functional fixes and C14/C15 integration without waiting for peer review.",
+    "- Manual capture/permissions/export/native window acceptance, final candidate and overall review remain open. No original Shottr runtime parity or full feature completion is implied."
   ]
 }

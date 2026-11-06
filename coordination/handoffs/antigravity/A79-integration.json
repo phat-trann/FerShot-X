@@ -1,0 +1,17 @@
+{
+  "task": "A79",
+  "feature_id": "F07",
+  "feature_name": "Text and numbered markers",
+  "status": "integrated",
+  "verified_sources": [
+    "src/Workspace.tsx",
+    "src/Workspace.editor.tsx",
+    "src/features/text-counter/TextCounterControls.tsx",
+    "src/features/text-counter/TextCounterControls.css",
+    "src/features/text-counter/index.ts",
+    "src/features/editor/advanced-workbench/AdvancedWorkbench.tsx"
+  ],
+  "wiring_details": "Bounded text labels and sequential numbered counter markers are integrated in AdvancedWorkbench (via WorkspaceEditor in Workspace.tsx), featuring draft input controls, anchor point clamping, auto-increment counter previews, and canvas rendering.",
+  "validation_status": "Tests/builds/setup NOT RUN — deferred by user. Standalone build delegated to Codex. Formatting/lint delegated to Copilot H01."
+}
+

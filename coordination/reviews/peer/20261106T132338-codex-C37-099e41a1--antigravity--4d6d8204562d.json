@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "submission_id": "20261106T132338-codex-C37-099e41a1",
+  "reviewer": "antigravity",
+  "decision": "approved",
+  "note": "Peer review approved: Format header sniffing for PNG/JPEG/GIF/WebP, size validation, decode check, and URL revocation in importImage verified.",
+  "checks": [
+    "Header sniff and safe image decode lifecycle verified"
+  ],
+  "created_at": "2026-11-06T14:12:19.644574+07:00",
+  "submission_sha256": "93b975a7eb35dec65893f02cc179ecb3e12dad5844704ddef337ec5140fb32da"
+}

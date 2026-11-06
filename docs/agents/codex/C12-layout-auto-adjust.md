@@ -1,0 +1,7 @@
+# C12 composition, backdrop and automatic adjustment (UNREVIEWED)
+
+Added explicit multi-image selection, image-pixel placements/sizes/z-order/opacity, vertical stacking, per-layer geometric snapping and transparent-canvas composition. Optional solid backdrop supports inset, corners and shadow. A36 planning plus A21/A20 renderers enforce geometry/pixel limits before source acquisition. Root adapters own and close all source/intermediate bitmaps, including the backdrop bitmap; selected rasters include basic/advanced edits. Output enters the library as a new PNG with unknown capture-scale provenance; default manual display scale 1 is never inferred Retina metadata. Input aggregate pixels are capped at 16 megapixels and output at existing dimension/32 MiB bounds.
+
+P78 controls now invoke A31's deterministic tonal adjustment on the edited raster, creating a new PNG and clearing temporary canvas allocation. Originals and annotation history remain intact. Known capture scale is preserved for same-sized adjustment output. Limited library insertion now releases rejected URL/scale metadata.
+
+Scoped strict TypeScript compilation passed; no Rust/dependency changes in this slice. Tests/browser pixels/native acceptance and independent review remain deferred. Explicit window-appearance/trim, richer backdrop configuration and further functional acceptance remain open. Formatting/lint delegated to Copilot H01. Canonical MVP acceptance before/after: 61.25%; no gate changes or Shottr-equivalence claim.

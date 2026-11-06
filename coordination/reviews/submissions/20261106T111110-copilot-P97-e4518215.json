@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "id": "20261106T111110-copilot-P97-e4518215",
+  "created_at": "2026-11-06T11:11:10.560195+07:00",
+  "agent": "copilot",
+  "request": "COPILOT-20261106-HOTKEY",
+  "task": "P97",
+  "completion": "done",
+  "summary": "Implemented strict five-action native accelerator adapter with canonical modifier/Code spelling, explicit supported key subset and reserved/duplicate alias validation",
+  "files": [
+    "src/features/hotkey-wire-codec/index.ts",
+    "src/features/hotkey-wire-codec/index.test.ts",
+    "src/features/hotkey-wire-codec/README.md",
+    "docs/qa/copilot-P97.md"
+  ],
+  "file_sha256": {
+    "src/features/hotkey-wire-codec/index.ts": "e883b2741842f116aba9a13fb9ba14dda08bb17b2140b8e0e1d744500137bbaf",
+    "src/features/hotkey-wire-codec/index.test.ts": "d9e8c0919be8bb56b43f52d349eb9a089dd5343965d35a26a98f663998aef249",
+    "src/features/hotkey-wire-codec/README.md": "fc0778fe48d5d18970f581fbad62aa7944a1018f03415a70acdad213d5afc080",
+    "docs/qa/copilot-P97.md": "3d31a1a355069785cb6afc87638bc63d5e5b7e1081a9fff1f037b08882632294"
+  },
+  "checks": [
+    "Node 26 vitest run src/features/hotkey-wire-codec/index.test.ts: 1 file, 36 tests passed"
+  ],
+  "risks": [
+    "Pure mapping only; native registration/permissions handled by Codex C13; no OS actions or target parity accepted; build delegated to Codex"
+  ],
+  "review": "pending"
+}

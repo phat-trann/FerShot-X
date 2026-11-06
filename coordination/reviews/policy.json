@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "authorized_by": "user",
+  "authorized_on": "2026-11-06",
+  "authorization": "Codex is the lead integrator; Codex code counts as reviewed now, must be marked, and will receive overall review later.",
+  "codex_review_state": "USER_WAIVED_REVIEW",
+  "counts_as_reviewed": true,
+  "overall_review_required": true,
+  "scope": "Existing and future Codex-authored packets; current snapshot and completion checks still apply. No independent peer review is asserted.",
+  "exclusions": "Does not complete unfinished work, waive known functional defects, fabricate tests/native acceptance or approve Copilot P57 as a Codex-authored packet."
+}

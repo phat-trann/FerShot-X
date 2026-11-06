@@ -1,0 +1,18 @@
+{
+  "task": "A97",
+  "feature_id": "F25",
+  "feature_name": "Output format / quality / downscale / destination",
+  "status": "integrated",
+  "verified_sources": [
+    "src/Workspace.tsx",
+    "src/Workspace.destination.tsx",
+    "src/platform/output-preferences.ts",
+    "src/features/export-destination-panel/ExportDestinationPanel.tsx",
+    "src/features/export-panel/ExportPanel.tsx",
+    "src/features/output-size/index.ts",
+    "src/features/app-preferences-codec/codec.ts"
+  ],
+  "wiring_details": "Output formats (PNG/JPEG), quality controls, retina downscaling (via withOutputPreferences and planOutputSize), destination directory selection (via WorkspaceDestination), and AppSettings persistence are fully integrated in Workspace.tsx.",
+  "validation_status": "Tests/builds/setup NOT RUN — deferred by user. Standalone build delegated to Codex. Formatting/lint delegated to Copilot H01."
+}
+

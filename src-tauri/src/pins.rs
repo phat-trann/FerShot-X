@@ -33,7 +33,7 @@ impl PinStore {
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct OpenPinRequest { source_id: String, name: String, png_base64: String }
 fn validate_source(id: &str) -> Result<(), NativeError> {
-    if id.is_empty() || id.len() > 128 || !id.bytes().all(|c| c.is_ascii_alphanumeric() || c == b'-' || c == b'_') {
+    if id.is_empty() || id.len() > 256 || !id.bytes().all(|c| c.is_ascii_alphanumeric() || c == b'-' || c == b'_' || c == b'~') {
         return Err(NativeError::new("invalid_pin", "Invalid source document identifier."));
     }
     Ok(())
@@ -98,7 +98,7 @@ pub async fn edit_pin(window: tauri::WebviewWindow, app: tauri::AppHandle,
 #[cfg(test)]
 mod tests {
     use super::*;
-    fn fixture() -> PinDocument { PinDocument { source_id: "synthetic".into(), name: "synthetic.png".into(), image: ImagePayload { png_base64: "small".into(), width: 1, height: 1, byte_size: 5 } } }
+    fn fixture() -> PinDocument { PinDocument { source_id: "synthetic".into(), name: "synthetic.png".into(), image: ImagePayload { png_base64: "small".into(), width: 1, height: 1, byte_size: 5, display_scale: None } } }
     #[test]
     fn pin_store_is_owned_bounded_and_cleaned_up() {
         let pins = PinStore::default();
@@ -112,7 +112,8 @@ mod tests {
     fn pin_requests_reject_paths_unknown_fields_and_large_source_ids() {
         for id in ["", "../main", "pin?q=1", "unsafe id"] { assert!(validate_source(id).is_err()); }
         assert!(validate_source("uuid-source_1").is_ok());
-        assert!(validate_source(&"x".repeat(129)).is_err());
+        assert!(validate_source("uuid-source_1~import-1").is_ok());
+        assert!(validate_source(&"x".repeat(257)).is_err());
         assert!(serde_json::from_value::<OpenPinRequest>(serde_json::json!({"sourceId":"doc","name":"image.png","pngBase64":"x","url":"https://example.invalid"})).is_err());
     }
 }

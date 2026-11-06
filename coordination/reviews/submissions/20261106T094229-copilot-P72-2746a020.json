@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "id": "20261106T094229-copilot-P72-2746a020",
+  "created_at": "2026-11-06T09:42:29.382560+07:00",
+  "agent": "copilot",
+  "request": "P72-parity-envelopes",
+  "task": "P72",
+  "completion": "done",
+  "summary": "Wrapped existing P43-P50 parity case arrays in the declared object contract with task IDs and Shottr baseline identity. Cases were preserved verbatim, including references, exclusions, statuses and null expected target results; no REA or runtime work performed.",
+  "files": [
+    "docs/qa/parity/P43.json",
+    "docs/qa/parity/P44.json",
+    "docs/qa/parity/P45.json",
+    "docs/qa/parity/P46.json",
+    "docs/qa/parity/P47.json",
+    "docs/qa/parity/P48.json",
+    "docs/qa/parity/P49.json",
+    "docs/qa/parity/P50.json",
+    "docs/qa/copilot-P72.md"
+  ],
+  "file_sha256": {
+    "docs/qa/parity/P43.json": "5e668b273856751653e453fc9c1e4af42005d83a6f4bc756be1a093a591c34a1",
+    "docs/qa/parity/P44.json": "80cac64487551fef9a81e691660790cb8ef7a8b8a043cb419083ecf365c05d1e",
+    "docs/qa/parity/P45.json": "534decadf2df0261056006b7caaa50adb23cecac319f19a17501db9139ec4aaf",
+    "docs/qa/parity/P46.json": "30d9af74a1aadefaf9beddc7f5e661f0317cb8aa2df6e324b75420055880eeb1",
+    "docs/qa/parity/P47.json": "8f8e6ffa634a31722730e12b055d0e80dc9c7b89b47757784b8a99212efbda4f",
+    "docs/qa/parity/P48.json": "6a67d6df4f235ad6dcbb3d361fb78dffd5979e9bfe0f7f288803c04261f26228",
+    "docs/qa/parity/P49.json": "6c6325da9e22f87987fd3f8ad093968cdc25ef95bd1298cfe83fb0ffaafb2311",
+    "docs/qa/parity/P50.json": "274a237d52d9917643195d5659cb1885942bd102e8998504b192a49bc35c9043",
+    "docs/qa/copilot-P72.md": "e48f453e8794b0a47b82cba328b4c89cec49657bd660b00e30611df724f93102"
+  },
+  "checks": [
+    "Bounded JSON validation passed for all eight envelopes; rtk proxy git diff --check passed. Counts: P43 4, P44 5, P45 6, P46 5, P47 4, P48 3, P49 3, P50 5."
+  ],
+  "risks": [
+    "No target/runtime observations were added; parity remains UNKNOWN or DELIBERATE_EXCLUSION as originally recorded."
+  ],
+  "review": "pending"
+}

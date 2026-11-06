@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "id": "20261106T100351-codex-C11-93a900ba",
+  "created_at": "2026-11-06T10:03:51.213421+07:00",
+  "agent": "codex",
+  "request": "IMPLEMENT-FIRST-20261106",
+  "task": "C11",
+  "completion": "partial",
+  "summary": "Integrated explicit manual scroll-frame collection, cancellation/ownership and bounded Rust stitching into the app; native acceptance remains pending",
+  "files": [
+    "src/Workspace.tsx",
+    "src/Workspace.scroll.tsx",
+    "src/platform/native.ts",
+    "src-tauri/src/scrolling.rs",
+    "src-tauri/src/lib.rs",
+    "src-tauri/Cargo.toml",
+    "src-tauri/Cargo.lock",
+    "coordination/build-tasks.json",
+    "docs/agents/codex/C11-manual-scroll.md"
+  ],
+  "file_sha256": {
+    "src/Workspace.tsx": "6836b0f368a80a5b65f5d040e682b5ed3ee4ef4f7dd122f87f24e7b01eb48649",
+    "src/Workspace.scroll.tsx": "d51fe69b4ac4b18af2c755e55f371e6c2df063ba4338626c924f2890e5653161",
+    "src/platform/native.ts": "aa783bd96fb8473f4b803b0fc7947e52e549250df5eba9717bdc84d93a502f85",
+    "src-tauri/src/scrolling.rs": "7ac2ffb3c03793398a5947c52579cfb6a5666f519f1a91f500ffc1db26f0ba2e",
+    "src-tauri/src/lib.rs": "729e4d97ca0310b454ae4b55c5c2a87434348786d83502fc1a84cbe3bc5bd3f8",
+    "src-tauri/Cargo.toml": "f204f705467a3a0b7530ebb694eedbc1e4cc8bef0ac21e411265313f70675461",
+    "src-tauri/Cargo.lock": "e58a89c8529ead4d683bc51a9bebd68f992014f7e8a4e9a3f097b84501600180",
+    "coordination/build-tasks.json": "47423b1162398f00c2022f0cc97e780173fc2bc3695fd970053bb855b3c7d305",
+    "docs/agents/codex/C11-manual-scroll.md": "12fcada9786f196f01fa5956412c07eb934e9d1f871ecfcb0afded535f3c70a8"
+  },
+  "checks": [
+    "Scoped strict TypeScript compile passed using existing Vite declarations",
+    "cargo check --locked --offline --manifest-path src-tauri/Cargo.toml --lib passed",
+    "Lock comparison: only ferby-scroll-core 0.1.0 added, no existing versions removed/changed",
+    "Tests deferred per user implementation-first priority; no OS captures executed",
+    "Formatting/lint delegated to Copilot H01"
+  ],
+  "risks": [
+    "Unreviewed provisional integration; native runtime and original scrolling equivalence remain unverified"
+  ],
+  "review": "pending"
+}

@@ -1,0 +1,17 @@
+{
+  "task": "A91",
+  "feature_id": "F19",
+  "feature_name": "Solid / gradient / caller-owned backgrounds",
+  "status": "integrated",
+  "verified_sources": [
+    "src/Workspace.tsx",
+    "src/Workspace.layout.tsx",
+    "src/platform/layout.ts",
+    "src/features/layout-workspace/LayoutWorkspace.tsx",
+    "src/features/composition/composition.ts",
+    "src/features/backdrop/backdrop-renderer.ts"
+  ],
+  "wiring_details": "Solid colors, linear/radial gradients, and caller-owned canvas fills are wired through LayoutWorkspace and Workspace.layout.tsx into composeWorkspaceLayout in platform/layout.ts, generating composed documents in Workspace.tsx.",
+  "validation_status": "Tests/builds/setup NOT RUN — deferred by user. Standalone build delegated to Codex. Formatting/lint delegated to Copilot H01."
+}
+

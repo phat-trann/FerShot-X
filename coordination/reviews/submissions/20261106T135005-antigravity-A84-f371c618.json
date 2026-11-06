@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "id": "20261106T135005-antigravity-A84-f371c618",
+  "created_at": "2026-11-06T13:50:05.354006+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A84",
+  "completion": "done",
+  "summary": "F12 app/native integration: Verified AutoAdjustPanel tonal adjustment and TransformTools resize integration in Workspace.tsx.",
+  "files": [
+    "src/Workspace.tsx",
+    "src/Workspace.tools.tsx",
+    "coordination/handoffs/antigravity/A84-integration.json",
+    "docs/agents/antigravity/A84.md"
+  ],
+  "file_sha256": {
+    "src/Workspace.tsx": "e2879fca74d6b07987cb81c8433ddb4a76d8507c4eb220d6055e82a3db91c13a",
+    "src/Workspace.tools.tsx": "000c15783e9d14d9de80f94b3f641c0c41527f1ed699b89b5b22f519e8bc36e5",
+    "coordination/handoffs/antigravity/A84-integration.json": "a1549d869b66d7297c5dab67edcea214d324d4b1ef2e3ed2b337193181a63840",
+    "docs/agents/antigravity/A84.md": "44d96dc899678ac8220d8f7786ce0779bb9b4b331a9b50fabcc809d50e64902f"
+  },
+  "checks": [
+    "Tests/builds/setup NOT RUN — deferred by user",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Resize and auto-adjustment app wiring verified."
+  ],
+  "review": "pending"
+}

@@ -1,0 +1,11 @@
+# C13 session global capture shortcuts
+
+Implemented typed main-only apply/read commands using pinned official tauri-plugin-global-shortcut 2.4.1. No default binding is registered. P97 maps a documented key subset to canonical accelerators; native parsing independently enforces five actions, modifiers, reservations and duplicates. Registration adds new keys before removing old keys, rolls back failures, reports failed cleanup and suppresses events until cleared. Press/release tracking prevents repeated presses while held. Main close clears owned registrations before destruction. No plugin JS registration permission is exposed to auxiliary windows.
+
+UI reads live session state, records drafts and applies/clears explicitly. Dispatch routes fullscreen/area/window capture, manual-scroll controls and capture-for-OCR through existing root actions. Busy operations, editing shortcut settings and focused editable controls suppress dispatch; background-window stale input focus does not suppress globals. Registration remains session-only, not persisted across app restarts. Capture-for-OCR opens the controls after capture rather than claiming instant-copy equivalence.
+
+Added required plugin dependencies without replacing any existing lockfile package version; 14 packages are additive. Native 24 tests passed with injected registry failures and no OS registration. P97 plus root status tests: 38 passed. Browser registration/clear test runs through fake native transport; exact outcome in tool log. Strict production-source tsc is separate from configured global build, currently blocked by unused React imports in completed external Anti tests. No formatter/lint run; cleanup ownership remains explicit.
+
+Original logic investigation is in C13-shottr-origin.md: real packaged entrypoints/callees read, complete pseudocode/runtime behavior still UNKNOWN. Full original Evidence exported, session closed. User review credit applies and later overall review remains required. Actual global OS registration, native capture/permission acceptance, persistent shortcuts and exact Shottr equivalence remain open. MVP acceptance before/after 68.75%, unchanged by this broader feature.
+
+Official API reference: https://v2.tauri.app/plugin/global-shortcut/ . Formatting/lint delegated; new package addition is task-required, not an upgrade of existing frozen versions.

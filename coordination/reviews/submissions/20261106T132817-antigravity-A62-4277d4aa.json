@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "id": "20261106T132817-antigravity-A62-4277d4aa",
+  "created_at": "2026-11-06T13:28:17.225056+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A62",
+  "completion": "done",
+  "summary": "F15 complete production: Reconciled fitImage viewport fitting, mapClientPoint coordinate mapping, and created controlled NavigationControls component with styling.",
+  "files": [
+    "src/features/viewport/fit.ts",
+    "src/features/point-map/index.ts",
+    "src/features/navigation-controls/NavigationControls.tsx",
+    "src/features/navigation-controls/NavigationControls.css",
+    "src/features/navigation-controls/index.ts",
+    "src/features/navigation-controls/README.md",
+    "docs/agents/antigravity/A62.md"
+  ],
+  "file_sha256": {
+    "src/features/viewport/fit.ts": "7e3957631adee7221f68a28b15fa7ee00fa26cdd377cb5e2a25fece9291af0c3",
+    "src/features/point-map/index.ts": "89a1a95773a962a12d3cdea63b1d997b19a67af4d65876897469a5d5fdb9e8aa",
+    "src/features/navigation-controls/NavigationControls.tsx": "235289d6ca6a0e8042bf6dfb20840703a33892cca1a5569860dc0452e02dc121",
+    "src/features/navigation-controls/NavigationControls.css": "fbd05ea99da1413f06ca79b1a831f1991a18401c913de30dc96b3c5f24e611ba",
+    "src/features/navigation-controls/index.ts": "0093dcd95dfd8823b425e3d907a18e12ad61bd03d56ec3c60b4e7f801e57bed7",
+    "src/features/navigation-controls/README.md": "2c1cb047ab4509f3b820030d280621e16b13fc2c1a0331383ca1bf5584d3e9ae",
+    "docs/agents/antigravity/A62.md": "a5a88fff289aaae646a56dcca6e6cd8a50e077a9301776ea7d31176cc82108ff"
+  },
+  "checks": [
+    "Tests/builds/setup NOT RUN — deferred by user",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Proportional image fitting, client coordinate mapping, and NavigationControls zoom UI complete."
+  ],
+  "review": "pending"
+}

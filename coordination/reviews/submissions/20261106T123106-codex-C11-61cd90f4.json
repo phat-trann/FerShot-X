@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "id": "20261106T123106-codex-C11-61cd90f4",
+  "created_at": "2026-11-06T12:31:06.013606+07:00",
+  "agent": "codex",
+  "request": "REPEAT-REGION-20261106",
+  "task": "C11",
+  "completion": "partial",
+  "summary": "Implement explicit fixed-region/repeat capture with physical display geometry validation and shared post-capture behavior; reject stale geometry and crop locally before returning image.",
+  "files": [
+    "src-tauri/src/imaging.rs",
+    "src-tauri/src/scrolling.rs",
+    "src-tauri/src/lib.rs",
+    "src/platform/native.ts",
+    "src/Workspace.tsx",
+    "src/Workspace.repeat-region.tsx",
+    "docs/agents/codex/C11-repeat-region.md"
+  ],
+  "file_sha256": {
+    "src-tauri/src/imaging.rs": "28c3e6e15931e686fd2a60be73ddf49f92a918db000f223014e46759809d9573",
+    "src-tauri/src/scrolling.rs": "e33033d58fb548d13a4a01c750d48d631acf5b6397ac446e75eae35d3dd5340f",
+    "src-tauri/src/lib.rs": "41fb195eec838fadd420e29937d7e98a90c716285fb5abbdbf8df5db887330d0",
+    "src/platform/native.ts": "809e1b92b605a86edd587b192c74f5d7e1175ed8b573d6f5802907f8ed7bb67a",
+    "src/Workspace.tsx": "7cf39d6b8ba78cf23174a176648a25967df755de5362d482e9daa342f63afd71",
+    "src/Workspace.repeat-region.tsx": "847e43bccae47446553905663a9da37889e39e5812e40d93003fd002fa98669e",
+    "docs/agents/codex/C11-repeat-region.md": "c8e4dfad77eda1ee5154c57be31705063364474f7c082541328e0fc4854269ac"
+  },
+  "checks": [
+    "TypeScript no-emit and locked offline cargo check --lib passed. Tests NOT RUN — deferred by user.",
+    "Formatting/lint delegated to Copilot H01."
+  ],
+  "risks": [
+    "USER_WAIVED_REVIEW; later overall review required. No captures or OS actions executed. Interactive last-area provenance, device identity, active-window semantics and native acceptance remain open. MVP acceptance unchanged at 68.75%."
+  ],
+  "review": "pending"
+}

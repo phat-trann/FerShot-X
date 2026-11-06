@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "id": "20261106T135630-antigravity-A91-2e0492b8",
+  "created_at": "2026-11-06T13:56:30.353623+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A91",
+  "completion": "done",
+  "summary": "F19 app/native integration: Verified solid, gradient, and caller-owned backgrounds in LayoutWorkspace, Workspace.layout.tsx, and Workspace.tsx.",
+  "files": [
+    "src/Workspace.tsx",
+    "src/Workspace.layout.tsx",
+    "src/platform/layout.ts",
+    "coordination/handoffs/antigravity/A91-integration.json",
+    "docs/agents/antigravity/A91.md"
+  ],
+  "file_sha256": {
+    "src/Workspace.tsx": "e2879fca74d6b07987cb81c8433ddb4a76d8507c4eb220d6055e82a3db91c13a",
+    "src/Workspace.layout.tsx": "9572c20a290f92b053510facba1fb3fd83413bc3a076632810a1e34367dfbc80",
+    "src/platform/layout.ts": "f5f01791ddd3dd8c0050a0537c8a7a7661dede4c9480874dd67417eb736fec7e",
+    "coordination/handoffs/antigravity/A91-integration.json": "6f96632ef774391f1f84d351426feb50ba2cb0bec8e335a4b8ebc481f9c99fea",
+    "docs/agents/antigravity/A91.md": "2b2b1b5f1eed84ab0ded55ff7d20c419fbc276396361a956cca9ca2724ea7b87"
+  },
+  "checks": [
+    "Tests/builds/setup NOT RUN — deferred by user",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Solid, gradient, and custom backgrounds app wiring verified."
+  ],
+  "review": "pending"
+}

@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "id": "20261106T125131-antigravity-A44-4dfc973c",
+  "created_at": "2026-11-06T12:51:31.309069+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A44",
+  "completion": "done",
+  "summary": "Implemented controlled CaptureActionControls component with explicit buttons, capability gating for activeWindowSupported and fixedRegionSupported, and single-click forwarding.",
+  "files": [
+    "src/features/capture-action-controls/CaptureActionControls.tsx",
+    "src/features/capture-action-controls/CaptureActionControls.css",
+    "src/features/capture-action-controls/index.ts",
+    "src/features/capture-action-controls/README.md",
+    "docs/agents/antigravity/A44.md"
+  ],
+  "file_sha256": {
+    "src/features/capture-action-controls/CaptureActionControls.tsx": "0d47a90bec4fecf4a23bffe73e5985ac2b8b7108271b5f0853dd320439cafb40",
+    "src/features/capture-action-controls/CaptureActionControls.css": "180dadf0fc6cd227024d2b401681c8dcb64d07e49fe93231f459b6a0ce8fa2b3",
+    "src/features/capture-action-controls/index.ts": "527300c87f337e865f964ba41dca29e549fb346553311ccbd4fdefe34d47ebab",
+    "src/features/capture-action-controls/README.md": "1de6d7bf98dfd836241cb7883139c893fe81e61676454042ffe8938e6baedf7c",
+    "docs/agents/antigravity/A44.md": "75d9315087cd66fc35955f4ea5da8212ac6cf69e68f85f672bf951d28ca3718f"
+  },
+  "checks": [
+    "Tests/builds NOT RUN — deferred by user",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Isolated UI component only; root integration and native capture invocation handled by Codex C26."
+  ],
+  "review": "pending"
+}

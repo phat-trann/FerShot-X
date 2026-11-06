@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "id": "20261106T095155-copilot-P75-e8869522",
+  "created_at": "2026-11-06T09:51:55.348017+07:00",
+  "agent": "copilot",
+  "request": "P75",
+  "task": "P75",
+  "completion": "done",
+  "summary": "Added controlled manual ScrollWorkspace with maxHeight/reverseDirection config, explicit start/capture/stop-stitch/cancel actions, running-state config lock, no-frame stop prevention, reused ScrollCapturePanel height bounds, and caller-owned C11 seams. Added plain exports and README documenting manual collection and unknown/native boundaries.",
+  "files": [
+    "src/features/scroll-workspace/ScrollWorkspace.tsx",
+    "src/features/scroll-workspace/index.ts",
+    "src/features/scroll-workspace/README.md"
+  ],
+  "file_sha256": {
+    "src/features/scroll-workspace/ScrollWorkspace.tsx": "6e0c3876eb5818b59e8cc16dce26af6350559768bb9c5613a08f2aebe51bcdf2",
+    "src/features/scroll-workspace/index.ts": "d138eda04d4e3a3b33a6ebfed9edc4d7b76015119c374759bc69a0002ce8e3ad",
+    "src/features/scroll-workspace/README.md": "181ba42622e883a126d3f180e91b79bc03795384c50853ec630af9a8e6459c70"
+  },
+  "checks": [
+    "Node 26 npx tsc --noEmit --pretty false: P75 files produced no diagnostics; command is blocked by pre-existing PreferencesWorkspace errors."
+  ],
+  "risks": [
+    "No tests added per task acceptance; build/integration remains Codex-owned."
+  ],
+  "review": "pending"
+}

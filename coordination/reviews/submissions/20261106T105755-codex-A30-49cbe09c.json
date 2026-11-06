@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "id": "20261106T105755-codex-A30-49cbe09c",
+  "created_at": "2026-11-06T10:57:55.076088+07:00",
+  "agent": "codex",
+  "request": "PRINT-MIME-20261106",
+  "task": "A30",
+  "completion": "done",
+  "summary": "Kept print-only WebP/GIF sources usable by skipping unavailable drag payload validation; capability regression and full frontend build/tests passed",
+  "files": [
+    "src/features/local-output/local-output.tsx",
+    "src/features/local-output/local-output.test.tsx",
+    "docs/agents/codex/A30-capability-fix.md"
+  ],
+  "file_sha256": {
+    "src/features/local-output/local-output.tsx": "604ea08d0e23a6b9c232698306624a91de29f434acc99981b01a092d22ed5a8e",
+    "src/features/local-output/local-output.test.tsx": "9729cfa56f668395e25dbeb12f0bcc247a75c9a6fa024701f82803cccf367676",
+    "docs/agents/codex/A30-capability-fix.md": "6296ba88fadb25805bce27b319d2ec88a1fe50d35e14789a113eae24329629bc"
+  },
+  "checks": [
+    "A30: 2 tests passed; global frontend: 392 tests/109 files passed at this checkpoint",
+    "npm run build passed: configured tsc plus Vite production build",
+    "USER_WAIVED_REVIEW counts as reviewed; overall review required; formatting/lint delegated to Copilot H01"
+  ],
+  "risks": [
+    "No native print dialog/drag operation executed by automated checks; final output acceptance remains open"
+  ],
+  "review": "pending"
+}

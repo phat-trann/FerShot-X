@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "id": "20261106T103933-copilot-P88-03c4ce49",
+  "created_at": "2026-11-06T10:39:33.536191+07:00",
+  "agent": "copilot",
+  "request": "P88",
+  "task": "P88",
+  "completion": "done",
+  "summary": "Added adversarial app-preferences codec regressions for nondefault/nested round-trip and immutable results, unsupported schema and unknown fields, wrong boolean types, JPEG quality zero/fractional range counterexamples, and oversized UTF-8 input.",
+  "files": [
+    "src/testing/copilot-app-preferences-codec.test.ts"
+  ],
+  "file_sha256": {
+    "src/testing/copilot-app-preferences-codec.test.ts": "bb35e131cd19ddf3c6bf4886412be2b3fff8e4afdfac4a1124a4809e5d6659ba"
+  },
+  "checks": [
+    "Node 26 vitest run src/testing/copilot-app-preferences-codec.test.ts: 1 file passed, 4 tests passed."
+  ],
+  "risks": [
+    "Codec remains a local Ferby sidecar; no persistence or OS behavior is tested."
+  ],
+  "review": "pending"
+}

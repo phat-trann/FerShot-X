@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "id": "20261106T132951-antigravity-A64-14d4ffca",
+  "created_at": "2026-11-06T13:29:51.715572+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A64",
+  "completion": "done",
+  "summary": "F17 complete production: Reconciled sampleRgba, averageRgba, rgbToHex/hexToRgb, and ColorFormatControls UI with HEX/RGB/RGBA copy dispatches.",
+  "files": [
+    "src/features/pixel-sample/index.ts",
+    "src/features/average-rgba/index.ts",
+    "src/features/color/color.ts",
+    "src/features/color-format-controls/ColorFormatControls.tsx",
+    "src/features/color-format-controls/ColorFormatControls.css",
+    "src/features/color-format-controls/index.ts",
+    "docs/agents/antigravity/A64.md"
+  ],
+  "file_sha256": {
+    "src/features/pixel-sample/index.ts": "728854346d80760aa76f6a9d730d48d393244174429c491750fc978dd4f40819",
+    "src/features/average-rgba/index.ts": "a8649f9d16e4f1eab7e9ae9c05ead93a9adcb144bc9f4dd7d51652585c637bda",
+    "src/features/color/color.ts": "e080dc13a6baaf07d30cff77a6a8855d2fc24f12be5206e313834dd6d0be643b",
+    "src/features/color-format-controls/ColorFormatControls.tsx": "e6fc9068aa7c2fc1ab484e687f6f8ef1d97b04f79a5dfa8447457494cc4e30d9",
+    "src/features/color-format-controls/ColorFormatControls.css": "b058193060a298b7d7641323235a57bc5cab67621e7cbfd80bb4a5145327cf13",
+    "src/features/color-format-controls/index.ts": "c6b209e6ba3ad8b1ccc487d779f645aa90711008e3010230bacf910f97f3e052",
+    "docs/agents/antigravity/A64.md": "7fc29f80ceeda9346be2ac82a52b42351cdb71f3ec2dedf522804dfb5c9853c2"
+  },
+  "checks": [
+    "Tests/builds/setup NOT RUN — deferred by user",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Point and area pixel sampling and ColorFormatControls UI complete."
+  ],
+  "review": "pending"
+}

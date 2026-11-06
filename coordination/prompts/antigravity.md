@@ -1,5 +1,37 @@
 # Antigravity implementation prompts
 
+## Latest user authorization: Anti may integrate features (2026-11-06)
+
+External Antigravity may connect real features into the app and native backend, including Workspace/platform code, native commands, contracts, root manifests/lockfiles/capabilities/config and required functional CSS. Shared edits require BOTH its ordinary task claim and root-wiring. Acquire root-wiring before reading a shared file for modification; reread after acquiring it. If occupied, skip shared edits and continue independent module work; never remove/inherit another session claim or touch active producers. Source feature ownership and historical authorship stay preserved. Anti may update only its evidenced feature source/wiring rows under these claims; acceptance ledger and generated review index/legacy review decisions stay Codex-owned. No self-approval. Codex coordinates final assembly; root integration is no longer Codex-exclusive. Tests/builds/typechecks/setup remain NOT RUN — deferred by user. No Swift, upgrades, OS actions, uploads, telemetry or cosmetic cleanup. Older exclusive-root/producer-only text below is superseded.
+
+
+## Latest full-scope allocation (2026-11-06)
+
+The five-package split below is superseded. Follow coordination/COMPLETE-SCOPE.md: external Anti owns23 complete feature production groups A51–A73; Codex owns6 native/root groups C35–C40 plus final assembly C41. Finish current claims; preserve completed code and old authorship. This covers every non-excluded feature through100% implemented/wired source, with actual evidence per row. No tests, builds, typechecks or setup this pass. Do not stop at an arbitrary batch size or invent original/runtime parity.
+
+
+## Latest allocation: two equal feature workstreams (2026-11-06)
+
+Follow coordination/TWO-HALVES.md: external Anti owns five producer packages A46–A50; Codex owns their native/root consumers and final app assembly. Completed A43–A45 stay available for consumption. This supersedes older small-task-only allowlists below. No tests, typechecks, builds, bundling or setup this pass. Publish/release/select; missing producer exports mean another independent task, never duplicate implementation or polling.
+
+
+## Latest user priority: source implementation only (2026-11-06)
+
+Do not run tests, typechecks, compilation, builds, bundling, formatting or lint in this implementation pass. Record tests and builds NOT RUN — deferred by user. Implement and connect missing production functions, then publish/release and continue. Source review/reading APIs, evidence and dependency resolution are allowed; they are not validation or native acceptance. External Antigravity receives small independent production scopes A43–A45, never an internal impersonation. Codex reviews their actual source and keeps USER_WAIVED_REVIEW changes marked for later user overall review. Previous validation instructions below are superseded for this pass.
+
+
+## Separate Antigravity client (2026-11-06 clarification)
+
+Antigravity is a separate AI/client operated by the user. Codex must not create an internal worker called Antigravity, submit Antigravity output or impersonate its reviews. Assign work through the repository queue/messages only; review the real client's published packets. The temporary Antigravity allocation is A39-A42, enforced by the dispatcher allowlist. Codex keeps complex feature implementation and auto-review credit marked for later user review. No automatic client launch is installed.
+
+
+## Current allocation: Codex lead and bounded Antigravity work (2026-11-06)
+
+Antigravity may resume only small independent tasks A39-A42 in the active queue. Codex reviews those actual test/report changes and owns feature logic, reverse-engineering comparison, native/root wiring, integration builds and complex corrections. Do not run A38 reviews of Codex. Codex snapshots auto-pass the review gate by explicit user authority, marked USER_WAIVED_REVIEW for later user overall review; do not fabricate peer approval or native acceptance. Codex may finish free former Copilot/Antigravity production scopes under ordinary producer claims as explicitly authorized by the user. Preserve old authorship/immutable records and skip occupied scopes. Keep the 0.1.0 stack, exclusions and privacy boundaries.
+
+Read the original Shottr logic/evidence for the specific function being cloned; names/selectors alone are not implementation proof. Bind evidence to target.json and distinguish static instructions from runtime equivalence. Complete useful work sequentially without waiting for Anti review. Report MVP acceptance percentage before/after; do not replace missing tests/behavior with auto-review credit.
+
+
 Use the dispatcher prompt once to execute the queue, or paste a single task prompt for bounded work. Open the same local `ferby-shottr` checkout.
 
 ## Validation ownership
@@ -10,7 +42,7 @@ Run scoped functional tests only. Do not run/fix formatting, lint, cargo fmt/cli
 
 ```text
 Work in /Users/phattran/Documents/Code/Personal/ferby-shottr/ as antigravity.
-Read AGENTS.md, coordination/DELIVERY-PLAN.md and coordination/CONTINUOUS.md. Active queue: A01-A38 (A13 superseded).
+Read AGENTS.md, coordination/DELIVERY-PLAN.md and coordination/CONTINUOUS.md. Active queue for the separate Antigravity AI/client: A39-A42 only. Do not take A01-A38.
 Run rtk proxy python3 scripts/next_task.py --agent antigravity --claim.
 Read only the selected task's named inputs/section, not the entire task catalogue.
 For the source-grounded wave, read coordination/ORIGIN-PARITY.md once; never invent target behavior.

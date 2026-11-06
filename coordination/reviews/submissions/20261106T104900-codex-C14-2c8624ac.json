@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "id": "20261106T104900-codex-C14-2c8624ac",
+  "created_at": "2026-11-06T10:49:00.364899+07:00",
+  "agent": "codex",
+  "request": "ARCHIVE-20261106",
+  "task": "C14",
+  "completion": "partial",
+  "summary": "Implemented portable editable session archive import/export with exact source bytes, staged merge, collision handling, bounded native dialogs and atomic non-clobber file publication",
+  "files": [
+    "src/Workspace.tsx",
+    "src/Workspace.archive.tsx",
+    "src/platform/archive.ts",
+    "src/platform/archive.test.ts",
+    "src/platform/native.ts",
+    "src-tauri/src/archive.rs",
+    "src-tauri/src/lib.rs",
+    "src-tauri/src/pins.rs",
+    "tests/e2e/codex-archive.spec.ts",
+    "coordination/build-tasks.json",
+    "docs/agents/codex/C14-portable-archive.md"
+  ],
+  "file_sha256": {
+    "src/Workspace.tsx": "3f8fa877a4dcec8c43f80b98c557646a340c295186a462e21afeb2a1f32dafcf",
+    "src/Workspace.archive.tsx": "e482877ab8979e1f103396109875cdf72247480be2e799a2eec52b06b52e00d4",
+    "src/platform/archive.ts": "014759bfe661b84e2346a31681f2ec4af356991fbd68512684dd3608c2d8f0c8",
+    "src/platform/archive.test.ts": "9796af74387d50b0a7ef9b4fca88b48a4a087e486cc8801cb608d8d85560f19e",
+    "src/platform/native.ts": "82acf99070b8c6af7302ef9d69a6342f62ae67b94d3ff73fdada4959786596c7",
+    "src-tauri/src/archive.rs": "e65005a37301346f969f90238ff423d297b0ea80f2d90f76f166ead9df17d1be",
+    "src-tauri/src/lib.rs": "f8a8e1bdc47825cbe0564122e91f9beb3c4268fe363ed05de95208a7d3083622",
+    "src-tauri/src/pins.rs": "7d45c9b8ce54cc4bd27e162966edd600fc2ba906a724be4ad3202db6d6bcd06a",
+    "tests/e2e/codex-archive.spec.ts": "d3bbc7130c2f1ecb65582a00b7d01eb06ffd1bbbf68e40bc02164bfa13d5ed6a",
+    "coordination/build-tasks.json": "97dab522a4a7a4d5bf96ccad8a64adb1fd93ea949d7259fa4424b64a690c06f5",
+    "docs/agents/codex/C14-portable-archive.md": "d2bda4dc492166b4efe1dd102a00d59f412b279d6e02d91fd2d82f930d2ce77b"
+  },
+  "checks": [
+    "3 archive codec tests passed; 2 Playwright archive round-trip/corruption tests passed",
+    "19 root Rust tests passed including non-clobber, symlink rejection and temp cleanup",
+    "Scoped strict TypeScript compile run after final changes; full compile A37 hygiene blocker delegated",
+    "USER_WAIVED_REVIEW counts as reviewed by user authorization; later overall review required",
+    "Formatting/lint delegated to Copilot H01"
+  ],
+  "risks": [
+    "Real native dialogs and full product acceptance remain pending; portable Ferby format is not Shottr data migration"
+  ],
+  "review": "pending"
+}

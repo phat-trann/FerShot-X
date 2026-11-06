@@ -9,6 +9,11 @@ export function PreferenceControls({ settings, ready, busy, notice, onChange, on
       <option value="png">PNG</option><option value="jpeg">JPEG</option></select></label>
     <label>JPEG quality<input aria-label="Preferred JPEG quality" type="number" min="1" max="100" step="1" value={settings.jpegQuality}
       disabled={!ready || busy} onChange={(e) => { const quality = Number(e.target.value); if (Number.isInteger(quality) && quality >= 1 && quality <= 100) onChange({ ...settings, jpegQuality: quality }); }} /></label>
+    <label><input type="checkbox" aria-label="Show capture preview" checked={settings.showPreview} disabled={!ready || busy}
+      onChange={event => onChange({ ...settings, showPreview: event.target.checked })} />Show capture preview</label>
+    <label><input type="checkbox" aria-label="Downscale captures with known Retina scale" checked={settings.downscaleRetina} disabled={!ready || busy}
+      onChange={event => onChange({ ...settings, downscaleRetina: event.target.checked })} />Downscale Retina copy/save output</label>
+    <p>Downscaling uses known capture display scale. Images without scale metadata keep their pixel size.</p>
     <button disabled={!ready || busy} onClick={onSave}>Save preferences</button>
     {notice && <p role="status">{notice}</p>}
   </div></details>;

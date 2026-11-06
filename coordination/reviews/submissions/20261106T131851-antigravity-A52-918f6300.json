@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "id": "20261106T131851-antigravity-A52-918f6300",
+  "created_at": "2026-11-06T13:18:51.100348+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A52",
+  "completion": "done",
+  "summary": "F04 complete production: Reconciled recognition-preferences-codec, RecognitionProfilePanel, OcrPanel, and QrPanel supporting multi-language OCR and QR workflows.",
+  "files": [
+    "src/features/recognition-preferences-codec/codec.ts",
+    "src/features/recognition-preferences-codec/index.ts",
+    "src/features/recognition-preferences-codec/README.md",
+    "src/features/recognition-profile-panel/RecognitionProfilePanel.tsx",
+    "src/features/recognition-profile-panel/RecognitionProfilePanel.css",
+    "src/features/recognition-profile-panel/index.ts",
+    "src/features/recognition-profile-panel/README.md",
+    "src/features/ocr-panel/OcrPanel.tsx",
+    "src/features/ocr-panel/OcrPanel.css",
+    "src/features/ocr-panel/index.ts",
+    "src/features/qr-panel/QrPanel.tsx",
+    "src/features/qr-panel/QrPanel.css",
+    "src/features/qr-panel/index.ts",
+    "docs/agents/antigravity/A52.md"
+  ],
+  "file_sha256": {
+    "src/features/recognition-preferences-codec/codec.ts": "a4a0793b918140d8359be825a0c68d84d14245c2e8a579183035f070bc0e76d1",
+    "src/features/recognition-preferences-codec/index.ts": "782a4fc1abbfd7ff651de53f74669e78290c6dea64c4764787a6f6ca1178184c",
+    "src/features/recognition-preferences-codec/README.md": "82b9fa33c3197f6f46b2d140974ff67ed30dd25c6a46b66963ee4b2c1bc2fbd1",
+    "src/features/recognition-profile-panel/RecognitionProfilePanel.tsx": "8e192d99b552b11df1964e065a30f30a7136ec9b16e73d60237787cde766a883",
+    "src/features/recognition-profile-panel/RecognitionProfilePanel.css": "4c73b7922cc54d1cc46cc4bcf962c420b936f2b8ee7e04e326ce36c5329275c4",
+    "src/features/recognition-profile-panel/index.ts": "55681e7ce63891c85d1f28d5472ab62a6a4d1d643764f7cad7da44dfd118f287",
+    "src/features/recognition-profile-panel/README.md": "b21f57630f984653c1a079e4123fc8f80385f2a6503a5bdc10484f5b535f5148",
+    "src/features/ocr-panel/OcrPanel.tsx": "0969cd7e719e7e30ab2ab764ddda3233fc43c70e0b7ffe7819ad95b1fd5ce087",
+    "src/features/ocr-panel/OcrPanel.css": "dfadcc1f854eba923f4f3c5a71c9cdac25cc1c4d805616851852252a12d83950",
+    "src/features/ocr-panel/index.ts": "82a32ad05fc509bd33fde20debc63548d9b0cef5f07855a157714b74cdad46a6",
+    "src/features/qr-panel/QrPanel.tsx": "a860635d073bc96af084ad82afc5043eb2131d9412acdbf0d63642292c4ffdde",
+    "src/features/qr-panel/QrPanel.css": "20bf2ca196c8532d28c1c06c975a79cc98ef64b096b21bee9a6489317dde594e",
+    "src/features/qr-panel/index.ts": "1be92f555d77897d1719464e8a84f614772cba595001cfd73583a82049357865",
+    "docs/agents/antigravity/A52.md": "22cfe07364fbb9328840c4d7f6803e3ef90be9d2bd7db9d9bffd5a49513c6c04"
+  },
+  "checks": [
+    "Tests/builds/setup NOT RUN — deferred by user",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "OCR language preferences, line break formatting, and profile controls implemented and wired."
+  ],
+  "review": "pending"
+}

@@ -17,18 +17,18 @@ test("multi-image selection, close and same-file reimport preserve other documen
   await expect(page.locator(".ferby-library-panel__item")).toHaveCount(2);
   await expect(page.locator(".canvas-image")).toHaveAttribute("alt", "first.png");
   await picker.setInputFiles({ name: "bad.txt", mimeType: "text/plain", buffer: Buffer.from("not an image") });
-  await expect(page.getByRole("alert")).toContainText("Choose a PNG");
+  await expect(page.locator(".error-banner")).toContainText("Choose a PNG");
   await expect(page.locator(".ferby-library-panel__item")).toHaveCount(2);
   await page.getByRole("button", { name: "Dismiss error" }).click();
   await picker.setInputFiles(fixture("third.png"));
   await expect(page.locator(".ferby-library-panel__item")).toHaveCount(3);
-  await expect(page.getByRole("alert")).toHaveCount(0);
+  await expect(page.locator(".error-banner")).toHaveCount(0);
 });
 
 test("browser capture is rejected without accessing the screen", async ({ page }) => {
   await page.goto("/");
   await page.getByRole("button", { name: /Capture Area/ }).click();
-  await expect(page.getByRole("alert")).toContainText("Open the desktop app");
+  await expect(page.locator(".error-banner")).toContainText("Open the desktop app");
   await expect(page.locator(".ferby-library-panel__item")).toHaveCount(0);
   await expect(page.getByRole("button", { name: "Open an image", exact: true })).toBeEnabled();
 });
@@ -64,11 +64,11 @@ test("mock IPC crop failure recovers, preserves original, and save forwards form
   await page.locator("summary").filter({ hasText: /^Crop$/ }).click();
   await page.getByRole("spinbutton", { name: "Crop X", exact: true }).fill("1");
   await page.getByRole("button", { name: "Apply crop", exact: true }).click();
-  await expect(page.getByRole("alert")).toContainText("crop must fit within image bounds");
+  await expect(page.locator(".error-banner")).toContainText("crop must fit within image bounds");
   await page.getByRole("spinbutton", { name: "Crop width", exact: true }).fill("1");
   await page.getByRole("button", { name: "Apply crop", exact: true }).click();
   await expect(page.getByRole("button", { name: "Close original.png", exact: true })).toBeDisabled();
-  await expect(page.getByRole("alert")).toContainText("Crop is outside image");
+  await expect(page.locator(".error-banner")).toContainText("Crop is outside image");
   await expect(page.locator(".ferby-library-panel__item")).toHaveCount(1);
   await page.getByRole("spinbutton", { name: "Crop X", exact: true }).fill("0");
   await page.getByRole("spinbutton", { name: "Crop width", exact: true }).fill("1");

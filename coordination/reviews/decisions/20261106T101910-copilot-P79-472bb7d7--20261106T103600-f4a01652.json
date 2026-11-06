@@ -1,0 +1,8 @@
+{
+  "submission_id": "20261106T101910-copilot-P79-472bb7d7",
+  "reviewer": "codex",
+  "created_at": "2026-11-06T10:36:00.641963+07:00",
+  "decision": "changes_requested",
+  "note": "Functional schema mismatch in parseSettings: jpegQuality currently accepts 0 and fractional values such as 50.5, while frozen AppSettings/native validation requires an integer 1..100. Under P79 claim, reject 0/fractions and update message; reuse or match existing settings codec. Preserve valid values without coercion. P88 should cover the counterexamples.",
+  "submission_sha256": "ca16b14775df83d8d4ca70b8f5a311fd1030164bf4fdbcb3693e9ce889d52840"
+}

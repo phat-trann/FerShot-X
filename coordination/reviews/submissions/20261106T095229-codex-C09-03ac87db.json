@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "id": "20261106T095229-codex-C09-03ac87db",
+  "created_at": "2026-11-06T09:52:29.582698+07:00",
+  "agent": "codex",
+  "request": "IMPLEMENT-FIRST-20261106",
+  "task": "C09",
+  "completion": "partial",
+  "summary": "Wired timed capture preview and explicit edit/copy/save/pin/OCR controls to the captured library document, applying persisted showPreview preference",
+  "files": [
+    "src/Workspace.tsx",
+    "coordination/build-tasks.json",
+    "docs/agents/codex/C09-capture-preview-integration.md"
+  ],
+  "file_sha256": {
+    "src/Workspace.tsx": "1cbf4a72108cb482ce0f214dae5dd18c0fb948fac3c2d5807e8dcea8af3ff65d",
+    "coordination/build-tasks.json": "b8136ea26e4e03b3e971304b961b9da4e66c88023817eb538526bee88faebc78",
+    "docs/agents/codex/C09-capture-preview-integration.md": "3e6e12bc25e109d76b2071379c932ede53b1b59a1295d3e7b159513ba4f756a3"
+  },
+  "checks": [
+    "Necessary scoped strict TypeScript compilation for actual Workspace passed",
+    "Functional/browser/native tests and formatting/lint deferred per user priority"
+  ],
+  "risks": [
+    "App-contained preview, not separate desktop thumbnail window; native pin/transparency/original parity acceptance remains unverified",
+    "Provisional UNREVIEWED integration; final acceptance unchanged"
+  ],
+  "review": "pending"
+}

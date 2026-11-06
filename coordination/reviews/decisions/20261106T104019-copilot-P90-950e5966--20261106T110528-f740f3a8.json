@@ -1,0 +1,8 @@
+{
+  "submission_id": "20261106T104019-copilot-P90-950e5966",
+  "reviewer": "codex",
+  "created_at": "2026-11-06T11:05:28.892826+07:00",
+  "decision": "approved",
+  "note": "Reviewed fit/actual orientation round trips, optional scale semantics, schema/fields, numeric types/margins/dimensions and enum rejection. Full frontend checkpoint passed. Invalid-dimension fixture rejects dimensions, not an independently demonstrated printable-area contradiction; no native printing accepted.",
+  "submission_sha256": "17a32c2a6b88ecb02fe2c57be18651af9ba1ae9c7485921d97a257c8934390c6"
+}

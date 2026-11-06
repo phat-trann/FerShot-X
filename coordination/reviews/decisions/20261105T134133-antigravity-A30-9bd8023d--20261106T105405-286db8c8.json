@@ -1,0 +1,8 @@
+{
+  "submission_id": "20261105T134133-antigravity-A30-9bd8023d",
+  "reviewer": "codex",
+  "created_at": "2026-11-06T10:54:05.277041+07:00",
+  "decision": "changes_requested",
+  "note": "Further capability integration found an actual UI defect: LocalOutputPanel enables Print with onRequestNativePrint undefined and enables draggable payload when onInitiateImageDrag is undefined. P71 independently advertises canPrint/canDrag but supplies undefined callbacks when unavailable, so each action must disable independently. Codex is taking the free A30 producer scope under user authorization, preserving authorship and adding a regression; this supersedes the earlier presentation approval for current integration.",
+  "submission_sha256": "4b11b6d02527d37b6dca438c431779808a14323e1a63734ba3ce20f3e9f7863d"
+}

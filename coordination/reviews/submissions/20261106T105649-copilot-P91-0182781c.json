@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "20261106T105649-copilot-P91-0182781c",
+  "created_at": "2026-11-06T10:56:49.972164+07:00",
+  "agent": "copilot",
+  "request": "COPILOT-20261106",
+  "task": "P91",
+  "completion": "done",
+  "summary": "Added six portable archive public-boundary regressions for data ownership/identity/schema/budgets and documented container-versus-raster validation separation",
+  "files": [
+    "src/testing/copilot-portable-archive.test.ts",
+    "docs/qa/copilot-P91.md"
+  ],
+  "file_sha256": {
+    "src/testing/copilot-portable-archive.test.ts": "f4133842e65339be32bd6fc99d0a7180dc292828d648a76e9c207d074682e332",
+    "docs/qa/copilot-P91.md": "917c80eb448aa56978ed7bf1256b9794541853e195956c016a3158dc9b09c9a0"
+  },
+  "checks": [
+    "Node 26 vitest run src/testing/copilot-portable-archive.test.ts: 1 file, 6 tests passed"
+  ],
+  "risks": [
+    "No browser raster/native dialog or original parity acceptance inferred; build delegated to Codex"
+  ],
+  "review": "pending"
+}

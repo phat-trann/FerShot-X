@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "id": "20261106T103827-codex-C08-b600fc9f",
+  "created_at": "2026-11-06T10:38:27.942280+07:00",
+  "agent": "codex",
+  "request": "VALIDATE-20261106",
+  "task": "C08",
+  "completion": "partial",
+  "summary": "Validated bounded Rust Vision OCR/QR with synthetic real framework recognition and actual app UI/copy/cancellation via mocked native transport; three OCR gates evidenced, native acceptance remains open",
+  "files": [
+    "tests/e2e/codex-recognition.spec.ts",
+    "src/Workspace.recognition.tsx",
+    "src/platform/recognition.ts",
+    "src/platform/native.ts",
+    "src-tauri/src/recognition.rs",
+    "src-tauri/crates/vision-core/src/lib.rs",
+    "src-tauri/crates/vision-core/tests/codex_output_budget.rs",
+    "src-tauri/src/lib.rs",
+    "docs/agents/codex/C08-recognition-acceptance.md"
+  ],
+  "file_sha256": {
+    "tests/e2e/codex-recognition.spec.ts": "e2bbb5579fe477173592f6111f985f2d488a0b2ef4a25e0513b769a03ea2a9c8",
+    "src/Workspace.recognition.tsx": "d50bd2f0aef1777406f6349d49d2bd07396c9eaf4832b22be1ee14976a6a7c2c",
+    "src/platform/recognition.ts": "639db0b4ff81fd45f6412be3bb3e0e41ddec05efb7a3cb533c8c8fab4c6e7ae8",
+    "src/platform/native.ts": "ed3d9f49729235630da321306e631edcac4c21a5d1482c2020275d4d6aa6ebce",
+    "src-tauri/src/recognition.rs": "369b5af06bd8bb4fb66a77cb23c6b2ba19f102ba17389ce62eb33303d9461d30",
+    "src-tauri/crates/vision-core/src/lib.rs": "4fe3829a11c7aec6b11ec4794aeec93c1661badd42afed3d25c9b9dd1dd741ab",
+    "src-tauri/crates/vision-core/tests/codex_output_budget.rs": "9e7f06c770673b315f2f35a86043f944fe2890c3c5e41abb919aebe5978efa8f",
+    "src-tauri/src/lib.rs": "0b3ca4577e032e1c7dfd79e3a0e8575faf20aa117c8ce39d9fe030ae651fc175",
+    "docs/agents/codex/C08-recognition-acceptance.md": "64c38be00ef3666efed952d480820149c2d245e1e15ada5b4b89e4bcbbb75936"
+  },
+  "checks": [
+    "Rust Vision: 10 tests passed, including generated text/QR using actual macOS Vision; one doc example ignored",
+    "Playwright recognition UI: 2 tests passed; real browser raster and mocked native/copy transport",
+    "Root Rust: 16 tests passed; no real screenshot/clipboard/window actions in automated checks",
+    "USER_WAIVED_REVIEW: user review credit applies; later overall review required",
+    "Formatting/lint delegated to Copilot H01"
+  ],
+  "risks": [
+    "Final native UI failure/permission acceptance and target Shottr parity remain unverified"
+  ],
+  "review": "pending"
+}

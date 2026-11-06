@@ -1,0 +1,17 @@
+{
+  "task": "A94",
+  "feature_id": "F22",
+  "feature_name": "Floating preview and thumbnail actions",
+  "status": "integrated",
+  "verified_sources": [
+    "src/Workspace.tsx",
+    "src/features/capture-preview/CapturePreviewController.tsx",
+    "src/features/capture-preview/CapturePreviewController.css",
+    "src/features/capture-workflow/CaptureWorkflowController.tsx",
+    "src-tauri/crates/preview-window-core/src/lib.rs",
+    "src/platform/native.ts"
+  ],
+  "wiring_details": "CapturePreviewController is wired as a floating thumbnail card in Workspace.tsx, bound to showPreview settings with auto-dismiss timers, paused state management, and direct action triggers for Edit, OCR, Copy, Pin, and Save.",
+  "validation_status": "Tests/builds/setup NOT RUN — deferred by user. Standalone build delegated to Codex. Formatting/lint delegated to Copilot H01."
+}
+

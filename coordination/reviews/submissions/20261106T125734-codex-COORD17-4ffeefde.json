@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "id": "20261106T125734-codex-COORD17-4ffeefde",
+  "created_at": "2026-11-06T12:57:34.649770+07:00",
+  "agent": "codex",
+  "request": "HALF-SPLIT-20261106",
+  "task": "COORD17",
+  "completion": "done",
+  "summary": "Split remaining work into five external Anti producer workstreams and five Codex native/integration workstreams; Codex owns final assembly and consumes completed A43-A45.",
+  "files": [
+    "coordination/build-tasks.json",
+    "coordination/TWO-HALVES.md",
+    "coordination/messages/antigravity/20261106-half-split-A46-A50.md",
+    "docs/agents/codex/COORD17-half-split.md"
+  ],
+  "file_sha256": {
+    "coordination/build-tasks.json": "5e4085cbaf111a5464e495ec94f4e4981dda813c1ddbe5c4a0f566d0041598fa",
+    "coordination/TWO-HALVES.md": "192e8e8ce683d091b2bff36aa9b4f3572626076694c27fc264a69c43ae5fedac",
+    "coordination/messages/antigravity/20261106-half-split-A46-A50.md": "caf98b60c81e74dbc0c870d517b6a4dab486bcb06815d3d164e78f84ff0a1b06",
+    "docs/agents/codex/COORD17-half-split.md": "f2984322b604c52a38ff9b637098c6fd4f9b80074979a09383d838a5e3b863f7"
+  },
+  "checks": [
+    "Tests/typechecks/builds/setup NOT RUN — deferred by user. Queue read/written as JSON only.",
+    "Formatting/lint delegated to Copilot H01."
+  ],
+  "risks": [
+    "External Anti must run its own client; no auto launch. Source implementation is not native acceptance; MVP acceptance remains68.75%."
+  ],
+  "review": "pending"
+}

@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "id": "20261106T133910-antigravity-A73-808e3687",
+  "created_at": "2026-11-06T13:39:10.687613+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A73",
+  "completion": "done",
+  "summary": "F26 complete production: Reconciled window appearance canvas rendering, ShadowTrimInsets calculation, and WindowAppearanceControls UI.",
+  "files": [
+    "src/features/window-appearance/window-appearance.ts",
+    "src/features/window-appearance/index.ts",
+    "src/features/window-appearance-controls/WindowAppearanceControls.tsx",
+    "src/features/window-appearance-controls/WindowAppearanceControls.css",
+    "src/features/window-appearance-controls/index.ts",
+    "docs/agents/antigravity/A73.md"
+  ],
+  "file_sha256": {
+    "src/features/window-appearance/window-appearance.ts": "9c8869108ca24d093dcfbd60f6b8c609d529a0ff15e2c29822d9e5a8262c27f2",
+    "src/features/window-appearance/index.ts": "ab9175b6facaaf2932f6031053cafb295f977e5ad835de07e5c09a7a82438e8b",
+    "src/features/window-appearance-controls/WindowAppearanceControls.tsx": "c6df51cf8cd3467c73e6e4c3c5b3ee1be965360dae82409142f056f4e954bf6f",
+    "src/features/window-appearance-controls/WindowAppearanceControls.css": "1ca6c090a826670df3351619528df23b929e98dcbd2de0567f2b47fad98c531b",
+    "src/features/window-appearance-controls/index.ts": "4a58857b432a470e537df3a2f175cbd189e6fb46d82473e6c25c1531c83eb822",
+    "docs/agents/antigravity/A73.md": "1020f0a9d7a8154dcf907af75ba551e686b18c1dd911d761b2a2c6413873aafd"
+  },
+  "checks": [
+    "Tests/builds/setup NOT RUN — deferred by user",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Window appearance layout, explicit shadow trim, and background rendering logic complete."
+  ],
+  "review": "pending"
+}

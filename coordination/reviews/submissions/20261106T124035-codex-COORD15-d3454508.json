@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "id": "20261106T124035-codex-COORD15-d3454508",
+  "created_at": "2026-11-06T12:40:35.061850+07:00",
+  "agent": "codex",
+  "request": "QUEUE-ID-CORRECTION-20261106",
+  "task": "COORD15",
+  "completion": "done",
+  "summary": "Correct notification/login follow-on to C29 because historical superseded C25 is reserved; preserve old task identity and update current source roadmap/handoff.",
+  "files": [
+    "coordination/build-tasks.json",
+    "coordination/FUNCTION-MAP.md",
+    "docs/agents/codex/COORD15-feature-handoff.md",
+    "coordination/handoffs/codex/20261106-implementation-first.json"
+  ],
+  "file_sha256": {
+    "coordination/build-tasks.json": "1f48a6784eac2dd2e86ceb95fb7ea90cf34a1771c5efa665dad1fd91ba311839",
+    "coordination/FUNCTION-MAP.md": "a22947c069f44717b85a533fa89da60890a80e5458bac46bc991d3bb33dd866e",
+    "docs/agents/codex/COORD15-feature-handoff.md": "be04765771afb7330f27576f42e86f7f1718595b6b0b37f6a77a9f1185b4c22c",
+    "coordination/handoffs/codex/20261106-implementation-first.json": "f7f1706f35c711002ffc378f6ae32188c91d297936248c101929cf0c08916e77"
+  },
+  "checks": [
+    "Queue JSON parsed; no source/binary changes. Tests NOT RUN — deferred by user.",
+    "Formatting/lint delegated to Copilot H01."
+  ],
+  "risks": [
+    "Corrects historical C25 reference in prior handoff packets; immutable submissions preserved. USER_WAIVED_REVIEW, later overall review required. Acceptance unchanged at 68.75%."
+  ],
+  "review": "pending"
+}

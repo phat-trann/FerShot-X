@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "id": "20261106T133125-antigravity-A65-e189e311",
+  "created_at": "2026-11-06T13:31:25.469805+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A65",
+  "completion": "done",
+  "summary": "F18 complete production: Reconciled backdrop inset, corner radius rounding, drop shadow blur/offsets, recentering layout, and canvas rendering.",
+  "files": [
+    "src/features/backdrop/backdrop-renderer.ts",
+    "src/features/backdrop/index.ts",
+    "src/features/editor/advanced-workbench/AdvancedWorkbench.tsx",
+    "docs/agents/antigravity/A65.md"
+  ],
+  "file_sha256": {
+    "src/features/backdrop/backdrop-renderer.ts": "d05fdd60636d624bbed2c2cfb0341fd9ce50e488074e8b7d52cf2781b4641971",
+    "src/features/backdrop/index.ts": "9535964f0e74b88b6fc227bb87a623f8a90b1fd2f48e61543f80a80e1e0f05d0",
+    "src/features/editor/advanced-workbench/AdvancedWorkbench.tsx": "9d783b02bb5ad43034c5c3712732a103bc0a3635aa68c88cbb483e5ae2cbf896",
+    "docs/agents/antigravity/A65.md": "76407ae1477ec56190c245b61ff5a39056631d1e33ccc12f18901c1261610387"
+  },
+  "checks": [
+    "Tests/builds/setup NOT RUN — deferred by user",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Backdrop styling, drop shadow, and layout rendering logic complete."
+  ],
+  "review": "pending"
+}

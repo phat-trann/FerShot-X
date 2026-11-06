@@ -13,7 +13,7 @@ fn import_with(reader: &mut impl ClipboardImageReader) -> Result<ImagePayload, N
         return Err(NativeError::new("image_limit", "The clipboard image is too large to import."));
     }
     Ok(ImagePayload { png_base64: STANDARD.encode(&imported.png_bytes), width: imported.width,
-        height: imported.height, byte_size: imported.png_bytes.len() })
+        height: imported.height, byte_size: imported.png_bytes.len(), display_scale: None })
 }
 
 #[tauri::command]

@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "id": "20261106T100532-codex-COORD06-b32caf8b",
+  "created_at": "2026-11-06T10:05:32.529527+07:00",
+  "agent": "codex",
+  "request": "IMPLEMENT-FIRST-20261106",
+  "task": "COORD06",
+  "completion": "done",
+  "summary": "Finalized four production allocations P78-P81; explicit P78 retry bypasses older empty queue-status packet, selector exposes all four tasks",
+  "files": [
+    "coordination/build-tasks.json",
+    "coordination/TWO-LANE.md",
+    "coordination/CONTINUOUS.md",
+    "coordination/prompts/copilot.md",
+    "coordination/messages/copilot/20261106-production-backlog-P78-P81.md",
+    "docs/agents/codex/COORD06-backlog.md"
+  ],
+  "file_sha256": {
+    "coordination/build-tasks.json": "8e10b1409fc3527295597d349f8446685e13eb8d34bc7502b772625d325ca556",
+    "coordination/TWO-LANE.md": "92efab4eb828b95c4897d7114e18ed885027855bf773ae7f1e04e603bd3b28fd",
+    "coordination/CONTINUOUS.md": "b6d2c65a0e4904a500f7fd5c784780d716f481fb8a5b58e5759d9a7066551401",
+    "coordination/prompts/copilot.md": "fdce59e4c954ae2d404cd4ddda4a2629b1d7f46bfb0940bf10509877b38bf843",
+    "coordination/messages/copilot/20261106-production-backlog-P78-P81.md": "0bbd3a6c07839171777762d1aef9b597fe8eb022393ddac2acafcc0fa7a7b9fe",
+    "docs/agents/codex/COORD06-backlog.md": "21d6a4c33ccc693f0ba1c2c8517305fb45b74478946a423a5ca1ae4df3c752b5"
+  },
+  "checks": [
+    "JSON, unique task IDs and both named input paths for all four tasks validated",
+    "Selector confirms P78 retry plus P79/P80/P81 implementation available",
+    "Formatting/lint delegated to Copilot H01; no product tests for coordination data"
+  ],
+  "risks": [
+    "Provisional implementation allocation, no review approval or automatic client launch"
+  ],
+  "review": "pending"
+}

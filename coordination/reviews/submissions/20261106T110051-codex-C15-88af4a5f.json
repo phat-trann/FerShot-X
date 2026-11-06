@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "id": "20261106T110051-codex-C15-88af4a5f",
+  "created_at": "2026-11-06T11:00:51.018502+07:00",
+  "agent": "codex",
+  "request": "PRINT-20261106",
+  "task": "C15",
+  "completion": "partial",
+  "summary": "Integrated dedicated bounded native print preview and explicit system-dialog command using existing Tauri API; native drag/deep-link remain open",
+  "files": [
+    "src/App.tsx",
+    "src/Workspace.tsx",
+    "src/Workspace.print.tsx",
+    "src/platform/native.ts",
+    "src-tauri/src/printing.rs",
+    "src-tauri/src/lib.rs",
+    "src-tauri/capabilities/print.json",
+    "tests/e2e/codex-print.spec.ts",
+    "tests/e2e/codex-clipboard.spec.ts",
+    "tests/e2e/codex-clipboard-import.spec.ts",
+    "tests/e2e/codex-regressions.spec.ts",
+    "coordination/build-tasks.json",
+    "docs/agents/codex/C15-native-print.md"
+  ],
+  "file_sha256": {
+    "src/App.tsx": "3b864b686b720325e304fdf9021de0cd71c9c62b44d7216ac20bda54959c0219",
+    "src/Workspace.tsx": "dc86311cbd8e99e756259cafcaef532ae8686810445ddf4db748439027846087",
+    "src/Workspace.print.tsx": "7e413178af3bde5bf15c8058c31faf68944371e56ef7897337196fe7fa6881d5",
+    "src/platform/native.ts": "35c0f0a3a3d38034e90e494ea4ced4fc9f9a257d39b80597b3f63d8fc234225f",
+    "src-tauri/src/printing.rs": "c22ad122a52907b48f6b65586f6e0ad219a82ffdde4e37d9bf47e15ab9a1d328",
+    "src-tauri/src/lib.rs": "2c9c0931c789ed0a9c289d3615f8eb4e6601899354df51354e587ef6adc1634d",
+    "src-tauri/capabilities/print.json": "326c3db12afd5921823fe9aab8e9709f06e4cadabf871134ff376f156673d884",
+    "tests/e2e/codex-print.spec.ts": "ae9fd579278819e40d1da45d16cfb9b5042e0e0508fc5ea79b9f8519c7980df1",
+    "tests/e2e/codex-clipboard.spec.ts": "83706dc66121cc90a741a4cb9335beb90915929066e8315bba83e4b7b3b2c8c8",
+    "tests/e2e/codex-clipboard-import.spec.ts": "771048c15e7e57a667ead76f153d38d34554e895c860f8c2315c73db0df5e1a5",
+    "tests/e2e/codex-regressions.spec.ts": "349b760cf428dcd40ca83917e3312a4d47f6d429151d88ceb9f7e3b428030c7a",
+    "coordination/build-tasks.json": "fbbd174866a2d9cb649d00d2bc6de8d35a73397cb91966fc42165a69e05eea67",
+    "docs/agents/codex/C15-native-print.md": "cb43d388fbfe97ee4ec0004e3d9e031ffad20d49168cc6bca39e8c7898a99f1e"
+  },
+  "checks": [
+    "21 root Rust tests passed; 2 dedicated print browser checks passed using mocked OS transport",
+    "Configured frontend tsc plus Vite build passed at preceding checkpoint; 392 frontend tests/109 files passed",
+    "Full Codex browser suite rerun after narrowing operation error assertions; actual result in final validation packet",
+    "First Tauri bundle attempt failed on worker P92 test typing; fixed by worker, app bundle still requires rerun",
+    "USER_WAIVED_REVIEW counts as reviewed; later overall review required; formatting/lint delegated to Copilot H01"
+  ],
+  "risks": [
+    "No real native print dialog executed; OS print/paper acceptance, native drag and protocol registration remain pending"
+  ],
+  "review": "pending"
+}

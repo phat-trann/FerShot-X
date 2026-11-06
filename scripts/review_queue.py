@@ -9,6 +9,7 @@ from pathlib import Path
 import re
 import tempfile
 import uuid
+from review_policy import codex_review_credit
 from zoneinfo import ZoneInfo
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -142,6 +143,8 @@ def build_index(root):
     for p in packets(root):
         decision = decisions.get(p['id'])
         state = 'STALE' if stale(root, p) else decision['decision'].upper() if decision else 'PENDING'
+        if state == 'PENDING' and codex_review_credit(root, p):
+            state = 'USER_WAIVED_REVIEW (COUNTS AS REVIEWED; OVERALL REVIEW DUE)'
         if decision:
             current_hash = digest(root / 'coordination/reviews/submissions' / (p['id'] + '.json'))
             if decision.get('submission_sha256') != current_hash:
@@ -150,6 +153,16 @@ def build_index(root):
     if not packets(root):
         lines += ['', 'No completion packets yet. Legacy investigation handoffs remain linked from `coordination/BOARD.md`.']
     lines += ['', 'A DONE packet is not a Codex approval. STALE means one of its declared files changed after submission.', '']
+    lines += ['## Codex review credit and later overall review', '',
+              'The user authorized Codex packets to count as reviewed on 2026-11-06. '
+              '`USER_WAIVED_REVIEW` is user-granted credit, not an independent review. '
+              'Every Codex snapshot below remains in the later overall-review backlog; '
+              'stale packets receive no current-snapshot approval and incomplete work remains incomplete.', '',
+              '| Codex packet | Snapshot | Overall review |', '| --- | --- | --- |']
+    for p in packets(root):
+        if codex_review_credit(root, p):
+            lines.append(f'| [{p["id"]}](submissions/{p["id"]}.json) | {"STALE" if stale(root, p) else "CURRENT"} | REQUIRED |')
+    lines += ['']
     peer_records = {}
     for path in (root / 'coordination/reviews/peer').glob('*.json'):
         record = json.loads(path.read_text())

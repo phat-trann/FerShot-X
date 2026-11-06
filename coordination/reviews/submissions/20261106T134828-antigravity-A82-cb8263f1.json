@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "id": "20261106T134828-antigravity-A82-cb8263f1",
+  "created_at": "2026-11-06T13:48:28.278908+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A82",
+  "completion": "done",
+  "summary": "F10 app/native integration: Verified EditorToolbar styling controls and shortcuts wired in EditorWorkbench and Workspace.editor.tsx.",
+  "files": [
+    "src/features/editor/workbench/EditorWorkbench.tsx",
+    "src/Workspace.editor.tsx",
+    "src/Workspace.tsx",
+    "coordination/handoffs/antigravity/A82-integration.json",
+    "docs/agents/antigravity/A82.md"
+  ],
+  "file_sha256": {
+    "src/features/editor/workbench/EditorWorkbench.tsx": "051b90b4d32dabfa4a4590fa1dfa1d135f6d6607efe5902a7d3d0458416ccc40",
+    "src/Workspace.editor.tsx": "474e914535ebd743a62c179cb8d608097a86ba725743ec487cf23e3b03244790",
+    "src/Workspace.tsx": "e2879fca74d6b07987cb81c8433ddb4a76d8507c4eb220d6055e82a3db91c13a",
+    "coordination/handoffs/antigravity/A82-integration.json": "b60c05cb37e6b6634a6663d7625b65908fe02d16a10686b2f275e4f3bb814d60",
+    "docs/agents/antigravity/A82.md": "a37b50e5150133a94646f33e6ab9d3da1f0ec23e37b702f6ffd63e5badaaba50"
+  },
+  "checks": [
+    "Tests/builds/setup NOT RUN — deferred by user",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Annotation style controls and toolbar UI app wiring verified."
+  ],
+  "review": "pending"
+}

@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "id": "20261106T130614-codex-C33-95d05dd4",
+  "created_at": "2026-11-06T13:06:14.854450+07:00",
+  "agent": "codex",
+  "request": "SOURCE-RESTORE-20261106",
+  "task": "C33",
+  "completion": "partial",
+  "summary": "Implement actual derivation-to-original ancestry and explicit retained-source restoration without deleting derived images or histories; A49 presentation replacement awaits external producer.",
+  "files": [
+    "src/Workspace.tsx",
+    "docs/agents/codex/C33-source-restoration.md"
+  ],
+  "file_sha256": {
+    "src/Workspace.tsx": "8b9011ac3e4e9eabd11d600218f3374c2de1b5155bede186d4180db722db43f8",
+    "docs/agents/codex/C33-source-restoration.md": "c9a6f14ac93bcc56315bfcc0bcf1bcc5b0d796f08643ecffe8276b660074758a"
+  },
+  "checks": [
+    "Tests/typechecks/builds/setup NOT RUN — deferred by user. Source-only implementation.",
+    "Formatting/lint delegated to Copilot H01."
+  ],
+  "risks": [
+    "USER_WAIVED_REVIEW; later overall review required. Source uncompiled; A49 presentation not yet available. Imported/composed provenance and exact Shottr uncrop semantics are not guessed; acceptance68.75% unchanged."
+  ],
+  "review": "pending"
+}

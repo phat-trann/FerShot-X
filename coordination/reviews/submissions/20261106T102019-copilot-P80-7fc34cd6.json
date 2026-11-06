@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "id": "20261106T102019-copilot-P80-7fc34cd6",
+  "created_at": "2026-11-06T10:20:19.811537+07:00",
+  "agent": "copilot",
+  "request": "P80",
+  "task": "P80",
+  "completion": "done",
+  "summary": "Added version-1 global hotkey preferences codec for all five actions. Strictly validates exact binding fields, bounded printable keys and boolean modifiers, then reuses existing validation for missing modifiers, reserved system shortcuts and duplicate conflicts. Returns owned immutable copies, enforces 16,384-byte UTF-8 limit, adds exports and README; no native registration or OS operations.",
+  "files": [
+    "src/features/hotkey-preferences-codec/codec.ts",
+    "src/features/hotkey-preferences-codec/index.ts",
+    "src/features/hotkey-preferences-codec/README.md"
+  ],
+  "file_sha256": {
+    "src/features/hotkey-preferences-codec/codec.ts": "4164b3f49fb95e5c5cb3d82bf35ddf085c20859a50172aacf2943cde7238ddf8",
+    "src/features/hotkey-preferences-codec/index.ts": "ba2f3eaa4bca2c2e596e76f32e88726c9a803734f2e64c7fda4eaea1554fdf31",
+    "src/features/hotkey-preferences-codec/README.md": "c5b5b27d273527c30a426313f3770be97b6a4b78b4d37c869be4b588d17b169c"
+  },
+  "checks": [
+    "Node 26 npx tsc --noEmit --pretty false: P80 files produced no diagnostics; command is blocked by pre-existing PreferencesWorkspace errors."
+  ],
+  "risks": [
+    "No tests added per task acceptance; build/integration remains Codex-owned."
+  ],
+  "review": "pending"
+}

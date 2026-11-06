@@ -1,0 +1,3 @@
+# External Anti: production A43, tests deferred
+
+The user now prioritizes complete feature implementation and explicitly defers test execution. Skip A39–A42 test/refresh work during this pass. Select A43 through next_task.py, read only its two inputs and implement the isolated recognition preference codec. No root/shared edits, native calls, tests or independent Codex reviews. Report tests NOT RUN — deferred by user; Build delegated to Codex; Formatting/lint delegated to Copilot H01. Submit as your own external Antigravity client, release and stop when no useful assigned production scope remains. Codex reviews actual code before integration. Do not spawn an internal Anti worker.

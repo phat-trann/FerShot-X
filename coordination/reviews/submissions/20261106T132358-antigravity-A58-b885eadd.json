@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "id": "20261106T132358-antigravity-A58-b885eadd",
+  "created_at": "2026-11-06T13:23:58.477964+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A58",
+  "completion": "done",
+  "summary": "F11 complete production: Reconciled SelectionHandlesOverlay (8 resize handles, translate/scale logic) and SourceRestoreControls non-destructive source reversion.",
+  "files": [
+    "src/features/selection-handles/SelectionHandlesOverlay.tsx",
+    "src/features/selection-handles/SelectionHandlesOverlay.css",
+    "src/features/selection-handles/index.ts",
+    "src/features/source-restore-controls/SourceRestoreControls.tsx",
+    "src/features/source-restore-controls/SourceRestoreControls.css",
+    "src/features/source-restore-controls/index.ts",
+    "docs/agents/antigravity/A58.md"
+  ],
+  "file_sha256": {
+    "src/features/selection-handles/SelectionHandlesOverlay.tsx": "23639f3aa35f95bfc3e92006ebdf6c17a9d3fca42c42d7cedf995721cfdfbbe6",
+    "src/features/selection-handles/SelectionHandlesOverlay.css": "1c677cb73995317a6fdccc7184ceb4e312a438f4ec5d2b4ff9af57b7dea68616",
+    "src/features/selection-handles/index.ts": "69390b7dffef9ff8b87896fac2e373274fa6f2308f9dec57b581f89009414d73",
+    "src/features/source-restore-controls/SourceRestoreControls.tsx": "1dd513b0ad6265b4780b9fd9ca05a5cca4ab30059b5bf574a8e4e8e8cb1a4f8c",
+    "src/features/source-restore-controls/SourceRestoreControls.css": "ab68ee1787aa46383d0097237e3ced29d7f0b97aabeb22dd5e5a747d1afc4ee8",
+    "src/features/source-restore-controls/index.ts": "02cd424b926b364288770fa6ebcc4ec53d9b35a655d12d105b7336ca6bbcfd8e",
+    "docs/agents/antigravity/A58.md": "ccdc688ed2aa20e7692b10108e71177ad5476235723226c57bff1f0026d9c434"
+  },
+  "checks": [
+    "Tests/builds/setup NOT RUN — deferred by user",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "8-handle selection manipulation and source restore controls logic complete."
+  ],
+  "review": "pending"
+}

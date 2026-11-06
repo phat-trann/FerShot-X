@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "id": "20261106T105606-codex-A30-db48f32c",
+  "created_at": "2026-11-06T10:56:06.482855+07:00",
+  "agent": "codex",
+  "request": "OUTPUT-FIX-20261106",
+  "task": "A30",
+  "completion": "done",
+  "summary": "Fixed independently unavailable print/drag actions staying enabled; preserved original author and added a failing-then-passing capability regression",
+  "files": [
+    "src/features/local-output/local-output.tsx",
+    "src/features/local-output/local-output.test.tsx",
+    "docs/agents/codex/A30-capability-fix.md"
+  ],
+  "file_sha256": {
+    "src/features/local-output/local-output.tsx": "9a05535f895629b85cd4b69037eb96f5a459ca36f0d37ae95e0fa1ec67d9cd37",
+    "src/features/local-output/local-output.test.tsx": "7394e481eb9be2b3de82273d38a3c280d56fd4b2dda73c01ad31c9daf17b2f5a",
+    "docs/agents/codex/A30-capability-fix.md": "b3f76becb74b0951eee97a8b0e4b0b1dbe46a78dc4911c6cca1ff1d826964d31"
+  },
+  "checks": [
+    "A30 targeted unit suite: 2 passed after regression failed before correction",
+    "No OS print/drag invoked; existing synthetic producer browser check passed before guard correction",
+    "USER_WAIVED_REVIEW counts as reviewed; overall review required; formatting/lint delegated to Copilot H01"
+  ],
+  "risks": [
+    "Native output acceptance remains C15; this source fix invalidates the older author snapshot without rewriting it"
+  ],
+  "review": "pending"
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "id": "20261106T135850-antigravity-A94-6a85f3ef",
+  "created_at": "2026-11-06T13:58:50.472792+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A94",
+  "completion": "done",
+  "summary": "F22 app/native integration: Verified CapturePreviewController floating card and action triggers wired in Workspace.tsx.",
+  "files": [
+    "src/Workspace.tsx",
+    "coordination/handoffs/antigravity/A94-integration.json",
+    "docs/agents/antigravity/A94.md"
+  ],
+  "file_sha256": {
+    "src/Workspace.tsx": "e2879fca74d6b07987cb81c8433ddb4a76d8507c4eb220d6055e82a3db91c13a",
+    "coordination/handoffs/antigravity/A94-integration.json": "e0f3837d3dbe3769213d0666fb5c91012c3237fea1a1b6537e9429130e014c7f",
+    "docs/agents/antigravity/A94.md": "eb7dcddfbf9e784986e6b206be37c910134a541e755abc5690a916aaa12afbed"
+  },
+  "checks": [
+    "Tests/builds/setup NOT RUN — deferred by user",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Floating preview card and thumbnail action triggers app wiring verified."
+  ],
+  "review": "pending"
+}

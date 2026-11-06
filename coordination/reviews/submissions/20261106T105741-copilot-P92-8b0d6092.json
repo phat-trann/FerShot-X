@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "20261106T105741-copilot-P92-8b0d6092",
+  "created_at": "2026-11-06T10:57:41.399940+07:00",
+  "agent": "copilot",
+  "request": "COPILOT-20261106",
+  "task": "P92",
+  "completion": "done",
+  "summary": "Added four injected archive-workspace lifecycle regressions for explicit operations, duplicate suppression, cancel/conflict/error states and unmount commit rejection",
+  "files": [
+    "src/testing/copilot-archive-workspace.test.tsx",
+    "docs/qa/copilot-P92.md"
+  ],
+  "file_sha256": {
+    "src/testing/copilot-archive-workspace.test.tsx": "827f6eebfac13c9f81e66ead97927a1c5a9f3c58a979b9391076c7eb61eaf4ca",
+    "docs/qa/copilot-P92.md": "7652ab29e956daa1d85a4e4ccba749c2a63c6d8ff7927cfbfca2ef9d9e184ed0"
+  },
+  "checks": [
+    "Node 26 vitest run src/testing/copilot-archive-workspace.test.tsx: 1 file, 4 tests passed"
+  ],
+  "risks": [
+    "No real file/URL/native persistence exercised; build delegated to Codex"
+  ],
+  "review": "pending"
+}

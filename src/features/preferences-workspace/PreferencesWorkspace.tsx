@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import type { ImageDocument } from "../../contracts/media";
-import { DEFAULT_SETTINGS, type AppSettings } from "../../contracts/settings";
+import type { AppSettings } from "../../contracts/settings";
 import {
   AppPreferencesPanel,
   DEFAULT_APP_PREFERENCES,

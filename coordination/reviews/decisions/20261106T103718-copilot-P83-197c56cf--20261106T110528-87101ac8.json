@@ -1,0 +1,8 @@
+{
+  "submission_id": "20261106T103718-copilot-P83-197c56cf",
+  "reviewer": "codex",
+  "created_at": "2026-11-06T11:05:28.883888+07:00",
+  "decision": "approved",
+  "note": "Reviewed actual RTL tests: cancellation, busy rejection/retry, revision invalidation and explicit on-top callback. Full frontend checkpoint and P83-P86 targeted rerun passed. Mock native effects are not OS window acceptance; duplicate modal-open coverage is narrower than arbitrary in-flight confirmation interleavings.",
+  "submission_sha256": "7f583e2b52a06e77beefedf3ac3e0f7f1c02ee6a1e9fe6a4b19ead3d854b42e0"
+}

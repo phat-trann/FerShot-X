@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "id": "20261106T134749-antigravity-A81-500e870b",
+  "created_at": "2026-11-06T13:47:49.571658+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A81",
+  "completion": "done",
+  "summary": "F09 app/native integration: Verified EffectsPanel UI, applyImageEffect platform dispatch, and effects-core Rust execution.",
+  "files": [
+    "src/Workspace.tsx",
+    "src/features/effects-panel/EffectsPanel.tsx",
+    "coordination/handoffs/antigravity/A81-integration.json",
+    "docs/agents/antigravity/A81.md"
+  ],
+  "file_sha256": {
+    "src/Workspace.tsx": "e2879fca74d6b07987cb81c8433ddb4a76d8507c4eb220d6055e82a3db91c13a",
+    "src/features/effects-panel/EffectsPanel.tsx": "309b106b70dd011682821fd3c704b9aa96d6ff9426ca68f769e80799a2c3099f",
+    "coordination/handoffs/antigravity/A81-integration.json": "71b6b6272860ce3b4e32326652a8ce880b0f95ec3a227294c24c16af32d8f07d",
+    "docs/agents/antigravity/A81.md": "885dffb398ef05f3790eb056242c2898d42de7752c4a787c4f2488fe190b7987"
+  },
+  "checks": [
+    "Tests/builds/setup NOT RUN — deferred by user",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Pixel effects app and native integration verified."
+  ],
+  "review": "pending"
+}

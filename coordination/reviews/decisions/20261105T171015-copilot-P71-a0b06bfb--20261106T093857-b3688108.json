@@ -1,0 +1,8 @@
+{
+  "submission_id": "20261105T171015-copilot-P71-a0b06bfb",
+  "reviewer": "codex",
+  "created_at": "2026-11-06T09:38:57.161983+07:00",
+  "decision": "changes_requested",
+  "note": "The latest P71 packet is queue-only/blocked and does not resolve the P71 source compile defect. Existing LocalOutputWorkspace JSX must be moved from index.ts into a .tsx implementation with plain index.ts exports, preserving the agreed props. Submit a fresh packet listing actual source files. Do not overwrite a producer task with an empty queue-status packet when no work is available; use a separate request-summary task. This is a required syntax correction, not new tests.",
+  "submission_sha256": "4fedc908b8db127ae8b304763c1b1b479ba871c1d668a579f10dd5b694241c34"
+}

@@ -1,0 +1,17 @@
+{
+  "task": "A82",
+  "feature_id": "F10",
+  "feature_name": "Annotation style controls",
+  "status": "integrated",
+  "verified_sources": [
+    "src/Workspace.tsx",
+    "src/Workspace.editor.tsx",
+    "src/features/editor/workbench/EditorWorkbench.tsx",
+    "src/features/editor/toolbar/EditorToolbar.tsx",
+    "src/features/editor/toolbar/EditorToolbar.css",
+    "src/features/style-values/index.ts"
+  ],
+  "wiring_details": "EditorToolbar with style controls (stroke width, stroke color, opacity, tool shortcuts) is wired directly into EditorWorkbench, hosted in WorkspaceEditor and Workspace.tsx for interactive annotation styling and keyboard tool shortcuts.",
+  "validation_status": "Tests/builds/setup NOT RUN — deferred by user. Standalone build delegated to Codex. Formatting/lint delegated to Copilot H01."
+}
+

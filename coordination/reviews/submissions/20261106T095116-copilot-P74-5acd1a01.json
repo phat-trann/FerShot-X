@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "id": "20261106T095116-copilot-P74-5acd1a01",
+  "created_at": "2026-11-06T09:51:16.617810+07:00",
+  "agent": "copilot",
+  "request": "P74",
+  "task": "P74",
+  "completion": "done",
+  "summary": "Added controlled ArchivePanel with typed callbacks, busy/status/error presentation, export gating for empty libraries, cancel gating while busy, and explicit import-adds-without-replacing semantics. Added plain index export and integration README; no filesystem, URL, persistence, native or root wiring.",
+  "files": [
+    "src/features/archive-panel/ArchivePanel.tsx",
+    "src/features/archive-panel/index.ts",
+    "src/features/archive-panel/README.md"
+  ],
+  "file_sha256": {
+    "src/features/archive-panel/ArchivePanel.tsx": "ebd7aafbe0cee4572cecb2f1e9c2dfd095aa6986358fa0bd536b74ddc1bb0e86",
+    "src/features/archive-panel/index.ts": "7e728aff9c0b8ce4f2ac0878c671f1f4eb37cff632105b06366052929a0e0462",
+    "src/features/archive-panel/README.md": "ccfa32cf5118a751afef1683f24eb7518f5184706b847904b36f841a1191bda9"
+  },
+  "checks": [
+    "Node 26 npx tsc --noEmit --pretty false: P74 files produced no diagnostics; command is blocked by pre-existing PreferencesWorkspace errors."
+  ],
+  "risks": [
+    "No tests added per task acceptance; build/integration remains Codex-owned."
+  ],
+  "review": "pending"
+}

@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "id": "20261106T133826-antigravity-A72-0e7f1563",
+  "created_at": "2026-11-06T13:38:26.818168+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A72",
+  "completion": "done",
+  "summary": "F25 complete production: Reconciled ExportPanel, ExportDestinationPanel, output size downscaling calculations, and app preferences codec.",
+  "files": [
+    "src/features/export-panel/ExportPanel.tsx",
+    "src/features/export-panel/index.ts",
+    "src/features/export-destination-panel/ExportDestinationPanel.tsx",
+    "src/features/export-destination-panel/index.ts",
+    "src/features/output-size/index.ts",
+    "src/features/app-preferences-codec/codec.ts",
+    "docs/agents/antigravity/A72.md"
+  ],
+  "file_sha256": {
+    "src/features/export-panel/ExportPanel.tsx": "1dcebbe70cdf8faf0ae8f735b62565fb0304f2da33099218e996e5a612e89d43",
+    "src/features/export-panel/index.ts": "5631981510e8a90f20074321803aed4d131bfb4acd16892038dac9b42cf6ebf2",
+    "src/features/export-destination-panel/ExportDestinationPanel.tsx": "4dd3f1a006462d0e90a9b52edf95434788238fe3bcd76478af20b112876691f6",
+    "src/features/export-destination-panel/index.ts": "74ba78d947f7d477b42f67d18864bdc9697bc8cb044d21e645f7157af45337b9",
+    "src/features/output-size/index.ts": "96b891ac05ef6c7e5b548f4be20865a0e200c3bbc5c17ffc2651c3c7eb816ca4",
+    "src/features/app-preferences-codec/codec.ts": "e104fbc4aef56d3957e721bae125a8e0f311a11ae11fc7b68e51eeb514f61479",
+    "docs/agents/antigravity/A72.md": "47f7d11d2755cfa15a96bf91692b8a0f94a9c54f260634b81ae12904790ad67b"
+  },
+  "checks": [
+    "Tests/builds/setup NOT RUN — deferred by user",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Export formats, quality tuning, destination selection, and preferences codec logic complete."
+  ],
+  "review": "pending"
+}

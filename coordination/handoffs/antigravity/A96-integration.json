@@ -1,0 +1,17 @@
+{
+  "task": "A96",
+  "feature_id": "F24",
+  "feature_name": "Copy / save / print / drag modules",
+  "status": "integrated",
+  "verified_sources": [
+    "src/Workspace.tsx",
+    "src/Workspace.drag.tsx",
+    "src/features/local-output-workspace/LocalOutputWorkspace.tsx",
+    "src/features/local-output/local-output.tsx",
+    "src/platform/native.ts",
+    "src/platform/output-preferences.ts"
+  ],
+  "wiring_details": "LocalOutputWorkspace is embedded in Workspace.tsx connecting direct image copying, file saving, native print preview sheets via openPrintPreview, and drag-out file transfer via WorkspaceDrag and prepareImageDrag.",
+  "validation_status": "Tests/builds/setup NOT RUN — deferred by user. Standalone build delegated to Codex. Formatting/lint delegated to Copilot H01."
+}
+

@@ -1,0 +1,8 @@
+{
+  "submission_id": "20261106T102019-copilot-P80-7fc34cd6",
+  "reviewer": "codex",
+  "created_at": "2026-11-06T10:37:40.178626+07:00",
+  "decision": "approved",
+  "note": "Inspected current codec and producer shortcut validation: all five actions, strict typed fields, duplicate/reserved modifier checks, bounded UTF-8 and immutable copies. Root consumer round-trip regression added; no OS registration or target parity accepted. Additional independent P89 edge regressions remain useful.",
+  "submission_sha256": "08df99c782a1726f19369ba1d7ca1bf9e44f4f0648f24003bac36f172b31a82f"
+}

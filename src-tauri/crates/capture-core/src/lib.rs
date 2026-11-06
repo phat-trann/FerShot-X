@@ -15,6 +15,7 @@ pub enum CaptureMode {
     Fullscreen,
     Area,
     Window,
+    WindowId(u32),
 }
 
 #[derive(Debug, Clone)]
@@ -59,6 +60,7 @@ pub enum CaptureError {
     PermissionDenied,
     ProcessFailure { code: Option<i32>, detail: String },
     InvalidOutput,
+    InvalidWindowId,
     Io(io::Error),
 }
 impl fmt::Display for CaptureError {
@@ -73,6 +75,7 @@ impl fmt::Display for CaptureError {
                 write!(f, "Screen capture failed ({code:?}): {detail}")
             }
             Self::InvalidOutput => write!(f, "Capture did not produce a bounded regular PNG file."),
+            Self::InvalidWindowId => write!(f, "A nonzero native window ID is required."),
             Self::Io(error) => write!(f, "Capture IO error: {error}"),
         }
     }
@@ -117,6 +120,7 @@ fn command(mode: CaptureMode, path: &Path) -> CaptureCommand {
         CaptureMode::Fullscreen => args.push("-m".into()),
         CaptureMode::Area => args.extend(["-i".into(), "-s".into()]),
         CaptureMode::Window => args.extend(["-i".into(), "-w".into()]),
+        CaptureMode::WindowId(id) => args.extend(["-l".into(), id.to_string().into()]),
     }
     args.push(path.as_os_str().to_owned());
     CaptureCommand {
@@ -144,6 +148,7 @@ fn capture_on_platform(
     if !macos {
         return Err(CaptureError::UnsupportedPlatform);
     }
+    if matches!(mode, CaptureMode::WindowId(0)) { return Err(CaptureError::InvalidWindowId); }
     let directory = tempfile::Builder::new()
         .prefix("ferby-capture-")
         .tempdir()?;
@@ -158,7 +163,7 @@ fn capture_on_platform(
     }
     if diagnostic.contains("cancelled")
         || diagnostic.contains("canceled")
-        || (mode != CaptureMode::Fullscreen
+        || (matches!(mode, CaptureMode::Area | CaptureMode::Window)
             && !path.exists()
             && (output.success || (output.code == Some(1) && diagnostic.trim().is_empty())))
     {

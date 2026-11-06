@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "id": "20261106T133642-antigravity-A70-4e6c203a",
+  "created_at": "2026-11-06T13:36:42.708915+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A70",
+  "completion": "done",
+  "summary": "F23 complete production: Reconciled post-capture pipeline planning and execution, capture preferences codec, and PostCapturePreferencesPanel UI.",
+  "files": [
+    "src/features/post-capture/PostCapturePlanner.tsx",
+    "src/features/post-capture/PostCapturePlanner.css",
+    "src/features/post-capture/index.ts",
+    "src/features/capture-preferences-codec/codec.ts",
+    "src/features/capture-preferences-codec/index.ts",
+    "docs/agents/antigravity/A70.md"
+  ],
+  "file_sha256": {
+    "src/features/post-capture/PostCapturePlanner.tsx": "4b602927166c4a332e0c5f28bf0d48f2e5eb1c0a285e864d99f08a0e1ec3185e",
+    "src/features/post-capture/PostCapturePlanner.css": "9727d95c16c700c379346da1d322e399e54e74131f8455e2641c7bda713c2fdb",
+    "src/features/post-capture/index.ts": "d55b675bece991d794c07dc4805a4da5758ade6ab532035d1bb4a4222200ab26",
+    "src/features/capture-preferences-codec/codec.ts": "fa546b5256f1da89827c48a8b775afe9c2dd7b5bef1bdb41df695adc5df34d3e",
+    "src/features/capture-preferences-codec/index.ts": "3729aaeeea0772605295cdf526eb2dd67d2bd9f3abab786f916d6d9284af3fda",
+    "docs/agents/antigravity/A70.md": "9c92e926972e0ffc1ff285bb1459b3de8721cab73d5a087af9670172efff79c5"
+  },
+  "checks": [
+    "Tests/builds/setup NOT RUN — deferred by user",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Post-capture step execution, token cancellation, and preferences codec logic complete."
+  ],
+  "review": "pending"
+}

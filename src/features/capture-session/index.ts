@@ -81,6 +81,7 @@ export class CaptureSessionController<F, O> {
     if (this.repeat && !sameDisplay(this.repeat.display, copy)) this.repeat = undefined;
     return this.repeat?.area ?? null;
   }
+  clearRepeatArea(): void { this.repeat = undefined; }
   private release(resource: { release(): void }): void {
     if (this.released.has(resource)) return;
     this.released.add(resource);

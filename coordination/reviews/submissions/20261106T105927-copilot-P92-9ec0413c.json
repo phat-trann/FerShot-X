@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "20261106T105927-copilot-P92-9ec0413c",
+  "created_at": "2026-11-06T10:59:27.251319+07:00",
+  "agent": "copilot",
+  "request": "COPILOT-20261106-FIX",
+  "task": "P92",
+  "completion": "done",
+  "summary": "Corrected RTL role-query typing by replacing unsupported exact option with anchored Cancel name regex; all four lifecycle tests still pass",
+  "files": [
+    "src/testing/copilot-archive-workspace.test.tsx",
+    "docs/qa/copilot-P92.md"
+  ],
+  "file_sha256": {
+    "src/testing/copilot-archive-workspace.test.tsx": "c024217c85816bef31cfa7f43bca91dc6d3eca4f7293bb4e2786091529db5e3e",
+    "docs/qa/copilot-P92.md": "3e59eb0a637d9459f99df8f6ca9bc69742dd2efce3b203c13245055369194014"
+  },
+  "checks": [
+    "Node 26 targeted P92 Vitest: 1 file, 4 tests passed"
+  ],
+  "risks": [
+    "Build delegated to Codex; no producer/native behavior changes"
+  ],
+  "review": "pending"
+}

@@ -4,6 +4,23 @@ Baseline: version 0.1.0 frozen; no dependency/product upgrades or cosmetic UI ph
 
 The [Existing MVP ledger](PROGRESS.md) retains its original scope/weights. Scrolling/advanced features are planned here for the broader requested function set; they are not quietly credited to the older MVP denominator. Parity is not complete while rows have unresolved native acceptance or UNKNOWN semantics. Workers implement documented Ferby choices and flag remaining target questions rather than fabricating equivalence.
 
+## Implementation checkpoint — 2026-11-06 (tests deferred)
+
+Latest user instruction prioritizes complete feature logic and app wiring. Tests in this pass are NOT RUN; type/compile/package checks do not constitute acceptance. Codex snapshots have USER_WAIVED_REVIEW and require later overall review. MVP acceptance remains 68.75%.
+
+| Feature | Current source implementation | Remaining boundary |
+| --- | --- | --- |
+| F01 | Native explicit primary-display rectangle/repeat with geometry and pixel checks; existing interactive modes | Active-window C26; interactive last-selection provenance and native acceptance |
+| F17 | Pixel and bounded region-average RGBA controls in the actual workspace | Original text-color/weighting semantics UNKNOWN |
+| F23/F25 | Persistent extended settings, editor/preview/copy/save action, zoom and output scaling | Real native acceptance and original automatic-format rules |
+| F24 | Prepared annotated/scaled native PNG file drag and existing copy/save/print paths | Actual Finder/native dialogs/print acceptance; crash-time staging cleanup |
+| F30 | Native shortcut registry plus saved assignments with explicit Apply/Clear/Save/Forget | Actual registration/conflict/restart acceptance |
+| F31 | Persistent always-on-top and menu bar icon; native desktop/tray menus | Notifications and launch-at-login C29 |
+| F32 | Ferby-only native macOS URL queue and source-bound confirmation | Installed-bundle URL delivery; original Shottr route semantics UNKNOWN |
+| F04/F05 | Recognition and image import already integrated | Persist OCR preferences C27/A43; native document-open C28 |
+
+The historical allocation table below reserves ownership and records unresolved target questions; use the current source reports/packets for implementation status. No full original Shottr parity is claimed.
+
 | Feature | Requested affordance | Task owners | Remaining boundary |
 | --- | --- | --- | --- |
 | F01 | Capture modes / active-window / repeat area | C02/C11; A25/P34 | Main/area/window wired; active/repeat acceptance and geometry remain |

@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "20261106T110222-copilot-P96-f2252c43",
+  "created_at": "2026-11-06T11:02:22.024410+07:00",
+  "agent": "copilot",
+  "request": "COPILOT-20261106",
+  "task": "P96",
+  "completion": "done",
+  "summary": "Added five local-output workspace regressions for explicit callbacks, independent print/drag capability, selected print options, busy suppression and invalid-margin rejection",
+  "files": [
+    "src/testing/copilot-local-output-workspace.test.tsx",
+    "docs/qa/copilot-P96.md"
+  ],
+  "file_sha256": {
+    "src/testing/copilot-local-output-workspace.test.tsx": "5ae58a106ae17b778749707922f538f76f5a92d0adf4a37b1f7f0357290d9ab2",
+    "docs/qa/copilot-P96.md": "b289c5d332188841412d2f03d64f7b532571863c0c484cb13bb44a1ee77d3873"
+  },
+  "checks": [
+    "Node 26 vitest run src/testing/copilot-local-output-workspace.test.tsx: 1 file, 5 tests passed"
+  ],
+  "risks": [
+    "Existing fit policy observed; no native print/drag/dialog/clipboard action or parity accepted; build delegated to Codex"
+  ],
+  "review": "pending"
+}

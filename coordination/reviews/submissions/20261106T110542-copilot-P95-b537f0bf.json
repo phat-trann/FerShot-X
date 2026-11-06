@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "20261106T110542-copilot-P95-b537f0bf",
+  "created_at": "2026-11-06T11:05:42.003959+07:00",
+  "agent": "copilot",
+  "request": "COPILOT-20261106-CORRECT",
+  "task": "P95",
+  "completion": "done",
+  "summary": "Extended editor-session regressions with encode/decode model compatibility cases for ids/styles/counters and advanced contract annotations",
+  "files": [
+    "src/testing/copilot-editor-session-codec.test.ts",
+    "docs/qa/copilot-P95.md"
+  ],
+  "file_sha256": {
+    "src/testing/copilot-editor-session-codec.test.ts": "60f090d3da4bc43d1cc079f38329815c15f58aaad91a54af427851c471bdb0ed",
+    "docs/qa/copilot-P95.md": "9ddaa0e1db22b99d3bb0b714c95be3cde6239186ce6ec761f2a0e07ac7c4e9d6"
+  },
+  "checks": [
+    "Node 26 targeted P95 Vitest: 1 file, 8 tests passed"
+  ],
+  "risks": [
+    "Data boundary checks only; build delegated to Codex; no native parity accepted"
+  ],
+  "review": "pending"
+}

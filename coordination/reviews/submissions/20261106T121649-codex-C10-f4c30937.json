@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "id": "20261106T121649-codex-C10-f4c30937",
+  "created_at": "2026-11-06T12:16:49.023603+07:00",
+  "agent": "codex",
+  "request": "APP-PREFERENCES-20261106",
+  "task": "C10",
+  "completion": "partial",
+  "summary": "Implement versioned native application preferences persistence and app post-capture editor/preview/copy/save, default zoom and persistent window level effects.",
+  "files": [
+    "src-tauri/src/application_preferences.rs",
+    "src-tauri/src/preferences.rs",
+    "src-tauri/src/lib.rs",
+    "src/platform/native.ts",
+    "src/Workspace.tsx",
+    "src/Workspace.lifecycle.tsx",
+    "src/Workspace.application-preferences.tsx",
+    "docs/agents/codex/C10-application-preferences.md"
+  ],
+  "file_sha256": {
+    "src-tauri/src/application_preferences.rs": "6ec718983f2d8032238ea46dc923229b8b0fc091126fc364f670c187da2684e6",
+    "src-tauri/src/preferences.rs": "4e20e10e6cad1f4fc40b3b2833974ba49a219db3bb78e64ddc389939e04c74d2",
+    "src-tauri/src/lib.rs": "b96144a9919cf6615c1c54f8c5c2bdc23d4c89673b928dfa8a69ed5d71558d87",
+    "src/platform/native.ts": "b517d7c200a0bfbb1a68603d4e789597333d1c57f28c206af7e7bd79d94ab6a1",
+    "src/Workspace.tsx": "2a8dbb9fc460b5701efe0b049d3ef16371732efa5dd89e6ebbaf7ab92c3e6deb",
+    "src/Workspace.lifecycle.tsx": "90c601a2980011870b984fdc8a7584f2077c1317c77d701b58208995a2168125",
+    "src/Workspace.application-preferences.tsx": "9d7820b80735522403db642b78bec800045af7e9c4d7ba72cdea99aeb8ba52ef",
+    "docs/agents/codex/C10-application-preferences.md": "ab221da08a68e14181b030d944140f9ad29e6925474826f430aeaba3c5b984b6"
+  },
+  "checks": [
+    "TypeScript no-emit using tsconfig.json passed; locked offline cargo check --lib passed. Initial TypeScript path was nonexistent and corrected.",
+    "Tests NOT RUN — deferred by user. Formatting/lint delegated to Copilot H01."
+  ],
+  "risks": [
+    "USER_WAIVED_REVIEW, later overall review required. Native notification/login/menu-bar effects and manual acceptance pending. Original defaults/event order UNKNOWN; 68.75% acceptance unchanged."
+  ],
+  "review": "pending"
+}

@@ -1,0 +1,636 @@
+{
+  "definition": "Complete requested source implementation and app wiring, not original runtime parity or tested release acceptance",
+  "scope": "All29 non-excluded feature groups from F01-F34; no arbitrary five-task cutoff",
+  "acceptance_before": 68.75,
+  "acceptance_after": 68.75,
+  "source_percentage": null,
+  "source_percentage_note": "Six Codex-owned groups reconciled: four source-implemented/wired, two explicit gaps. Other23 existing feature groups await owner source reconciliation; do not equate this lower-bound count with overall completion.",
+  "excluded": [
+    "F27 cloud",
+    "F28 S3",
+    "F29 upload share URLs",
+    "F33 license gates/nags (Ferby unlocked)",
+    "F34 telemetry"
+  ],
+  "deferred": [
+    "FTP",
+    "Tests/typechecks/builds/setup",
+    "Native/manual and original runtime acceptance"
+  ],
+  "features": [
+    {
+      "feature_id": "F01",
+      "name": "Capture modes / active window / repeat area",
+      "owner": "codex",
+      "task": "C35",
+      "logic_complete": true,
+      "app_wired": true,
+      "source_evidence": [
+        "docs/agents/codex/C35.md",
+        "src/features/capture-region-selector/CaptureRegionSelector.tsx",
+        "src/features/capture-region-selector/index.ts",
+        "src/Workspace.repeat-region.tsx",
+        "src/Workspace.tsx"
+      ],
+      "remaining": "Complete: interactive screenshot region selector (CaptureRegionSelector), confirmed pixel cropping, and display/rectangle repeat memory wired in Workspace.tsx.",
+      "packet": "20261106T131714-codex-C35-27e98016",
+      "validation": "Tests/typechecks/builds/setup NOT RUN \u2014 deferred by user; source-only status, not runtime acceptance.",
+      "integration_owners": [
+        "codex",
+        "antigravity"
+      ],
+      "antigravity_integration_task": "A99"
+    },
+    {
+      "feature_id": "F02",
+      "name": "Scrolling capture and bounded stitching",
+      "owner": "codex",
+      "task": "C36",
+      "logic_complete": true,
+      "app_wired": true,
+      "source_evidence": [
+        "docs/agents/codex/C36.md"
+      ],
+      "remaining": "Automatic/manual scroll routes implemented; no native execution/compile claimed.",
+      "packet": "20261106T132304-codex-C36-da7309a9",
+      "validation": "Tests/typechecks/builds/setup NOT RUN \u2014 deferred by user; source-only status, not runtime acceptance.",
+      "integration_owners": [
+        "codex",
+        "antigravity"
+      ]
+    },
+    {
+      "feature_id": "F03",
+      "name": "Local OCR and QR recognition",
+      "owner": "antigravity",
+      "task": "A51",
+      "logic_complete": true,
+      "app_wired": true,
+      "source_evidence": [
+        "src-tauri/crates/vision-core/src/lib.rs",
+        "src/features/recognition-workflow/index.ts",
+        "src/features/recognition-workspace/RecognitionWorkspace.tsx",
+        "src/features/recognition-workspace/RecognitionWorkspace.css",
+        "src/Workspace.recognition.tsx"
+      ],
+      "remaining": "Complete: native Vision OCR/QR Rust backend (objc2-vision), workflow controller, and RecognitionWorkspace UI integrated into Workspace.recognition.tsx.",
+      "integration_owners": [
+        "codex",
+        "antigravity"
+      ],
+      "antigravity_integration_task": "A76"
+    },
+    {
+      "feature_id": "F04",
+      "name": "OCR languages / line breaks / profiles",
+      "owner": "antigravity",
+      "task": "A52",
+      "logic_complete": true,
+      "app_wired": true,
+      "source_evidence": [
+        "src/features/recognition-preferences-codec/codec.ts",
+        "src/features/recognition-preferences-codec/index.ts",
+        "src/features/recognition-profile-panel/RecognitionProfilePanel.tsx",
+        "src/features/recognition-profile-panel/RecognitionProfilePanel.css",
+        "src/features/ocr-panel/OcrPanel.tsx",
+        "src/features/ocr-panel/OcrPanel.css",
+        "src/features/qr-panel/QrPanel.tsx",
+        "src/features/qr-panel/QrPanel.css"
+      ],
+      "remaining": "Complete: strict recognition preferences codec, RecognitionProfilePanel, OcrPanel language & line-break controls, and QrPanel.",
+      "integration_owners": [
+        "codex",
+        "antigravity"
+      ],
+      "antigravity_integration_task": "A77"
+    },
+    {
+      "feature_id": "F05",
+      "name": "Image / clipboard / desktop import",
+      "owner": "codex",
+      "task": "C37",
+      "logic_complete": true,
+      "app_wired": true,
+      "source_evidence": [
+        "docs/agents/codex/C37.md"
+      ],
+      "remaining": "Picker/drop/clipboard/native document-open routes implemented.",
+      "packet": "20261106T132338-codex-C37-099e41a1",
+      "validation": "Tests/typechecks/builds/setup NOT RUN \u2014 deferred by user; source-only status, not runtime acceptance.",
+      "integration_owners": [
+        "codex",
+        "antigravity"
+      ]
+    },
+    {
+      "feature_id": "F06",
+      "name": "Arrow / line / rectangle / ellipse / freehand",
+      "owner": "antigravity",
+      "task": "A53",
+      "logic_complete": true,
+      "app_wired": true,
+      "source_evidence": [
+        "src/features/shapes/shapes.tsx",
+        "src/features/shapes/index.ts",
+        "src/features/editor/view/EditorView.tsx",
+        "src/features/editor/view/EditorView.css",
+        "src/features/editor/advanced-workbench/AdvancedWorkbench.tsx",
+        "src/features/editor/advanced-workbench/AdvancedWorkbench.css"
+      ],
+      "remaining": "Complete: arrow, plain line, rectangle, ellipse, and freehand pen vector geometry, interactive creation, and canvas rendering.",
+      "integration_owners": [
+        "codex",
+        "antigravity"
+      ],
+      "antigravity_integration_task": "A78"
+    },
+    {
+      "feature_id": "F07",
+      "name": "Text and numbered markers",
+      "owner": "antigravity",
+      "task": "A54",
+      "logic_complete": true,
+      "app_wired": true,
+      "source_evidence": [
+        "src/features/text-counter/TextCounterControls.tsx",
+        "src/features/text-counter/TextCounterControls.css",
+        "src/features/text-counter/index.ts",
+        "src/features/editor/advanced-workbench/AdvancedWorkbench.tsx"
+      ],
+      "remaining": "Complete: bounded text annotations, sequential counter numbered badges with auto-increment, styling, and canvas rendering.",
+      "integration_owners": [
+        "codex",
+        "antigravity"
+      ],
+      "antigravity_integration_task": "A79"
+    },
+    {
+      "feature_id": "F08",
+      "name": "Highlight / spotlight / magnifier",
+      "owner": "antigravity",
+      "task": "A55",
+      "logic_complete": true,
+      "app_wired": true,
+      "source_evidence": [
+        "src/features/emphasis/emphasis-renderer.ts",
+        "src/features/emphasis/index.ts",
+        "src/features/editor/advanced-workbench/AdvancedWorkbench.tsx",
+        "src/features/editor/advanced-workbench/AdvancedWorkbench.css"
+      ],
+      "remaining": "Complete: rectangular color highlight, darkened backdrop spotlight cutout, circular magnifying glass lens with zoom and border, and canvas rendering.",
+      "integration_owners": [
+        "codex",
+        "antigravity"
+      ],
+      "antigravity_integration_task": "A80"
+    },
+    {
+      "feature_id": "F09",
+      "name": "Blur / conceal / erase",
+      "owner": "antigravity",
+      "task": "A56",
+      "logic_complete": true,
+      "app_wired": true,
+      "source_evidence": [
+        "src-tauri/crates/effects-core/src/lib.rs",
+        "src-tauri/crates/effects-core/Cargo.toml",
+        "src-tauri/src/effects.rs",
+        "src/features/effects-panel/EffectsPanel.tsx",
+        "src/features/effects-panel/EffectsPanel.css",
+        "src/features/effects-panel/index.ts"
+      ],
+      "remaining": "Complete: Gaussian blur, mosaic pixelation, solid redaction cover, and transparent pixel erase in effects-core and EffectsPanel.",
+      "integration_owners": [
+        "codex",
+        "antigravity"
+      ],
+      "antigravity_integration_task": "A81"
+    },
+    {
+      "feature_id": "F10",
+      "name": "Annotation style controls",
+      "owner": "antigravity",
+      "task": "A57",
+      "logic_complete": true,
+      "app_wired": true,
+      "source_evidence": [
+        "src/features/editor/toolbar/EditorToolbar.tsx",
+        "src/features/editor/toolbar/EditorToolbar.css",
+        "src/features/editor/toolbar/index.ts",
+        "src/features/style-values/index.ts"
+      ],
+      "remaining": "Complete: annotation tool selection, hex color/stroke width/opacity validation via style-values, keyboard shortcuts, and toolbar UI.",
+      "integration_owners": [
+        "codex",
+        "antigravity"
+      ],
+      "antigravity_integration_task": "A82"
+    },
+    {
+      "feature_id": "F11",
+      "name": "Crop / selection / return to original",
+      "owner": "antigravity",
+      "task": "A58",
+      "logic_complete": true,
+      "app_wired": true,
+      "source_evidence": [
+        "src/features/selection-handles/SelectionHandlesOverlay.tsx",
+        "src/features/selection-handles/SelectionHandlesOverlay.css",
+        "src/features/selection-handles/index.ts",
+        "src/features/source-restore-controls/SourceRestoreControls.tsx",
+        "src/features/source-restore-controls/SourceRestoreControls.css",
+        "src/features/source-restore-controls/index.ts"
+      ],
+      "remaining": "Complete: 8-point interactive resize handles, annotation bounds translation/scaling, crop selection, and source restore controls.",
+      "integration_owners": [
+        "codex",
+        "antigravity"
+      ],
+      "antigravity_integration_task": "A83"
+    },
+    {
+      "feature_id": "F12",
+      "name": "Resize / automatic adjustment",
+      "owner": "antigravity",
+      "task": "A59",
+      "logic_complete": true,
+      "app_wired": true,
+      "source_evidence": [
+        "src/features/auto-adjust/auto-adjust.ts",
+        "src/features/auto-adjust/index.ts",
+        "src/features/auto-adjust-panel/AutoAdjustPanel.tsx",
+        "src/features/auto-adjust-panel/AutoAdjustPanel.css",
+        "src/features/auto-adjust-panel/index.ts",
+        "src/platform/auto-adjust.ts"
+      ],
+      "remaining": "Complete: deterministic Rec.709 luminance histogram percentile adjustment, alpha preservation, and AutoAdjustPanel.",
+      "integration_owners": [
+        "codex",
+        "antigravity"
+      ],
+      "antigravity_integration_task": "A84"
+    },
+    {
+      "feature_id": "F13",
+      "name": "Undo / redo / merge",
+      "owner": "antigravity",
+      "task": "A60",
+      "logic_complete": true,
+      "app_wired": true,
+      "source_evidence": [
+        "src/features/editor/workbench/EditorWorkbench.tsx",
+        "src/features/editor/workbench/EditorWorkbench.css",
+        "src/features/editor/workbench/index.ts",
+        "src/features/editor/advanced-workbench/AdvancedWorkbench.tsx",
+        "src/features/editor/advanced-workbench/AdvancedWorkbench.css",
+        "src/features/editor/render/render-annotations.ts",
+        "src/features/editor/render/index.ts"
+      ],
+      "remaining": "Complete: past/present/future history state stack, undo/redo dispatch, item deletion, and raster merge rendering.",
+      "integration_owners": [
+        "codex",
+        "antigravity"
+      ],
+      "antigravity_integration_task": "A85"
+    },
+    {
+      "feature_id": "F14",
+      "name": "Add capture / composition / snapping",
+      "owner": "antigravity",
+      "task": "A61",
+      "logic_complete": true,
+      "app_wired": true,
+      "source_evidence": [
+        "src/features/composition/composition.ts",
+        "src/features/composition/index.ts",
+        "src/features/snap-distance/index.ts",
+        "src/features/editor/advanced-workbench/AdvancedWorkbench.tsx"
+      ],
+      "remaining": "Complete: multi-layer capture composition, z-ordering, geometric edge/center alignment snapping, and canvas rendering.",
+      "integration_owners": [
+        "codex",
+        "antigravity"
+      ],
+      "antigravity_integration_task": "A86"
+    },
+    {
+      "feature_id": "F15",
+      "name": "Zoom / pan / navigation",
+      "owner": "antigravity",
+      "task": "A62",
+      "logic_complete": true,
+      "app_wired": true,
+      "source_evidence": [
+        "src/features/viewport/fit.ts",
+        "src/features/point-map/index.ts",
+        "src/features/navigation-controls/NavigationControls.tsx",
+        "src/features/navigation-controls/NavigationControls.css",
+        "src/features/navigation-controls/index.ts"
+      ],
+      "remaining": "Complete: proportional image viewport fitting, client-to-image coordinate mapping, and NavigationControls UI.",
+      "integration_owners": [
+        "codex",
+        "antigravity"
+      ],
+      "antigravity_integration_task": "A87"
+    },
+    {
+      "feature_id": "F16",
+      "name": "PX / PT measurement",
+      "owner": "antigravity",
+      "task": "A63",
+      "logic_complete": true,
+      "app_wired": true,
+      "source_evidence": [
+        "src/features/measurement/measurement.ts",
+        "src/features/measurement-panel/MeasurementOverlay.tsx",
+        "src/features/measurement-panel/MeasurementOverlay.css",
+        "src/features/measurement-panel/index.ts"
+      ],
+      "remaining": "Complete: pixel and point measurement calculations with Retina scale factor, rect normalization, and MeasurementOverlay UI.",
+      "integration_owners": [
+        "codex",
+        "antigravity"
+      ],
+      "antigravity_integration_task": "A88"
+    },
+    {
+      "feature_id": "F17",
+      "name": "Pixel / average / color format actions",
+      "owner": "antigravity",
+      "task": "A64",
+      "logic_complete": true,
+      "app_wired": true,
+      "source_evidence": [
+        "src/features/pixel-sample/index.ts",
+        "src/features/average-rgba/index.ts",
+        "src/features/color/color.ts",
+        "src/features/color-format-controls/ColorFormatControls.tsx",
+        "src/features/color-format-controls/ColorFormatControls.css",
+        "src/features/color-format-controls/index.ts"
+      ],
+      "remaining": "Complete: point pixel sampling, area average RGBA calculation, color model conversion, and ColorFormatControls UI.",
+      "integration_owners": [
+        "codex",
+        "antigravity"
+      ],
+      "antigravity_integration_task": "A89"
+    },
+    {
+      "feature_id": "F18",
+      "name": "Backdrop / inset / shadow / recenter",
+      "owner": "antigravity",
+      "task": "A65",
+      "logic_complete": true,
+      "app_wired": true,
+      "source_evidence": [
+        "src/features/backdrop/backdrop-renderer.ts",
+        "src/features/backdrop/index.ts",
+        "src/features/editor/advanced-workbench/AdvancedWorkbench.tsx"
+      ],
+      "remaining": "Complete: backdrop inset padding, corner radius rounding, drop shadow blur/offsets, recentering layout, and canvas rendering.",
+      "integration_owners": [
+        "codex",
+        "antigravity"
+      ],
+      "antigravity_integration_task": "A90"
+    },
+    {
+      "feature_id": "F19",
+      "name": "Solid / gradient / caller-owned backgrounds",
+      "owner": "antigravity",
+      "task": "A66",
+      "logic_complete": true,
+      "app_wired": true,
+      "source_evidence": [
+        "src/features/layout-workspace/LayoutWorkspace.tsx",
+        "src/features/layout-workspace/index.ts",
+        "src/features/composition/composition.ts",
+        "src/features/backdrop/backdrop-renderer.ts"
+      ],
+      "remaining": "Complete: solid, linear/radial gradient, and caller-owned canvas backgrounds wired in LayoutWorkspace, Workspace.layout.tsx, and platform/layout.ts.",
+      "integration_owners": [
+        "codex",
+        "antigravity"
+      ],
+      "antigravity_integration_task": "A91"
+    },
+    {
+      "feature_id": "F20",
+      "name": "Native pin image behavior",
+      "owner": "antigravity",
+      "task": "A67",
+      "logic_complete": true,
+      "app_wired": true,
+      "source_evidence": [
+        "src/features/pin/PinPreviewCard.tsx",
+        "src/features/pin/index.ts",
+        "src/features/pin-values/index.ts",
+        "src-tauri/crates/pin-window-core/src/lib.rs",
+        "src-tauri/src/pins.rs"
+      ],
+      "remaining": "Complete: native pinned windows, open_pin/get_pin/edit_pin/close_pin commands, ferby-pin-edit event, PinPreviewCard, and ferby-pin-window-core geometry.",
+      "integration_owners": [
+        "codex",
+        "antigravity"
+      ],
+      "antigravity_integration_task": "A92"
+    },
+    {
+      "feature_id": "F21",
+      "name": "Session library / local archive",
+      "owner": "antigravity",
+      "task": "A68",
+      "logic_complete": true,
+      "app_wired": true,
+      "source_evidence": [
+        "src/features/library/LibraryPanel.tsx",
+        "src/features/library/index.ts",
+        "src/features/archive-panel/ArchivePanel.tsx",
+        "src/features/archive-workflow/index.ts",
+        "src/features/editor-session-codec/codec.ts",
+        "src-tauri/crates/session-core/src/lib.rs"
+      ],
+      "remaining": "Complete: LibraryPanel sidebar browsing, WorkspaceArchive integration with ArchivePanel, archive-workflow import/export, and session-core persistence.",
+      "integration_owners": [
+        "codex",
+        "antigravity"
+      ],
+      "antigravity_integration_task": "A93"
+    },
+    {
+      "feature_id": "F22",
+      "name": "Floating preview and thumbnail actions",
+      "owner": "antigravity",
+      "task": "A69",
+      "logic_complete": true,
+      "app_wired": true,
+      "source_evidence": [
+        "src/features/capture-preview/CapturePreviewController.tsx",
+        "src/features/capture-preview/index.ts",
+        "src/features/capture-workflow/CaptureWorkflowController.tsx",
+        "src/features/capture-workflow/index.ts",
+        "src-tauri/crates/preview-window-core/src/lib.rs"
+      ],
+      "remaining": "Complete: floating thumbnail card CapturePreviewController, corner anchoring via preview-window-core, auto-dismiss, and Edit/OCR/Copy/Pin/Save actions wired in Workspace.tsx.",
+      "integration_owners": [
+        "codex",
+        "antigravity"
+      ],
+      "antigravity_integration_task": "A94"
+    },
+    {
+      "feature_id": "F23",
+      "name": "Post-capture Show / Copy / Save",
+      "owner": "antigravity",
+      "task": "A70",
+      "logic_complete": true,
+      "app_wired": true,
+      "source_evidence": [
+        "src/features/post-capture/PostCapturePlanner.tsx",
+        "src/features/post-capture/PostCapturePlanner.css",
+        "src/features/post-capture/index.ts",
+        "src/features/capture-preferences-codec/codec.ts",
+        "src/features/capture-preferences-codec/index.ts"
+      ],
+      "remaining": "Complete: postCaptureBehavior execution in finishCapture (open-editor, show-preview, copy-only, save-only), notifications, and preferences codec.",
+      "integration_owners": [
+        "codex",
+        "antigravity"
+      ],
+      "antigravity_integration_task": "A95"
+    },
+    {
+      "feature_id": "F24",
+      "name": "Copy / save / print / drag modules",
+      "owner": "antigravity",
+      "task": "A71",
+      "logic_complete": true,
+      "app_wired": true,
+      "source_evidence": [
+        "src/features/local-output/local-output.tsx",
+        "src/features/local-output/index.ts",
+        "src/features/local-output-workspace/LocalOutputWorkspace.tsx",
+        "src/features/local-output-workspace/LocalOutputWorkspace.css",
+        "src/features/output-jobs/index.ts",
+        "src/features/print-preferences-codec/codec.ts"
+      ],
+      "remaining": "Complete: LocalOutputWorkspace with copy, save, print (openPrintPreview), and drag-out (WorkspaceDrag via prepareImageDrag) in Workspace.tsx.",
+      "integration_owners": [
+        "codex",
+        "antigravity"
+      ],
+      "antigravity_integration_task": "A96"
+    },
+    {
+      "feature_id": "F25",
+      "name": "Output format / quality / downscale / destination",
+      "owner": "antigravity",
+      "task": "A72",
+      "logic_complete": true,
+      "app_wired": true,
+      "source_evidence": [
+        "src/features/export-panel/ExportPanel.tsx",
+        "src/features/export-panel/index.ts",
+        "src/features/export-destination-panel/ExportDestinationPanel.tsx",
+        "src/features/export-destination-panel/index.ts",
+        "src/features/output-size/index.ts",
+        "src/features/app-preferences-codec/codec.ts"
+      ],
+      "remaining": "Complete: PreferenceControls, WorkspaceDestination directory selection, withOutputPreferences (format, quality, retina downscale), and app preferences codec.",
+      "integration_owners": [
+        "codex",
+        "antigravity"
+      ],
+      "antigravity_integration_task": "A97"
+    },
+    {
+      "feature_id": "F26",
+      "name": "Window background / explicit shadow trim",
+      "owner": "antigravity",
+      "task": "A73",
+      "logic_complete": true,
+      "app_wired": true,
+      "source_evidence": [
+        "src/features/window-appearance/window-appearance.ts",
+        "src/features/window-appearance/index.ts",
+        "src/features/window-appearance-controls/WindowAppearanceControls.tsx",
+        "src/features/window-appearance-controls/WindowAppearanceControls.css",
+        "src/features/window-appearance-controls/index.ts"
+      ],
+      "remaining": "Complete: WindowAppearanceControls, shadow trim insets, transparent/solid window background modes, and LayoutWorkspace layer trimming.",
+      "integration_owners": [
+        "codex",
+        "antigravity"
+      ],
+      "antigravity_integration_task": "A98"
+    },
+    {
+      "feature_id": "F30",
+      "name": "Global shortcut assignment",
+      "owner": "codex",
+      "task": "C38",
+      "logic_complete": true,
+      "app_wired": true,
+      "source_evidence": [
+        "docs/agents/codex/C38.md",
+        "docs/agents/antigravity/A100.md"
+      ],
+      "remaining": "Complete: eight-action global shortcuts schema, native registration, v1/v2 migration, and GlobalShortcutsV2Panel UI wired in Workspace.tsx.",
+      "packet": "20261106T132515-codex-C38-e7e2a11b",
+      "validation": "Tests/typechecks/builds/setup NOT RUN \u2014 deferred by user; source-only status, not runtime acceptance.",
+      "integration_owners": [
+        "codex",
+        "antigravity"
+      ],
+      "antigravity_integration_task": "A100"
+    },
+    {
+      "feature_id": "F31",
+      "name": "Notifications / login / window lifecycle",
+      "owner": "codex",
+      "task": "C39",
+      "logic_complete": true,
+      "app_wired": true,
+      "source_evidence": [
+        "docs/agents/codex/C39.md"
+      ],
+      "remaining": "Native services/window/menu/login/notification source routes wired; native compatibility unverified.",
+      "packet": "20261106T132814-codex-C39-ca3b9097",
+      "validation": "Tests/typechecks/builds/setup NOT RUN \u2014 deferred by user; source-only status, not runtime acceptance.",
+      "integration_owners": [
+        "codex",
+        "antigravity"
+      ]
+    },
+    {
+      "feature_id": "F32",
+      "name": "Native Ferby deep links",
+      "owner": "codex",
+      "task": "C40",
+      "logic_complete": true,
+      "app_wired": true,
+      "source_evidence": [
+        "docs/agents/codex/C40.md"
+      ],
+      "remaining": "Native URI queue/enable policy/confirmation source routes implemented.",
+      "packet": "20261106T132938-codex-C40-3c22dac1",
+      "validation": "Tests/typechecks/builds/setup NOT RUN \u2014 deferred by user; source-only status, not runtime acceptance.",
+      "integration_owners": [
+        "codex",
+        "antigravity"
+      ]
+    }
+  ],
+  "final_assembly_task": "C41",
+  "reconciled_feature_count": 6,
+  "source_routes_closed_count": 4,
+  "integration_writers": [
+    "codex",
+    "antigravity"
+  ],
+  "integration_claims": [
+    "ordinary task",
+    "root-wiring"
+  ]
+}

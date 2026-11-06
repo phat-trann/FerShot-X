@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "id": "20261106T140212-antigravity-A98-89f9ca53",
+  "created_at": "2026-11-06T14:02:12.465707+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A98",
+  "completion": "done",
+  "summary": "F26 app/native integration: Verified WindowAppearanceControls, ShadowTrimInsets, and layer trimming in LayoutWorkspace and Workspace.tsx.",
+  "files": [
+    "src/features/window-appearance-controls/WindowAppearanceControls.tsx",
+    "src/features/layout-workspace/LayoutWorkspace.tsx",
+    "coordination/handoffs/antigravity/A98-integration.json",
+    "docs/agents/antigravity/A98.md"
+  ],
+  "file_sha256": {
+    "src/features/window-appearance-controls/WindowAppearanceControls.tsx": "c6df51cf8cd3467c73e6e4c3c5b3ee1be965360dae82409142f056f4e954bf6f",
+    "src/features/layout-workspace/LayoutWorkspace.tsx": "d48a951561333ba83e0fdde53d26402a4d685e68b8aa631883cd3477a3416f2e",
+    "coordination/handoffs/antigravity/A98-integration.json": "952bfc9f708b610bad593d2dfa0b3fc74575a4ab4579198fc3b91e525cc38110",
+    "docs/agents/antigravity/A98.md": "21cf78de19c7175ae1cc6f00e2b284cde3c3437ccff3412fd7e08b6dec0d5942"
+  },
+  "checks": [
+    "Tests/builds/setup NOT RUN — deferred by user",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Window background and explicit shadow trim app wiring verified."
+  ],
+  "review": "pending"
+}

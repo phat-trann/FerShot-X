@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "id": "20261106T114701-codex-COORD12-e27bc6c6",
+  "created_at": "2026-11-06T11:47:01.743755+07:00",
+  "agent": "codex",
+  "request": "ANTI-RETURN-20261106",
+  "task": "COORD12",
+  "completion": "done",
+  "summary": "Assigned Anti four small independent tasks A39-A42 for Codex review; deferred A38, preserved user auto-review credit and original-logic requirement",
+  "files": [
+    "AGENTS.md",
+    "coordination/build-tasks.json",
+    "coordination/TWO-LANE.md",
+    "coordination/START-HERE.md",
+    "coordination/prompts/codex.md",
+    "coordination/prompts/antigravity.md",
+    "coordination/DELIVERY-PLAN.md",
+    "coordination/messages/antigravity/20261106-small-tasks-A39-A42.md",
+    "docs/agents/codex/COORD12-anti-return.md"
+  ],
+  "file_sha256": {
+    "AGENTS.md": "0863375ea0e653e50b1bff49a3a3fb8f1eaf887d9486137c2552c8ca2dc055ae",
+    "coordination/build-tasks.json": "2bd6e8296c6ad1a9b3acb865dce5875550cec595d41188e370bebf0884992e11",
+    "coordination/TWO-LANE.md": "a665ce02f9e819973aa4975a519e9f1a0816b2ec33567c004226db4c923372e2",
+    "coordination/START-HERE.md": "449d8d1ed94c4fc02dcd48f31c392ab422516ab7c2e565f5116e135dad1c0185",
+    "coordination/prompts/codex.md": "06b51eb31a23e3b4f6beb3f15e2822e56f583b0b429f2284908cdd95518d5593",
+    "coordination/prompts/antigravity.md": "6085b9a7ea1c36f888179dd50d4e8e328115fda5b730538d619db7c9ead24aa5",
+    "coordination/DELIVERY-PLAN.md": "14ed8ee4d8b51a491e22dec8d980956c1acf906b5a09963f504616fcad0c753c",
+    "coordination/messages/antigravity/20261106-small-tasks-A39-A42.md": "b6083d066464ffbccf074a8b401e8c95bb1b3fc6ae8bdc75cd5ed6f1a5daf660",
+    "docs/agents/codex/COORD12-anti-return.md": "0c5ca4ebf303ae196e2d91b39e3fc55331520756ee0969e093aabeef40fdfad4"
+  },
+  "checks": [
+    "Queue JSON, unique task ids and exact input files checked; 28 coordination tests passed",
+    "MVP before 68.75 percent; no acceptance gate changed by allocation",
+    "Formatting/lint delegated; no native actions"
+  ],
+  "risks": [
+    "Codex auto-review credit does not establish completed features, tests or original runtime parity"
+  ],
+  "review": "pending"
+}

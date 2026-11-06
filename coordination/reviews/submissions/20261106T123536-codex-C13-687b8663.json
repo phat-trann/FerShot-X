@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "id": "20261106T123536-codex-C13-687b8663",
+  "created_at": "2026-11-06T12:35:36.505712+07:00",
+  "agent": "codex",
+  "request": "MENU-BAR-20261106",
+  "task": "C13",
+  "completion": "partial",
+  "summary": "Implement native persistent menu bar visibility and tray capture/show/close actions using the frozen Tauri tray feature, without locked package changes.",
+  "files": [
+    "src-tauri/Cargo.toml",
+    "src-tauri/Cargo.lock",
+    "src-tauri/src/menu_bar.rs",
+    "src-tauri/src/lib.rs",
+    "src-tauri/src/lifecycle.rs",
+    "src/platform/native.ts",
+    "src/Workspace.tsx",
+    "src/Workspace.application-preferences.tsx",
+    "docs/agents/codex/C13-menu-bar.md"
+  ],
+  "file_sha256": {
+    "src-tauri/Cargo.toml": "3de079c83506055cfa2d4c3ce53ad4f1c33ac96d44431e590e93a29b4e2006a3",
+    "src-tauri/Cargo.lock": "39bc56dfa90d7e31716ce24cf4f59c26c97bd2d8e8dfbbb2abe718eedf3844e2",
+    "src-tauri/src/menu_bar.rs": "a913b8b57a5e2af7d0562567a16752843bc5d8c13f5deb291e36089acbcab95d",
+    "src-tauri/src/lib.rs": "113fa1b18e33bccbf328f7cc33850d652d02310e79aa3ed3b3ae0af4e540e7ca",
+    "src-tauri/src/lifecycle.rs": "ece393ae9caab720709ae41f455342e771094577c5aed324ef5c6d2cce15ba09",
+    "src/platform/native.ts": "53c98fa0ae6b88fce2d583404469b21a7eb437184cc1deed417e37b6c9478222",
+    "src/Workspace.tsx": "4b6496479eacc9f8fa960af56a101679a5939e1496709b03b04619e89eaa51a4",
+    "src/Workspace.application-preferences.tsx": "ce83b6d8b5e7bc090beb8cc8663d7e5bbabecebd4302a47bd390fa2237771fd7",
+    "docs/agents/codex/C13-menu-bar.md": "01a4d510e4101017e0b1c4d106dd1f75d0d20b2c746c640103e8001fba5fc9d6"
+  },
+  "checks": [
+    "TypeScript no-emit and locked offline cargo check --lib passed. Lock comparison: zero removed/upgraded and zero additive packages.",
+    "Tests NOT RUN — deferred by user. Formatting/lint delegated to Copilot H01."
+  ],
+  "risks": [
+    "USER_WAIVED_REVIEW; later overall review required. Notifications/launch-at-login remain capability-disabled; actual tray/native acceptance unverified. 68.75% MVP acceptance unchanged."
+  ],
+  "review": "pending"
+}

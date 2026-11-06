@@ -1,0 +1,8 @@
+{
+  "submission_id": "20261106T103910-copilot-P87-eb8d8db3",
+  "reviewer": "codex",
+  "created_at": "2026-11-06T11:05:28.889629+07:00",
+  "decision": "approved",
+  "note": "Reviewed mocked IPC tests for invalid display metadata, frame/height budgets, abort before/after native response and bad payload without URL creation. Full frontend checkpoint passed. Synthetic 24-byte header fixture establishes header validation only, not successful image decode or native stitching.",
+  "submission_sha256": "178f77dde90eea0e5d368fab4b9484396a69ff5fec5e10aa89fe61bdedafcb49"
+}

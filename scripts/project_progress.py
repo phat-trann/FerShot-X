@@ -42,13 +42,15 @@ def render(root):
              'This is an evidence-based delivery score, not elapsed time, token consumption or full Shottr parity. Each milestone has equally weighted acceptance gates. Formula: sum(weight × accepted gates / total gates). Code existing, a DONE packet, or an isolated mock does not automatically pass a gate. Codex updates this ledger after review; workers propose evidence in completion packets. Native acceptance gates require real manual validation and remain unchecked.', '',
              '| Milestone | Weight | Accepted gates | Earned |', '| --- | --- | --- | --- |'] + rows + ['',
              '## Current work and blockers', '',
+             *data.get('checkpoint_notes', [
              '- C01-C03/C05/C06 are preserved. Current integration checkpoints: C07 editor/raster, C08 clipboard import, C09 native pin and C10 format/quality preferences; broader tasks remain partial.',
              '- Antigravity A33 Rust Vision replaces inactive Swift A13. Current reviewed editor/pin/settings/clipboard modules are connected; further feature modules await integration review.',
              '- Copilot continues P01-P42 and H01; immutable current packet decisions are authoritative, not historical table labels.',
              '- Codex verification: 195 frontend unit tests, 22 selected browser E2E and 16 root Rust tests passed at this checkpoint. Native manual acceptance remains open; source/version checks preserve the 0.1.0 baseline.',
              '- Progress rose from 47.5% to 61.25% through composed editor/rendering, tested settings persistence core and restricted pin/controls implementation. No native manual gate or OCR gate was credited.',
              '- Continuous task lists cover Antigravity A01-A33 (A13 superseded) and Copilot P01-P42 + H01. The selector skips submitted work and superseded tasks; clients are not auto-launched or restarted.',
-             '- Scrolling/effects/global hotkeys/archive/print and Rust OCR/QR remain on the broader functional roadmap; review/integration and user-only native acceptance still prevent parity/release claims.', '',
+             '- Scrolling/effects/global hotkeys/archive/print and Rust OCR/QR remain on the broader functional roadmap; review/integration and user-only native acceptance still prevent parity/release claims.', 
+             ]), '',
              'See [build queue](BUILD-QUEUE.md), [kickoff prompts](START-HERE.md), [review inbox](reviews/INDEX.md) and [C05 checks](../docs/agents/codex/C05-validation.md).', '',
              '## Acceptance ledger', ''] + details + [
              '## Update procedure', '',

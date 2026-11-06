@@ -1,0 +1,17 @@
+{
+  "task": "A76",
+  "feature_id": "F03",
+  "feature_name": "Local OCR and QR recognition",
+  "status": "integrated",
+  "verified_sources": [
+    "src/Workspace.tsx",
+    "src/Workspace.recognition.tsx",
+    "src/platform/recognition.ts",
+    "src-tauri/crates/vision-core/src/lib.rs",
+    "src/features/recognition-workspace/RecognitionWorkspace.tsx",
+    "src/features/recognition-workspace/RecognitionWorkspace.css"
+  ],
+  "wiring_details": "Reconciled native Vision OCR/QR execution through rasterizeDocument and recognizeRaster in src/platform/recognition.ts, hooked to WorkspaceRecognition in src/Workspace.recognition.tsx and interactive controls in src/Workspace.tsx.",
+  "validation_status": "Tests/builds/setup NOT RUN — deferred by user. Standalone build delegated to Codex. Formatting/lint delegated to Copilot H01."
+}
+

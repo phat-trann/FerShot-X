@@ -8,6 +8,23 @@ import {
 } from "./local-output";
 
 describe("LocalOutputPanel (A30)", () => {
+  it("disables unavailable print and drag independently", () => {
+    const doc = { id: "capability", name: "image.png", src: "blob:synthetic", width: 2, height: 2, mimeType: "image/png", byteSize: 24 };
+    const onPrint = vi.fn(), onDrag = vi.fn();
+    const view = render(<LocalOutputPanel document={doc} paper="a4" orientation="portrait" marginPt={36} onRequestNativePrint={onPrint} />);
+    expect(screen.getByRole("button", { name: "Print Image…" })).toBeEnabled();
+    expect(screen.getByLabelText("Drag image payload")).toHaveAttribute("aria-disabled", "true");
+    expect(screen.getByLabelText("Drag image payload")).toHaveAttribute("draggable", "false");
+    view.rerender(<LocalOutputPanel document={doc} paper="a4" orientation="portrait" marginPt={36} onInitiateImageDrag={onDrag} />);
+    expect(screen.getByRole("button", { name: "Print Image…" })).toBeDisabled();
+    expect(screen.getByLabelText("Drag image payload")).toHaveAttribute("aria-disabled", "false");
+    fireEvent.click(screen.getByRole("button", { name: "Print Image…" }));
+    expect(onPrint).not.toHaveBeenCalled();
+    view.rerender(<LocalOutputPanel document={{ ...doc, mimeType: "image/webp" }} paper="a4" orientation="portrait" marginPt={36} onRequestNativePrint={onPrint} />);
+    expect(screen.getByRole("button", { name: "Print Image…" })).toBeEnabled();
+    expect(screen.queryByRole("alert")).not.toBeInTheDocument();
+  });
+
   it("computes portrait and landscape sheet layouts and enforces image-only drag MIME boundaries without invoking window.print", () => {
     const printSpy = vi.fn();
     Object.defineProperty(window, "print", {

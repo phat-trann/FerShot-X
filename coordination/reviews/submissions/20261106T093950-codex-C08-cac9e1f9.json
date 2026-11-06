@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "id": "20261106T093950-codex-C08-cac9e1f9",
+  "created_at": "2026-11-06T09:39:50.370984+07:00",
+  "agent": "codex",
+  "request": "IMPLEMENT-FIRST-20261106",
+  "task": "C08",
+  "completion": "partial",
+  "summary": "Completed provisional OCR/QR app path: main-only Rust Vision/text-copy commands, serialized worker jobs, source-revision controller and controlled workspace UI",
+  "files": [
+    "src-tauri/Cargo.toml",
+    "src-tauri/Cargo.lock",
+    "src-tauri/src/lib.rs",
+    "src-tauri/src/recognition.rs",
+    "src/platform/native.ts",
+    "src/platform/recognition.ts",
+    "src/Workspace.tsx",
+    "src/Workspace.recognition.tsx",
+    "coordination/build-tasks.json",
+    "docs/agents/codex/C08-native-recognition-integration.md"
+  ],
+  "file_sha256": {
+    "src-tauri/Cargo.toml": "519a199987d8529fbe5e421ee8020014b79cc64588b815823ad17fcc9908acc9",
+    "src-tauri/Cargo.lock": "b6a5205d12988a774ec09a86091c97f47387b6a1cceea3f4c67e8331af75a091",
+    "src-tauri/src/lib.rs": "6d4b06a7627c82159827d40a93276073c54691df3a492e362ce479c7b41fe3f3",
+    "src-tauri/src/recognition.rs": "369b5af06bd8bb4fb66a77cb23c6b2ba19f102ba17389ce62eb33303d9461d30",
+    "src/platform/native.ts": "4d6a89296724bacf8c8e7e52a84a824fa8f471f85bd46102399d1bc393585f7e",
+    "src/platform/recognition.ts": "639db0b4ff81fd45f6412be3bb3e0e41ddec05efb7a3cb533c8c8fab4c6e7ae8",
+    "src/Workspace.tsx": "2d7f318ff93c18adcdbee8da85609bce256fcc5c5afd2d698aad5fdc333eb322",
+    "src/Workspace.recognition.tsx": "d50bd2f0aef1777406f6349d49d2bd07396c9eaf4832b22be1ee14976a6a7c2c",
+    "coordination/build-tasks.json": "e3015feea674c09db32a78f6e6b84d176bf6f824acafb6de506b35393c9776e2",
+    "docs/agents/codex/C08-native-recognition-integration.md": "01873583b17408bc7602c161a7dcd627e4623f7160d66c97e3e3c1bc8d20ad24"
+  },
+  "checks": [
+    "Scoped strict TypeScript production compile passed for Workspace/recognition/native and imported modules",
+    "cargo check --locked --offline --manifest-path src-tauri/Cargo.toml --lib passed",
+    "Existing root package versions preserved; only additive ferby-vision-core 0.1.0 and pinned objc2-vision 0.3.2 linkage",
+    "New functional/native/UI tests and formatting/lint explicitly deferred per user implementation-first priority; no Vision/clipboard operation executed"
+  ],
+  "risks": [
+    "Provisional UNREVIEWED; native cancellation discards late results but cannot preempt synchronous Vision work",
+    "No actual OCR accuracy, OS/native acceptance, full frontend production build or original runtime parity certification",
+    "P71 export syntax correction and later global validation remain with producer; accepted MVP percentage unchanged"
+  ],
+  "review": "pending"
+}

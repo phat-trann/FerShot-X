@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "id": "20261106T101822-copilot-P78-81328d79",
+  "created_at": "2026-11-06T10:18:22.646816+07:00",
+  "agent": "copilot",
+  "request": "P78",
+  "task": "P78",
+  "completion": "done",
+  "summary": "Added controlled AutoAdjustPanel for whole-image deterministic Ferby tonal adjustment. Reused existing defaults and bounds, validates dimensions, finite strength, percentile ranges and low<high before explicit Apply callback; no canvas, raster, IO or side effects. Added plain exports and README documenting non-equivalence to Shottr and C12 raster ownership.",
+  "files": [
+    "src/features/auto-adjust-panel/AutoAdjustPanel.tsx",
+    "src/features/auto-adjust-panel/index.ts",
+    "src/features/auto-adjust-panel/README.md"
+  ],
+  "file_sha256": {
+    "src/features/auto-adjust-panel/AutoAdjustPanel.tsx": "d0053f25f7de682a78fefee080090cb045b8e593fe5f71372d59e8f71e2a2ea7",
+    "src/features/auto-adjust-panel/index.ts": "4575a4cf0df06987d51c97db503b187e9a987041cc698e2b2273fc7b3f2c8820",
+    "src/features/auto-adjust-panel/README.md": "342dcd8e75705a41826fe1d7a2db1f94dd0b9c3d935882cd1f10c852e684a435"
+  },
+  "checks": [
+    "Node 26 npx tsc --noEmit --pretty false: P78 files produced no diagnostics; command is blocked by pre-existing PreferencesWorkspace errors."
+  ],
+  "risks": [
+    "No tests added per task acceptance; build/integration remains Codex-owned."
+  ],
+  "review": "pending"
+}

@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "id": "20261106T140520-antigravity-A99-851e0360",
+  "created_at": "2026-11-06T14:05:20.249203+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A99",
+  "completion": "done",
+  "summary": "F01 gap integration: Closed interactive region selection gap by integrating CaptureRegionSelector, confirmed pixel cropping, and repeat-region memory in Workspace.tsx.",
+  "files": [
+    "src/Workspace.tsx",
+    "src/Workspace.repeat-region.tsx",
+    "coordination/handoffs/antigravity/A99-integration.json",
+    "docs/agents/antigravity/A99.md"
+  ],
+  "file_sha256": {
+    "src/Workspace.tsx": "ecc61d9cdbb934986fd479da3ce0ce5d1442cbe96d928b36290d1c2fe6a855b4",
+    "src/Workspace.repeat-region.tsx": "3c225344b7437d59003aa876e80126294e1065a2c32a1b7f5858ece1b93fbf02",
+    "coordination/handoffs/antigravity/A99-integration.json": "f1336c6a2e8b156021183df686c7235dd436e9d7742d8e7c57a68fe51a24fb57",
+    "docs/agents/antigravity/A99.md": "9321f03ae70a1ee3a881efb61288c97cb38eda9dd6fe7281d314c30e8f163a41"
+  },
+  "checks": [
+    "Tests/builds/setup NOT RUN — deferred by user",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "F01 area selection rectangle provenance and repeat region integration verified."
+  ],
+  "review": "pending"
+}

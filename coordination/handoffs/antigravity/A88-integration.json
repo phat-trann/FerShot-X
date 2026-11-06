@@ -1,0 +1,18 @@
+{
+  "task": "A88",
+  "feature_id": "F16",
+  "feature_name": "PX / PT measurement",
+  "status": "integrated",
+  "verified_sources": [
+    "src/Workspace.tsx",
+    "src/Workspace.measurement.tsx",
+    "src/platform/measurement.ts",
+    "src/features/measurement/measurement.ts",
+    "src/features/measurement-panel/MeasurementOverlay.tsx",
+    "src/features/measurement-panel/MeasurementOverlay.css",
+    "src/features/measurement-panel/index.ts"
+  ],
+  "wiring_details": "MeasurementTools is wired in Workspace.tsx with MeasurementOverlay integration, supporting dual px/pt dimension readouts, display scale adjustments, and imprintMeasurement canvas burning to generate derived library documents.",
+  "validation_status": "Tests/builds/setup NOT RUN — deferred by user. Standalone build delegated to Codex. Formatting/lint delegated to Copilot H01."
+}
+

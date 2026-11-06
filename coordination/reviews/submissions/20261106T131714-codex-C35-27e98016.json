@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "id": "20261106T131714-codex-C35-27e98016",
+  "created_at": "2026-11-06T13:17:14.442050+07:00",
+  "agent": "codex",
+  "request": "DEPLOY-SOURCE-20261106",
+  "task": "C35",
+  "completion": "partial",
+  "summary": "Integrate external A44 capture controls with all eight real app routes and typed fixed/repeat handles; retain explicit interactive-area provenance limitation.",
+  "files": [
+    "src/Workspace.tsx",
+    "src/Workspace.repeat-region.tsx",
+    "docs/agents/codex/C35.md"
+  ],
+  "file_sha256": {
+    "src/Workspace.tsx": "446c193245fdbf5e95c67b72621482f54b1be5aaed94af37ba6d03df2e5be7ba",
+    "src/Workspace.repeat-region.tsx": "acefec7e9b9a2a6c51d8370854ef870ccfd4475de9c4dcd34a52958c4b869e35",
+    "docs/agents/codex/C35.md": "4021317f060c069bc4d36c93ff4492a22ce8c76ef10f2b254ad75569dd990562"
+  },
+  "checks": [
+    "Tests/typechecks/builds/setup NOT RUN — deferred by user; source integration only.",
+    "Formatting/lint delegated to Copilot H01."
+  ],
+  "risks": [
+    "USER_WAIVED_REVIEW; later overall review required. Source uncompiled; interactive-selected rectangle provenance still unavailable and F01 not declared fully matched. MVP acceptance68.75% unchanged."
+  ],
+  "review": "pending"
+}

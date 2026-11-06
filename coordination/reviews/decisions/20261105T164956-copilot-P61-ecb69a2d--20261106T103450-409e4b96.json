@@ -1,0 +1,8 @@
+{
+  "submission_id": "20261105T164956-copilot-P61-ecb69a2d",
+  "reviewer": "codex",
+  "created_at": "2026-11-06T10:34:50.602359+07:00",
+  "decision": "changes_requested",
+  "note": "Global TypeScript compile fails at src/testing/copilot-preferences-workspace.test.tsx:62: save is typed as a plain Promise function, so .mock is unavailable. Correct the owned test mock typing under P61 claim without weakening assertions; run its targeted test and resubmit actual .tsx snapshot. This is a compiler defect, not a request for styling.",
+  "submission_sha256": "28c4413a93d3baeb8a62799fc6dc744199730eaa83e11b9afdfe4241483f2e5d"
+}

@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "id": "20261106T103951-copilot-P89-1773023b",
+  "created_at": "2026-11-06T10:39:51.773240+07:00",
+  "agent": "copilot",
+  "request": "P89",
+  "task": "P89",
+  "completion": "done",
+  "summary": "Added adversarial hotkey codec regressions for complete null-map and distinct-binding round trips with immutable results, missing/extra actions, nonboolean modifiers, case-normalized duplicate bindings, reserved system shortcuts and malformed JSON.",
+  "files": [
+    "src/testing/copilot-hotkey-preferences-codec.test.ts"
+  ],
+  "file_sha256": {
+    "src/testing/copilot-hotkey-preferences-codec.test.ts": "d3e2d687aff81eac0f4afc451fa02cd53323bad8dd33b97b484d74c49523072a"
+  },
+  "checks": [
+    "Node 26 vitest run src/testing/copilot-hotkey-preferences-codec.test.ts: 1 file passed, 4 tests passed."
+  ],
+  "risks": [
+    "No event listeners, OS registration or native parity claim."
+  ],
+  "review": "pending"
+}

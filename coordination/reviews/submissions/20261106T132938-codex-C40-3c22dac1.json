@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "id": "20261106T132938-codex-C40-3c22dac1",
+  "created_at": "2026-11-06T13:29:38.849127+07:00",
+  "agent": "codex",
+  "request": "LINK-POLICY-SOURCE-20261106",
+  "task": "C40",
+  "completion": "done",
+  "summary": "Complete Ferby deep-link handling with persisted enabled/disabled policy, fail-closed loading, queued-action discard and preserved explicit source-bound confirmations.",
+  "files": [
+    "src-tauri/src/deep_links.rs",
+    "src-tauri/src/application_preferences.rs",
+    "src-tauri/src/lib.rs",
+    "src/platform/native.ts",
+    "src/Workspace.deep-links.tsx",
+    "docs/agents/codex/C40.md"
+  ],
+  "file_sha256": {
+    "src-tauri/src/deep_links.rs": "337b39c07888633b5e55bd5f6f131732fbde0cb4a168ae516815ed4cc9143a0b",
+    "src-tauri/src/application_preferences.rs": "74618a8f28c85859dc2dfe55ed06f2917c550bd4452e35eb8b2316c4f502c744",
+    "src-tauri/src/lib.rs": "7dc40ab95483d4ff38416491b0b048bddb84b619cfb3f683ccf448b3f28582c6",
+    "src/platform/native.ts": "00595016d1600952cfc96e31b203505778797a55ca8b698f3364da68eb60abd0",
+    "src/Workspace.deep-links.tsx": "00f58c632745fc1de3ba5e8d6de192b3a70823906d4148192e65e1144facc678",
+    "docs/agents/codex/C40.md": "4302106c3838f7d8e5b05adc143179dfc8fce7f7ced326b08e980a6da7aad06e"
+  },
+  "checks": [
+    "Tests/typechecks/builds/setup NOT RUN — deferred by user. Source reading/editing only; no URL or OS operation.",
+    "Formatting/lint delegated to Copilot H01."
+  ],
+  "risks": [
+    "USER_WAIVED_REVIEW; later overall review required. Source uncompiled and native URL delivery unverified; original route/default semantics UNKNOWN. MVP acceptance68.75% unchanged."
+  ],
+  "review": "pending"
+}

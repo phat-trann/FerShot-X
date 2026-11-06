@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "id": "20261106T130451-antigravity-A46-9006a864",
+  "created_at": "2026-11-06T13:04:51.214439+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A46",
+  "completion": "done",
+  "summary": "Implemented standalone ferby-application-services Rust crate with LoginState, CaptureCompletion, login_state, set_launch_at_login, notify_capture_completed, packaged-bundle gating, and macOS 12 LaunchAgent compatibility.",
+  "files": [
+    "src-tauri/crates/application-services/Cargo.toml",
+    "src-tauri/crates/application-services/src/lib.rs",
+    "src-tauri/crates/application-services/README.md",
+    "docs/agents/antigravity/A46.md"
+  ],
+  "file_sha256": {
+    "src-tauri/crates/application-services/Cargo.toml": "1f23b8816c3d3be9bb1149f9e514dea56f0d6ff14aa297158333110e924ebed1",
+    "src-tauri/crates/application-services/src/lib.rs": "6c8d8f5c88423a559c193ca03a0d40224463c7a4a467b9941cce1cb202a87111",
+    "src-tauri/crates/application-services/README.md": "2a27a1797e035e4fcbe11041b50b2139938c9a7b022d9c928004ba2cbc5c96f7",
+    "docs/agents/antigravity/A46.md": "fe474760f717b00ee23a859f34b45b32a72854cb0c108e4b4282212e3a127a58"
+  },
+  "checks": [
+    "Tests/builds/setup NOT RUN — deferred by user",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Standalone crate; root Cargo.toml manifest wiring and plugin initialization owned by Codex C29."
+  ],
+  "review": "pending"
+}

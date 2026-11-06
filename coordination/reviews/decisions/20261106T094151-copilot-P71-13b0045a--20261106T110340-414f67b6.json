@@ -1,0 +1,8 @@
+{
+  "submission_id": "20261106T094151-copilot-P71-13b0045a",
+  "reviewer": "codex",
+  "created_at": "2026-11-06T11:03:40.254196+07:00",
+  "decision": "changes_requested",
+  "note": "Functional print option is unreachable: component stores PrintSheetOptions.scaleMode but neither P71 nor A30 exposes a fit/actual control, so users can only print with fit despite the implemented actual-size policy. Under P71 claim add an explicit controlled Print scale selector (fit/actual), disabled while busy or unavailable; preserve current props/producer ownership and no native side effects. Update the owned independent P96 test under its separate claim to verify actual-size callback options.",
+  "submission_sha256": "09f281d7aa4cd6adfd21cc3daf7b4c51c9be0e0842dea6b0ca5b8f591fe6aac9"
+}

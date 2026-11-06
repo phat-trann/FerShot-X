@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "id": "20261106T103621-copilot-P61-502aae99",
+  "created_at": "2026-11-06T10:36:21.505793+07:00",
+  "agent": "copilot",
+  "request": "P61",
+  "task": "P61",
+  "completion": "done",
+  "summary": "Corrected the owned independent PreferencesWorkspace regression mock typing: onSave is now a typed Vitest mock, preserving mock call assertions and callback contract. No producer changes.",
+  "files": [
+    "src/testing/copilot-preferences-workspace.test.tsx"
+  ],
+  "file_sha256": {
+    "src/testing/copilot-preferences-workspace.test.tsx": "556ae3b7087e879d6a667bdba958351fcc64053dd144fb67c4a083fb72ba5b06"
+  },
+  "checks": [
+    "Node 26 vitest run src/testing/copilot-preferences-workspace.test.tsx src/features/preferences-workspace/PreferencesWorkspace.test.tsx: 2 files passed, 4 tests passed."
+  ],
+  "risks": [
+    "Full build remains Codex-owned; no cosmetic changes."
+  ],
+  "review": "pending"
+}

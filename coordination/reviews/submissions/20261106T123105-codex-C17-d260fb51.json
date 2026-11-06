@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "id": "20261106T123105-codex-C17-d260fb51",
+  "created_at": "2026-11-06T12:31:05.781661+07:00",
+  "agent": "codex",
+  "request": "REPEAT-REGION-20261106",
+  "task": "C17",
+  "completion": "done",
+  "summary": "Add explicit repeat-area invalidation for native geometry/pixel mismatch recovery.",
+  "files": [
+    "src/features/capture-session/index.ts",
+    "docs/agents/codex/C17-repeat-area-reset.md"
+  ],
+  "file_sha256": {
+    "src/features/capture-session/index.ts": "36f1e79fc2c171387db07e33dd7a68acbe09dae413b71175f3184fb28ace948b",
+    "docs/agents/codex/C17-repeat-area-reset.md": "5bab120b0e7e13d3fe57e823f60edff9926b2a976093dcee22502d428fab0a91"
+  },
+  "checks": [
+    "TypeScript no-emit passed. Tests NOT RUN — deferred by user.",
+    "Formatting/lint delegated to Copilot H01."
+  ],
+  "risks": [
+    "USER_WAIVED_REVIEW; later overall review required. No native captures executed; 68.75% acceptance unchanged."
+  ],
+  "review": "pending"
+}

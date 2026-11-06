@@ -1,0 +1,7 @@
+# A30 independent output capabilities correction
+
+Preserved the existing Antigravity implementation/authorship. During C15 integration, print and drag actions remained enabled when their respective callbacks were absent; P71 uses absent callbacks for unavailable capabilities. Added a regression that failed on missing-drag capability, then gated print and drag independently (including native draggable flag and handlers). No unavailable action advertises functional drag/print. Callback-present behavior is retained.
+
+Targeted A30 unit suite passed after correction (2 tests); prior failure is in artifacts/20261106-output-capability-before.log. Existing real-browser producer sheet check passed before this guard-only correction; C15 main/preview checks exercise the integrated disabled-drag path. No OS output was invoked. Formatting/lint delegated to Copilot H01. New Codex snapshot counts as reviewed under USER_WAIVED_REVIEW and remains marked for overall review; old independent snapshot is stale, not silently reapproved.
+
+Follow-on print MIME integration: absent drag capability now skips drag-payload validation entirely, so supported WebP/GIF raster printing does not show an irrelevant PNG/JPEG drag error. Added non-PNG print-only regression; 2 A30 tests passed. Current full root check: npm run build passed (tsc + Vite), and 392 frontend tests across 109 files passed. These checks do not invoke native OS output.

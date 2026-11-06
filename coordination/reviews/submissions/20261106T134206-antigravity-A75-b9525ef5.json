@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "id": "20261106T134206-antigravity-A75-b9525ef5",
+  "created_at": "2026-11-06T13:42:06.351075+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A75",
+  "completion": "done",
+  "summary": "F30 complete eight-action shortcut producer: Implemented GlobalShortcutsV2 schema, backward-compatible v1/v2 codec, native accelerator conversion, and GlobalShortcutsV2Panel UI.",
+  "files": [
+    "src/features/global-shortcuts-v2/types.ts",
+    "src/features/global-shortcuts-v2/codec.ts",
+    "src/features/global-shortcuts-v2/GlobalShortcutsV2Panel.tsx",
+    "src/features/global-shortcuts-v2/GlobalShortcutsV2Panel.css",
+    "src/features/global-shortcuts-v2/index.ts",
+    "docs/agents/antigravity/A75.md"
+  ],
+  "file_sha256": {
+    "src/features/global-shortcuts-v2/types.ts": "2626fae24d442d1fd414b447d8e6d1990a802ae132b377769c1ec32898692235",
+    "src/features/global-shortcuts-v2/codec.ts": "2c22fa063afd6a3791aaf69a0191f2e5872bdf31a8fd83b452b0c4ba606a6097",
+    "src/features/global-shortcuts-v2/GlobalShortcutsV2Panel.tsx": "8b06adcb197a23837aaebfe8e1963841db0d6be9f136a33f7a949fe04ca9be2e",
+    "src/features/global-shortcuts-v2/GlobalShortcutsV2Panel.css": "7e4fd60d51793578c595b8311d4d5a54c32b4352b608993ee51dc8204317c19f",
+    "src/features/global-shortcuts-v2/index.ts": "e7b4376cc4f789453ea22146567a65880d19d36e7d44ce4299acabaf0648657b",
+    "docs/agents/antigravity/A75.md": "8d319c2aab92bac55dedfe3fc2afb8daec3586258930983b7547952590a1b8f5"
+  },
+  "checks": [
+    "Tests/builds/setup NOT RUN — deferred by user",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Eight-action shortcut schema, v1 migration, native wire serialization, and UI panel logic complete."
+  ],
+  "review": "pending"
+}

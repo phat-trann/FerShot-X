@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "id": "20261106T103526-codex-COORD08-94213d54",
+  "created_at": "2026-11-06T10:35:26.476757+07:00",
+  "agent": "codex",
+  "request": "VALIDATE-20261106",
+  "task": "COORD08",
+  "completion": "done",
+  "summary": "Implemented user-granted Codex review credit with marked overall-review backlog, resumed active validation and allocated eight Copilot tasks P83-P90",
+  "files": [
+    "scripts/review_policy.py",
+    "scripts/next_task.py",
+    "scripts/review_queue.py",
+    "scripts/test_next_task.py",
+    "coordination/reviews/policy.json",
+    "AGENTS.md",
+    "coordination/START-HERE.md",
+    "coordination/TWO-LANE.md",
+    "coordination/DELIVERY-PLAN.md",
+    "coordination/reviews/README.md",
+    "coordination/prompts/codex.md",
+    "coordination/prompts/copilot.md",
+    "coordination/build-tasks.json",
+    "coordination/messages/copilot/20261106-active-validation-P83-P90.md",
+    "coordination/messages/copilot/20261106-typecheck-blockers.md",
+    "docs/agents/codex/COORD08-active-validation.md"
+  ],
+  "file_sha256": {
+    "scripts/review_policy.py": "971ae41dbbdc6b79288a79224528499e41b0f8031221f9078e81e6aaf480a622",
+    "scripts/next_task.py": "c1f3e191705be5624eaca7745adbcf12dbd98bfe4c4132580b6a11cf6543835a",
+    "scripts/review_queue.py": "712fc72af04fa4475efe93974c0216cdadbd6cb767908bb8b5641facaa656285",
+    "scripts/test_next_task.py": "cba9eb5fb4d9663c4def55708923d4e0c02794e0e9dc7c433687ff83479aa682",
+    "coordination/reviews/policy.json": "2803088cfc653b4150bda65ca495b0624883db416ad7fb39d31e4008c45bdcc3",
+    "AGENTS.md": "591bc3445ba14a2592415244080b36d1e7f9c19d419bbbca948dca7f211802d2",
+    "coordination/START-HERE.md": "b47c30d7595e0c1e15da73b075cc1f03be4015da20244635f5b80639833580f9",
+    "coordination/TWO-LANE.md": "ce1c91d3f481b401edd07afcc2b41189e1ddbd5a4a41765c978551e4050327e0",
+    "coordination/DELIVERY-PLAN.md": "58df73ca9eaed642cbe5441041a66ff0b35445388628db921405ba4453add401",
+    "coordination/reviews/README.md": "0be597d82ee7892ba9e1a2cdba5f677e3ef8284249769649a38a4f5a2a326074",
+    "coordination/prompts/codex.md": "1740fa5b375db329231390e31f72e1b59e1638590c153a22f65858edfd79e458",
+    "coordination/prompts/copilot.md": "08f31d0067b1ccf41117d7faf6bbb7f6038a00418a503056791b7d4ff1151215",
+    "coordination/build-tasks.json": "16d7d54bb5a8d54c5cecaa117a272c311b6aa07989ad56a5e80fa67a257a9e9d",
+    "coordination/messages/copilot/20261106-active-validation-P83-P90.md": "595874bddb7b77145f1b1738ebf49c7e281d61f8fe5bbd3ae9ca7b311b40e92a",
+    "coordination/messages/copilot/20261106-typecheck-blockers.md": "ce6cb4ac74b23a36b40416d09d6b66d493a266749674c3517ee90936e6518d8e",
+    "docs/agents/codex/COORD08-active-validation.md": "47c7bec7a099e7a7a5c9efa96cfbf596908983639fde039b36b64565456de828"
+  },
+  "checks": [
+    "28 coordination tests passed, including review-credit rejection/staleness/partial-work coverage",
+    "345 frontend tests/98 files passed in saved test log; 16 root Rust tests passed; 10 Rust Vision tests passed including synthetic real OCR/QR",
+    "Two global tsc errors handed off to P61/H01; no blanket build pass claimed",
+    "Formatting/lint delegated to Copilot H01"
+  ],
+  "risks": [
+    "User review credit is not actual independent review; marked overall review remains due; product tests/native gates still require evidence"
+  ],
+  "review": "pending"
+}

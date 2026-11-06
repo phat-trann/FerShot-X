@@ -1,0 +1,17 @@
+{
+  "task": "A86",
+  "feature_id": "F14",
+  "feature_name": "Add capture / composition / snapping",
+  "status": "integrated",
+  "verified_sources": [
+    "src/Workspace.tsx",
+    "src/Workspace.layout.tsx",
+    "src/platform/layout.ts",
+    "src/features/composition/composition.ts",
+    "src/features/composition/index.ts",
+    "src/features/snap-distance/index.ts"
+  ],
+  "wiring_details": "WorkspaceLayout is wired in Workspace.tsx with multi-image layer selection (up to 32 images), edge snapping via snapPlacementToEdges, stacking, and composeWorkspaceLayout integration producing new derived library documents.",
+  "validation_status": "Tests/builds/setup NOT RUN — deferred by user. Standalone build delegated to Codex. Formatting/lint delegated to Copilot H01."
+}
+

@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "id": "20261106T120427-codex-C04-736b1c1b",
+  "created_at": "2026-11-06T12:04:27.677125+07:00",
+  "agent": "codex",
+  "request": "ANTI-REVIEW-20261106",
+  "task": "C04",
+  "completion": "partial",
+  "summary": "Correction: eight external Anti tests passed actual review/run, but approval writes were blocked by stale worker snapshots; current files captured and fresh worker packets requested",
+  "files": [
+    "src/testing/antigravity-print-preview.test.tsx",
+    "src/testing/antigravity-archive-panel.test.tsx",
+    "src/testing/antigravity-shortcut-recorder.test.tsx",
+    "src/testing/antigravity-capture-preferences.test.ts",
+    "docs/agents/antigravity/A39.md",
+    "docs/agents/antigravity/A40.md",
+    "docs/agents/antigravity/A41.md",
+    "docs/agents/antigravity/A42.md",
+    "docs/agents/codex/C04-external-anti-review.md",
+    "coordination/messages/antigravity/20261106-refresh-current-test-packets.md"
+  ],
+  "file_sha256": {
+    "src/testing/antigravity-print-preview.test.tsx": "3d245911fc71e36f3700790b7ea88c8b7acac9c956773d14788be57cd7484309",
+    "src/testing/antigravity-archive-panel.test.tsx": "57399dc27a92d0b0cc1289e512b05b08887b43c0b98155157b2e24fc0c66ba69",
+    "src/testing/antigravity-shortcut-recorder.test.tsx": "2f6179e049dee666972e9415fbdb0a63faa6a20e046e10be3f1e93ff93524a88",
+    "src/testing/antigravity-capture-preferences.test.ts": "78b7176e93c83db97ef5e2320c595d5642bc46f0e66e3f8be36e48faf746e21e",
+    "docs/agents/antigravity/A39.md": "772a236da9941f6c29e24e8cd69504bfc21bcfaee7350a961fbd7fc232936305",
+    "docs/agents/antigravity/A40.md": "ef26f7a227b9278e7d6a7511338e03ac59a67836f270a892425b24ff94462111",
+    "docs/agents/antigravity/A41.md": "d8e7788f1204a4e06a330b34bd4c489f54d144260038be9ef7a113688110caa3",
+    "docs/agents/antigravity/A42.md": "8246b6d3b3f98abff41a8298163ca8fb11587e860c9ac7c6cc2e6de8f287a85d",
+    "docs/agents/codex/C04-external-anti-review.md": "8deeefefa71517de7e68450872e72579e33a42098369603c4c273ad731b6b7b1",
+    "coordination/messages/antigravity/20261106-refresh-current-test-packets.md": "9c78fdabc762f157d1c8bd34cb2ef3d4467be831f1be368324621f70cee8c51d"
+  },
+  "checks": [
+    "Four targeted Vitest files passed: 8 tests; all source bodies inspected",
+    "Approval loop raised stale-snapshot error before any A39-A42 decision was written; previous summary corrected explicitly",
+    "Current exact files snapshotted without overwriting worker packets or reports"
+  ],
+  "risks": [
+    "Fresh worker snapshots still needed; configured tsc has compile-only unused-import cleanup; current source review is retained in this Codex packet"
+  ],
+  "review": "pending"
+}

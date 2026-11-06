@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "20261106T105851-copilot-P93-0495a59e",
+  "created_at": "2026-11-06T10:58:51.514679+07:00",
+  "agent": "copilot",
+  "request": "COPILOT-20261106",
+  "task": "P93",
+  "completion": "done",
+  "summary": "Added four recognition-workspace async regressions with real injected controllers for duplicate suppression, source revision/cancel invalidation and failed prepare recovery",
+  "files": [
+    "src/testing/copilot-workspace-recognition.test.tsx",
+    "docs/qa/copilot-P93.md"
+  ],
+  "file_sha256": {
+    "src/testing/copilot-workspace-recognition.test.tsx": "9a3db4ef128eec297223c93f81afaebc72ac856662019679ce99a14b88469120",
+    "docs/qa/copilot-P93.md": "ab648dae8f37ac7b82e392f4a4f8cb5a13bcffb31b2c323ea55d40818accab72"
+  },
+  "checks": [
+    "Node 26 vitest run src/testing/copilot-workspace-recognition.test.tsx: 1 file, 4 tests passed"
+  ],
+  "risks": [
+    "Synthetic backend and native ports only; no engine/clipboard/native parity accepted; build delegated to Codex"
+  ],
+  "review": "pending"
+}

@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "id": "20261106T100945-codex-COORD06-c1f43720",
+  "created_at": "2026-11-06T10:09:45.568999+07:00",
+  "agent": "codex",
+  "request": "IMPLEMENT-FIRST-20261106",
+  "task": "COORD06",
+  "completion": "done",
+  "summary": "Published production checkpoint and four Copilot allocations; updated startup instructions to remaining C12-C15 wiring and preserved pending native/review gates",
+  "files": [
+    "coordination/build-tasks.json",
+    "coordination/START-HERE.md",
+    "coordination/TWO-LANE.md",
+    "coordination/CONTINUOUS.md",
+    "coordination/prompts/copilot.md",
+    "coordination/messages/copilot/20261106-production-backlog-P78-P81.md",
+    "docs/agents/codex/COORD06-backlog.md"
+  ],
+  "file_sha256": {
+    "coordination/build-tasks.json": "111e398ec8fa346011a2e198b1d855c698b6ad18460890436c490b4f700f1a9b",
+    "coordination/START-HERE.md": "00ced4848650b123c3075559d949eab066ccb530739b0db7f4beb085f97edad2",
+    "coordination/TWO-LANE.md": "92efab4eb828b95c4897d7114e18ed885027855bf773ae7f1e04e603bd3b28fd",
+    "coordination/CONTINUOUS.md": "b6d2c65a0e4904a500f7fd5c784780d716f481fb8a5b58e5759d9a7066551401",
+    "coordination/prompts/copilot.md": "fdce59e4c954ae2d404cd4ddda4a2629b1d7f46bfb0940bf10509877b38bf843",
+    "coordination/messages/copilot/20261106-production-backlog-P78-P81.md": "0bbd3a6c07839171777762d1aef9b597fe8eb022393ddac2acafcc0fa7a7b9fe",
+    "docs/agents/codex/COORD06-backlog.md": "bd8b7d2072a488d0eef8ba6de89b01cb6cd9746342d42464063baec8ae4487fb"
+  },
+  "checks": [
+    "Queue/input/unique ID validation and selector availability checked; next Codex C13",
+    "Current root scoped TypeScript and locked/offline Rust compile passed in C12 packet",
+    "260 completion packets validated before this checkpoint; review index refreshed",
+    "Raw/captures/artifacts/node_modules/targets/.vscode remain ignored",
+    "Formatting/lint delegated to Copilot H01; expanded tests deferred by user"
+  ],
+  "risks": [
+    "No independent approval/native acceptance/100 percent claim; prior shared-source snapshots may be stale after subsequent integration"
+  ],
+  "review": "pending"
+}

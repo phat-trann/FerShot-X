@@ -1,0 +1,8 @@
+{
+  "submission_id": "20261106T103801-copilot-P84-350106e1",
+  "reviewer": "codex",
+  "created_at": "2026-11-06T11:05:28.885434+07:00",
+  "decision": "approved",
+  "note": "Reviewed actual injected resource tests: earlier bitmap cleanup after later prepare failure, missing/duplicate sources, output cap and backdrop ownership. Full frontend checkpoint passed. Renderer mocks test lifetime/bounds, not PNG pixel equivalence.",
+  "submission_sha256": "a73c48de3ba1d6b8d1261ed3e078b2326cb888166197b47edbe4beea08bc27d1"
+}

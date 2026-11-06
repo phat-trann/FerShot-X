@@ -1,50 +1,58 @@
-[
-  {
-    "id": "P48-F20-pin-controls",
-    "feature_id": "F20",
-    "source_reference": "UI-02/UI-09 Pin to Screen controls; PinPreviewCard public scale/opacity exports",
-    "source_evidence_level": "STATIC_OBSERVED",
-    "fixture": "Synthetic ImageDocument with known dimensions and scale/opacity boundary values.",
-    "trigger": "Pin the document and exercise 50/100/200%, semi-transparent, invalid and out-of-range controls.",
-    "target_observation_needed": "Record window placement, stacking, persistence, transparency and clamping behavior.",
-    "ferby_observation_needed": "Record clampPinScale/clampPinOpacity outputs, rendered dimensions and callback values.",
-    "expected_target_result": null,
-    "acceptance_rule": "Compare visual and callback behavior only against separately recorded target results.",
-    "target_status": "NOT_EXECUTED",
-    "ferby_status": "NOT_EXECUTED",
-    "owner": "C09",
-    "limitations": "PinPreviewCard exposes a preview component, not native window placement, stacking or persistence."
+{
+  "task": "P48",
+  "baseline": {
+    "version": "1.9.3",
+    "build": "137",
+    "executable_sha256": "4a1ea879e1079b81b1c501e7ef0c399cf7d0890c2b33fc79f97c4124620360a3"
   },
-  {
-    "id": "P48-F21-library-boundary",
-    "feature_id": "F21",
-    "source_reference": "UI-07 library storyboard, search, File List and tile-size labels",
-    "source_evidence_level": "STATIC_OBSERVED",
-    "fixture": "Synthetic set of image documents with duplicate names, missing metadata and tile-size variants.",
-    "trigger": "Search, switch File List/small/medium/large tiles and select an item.",
-    "target_observation_needed": "Record source folder, persistence, metadata/search scope and actions.",
-    "ferby_observation_needed": "Record whether PinPreviewCard receives stable document IDs and rendered metadata; library behavior is separately marked absent.",
-    "expected_target_result": null,
-    "acceptance_rule": "Compare library ordering, filtering and persistence only after both implementations are observed.",
-    "target_status": "NOT_EXECUTED",
-    "ferby_status": "NOT_EXECUTED",
-    "owner": "C14",
-    "limitations": "The named file exports no library, search, folder or tile-list API."
-  },
-  {
-    "id": "P48-F22-preview-actions",
-    "feature_id": "F22",
-    "source_reference": "UI-16 Edit, Copy, Save, Upload, OCR, Pin and Close labels; PinPreviewCard callbacks",
-    "source_evidence_level": "STATIC_OBSERVED",
-    "fixture": "Synthetic ImageDocument with isolated action callback spies and a close transition.",
-    "trigger": "Invoke Edit Image, Copy Image and Close Pin from the preview.",
-    "target_observation_needed": "Record thumbnail lifetime and transitions to editor/pin plus copy/save/OCR action outcomes.",
-    "ferby_observation_needed": "Record exact callback IDs and preview unmount/transition behavior.",
-    "expected_target_result": null,
-    "acceptance_rule": "Compare callback identity and transitions only with recorded target behavior; absent actions remain unknown.",
-    "target_status": "NOT_EXECUTED",
-    "ferby_status": "NOT_EXECUTED",
-    "owner": "C09",
-    "limitations": "The named props expose edit/copy/close only; Save, Upload, OCR and Pin are not exported here."
-  }
-]
+  "cases": [
+    {
+      "id": "P48-F20-pin-controls",
+      "feature_id": "F20",
+      "source_reference": "UI-02/UI-09 Pin to Screen controls; PinPreviewCard public scale/opacity exports",
+      "source_evidence_level": "STATIC_OBSERVED",
+      "fixture": "Synthetic ImageDocument with known dimensions and scale/opacity boundary values.",
+      "trigger": "Pin the document and exercise 50/100/200%, semi-transparent, invalid and out-of-range controls.",
+      "target_observation_needed": "Record window placement, stacking, persistence, transparency and clamping behavior.",
+      "ferby_observation_needed": "Record clampPinScale/clampPinOpacity outputs, rendered dimensions and callback values.",
+      "expected_target_result": null,
+      "acceptance_rule": "Compare visual and callback behavior only against separately recorded target results.",
+      "target_status": "NOT_EXECUTED",
+      "ferby_status": "NOT_EXECUTED",
+      "owner": "C09",
+      "limitations": "PinPreviewCard exposes a preview component, not native window placement, stacking or persistence."
+    },
+    {
+      "id": "P48-F21-library-boundary",
+      "feature_id": "F21",
+      "source_reference": "UI-07 library storyboard, search, File List and tile-size labels",
+      "source_evidence_level": "STATIC_OBSERVED",
+      "fixture": "Synthetic set of image documents with duplicate names, missing metadata and tile-size variants.",
+      "trigger": "Search, switch File List/small/medium/large tiles and select an item.",
+      "target_observation_needed": "Record source folder, persistence, metadata/search scope and actions.",
+      "ferby_observation_needed": "Record whether PinPreviewCard receives stable document IDs and rendered metadata; library behavior is separately marked absent.",
+      "expected_target_result": null,
+      "acceptance_rule": "Compare library ordering, filtering and persistence only after both implementations are observed.",
+      "target_status": "NOT_EXECUTED",
+      "ferby_status": "NOT_EXECUTED",
+      "owner": "C14",
+      "limitations": "The named file exports no library, search, folder or tile-list API."
+    },
+    {
+      "id": "P48-F22-preview-actions",
+      "feature_id": "F22",
+      "source_reference": "UI-16 Edit, Copy, Save, Upload, OCR, Pin and Close labels; PinPreviewCard callbacks",
+      "source_evidence_level": "STATIC_OBSERVED",
+      "fixture": "Synthetic ImageDocument with isolated action callback spies and a close transition.",
+      "trigger": "Invoke Edit Image, Copy Image and Close Pin from the preview.",
+      "target_observation_needed": "Record thumbnail lifetime and transitions to editor/pin plus copy/save/OCR action outcomes.",
+      "ferby_observation_needed": "Record exact callback IDs and preview unmount/transition behavior.",
+      "expected_target_result": null,
+      "acceptance_rule": "Compare callback identity and transitions only with recorded target behavior; absent actions remain unknown.",
+      "target_status": "NOT_EXECUTED",
+      "ferby_status": "NOT_EXECUTED",
+      "owner": "C09",
+      "limitations": "The named props expose edit/copy/close only; Save, Upload, OCR and Pin are not exported here."
+    }
+  ]
+}

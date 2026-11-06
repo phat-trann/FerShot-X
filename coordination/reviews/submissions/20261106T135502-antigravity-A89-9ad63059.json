@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "id": "20261106T135502-antigravity-A89-9ad63059",
+  "created_at": "2026-11-06T13:55:02.743544+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A89",
+  "completion": "done",
+  "summary": "F17 app/native integration: Verified pixel inspection, AverageColorControls region averaging, and formatted color copying in Workspace.tsx.",
+  "files": [
+    "src/Workspace.tsx",
+    "src/Workspace.average-color.tsx",
+    "src/platform/pixel-inspection.ts",
+    "src/platform/color-copy.ts",
+    "coordination/handoffs/antigravity/A89-integration.json",
+    "docs/agents/antigravity/A89.md"
+  ],
+  "file_sha256": {
+    "src/Workspace.tsx": "e2879fca74d6b07987cb81c8433ddb4a76d8507c4eb220d6055e82a3db91c13a",
+    "src/Workspace.average-color.tsx": "9a24954d51a46ed9dadaf67ffc654168c96c4aa3d64689e36185314558628b5b",
+    "src/platform/pixel-inspection.ts": "471bf9d00cbb71b50037e66873b4d7278a2162b204fa527913e020bb0ff5b833",
+    "src/platform/color-copy.ts": "8c980859a71176e5d14ff47a8cf555c77be75dea96e357b5714a99d58e5caf00",
+    "coordination/handoffs/antigravity/A89-integration.json": "b0479c1e3471e81d6fff3907b85d513e457254f284e22150b8521583a80511ac",
+    "docs/agents/antigravity/A89.md": "5cbf10573233446b959a3ca6dd9ba17fff39dd3d9c0d3082b5dd0afc167516e8"
+  },
+  "checks": [
+    "Tests/builds/setup NOT RUN — deferred by user",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Pixel inspection, region averaging, and color copying app wiring verified."
+  ],
+  "review": "pending"
+}

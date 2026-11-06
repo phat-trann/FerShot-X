@@ -1,0 +1,8 @@
+{
+  "submission_id": "20261105T134133-antigravity-A30-9bd8023d",
+  "reviewer": "codex",
+  "created_at": "2026-11-06T10:50:59.751391+07:00",
+  "decision": "approved",
+  "note": "Reviewed current print layout/preview and drag-payload implementation against supplied-raster ownership, bounded dimensions/margins, deterministic fit/actual policy and allowed in-memory image MIME boundary. Scoped unit and real-browser synthetic print-sheet tests rerun; no automatic print/OS dialog invoked. This accepts presentation/helpers, not native print or file-promise drag.",
+  "submission_sha256": "4b11b6d02527d37b6dca438c431779808a14323e1a63734ba3ce20f3e9f7863d"
+}

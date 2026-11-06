@@ -1,0 +1,18 @@
+{
+  "task": "A93",
+  "feature_id": "F21",
+  "feature_name": "Session library / local archive",
+  "status": "integrated",
+  "verified_sources": [
+    "src/Workspace.tsx",
+    "src/Workspace.archive.tsx",
+    "src/features/library/LibraryPanel.tsx",
+    "src/features/archive-panel/ArchivePanel.tsx",
+    "src/features/archive-workflow/index.ts",
+    "src/features/editor-session-codec/codec.ts",
+    "src-tauri/crates/session-core/src/lib.rs"
+  ],
+  "wiring_details": "LibraryPanel is wired in Workspace.tsx sidebar with search, grid/list modes, and selection/removal. WorkspaceArchive integrates ArchivePanel with snapshot and commit hooks for zip/tar archive import/export backed by session-core and archive-workflow.",
+  "validation_status": "Tests/builds/setup NOT RUN — deferred by user. Standalone build delegated to Codex. Formatting/lint delegated to Copilot H01."
+}
+

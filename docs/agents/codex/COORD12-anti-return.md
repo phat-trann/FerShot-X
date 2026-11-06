@@ -1,0 +1,3 @@
+# COORD12 bounded Antigravity return
+
+Updated active allocation: Codex leads and auto-passes review by user authorization, marked for later overall user review. Anti receives A39-A42: four small independent UI/codec checks with two inputs and test/report-only ownership. A38 is deferred. No root/dependency/complex production ownership handed to Anti. Codex must inspect and review actual changes. User authorizes Codex to complete free former worker scopes while preserving author identity. MVP before remains 68.75%; no gate changed by staffing. Original Shottr identity/evidence read for the active shortcut function; evidence limitations remain explicit.

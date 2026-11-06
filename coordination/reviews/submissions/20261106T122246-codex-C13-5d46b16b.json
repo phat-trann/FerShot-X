@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "id": "20261106T122246-codex-C13-5d46b16b",
+  "created_at": "2026-11-06T12:22:46.535064+07:00",
+  "agent": "codex",
+  "request": "PERSISTENT-SHORTCUTS-20261106",
+  "task": "C13",
+  "completion": "partial",
+  "summary": "Persist validated shortcut assignments with Save/Forget and explicit per-session Apply/Clear; share bounded atomic preference storage without dependency changes.",
+  "files": [
+    "src-tauri/src/application_preferences.rs",
+    "src-tauri/src/preferences.rs",
+    "src-tauri/src/shortcuts.rs",
+    "src-tauri/src/lib.rs",
+    "src/platform/native.ts",
+    "src/platform/shortcuts.ts",
+    "src/Workspace.shortcuts.tsx",
+    "docs/agents/codex/C13-persistent-shortcuts.md"
+  ],
+  "file_sha256": {
+    "src-tauri/src/application_preferences.rs": "f0d4533ff3b085da7a257e921ab96847e9b1533a18b214a7d463fc09ddd0351e",
+    "src-tauri/src/preferences.rs": "8915a159a1c529db7b9d6528f4fb838cb911d397c5840986e3eeae88fe38d195",
+    "src-tauri/src/shortcuts.rs": "fc33999aa62e123aa39bcccfe53b5f66e33618baa1716be4759c65a8c48a2d4d",
+    "src-tauri/src/lib.rs": "e9eab3841fe7eb41da4bd0b52671c4410eb2f0733cbc232bc248ba8d28d148ee",
+    "src/platform/native.ts": "15f0f8b939db9c0144f9939cddc6afa6da1608311c8b5cce0ef4a20c702a25ca",
+    "src/platform/shortcuts.ts": "3845bc18aa59d5eed2e36f45159ce558a3b3071b276cd506777c75fc7eac7047",
+    "src/Workspace.shortcuts.tsx": "3d746493af503ffa6268601241320f19d975fd06582dfab012683cd7cd8b8256",
+    "docs/agents/codex/C13-persistent-shortcuts.md": "2c62615506f7e47ae47e18ddcec9bc9cd027fb77fb7ea50c641b7cd07bba722e"
+  },
+  "checks": [
+    "TypeScript no-emit and locked offline cargo check --lib passed.",
+    "Tests NOT RUN — deferred by user. Formatting/lint delegated to Copilot H01."
+  ],
+  "risks": [
+    "USER_WAIVED_REVIEW; later overall review required. No automatic startup registration or actual native shortcut acceptance claimed. MVP acceptance unchanged at 68.75%."
+  ],
+  "review": "pending"
+}

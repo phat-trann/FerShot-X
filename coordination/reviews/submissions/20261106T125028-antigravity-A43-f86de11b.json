@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "id": "20261106T125028-antigravity-A43-f86de11b",
+  "created_at": "2026-11-06T12:50:28.732623+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A43",
+  "completion": "done",
+  "summary": "Implemented strict version-1 recognition preferences codec with deduplicated explicit tags (max16), preserveLineBreaks, recognition mode enum, 16 KiB limit, and explicit Ferby defaults.",
+  "files": [
+    "src/features/recognition-preferences-codec/index.ts",
+    "src/features/recognition-preferences-codec/codec.ts",
+    "src/features/recognition-preferences-codec/README.md",
+    "docs/agents/antigravity/A43.md"
+  ],
+  "file_sha256": {
+    "src/features/recognition-preferences-codec/index.ts": "4e8edf40651e9172801858bc320104f6bbf6e9aada4125e5fa69c9d9dccdf6c5",
+    "src/features/recognition-preferences-codec/codec.ts": "0917d1bfadb3a3bff319e5ed46bc40439ee511e9efe67b882ff80513bb741ddf",
+    "src/features/recognition-preferences-codec/README.md": "fc2505b0cbf2df77de1c895cabacc5b30dca5be0ed1435e7d9d45305aef77efb",
+    "docs/agents/antigravity/A43.md": "790564b10a32b48129cc4b71dc1f550512e6e3e2690950aea9ae55e51be5d083"
+  },
+  "checks": [
+    "Tests NOT RUN — deferred by user",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Isolated codec implementation only; persistence and native OCR wiring handled by Codex."
+  ],
+  "review": "pending"
+}

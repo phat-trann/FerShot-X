@@ -1,0 +1,7 @@
+# C09: Timed capture preview integration (UNREVIEWED)
+
+Connected the existing A15 CapturePreviewController to actual successful user-triggered captures. The saved showPreview preference gates display and dismisses an existing preview when disabled. The app-contained floating preview supports timeout, keep-open, close/Escape, edit, explicit copy/save/pin and opening OCR/QR controls. Actions resolve the preview document ID from the live library instead of using the currently selected image. Outputs include basic and advanced annotations through the shared raster pipeline.
+
+Preview dismissal does not revoke library-owned source URLs; replacing/closing a document clears the relevant preview. Stable close callbacks prevent unrelated React state changes from resetting the timer. Busy IO pauses auto-dismiss; callbacks recheck source availability/busy state. Pin remains the existing restricted native window. This preview is app-contained, not a claim of an independent desktop thumbnail window or whole-window translucency parity. OCR action opens language-aware recognition controls, not implicit recognition on render.
+
+Necessary scoped strict TypeScript compilation passed. Functional/browser/native tests and hygiene are deferred by the user. No native capture/clipboard/dialog/pin action was invoked during implementation. Source is provisionally integrated and UNREVIEWED; original runtime behavior and later acceptance remain open.

@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "id": "20261106T135807-antigravity-A93-77871a6d",
+  "created_at": "2026-11-06T13:58:07.036948+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A93",
+  "completion": "done",
+  "summary": "F21 app/native integration: Verified LibraryPanel sidebar browsing, WorkspaceArchive import/export, and session-core persistence in Workspace.tsx.",
+  "files": [
+    "src/Workspace.tsx",
+    "src/Workspace.archive.tsx",
+    "coordination/handoffs/antigravity/A93-integration.json",
+    "docs/agents/antigravity/A93.md"
+  ],
+  "file_sha256": {
+    "src/Workspace.tsx": "e2879fca74d6b07987cb81c8433ddb4a76d8507c4eb220d6055e82a3db91c13a",
+    "src/Workspace.archive.tsx": "e482877ab8979e1f103396109875cdf72247480be2e799a2eec52b06b52e00d4",
+    "coordination/handoffs/antigravity/A93-integration.json": "352c5b5c143861ef6cc09319f6fdf73e6318f997061257e08c178f3b869fc78e",
+    "docs/agents/antigravity/A93.md": "cb72ae882feac1d414451e72888ba090b083e85aa889630a4509100974229f94"
+  },
+  "checks": [
+    "Tests/builds/setup NOT RUN — deferred by user",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Session library and local archive app wiring verified."
+  ],
+  "review": "pending"
+}

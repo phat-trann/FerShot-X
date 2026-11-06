@@ -1,0 +1,20 @@
+{
+  "task": "A84",
+  "feature_id": "F12",
+  "feature_name": "Resize / automatic adjustment",
+  "status": "integrated",
+  "verified_sources": [
+    "src/Workspace.tsx",
+    "src/Workspace.tools.tsx",
+    "src/features/auto-adjust/auto-adjust.ts",
+    "src/features/auto-adjust/index.ts",
+    "src/features/auto-adjust-panel/AutoAdjustPanel.tsx",
+    "src/features/auto-adjust-panel/AutoAdjustPanel.css",
+    "src/features/auto-adjust-panel/index.ts",
+    "src/platform/auto-adjust.ts",
+    "src/platform/native.ts"
+  ],
+  "wiring_details": "AutoAdjustPanel is embedded in Workspace.tsx with options configuration (target dynamic range, percentiles) routed via platform/auto-adjust.ts. Image resizing is wired in Workspace.tools.tsx via native transformImage.",
+  "validation_status": "Tests/builds/setup NOT RUN — deferred by user. Standalone build delegated to Codex. Formatting/lint delegated to Copilot H01."
+}
+

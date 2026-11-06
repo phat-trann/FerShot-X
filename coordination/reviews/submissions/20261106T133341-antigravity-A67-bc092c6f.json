@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "id": "20261106T133341-antigravity-A67-bc092c6f",
+  "created_at": "2026-11-06T13:33:41.278372+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A67",
+  "completion": "done",
+  "summary": "F20 complete production: Reconciled native pin window crate ferby-pin-window-core, PinPreviewCard UI, pin scaling and opacity controls, and native pin platform integration.",
+  "files": [
+    "src/features/pin/PinPreviewCard.tsx",
+    "src/features/pin/index.ts",
+    "src/features/pin-values/index.ts",
+    "src-tauri/crates/pin-window-core/Cargo.toml",
+    "src-tauri/crates/pin-window-core/src/lib.rs",
+    "src-tauri/crates/pin-window-core/README.md",
+    "docs/agents/antigravity/A67.md"
+  ],
+  "file_sha256": {
+    "src/features/pin/PinPreviewCard.tsx": "e17ca4daaf8a8d9bf0e8358ad8b8c2d62920ddc99bcf74c94cdebacdd65273cc",
+    "src/features/pin/index.ts": "6c7ab3e37406d703b56b5ace71a76deb2294169e6d73baf192950cbbb778accc",
+    "src/features/pin-values/index.ts": "c8df7e2c5037caf5d3dce95cfef340a977ddec5d74dff475e53fd7ea79484bce",
+    "src-tauri/crates/pin-window-core/Cargo.toml": "626484bc26e723cbdee940fe250f9ae4489f4c7da45de4450380ec7b4995534f",
+    "src-tauri/crates/pin-window-core/src/lib.rs": "03c46f2dd4c1dffafcec967cfbda7b0a756b6d0e35642fb420ea4884d080f795",
+    "src-tauri/crates/pin-window-core/README.md": "9f6f45e385d713bf62df3677d791f67f2e23f1137664db8d3b27b324e6bd16e4",
+    "docs/agents/antigravity/A67.md": "78dff11361ea6a76280ed69e5e2524fa21feaa71dd8b24f8ffe8136974d92d62"
+  },
+  "checks": [
+    "Tests/builds/setup NOT RUN — deferred by user",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Pin window geometry, limits, and UI controls logic complete."
+  ],
+  "review": "pending"
+}

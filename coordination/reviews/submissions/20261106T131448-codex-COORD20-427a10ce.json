@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "id": "20261106T131448-codex-COORD20-427a10ce",
+  "created_at": "2026-11-06T13:14:48.839458+07:00",
+  "agent": "codex",
+  "request": "ANTI-MAJORITY-20261106",
+  "task": "COORD20",
+  "completion": "done",
+  "summary": "Replace incomplete five-package split with entire29-feature delivery: external Anti owns23 complete production groups A51-A73, Codex6 native/root groups C35-C40 and final assembly C41.",
+  "files": [
+    "coordination/COMPLETE-SCOPE.md",
+    "coordination/COMPLETE-SCOPE.json",
+    "coordination/TWO-HALVES.md",
+    "coordination/build-tasks.json",
+    "coordination/messages/antigravity/20261106-entire-scope-A51-A73.md",
+    "coordination/START-HERE.md",
+    "coordination/prompts/antigravity.md",
+    "coordination/prompts/codex.md",
+    "AGENTS.md",
+    "docs/agents/codex/COORD20-full-allocation.md"
+  ],
+  "file_sha256": {
+    "coordination/COMPLETE-SCOPE.md": "367fe95d7d8db72d31077b4f6ff5496ab6d327801e6125550bcb34932a132f03",
+    "coordination/COMPLETE-SCOPE.json": "5894615ee641701f7c3030b742f4fe63bfc8eb6ae02abe5cd37007d6a0a28f25",
+    "coordination/TWO-HALVES.md": "cb8106b9e80d49a8f5c6925ba3aae6299f77e474550f37c081e9f2179de4c893",
+    "coordination/build-tasks.json": "ed52884ce90a95d636d257038f25d861165d47dd78496a2882369d824583977c",
+    "coordination/messages/antigravity/20261106-entire-scope-A51-A73.md": "367fe95d7d8db72d31077b4f6ff5496ab6d327801e6125550bcb34932a132f03",
+    "coordination/START-HERE.md": "4c0e433a91b06ae88c1350e1bc3bdcdd6da7a143121823b2e10f1f5f973aedcb",
+    "coordination/prompts/antigravity.md": "f10c2c64349b4a6717f72addad715eb82f6b597da645a1a58dca4079751d83c8",
+    "coordination/prompts/codex.md": "9ba66919d3027a5c765d9dde0c34884f5d9769bf6dd87ef4675a165271e26088",
+    "AGENTS.md": "c8eb3897be01286dd71b9662a079dfa35db8ed6da2cedac4f1959ba4d035f00f",
+    "docs/agents/codex/COORD20-full-allocation.md": "de4bd45a2591ea373385d3ba18f1fba594dc9b045318c9f2d6971421aeda16cd"
+  },
+  "checks": [
+    "Tests/typechecks/builds/setup NOT RUN — deferred by user. Source allocation metadata only; queue JSON read/written.",
+    "Formatting/lint delegated to Copilot H01."
+  ],
+  "risks": [
+    "Scheduling is not feature completion. Baseline source progress unreconciled;100% requires29 implemented/wired rows with current source evidence. Existing claims preserved; external client not launched. MVP acceptance68.75% before/after unchanged."
+  ],
+  "review": "pending"
+}

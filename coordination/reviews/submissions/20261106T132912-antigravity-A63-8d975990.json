@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "id": "20261106T132912-antigravity-A63-8d975990",
+  "created_at": "2026-11-06T13:29:12.414120+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A63",
+  "completion": "done",
+  "summary": "F16 complete production: Reconciled pixelsToPoints calculation, normalizeRect, clampPointToImage, and MeasurementOverlay UI with unit toggles and imprint action.",
+  "files": [
+    "src/features/measurement/measurement.ts",
+    "src/features/measurement-panel/MeasurementOverlay.tsx",
+    "src/features/measurement-panel/MeasurementOverlay.css",
+    "src/features/measurement-panel/index.ts",
+    "docs/agents/antigravity/A63.md"
+  ],
+  "file_sha256": {
+    "src/features/measurement/measurement.ts": "06d944bbb77db4298330bfc3d0a798e56037f057413c7c63ebbd281b9701593a",
+    "src/features/measurement-panel/MeasurementOverlay.tsx": "fd802caa2a2ed4a763fc5451a4a58c68494ad1cef5168236423c0a1b9f88a5a3",
+    "src/features/measurement-panel/MeasurementOverlay.css": "3ecdc7a2e5b7d3b714c65d0c82efde583ff6bc1db2b8b81ae2a454be246d7e85",
+    "src/features/measurement-panel/index.ts": "96b39783082b21408b22fd1b059e1547126b36a13d2071413509e9ed962b1c67",
+    "docs/agents/antigravity/A63.md": "ef3c5e6777d8a049cef1ea9b9358af8ccab5a0a86b51beb978976f11a511abdc"
+  },
+  "checks": [
+    "Tests/builds/setup NOT RUN — deferred by user",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Pixel and typographic point distance calculation and overlay UI complete."
+  ],
+  "review": "pending"
+}

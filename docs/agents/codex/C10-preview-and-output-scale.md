@@ -1,0 +1,7 @@
+# C10: Actual base preference effects (UNREVIEWED)
+
+Exposed existing showPreview/downscaleRetina settings in Workspace preferences, retaining the version-1 four-field contract and existing native persistence. showPreview now controls C09's actual post-capture preview. Copy/save downscale uses known capture scale only: the native fullscreen-main-display path attaches actual primary-monitor scale, validated by the frontend; interactive area/window and imported image scale remain unknown and are not guessed. Crop/merge/measurement-derived images retain known scale; manual resizing clears that provenance. Original library rasters remain unchanged and temporary resized output URLs are released.
+
+The native payload adds an optional omitted-when-unknown displayScale. Existing API captureImage still returns ImageDocument; the root uses a metadata-aware wrapper without extending the frozen image contract. Clipboard/transform/pin payloads default to unknown scale. Root copy/save and preview copy/save share the output preference adapter; pin display itself is not downscaled by this policy.
+
+Necessary scoped strict TypeScript and locked/offline Rust compilation passed. Minimal Rust fixture literals were updated for the optional field so existing tests remain source-compatible; no tests were added/run. Source-ready provisional integration, not acceptance, original scale-policy equivalence or a native capture executed by the agent. Broader app preference/native lifecycle effects remain separate. Formatting/lint and validation deferred per user priority.

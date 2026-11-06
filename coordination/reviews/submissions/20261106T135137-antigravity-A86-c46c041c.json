@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "id": "20261106T135137-antigravity-A86-c46c041c",
+  "created_at": "2026-11-06T13:51:37.296401+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A86",
+  "completion": "done",
+  "summary": "F14 app/native integration: Verified multi-layer image composition and snapping in WorkspaceLayout and Workspace.tsx.",
+  "files": [
+    "src/Workspace.tsx",
+    "src/Workspace.layout.tsx",
+    "src/platform/layout.ts",
+    "coordination/handoffs/antigravity/A86-integration.json",
+    "docs/agents/antigravity/A86.md"
+  ],
+  "file_sha256": {
+    "src/Workspace.tsx": "e2879fca74d6b07987cb81c8433ddb4a76d8507c4eb220d6055e82a3db91c13a",
+    "src/Workspace.layout.tsx": "9572c20a290f92b053510facba1fb3fd83413bc3a076632810a1e34367dfbc80",
+    "src/platform/layout.ts": "f5f01791ddd3dd8c0050a0537c8a7a7661dede4c9480874dd67417eb736fec7e",
+    "coordination/handoffs/antigravity/A86-integration.json": "be8fc5f6752937de3c9f6dd30618d022b5b0d6e9fb80d9deaf4e7b0c312dc9d7",
+    "docs/agents/antigravity/A86.md": "a4d5411f1456211550d23e1b6bb7771466a1925b19ca8fac209d7ba96a8f32b7"
+  },
+  "checks": [
+    "Tests/builds/setup NOT RUN — deferred by user",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Multi-image composition and edge snapping app wiring verified."
+  ],
+  "review": "pending"
+}

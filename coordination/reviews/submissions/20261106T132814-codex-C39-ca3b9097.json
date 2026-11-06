@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "id": "20261106T132814-codex-C39-ca3b9097",
+  "created_at": "2026-11-06T13:28:14.902611+07:00",
+  "agent": "codex",
+  "request": "APP-SERVICES-SOURCE-20261106",
+  "task": "C39",
+  "completion": "done",
+  "summary": "Consume external A46 crate and wire actual login state/mutation, native static capture notifications, capability-aware preferences and preserved window lifecycle controls.",
+  "files": [
+    "src-tauri/src/application_services.rs",
+    "src-tauri/src/lib.rs",
+    "src-tauri/Cargo.toml",
+    "src-tauri/Cargo.lock",
+    "src/platform/native.ts",
+    "src/Workspace.tsx",
+    "src/Workspace.application-preferences.tsx",
+    "docs/agents/codex/C39.md"
+  ],
+  "file_sha256": {
+    "src-tauri/src/application_services.rs": "4b23438a49a4c8884db627a0f72a90e0b6fab74b06620789163ed0fc1d24b7e7",
+    "src-tauri/src/lib.rs": "08b8f5cc5c3bbef40328f192296687689b8755757a8967d80352ead2e214e0b8",
+    "src-tauri/Cargo.toml": "8c11a6ae4341eb8945f4ffcd6737e0e1f55acba44b8b779d11bd4e5bac13713d",
+    "src-tauri/Cargo.lock": "56aedda42b616e1049aa0b485b95b87725c52678aad74b796b674ca407578662",
+    "src/platform/native.ts": "2bd853af895f9bb1b97b3008b668c91e5101d2135f29f2561de2a3f988350c8f",
+    "src/Workspace.tsx": "e2879fca74d6b07987cb81c8433ddb4a76d8507c4eb220d6055e82a3db91c13a",
+    "src/Workspace.application-preferences.tsx": "0ad006d67108859199b74d364565edbe61ad75097951a5795196fe92bc75b840",
+    "docs/agents/codex/C39.md": "1120f34f78f11c28966bf4ab7e9479a12cb4b6232439221e497ea5a0652bd42e"
+  },
+  "checks": [
+    "Tests/typechecks/builds/setup NOT RUN — deferred by user. Producer API/source read only; no native login/notification operations.",
+    "Formatting/lint delegated to Copilot H01."
+  ],
+  "risks": [
+    "USER_WAIVED_REVIEW; later overall review required. Source uncompiled; macOS12 linking, system delivery and actual lifecycle behavior unverified. MVP acceptance68.75% unchanged."
+  ],
+  "review": "pending"
+}

@@ -1,0 +1,19 @@
+{
+  "task": "A89",
+  "feature_id": "F17",
+  "feature_name": "Pixel / average / color format actions",
+  "status": "integrated",
+  "verified_sources": [
+    "src/Workspace.tsx",
+    "src/Workspace.average-color.tsx",
+    "src/platform/pixel-inspection.ts",
+    "src/platform/color-copy.ts",
+    "src/features/pixel-sample/index.ts",
+    "src/features/average-rgba/index.ts",
+    "src/features/color/color.ts",
+    "src/features/color-format-controls/ColorFormatControls.tsx"
+  ],
+  "wiring_details": "Point pixel inspection, region average RGBA calculation (up to 1,000,000 pixels), live swatch rendering, and formatted HEX/RGBA color copying are wired in Workspace.tsx and Workspace.average-color.tsx via platform/pixel-inspection.ts and platform/color-copy.ts.",
+  "validation_status": "Tests/builds/setup NOT RUN — deferred by user. Standalone build delegated to Codex. Formatting/lint delegated to Copilot H01."
+}
+

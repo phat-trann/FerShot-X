@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "id": "20261106T103818-copilot-P85-c499de51",
+  "created_at": "2026-11-06T10:38:18.564558+07:00",
+  "agent": "copilot",
+  "request": "P85",
+  "task": "P85",
+  "completion": "done",
+  "summary": "Added RTL regressions for AutoAdjustPanel: no render side effect, exact default options on valid Apply, rejection of reversed percentiles/invalid strength/invalid dimensions without callback, and Apply suppression while busy.",
+  "files": [
+    "src/testing/copilot-adjust-panel.test.tsx"
+  ],
+  "file_sha256": {
+    "src/testing/copilot-adjust-panel.test.tsx": "5d6ed23c742e1f49e5b15f6c2ffbb61dc1a2731607c6462ff1dc534b97cd1948"
+  },
+  "checks": [
+    "Node 26 vitest run src/testing/copilot-adjust-panel.test.tsx: 1 file passed, 4 tests passed."
+  ],
+  "risks": [
+    "Synthetic UI only; no raster, native or Shottr parity claim."
+  ],
+  "review": "pending"
+}

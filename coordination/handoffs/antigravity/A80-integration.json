@@ -1,0 +1,17 @@
+{
+  "task": "A80",
+  "feature_id": "F08",
+  "feature_name": "Highlight / spotlight / magnifier",
+  "status": "integrated",
+  "verified_sources": [
+    "src/Workspace.tsx",
+    "src/Workspace.editor.tsx",
+    "src/features/emphasis/emphasis-renderer.ts",
+    "src/features/emphasis/index.ts",
+    "src/features/editor/advanced-workbench/AdvancedWorkbench.tsx",
+    "src/features/editor/advanced-workbench/AdvancedWorkbench.css"
+  ],
+  "wiring_details": "Emphasis layers (highlight color overlays, spotlight backdrop cutouts, and circular magnifier lenses) are integrated in AdvancedWorkbench, providing interactive creation tools, history tracking, and composite raster rendering via renderEmphasisToPngBlob.",
+  "validation_status": "Tests/builds/setup NOT RUN — deferred by user. Standalone build delegated to Codex. Formatting/lint delegated to Copilot H01."
+}
+

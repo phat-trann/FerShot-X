@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "id": "20261106T103910-copilot-P87-eb8d8db3",
+  "created_at": "2026-11-06T10:39:10.447497+07:00",
+  "agent": "copilot",
+  "request": "P87",
+  "task": "P87",
+  "completion": "done",
+  "summary": "Added injected capture/stitch IPC regressions for invalid display metadata, invalid frame count/height before invoke, pre-aborted requests, malformed PNG payload rejection without output URL creation, and cancellation checked after a late native stitch response.",
+  "files": [
+    "src/testing/copilot-capture-stitch-ipc.test.ts"
+  ],
+  "file_sha256": {
+    "src/testing/copilot-capture-stitch-ipc.test.ts": "d3ad03e653e1e5147186e0e2d6a55bab091d3abb8a7f11e5d78af69944c01593"
+  },
+  "checks": [
+    "Node 26 vitest run src/testing/copilot-capture-stitch-ipc.test.ts: 1 file passed, 5 tests passed."
+  ],
+  "risks": [
+    "Mocks Tauri invoke and browser raster primitives; no OS capture or native parity claim."
+  ],
+  "review": "pending"
+}

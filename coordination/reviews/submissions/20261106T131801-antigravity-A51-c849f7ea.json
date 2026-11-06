@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "id": "20261106T131801-antigravity-A51-c849f7ea",
+  "created_at": "2026-11-06T13:18:01.221135+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A51",
+  "completion": "done",
+  "summary": "F03 complete production: Reconciled native vision-core Rust backend (objc2-vision), workflow controller, RecognitionWorkspace UI with styling, and Workspace.recognition wiring.",
+  "files": [
+    "src/features/recognition-workspace/RecognitionWorkspace.tsx",
+    "src/features/recognition-workspace/RecognitionWorkspace.css",
+    "src/features/recognition-workspace/index.ts",
+    "src/features/recognition-workspace/README.md",
+    "src/features/recognition-workflow/index.ts",
+    "src/features/recognition-workflow/README.md",
+    "src-tauri/crates/vision-core/src/lib.rs",
+    "src-tauri/crates/vision-core/Cargo.toml",
+    "src-tauri/crates/vision-core/README.md",
+    "docs/agents/antigravity/A51.md"
+  ],
+  "file_sha256": {
+    "src/features/recognition-workspace/RecognitionWorkspace.tsx": "fb9d3983e83c94872f4a9d24130f9fafee97de3858397f76c6bbdc7cf2067169",
+    "src/features/recognition-workspace/RecognitionWorkspace.css": "1e000109da8b1746be56095abc99ef7c27428bac34fefddf3a0dad101740b08b",
+    "src/features/recognition-workspace/index.ts": "04efb112b3598c585f1a1af54b7da9c2bd809f522eb36e01aea237f6d127c9b3",
+    "src/features/recognition-workspace/README.md": "571b72152e2a66b5ae18fe25da5dc54cb58d9c226ca9f88a8b80ddd8184cf63f",
+    "src/features/recognition-workflow/index.ts": "a74e9918d2141c0dd1eab2844d9993d26c87e6da292b325448c2e3a51e537410",
+    "src/features/recognition-workflow/README.md": "669b90e7f11c73ae225451849d026539beef0e00ad26d4f34f2a1a2d83d79c64",
+    "src-tauri/crates/vision-core/src/lib.rs": "4fe3829a11c7aec6b11ec4794aeec93c1661badd42afed3d25c9b9dd1dd741ab",
+    "src-tauri/crates/vision-core/Cargo.toml": "b190ea55a12e88f4838015fc5f0358e12afe8c5ca4f4cce51dcb16026c3693b0",
+    "src-tauri/crates/vision-core/README.md": "91bf725100208e7cc828c24f7e43157c7b3c1d25542359d24a05ec5417a116c8",
+    "docs/agents/antigravity/A51.md": "b59ef0200c445d8d6dd9b83b97d75a3d8ce14bd6be0b311d89ddd64c4faea103"
+  },
+  "checks": [
+    "Tests/builds/setup NOT RUN — deferred by user",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Native Apple Vision OCR and QR detection logic complete and wired; runtime acceptance deferred."
+  ],
+  "review": "pending"
+}

@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "id": "20261106T124905-codex-C26-2045b456",
+  "created_at": "2026-11-06T12:49:05.408811+07:00",
+  "agent": "codex",
+  "request": "ACTIVE-WINDOW-20261106",
+  "task": "C26",
+  "completion": "done",
+  "summary": "Implement last-active-app native window capture via NSWorkspace observation, bounded CoreGraphics owner/window binding, fixed capture runner mode and actual workspace/desktop/tray controls.",
+  "files": [
+    "src-tauri/src/active_window.rs",
+    "src-tauri/src/imaging.rs",
+    "src-tauri/src/lifecycle.rs",
+    "src-tauri/src/lib.rs",
+    "src-tauri/src/desktop_menu.rs",
+    "src-tauri/src/menu_bar.rs",
+    "src-tauri/Cargo.toml",
+    "src-tauri/Cargo.lock",
+    "src/platform/native.ts",
+    "src/Workspace.tsx",
+    "docs/agents/codex/C26-active-window.md"
+  ],
+  "file_sha256": {
+    "src-tauri/src/active_window.rs": "95df8444a5ec9a367310525552c06bfc4c00b414173774350bb35d28978aa13c",
+    "src-tauri/src/imaging.rs": "66c38cd8c32b2aaa4f6a930bb2fa89f25fba18eafc9abffd3f658c1cd9e31549",
+    "src-tauri/src/lifecycle.rs": "8d0f52ac845b22bf62dd94fa71532cd34cc62cd67ed7464b1a8cb56bc8d61fbf",
+    "src-tauri/src/lib.rs": "5802b4d0053d8225ef34ed5f286314450db0f42457321962a4633d550ac925a5",
+    "src-tauri/src/desktop_menu.rs": "6832f60f58fb5eadd34ec74055238eb2ff650074801847593d798611a7e74441",
+    "src-tauri/src/menu_bar.rs": "17305cc5248b33a57b0960d870c95f2ece56fc63563ab4d7bf2c82bc39b91165",
+    "src-tauri/Cargo.toml": "b4db38cf35e3fd31dc9a84928481482169e8006d828714ee8c5c0e0e905ca916",
+    "src-tauri/Cargo.lock": "de29db5c09deff2f16459f8b10ab3096c6c2467d0962f0f470e9b83ff5a18514",
+    "src/platform/native.ts": "54c117c7ebb4f66882e4baf1db2eb1400d9ed9708b2cf9f3b0d52e2e0bb9f8cd",
+    "src/Workspace.tsx": "14acd83e5e75b7f39fabda75db92ad73d02ad4d5919bf093d09f50dbf094db32",
+    "docs/agents/codex/C26-active-window.md": "247641d2b69a5f3050149e98c30b905c777d4d7e814e619e33c8b7cb9cf03621"
+  },
+  "checks": [
+    "Tests/typechecks/builds NOT RUN — deferred by user. Source/API inspection only; direct dependency lock edges use already frozen package versions.",
+    "Formatting/lint delegated to Copilot H01."
+  ],
+  "risks": [
+    "USER_WAIVED_REVIEW; later overall review required. Compilation and native behavior unverified. Exact original selection semantics UNKNOWN; acceptance remains68.75%."
+  ],
+  "review": "pending"
+}

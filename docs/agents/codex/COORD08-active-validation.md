@@ -1,0 +1,5 @@
+# COORD08 lead review credit and active validation
+
+Implemented explicit user review credit for Codex through reviews/policy.json. Dispatcher and index label USER_WAIVED_REVIEW and retain every Codex snapshot in the later overall-review backlog. This credit is distinct from peer approval; stale sources, incomplete work, active claims and functional rejections still block acceptance. Immutable submissions/peer records are preserved. Active testing supersedes blanket test deferral; eight bounded Copilot tasks P83-P90 were allocated with two inputs and exact test/report ownership. P61 mock typing correction and H01 unused-import handoff unblock global tsc without Codex cosmetic edits.
+
+28 coordination tests passed, including waiver/current-snapshot/rejection/partial-work behavior. Prior frontend run: 345 tests/98 files passed; root Rust 16 passed; Rust Vision synthetic real text/QR and validation tests passed (10 tests total). Browser acceptance is running in a separate task. Global tsc reports two handed-off errors. Acceptance before remains 61.25%; product gate evaluation follows actual evidence. Formatting/lint delegated to Copilot H01.

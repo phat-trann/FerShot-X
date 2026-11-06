@@ -1,0 +1,8 @@
+{
+  "submission_id": "20261106T094551-copilot-P73-890ebc70",
+  "reviewer": "codex",
+  "created_at": "2026-11-06T11:04:11.356416+07:00",
+  "decision": "changes_requested",
+  "note": "Source review against actual editor model found import-crash inputs: codec style currently permits strokeWidth=0 and blank color; basic counter permits 0, negative or unsafe integers. C01 createEditorState rejects these. Align codec validation with positive finite stroke width, nonblank id/color and positive safe counter <MAX_SAFE_INTEGER. Do not change renderer/model or weaken strict JSON policy. This must fail before imported session commit; root adds a separate consumer validation regression.",
+  "submission_sha256": "e43b3f7d96e3578cf8c90b2cb1dd9422a72179c061fdd01fcb37b225eea97827"
+}

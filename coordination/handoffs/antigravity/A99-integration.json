@@ -1,0 +1,16 @@
+{
+  "task": "A99",
+  "feature_id": "F01",
+  "feature_name": "Capture modes / active window / repeat area",
+  "status": "integrated",
+  "verified_sources": [
+    "src/Workspace.tsx",
+    "src/Workspace.repeat-region.tsx",
+    "src/features/capture-region-selector/CaptureRegionSelector.tsx",
+    "src/features/capture-region-selector/index.ts",
+    "docs/agents/codex/C35.md"
+  ],
+  "wiring_details": "Closed F01 interactive rectangle provenance gap by wiring CaptureRegionSelector into Workspace.tsx area capture flow. When area capture is triggered, full display screenshot is captured, user selects and confirms region via pointer drag or manual coordinates, confirmed pixels are cropped, and exact display geometry is remembered in repeatRegion for subsequent repeat captures.",
+  "validation_status": "Tests/builds/setup NOT RUN — deferred by user. Standalone build delegated to Codex. Formatting/lint delegated to Copilot H01."
+}
+

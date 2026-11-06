@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "id": "20261106T110638-copilot-P71-7572e94e",
+  "created_at": "2026-11-06T11:06:38.485678+07:00",
+  "agent": "copilot",
+  "request": "COPILOT-20261106-CORRECT",
+  "task": "P71",
+  "completion": "done",
+  "summary": "Exposed controlled fit/actual Print scale selection using existing state/callbacks, disabled when busy or printing unavailable, without A30/native changes",
+  "files": [
+    "src/features/local-output-workspace/LocalOutputWorkspace.tsx",
+    "src/features/local-output-workspace/index.ts",
+    "src/features/local-output-workspace/README.md",
+    "docs/qa/copilot-P71.md"
+  ],
+  "file_sha256": {
+    "src/features/local-output-workspace/LocalOutputWorkspace.tsx": "6e88a5e96f766297fccd46706d9fefdaebce9caeec69120fefcdac1f89bbea54",
+    "src/features/local-output-workspace/index.ts": "95e2b30be379f2e8bc7f35a0f85d8200e64c88c2300d8c365ae362893ce94d9c",
+    "src/features/local-output-workspace/README.md": "10f90102c4ab7250ae0b54acf011c274c3537acc70bdaf8ddcbbc8c361099046",
+    "docs/qa/copilot-P71.md": "645aaffe47b5e10fb5cacc80c044541bc1326da17e2504ef2c8bf1cdc74b54bb"
+  },
+  "checks": [
+    "Node 26 P96 targeted Vitest: 1 file, 6 tests passed under separate P96 claim"
+  ],
+  "risks": [
+    "Existing actual-mode layout semantics preserved; build delegated to Codex; no native print/drag acceptance"
+  ],
+  "review": "pending"
+}

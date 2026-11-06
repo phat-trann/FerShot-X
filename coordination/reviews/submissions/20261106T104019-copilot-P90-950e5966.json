@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "id": "20261106T104019-copilot-P90-950e5966",
+  "created_at": "2026-11-06T10:40:19.671829+07:00",
+  "agent": "copilot",
+  "request": "P90",
+  "task": "P90",
+  "completion": "done",
+  "summary": "Added print-preferences codec regressions for fit and actual/orientation round trips, preservation of omitted optional scaleMode, unknown schema/fields, wrong numeric types, margin bounds, invalid image dimensions and enum values.",
+  "files": [
+    "src/testing/copilot-print-preferences-codec.test.ts"
+  ],
+  "file_sha256": {
+    "src/testing/copilot-print-preferences-codec.test.ts": "45a0d81983960568c8da0f4ce0283a4df3616a88f79a40b0e17192bfd38cdcdd"
+  },
+  "checks": [
+    "Node 26 vitest run src/testing/copilot-print-preferences-codec.test.ts: 1 file passed, 4 tests passed."
+  ],
+  "risks": [
+    "No print dialogs, filesystem or native OS behavior tested."
+  ],
+  "review": "pending"
+}

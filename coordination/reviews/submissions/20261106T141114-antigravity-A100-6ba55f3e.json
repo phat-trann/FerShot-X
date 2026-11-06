@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "id": "20261106T141114-antigravity-A100-6ba55f3e",
+  "created_at": "2026-11-06T14:11:14.975026+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A100",
+  "completion": "done",
+  "summary": "F30 gap integration: Connected eight-action global shortcuts schema, native registry, v1 migration, and GlobalShortcutsV2Panel UI in Workspace.tsx.",
+  "files": [
+    "src-tauri/src/shortcuts.rs",
+    "src/platform/shortcuts.ts",
+    "src/features/global-shortcuts-v2/GlobalShortcutsV2Panel.tsx",
+    "src/Workspace.shortcuts.tsx",
+    "src/Workspace.tsx",
+    "coordination/handoffs/antigravity/A100-integration.json",
+    "docs/agents/antigravity/A100.md"
+  ],
+  "file_sha256": {
+    "src-tauri/src/shortcuts.rs": "4e4e9ce399b19c4cdf53dd0a9423584861f204c14d5c4fc9b0f7644b34376958",
+    "src/platform/shortcuts.ts": "39a2004e3c32fb62d5987bdec813edf7324d1d272d43c31d04572ef516eddbed",
+    "src/features/global-shortcuts-v2/GlobalShortcutsV2Panel.tsx": "8e6561ac6192158ec55de0a10443434e3dd5c22901a2448ab60f0565796b3f22",
+    "src/Workspace.shortcuts.tsx": "f679448a2e7ca068685134d5f679f6f5504a5d23d8588ace6073dcbf8ed17eef",
+    "src/Workspace.tsx": "0db4cfc75116e3e91a7b80bb902363b6bee32834b872d340e0f29b083e192cdf",
+    "coordination/handoffs/antigravity/A100-integration.json": "b99bcf9c2934e85fe462af3dfcfc1493aadae3b7a81685f071a497ea25b6a1af",
+    "docs/agents/antigravity/A100.md": "99b5bca2236d55f7a07d095f1609b688b917fd5122f2dda1b88de76a9884edbd"
+  },
+  "checks": [
+    "Tests/builds/setup NOT RUN — deferred by user",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Eight-action global shortcut registry, migration, and Workspace UI app wiring verified."
+  ],
+  "review": "pending"
+}

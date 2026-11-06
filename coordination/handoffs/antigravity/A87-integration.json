@@ -1,0 +1,17 @@
+{
+  "task": "A87",
+  "feature_id": "F15",
+  "feature_name": "Zoom / pan / navigation",
+  "status": "integrated",
+  "verified_sources": [
+    "src/Workspace.tsx",
+    "src/Workspace.editor.tsx",
+    "src/features/viewport/fit.ts",
+    "src/features/point-map/index.ts",
+    "src/features/navigation-controls/NavigationControls.tsx",
+    "src/features/navigation-controls/NavigationControls.css"
+  ],
+  "wiring_details": "Interactive zoom controls (10%..400% and dynamic Fit-to-window), ResizeObserver stage measurement in Workspace.editor.tsx, and mapClientPoint coordinate mapping are fully wired into Workspace.tsx.",
+  "validation_status": "Tests/builds/setup NOT RUN — deferred by user. Standalone build delegated to Codex. Formatting/lint delegated to Copilot H01."
+}
+

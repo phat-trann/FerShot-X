@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "id": "20261106T115837-antigravity-A41-0719b722",
+  "created_at": "2026-11-06T11:58:37.623910+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A41",
+  "completion": "done",
+  "summary": "Implemented scoped RTL/jsdom checks in antigravity-shortcut-recorder.test.tsx verifying Escape cancels recording and valid modified key records action once.",
+  "files": [
+    "src/testing/antigravity-shortcut-recorder.test.tsx",
+    "docs/agents/antigravity/A41.md"
+  ],
+  "file_sha256": {
+    "src/testing/antigravity-shortcut-recorder.test.tsx": "2f6179e049dee666972e9415fbdb0a63faa6a20e046e10be3f1e93ff93524a88",
+    "docs/agents/antigravity/A41.md": "3f6eb2b3db855bd19f6b963249346cec3fbea5bff60dc72a112f579a826ad805"
+  },
+  "checks": [
+    "npm run test:unit -- src/testing/antigravity-shortcut-recorder.test.tsx: passed (2 tests, 120ms)",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Synthetic RTL unit tests only; no real OS shortcut registration invoked."
+  ],
+  "review": "pending"
+}

@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "id": "20261106T123316-codex-C13-a3c2fbaa",
+  "created_at": "2026-11-06T12:33:16.230780+07:00",
+  "agent": "codex",
+  "request": "NATIVE-MENU-20261106",
+  "task": "C13",
+  "completion": "partial",
+  "summary": "Implement native capture/image/text-edit menus through existing Tauri APIs and typed workspace event routes; preserve close confirmation and child-window isolation.",
+  "files": [
+    "src-tauri/src/desktop_menu.rs",
+    "src-tauri/src/lib.rs",
+    "src/platform/native.ts",
+    "src/Workspace.tsx",
+    "docs/agents/codex/C13-native-menu.md"
+  ],
+  "file_sha256": {
+    "src-tauri/src/desktop_menu.rs": "2cb8484213079ef2da0077fc719d625a74edd1ecd51ee7b0247ee3d8b6477383",
+    "src-tauri/src/lib.rs": "e64e6e05477c9bf935a68987e0ab758496a2c1eb8d6133065caaf7e36feeb006",
+    "src/platform/native.ts": "48fd15685b985945f6c051372eaeba48c2deae2b26bca33e0dd2f8bfd858465c",
+    "src/Workspace.tsx": "3999948b22c83b709942dfe90cfe9d0e44176a49ce82f09af3313aeb91218ce3",
+    "docs/agents/codex/C13-native-menu.md": "d1df4b4d36ba55001cca394d1a9a8f7a9e5a9cd18e5761db99837dd48d262553"
+  },
+  "checks": [
+    "TypeScript no-emit and locked offline cargo check --lib passed. Tests NOT RUN — deferred by user.",
+    "Formatting/lint delegated to Copilot H01."
+  ],
+  "risks": [
+    "USER_WAIVED_REVIEW; later overall review required. No OS menu actions executed; native manual acceptance open. Tray, notifications and launch-at-login remain capability-disabled. 68.75% MVP acceptance unchanged."
+  ],
+  "review": "pending"
+}

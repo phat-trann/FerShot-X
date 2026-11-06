@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "id": "20261106T135718-antigravity-A92-58826497",
+  "created_at": "2026-11-06T13:57:18.016256+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A92",
+  "completion": "done",
+  "summary": "F20 app/native integration: Verified native pin windows, ferby-pin-edit restoration, and pin toolbar/preview actions in Workspace.tsx.",
+  "files": [
+    "src/Workspace.tsx",
+    "src/platform/native.ts",
+    "src-tauri/src/pins.rs",
+    "coordination/handoffs/antigravity/A92-integration.json",
+    "docs/agents/antigravity/A92.md"
+  ],
+  "file_sha256": {
+    "src/Workspace.tsx": "e2879fca74d6b07987cb81c8433ddb4a76d8507c4eb220d6055e82a3db91c13a",
+    "src/platform/native.ts": "00595016d1600952cfc96e31b203505778797a55ca8b698f3364da68eb60abd0",
+    "src-tauri/src/pins.rs": "7d45c9b8ce54cc4bd27e162966edd600fc2ba906a724be4ad3202db6d6bcd06a",
+    "coordination/handoffs/antigravity/A92-integration.json": "2ae0334ac19415ecefd8ebb3f0dbf5ccb60f33e07e1eefdf02059d8fa2026221",
+    "docs/agents/antigravity/A92.md": "26b76752660324dec27613905bb158767046c0cf446e52720fcbdc7f6173edb1"
+  },
+  "checks": [
+    "Tests/builds/setup NOT RUN — deferred by user",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Native pinned windows and workspace restoration app wiring verified."
+  ],
+  "review": "pending"
+}

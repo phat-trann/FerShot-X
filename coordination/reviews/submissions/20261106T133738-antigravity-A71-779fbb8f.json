@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "id": "20261106T133738-antigravity-A71-779fbb8f",
+  "created_at": "2026-11-06T13:37:38.883667+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A71",
+  "completion": "done",
+  "summary": "F24 complete production: Reconciled LocalOutputWorkspace UI, LocalOutputWorkspace.css, print preferences codec, and output job queue management.",
+  "files": [
+    "src/features/local-output/local-output.tsx",
+    "src/features/local-output/index.ts",
+    "src/features/local-output-workspace/LocalOutputWorkspace.tsx",
+    "src/features/local-output-workspace/LocalOutputWorkspace.css",
+    "src/features/output-jobs/index.ts",
+    "src/features/print-preferences-codec/codec.ts",
+    "docs/agents/antigravity/A71.md"
+  ],
+  "file_sha256": {
+    "src/features/local-output/local-output.tsx": "421d066bb03cbbbb460d605ecbca39ddaf5b6a9e5edc88595c78cc80418e06b0",
+    "src/features/local-output/index.ts": "6e851bed1b35f38451e0713bf207ff96ce854be701d480edca7260d21c89b8d1",
+    "src/features/local-output-workspace/LocalOutputWorkspace.tsx": "91d9a806a2813328edc6cf27de3c2485a5555d473f14225d9d0205a7aa07d5df",
+    "src/features/local-output-workspace/LocalOutputWorkspace.css": "a612bb08920176204416ec0d73279db64ba7ae5ee2e9c3b7bc36a19167b3d7b4",
+    "src/features/output-jobs/index.ts": "3355e71a9dd805bc4cc04031c98dfe607aa2071dcbd3ccd2436f5f4e20b296be",
+    "src/features/print-preferences-codec/codec.ts": "f6b04bbfa5b7304be16329050b8c850502560007b31c85f68ece1373f75d3773",
+    "docs/agents/antigravity/A71.md": "a907d944e837f672909c747dd4b2fe68655626ced43af686ce707ccde297fb26"
+  },
+  "checks": [
+    "Tests/builds/setup NOT RUN — deferred by user",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Local output actions, print configuration, and output job queue logic complete."
+  ],
+  "review": "pending"
+}

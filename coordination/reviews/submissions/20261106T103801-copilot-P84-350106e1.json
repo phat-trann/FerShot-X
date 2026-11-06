@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "id": "20261106T103801-copilot-P84-350106e1",
+  "created_at": "2026-11-06T10:38:01.497393+07:00",
+  "agent": "copilot",
+  "request": "P84",
+  "task": "P84",
+  "completion": "done",
+  "summary": "Added injected workspace-layout regressions for cleanup and resource boundaries: later source preparation failure releases earlier bitmaps, missing/duplicate sources reject before prepare/render, oversized output is rejected with cleanup, and backdrop bitmap is released while a new document is returned.",
+  "files": [
+    "src/testing/copilot-workspace-layout.test.ts"
+  ],
+  "file_sha256": {
+    "src/testing/copilot-workspace-layout.test.ts": "c6a8c47d8aad97879dc15e1a67ed24120a06f0b8fa898de3a5cb7baa4476092c"
+  },
+  "checks": [
+    "Node 26 vitest run src/testing/copilot-workspace-layout.test.ts: 1 file passed, 4 tests passed."
+  ],
+  "risks": [
+    "Synthetic injected bitmap/render helpers only; no canvas pixel equivalence or native parity claim."
+  ],
+  "review": "pending"
+}

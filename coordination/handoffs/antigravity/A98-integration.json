@@ -1,0 +1,17 @@
+{
+  "task": "A98",
+  "feature_id": "F26",
+  "feature_name": "Window background / explicit shadow trim",
+  "status": "integrated",
+  "verified_sources": [
+    "src/Workspace.tsx",
+    "src/features/window-appearance/window-appearance.ts",
+    "src/features/window-appearance/index.ts",
+    "src/features/window-appearance-controls/WindowAppearanceControls.tsx",
+    "src/features/window-appearance-controls/WindowAppearanceControls.css",
+    "src/features/layout-workspace/LayoutWorkspace.tsx"
+  ],
+  "wiring_details": "WindowAppearanceControls and window-appearance layout logic are wired into LayoutWorkspace, supporting explicit 4-directional shadow trimming, solid/transparent backgrounds, and rendered window appearance layers.",
+  "validation_status": "Tests/builds/setup NOT RUN — deferred by user. Standalone build delegated to Codex. Formatting/lint delegated to Copilot H01."
+}
+

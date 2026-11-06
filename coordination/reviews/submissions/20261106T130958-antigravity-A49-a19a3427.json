@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "id": "20261106T130958-antigravity-A49-a19a3427",
+  "created_at": "2026-11-06T13:09:58.822566+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A49",
+  "completion": "done",
+  "summary": "Implemented controlled SourceRestoreControls component with non-destructive derivation explanation, source-presence badge, and guarded single-action restore button.",
+  "files": [
+    "src/features/source-restore-controls/SourceRestoreControls.tsx",
+    "src/features/source-restore-controls/SourceRestoreControls.css",
+    "src/features/source-restore-controls/index.ts",
+    "src/features/source-restore-controls/README.md",
+    "docs/agents/antigravity/A49.md"
+  ],
+  "file_sha256": {
+    "src/features/source-restore-controls/SourceRestoreControls.tsx": "8b6bf6cb965ced18136c32e0b98fccf922e28a950c05e62b8ebb65ef9cf4dc86",
+    "src/features/source-restore-controls/SourceRestoreControls.css": "ee29b4d25ee731ac863d7a0c3376ab5159dfbbeed9d9c0f1a7a9d3dc440b8c16",
+    "src/features/source-restore-controls/index.ts": "887c9192a24393fe9efb378a7a2cf4296f2d2b3e5740bf2a1c5160b0f2c99f89",
+    "src/features/source-restore-controls/README.md": "07d5dded29c1218f2c6710fe4f94ecc3e126d63148ce297c0812a181da6956b7",
+    "docs/agents/antigravity/A49.md": "cbe36c22eaa5f1053c11b38325cdf84abb92f6d4277b4bec074117d30308b134"
+  },
+  "checks": [
+    "Tests/builds/setup NOT RUN — deferred by user",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Isolated UI component only; derivation graph and document switching handled by Codex C33."
+  ],
+  "review": "pending"
+}

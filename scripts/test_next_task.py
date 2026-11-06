@@ -8,6 +8,21 @@ import peer_review as peer
 
 
 class NextTaskTests(unittest.TestCase):
+    def test_current_agent_allocation_excludes_older_functional_corrections(self):
+        self.tasks = [{"id": "A22", "agent": "antigravity"}, {"id": "A39", "agent": "antigravity"}]
+        self.save()
+        path = self.root / "coordination/build-tasks.json"
+        data = json.loads(path.read_text())
+        data["agent_task_allowlists"] = {"antigravity": ["A39"]}
+        path.write_text(json.dumps(data))
+        packet = q.submit(self.root, agent="antigravity", task="A22", request="TEST", summary="old scope",
+                          status="done", files=["module.ts"], checks=["synthetic"], risks=[])
+        q.review(self.root, packet["id"], "changes_requested", "old functional finding")
+        result = dispatcher.choose(self.root, "antigravity", acquire=True)
+        self.assertEqual(result["claimed"], ["A39"])
+        self.assertFalse((self.root / "coordination/claims/A22").exists())
+        self.assertIn({"id": "A22", "reason": "outside current agent allocation"}, result["skipped"])
+
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)
@@ -126,6 +141,35 @@ class NextTaskTests(unittest.TestCase):
         result = dispatcher.choose(self.root, 'codex')['next']
         self.assertEqual(result['action'], 'fix_review')
         self.assertEqual(result['review_note'], 'Fix actual defect')
+
+    def test_user_credit_unblocks_only_current_codex_input_without_fake_peer_record(self):
+        self.tasks = [{'id': 'C07', 'agent': 'codex', 'work_kind': 'integration', 'requires_reviewed_tasks': ['C17']}]
+        self.save()
+        p = q.submit(self.root, agent='codex', task='C17', request='TEST', summary='fixture',
+                     status='done', files=['module.ts'], checks=['synthetic'], risks=[])
+        policy = self.root / 'coordination/reviews/policy.json'
+        policy.write_text(json.dumps(dict(schema_version=1, authorized_by='user', codex_review_state='USER_WAIVED_REVIEW',
+                                         counts_as_reviewed=True, overall_review_required=True)))
+        self.assertEqual(dispatcher.choose(self.root, 'codex')['next']['task']['id'], 'C07')
+        self.assertEqual(peer.current(self.root, p), [])
+        index = q.build_index(self.root).read_text()
+        self.assertIn('USER_WAIVED_REVIEW', index)
+        self.assertIn('REQUIRED', index)
+        (self.root / 'module.ts').write_text('changed')
+        self.assertIsNone(dispatcher.choose(self.root, 'codex')['next'])
+
+    def test_user_credit_does_not_override_functional_rejection_or_partial_work(self):
+        self.tasks = [{'id': 'C07', 'agent': 'codex', 'work_kind': 'integration', 'requires_reviewed_tasks': ['C17']}]
+        self.save()
+        p = q.submit(self.root, agent='codex', task='C17', request='TEST', summary='fixture',
+                     status='done', files=['module.ts'], checks=['synthetic'], risks=[])
+        (self.root / 'coordination/reviews/policy.json').write_text(json.dumps(dict(schema_version=1, authorized_by='user',
+            codex_review_state='USER_WAIVED_REVIEW', counts_as_reviewed=True, overall_review_required=True)))
+        peer.review(self.root, p['id'], 'antigravity', 'changes_requested', 'Actual defect', ['synthetic'])
+        self.assertIsNone(dispatcher.choose(self.root, 'codex')['next'])
+        q.submit(self.root, agent='codex', task='C17', request='TEST', summary='unfinished fix',
+                 status='partial', files=['module.ts'], checks=['synthetic'], risks=[])
+        self.assertIsNone(dispatcher.choose(self.root, 'codex')['next'])
 
     def test_codex_input_needs_independent_approval_before_integration(self):
         self.tasks = [{'id': 'C07', 'agent': 'codex', 'work_kind': 'integration',

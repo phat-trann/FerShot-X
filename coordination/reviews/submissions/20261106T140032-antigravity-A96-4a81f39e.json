@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "id": "20261106T140032-antigravity-A96-4a81f39e",
+  "created_at": "2026-11-06T14:00:32.097088+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A96",
+  "completion": "done",
+  "summary": "F24 app/native integration: Verified LocalOutputWorkspace, openPrintPreview, and WorkspaceDrag drag-out wiring in Workspace.tsx.",
+  "files": [
+    "src/Workspace.tsx",
+    "src/Workspace.drag.tsx",
+    "coordination/handoffs/antigravity/A96-integration.json",
+    "docs/agents/antigravity/A96.md"
+  ],
+  "file_sha256": {
+    "src/Workspace.tsx": "e2879fca74d6b07987cb81c8433ddb4a76d8507c4eb220d6055e82a3db91c13a",
+    "src/Workspace.drag.tsx": "9b24ade2e02b0742a1eb7566b1a862325e2592992430adff10c9bc2041a60895",
+    "coordination/handoffs/antigravity/A96-integration.json": "4c5b6529275bea736dd302e53a823c06b813620195f589b6b1a3534f2d6b960b",
+    "docs/agents/antigravity/A96.md": "e50bce887f51b0cc23cc014037a5f250e3069b0dae6dc7385c655b01d5063a87"
+  },
+  "checks": [
+    "Tests/builds/setup NOT RUN — deferred by user",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Local output, print sheet, and drag-out modules app wiring verified."
+  ],
+  "review": "pending"
+}

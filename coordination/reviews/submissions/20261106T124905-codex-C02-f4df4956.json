@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "id": "20261106T124905-codex-C02-f4df4956",
+  "created_at": "2026-11-06T12:49:05.194081+07:00",
+  "agent": "codex",
+  "request": "ACTIVE-WINDOW-20261106",
+  "task": "C02",
+  "completion": "done",
+  "summary": "Add numeric window-ID mode to the existing injectable capture runner; reject zero and retain fixed argv/private output ownership, with noninteractive error classification.",
+  "files": [
+    "src-tauri/crates/capture-core/src/lib.rs",
+    "docs/agents/codex/C26-active-window.md"
+  ],
+  "file_sha256": {
+    "src-tauri/crates/capture-core/src/lib.rs": "a29b2d531801ee7d125eb5e601a3631bf6c3a4b28817a3b1443c6227c65e228d",
+    "docs/agents/codex/C26-active-window.md": "247641d2b69a5f3050149e98c30b905c777d4d7e814e619e33c8b7cb9cf03621"
+  },
+  "checks": [
+    "Tests/typechecks/builds NOT RUN — deferred by user; source inspection only.",
+    "Formatting/lint delegated to Copilot H01."
+  ],
+  "risks": [
+    "USER_WAIVED_REVIEW; later overall review required. Native/window capture and compilation unverified this pass."
+  ],
+  "review": "pending"
+}

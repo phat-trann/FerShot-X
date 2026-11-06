@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "id": "20261106T130646-antigravity-A47-36b2d4bf",
+  "created_at": "2026-11-06T13:06:46.450098+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A47",
+  "completion": "done",
+  "summary": "Implemented controlled WindowAppearanceControls with transparent/solid background selection, integer shadow-trim inset validation, and strongly typed WindowAppearanceRenderRequest onApply dispatch.",
+  "files": [
+    "src/features/window-appearance-controls/WindowAppearanceControls.tsx",
+    "src/features/window-appearance-controls/WindowAppearanceControls.css",
+    "src/features/window-appearance-controls/index.ts",
+    "src/features/window-appearance-controls/README.md",
+    "docs/agents/antigravity/A47.md"
+  ],
+  "file_sha256": {
+    "src/features/window-appearance-controls/WindowAppearanceControls.tsx": "42f08f547df6456345783240ba4b4cc90a7ecc69cf861b7a991f578eb9cde247",
+    "src/features/window-appearance-controls/WindowAppearanceControls.css": "553882a08884c1c2cb13845f2176baf01d26f55ca1dbfac2fc353ff9be658cbe",
+    "src/features/window-appearance-controls/index.ts": "e966236aa0f21a485cd5cd0216c0f1fe4c932771117aa56a8233c59396d8420c",
+    "src/features/window-appearance-controls/README.md": "b5afb1df1935756db3dd50db7f545983e85aaa687ca392e7bc92ed9fffb8507b",
+    "docs/agents/antigravity/A47.md": "e1ea28bc7c8f3232f082a1e28116596afb2295ff88ecb9137cc120c43688d71d"
+  },
+  "checks": [
+    "Tests/builds/setup NOT RUN — deferred by user",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Isolated UI component only; canvas rendering integration handled by Codex C32."
+  ],
+  "review": "pending"
+}

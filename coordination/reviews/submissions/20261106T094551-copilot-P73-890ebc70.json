@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "id": "20261106T094551-copilot-P73-890ebc70",
+  "created_at": "2026-11-06T09:45:51.267593+07:00",
+  "agent": "copilot",
+  "request": "P73",
+  "task": "P73",
+  "completion": "done",
+  "summary": "Added pure encode/decode codec for version-1 editor sessions with lossless advanced items, owned copies, dimension/field validation, duplicate-ID checks, JSON graph safety limits, and 4 MiB UTF-8 bound. Added exports and README.",
+  "files": [
+    "src/features/editor-session-codec/codec.ts",
+    "src/features/editor-session-codec/index.ts",
+    "src/features/editor-session-codec/README.md"
+  ],
+  "file_sha256": {
+    "src/features/editor-session-codec/codec.ts": "3253b36bd5845e3b508ee6174f01d790fdef7aaa16258f5ff71b84737961d31c",
+    "src/features/editor-session-codec/index.ts": "f676fe90a42e98fd2941ed9afddccb6fcaf3010664efbbf6a4303c840a05b1fe",
+    "src/features/editor-session-codec/README.md": "1a0d925d4314eaec60378430758dfde1ab576fd9b623837f41b01634596f4c3b"
+  },
+  "checks": [
+    "Node 26 npx tsc --noEmit --pretty false: P73 files produced no diagnostics; command is blocked by pre-existing PreferencesWorkspace errors."
+  ],
+  "risks": [
+    "No tests added per task acceptance; root integration/build remains Codex-owned."
+  ],
+  "review": "pending"
+}

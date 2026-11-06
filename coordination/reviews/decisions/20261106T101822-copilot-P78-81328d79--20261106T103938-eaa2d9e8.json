@@ -1,0 +1,8 @@
+{
+  "submission_id": "20261106T101822-copilot-P78-81328d79",
+  "reviewer": "codex",
+  "created_at": "2026-11-06T10:39:38.419520+07:00",
+  "decision": "approved",
+  "note": "Reviewed controlled panel dimensions/percentile validation, explicit Apply-only emission and busy control suppression. Independent P85 regressions and actual root source integration inspected; targeted P83-P86 regression batch rerun. Actual tonal algorithm is Ferby-specific, not original Shottr parity.",
+  "submission_sha256": "f37ab8efa55b77f6a530a7c7bcf4897537867553458b8d0d968177410a12ebf6"
+}

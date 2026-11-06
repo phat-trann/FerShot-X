@@ -48,6 +48,8 @@ pub struct ImagePayload {
     pub(crate) width: u32,
     pub(crate) height: u32,
     pub(crate) byte_size: usize,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub(crate) display_scale: Option<f64>,
 }
 
 #[derive(Clone, Copy, Deserialize)]
@@ -106,6 +108,7 @@ pub(crate) fn payload(raster: Raster) -> Result<ImagePayload, NativeError> {
         width,
         height,
         byte_size: bytes.len(),
+        display_scale: None,
     })
 }
 
@@ -174,6 +177,29 @@ pub async fn capture_image(
     window: tauri::WebviewWindow,
     jobs: tauri::State<'_, NativeJobs>,
 ) -> Result<ImagePayload, NativeError> {
+    capture_with_region(mode, None, None, window, jobs).await
+}
+
+#[derive(Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct CaptureRegionRequest { display: crate::scrolling::DisplayGeometry, region: Crop }
+
+#[tauri::command]
+pub async fn capture_region(request: CaptureRegionRequest, window: tauri::WebviewWindow,
+    jobs: tauri::State<'_, NativeJobs>) -> Result<ImagePayload, NativeError> {
+    capture_with_region(Mode::Fullscreen, Some(request), None, window, jobs).await
+}
+
+#[tauri::command]
+pub async fn capture_active_window(window: tauri::WebviewWindow, jobs: tauri::State<'_, NativeJobs>) -> Result<ImagePayload, NativeError> {
+    validate_window_label(window.label())?;
+    let target = crate::active_window::target()?;
+    capture_with_region(Mode::Window, None, Some(target), window, jobs).await
+}
+
+async fn capture_with_region(mode: Mode, region: Option<CaptureRegionRequest>,
+    active_window: Option<(u32, u32)>,
+    window: tauri::WebviewWindow, jobs: tauri::State<'_, NativeJobs>) -> Result<ImagePayload, NativeError> {
     validate_window_label(window.label())?;
     if !cfg!(target_os = "macos") {
         return Err(NativeError::new(
@@ -182,6 +208,15 @@ pub async fn capture_image(
         ));
     }
     let guard = jobs.acquire()?;
+    if let Some(request) = &region {
+        let current = crate::scrolling::current_display(&window)?;
+        if current != request.display { return Err(NativeError::new("display_changed", "Display geometry changed. Define the capture region again.")); }
+        let rect = &request.region;
+        if rect.width == 0 || rect.height == 0 || rect.x.checked_add(rect.width).is_none_or(|x| x > current.width)
+            || rect.y.checked_add(rect.height).is_none_or(|y| y > current.height) {
+            return Err(NativeError::new("invalid_bounds", "The repeat region must fit within the primary display's physical pixels."));
+        }
+    }
     let visible = window
         .is_visible()
         .map_err(|e| NativeError::new("window_failed", e.to_string()))?;
@@ -189,6 +224,10 @@ pub async fn capture_image(
         window: window.clone(),
         was_visible: visible,
     };
+    let display_scale = if matches!(mode, Mode::Fullscreen) {
+        window.primary_monitor().ok().flatten().map(|monitor| monitor.scale_factor())
+            .filter(|value| value.is_finite() && *value > 0.0 && *value <= 8.0)
+    } else { None };
     if visible {
         window
             .hide()
@@ -203,6 +242,10 @@ pub async fn capture_image(
             Mode::Area => CaptureMode::Area,
             Mode::Window => CaptureMode::Window,
         };
+        let mode = if let Some((pid, window)) = active_window {
+            crate::active_window::confirm(pid, window)?;
+            CaptureMode::WindowId(window)
+        } else { mode };
         let captured = ferby_capture_core::capture(mode).map_err(|error| {
             let code = match error {
                 CaptureError::Cancelled => "cancelled",
@@ -214,10 +257,19 @@ pub async fn capture_image(
         let bytes = captured
             .read()
             .map_err(|error| NativeError::new("capture_failed", error.to_string()))?;
-        payload(
-            Raster::decode(&bytes)
-                .map_err(|error| NativeError::new("invalid_image", error.to_string()))?,
-        )
+        let mut raster = Raster::decode(&bytes).map_err(|error| NativeError::new("invalid_image", error.to_string()))?;
+        if let Some(request) = region {
+            if crate::scrolling::current_display(&_restore.window)? != request.display ||
+                raster.dimensions() != (request.display.width, request.display.height) {
+                return Err(NativeError::new("display_changed", "Display pixels changed during capture. Define the region again."));
+            }
+            let rect = request.region;
+            raster = raster.crop(CropRect { x: rect.x, y: rect.y, width: rect.width, height: rect.height })
+                .map_err(|error| NativeError::new("invalid_bounds", error.to_string()))?;
+        }
+        let mut result = payload(raster)?;
+        result.display_scale = display_scale;
+        Ok(result)
     })
     .await
     .map_err(|_| NativeError::new("worker_failed", "Screen capture stopped unexpectedly."))?
@@ -274,9 +326,11 @@ pub async fn save_image(
     window: tauri::WebviewWindow,
     app: tauri::AppHandle,
     jobs: tauri::State<'_, NativeJobs>,
+    preferences: tauri::State<'_, crate::preferences::PreferenceGate>,
 ) -> Result<Option<String>, NativeError> {
     validate_window_label(window.label())?;
     let guard = jobs.acquire()?;
+    let preference_gate = preferences.shared();
     tauri::async_runtime::spawn_blocking(move || {
         let _guard = guard;
         validate_name(&request.suggested_name)?;
@@ -286,6 +340,13 @@ pub async fn save_image(
             SaveFormat::Png => "png",
             SaveFormat::Jpeg => "jpg",
         };
+        let destination = {
+            use tauri::Manager;
+            let path = app.path().app_config_dir().map_err(|e| NativeError::new("settings_failed", e.to_string()))?;
+            let _lock = preference_gate.lock().map_err(|_| NativeError::new("settings_failed", "Export preferences unavailable."))?;
+            crate::export_destination::load(&path)?
+        };
+        if let Some(saved) = crate::export_destination::save_to_folder(&raster, &destination, format, extension)? { return Ok(Some(saved)); }
         let selected = app
             .dialog()
             .file()

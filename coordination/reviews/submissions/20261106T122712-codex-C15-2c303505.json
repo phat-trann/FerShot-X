@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "id": "20261106T122712-codex-C15-2c303505",
+  "created_at": "2026-11-06T12:27:12.838471+07:00",
+  "agent": "codex",
+  "request": "NATIVE-DRAG-20261106",
+  "task": "C15",
+  "completion": "partial",
+  "summary": "Implement prepared native macOS PNG drag-out including annotations/output scaling, bounded private staging, token ownership, result/cancel handling and close cleanup.",
+  "files": [
+    "src-tauri/Cargo.toml",
+    "src-tauri/Cargo.lock",
+    "src-tauri/src/dragging.rs",
+    "src-tauri/src/lifecycle.rs",
+    "src-tauri/src/lib.rs",
+    "src/platform/native.ts",
+    "src/Workspace.drag.tsx",
+    "src/Workspace.tsx",
+    "docs/agents/codex/C15-native-drag.md"
+  ],
+  "file_sha256": {
+    "src-tauri/Cargo.toml": "c00c0de4cad8df84005f9d332960a563ba9260d29492240cd958b900d58d0be3",
+    "src-tauri/Cargo.lock": "39bc56dfa90d7e31716ce24cf4f59c26c97bd2d8e8dfbbb2abe718eedf3844e2",
+    "src-tauri/src/dragging.rs": "3ae2a9b83a3fd99ba0048920891c11f25a81f9633f9d519fb7f8bd8e1f453b9e",
+    "src-tauri/src/lifecycle.rs": "6b4cf6005217a90228b1eba2b02bcba4db96e6c3fe3b0146461ca5485e064c79",
+    "src-tauri/src/lib.rs": "0c34f85fce9dfe317c192a14aadfbeded64b9cbebfbee4123f42df91ac879fc5",
+    "src/platform/native.ts": "dea387faa3739018da36e02243be1e4e244ae686e7c3aa8d31cc35b31afa8d3f",
+    "src/Workspace.drag.tsx": "9b24ade2e02b0742a1eb7566b1a862325e2592992430adff10c9bc2041a60895",
+    "src/Workspace.tsx": "71cefca96fe3f87e383fa33dc7b5e63b2cf3f6d74406424b4e82a422efcc3a01",
+    "docs/agents/codex/C15-native-drag.md": "fc4f6b57d86a68fb452f257678a9bad564ae5ccf5498ab68b8762270b17ae7b8"
+  },
+  "checks": [
+    "TypeScript no-emit and locked offline Rust library compilation passed. Lock comparison: 12 additive packages; zero existing locked packages removed/upgraded.",
+    "Tests NOT RUN — deferred by user. Formatting/lint delegated to Copilot H01."
+  ],
+  "risks": [
+    "USER_WAIVED_REVIEW; later overall review required. Actual Finder/native drag behavior and crash-time temporary-file cleanup unverified. Shottr drag implementation UNKNOWN. 68.75% MVP acceptance unchanged."
+  ],
+  "review": "pending"
+}

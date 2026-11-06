@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "id": "20261106T130527-codex-C32-2eb97a70",
+  "created_at": "2026-11-06T13:05:27.257883+07:00",
+  "agent": "codex",
+  "request": "WINDOW-API-20261106",
+  "task": "C32",
+  "completion": "partial",
+  "summary": "Implement integrator-owned A26 window appearance renderer adapter with real decoded source, bounded derived PNG and canvas cleanup; await isolated A47 controls without speculative import.",
+  "files": [
+    "src/platform/window-appearance.ts",
+    "docs/agents/codex/C32-window-adapter.md"
+  ],
+  "file_sha256": {
+    "src/platform/window-appearance.ts": "ebb76704a55602477938c1f8cfa6e526beeb9eab4e2fe548a4f5ff4e78611357",
+    "docs/agents/codex/C32-window-adapter.md": "6ee00cb5f39b4761b155ce3a940fd082a66cfedb2b2582a639aaaabf8bdafe91"
+  },
+  "checks": [
+    "Tests/typechecks/builds/setup NOT RUN — deferred by user. Source/API reading only.",
+    "Formatting/lint delegated to Copilot H01."
+  ],
+  "risks": [
+    "USER_WAIVED_REVIEW; later overall review required. A47 missing, source uncompiled and actual app control integration pending. Original automatic shadow semantics UNKNOWN; acceptance68.75% unchanged."
+  ],
+  "review": "pending"
+}

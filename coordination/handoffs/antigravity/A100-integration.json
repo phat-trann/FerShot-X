@@ -1,0 +1,18 @@
+{
+  "task": "A100",
+  "feature_id": "F30",
+  "feature_name": "Global shortcut assignment",
+  "producer_task": "A75",
+  "integration_status": "complete",
+  "summary": "Integrated full eight-action global shortcuts in Tauri backend and React frontend. Supported all 8 actions: capture-fullscreen, capture-area, capture-window, capture-active-window, capture-repeat-region, capture-scrolling, ocr-capture, show-workspace with backwards-compatible v1 migration, GlobalShortcutsV2Panel UI, and Workspace global action dispatcher.",
+  "files": [
+    "src-tauri/src/shortcuts.rs",
+    "src/platform/shortcuts.ts",
+    "src/features/global-shortcuts-v2/GlobalShortcutsV2Panel.tsx",
+    "src/Workspace.shortcuts.tsx",
+    "src/Workspace.tsx",
+    "coordination/COMPLETE-SCOPE.json"
+  ],
+  "verification": "Tests/builds/setup NOT RUN — deferred by user. Formatting/lint delegated to Copilot H01. Build delegated to Codex."
+}
+

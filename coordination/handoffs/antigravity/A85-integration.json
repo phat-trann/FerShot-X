@@ -1,0 +1,17 @@
+{
+  "task": "A85",
+  "feature_id": "F13",
+  "feature_name": "Undo / redo / merge",
+  "status": "integrated",
+  "verified_sources": [
+    "src/Workspace.tsx",
+    "src/Workspace.editor.tsx",
+    "src/features/editor/workbench/EditorWorkbench.tsx",
+    "src/features/editor/advanced-workbench/AdvancedWorkbench.tsx",
+    "src/platform/annotations.ts",
+    "src/features/editor/render/render-annotations.ts"
+  ],
+  "wiring_details": "Undo and redo history stacks are wired in EditorWorkbench and AdvancedWorkbench with keyboard shortcuts and toolbar buttons. Merge annotations is wired in Workspace.tsx via mergeAnnotations and renderWorkspaceDocument, flattening layers into derived library documents.",
+  "validation_status": "Tests/builds/setup NOT RUN — deferred by user. Standalone build delegated to Codex. Formatting/lint delegated to Copilot H01."
+}
+

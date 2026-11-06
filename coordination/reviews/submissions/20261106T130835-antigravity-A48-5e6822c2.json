@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "id": "20261106T130835-antigravity-A48-5e6822c2",
+  "created_at": "2026-11-06T13:08:35.600349+07:00",
+  "agent": "antigravity",
+  "request": "BUILD-20261105",
+  "task": "A48",
+  "completion": "done",
+  "summary": "Implemented controlled RecognitionProfilePanel component supporting ocr/qr/both modes, explicit language selections (max16), line break preservation, shape validation via codec, and Save/Reset actions.",
+  "files": [
+    "src/features/recognition-profile-panel/RecognitionProfilePanel.tsx",
+    "src/features/recognition-profile-panel/RecognitionProfilePanel.css",
+    "src/features/recognition-profile-panel/index.ts",
+    "src/features/recognition-profile-panel/README.md",
+    "docs/agents/antigravity/A48.md"
+  ],
+  "file_sha256": {
+    "src/features/recognition-profile-panel/RecognitionProfilePanel.tsx": "e188048ded4ca154b8dc73d55cafd8696d92b4390414288f0447dc7712cfe57b",
+    "src/features/recognition-profile-panel/RecognitionProfilePanel.css": "4baa62cb7782fcefddb878b393af1cb974a18f2749cf3388f57ec3a09bbd0b6f",
+    "src/features/recognition-profile-panel/index.ts": "a8c9aff61220c7ffc57d9b7b95f449f49d65feaf62082906b09315853a66bc8b",
+    "src/features/recognition-profile-panel/README.md": "b3cb989c068aacc9c78e824f5fc74ea1db7e9dc9b1395fc783d7d75eb972898e",
+    "docs/agents/antigravity/A48.md": "7b1c54c9127ff3d16d928fa9e41b1e58ed1501caa520a3058b6aae32ef414776"
+  },
+  "checks": [
+    "Tests/builds/setup NOT RUN — deferred by user",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Isolated UI component only; settings persistence and OCR wiring handled by Codex C27."
+  ],
+  "review": "pending"
+}

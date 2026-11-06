@@ -1,4 +1,5 @@
 import React, { useId } from "react";
+import "./PostCapturePlanner.css";
 
 export type PostCaptureStep = "copy" | "save" | "preview" | "edit" | "show";
 

@@ -1,0 +1,139 @@
+{
+  "request": "DESIGN-ACCEPTANCE-20261106",
+  "acceptance_before": 68.75,
+  "acceptance_after": 87.5,
+  "automated_tests": {
+    "frontend": 478,
+    "browser": 51,
+    "rust_root": 24,
+    "rust_crates": 67,
+    "total": 620
+  },
+  "native_processes": [
+    {
+      "phase": 1,
+      "ok": true,
+      "checks": [
+        "isolated native defaults reach actual WKWebView",
+        "real preference handler persisted quality 73",
+        "synthetic File decoded and shown in native WKWebView",
+        "real native crop command returns 60x50 pixels into actual GUI",
+        "actual annotate/render/save UI executed twice through production IPC",
+        "actual native pin owns, scales, fades and closes its own window",
+        "actual native Vision language discovery",
+        "actual malformed native recognition rejects with a structured error",
+        "actual Vision recognizes synthetic FERBY text through real WKWebView IPC",
+        "actual OCR panel renders real Vision result for selected synthetic document"
+      ],
+      "report": "artifacts/C44-native-phase-1-1793962362076447000.json",
+      "report_sha256": "2be7ca5cdec1f4cf5154353a21a9c4a034afa2a3f10a905e69eba61bc181ebe7"
+    },
+    {
+      "phase": 2,
+      "ok": true,
+      "checks": [
+        "actual process restart reloads saved preference into GUI",
+        "real native handler agrees after restart"
+      ],
+      "report": "artifacts/C44-native-phase-2-1793962362076447000.json",
+      "report_sha256": "2adce29dfd15bf874b626138621ffa5c36cbc4e15f8c61c941fb75a6c65c9c00"
+    },
+    {
+      "phase": 3,
+      "ok": true,
+      "checks": [
+        "corrupt isolated preference file recovers to default GUI state",
+        "real native handler rejects corruption while UI remains usable"
+      ],
+      "report": "artifacts/C44-native-phase-3-1793962362076447000.json",
+      "report_sha256": "db37c795e314bae763e54d9bce264b8b664debe022502d42e8c6fb0065b0ace5"
+    }
+  ],
+  "native_input_sha256": {
+    "src-tauri/target/debug/ferby-shottr": "c2afb48c54afba119eb276ddf9a567ea66a6efba0710b91706e819b39f255177",
+    "src-tauri/src/acceptance.rs": "0e0f683cde6aeccf13554435e2cc1716f2afcfb08d9296606543660a0db95a23",
+    "scripts/native_acceptance.js": "1573242f3ff87a0eab8ac3ae352e7f9d1ce4d4a8ca977be05afb34b8531e2ca9",
+    "scripts/native_acceptance_pin.js": "5468cf5ac8832c3d3167bf67bddf7cda7c98a437b29a19ce717180e28104abb3",
+    "scripts/run_native_acceptance.py": "e81fdf3e49b4242b37cfeab5fb9a1bb2e892cecf8d273ad7dfc8d7cc54b7bb96",
+    "src/platform/native.ts": "d0a2be0d79f2a8094d3f2b7e46852baf2b31562727a7706ad40f2d8826e8c19a",
+    "src/Workspace.tsx": "cc79e3f69be12689f18e2c227959c0526fdf08b65396f94344c4a22d393ef247",
+    "src/Workspace.css": "4d5dd656258633d8e48a345ac809033addfc20dc69a134070628737b1b4895c0",
+    "src/Workspace.settings-dialog.tsx": "729df51cbfff06938b9517123f439acb2db63b6f657979dce172dde4aa98877b",
+    "src/styles/tokens.css": "1216cf05044b385c02c4fba18d0b3a6c2ec8703e65ff0dcb4ef90b14f8bc381d"
+  },
+  "native_verified_exports": [
+    {
+      "height": 80,
+      "path": "/Users/phattran/Library/Application Support/dev.ferby.shottr.acceptance.c44-1793962362076447000/synthetic-exports/Acceptance.png",
+      "pixel": [
+        255,
+        255,
+        128,
+        255
+      ],
+      "width": 100
+    },
+    {
+      "height": 80,
+      "path": "/Users/phattran/Library/Application Support/dev.ferby.shottr.acceptance.c44-1793962362076447000/synthetic-exports/Acceptance-1.png",
+      "pixel": [
+        255,
+        255,
+        128,
+        255
+      ],
+      "width": 100
+    }
+  ],
+  "native_pin": {
+    "checks": [
+      "actual native child renders its owned raster",
+      "actual native pin scale 200% and image opacity 50%",
+      "main-only command is rejected from actual pin window"
+    ],
+    "nativeAlwaysOnTop": true,
+    "ok": true
+  },
+  "release": {
+    "bundle": "/Users/phattran/Documents/Code/Personal/ferby-shottr/src-tauri/target/release/bundle/macos/Ferby Shottr.app",
+    "executable_sha256": "5aa2739469e8b32b519f31d904f9d65450a24d104efed295e3775638a5e9f8c2",
+    "executable_bytes": 6737984,
+    "version": "0.1.0",
+    "minimum_system": "12.0",
+    "test_driver_markers_present": {
+      "FERBY_ACCEPTANCE_ID": false,
+      "ferby-acceptance-report": false,
+      "__FERBY_NATIVE_ACCEPTANCE_RUNNING__": false,
+      "__FERBY_PIN_ACCEPTANCE__": false
+    },
+    "signing": "Ad-hoc whole-bundle signature; no Apple identity or notarization",
+    "signature_verification": "codesign --verify --deep --strict: passed",
+    "distribution": "Local internal only; no upload/publishing or public distribution authorized",
+    "signature_fix": "Initial linker-only ad-hoc executable signature lacked app resource sealing. Signed the owned generated bundle ad-hoc with timestamp=none, then strict verification passed.",
+    "mach_o_build_version": [
+      "      cmd LC_BUILD_VERSION",
+      "  cmdsize 32",
+      " platform 1",
+      "    minos 12.0",
+      "      sdk 26.5",
+      "   ntools 1",
+      "     tool 3"
+    ]
+  },
+  "smoke": {
+    "executable": "/Users/phattran/Documents/Code/Personal/ferby-shottr/src-tauri/target/release/bundle/macos/Ferby Shottr.app/Contents/MacOS/ferby-shottr",
+    "owned_pid": 60157,
+    "alive_after_seconds": 4,
+    "smoke_pass": true,
+    "closed": "only the owned smoke process",
+    "actions": "No capture, image import, clipboard action, settings save, upload or privacy mutation requested."
+  },
+  "remaining": "docs/agents/codex/C45-manual-acceptance.md",
+  "not_claimed": [
+    "zero bugs",
+    "100% acceptance",
+    "Shottr runtime parity",
+    "notarized distribution",
+    "final P57 approval"
+  ]
+}

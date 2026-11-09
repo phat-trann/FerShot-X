@@ -1,0 +1,3 @@
+# A74 source correction
+
+Reviewed the external region selector and actual workspace consumer. Fixed fractional pointer origins, image-relative overlay positioning through resize, missing focus containment and busy-to-ready initial focus. Four new component regressions pass; browser cancellation verifies focus and private screenshot cleanup through the real workspace under injected IPC. Shottr static coordinate/rounding evidence and limitations are recorded in `C42-shottr-comparison.md`; no runtime equivalence is claimed. Main workspace lifecycle/provenance changes are published in C42. Historical producer identity is preserved. Formatting/lint delegated to Copilot H01. MVP acceptance remains 68.75%.

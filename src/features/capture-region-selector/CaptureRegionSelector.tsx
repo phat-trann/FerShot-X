@@ -1,4 +1,4 @@
-import React, { useRef, useState, useCallback } from "react";
+import React, { useRef, useState, useCallback, useEffect } from "react";
 import type { ImageDocument } from "../../contracts/media";
 import type { Point } from "../../contracts/editor";
 import { mapClientPoint } from "../point-map";
@@ -39,6 +39,14 @@ export function CaptureRegionSelector({
   const [isDragging, setIsDragging] = useState(false);
   const dragStartRef = useRef<Point | null>(null);
   const imgRef = useRef<HTMLImageElement | null>(null);
+  const hostRef = useRef<HTMLElement | null>(null);
+  useEffect(() => {
+    const previous = document.activeElement;
+    return () => { if (previous instanceof HTMLElement && previous.isConnected) previous.focus(); };
+  }, []);
+  useEffect(() => {
+    if (!busy) hostRef.current?.querySelector<HTMLInputElement>("input")?.focus();
+  }, [busy]);
 
   const getSourcePoint = useCallback(
     (clientX: number, clientY: number): Point | null => {
@@ -59,7 +67,10 @@ export function CaptureRegionSelector({
     const pt = getSourcePoint(e.clientX, e.clientY);
     if (!pt) return;
 
-    dragStartRef.current = pt;
+    dragStartRef.current = {
+      x: clampInt(pt.x, 0, image.width),
+      y: clampInt(pt.y, 0, image.height),
+    };
     setIsDragging(true);
     setArea({
       x: clampInt(pt.x, 0, image.width),
@@ -71,7 +82,7 @@ export function CaptureRegionSelector({
   };
 
   const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
-    if (!isDragging || !dragStartRef.current) return;
+    if (busy || !isDragging || !dragStartRef.current) return;
     const pt = getSourcePoint(e.clientX, e.clientY);
     if (!pt) return;
 
@@ -135,17 +146,14 @@ export function CaptureRegionSelector({
     });
   };
 
-  // Compute visual overlay coordinates relative to rendered image
+  // Percentages track the image through loading and viewport resize without stale DOM measurements.
   let overlayStyle: React.CSSProperties | undefined;
-  if (imgRef.current && area.width > 0 && area.height > 0) {
-    const rect = imgRef.current.getBoundingClientRect();
-    const scaleX = rect.width / image.width;
-    const scaleY = rect.height / image.height;
+  if (area.width > 0 && area.height > 0) {
     overlayStyle = {
-      left: `${area.x * scaleX}px`,
-      top: `${area.y * scaleY}px`,
-      width: `${area.width * scaleX}px`,
-      height: `${area.height * scaleY}px`,
+      left: `${area.x / image.width * 100}%`,
+      top: `${area.y / image.height * 100}%`,
+      width: `${area.width / image.width * 100}%`,
+      height: `${area.height / image.height * 100}%`,
     };
   }
 
@@ -153,9 +161,18 @@ export function CaptureRegionSelector({
 
   return (
     <section
+      ref={hostRef}
       className="ferby-region-selector"
       aria-label="Area selection workspace"
       data-testid="capture-region-selector"
+      onKeyDown={event => {
+        if (event.key === "Escape" && !busy) { event.preventDefault(); event.stopPropagation(); onCancel(); }
+        if (event.key !== "Tab") return;
+        const controls = Array.from(event.currentTarget.querySelectorAll<HTMLElement>("input:not(:disabled), button:not(:disabled)"));
+        const first = controls[0], last = controls[controls.length - 1];
+        if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus(); }
+        else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus(); }
+      }}
     >
       <header className="ferby-region-selector__header">
         <h3 className="ferby-region-selector__title">Select Capture Region</h3>
@@ -171,6 +188,7 @@ export function CaptureRegionSelector({
         onPointerUp={handlePointerUp}
         onPointerCancel={handlePointerUp}
       >
+        <div className="ferby-region-selector__image-wrap">
         <img
           ref={imgRef}
           src={image.src}
@@ -185,6 +203,7 @@ export function CaptureRegionSelector({
             data-testid="region-selector-overlay"
           />
         )}
+        </div>
       </div>
 
       <div className="ferby-region-selector__inputs">

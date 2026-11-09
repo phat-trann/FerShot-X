@@ -11,10 +11,11 @@ import { withWorkspaceAnnotations, renderWorkspaceDocument } from "./platform/an
 import type { AdvancedEditorItem } from "./features/editor/advanced-workbench";
 import { WorkspaceEditor } from "./Workspace.editor";
 import type { CaptureMode, ImageDocument } from "./contracts/media";
+import type { DisplayGeometry } from "./features/capture-session";
 import { mapClientPoint } from "./features/point-map";
 import { inspectImagePixel, type InspectedPixel } from "./platform/pixel-inspection";
 import { AverageColorControls } from "./Workspace.average-color";
-import { copyColor } from "./platform/color-copy";
+import { copyColor, type ColorCopyFormat } from "./platform/color-copy";
 import { importImage } from "./platform/import-image";
 import { captureImageWithScale, copyImage, importClipboardImage, NativeOperationError, pinImage, documentFromPin, readAppInfo, saveImage, savePreferences, transformImage, readCaptureDisplay, type ProcessOptions } from "./platform/native";
 import { CaptureRegionSelector, type CaptureSelectedArea } from "./features/capture-region-selector";
@@ -36,6 +37,9 @@ import { openRequestedDocument } from "./platform/native";
 import { WorkspaceDrag } from "./Workspace.drag";
 import { prepareImageDrag } from "./platform/native";
 import { WorkspaceLayout } from "./Workspace.layout";
+import { WorkspaceSettingsDialog } from "./Workspace.settings-dialog";
+import { WorkspaceWindowAppearance } from "./Workspace.window-appearance";
+import { applyWindowAppearance, type WindowAppearanceOptions } from "./platform/window-appearance";
 import { composeWorkspaceLayout, type WorkspaceLayoutPlan } from "./platform/layout";
 import { AutoAdjustPanel } from "./features/auto-adjust-panel";
 import type { AutoAdjustOptions } from "./features/auto-adjust";
@@ -51,6 +55,27 @@ import { WorkspaceShortcuts } from "./Workspace.shortcuts";
 import { EffectsPanel, type PixelEffectRequest } from "./features/effects-panel";
 import { applyImageEffect } from "./platform/native";
 import type { MeasurementReadout, MeasurementUnitMode } from "./features/measurement-panel";
+import {
+  IconFolderOpen,
+  IconClipboard,
+  IconWindow,
+  IconScroll,
+  IconArchive,
+  IconKeyboard,
+  IconPencil,
+  IconColorPicker,
+  IconRuler,
+  IconScanText,
+  IconSparkles,
+  IconMagicWand,
+  IconLayers,
+  IconPrinter,
+  IconPin,
+  IconSave,
+  IconMerge,
+  IconClose,
+  IconRestore,
+} from "./components/icons";
 import "./Workspace.css";
 
 const EMPTY_ADVANCED_ITEMS: readonly AdvancedEditorItem[] = Object.freeze([]);
@@ -89,7 +114,13 @@ export default function Workspace() {
     image: ImageDocument;
     displayScale: number | null;
     recognizeAfter: boolean;
+    display: DisplayGeometry | null;
   } | null>(null);
+  // A selection screenshot is a private temporary resource until the crop is committed.
+  useEffect(() => {
+    if (!selectingRegion) return;
+    return () => URL.revokeObjectURL(selectingRegion.image.src);
+  }, [selectingRegion]);
   const dismissCapturePreview = useCallback((id: string) => setCapturePreviewId(current => current === id ? null : current), []);
   const sourceRevisions = useRef(new Map<string, number>());
   const captureScales = useRef(new Map<string, number>());
@@ -97,6 +128,7 @@ export default function Workspace() {
   const [annotationsById, setAnnotationsById] = useState<ReadonlyMap<string, readonly Annotation[]>>(() => new Map());
   const [advancedById, setAdvancedById] = useState<ReadonlyMap<string, readonly AdvancedEditorItem[]>>(() => new Map());
   const [pixel, setPixel] = useState<{ imageId: string; value: InspectedPixel } | null>(null);
+  const [pixelCopyFormat, setPixelCopyFormat] = useState<ColorCopyFormat>("hex");
   const picker = useRef<HTMLInputElement>(null);
   const repeatRegion = useRef<RepeatRegionHandle>(null);
   const liveImages = useRef<ImageDocument[]>([]);
@@ -222,12 +254,14 @@ export default function Workspace() {
       setCapturing(true);
       try {
         if (mode === "area") {
+          const display = await readCaptureDisplay().catch(() => null);
           const frame = await captureImageWithScale("fullscreen");
-          if (!mounted.current) return;
+          if (!mounted.current) { URL.revokeObjectURL(frame.image.src); return; }
           setSelectingRegion({
             image: frame.image,
             displayScale: frame.displayScale,
             recognizeAfter,
+            display,
           });
           return;
         }
@@ -240,7 +274,7 @@ export default function Workspace() {
 
   globalAction.current = (action, fromMenu = false) => {
     const focused = document.activeElement;
-    if (busyRef.current || scrollActive || shortcutsOpen || (!fromMenu && document.hasFocus() && focused instanceof HTMLElement && (focused.isContentEditable || ["INPUT", "TEXTAREA", "SELECT"].includes(focused.tagName)))) return;
+    if (busyRef.current || selectingRegion || document.querySelector('[aria-modal="true"]') || scrollActive || shortcutsOpen || (!fromMenu && document.hasFocus() && focused instanceof HTMLElement && (focused.isContentEditable || ["INPUT", "TEXTAREA", "SELECT"].includes(focused.tagName)))) return;
     if (action === "capture-fullscreen") capture("fullscreen");
     else if (action === "capture-area") capture("area");
     else if (action === "capture-window") capture("window");
@@ -265,7 +299,7 @@ export default function Workspace() {
   }
 
   function requestCaptureAction(action: CaptureActionId) {
-    if (busyRef.current || scrollActive) return;
+    if (busyRef.current || selectingRegion || scrollActive) return;
     if (action === "fullscreen" || action === "area" || action === "window") capture(action);
     else if (action === "active-window") captureActive();
     else if (action === "fixed-region") repeatRegion.current?.open();
@@ -308,6 +342,14 @@ export default function Workspace() {
   function transform(options: ProcessOptions) {
     if (!image) return;
     void operate(async () => { addDerivedDocument(await withEdits(image, annotations, (rendered) => transformImage(rendered, options)), image.id, !!options.crop); setNotice("New image created; original preserved."); });
+  }
+
+  function changeWindowAppearance(options: WindowAppearanceOptions) {
+    if (!image) return;
+    void operate(async () => {
+      addDerivedDocument(await withEdits(image, annotations, source => applyWindowAppearance(source, options)), image.id);
+      setNotice("Window appearance applied to a new image; source preserved.");
+    });
   }
 
   function samplePixel(point: { x: number; y: number }) {
@@ -441,8 +483,9 @@ export default function Workspace() {
       try {
         const full = await saveApplicationPreferences({ ...applicationPreferences, baseSettings: saved });
         setApplicationPreferences(full);
-      } catch {
-        // Fallback when environment only mocks base save_preferences
+      } catch (reason) {
+        setPreferenceNotice("Export preferences saved, but application behavior could not be saved. Retry Save preferences.");
+        throw reason;
       }
       setPreferenceNotice("Preferences saved.");
     });
@@ -537,20 +580,21 @@ export default function Workspace() {
 
   return (
     <div className="workspace">
-      <aside className="sidebar">
-        <div className="brand"><span className="brand-mark" aria-hidden="true">⌘</span><div>Ferby<span>SHOTTR</span></div></div>
-        <button className="open-button" onClick={() => picker.current?.click()} disabled={busy}>＋ Open image</button>
-        <button className="open-button clipboard-open" disabled={busy} onClick={openClipboard}>Open clipboard image</button>
+      <aside className="sidebar" inert={!!selectingRegion}>
+        <div className="brand"><span className="brand-mark" aria-hidden="true"><IconWindow size={21} /></span><div>ferby<span>Image workspace</span></div><span className="version-badge">0.1</span></div>
+        <button className="open-button" onClick={() => picker.current?.click()} disabled={busy}><IconFolderOpen /><span>＋ Open image</span></button>
+        <button className="open-button clipboard-open" disabled={busy} onClick={openClipboard}><IconClipboard /><span>Open clipboard image</span></button>
+        <p className="section-label">Capture</p>
         <fieldset className="capture-controls" disabled={busy} aria-label="Capture controls">
           <CaptureActionControls disabled={busy || capturing || scrollActive}
             activeWindowSupported={supportsNativeOutput()} fixedRegionSupported={supportsNativeOutput()} onAction={requestCaptureAction} />
         </fieldset>
-        <button disabled={busy} aria-pressed={scrolling} onClick={() => setScrolling(value => !value)}>Manual scrolling capture</button>
-        <button disabled={busy || scrollActive || !preferencesReady} onClick={captureActive}>Capture last active app window</button>
+        <button className="sidebar-action-btn ferby-toggle" disabled={busy} aria-pressed={scrolling} onClick={() => setScrolling(value => !value)}><IconScroll /><span>Manual scrolling capture</span><span className="toggle-indicator" aria-hidden="true" /></button>
         {supportsNativeOutput() && <RepeatRegionControls controlRef={repeatRegion} busy={busy || scrollActive || !preferencesReady} run={operate}
           onCapture={(captured, scale) => finishCapture({ image: captured, displayScale: scale })} />}
-        <button disabled={busy} aria-pressed={archiveOpen} onClick={() => setArchiveOpen(value => !value)}>Local session archive</button>
-        <button disabled={busy} aria-pressed={shortcutsOpen} onClick={() => setShortcutsOpen(value => !value)}>Global shortcuts</button>
+        <button className="sidebar-action-btn ferby-toggle" disabled={busy} aria-pressed={archiveOpen} onClick={() => setArchiveOpen(value => !value)}><IconArchive /><span>Local session archive</span><span className="toggle-indicator" aria-hidden="true" /></button>
+        <button className="sidebar-action-btn ferby-toggle" disabled={busy} aria-pressed={shortcutsOpen} onClick={() => setShortcutsOpen(value => !value)}><IconKeyboard /><span>Global shortcuts</span><span className="toggle-indicator" aria-hidden="true" /></button>
+        <p className="section-label library-label">Library<span>{images.length}</span></p>
         <fieldset className="library-controls" disabled={busy} aria-label="Session library controls">
           <LibraryPanel images={images} selectedId={selectedId}
             onSelect={(id) => { if (!busyRef.current) { setSelectedId(id); setZoom(applicationPreferences.defaultZoomPercent / 100); } }}
@@ -559,55 +603,135 @@ export default function Workspace() {
         <WorkspaceLifecycle context={{ documentId: image?.id ?? null, revision: sessionRevision.current,
           imageIds: images.map(item => item.id), dirty: images.length > 0, busy: busy || scrollActive, editable: false }}
           onTop={applicationPreferences.keepEditorAlwaysOnTop} onTopChanged={value => setApplicationPreferences(previous => ({ ...previous, keepEditorAlwaysOnTop: value }))} />
-        <div className="sidebar-bottom"><span className="status-dot" /> Images stay on this device<small>{runtimeLabel}</small></div>
+        <div className="sidebar-bottom"><span><span className="status-dot" /> Images stay on this device</span><small>{runtimeLabel}</small></div>
       </aside>
-      <main className="main-panel">
+      <main className="main-panel" inert={!!selectingRegion}>
         <WorkspaceDocumentOpen busy={busy || scrollActive || !preferencesReady} run={operate} onOpen={async id => {
           addDocument(await openRequestedDocument(id)); setNotice("Image opened from the desktop.");
         }} />
-        <WorkspaceDeepLinks context={{ documentId: image?.id ?? null, revision: sessionRevision.current,
+
+        <header className="topbar"><div className="document-title">{image?.name ?? "Untitled workspace"}<span>{image ? `${image.width} × ${image.height} px` : "Capture, annotate, make it clear."}</span></div><div className="workspace-settings" role="group" aria-label="Workspace preferences">        <WorkspaceDeepLinks context={{ documentId: image?.id ?? null, revision: sessionRevision.current,
           imageIds: images.map(item => item.id), dirty: images.length > 0, busy: busy || scrollActive || !preferencesReady, editable: false }}
           onCapture={capture} onEditor={id => { if (busyRef.current || !liveImages.current.some(source => source.id === id)) return;
-            setSelectedId(id); setZoom(applicationPreferences.defaultZoomPercent / 100); setEditing(true); setInspecting(false); setMeasuring(false); setRecognizing(false); }} />
-        <header className="topbar"><div className="document-title">{image?.name ?? "Your next great capture"}<span>{image ? `${image.width} × ${image.height} px` : "A little clarity goes a long way."}</span></div><WorkspaceDestination busy={busy || scrollActive} run={operate} /><PreferenceControls settings={settings} ready={preferencesReady} busy={busy} notice={preferenceNotice} onChange={setSettings} onSave={persistPreferences} /><ApplicationPreferenceControls loginSupported={loginSupported} value={{ ...applicationPreferences, baseSettings: settings }} disabled={!preferencesReady || busy} onChange={changeApplicationPreferences} /></header>
-        <div className="toolbar"><div><span>{editing ? "Annotations" : "Original preview"}</span>{image && <button className="inspect-toggle" disabled={busy} aria-pressed={editing} onClick={() => { setEditing((value) => !value); setInspecting(false); setMeasuring(false); }}>Annotate image</button>}{image && <button className="inspect-toggle" disabled={busy} aria-pressed={inspecting} onClick={() => { setInspecting((value) => !value); setEditing(false); setMeasuring(false); }}>Inspect color</button>}{image && <button disabled={busy} aria-pressed={measuring} onClick={() => { setMeasuring(value => !value); setEditing(false); setInspecting(false); }}>Measure image</button>}{image && <TransformTools key={image.id} image={image} busy={busy} onTransform={transform} />}</div>
-          <div className="zoom-controls"><button disabled={!image || busy} aria-label="Zoom out" onClick={() => setZoom((value) => Math.max(0.1, (value ?? 1) - 0.25))}>−</button><span>{zoom === null ? "Fit" : `${Math.round(zoom * 100)}%`}</span><button disabled={!image || busy} aria-label="Zoom in" onClick={() => setZoom((value) => Math.min(4, (value ?? 1) + 0.25))}>＋</button><button disabled={!image || busy} onClick={() => setZoom(null)}>Fit</button>{image && originalId && <button disabled={busy || scrollActive || !originalImage} title={originalImage ? `Return to ${originalImage.name}` : "Source image was closed"} onClick={restoreOriginal}>Return to source image</button>}{image && <button disabled={busy} onClick={() => removeImage(image.id)} aria-label={`Close ${image.name}`}>Close</button>}</div>
+            setSelectedId(id); setZoom(applicationPreferences.defaultZoomPercent / 100); setEditing(true); setInspecting(false); setMeasuring(false); setRecognizing(false); }} /><WorkspaceSettingsDialog><WorkspaceDestination busy={busy || scrollActive} run={operate} /><PreferenceControls settings={settings} ready={preferencesReady} busy={busy} notice={preferenceNotice} onChange={setSettings} onSave={persistPreferences} /><ApplicationPreferenceControls loginSupported={loginSupported} value={{ ...applicationPreferences, baseSettings: settings }} disabled={!preferencesReady || busy} onChange={changeApplicationPreferences} /></WorkspaceSettingsDialog></div></header>
+        <div className="toolbar">
+          <div className="toolbar-left">
+            <span className="mode-badge">{editing ? "Edit" : "Preview"}</span>
+            {image && (
+              <div className="segmented-tool-group" role="group" aria-label="Editor modes">
+                <button className="inspect-toggle ferby-toggle" disabled={busy} aria-label="Annotate image" title="Annotate image" aria-pressed={editing} onClick={() => { setEditing((value) => !value); setInspecting(false); setMeasuring(false); }}><IconPencil /><span>Annotate</span></button>
+                <button className="inspect-toggle ferby-toggle" disabled={busy} aria-label="Inspect color" title="Inspect color" aria-pressed={inspecting} onClick={() => { setInspecting((value) => !value); setEditing(false); setMeasuring(false); }}><IconColorPicker /><span>Color</span></button>
+                <button className="inspect-toggle ferby-toggle" disabled={busy} aria-label="Measure image" title="Measure image" aria-pressed={measuring} onClick={() => { setMeasuring(value => !value); setEditing(false); setInspecting(false); }}><IconRuler /><span>Measure</span></button>
+                <button className="inspect-toggle ferby-toggle" disabled={busy} aria-label="Recognize text / QR" title="Recognize text / QR" aria-pressed={recognizing} onClick={() => setRecognizing(value => !value)}><IconScanText /><span>Text / QR</span></button>
+              </div>
+            )}
+            {image && <TransformTools key={image.id} image={image} busy={busy} onTransform={transform} />}
+          </div>
+          <div className="zoom-controls">
+            <button disabled={!image || busy} aria-label="Zoom out" onClick={() => setZoom((value) => Math.max(0.1, (value ?? 1) - 0.25))}>−</button>
+            <span>{zoom === null ? "Fit" : `${Math.round(zoom * 100)}%`}</span>
+            <button disabled={!image || busy} aria-label="Zoom in" onClick={() => setZoom((value) => Math.min(4, (value ?? 1) + 0.25))}>＋</button>
+            <button disabled={!image || busy} onClick={() => setZoom(null)}>Fit</button>
+            {image && originalId && <button className="tool-btn" disabled={busy || scrollActive || !originalImage} title={originalImage ? `Return to ${originalImage.name}` : "Source image was closed"} onClick={restoreOriginal}><IconRestore /><span>Return to source image</span></button>}
+            {image && <button className="tool-btn close-btn" disabled={busy} onClick={() => removeImage(image.id)} aria-label={`Close ${image.name}`}><IconClose /><span>Close</span></button>}
+          </div>
         </div>
-        {image && <div className="export-toolbar"><label>Export format<select aria-label="Export format" disabled={busy || !preferencesReady} value={settings.saveFormat} onChange={(event) => setSettings((previous) => ({ ...previous, saveFormat: event.target.value as AppSettings["saveFormat"] }))}><option value="png">PNG</option><option value="jpeg">JPEG</option></select></label><button disabled={busy} aria-pressed={recognizing} onClick={() => setRecognizing(value => !value)}>Recognize text / QR</button><button disabled={busy} onClick={copy}>Copy image</button><button disabled={busy} onClick={pin}>Pin image</button><button disabled={busy || (!annotations.length && !advancedItems.length)} onClick={mergeAnnotations}>Merge annotations</button><button disabled={busy} onClick={save}>Save image…</button><span>Original files are never overwritten.</span></div>}
-        {image && recognizing && <div style={{ maxHeight: "45vh", overflowY: "auto", flexShrink: 0 }}><WorkspaceRecognition image={image} revision={imageRevision}
-          prepare={(signal, languages) => withEdits(image, annotations, rendered => createRecognitionSession(rendered, imageRevision, signal, languages))} /></div>}
-        {shortcutsOpen && <div style={{ maxHeight: "45vh", overflowY: "auto", flexShrink: 0 }}><WorkspaceShortcuts blocked={busy || scrollActive} /></div>}
-        {image && <button disabled={busy} aria-pressed={outputOpen} onClick={() => setOutputOpen(value => !value)}>Print / local output</button>}
-        {image && outputOpen && <div style={{ maxHeight: "45vh", overflowY: "auto", flexShrink: 0 }}><LocalOutputWorkspace key={image.id} image={image} busy={busy}
-          canPrint={supportsNativeOutput()} canDrag={false} onCopy={copy} onSave={save} onPrint={print} onDrag={() => {}}
-          nativeDragControls={supportsNativeOutput() ? <WorkspaceDrag key={`${image.id}:${imageRevision}:${settings.downscaleRetina}`} busy={busy} run={operate}
-            prepare={() => withEdits(image, annotations, rendered => withOutputPreferences(rendered, settings, captureScales.current.get(image.id), prepareImageDrag))} /> : undefined} /></div>}
-        {archiveOpen && <div style={{ maxHeight: "40vh", overflowY: "auto", flexShrink: 0 }}><WorkspaceArchive imageCount={images.length} blocked={busy} snapshot={archiveSnapshot} commit={commitArchive} run={operate} /></div>}
-        {image && <button disabled={busy} aria-pressed={autoAdjustOpen} onClick={() => setAutoAdjustOpen(value => !value)}>Automatic tonal adjustment</button>}
-        {image && autoAdjustOpen && <div style={{ maxHeight: "40vh", overflowY: "auto", flexShrink: 0 }}><AutoAdjustPanel key={image.id} imageWidth={image.width} imageHeight={image.height} busy={busy} onApply={autoAdjust} /></div>}
-        {image && <button disabled={busy} aria-pressed={layoutOpen} onClick={() => setLayoutOpen(value => !value)}>Compose images / backdrop</button>}
-        {image && layoutOpen && <div style={{ maxHeight: "45vh", overflowY: "auto", flexShrink: 0 }}><WorkspaceLayout key={image.id} images={images} selected={image} busy={busy} onCompose={composeLayout} /></div>}
-        {image && <button disabled={busy} aria-pressed={effectsOpen} onClick={() => setEffectsOpen(value => !value)}>Pixel effects</button>}
-        {image && effectsOpen && <div style={{ maxHeight: "40vh", overflowY: "auto", flexShrink: 0 }}><EffectsPanel key={image.id} imageWidth={image.width} imageHeight={image.height} busy={busy} onApply={applyEffect} /></div>}
-        {scrolling && <div style={{ maxHeight: "45vh", overflowY: "auto", flexShrink: 0 }}><WorkspaceScroll blocked={busy} onResult={addDocument} onActivityChange={setScrollActive} /></div>}
-        {image && measuring && <MeasurementTools key={image.id} image={image} busy={busy} onImprint={imprint} />}
-        {image && inspecting && <div className="pixel-inspector" style={{ maxHeight: "40vh", overflowY: "auto", flexShrink: 0 }}>
-          <AverageColorControls key={image.id} image={image} busy={busy} run={operate} />
-          <form key={image.id} onSubmit={inspectCoordinates} aria-label="Inspect pixel coordinates">
-            <label>X<input aria-label="Pixel X" type="number" name="x" defaultValue="0" min="0" max={image.width - 1} step="1" required disabled={busy} /></label>
-            <label>Y<input aria-label="Pixel Y" type="number" name="y" defaultValue="0" min="0" max={image.height - 1} step="1" required disabled={busy} /></label>
-            <button disabled={busy}>Sample color</button>
-          </form>
-          <output role="status" aria-label="Pixel color">{pixel?.imageId === image.id ? <><span className="pixel-swatch" aria-hidden="true" style={{ backgroundColor: `rgba(${pixel.value.r},${pixel.value.g},${pixel.value.b},${pixel.value.a / 255})` }} />
-            <button disabled={busy || !supportsNativeOutput()} onClick={() => { const sampled = pixel.value; void operate(async () => { await copyColor(sampled, "hex"); setNotice("Pixel HEX copied."); }); }}>Copy pixel HEX</button><span>{pixel.value.hex} · RGBA {pixel.value.r}, {pixel.value.g}, {pixel.value.b}, {pixel.value.a} · Pixel {pixel.value.x}, {pixel.value.y}</span></> : "Click the image or enter coordinates."}</output>
-        </div>}
+
+        {image && (
+          <div className="export-toolbar">
+            <div className="studio-toggles" role="group" aria-label="Studio features">
+              <button className="ferby-toggle" disabled={busy} aria-label="Automatic tonal adjustment" title="Automatic tonal adjustment" aria-pressed={autoAdjustOpen} onClick={() => setAutoAdjustOpen(value => !value)}><IconSparkles /><span>Adjust</span></button>
+              <button className="ferby-toggle" disabled={busy} aria-label="Pixel effects" title="Pixel effects" aria-pressed={effectsOpen} onClick={() => setEffectsOpen(value => !value)}><IconMagicWand /><span>Effects</span></button>
+              <button className="ferby-toggle" disabled={busy} aria-label="Compose images / backdrop" title="Compose images / backdrop" aria-pressed={layoutOpen} onClick={() => setLayoutOpen(value => !value)}><IconLayers /><span>Compose</span></button>
+              <button className="ferby-toggle" disabled={busy} aria-label="Print / local output" title="Print / local output" aria-pressed={outputOpen} onClick={() => setOutputOpen(value => !value)}><IconPrinter /><span>Output</span></button>
+            </div>
+            <div className="export-actions">
+              <label>Export format<select aria-label="Export format" disabled={busy || !preferencesReady} value={settings.saveFormat} onChange={(event) => setSettings((previous) => ({ ...previous, saveFormat: event.target.value as AppSettings["saveFormat"] }))}><option value="png">PNG</option><option value="jpeg">JPEG</option></select></label>
+              <button className="action-btn" disabled={busy} onClick={copy}><IconClipboard /><span>Copy image</span></button>
+              <button className="action-btn" disabled={busy} onClick={pin}><IconPin /><span>Pin image</span></button>
+              <button className="action-btn" disabled={busy || (!annotations.length && !advancedItems.length)} onClick={mergeAnnotations}><IconMerge /><span>Merge annotations</span></button>
+              <button className="action-btn action-btn--save" disabled={busy} onClick={save}><IconSave /><span>Save image…</span></button>
+              <span className="export-note">Original files are never overwritten.</span>
+            </div>
+          </div>
+        )}
+
         {error && <div className="error-banner" role="alert">{error}<button onClick={() => setError("")} aria-label="Dismiss error">×</button></div>}
+        <div className="workspace-body">
         <section className={`stage ${dragging ? "dragging" : ""} ${image ? "has-image" : ""}`} aria-label="Image workspace" aria-busy={busy}
           onDragOver={(event) => { event.preventDefault(); setDragging(true); }} onDragLeave={() => setDragging(false)}
           onDrop={(event) => { event.preventDefault(); setDragging(false); void openFiles(Array.from(event.dataTransfer.files)); }}>
           {image ? <div className="image-stage"><img hidden={editing} className={`canvas-image ${zoom === null ? "fit-image" : ""} ${inspecting ? "inspect-image" : ""}`} onClick={inspect} src={image.src} alt={image.name} style={zoom === null ? undefined : { width: image.width * zoom, maxWidth: "none", maxHeight: "none" }} /><WorkspaceEditor image={image} annotations={annotations} advancedItems={advancedItems} active={editing} busy={busy} zoom={zoom} onChange={updateAnnotations} onAdvancedChange={updateAdvanced} /></div> :
-            <div className="empty-state"><div className="empty-illustration" aria-hidden="true"><div className="picture-sun" /><div className="picture-mountain" /><span>＋</span></div><p className="eyebrow">A SPACE FOR YOUR IMAGES</p><h1>Bring the details into focus.</h1><p>Drop an image here to take a closer look,<br />or open one from your Mac.</p><button className="primary-button" onClick={() => picker.current?.click()} disabled={busy}>{busy ? "Opening…" : "Open an image"}<span aria-hidden="true">↗</span></button><small>PNG, JPEG, WebP or GIF · up to 20 MB</small></div>}
+            <div className="empty-state"><div className="empty-illustration" aria-hidden="true"><IconWindow size={40} /><span className="empty-illustration__plus">+</span></div><p className="eyebrow">A LITTLE MORE CLARITY</p><h1>Bring the details into focus.</h1><p>A capture, an idea, a detail worth sharing.<br />Drop an image to start making it yours.</p><button className="primary-button" onClick={() => picker.current?.click()} disabled={busy}>{busy ? "Opening…" : "Open an image"}<span aria-hidden="true">↗</span></button><small>PNG, JPEG, WebP or GIF · up to 20 MB</small></div>}
         </section>
+          {(shortcutsOpen || archiveOpen || scrolling || (image && (recognizing || outputOpen || autoAdjustOpen || layoutOpen || effectsOpen || measuring || inspecting))) && <aside className="inspector" aria-label="Tool properties">
+            <div className="inspector-heading"><span>Properties</span><button disabled={busy || scrollActive} aria-label="Close properties" onClick={() => {
+              setShortcutsOpen(false); setArchiveOpen(false); setScrolling(false); setRecognizing(false); setOutputOpen(false);
+              setAutoAdjustOpen(false); setLayoutOpen(false); setEffectsOpen(false); setMeasuring(false); setInspecting(false);
+            }}><IconClose /></button></div>
+        {image && recognizing && (
+          <div className="workspace-drawer" >
+            <WorkspaceRecognition image={image} revision={imageRevision}
+              prepare={(signal, languages) => withEdits(image, annotations, rendered => createRecognitionSession(rendered, imageRevision, signal, languages))} />
+          </div>
+        )}
+        {shortcutsOpen && (
+          <div className="workspace-drawer" >
+            <WorkspaceShortcuts blocked={busy || scrollActive} />
+          </div>
+        )}
+        {image && outputOpen && (
+          <div className="workspace-drawer" >
+            <LocalOutputWorkspace key={image.id} image={image} busy={busy}
+              canPrint={supportsNativeOutput()} canDrag={false} onCopy={copy} onSave={save} onPrint={print} onDrag={() => {}}
+              nativeDragControls={supportsNativeOutput() ? <WorkspaceDrag key={`${image.id}:${imageRevision}:${settings.downscaleRetina}`} busy={busy} run={operate}
+                prepare={() => withEdits(image, annotations, rendered => withOutputPreferences(rendered, settings, captureScales.current.get(image.id), prepareImageDrag))} /> : undefined} />
+          </div>
+        )}
+        {archiveOpen && (
+          <div className="workspace-drawer" >
+            <WorkspaceArchive imageCount={images.length} blocked={busy} snapshot={archiveSnapshot} commit={commitArchive} run={operate} />
+          </div>
+        )}
+        {image && autoAdjustOpen && (
+          <div className="workspace-drawer" >
+            <AutoAdjustPanel key={image.id} imageWidth={image.width} imageHeight={image.height} busy={busy} onApply={autoAdjust} />
+          </div>
+        )}
+        {image && layoutOpen && (
+          <div className="workspace-drawer" >
+            <WorkspaceLayout key={image.id} images={images} selected={image} busy={busy} onCompose={composeLayout} />
+            <WorkspaceWindowAppearance key={`appearance-${image.id}`} image={image} busy={busy} onApply={changeWindowAppearance} />
+          </div>
+        )}
+        {image && effectsOpen && (
+          <div className="workspace-drawer" >
+            <EffectsPanel key={image.id} imageWidth={image.width} imageHeight={image.height} busy={busy} onApply={applyEffect} />
+          </div>
+        )}
+        {scrolling && (
+          <div className="workspace-drawer" >
+            <WorkspaceScroll blocked={busy} onResult={addDocument} onActivityChange={setScrollActive} />
+          </div>
+        )}
+        {image && measuring && <MeasurementTools key={image.id} image={image} busy={busy} onImprint={imprint} />}
+        {image && inspecting && (
+          <div className="pixel-inspector" >
+            <AverageColorControls key={`average-${image.id}`} image={image} busy={busy} run={operate} />
+            <form key={`pixel-${image.id}`} onSubmit={inspectCoordinates} aria-label="Inspect pixel coordinates">
+              <label>X<input aria-label="Pixel X" type="number" name="x" defaultValue="0" min="0" max={image.width - 1} step="1" required disabled={busy} /></label>
+              <label>Y<input aria-label="Pixel Y" type="number" name="y" defaultValue="0" min="0" max={image.height - 1} step="1" required disabled={busy} /></label>
+              <button disabled={busy}>Sample color</button>
+            </form>
+            <output role="status" aria-label="Pixel color">{pixel?.imageId === image.id ? <><span className="pixel-swatch" aria-hidden="true" style={{ backgroundColor: `rgba(${pixel.value.r},${pixel.value.g},${pixel.value.b},${pixel.value.a / 255})` }} />
+              <label>Copy format<select aria-label="Pixel copy format" value={pixelCopyFormat} onChange={event => setPixelCopyFormat(event.target.value as ColorCopyFormat)}>
+                <option value="hex">HEX</option><option value="rgb">RGB</option><option value="rgba">RGBA</option>
+              </select></label>
+              <button disabled={busy || !supportsNativeOutput()} onClick={() => { const sampled = pixel.value; void operate(async () => { await copyColor(sampled, pixelCopyFormat); setNotice(`Pixel ${pixelCopyFormat.toUpperCase()} copied.`); }); }}>Copy pixel {pixelCopyFormat.toUpperCase()}</button><span>{pixel.value.hex} · RGBA {pixel.value.r}, {pixel.value.g}, {pixel.value.b}, {pixel.value.a} · Pixel {pixel.value.x}, {pixel.value.y}</span></> : "Click the image or enter coordinates."}</output>
+          </div>
+        )}
+          </aside>}
+        </div>
         <footer className="statusbar"><span role="status" aria-live="polite">{busy ? "Working…" : notice || (image ? "Image · session only" : "Ready when you are")}</span><span>{images.length} {images.length === 1 ? "image" : "images"}</span></footer>
       </main>
       {capturePreview && settings.showPreview && <div style={{ position: "fixed", right: 16, bottom: 36, width: "min(360px, 80vw)", maxHeight: "65vh", overflowY: "auto", zIndex: 100 }}>
@@ -617,23 +741,32 @@ export default function Workspace() {
           onSave={id => previewOperation(id, document => saveImage(document, settings.saveFormat, settings.jpegQuality), true)} />
       </div>}
       {selectingRegion && (
-        <div style={{ position: "fixed", inset: 0, zIndex: 1000, background: "rgba(0,0,0,0.85)", display: "flex", justifyContent: "center", alignItems: "center", padding: 24, overflow: "auto" }}>
+        <div role="dialog" aria-modal="true" aria-label="Select capture region" onKeyDown={event => {
+          if (event.key === "Escape" && !busy) { event.preventDefault(); setSelectingRegion(null); setNotice("Area selection cancelled."); }
+        }} style={{ position: "fixed", inset: 0, zIndex: 1000, background: "rgba(0,0,0,0.85)", display: "flex", justifyContent: "center", alignItems: "center", padding: 24, overflow: "auto" }}>
           <CaptureRegionSelector
             image={selectingRegion.image}
             busy={busy}
             onConfirm={(area: CaptureSelectedArea) => {
               const target = selectingRegion;
-              setSelectingRegion(null);
               void operate(async () => {
+                const cropped = await transformImage(target.image, { crop: area });
+                // The source URL stays alive until its pixels have been consumed.
+                setSelectingRegion(null);
+                await finishCapture({ image: cropped, displayScale: target.displayScale }, target.recognizeAfter);
                 try {
                   const display = await readCaptureDisplay();
+                  const before = target.display;
+                  if (!before || display.id !== before.id || display.x !== before.x || display.y !== before.y || display.scale !== before.scale ||
+                    display.width !== before.width || display.height !== before.height || target.image.width !== display.width || target.image.height !== display.height) {
+                    setNotice("Region captured. Display geometry changed or could not be verified; repeat was not updated.");
+                    return;
+                  }
                   repeatRegion.current?.rememberRegion(display, area);
+                  setNotice("Region captured and remembered for repeat.");
                 } catch {
-                  // Ignore display query failure if off primary display
+                  setNotice("Region captured. Display geometry was unavailable; repeat was not updated.");
                 }
-                const cropped = await transformImage(target.image, { crop: area });
-                await finishCapture({ image: cropped, displayScale: target.displayScale }, target.recognizeAfter);
-                setNotice("Region captured and remembered for repeat.");
               });
             }}
             onCancel={() => {

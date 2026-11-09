@@ -2,9 +2,9 @@
   "definition": "Complete requested source implementation and app wiring, not original runtime parity or tested release acceptance",
   "scope": "All29 non-excluded feature groups from F01-F34; no arbitrary five-task cutoff",
   "acceptance_before": 68.75,
-  "acceptance_after": 68.75,
+  "acceptance_after": 87.5,
   "source_percentage": null,
-  "source_percentage_note": "Six Codex-owned groups reconciled: four source-implemented/wired, two explicit gaps. Other23 existing feature groups await owner source reconciliation; do not equate this lower-bound count with overall completion.",
+  "source_percentage_note": "Owners marked 29 groups source-complete; C42 independently found and repaired several missing app routes and a native shortcut incompatibility. Automated regression is green; do not interpret owner declarations as exhaustive source review, native acceptance or original runtime parity.",
   "excluded": [
     "F27 cloud",
     "F28 S3",
@@ -14,7 +14,6 @@
   ],
   "deferred": [
     "FTP",
-    "Tests/typechecks/builds/setup",
     "Native/manual and original runtime acceptance"
   ],
   "features": [
@@ -30,16 +29,20 @@
         "src/features/capture-region-selector/CaptureRegionSelector.tsx",
         "src/features/capture-region-selector/index.ts",
         "src/Workspace.repeat-region.tsx",
-        "src/Workspace.tsx"
+        "src/Workspace.tsx",
+        "docs/agents/codex/A74-final-review.md",
+        "docs/agents/codex/C42-shottr-comparison.md",
+        "docs/agents/codex/C42-final-review.md"
       ],
       "remaining": "Complete: interactive screenshot region selector (CaptureRegionSelector), confirmed pixel cropping, and display/rectangle repeat memory wired in Workspace.tsx.",
       "packet": "20261106T131714-codex-C35-27e98016",
-      "validation": "Tests/typechecks/builds/setup NOT RUN \u2014 deferred by user; source-only status, not runtime acceptance.",
+      "validation": "C42 final automated regression/build passed; see report for exact scope. No original runtime equivalence or native/manual acceptance.",
       "integration_owners": [
         "codex",
         "antigravity"
       ],
-      "antigravity_integration_task": "A99"
+      "antigravity_integration_task": "A99",
+      "review_followup": "C42 source correction and automated regressions; historical authorship and review flags retained. Native/original runtime acceptance remains open."
     },
     {
       "feature_id": "F02",
@@ -71,14 +74,16 @@
         "src/features/recognition-workflow/index.ts",
         "src/features/recognition-workspace/RecognitionWorkspace.tsx",
         "src/features/recognition-workspace/RecognitionWorkspace.css",
-        "src/Workspace.recognition.tsx"
+        "src/Workspace.recognition.tsx",
+        "docs/agents/codex/C44-native-acceptance.md"
       ],
       "remaining": "Complete: native Vision OCR/QR Rust backend (objc2-vision), workflow controller, and RecognitionWorkspace UI integrated into Workspace.recognition.tsx.",
       "integration_owners": [
         "codex",
         "antigravity"
       ],
-      "antigravity_integration_task": "A76"
+      "antigravity_integration_task": "A76",
+      "native_acceptance": "Actual controlled native application subcases passed; exact bounds in C44 report. Original runtime parity remains UNKNOWN."
     },
     {
       "feature_id": "F04",
@@ -239,14 +244,16 @@
         "src/features/selection-handles/index.ts",
         "src/features/source-restore-controls/SourceRestoreControls.tsx",
         "src/features/source-restore-controls/SourceRestoreControls.css",
-        "src/features/source-restore-controls/index.ts"
+        "src/features/source-restore-controls/index.ts",
+        "docs/agents/codex/C44-native-acceptance.md"
       ],
       "remaining": "Complete: 8-point interactive resize handles, annotation bounds translation/scaling, crop selection, and source restore controls.",
       "integration_owners": [
         "codex",
         "antigravity"
       ],
-      "antigravity_integration_task": "A83"
+      "antigravity_integration_task": "A83",
+      "native_acceptance": "Actual controlled native application subcases passed; exact bounds in C44 report. Original runtime parity remains UNKNOWN."
     },
     {
       "feature_id": "F12",
@@ -284,14 +291,16 @@
         "src/features/editor/advanced-workbench/AdvancedWorkbench.tsx",
         "src/features/editor/advanced-workbench/AdvancedWorkbench.css",
         "src/features/editor/render/render-annotations.ts",
-        "src/features/editor/render/index.ts"
+        "src/features/editor/render/index.ts",
+        "docs/agents/codex/C44-native-acceptance.md"
       ],
       "remaining": "Complete: past/present/future history state stack, undo/redo dispatch, item deletion, and raster merge rendering.",
       "integration_owners": [
         "codex",
         "antigravity"
       ],
-      "antigravity_integration_task": "A85"
+      "antigravity_integration_task": "A85",
+      "native_acceptance": "Actual controlled native application subcases passed; exact bounds in C44 report. Original runtime parity remains UNKNOWN."
     },
     {
       "feature_id": "F14",
@@ -367,14 +376,19 @@
         "src/features/color/color.ts",
         "src/features/color-format-controls/ColorFormatControls.tsx",
         "src/features/color-format-controls/ColorFormatControls.css",
-        "src/features/color-format-controls/index.ts"
+        "src/features/color-format-controls/index.ts",
+        "src/Workspace.average-color.tsx",
+        "src/platform/color-copy.ts",
+        "docs/agents/codex/C42-final-review.md"
       ],
       "remaining": "Complete: point pixel sampling, area average RGBA calculation, color model conversion, and ColorFormatControls UI.",
       "integration_owners": [
         "codex",
         "antigravity"
       ],
-      "antigravity_integration_task": "A89"
+      "antigravity_integration_task": "A89",
+      "review_followup": "C42 source correction and automated regressions; historical authorship and review flags retained. Native/original runtime acceptance remains open.",
+      "validation": "C42 final automated regression/build passed; see report for exact scope. No original runtime equivalence or native/manual acceptance."
     },
     {
       "feature_id": "F18",
@@ -406,14 +420,19 @@
         "src/features/layout-workspace/LayoutWorkspace.tsx",
         "src/features/layout-workspace/index.ts",
         "src/features/composition/composition.ts",
-        "src/features/backdrop/backdrop-renderer.ts"
+        "src/features/backdrop/backdrop-renderer.ts",
+        "src/Workspace.layout.tsx",
+        "src/platform/layout.ts",
+        "docs/agents/codex/C42-final-review.md"
       ],
       "remaining": "Complete: solid, linear/radial gradient, and caller-owned canvas backgrounds wired in LayoutWorkspace, Workspace.layout.tsx, and platform/layout.ts.",
       "integration_owners": [
         "codex",
         "antigravity"
       ],
-      "antigravity_integration_task": "A91"
+      "antigravity_integration_task": "A91",
+      "review_followup": "C42 source correction and automated regressions; historical authorship and review flags retained. Native/original runtime acceptance remains open.",
+      "validation": "C42 final automated regression/build passed; see report for exact scope. No original runtime equivalence or native/manual acceptance."
     },
     {
       "feature_id": "F20",
@@ -427,14 +446,16 @@
         "src/features/pin/index.ts",
         "src/features/pin-values/index.ts",
         "src-tauri/crates/pin-window-core/src/lib.rs",
-        "src-tauri/src/pins.rs"
+        "src-tauri/src/pins.rs",
+        "docs/agents/codex/C44-native-acceptance.md"
       ],
       "remaining": "Complete: native pinned windows, open_pin/get_pin/edit_pin/close_pin commands, ferby-pin-edit event, PinPreviewCard, and ferby-pin-window-core geometry.",
       "integration_owners": [
         "codex",
         "antigravity"
       ],
-      "antigravity_integration_task": "A92"
+      "antigravity_integration_task": "A92",
+      "native_acceptance": "Actual controlled native application subcases passed; exact bounds in C44 report. Original runtime parity remains UNKNOWN."
     },
     {
       "feature_id": "F21",
@@ -535,14 +556,16 @@
         "src/features/export-destination-panel/ExportDestinationPanel.tsx",
         "src/features/export-destination-panel/index.ts",
         "src/features/output-size/index.ts",
-        "src/features/app-preferences-codec/codec.ts"
+        "src/features/app-preferences-codec/codec.ts",
+        "docs/agents/codex/C44-native-acceptance.md"
       ],
       "remaining": "Complete: PreferenceControls, WorkspaceDestination directory selection, withOutputPreferences (format, quality, retina downscale), and app preferences codec.",
       "integration_owners": [
         "codex",
         "antigravity"
       ],
-      "antigravity_integration_task": "A97"
+      "antigravity_integration_task": "A97",
+      "native_acceptance": "Actual controlled native application subcases passed; exact bounds in C44 report. Original runtime parity remains UNKNOWN."
     },
     {
       "feature_id": "F26",
@@ -556,14 +579,19 @@
         "src/features/window-appearance/index.ts",
         "src/features/window-appearance-controls/WindowAppearanceControls.tsx",
         "src/features/window-appearance-controls/WindowAppearanceControls.css",
-        "src/features/window-appearance-controls/index.ts"
+        "src/features/window-appearance-controls/index.ts",
+        "src/Workspace.window-appearance.tsx",
+        "src/platform/window-appearance.ts",
+        "docs/agents/codex/C42-final-review.md"
       ],
       "remaining": "Complete: WindowAppearanceControls, shadow trim insets, transparent/solid window background modes, and LayoutWorkspace layer trimming.",
       "integration_owners": [
         "codex",
         "antigravity"
       ],
-      "antigravity_integration_task": "A98"
+      "antigravity_integration_task": "A98",
+      "review_followup": "C42 source correction and automated regressions; historical authorship and review flags retained. Native/original runtime acceptance remains open.",
+      "validation": "C42 final automated regression/build passed; see report for exact scope. No original runtime equivalence or native/manual acceptance."
     },
     {
       "feature_id": "F30",
@@ -574,16 +602,21 @@
       "app_wired": true,
       "source_evidence": [
         "docs/agents/codex/C38.md",
-        "docs/agents/antigravity/A100.md"
+        "docs/agents/antigravity/A100.md",
+        "src/platform/shortcuts-v2.ts",
+        "src/Workspace.shortcuts.tsx",
+        "docs/agents/codex/A75-final-review.md",
+        "docs/agents/codex/C42-final-review.md"
       ],
       "remaining": "Complete: eight-action global shortcuts schema, native registration, v1/v2 migration, and GlobalShortcutsV2Panel UI wired in Workspace.tsx.",
       "packet": "20261106T132515-codex-C38-e7e2a11b",
-      "validation": "Tests/typechecks/builds/setup NOT RUN \u2014 deferred by user; source-only status, not runtime acceptance.",
+      "validation": "C42 final automated regression/build passed; see report for exact scope. No original runtime equivalence or native/manual acceptance.",
       "integration_owners": [
         "codex",
         "antigravity"
       ],
-      "antigravity_integration_task": "A100"
+      "antigravity_integration_task": "A100",
+      "review_followup": "C42 source correction and automated regressions; historical authorship and review flags retained. Native/original runtime acceptance remains open."
     },
     {
       "feature_id": "F31",
@@ -632,5 +665,15 @@
   "integration_claims": [
     "ordinary task",
     "root-wiring"
-  ]
+  ],
+  "validation_checkpoint": {
+    "report": "docs/agents/codex/C44-native-acceptance.md",
+    "unit_tests": 478,
+    "browser_tests": 51,
+    "rust_tests": 91,
+    "actual_isolated_native_processes": 3,
+    "remaining": "docs/agents/codex/C45-manual-acceptance.md",
+    "original_runtime_parity": "UNKNOWN",
+    "release": "docs/agents/codex/C45-release-decision.md"
+  }
 }

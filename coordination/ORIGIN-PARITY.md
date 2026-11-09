@@ -78,3 +78,7 @@ Use unique case IDs prefixed by the task ID; assigned feature IDs only; 3-6 case
 ## Current integration facts
 
 The latest Codex packets report partial integrations for basic editor/raster output (C07), explicit clipboard import (C08), restricted pins (C09), and format/quality persistence (C10). They do not certify equivalent original runtime behavior. A33 has a fresh worker submission awaiting actual code/evidence review; no OCR parity is credited here. Native manual acceptance and broader C11-C15 integration remain separate open gates.
+
+## C42 focused static follow-up (2026-11-06)
+
+[Region coordinate follow-up](../docs/agents/codex/C42-shottr-comparison.md) reads the actual RegionSelector mouse-up wrapper and its called body in hash-matched Shottr 1.9.3 (137). Rectangle coordinate operations and four FRINTA instructions are STATIC_OBSERVED; callback consumer, Retina/multi-display equivalence and original runtime behavior remain UNKNOWN. Ferby synthetic regressions do not change the runtime comparison gates.

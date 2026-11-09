@@ -1,3 +1,5 @@
+#[cfg(feature = "native-acceptance")]
+mod acceptance;
 mod commands;
 mod imaging;
 mod preferences;
@@ -24,7 +26,7 @@ mod document_open;
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
-    tauri::Builder::default()
+    let builder = tauri::Builder::default()
         .manage(imaging::NativeJobs::default())
         .manage(auto_scroll::AutoScrollStore::default())
         .manage(preferences::PreferenceGate::default())
@@ -35,7 +37,11 @@ pub fn run() {
         .manage(document_open::DocumentOpenStore::default())
         .manage(dragging::DragStore::default())
         .on_window_event(lifecycle::on_window_event)
-        .setup(|_app| { active_window::install(); Ok(()) })
+        .setup(|_app| {
+            active_window::install();
+            #[cfg(feature = "native-acceptance")] acceptance::setup(_app)?;
+            Ok(())
+        })
         .menu(desktop_menu::build)
         .on_menu_event(desktop_menu::on_event)
         .plugin(tauri_plugin_dialog::init())
@@ -101,7 +107,13 @@ pub fn run() {
             dragging::discard_prepared_drag,
             dragging::start_prepared_drag
         ])
-        .build(tauri::generate_context!())
+;
+    #[cfg(feature = "native-acceptance")]
+    let builder = builder.on_page_load(acceptance::on_page_load);
+    let context = tauri::generate_context!();
+    #[cfg(feature = "native-acceptance")]
+    let context = acceptance::isolate(context);
+    builder.build(context)
         .expect("error while building tauri application")
         .run(|app, event| { deep_links::on_event(app, &event); document_open::on_event(app, &event); });
 }

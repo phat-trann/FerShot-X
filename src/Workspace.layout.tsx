@@ -15,6 +15,10 @@ export function WorkspaceLayout({ images, selected, busy, onCompose }: {
   const [inset, setInset] = useState(64);
   const [cornerRadius, setCornerRadius] = useState(12);
   const [color, setColor] = useState("#e8edf5");
+  const [fillKind, setFillKind] = useState("solid");
+  const [endColor, setEndColor] = useState("#6c5ce7");
+  const [angle, setAngle] = useState(135);
+  const [backgroundId, setBackgroundId] = useState(selected.id);
   const [shadow, setShadow] = useState(false);
   const [error, setError] = useState("");
 
@@ -29,8 +33,11 @@ export function WorkspaceLayout({ images, selected, busy, onCompose }: {
   function compose() {
     setError("");
     if (!Number.isFinite(scale) || scale <= 0 || scale > 8) { setError("Pixels per point must be greater than 0 and at most 8."); return; }
+    if (backdrop && fillKind === "image" && !images.some(image => image.id === backgroundId)) { setError("Choose an available background image."); return; }
     onCompose({ canvasWidth: width, canvasHeight: height, displayScale: scale, layers: layers.map(layer => ({ ...layer })),
-      backdrop: backdrop ? { inset, cornerRadius, fill: { kind: "solid", color },
+      backdropImageId: backdrop && fillKind === "image" ? backgroundId : undefined,
+      backdrop: backdrop ? { inset, cornerRadius, fill: fillKind === "linear-gradient" ? { kind: "linear-gradient", startColor: color, endColor, angleDeg: angle }
+        : fillKind === "radial-gradient" ? { kind: "radial-gradient", innerColor: color, outerColor: endColor } : { kind: "solid", color },
         shadow: shadow ? { blur: 16, offsetX: 0, offsetY: 8, color: "#000000" } : null } : null });
   }
   return <section aria-label="Image composition controls">
@@ -58,6 +65,15 @@ export function WorkspaceLayout({ images, selected, busy, onCompose }: {
       {backdrop && <div><label>Inset<input type="number" min="0" max="512" value={inset} onChange={event => setInset(Number(event.target.value))} /></label>
         <label>Corner radius<input type="number" min="0" max="256" value={cornerRadius} onChange={event => setCornerRadius(Number(event.target.value))} /></label>
         <label>Backdrop color<input type="color" value={color} onChange={event => setColor(event.target.value)} /></label>
+        <label>Backdrop fill<select aria-label="Backdrop fill" value={fillKind} onChange={event => setFillKind(event.target.value)}>
+          <option value="solid">Solid color</option><option value="linear-gradient">Linear gradient</option>
+          <option value="radial-gradient">Radial gradient</option><option value="image">Session image</option>
+        </select></label>
+        {(fillKind === "linear-gradient" || fillKind === "radial-gradient") && <label>Second backdrop color<input type="color" value={endColor} onChange={event => setEndColor(event.target.value)} /></label>}
+        {fillKind === "linear-gradient" && <label>Gradient angle<input type="number" min="-360" max="360" value={angle} onChange={event => setAngle(Number(event.target.value))} /></label>}
+        {fillKind === "image" && <label>Backdrop image<select aria-label="Backdrop image" value={backgroundId} onChange={event => setBackgroundId(event.target.value)}>
+          {images.map(image => <option key={image.id} value={image.id}>{image.name}</option>)}
+        </select></label>}
         <label><input type="checkbox" checked={shadow} onChange={event => setShadow(event.target.checked)} />Add shadow</label></div>}
       <button type="button" disabled={!layers.length} onClick={compose}>Create composed image</button>
     </fieldset>

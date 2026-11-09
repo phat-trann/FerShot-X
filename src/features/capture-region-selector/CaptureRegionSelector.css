@@ -37,6 +37,14 @@
   border-radius: 4px;
   cursor: crosshair;
   user-select: none;
+  touch-action: none;
+}
+
+.ferby-region-selector__image-wrap {
+  position: relative;
+  display: inline-flex;
+  max-width: 100%;
+  min-width: 0;
 }
 
 .ferby-region-selector__image {

@@ -345,17 +345,8 @@ export async function readApplicationPreferences(): Promise<Readonly<FerbyAppPre
 export async function saveApplicationPreferences(preferences: FerbyAppPreferences): Promise<Readonly<FerbyAppPreferences>> {
   requireDesktop();
   const validated = parseAppPreferencesJson(serializeAppPreferencesJson(preferences));
-  try {
-    const saved = await nativeCall<unknown>("save_application_preferences", { preferences: validated });
-    return parseAppPreferencesJson(JSON.stringify({ version: 1, preferences: saved }));
-  } catch (err) {
-    try {
-      const base = await savePreferences(validated.baseSettings);
-      return { ...validated, baseSettings: base };
-    } catch {
-      throw err;
-    }
-  }
+  const saved = await nativeCall<unknown>("save_application_preferences", { preferences: validated });
+  return parseAppPreferencesJson(JSON.stringify({ version: 1, preferences: saved }));
 }
 export async function readRecognitionPreferences(): Promise<Readonly<RecognitionPreferences>> {
   if (!isTauri()) return DEFAULT_RECOGNITION_PREFERENCES;

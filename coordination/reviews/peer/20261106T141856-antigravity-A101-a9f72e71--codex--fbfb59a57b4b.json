@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "submission_id": "20261106T141856-antigravity-A101-a9f72e71",
+  "reviewer": "codex",
+  "decision": "changes_requested",
+  "note": "The 100% source/wiring declaration omitted reachable-app gaps: native eight-action shortcuts still used a five-action frontend, window appearance/shadow trim controls were absent from the workspace, and gradient/image backdrops were renderer-only. Codex C42 corrects these actual sources and adds real-workspace regressions. Preserve original authorship and this historical finding; no blanket native/runtime approval.",
+  "checks": [
+    "Reviewed app entry routes and production adapters; full baseline frontend/browser/root Rust and standalone crate suites rerun, with new integration regressions for the discovered gaps."
+  ],
+  "created_at": "2026-11-06T17:17:57.513807+07:00",
+  "submission_sha256": "5cd447791c13a692f48d65316474f1c57ef5a98370acd93b5cd3c9f4a1c4bf7c"
+}

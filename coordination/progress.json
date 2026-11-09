@@ -80,8 +80,8 @@
         },
         {
           "name": "Annotated export end-to-end acceptance",
-          "done": false,
-          "evidence": "Not accepted yet"
+          "done": true,
+          "evidence": "docs/agents/codex/C44-native-acceptance.md"
         }
       ]
     },
@@ -107,8 +107,8 @@
         },
         {
           "name": "Native GUI transform acceptance",
-          "done": false,
-          "evidence": "Not accepted yet"
+          "done": true,
+          "evidence": "docs/agents/codex/C44-native-acceptance.md"
         }
       ]
     },
@@ -134,8 +134,8 @@
         },
         {
           "name": "Annotated-pixel export acceptance",
-          "done": false,
-          "evidence": "Not accepted yet"
+          "done": true,
+          "evidence": "docs/agents/codex/C44-native-acceptance.md"
         }
       ]
     },
@@ -183,13 +183,13 @@
         },
         {
           "name": "Native integration and preference application",
-          "done": false,
-          "evidence": "Not accepted yet"
+          "done": true,
+          "evidence": "docs/agents/codex/C44-native-acceptance.md"
         },
         {
           "name": "Restart/invalid-settings acceptance",
-          "done": false,
-          "evidence": "Not accepted yet"
+          "done": true,
+          "evidence": "docs/agents/codex/C44-native-acceptance.md"
         }
       ]
     },
@@ -215,8 +215,8 @@
         },
         {
           "name": "Native pin acceptance",
-          "done": false,
-          "evidence": "Not accepted yet"
+          "done": true,
+          "evidence": "docs/agents/codex/C44-native-acceptance.md"
         }
       ]
     },
@@ -242,8 +242,8 @@
         },
         {
           "name": "Native acceptance and failure handling",
-          "done": false,
-          "evidence": "Not accepted yet"
+          "done": true,
+          "evidence": "docs/agents/codex/C44-native-acceptance.md"
         }
       ]
     },
@@ -269,8 +269,8 @@
         },
         {
           "name": "Release build/signing/distribution decision",
-          "done": false,
-          "evidence": "Not accepted yet"
+          "done": true,
+          "evidence": "docs/agents/codex/C45-release-decision.md"
         }
       ]
     }
@@ -281,6 +281,14 @@
     "- Actual validation this request: 345 frontend tests in the earlier baseline run, 16 root Rust tests, 10 Vision tests (including real framework OCR/QR), 5 existing browser acceptance checks and 2 new recognition browser checks passed. Native OS actions were mocked except Vision on synthetic images.",
     "- Source review found the P79 JPEG-quality schema mismatch; Copilot corrected it, and five root preference-contract tests now pass. Global tsc blockers are tracked through P61/H01 handoffs; final build outcome is reported separately.",
     "- Copilot P83-P90 add eight bounded functional regressions; Codex continues reviews, functional fixes and C14/C15 integration without waiting for peer review.",
-    "- Manual capture/permissions/export/native window acceptance, final candidate and overall review remain open. No original Shottr runtime parity or full feature completion is implied."
+    "- Manual capture/permissions/export/native window acceptance, final candidate and overall review remain open. No original Shottr runtime parity or full feature completion is implied.",
+    "- C42 resumes validation as the sole active client: 478 frontend tests, 46 browser tests and 91 Rust tests passed (615 total), frontend type/build and macOS debug app bundle passed. See docs/agents/codex/C42-final-review.md.",
+    "- C42 repaired actual eight-action shortcut/native incompatibility and frozen v2 codec mutation; exposed window appearance/shadow trim, gradient/session-image backdrop and color format controls; corrected area geometry/resource lifecycle and small-window UI accessibility.",
+    "- MVP acceptance remains 68.75%: no real native/manual acceptance gate or original Shottr runtime parity was executed. Historical USER_WAIVED_REVIEW flags and immutable external review records are preserved; regression success is not blanket overall approval.",
+    "- C43 standardizes UI with shared light tokens, library/canvas/properties layout and focus-contained settings. False preference-save success, inspector action clipping and modal action isolation were corrected; final frontend/browser suites pass.",
+    "- C44 raises accepted MVP from 68.75% to 85.00% using three actual isolated native app processes: real crop/annotated file export, native pin ownership/window controls, real Vision OCR UI, actual restart and corrupt-preference recovery. See docs/agents/codex/C44-native-acceptance.md.",
+    "- Real capture/permission restoration, system Save dialog, full manual matrix and release decision remain separate; no original Shottr runtime equality or no-bug guarantee. Native test feature is opt-in and disabled in ordinary release builds.",
+    "- C45 ordinary optimized arm64 0.1.0 app build passed, native test-driver markers absent, macOS minimum 12.0 verified. Repaired generated bundle ad-hoc resource signature; strict codesign verification passed. Local internal only, no public distribution/notarization. This accepts the release build/decision gate and raises the MVP to 87.50%.",
+    "- Remaining 12.50%: actual capture modes/cancel and permission/error/window restoration, actual Save dialog/existing-file behavior, and the completed native manual matrix. See docs/agents/codex/C45-manual-acceptance.md; unexecuted cases remain open."
   ]
 }

@@ -1,10 +1,9 @@
 import { useEffect, useRef, useState } from "react";
-import { HotkeyPanel } from "./features/hotkey-panel";
-import { applyShortcuts, emptyHotkeys, HOTKEY_ACTIONS, readShortcuts, readSavedShortcuts, saveShortcuts, type HotkeyDraft } from "./platform/shortcuts";
+import { GlobalShortcutsV2Panel } from "./features/global-shortcuts-v2";
+import { applyShortcuts, emptyHotkeys, HOTKEY_ACTIONS, readShortcuts, readSavedShortcuts, saveShortcuts, type HotkeyDraft } from "./platform/shortcuts-v2";
 import { supportsNativeOutput } from "./platform/native";
 
-const labels = { "capture-fullscreen": "Capture fullscreen", "capture-area": "Capture area", "capture-window": "Capture window",
-  "capture-scrolling": "Open manual scroll capture", "ocr-capture": "Capture area for OCR" };
+
 
 export function WorkspaceShortcuts({ blocked }: { blocked: boolean }) {
   const [draft, setDraft] = useState<HotkeyDraft>(emptyHotkeys);
@@ -54,13 +53,9 @@ export function WorkspaceShortcuts({ blocked }: { blocked: boolean }) {
 
   return <section aria-label="Global capture shortcuts"><h2>Global capture shortcuts</h2>
     <fieldset disabled={blocked || busy || !loaded}><legend>Shortcut assignments</legend>
-      <HotkeyPanel permissionState="unknown" items={HOTKEY_ACTIONS.map(actionId => ({ actionId, label: labels[actionId], binding: draft[actionId] }))}
-        onAssign={(action, binding) => setDraft(previous => ({ ...previous, [action]: binding }))}
-        onClear={action => setDraft(previous => ({ ...previous, [action]: null }))} />
-      <button onClick={() => { void apply(draft); }}>Apply shortcuts for this session</button>
-      <button onClick={() => { void apply(emptyHotkeys()); }}>Clear all shortcuts</button>
-      <button onClick={() => { void saveAssignments(); }}>Save assignments</button>
-      <button onClick={() => { void saveAssignments(true); }}>Forget saved assignments</button>
+      <GlobalShortcutsV2Panel value={draft} disabled={blocked || busy || !loaded} onChange={setDraft}
+        onApply={() => { void apply(draft); }} onClear={() => { void apply(emptyHotkeys()); }}
+        onSave={() => { void saveAssignments(); }} onForget={() => { void saveAssignments(true); }} />
     </fieldset>
     <p>No default shortcuts are registered. Save retains assignments after restart; Apply registers them for this session. Clear removes active registrations; Forget removes saved assignments. Active registrations are cleared when the main workspace closes. Letters, digits, F1–F24 and common navigation keys are supported. Conflicting or reserved shortcuts are rejected.</p>
     {status && <p role="status">{status}</p>}{error && <p role="alert">{error}</p>}

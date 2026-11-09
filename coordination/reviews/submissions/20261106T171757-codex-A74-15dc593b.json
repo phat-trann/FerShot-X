@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "id": "20261106T171757-codex-A74-15dc593b",
+  "created_at": "2026-11-06T17:17:57.798154+07:00",
+  "agent": "codex",
+  "request": "FINAL-REVIEW-20261106",
+  "task": "A74",
+  "completion": "done",
+  "summary": "Correct external region selector integer geometry, responsive overlay and modal keyboard lifecycle; preserve original authorship.",
+  "files": [
+    "src/features/capture-region-selector/CaptureRegionSelector.tsx",
+    "src/features/capture-region-selector/CaptureRegionSelector.css",
+    "src/features/capture-region-selector/CaptureRegionSelector.test.tsx",
+    "docs/agents/codex/A74-final-review.md",
+    "docs/agents/codex/C42-shottr-comparison.md"
+  ],
+  "file_sha256": {
+    "src/features/capture-region-selector/CaptureRegionSelector.tsx": "2fff9a1c80c10debcbf8333f844bb413f933fba22bac143cf16b72ab42fdb212",
+    "src/features/capture-region-selector/CaptureRegionSelector.css": "01cdcfed22bb1b7def7180eb0a6d9a78e6f3d3e164289070005904f9af17ccc5",
+    "src/features/capture-region-selector/CaptureRegionSelector.test.tsx": "8d0e7d5b70b3cf9f9718ba72f81b9f0f38d8c3c5b6475bc9d8f262933096a384",
+    "docs/agents/codex/A74-final-review.md": "7a3de8d7745bece3d7965e765f78c410bcdc1b364ea6bfe41e763c29baf121cc",
+    "docs/agents/codex/C42-shottr-comparison.md": "d636a6406f06907d113f1d457ed36322eeacdf955631a413814de3d9c0dfc834"
+  },
+  "checks": [
+    "Four selector component regressions pass; browser cancellation/focus/URL lifecycle regression passes with injected native IPC.",
+    "Formatting/lint delegated to Copilot H01."
+  ],
+  "risks": [
+    "Static Shottr evidence only; no original runtime equivalence or native capture acceptance. Integration snapshot follows in C42."
+  ],
+  "review": "pending"
+}

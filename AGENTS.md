@@ -1,5 +1,9 @@
 # Agent instructions
 
+## Current user request: final review, validation and UI completion (2026-11-06)
+
+Codex is now the sole active client. Resume functional tests, type checks, builds and source review of flagged Codex/Copilot/Antigravity changes; fix defects and improve the functional UI. This supersedes earlier test/build deferrals and the UI-polish deferral. Preserve authorship, immutable records, the frozen dependency stack, privacy boundaries and exclusions. Review credit is not native or original runtime acceptance. Use REA for Shottr comparisons, retaining static/runtime distinctions.
+
 ## Latest user authorization: Anti may integrate features (2026-11-06)
 
 External Antigravity may connect real features into the app and native backend, including Workspace/platform code, native commands, contracts, root manifests/lockfiles/capabilities/config and required functional CSS. Shared edits require BOTH its ordinary task claim and root-wiring. Acquire root-wiring before reading a shared file for modification; reread after acquiring it. If occupied, skip shared edits and continue independent module work; never remove/inherit another session claim or touch active producers. Source feature ownership and historical authorship stay preserved. Anti may update only its evidenced feature source/wiring rows under these claims; acceptance ledger and generated review index/legacy review decisions stay Codex-owned. No self-approval. Codex coordinates final assembly; root integration is no longer Codex-exclusive. Tests/builds/typechecks/setup remain NOT RUN — deferred by user. No Swift, upgrades, OS actions, uploads, telemetry or cosmetic cleanup. Older exclusive-root/producer-only text below is superseded.

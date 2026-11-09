@@ -99,9 +99,9 @@ export function WorkspaceDeepLinks({ context, onCapture, onEditor }: {
     }
   }
 
-  return <><details><summary>External Ferby links</summary><label><input type="checkbox" checked={enabled}
+  return <><details className="preference-controls"><summary>External Ferby links</summary><div className="preference-popover"><label><input type="checkbox" checked={enabled}
     disabled={!policyReady || savingPolicy || context.busy || !supportsNativeOutput()} onChange={event => { void changePolicy(event.target.checked); }} />Allow Ferby links</label>
-    <p>Capture and editor links always require confirmation. Disabling this discards queued link actions and is saved for the next launch.</p></details>
+    <p>Capture and editor links always require confirmation. Disabling this discards queued link actions and is saved for the next launch.</p></div></details>
   {enabled && pending && <section role="alertdialog" aria-label="Confirm external Ferby link">
     <p>{pending.action.kind === "capture" ? `Capture ${pending.action.mode} from an external link?` : "Open the requested session image in the editor?"}</p>
     <p>{pending.entry.url}</p><button disabled={context.busy} onClick={() => resolve(true)}>Allow link action</button>

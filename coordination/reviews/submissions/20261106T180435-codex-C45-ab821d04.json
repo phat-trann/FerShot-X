@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "id": "20261106T180435-codex-C45-ab821d04",
+  "created_at": "2026-11-06T18:04:35.879783+07:00",
+  "agent": "codex",
+  "request": "DESIGN-ACCEPTANCE-20261106",
+  "task": "C45",
+  "completion": "partial",
+  "summary": "Build and inspect ordinary optimized 0.1.0 arm64 app, correct ad-hoc bundle resource signing, verify test-driver exclusion and local-only distribution; MVP acceptance reaches 87.50%, awaiting explicit real capture/dialog/manual cases.",
+  "files": [
+    "docs/agents/codex/C45-release-decision.md",
+    "docs/agents/codex/C45-manual-acceptance.md",
+    "coordination/handoffs/codex/C45-current-evidence.json",
+    "coordination/progress.json",
+    "coordination/PROGRESS.md",
+    "coordination/build-tasks.json",
+    "coordination/COMPLETE-SCOPE.json"
+  ],
+  "file_sha256": {
+    "docs/agents/codex/C45-release-decision.md": "e371fef405990767390d3f51ada6b0af0c80edfc5801fa48f52f1f768ad8fb51",
+    "docs/agents/codex/C45-manual-acceptance.md": "80dc12d6e5a9366bed580e134beec9276286067c6a6e5af10e258f066fc977f0",
+    "coordination/handoffs/codex/C45-current-evidence.json": "285b4c9f539990bcae6e30d1605aed9c5b427f0efa5bfcc930692ec18a21e4b4",
+    "coordination/progress.json": "7ee00997b7313e0380c5640b60dfbbbb3582036c9f6aa5651640a29235f0627e",
+    "coordination/PROGRESS.md": "f9399255354e6a0fd222137e3e7cf889482fa95f8dd1be6aa34425020491da98",
+    "coordination/build-tasks.json": "e5c3f464774cf9b271294e0a745501eb6147a487f4f8c00ffdec511ff402191e",
+    "coordination/COMPLETE-SCOPE.json": "618787a2a3dba50b2472e82831785bf5b5dd3311b9da91ef92946b4d32838beb"
+  },
+  "checks": [
+    "Actual ordinary optimized build and bundle succeeded (6m23s); version 0.1.0 and macOS 12.0 minos preserved; all four native acceptance driver markers absent.",
+    "Owned generated bundle signed ad-hoc without timestamp/network; codesign --verify --deep --strict passed, identifier and sealed resources bound. Direct release process stayed alive for 4 seconds and only that owned process was terminated.",
+    "Final 620 automatic tests passed plus the separate actual three-process native sequence; source/artifact hashes and bounded native evidence retained in C45-current-evidence.json. Progress document and packet validation passed. Formatting/lint delegated to H01."
+  ],
+  "risks": [
+    "Local internal ad-hoc release only, not notarized or publicly distributed. No 100% or zero-bug claim. Remaining 12.50% requires actual capture modes/cancel, permissions/error/window restoration, system Save dialog and completed native manual matrix; user action requested with the concrete bundle/checklist ready. No original Shottr runtime parity or final P57 approval."
+  ],
+  "review": "pending"
+}

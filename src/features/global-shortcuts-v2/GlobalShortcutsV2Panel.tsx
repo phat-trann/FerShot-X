@@ -8,7 +8,7 @@ import {
   type GlobalBindingsV2,
 } from "./types";
 import {
-  serializeGlobalShortcutsV2Json,
+  toNativeGlobalBindingsV2,
 } from "./codec";
 import "./GlobalShortcutsV2Panel.css";
 
@@ -91,7 +91,7 @@ export function GlobalShortcutsV2Panel({
       };
 
       try {
-        serializeGlobalShortcutsV2Json(nextBindings as GlobalBindingsV2);
+        toNativeGlobalBindingsV2(nextBindings as GlobalBindingsV2);
         setErrorMessage(null);
         setRecordingAction(null);
         onChange(Object.freeze(nextBindings as GlobalBindingsV2));

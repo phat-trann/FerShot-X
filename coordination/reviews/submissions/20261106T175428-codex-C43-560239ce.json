@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "id": "20261106T175428-codex-C43-560239ce",
+  "created_at": "2026-11-06T17:54:28.417602+07:00",
+  "agent": "codex",
+  "request": "DESIGN-ACCEPTANCE-20261106",
+  "task": "C43",
+  "completion": "done",
+  "summary": "Standardize functional workspace UI with shared tokens, library/canvas/properties layout and accessible settings portal; correct false preference-save success and inspector clipping.",
+  "files": [
+    "src/Workspace.tsx",
+    "src/Workspace.css",
+    "src/Workspace.settings-dialog.tsx",
+    "src/styles/tokens.css",
+    "src/platform/native.ts",
+    "tests/e2e/codex-design-system.spec.ts",
+    "tests/e2e/codex-preferences.spec.ts",
+    "tests/e2e/codex-final-review.spec.ts",
+    "docs/agents/codex/C43-design-system.md",
+    "docs/agents/codex/C43-ui-validation.md"
+  ],
+  "file_sha256": {
+    "src/Workspace.tsx": "cc79e3f69be12689f18e2c227959c0526fdf08b65396f94344c4a22d393ef247",
+    "src/Workspace.css": "4d5dd656258633d8e48a345ac809033addfc20dc69a134070628737b1b4895c0",
+    "src/Workspace.settings-dialog.tsx": "729df51cbfff06938b9517123f439acb2db63b6f657979dce172dde4aa98877b",
+    "src/styles/tokens.css": "1216cf05044b385c02c4fba18d0b3a6c2ec8703e65ff0dcb4ef90b14f8bc381d",
+    "src/platform/native.ts": "d0a2be0d79f2a8094d3f2b7e46852baf2b31562727a7706ad40f2d8826e8c19a",
+    "tests/e2e/codex-design-system.spec.ts": "cb2c9ee9b8e5232e2234083c0e0bd83291a40c15ad8d302758a27534a4609482",
+    "tests/e2e/codex-preferences.spec.ts": "6fc1a53fe565c70e62ae62ada102f79221197ab047ce9eb0d97f9a85ff32fef4",
+    "tests/e2e/codex-final-review.spec.ts": "194b03f619761b6ffed1ac76982a594e0c5e73a0a70778c44aedfdab715566e2",
+    "docs/agents/codex/C43-design-system.md": "90f09cdbf1a0431bc7dc19552d7b56d1cb0a7c95d4686ac41a94b7ad4acbfa6c",
+    "docs/agents/codex/C43-ui-validation.md": "2ca673b6c4ab8fcc0f4cafccf8999aebd741220c8764c4206445966b32263c86"
+  },
+  "checks": [
+    "478 frontend tests and 51 browser tests passed on final source; responsive/modal focus and partial preference failure regressions included.",
+    "TypeScript and Vite build passed in the current native build. Formatting/lint delegated to H01."
+  ],
+  "risks": [
+    "No no-bug guarantee or blanket original/runtime approval. Native controlled acceptance is recorded in C44; real capture/dialog/manual release gates remain separate."
+  ],
+  "review": "pending"
+}

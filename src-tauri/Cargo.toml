@@ -57,3 +57,7 @@ lto = true
 opt-level = 3
 panic = "abort"
 strip = true
+
+[features]
+# Explicit local test executable; never enabled in ordinary app/release builds.
+native-acceptance = []

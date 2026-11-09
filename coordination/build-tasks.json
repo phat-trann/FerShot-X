@@ -4376,6 +4376,58 @@
         "codex"
       ],
       "acceptance": "Actual source/native routes connected, compatible old data preserved, source gaps explicitly tracked. Tests/builds/setup NOT RUN by user."
+    },
+    {
+      "id": "C42",
+      "agent": "codex",
+      "title": "Flagged source review, production integration fixes and UI validation",
+      "owned_paths": "src/Workspace.*; src/platform/**; scoped completed producer fixes; tests/e2e/codex-final-review.spec.ts; tests/e2e/codex-shortcuts.spec.ts; coordination and docs/agents/codex/C42*",
+      "inputs": "Current completed external packets, current app routes, scoped Shottr REA evidence",
+      "work": "Review actual source, repair integration defects, verify real pixels under synthetic browser fixtures and injected OS boundaries, build current macOS app. Preserve historical author identity and immutable reviews. No automatic peer approval or native/manual parity acceptance.",
+      "state": "READY",
+      "work_kind": "integration",
+      "shared_claim": "root-wiring",
+      "reviewers": [],
+      "acceptance": "Concrete defect fixes, actual scoped/full checks, current source snapshot and explicit remaining native/runtime gates."
+    },
+    {
+      "id": "C43",
+      "agent": "codex",
+      "title": "Unified UI design system and settings error correction",
+      "owned_paths": "src/Workspace.*; src/styles/tokens.css; src/platform/native.ts; scoped browser regressions; docs/agents/codex/C43*",
+      "inputs": "Current hash-bound app source and completion packets",
+      "work": "Latest user asks UI standardization and complete evidence-backed acceptance; preserve authorship, claims and immutable records. Run actual checks within synthetic/controlled native boundaries; never infer unexecuted capture/dialog acceptance.",
+      "state": "READY",
+      "work_kind": "integration",
+      "shared_claim": "root-wiring",
+      "reviewers": [],
+      "acceptance": "Current source/artifact evidence, actual checks and explicit outstanding native/manual gates."
+    },
+    {
+      "id": "C44",
+      "agent": "codex",
+      "title": "Actual isolated native application acceptance",
+      "owned_paths": "src-tauri/Cargo.toml; src-tauri/src/lib.rs; src-tauri/src/acceptance.rs; scripts/*native_acceptance*; coordination/progress.json; docs/agents/codex/C44*",
+      "inputs": "Current hash-bound app source and completion packets",
+      "work": "Latest user asks UI standardization and complete evidence-backed acceptance; preserve authorship, claims and immutable records. Run actual checks within synthetic/controlled native boundaries; never infer unexecuted capture/dialog acceptance.",
+      "state": "READY",
+      "work_kind": "integration",
+      "shared_claim": "root-wiring",
+      "reviewers": [],
+      "acceptance": "Current source/artifact evidence, actual checks and explicit outstanding native/manual gates."
+    },
+    {
+      "id": "C45",
+      "agent": "codex",
+      "title": "Ordinary release build and explicit local-only distribution decision",
+      "owned_paths": "root build/coordination manifests; release artifacts; docs/agents/codex/C45*",
+      "inputs": "Current hash-bound app source and completion packets",
+      "work": "Latest user asks UI standardization and complete evidence-backed acceptance; preserve authorship, claims and immutable records. Run actual checks within synthetic/controlled native boundaries; never infer unexecuted capture/dialog acceptance.",
+      "state": "READY",
+      "work_kind": "integration",
+      "shared_claim": "root-wiring",
+      "reviewers": [],
+      "acceptance": "Current source/artifact evidence, actual checks and explicit outstanding native/manual gates."
     }
   ],
   "allocation": "Three implementation lanes: Codex C17-C22 + C07-C15 shared integration; Antigravity A01-A37 + recurring A38 independent review; Copilot P01-P57 + H01. Implementation and review have separate completion states. Codex and Antigravity jointly approve a frozen final P57 candidate before final acceptance.",
@@ -4432,19 +4484,20 @@
     "copilot_followup": "P53/P54 compile fixes; P62/P63 A35 regressions; P64-P67 independent standalone Rust integration tests"
   },
   "execution_phase": {
-    "mode": "implementation-first",
-    "effective": "2026-11-05",
+    "mode": "final-review-and-validation",
+    "effective": "2026-11-06",
     "allow_provisional_integration": true,
-    "validation": "Tests, typechecks, builds, bundling and environment setup NOT RUN \u2014 deferred by user. Source implementation and source reading only.",
-    "parallel": "Existing Codex and Copilot clients execute distinct claims; do not spawn a duplicate Copilot while its claim is active.",
+    "validation": "Latest user request resumes functional tests, type checks, frontend/native builds and UI completion. Synthetic fixtures and injected OS boundaries remain required; no automatic original/runtime or native manual acceptance.",
+    "parallel": "Codex is the sole active client; preserve existing immutable packets and historical authorship.",
     "data_scope": "In-scope feature logic/configuration/workflows; no personal Shottr library/preferences migration or proprietary code/resources.",
     "batch_targets": {
       "policy": "Soft guidance only; continue available implementation/review/validation until exhausted or genuinely blocked; no quota-based early stop."
     },
-    "allocation": "Entire non-excluded scope: external Anti owns23 feature production groups (A51-A73), Codex owns6 native/root groups (C35-C40) and final assembly C41. Old A46-A50 work/claims are preserved and consumed, not duplicated. No tests/build/setup. Latest user permission: Anti also integrates its assigned and explicitly queued completed features into root/native code under task + root-wiring; Codex coordinates final assembly. Independent producers remain parallel when root is occupied.",
+    "allocation": "Codex reviews completed external work, fixes production/wiring defects, improves functional UI and owns final assembly. Earlier implementation-only deferrals are superseded.",
     "defer_snapshot_only_refresh": true,
     "review_policy": "coordination/reviews/policy.json",
-    "full_scope_manifest": "coordination/COMPLETE-SCOPE.json"
+    "full_scope_manifest": "coordination/COMPLETE-SCOPE.json",
+    "current_checkpoint": "C43 UI standardized and checked; C44 actual native gates passed; C45 ordinary release build/ad-hoc signature verified. MVP acceptance 87.50%. Remaining manual capture/permissions/Save dialog/native matrix cannot be inferred from automated coverage."
   },
   "agent_task_allowlists": {
     "antigravity": [

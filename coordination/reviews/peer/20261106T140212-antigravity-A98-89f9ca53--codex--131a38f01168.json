@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "submission_id": "20261106T140212-antigravity-A98-89f9ca53",
+  "reviewer": "codex",
+  "decision": "changes_requested",
+  "note": "Window appearance controls/renderers existed but the reachable WorkspaceLayout route did not import or expose them. Module tests did not prove app integration. Codex C42 adds an actual decoded-source wrapper and a main-workspace pixel regression for solid fill, explicit shadow trimming and source preservation.",
+  "checks": [
+    "Read Workspace.tsx, Workspace.layout.tsx, platform/window-appearance.ts and window appearance controls; actual production UI pixel regression passes."
+  ],
+  "created_at": "2026-11-06T17:15:47.547148+07:00",
+  "submission_sha256": "882bafdc034efcee9a4f2e9f157f7f22899003dc5254e1b9e1cb701883caf70e"
+}

@@ -1,13 +1,14 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import type { ImageDocument } from "./contracts/media";
 import { inspectImageRegion, type InspectedRegion } from "./platform/pixel-inspection";
-import { copyColor } from "./platform/color-copy";
+import { copyColor, type ColorCopyFormat } from "./platform/color-copy";
 import { supportsNativeOutput } from "./platform/native";
 
 export function AverageColorControls({ image, busy, run }: {
   image: ImageDocument; busy: boolean; run: (operation: () => Promise<void>) => Promise<void>;
 }) {
   const [result, setResult] = useState<InspectedRegion | null>(null);
+  const [format, setFormat] = useState<ColorCopyFormat>("hex");
   const mounted = useRef(true);
   useEffect(() => { mounted.current = true; return () => { mounted.current = false; }; }, []);
   function sample(event: FormEvent<HTMLFormElement>) {
@@ -28,6 +29,8 @@ export function AverageColorControls({ image, busy, run }: {
     {result && <><output aria-label="Average region color result" role="status"><span className="pixel-swatch" aria-hidden="true"
       style={{ backgroundColor: `rgba(${result.r},${result.g},${result.b},${result.a / 255})` }} />
       {result.hex} · RGBA {result.r}, {result.g}, {result.b}, {result.a} · {result.region.width} × {result.region.height} at {result.region.x}, {result.region.y}
-    </output><button disabled={busy || !supportsNativeOutput()} onClick={() => { void run(() => copyColor(result, "hex")); }}>Copy average HEX</button></>}
+    </output><label>Copy format<select aria-label="Average color copy format" value={format} onChange={event => setFormat(event.target.value as ColorCopyFormat)}>
+      <option value="hex">HEX</option><option value="rgb">RGB</option><option value="rgba">RGBA</option>
+    </select></label><button disabled={busy || !supportsNativeOutput()} onClick={() => { void run(() => copyColor(result, format)); }}>Copy average {format.toUpperCase()}</button></>}
   </section>;
 }

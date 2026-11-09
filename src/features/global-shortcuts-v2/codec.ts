@@ -147,7 +147,13 @@ function validateAndAssembleBindings(
   isV1: boolean,
 ): GlobalBindingsV2 {
   const result: Record<GlobalActionIdV2, ShortcutBinding | null> =
-    emptyGlobalBindingsV2();
+    { ...emptyGlobalBindingsV2() };
+  if (isV1) {
+    const legacy = ["capture-fullscreen", "capture-area", "capture-window", "capture-scrolling", "ocr-capture"];
+    if (Object.keys(rawBindings).length !== legacy.length || legacy.some(action => !Object.prototype.hasOwnProperty.call(rawBindings, action))) {
+      reject("Version 1 requires exactly its five supported actions.");
+    }
+  }
 
   // Validate allowed keys
   for (const key of Object.keys(rawBindings)) {
@@ -260,6 +266,7 @@ export function toNativeGlobalBindingsV2(
     serializeGlobalShortcutsV2Json(input),
   );
   const result = {} as Record<GlobalActionIdV2, string | null>;
+  const accelerators = new Set<string>();
 
   for (const action of GLOBAL_ACTIONS_V2) {
     const binding = validated[action];
@@ -273,7 +280,13 @@ export function toNativeGlobalBindingsV2(
     if (binding.ctrlKey) modifiers.push("Control");
     if (binding.altKey) modifiers.push("Alt");
     if (binding.shiftKey) modifiers.push("Shift");
-    result[action] = [...modifiers, code].join("+");
+    const accelerator = [...modifiers, code].join("+");
+    if (["KeyQ", "KeyW", "Tab", "Space"].includes(code) && modifiers.length === 1 && modifiers[0] === "Super") {
+      throw new TypeError("Reserved macOS shortcut accelerator.");
+    }
+    if (accelerators.has(accelerator)) throw new TypeError("Duplicate native shortcut accelerator.");
+    accelerators.add(accelerator);
+    result[action] = accelerator;
   }
 
   return Object.freeze(result);

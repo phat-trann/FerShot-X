@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "submission_id": "20261106T141114-antigravity-A100-6ba55f3e",
+  "reviewer": "codex",
+  "decision": "changes_requested",
+  "note": "Actual source review found WorkspaceShortcuts still imported the five-action platform adapter and HotkeyPanel, while native shortcuts.rs requires eight actions. This rejects actual native status/apply maps; old browser mocks concealed it. Corrected in Codex C42 using the existing v2 producer module; retain this historical rejection and review the new current packet instead.",
+  "checks": [
+    "Read native parser, Workspace.shortcuts.tsx, platform/shortcuts.ts, v2 producer codec/panel and the existing mock boundary test; added eight-action integration regression."
+  ],
+  "created_at": "2026-11-06T17:15:47.423180+07:00",
+  "submission_sha256": "8dd538af555e7f2da35649b49a74d526c12df9f89fb3e9d0b5568ec0f8488c51"
+}

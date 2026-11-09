@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "id": "20261106T155017-antigravity-A104-16840d94",
+  "created_at": "2026-11-06T15:50:17.906085+07:00",
+  "agent": "antigravity",
+  "request": "ui-layout-and-toggles",
+  "task": "A104",
+  "completion": "done",
+  "summary": "Organized workspace layout logically, integrated matching vector icons, and styled proper toggle button controls and trays",
+  "files": [
+    "src/Workspace.tsx",
+    "src/Workspace.css",
+    "src/components/icons.tsx",
+    "docs/agents/antigravity/A104-layout-and-toggles-report.md"
+  ],
+  "file_sha256": {
+    "src/Workspace.tsx": "94bf91570985ff6fb82b4bcd724a006eefbd6dafc927bbeaf55eaac6c60cac65",
+    "src/Workspace.css": "aac2c7017ba77e763a6938f5f22bd9ff129b508c1eb5ddc2fabf882f2dcaa2ab",
+    "src/components/icons.tsx": "99732cbfaae579a83282361cb8fd5cc9e9bcee7ee4bae30098111c0b17659b9e",
+    "docs/agents/antigravity/A104-layout-and-toggles-report.md": "5f540980ec69798ce4937038b22d948cdbb9bf8a68d4a798019a94586398a537"
+  },
+  "checks": [
+    "Verified 100% test pass rate across Vitest (469/469) and Playwright (38/38) and clean production build"
+  ],
+  "risks": [
+    "low"
+  ],
+  "review": "pending"
+}

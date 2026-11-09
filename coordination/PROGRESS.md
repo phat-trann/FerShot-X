@@ -1,6 +1,6 @@
 # Project progress
 
-**68.75% accepted against the declared MVP baseline** (rounded: 69%). Updated: 2026-11-06.
+**87.5% accepted against the declared MVP baseline** (rounded: 88%). Updated: 2026-11-06.
 
 Ferby macOS MVP v0.1: local capture/import, basic annotations, crop/resize, PNG/JPEG save, session library, settings, native pin and local OCR.
 
@@ -12,14 +12,14 @@ This is an evidence-based delivery score, not elapsed time, token consumption or
 | --- | --- | --- | --- |
 | Runnable foundation | 10% | 4/4 | 10% |
 | Native capture | 15% | 2/4 | 7.5% |
-| Annotations and history | 20% | 3/4 | 15% |
-| Crop and resize | 10% | 3/4 | 7.5% |
-| PNG/JPEG export | 10% | 2/4 | 5% |
+| Annotations and history | 20% | 4/4 | 20% |
+| Crop and resize | 10% | 4/4 | 10% |
+| PNG/JPEG export | 10% | 3/4 | 7.5% |
 | Session library | 5% | 4/4 | 5% |
-| Ferby settings | 5% | 2/4 | 2.5% |
-| Native pin and preview | 5% | 3/4 | 3.75% |
-| Local OCR | 10% | 3/4 | 7.5% |
-| Quality and release | 10% | 2/4 | 5% |
+| Ferby settings | 5% | 4/4 | 5% |
+| Native pin and preview | 5% | 4/4 | 5% |
+| Local OCR | 10% | 4/4 | 10% |
+| Quality and release | 10% | 3/4 | 7.5% |
 
 ## Current work and blockers
 
@@ -29,6 +29,14 @@ This is an evidence-based delivery score, not elapsed time, token consumption or
 - Source review found the P79 JPEG-quality schema mismatch; Copilot corrected it, and five root preference-contract tests now pass. Global tsc blockers are tracked through P61/H01 handoffs; final build outcome is reported separately.
 - Copilot P83-P90 add eight bounded functional regressions; Codex continues reviews, functional fixes and C14/C15 integration without waiting for peer review.
 - Manual capture/permissions/export/native window acceptance, final candidate and overall review remain open. No original Shottr runtime parity or full feature completion is implied.
+- C42 resumes validation as the sole active client: 478 frontend tests, 46 browser tests and 91 Rust tests passed (615 total), frontend type/build and macOS debug app bundle passed. See docs/agents/codex/C42-final-review.md.
+- C42 repaired actual eight-action shortcut/native incompatibility and frozen v2 codec mutation; exposed window appearance/shadow trim, gradient/session-image backdrop and color format controls; corrected area geometry/resource lifecycle and small-window UI accessibility.
+- MVP acceptance remains 68.75%: no real native/manual acceptance gate or original Shottr runtime parity was executed. Historical USER_WAIVED_REVIEW flags and immutable external review records are preserved; regression success is not blanket overall approval.
+- C43 standardizes UI with shared light tokens, library/canvas/properties layout and focus-contained settings. False preference-save success, inspector action clipping and modal action isolation were corrected; final frontend/browser suites pass.
+- C44 raises accepted MVP from 68.75% to 85.00% using three actual isolated native app processes: real crop/annotated file export, native pin ownership/window controls, real Vision OCR UI, actual restart and corrupt-preference recovery. See docs/agents/codex/C44-native-acceptance.md.
+- Real capture/permission restoration, system Save dialog, full manual matrix and release decision remain separate; no original Shottr runtime equality or no-bug guarantee. Native test feature is opt-in and disabled in ordinary release builds.
+- C45 ordinary optimized arm64 0.1.0 app build passed, native test-driver markers absent, macOS minimum 12.0 verified. Repaired generated bundle ad-hoc resource signature; strict codesign verification passed. Local internal only, no public distribution/notarization. This accepts the release build/decision gate and raises the MVP to 87.50%.
+- Remaining 12.50%: actual capture modes/cancel and permission/error/window restoration, actual Save dialog/existing-file behavior, and the completed native manual matrix. See docs/agents/codex/C45-manual-acceptance.md; unexecuted cases remain open.
 
 See [build queue](BUILD-QUEUE.md), [kickoff prompts](START-HERE.md), [review inbox](reviews/INDEX.md) and [C05 checks](../docs/agents/codex/C05-validation.md).
 
@@ -53,21 +61,21 @@ See [build queue](BUILD-QUEUE.md), [kickoff prompts](START-HERE.md), [review inb
 - [x] Immutable model with tested history. [Evidence](../src/features/editor/model/README.md).
 - [x] Reviewed gestures and composed UI. [Evidence](../docs/agents/codex/C07-editor-integration.md).
 - [x] Bitmap renderer with real browser pixels. [Evidence](../docs/agents/codex/C07-editor-integration.md).
-- [ ] Annotated export end-to-end acceptance.
+- [x] Annotated export end-to-end acceptance. [Evidence](../docs/agents/codex/C44-native-acceptance.md).
 
 ### Crop and resize
 
 - [x] Synthetic bounded Rust transforms. [Evidence](../docs/agents/codex/C05-validation.md).
 - [x] Non-destructive workspace wiring. [Evidence](../docs/agents/codex/C05-validation.md).
 - [x] Browser regression with real canvas and mocked IPC. [Evidence](../docs/agents/codex/C05-validation.md).
-- [ ] Native GUI transform acceptance.
+- [x] Native GUI transform acceptance. [Evidence](../docs/agents/codex/C44-native-acceptance.md).
 
 ### PNG/JPEG export
 
 - [x] Bounded codecs and non-clobber save core. [Evidence](../docs/agents/codex/C05-validation.md).
 - [x] Typed dialog wiring with cancellation checks. [Evidence](../docs/agents/codex/C05-validation.md).
 - [ ] Real dialog/existing-file acceptance.
-- [ ] Annotated-pixel export acceptance.
+- [x] Annotated-pixel export acceptance. [Evidence](../docs/agents/codex/C44-native-acceptance.md).
 
 ### Session library
 
@@ -80,29 +88,29 @@ See [build queue](BUILD-QUEUE.md), [kickoff prompts](START-HERE.md), [review inb
 
 - [x] Reviewed controlled settings UI. [Evidence](../docs/agents/codex/C04-library-checkpoint.md).
 - [x] Standalone persistence tested. [Evidence](../docs/agents/codex/C04-modules-current.md).
-- [ ] Native integration and preference application.
-- [ ] Restart/invalid-settings acceptance.
+- [x] Native integration and preference application. [Evidence](../docs/agents/codex/C44-native-acceptance.md).
+- [x] Restart/invalid-settings acceptance. [Evidence](../docs/agents/codex/C44-native-acceptance.md).
 
 ### Native pin and preview
 
 - [x] Controlled pin presentation reviewed. [Evidence](../src/features/pin/PinPreviewCard.tsx).
 - [x] Restricted native pin window. [Evidence](../docs/agents/codex/C09-pin-integration.md).
 - [x] Clipboard and controls integration. [Evidence](../docs/agents/codex/C09-pin-integration.md).
-- [ ] Native pin acceptance.
+- [x] Native pin acceptance. [Evidence](../docs/agents/codex/C44-native-acceptance.md).
 
 ### Local OCR
 
 - [x] Bounded engine contract/core. [Evidence](../docs/agents/codex/C08-recognition-acceptance.md).
 - [x] Synthetic text recognition tests. [Evidence](../docs/agents/codex/C08-recognition-acceptance.md).
 - [x] UI/copy integration. [Evidence](../docs/agents/codex/C08-recognition-acceptance.md).
-- [ ] Native acceptance and failure handling.
+- [x] Native acceptance and failure handling. [Evidence](../docs/agents/codex/C44-native-acceptance.md).
 
 ### Quality and release
 
 - [x] Automated frontend/Rust regression baseline. [Evidence](../docs/agents/codex/C05-validation.md).
 - [x] Local debug app bundle. [Evidence](../docs/agents/codex/C05-validation.md).
 - [ ] Native manual acceptance matrix.
-- [ ] Release build/signing/distribution decision.
+- [x] Release build/signing/distribution decision. [Evidence](../docs/agents/codex/C45-release-decision.md).
 
 ## Update procedure
 

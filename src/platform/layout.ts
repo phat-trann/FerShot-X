@@ -11,6 +11,7 @@ export interface LayoutLayerPlan {
 export interface WorkspaceLayoutPlan {
   readonly canvasWidth: number; readonly canvasHeight: number; readonly displayScale: number;
   readonly layers: readonly LayoutLayerPlan[]; readonly backdrop: LayoutWorkspaceConfig["backdrop"];
+  readonly backdropImageId?: string;
 }
 
 export async function composeWorkspaceLayout(plan: WorkspaceLayoutPlan, images: readonly ImageDocument[], prepare: (image: ImageDocument) => Promise<ImageBitmap>): Promise<ImageDocument> {
@@ -26,6 +27,18 @@ export async function composeWorkspaceLayout(plan: WorkspaceLayoutPlan, images: 
     if (pixels > 16_777_216) throw new RangeError("Combined layout source pixels exceed 16 megapixels.");
     return image;
   });
+  let backdropIndex: number | null = null;
+  if (plan.backdropImageId !== undefined) {
+    if (!plan.backdrop) throw new RangeError("A background image requires an enabled backdrop.");
+    backdropIndex = inputs.findIndex(image => image.id === plan.backdropImageId);
+    if (backdropIndex < 0) {
+      const background = images.find(image => image.id === plan.backdropImageId);
+      if (!background) throw new RangeError("Backdrop source is unavailable.");
+      pixels += background.width * background.height;
+      if (pixels > 16_777_216) throw new RangeError("Combined layout source pixels exceed 16 megapixels.");
+      backdropIndex = inputs.length; inputs.push(background);
+    }
+  }
   const owned: ImageBitmap[] = [];
   try {
     for (const input of inputs) {
@@ -38,7 +51,8 @@ export async function composeWorkspaceLayout(plan: WorkspaceLayoutPlan, images: 
     if (plan.backdrop) {
       const bitmap = await createImageBitmap(composed); owned.push(bitmap);
       output = await renderBackdropToPngBlob({ source: bitmap, sourceWidth: plan.canvasWidth,
-        sourceHeight: plan.canvasHeight, ...plan.backdrop });
+        sourceHeight: plan.canvasHeight, ...plan.backdrop,
+        ...(backdropIndex === null ? {} : { fill: { kind: "image" as const, source: owned[backdropIndex] } }) });
     }
     if (!output.size || output.size > MAX_NATIVE_BYTES) throw new RangeError("Layout PNG exceeds the output budget.");
     return { id: crypto.randomUUID(), name: `Layout-${Date.now()}.png`, width: summary.outputWidthPx,

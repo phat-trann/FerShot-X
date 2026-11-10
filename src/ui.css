@@ -1,0 +1,52 @@
+button { border: 0 solid transparent; background-color: transparent; }
+@tailwind components;
+@tailwind utilities;
+:root {
+  --ui-background: 225.00000 5.40541% 14.50980%;
+  --ui-foreground: 0 0% 100%;
+  --ui-border: 228.00000 3.64964% 26.86275%;
+  --ui-primary: 215.39171 99.08676% 57.05882%;
+  --ui-primary-foreground: 0.00000 0.00000% 100.00000%;
+  --ui-secondary: 230.00000 5.88235% 20.00000%;
+  --ui-accent: 214.28571 18.91892% 7.25490%;
+  --ui-ring: 215.39171 99.08676% 57.05882%;
+  --ui-muted-foreground: 240.00000 2.24719% 65.09804%;
+}
+
+:root { --control-height: 32px; --control-radius: 6px; --control-gap: 8px; --panel-padding: 20px; }
+:is(.workspace, .library-window, .preferences-window) button[data-slot="button"] {
+  box-sizing: border-box;
+  min-height: var(--control-height);
+  height: var(--control-height);
+  padding: 0 12px;
+  gap: var(--control-gap);
+  border-radius: var(--control-radius);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  border: 1px solid transparent;
+}
+:is(.workspace, .library-window, .preferences-window) button[data-slot="button"][data-size="sm"] { height: 32px; min-height: 32px; padding-inline: 10px; }
+:is(.workspace, .library-window, .preferences-window) button[data-slot="button"][data-size="icon"] { width: 32px; min-width: 32px; padding: 6px; }
+:is(.workspace, .library-window, .preferences-window) button[data-slot="button"][data-variant="default"] { background: var(--accent); color: white; }
+:is(.workspace, .library-window, .preferences-window) button[data-slot="button"][data-variant="outline"] { background: transparent; border-color: var(--border-strong); color: var(--text); }
+:is(.workspace, .library-window, .preferences-window) button[data-slot="button"][data-variant="ghost"] { background: transparent; color: var(--text); }
+:is(.workspace, .library-window, .preferences-window) button[data-slot="button"][data-variant="secondary"] { background: var(--surface-elevated); color: var(--text); }
+:is(.workspace, .library-window, .preferences-window) button[data-slot="button"][data-variant="destructive"] { background: var(--danger-bg); border-color: var(--danger-border); color: var(--danger); }
+:is(.workspace, .library-window, .preferences-window) button[data-slot="button"]:hover:not(:disabled) { filter: brightness(1.12); }
+:is(.workspace, .library-window, .preferences-window) button[data-slot="button"][data-variant="ghost"]:hover:not(:disabled),
+:is(.workspace, .library-window, .preferences-window) button[data-slot="button"][data-variant="outline"]:hover:not(:disabled) { background: var(--surface-elevated); }
+:is(.workspace, .library-window, .preferences-window) button[data-slot="button"]:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+:is(.workspace, .library-window, .preferences-window) button[data-slot="button"]:disabled { opacity: .45; cursor: default; }
+
+/* No browser outlines/rings; keyboard focus is indicated by a surface change instead. */
+*:focus,
+*:focus-visible {
+  outline: none !important;
+  --tw-ring-shadow: 0 0 #0000 !important;
+  --tw-ring-offset-shadow: 0 0 #0000 !important;
+  box-shadow: none !important;
+}
+:where(button, a, summary, input, select, textarea, [role="tab"], [role="switch"]):focus-visible { filter: brightness(1.15) !important; }
+:where(input, textarea, select):focus-visible { border-color: var(--border-strong); }
+:where(a):visited { color: inherit; }

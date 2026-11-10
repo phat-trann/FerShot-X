@@ -1,0 +1,36 @@
+.window-titlebar.editor-window-drag {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  box-sizing: border-box;
+  flex: 0 0 30px;
+  height: 30px;
+  min-height: 30px;
+  padding: 0 12px 0 88px;
+  user-select: none;
+  cursor: default;
+  color: var(--text, var(--pref-text));
+  background: var(--surface-card, var(--pref-bg));
+}
+.window-titlebar .app-window-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-width: 0;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  pointer-events: none;
+}
+.window-titlebar .app-window-title img {
+  width: 20px;
+  height: 20px;
+  background: none;
+  border: 0;
+}
+.window-titlebar-meta {
+  margin-left: auto;
+  font-size: 11px;
+  color: var(--muted, var(--pref-muted));
+  pointer-events: none;
+}

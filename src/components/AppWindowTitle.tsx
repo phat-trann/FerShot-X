@@ -1,0 +1,1 @@
+export function AppWindowTitle({section}:{section:"Edit"|"Library"|"Settings"}){return <span className="app-window-title"><img src="/tray-icon.svg" alt="" title="FerShot X" aria-hidden="true"/><span>{`FerShot X — ${section}`}</span></span>;}

@@ -1,7 +1,7 @@
+import LibraryWindow from "./LibraryWindow";
 import Workspace from "./Workspace";
-import PinnedWorkspace from "./Workspace.pin";
-import PrintWorkspace from "./Workspace.print";
+import PreferencesWindow from "./PreferencesWindow";
 export default function App() {
   const route = new URLSearchParams(window.location.search);
-  return route.has("pin") ? <PinnedWorkspace /> : route.has("print") ? <PrintWorkspace /> : <Workspace />;
+  return route.has("preferences") ? <PreferencesWindow /> : route.has("editor") ? <Workspace /> : <LibraryWindow />;
 }

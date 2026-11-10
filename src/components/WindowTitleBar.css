@@ -17,8 +17,8 @@
   align-items: center;
   gap: 7px;
   min-width: 0;
-  font-size: 12px;
-  font-weight: 600;
+  font-size: 13px;
+  font-weight: 500;
   white-space: nowrap;
   pointer-events: none;
 }
@@ -34,3 +34,7 @@
   color: var(--muted, var(--pref-muted));
   pointer-events: none;
 }
+
+.window-titlebar.editor-window-drag{position:relative;padding-right:92px;line-height:30px}
+.window-titlebar .window-titlebar-meta{position:absolute;right:16px;top:50%;transform:translateY(-50%);width:60px;margin:0;text-align:right;font:500 12px/16px var(--font-ui)}
+.window-titlebar .app-window-title{font-size:14px}

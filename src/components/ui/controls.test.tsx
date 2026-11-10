@@ -1,6 +1,7 @@
 // @vitest-environment jsdom
 import { fireEvent, render, screen } from "@testing-library/react";
 import { beforeEach, afterEach, describe, expect, it, vi } from "vitest";
+import { Radio } from "./radio";
 import { Slider } from "./slider";
 import { Switch } from "./switch";
 import { Checkbox } from "./checkbox";
@@ -11,6 +12,7 @@ beforeEach(()=>vi.stubGlobal("ResizeObserver",class {observe(){}unobserve(){}dis
 afterEach(()=>vi.unstubAllGlobals());
 
 describe("shared control behavior",()=>{
+  it("keeps radio grouping, checked state and callbacks",()=>{const change=vi.fn();render(<><Radio aria-label="PNG" name="format" defaultChecked/><Radio aria-label="JPEG" name="format" onChange={change}/></>);fireEvent.click(screen.getByRole("radio",{name:"JPEG"}));expect(screen.getByRole("radio",{name:"JPEG"})).toBeChecked();expect(screen.getByRole("radio",{name:"PNG"})).not.toBeChecked();expect(change).toHaveBeenCalledOnce();});
   it("keeps scalar slider callbacks and fill synchronized with controlled values",()=>{
     const change=vi.fn(),native=vi.fn();
     const {rerender}=render(<Slider aria-label="Zoom" min={25} max={400} step={25} value={100} onValueChange={change} onChange={native}/>);

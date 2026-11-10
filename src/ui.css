@@ -21,7 +21,7 @@ button { border: 0 solid transparent; background-color: transparent; }
   padding: 0 12px;
   gap: var(--control-gap);
   border-radius: var(--control-radius);
-  font-size: 12px;
+  font-size: var(--font-size-ui);
   font-weight: 500;
   line-height: 16px;
   border: 1px solid transparent;
@@ -50,3 +50,21 @@ button { border: 0 solid transparent; background-color: transparent; }
 :where(button, a, summary, input, select, textarea, [role="tab"], [role="switch"]):focus-visible { filter: brightness(1.15) !important; }
 :where(input, textarea, select):focus-visible { border-color: var(--border-strong); }
 :where(a):visited { color: inherit; }
+
+/* Explicit geometry: Tailwind preflight is intentionally disabled. */
+[data-slot="alert-dialog-overlay"]{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.55)}
+[data-slot="alert-dialog-content"]{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:101;box-sizing:border-box;width:min(480px,calc(100vw - 40px));max-height:calc(100dvh - 40px);overflow:auto;margin:0;padding:24px;border:.5px solid var(--selection-border);border-radius:12px;background:var(--surface-elevated);color:var(--text);font:var(--font-size-ui)/1.4 var(--font-ui);animation:none}
+[data-slot="alert-dialog-content"] h2{margin:0;font-size:15px;font-weight:600}
+[data-slot="alert-dialog-content"] p{margin:8px 0 16px;font-size:13px;color:var(--text-secondary);overflow-wrap:anywhere}
+[data-slot="alert-dialog-content"] button[data-slot="button"]{height:var(--control-height);padding:0 12px;border:.5px solid var(--border);border-radius:var(--control-radius);font:inherit;color:var(--text);cursor:pointer}
+[data-slot="alert-dialog-content"] button[data-variant="default"]{background:var(--accent);border-color:transparent}
+[data-slot="alert-dialog-content"] button[data-variant="outline"]{background:transparent}
+
+[data-slot="alert-dialog-content"] button[data-variant="destructive"]{background:var(--danger-bg);border-color:var(--danger-border);color:var(--danger)}
+
+body{-webkit-user-select:none;user-select:none}
+input,textarea,[contenteditable="true"]{-webkit-user-select:text;user-select:text}
+:is(.workspace,.library-window,.preferences-window) :is(label,summary){font-size:14px}
+.library-row-info strong{font-size:14px;font-weight:600}
+.library-row-info :is(span,time),.library-detail>header span,.library-metadata,.library-sidebar>footer,.preferences-window .preference-help,.preferences-footer p{font-size:12px;font-weight:500}
+.preferences-window :is(legend,summary),.preferences-window section[aria-label="FTP publishing settings"] p{font-size:13px;font-weight:500}

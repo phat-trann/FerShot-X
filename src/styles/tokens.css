@@ -1,4 +1,6 @@
 :root {
+  --font-ui: "Helvetica Neue", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-size-ui: 14px;
   color-scheme: dark;
   --surface: #232427;
   --surface-card: #232427;

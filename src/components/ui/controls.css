@@ -101,7 +101,7 @@ input.ui-input[data-slot=input],select.ui-select[data-slot=select] {
   background: var(--selection,#0F1216);
   color: var(--text,#fff);
   font: inherit;
-  font-size: 12px;
+  font-size: var(--font-size-ui);
   transition: background-color 120ms ease,filter 120ms ease;
 }
 .ui-input::placeholder { color: var(--muted,#A4A4A8); }
@@ -130,3 +130,12 @@ input.ui-checkbox:checked { background: var(--accent,#257EFE); border-color: tra
 @media(prefers-reduced-motion:reduce) { .ui-switch,.ui-switch-thumb,.ui-input,.ui-select { transition: none !important; } .ui-slider::-webkit-slider-thumb { transition: none; } .ui-slider::-moz-range-thumb { transition: none; } }
 
 label:has(> .ui-switch) { position: relative; }
+
+input.ui-radio[type=radio][data-slot=radio] {
+ appearance: none; -webkit-appearance: none; box-sizing: border-box;
+ flex: 0 0 16px; width: 16px; height: 16px; min-height: 16px;
+ margin: 0; padding: 0; border: .5px solid var(--selection-border);
+ border-radius: 50%; background: var(--selection); cursor: pointer;
+}
+input.ui-radio[type=radio]:checked { border-color: var(--accent); background: radial-gradient(circle,var(--accent) 0 4px,var(--selection) 4.5px); }
+input.ui-radio:disabled { opacity: .45; cursor: default; }

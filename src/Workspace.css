@@ -246,6 +246,7 @@ body { background:transparent; }
 .app-window-title img{filter:drop-shadow(0 0 .6px rgba(0,0,0,.65));}
 
 .editor-tool-slot { position: relative; flex-basis: 40px; width: 40px; }
+#editor-annotation-tools .editor-tool-slot { flex-basis: 36px; width: 36px; }
 .editor-tool-slot::after { content: "|"; position: absolute; right: 0; color: var(--border-strong); font-size: 12px; line-height: 16px; pointer-events: none; }
 .editor-tool-slot.editor-tool-last::after,
 #editor-annotation-tools .editor-tool-slot::after { content: none; }
@@ -256,9 +257,51 @@ body { background:transparent; }
 .konva-element-properties input[type=range] { width: 100px; flex: 0 0 100px; }
 .konva-element-properties input[aria-label="Annotation text"] { width: 180px; }
 
-.editor-unified-bar .editor-tool-slot>button[aria-pressed=true], .editor-unified-bar .editor-tool-slot>button[data-state=on] {
- background: var(--selection);
- color: var(--text);
- border: .5px solid var(--selection-border) !important;
+.editor-tool-slot > button,
+.editor-tool-slot > [data-slot=toggle],
+.editor-tool-slot > [data-slot=button] {
+  width: 32px !important;
+  height: 32px !important;
+  min-width: 32px !important;
+  min-height: 32px !important;
+  padding: 0 !important;
+  border-radius: 6px !important;
+  border: 1px solid transparent !important;
+  box-shadow: none !important;
+  outline: none !important;
+  transition: none !important;
+  box-sizing: border-box !important;
+  background: transparent !important;
+  color: var(--text-secondary, #DEDEDF) !important;
+}
+
+.editor-tool-slot > button:hover,
+.editor-tool-slot > [data-slot=toggle]:hover,
+.editor-tool-slot > [data-slot=button]:hover {
+  background: var(--surface-card, #2B2D31) !important;
+  color: var(--text, #FFFFFF) !important;
+  border: 1px solid transparent !important;
+  transition: none !important;
+}
+
+.editor-unified-bar .editor-tool-slot > button[aria-pressed=true],
+.editor-unified-bar .editor-tool-slot > button[data-state=on],
+.editor-unified-bar .editor-tool-slot > [data-slot=toggle][data-state=on],
+.editor-unified-bar .editor-tool-slot > [data-slot=toggle][aria-pressed=true] {
+  background: #0F1216 !important;
+  color: #FFFFFF !important;
+  border: 1px solid var(--selection-border, #257EFE) !important;
+  box-shadow: none !important;
+  outline: none !important;
+  transition: none !important;
+}
+
+.editor-tool-slot > button:focus,
+.editor-tool-slot > button:focus-visible,
+.editor-tool-slot > [data-slot=toggle]:focus,
+.editor-tool-slot > [data-slot=toggle]:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+  filter: brightness(1.15) !important;
 }
 .editor-size-presets>button { height: 32px; }

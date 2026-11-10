@@ -12,7 +12,7 @@ export function EditorToolbarProvider({children}:{children:ReactNode}){
 }
 export function EditorToolStrip({children}:{children:ReactNode}){
  const context=useContext(Context)!,visible=useRef<HTMLDivElement>(null);
- useLayoutEffect(()=>{const node=visible.current;if(!node)return;const measure=()=>context.setCapacity(Math.max(0,Math.floor(Math.max(0,node.clientWidth-12)/40)));const observer=new ResizeObserver(measure);observer.observe(node);measure();return()=>observer.disconnect();},[context.setCapacity]);
+ useLayoutEffect(()=>{const node=visible.current;if(!node)return;const measure=()=>context.setCapacity(Math.max(0,Math.floor(Math.max(0,node.clientWidth-12)/36)));const observer=new ResizeObserver(measure);observer.observe(node);measure();return()=>observer.disconnect();},[context.setCapacity]);
  const overflow=context.orders.length>context.capacity;
  return <div className="editor-tool-strip"><div ref={visible} className="editor-visible-tools">{children}</div><div className="editor-overflow-slot"><details className="editor-tool-overflow" hidden={!overflow}><summary aria-label="More tools" title="More Tools"><Ellipsis size={16}/></summary><div ref={context.setHost} className="editor-overflow-menu" aria-label="Additional image tools"/></details></div></div>;
 }

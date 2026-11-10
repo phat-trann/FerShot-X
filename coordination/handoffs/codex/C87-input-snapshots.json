@@ -1,0 +1,8 @@
+{
+  "provenance": "Existing external-client source reviewed and corrected under Codex identity; historical submissions unchanged.",
+  "sha256": {
+    "src/features/editor/konva/KonvaWorkbench.tsx": "5a324a9af73b5c5b00124891c9dc2ad96cb65a4761f52fd7679215359f1ca327",
+    "src/components/EditorToolbarLayout.tsx": "ffaf52baed70eb6aed5c7c334491d5963cddb9f4e167eaecab823dbeb3fd368b",
+    "src/Workspace.css": "b0e61015a2de34d4d29ab89e486039574e84ef33650089ddb0ee29d4b043fc78"
+  }
+}

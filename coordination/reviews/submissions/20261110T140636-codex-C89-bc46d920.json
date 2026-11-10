@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "id": "20261110T140636-codex-C89-bc46d920",
+  "created_at": "2026-11-10T14:06:36.633566+07:00",
+  "agent": "codex",
+  "request": "C89-library-editor-handoff",
+  "task": "C89",
+  "completion": "done",
+  "summary": "Remove stale upload success UI; Library multiselect, oldest-first FTP link copy and confirmed bulk deletion; rendered Local file-list clipboard; repeat Text/Counter clicks and Helvetica Neue UI font",
+  "files": [
+    "AGENTS.md",
+    "coordination/build-tasks.json",
+    "coordination/handoffs/codex/C89-claim-transfer.json",
+    "docs/agents/codex/C89-library-editor.md",
+    "docs/releases/1.0.0-manual-acceptance.md",
+    "src/Workspace.tsx",
+    "src/LibraryWindow.tsx",
+    "src/LibraryWindow.css",
+    "src/platform/library.ts",
+    "src-tauri/src/lib.rs",
+    "src-tauri/src/library_window.rs",
+    "src/features/editor/konva/KonvaWorkbench.tsx",
+    "src/styles/tokens.css",
+    "tests/e2e/codex-v1-editor.spec.ts",
+    "tests/e2e/helpers/v1-ipc.ts"
+  ],
+  "file_sha256": {
+    "AGENTS.md": "3636a9ec4aa6e9d881aa379fb8232159008916cff4ea85eda8f19ca1ad17a63f",
+    "coordination/build-tasks.json": "3330cda6ed7dc011d5e649421b0b764c08559182597ae631ea57265824899c97",
+    "coordination/handoffs/codex/C89-claim-transfer.json": "cbb5f79806e897a9a3d339d60820c781b5bcd2504866682d3f3ced9f8e2c7ed9",
+    "docs/agents/codex/C89-library-editor.md": "3413067354a35cba7a4437277bacdba44f7b24f72cb5b9d3413c0ab7acaa85e6",
+    "docs/releases/1.0.0-manual-acceptance.md": "ca966e9a0e204e7bc7e740b6cc3750eb3855f5f39cad93bf519791f4b045c195",
+    "src/Workspace.tsx": "e82a2cd07743bf77246b26f6b6e7c8c46115d2d4a841599c2d7ffa238cc9cf78",
+    "src/LibraryWindow.tsx": "dba6cc951a784ba41a75d29f71995dfd58200a43ca34d03f89f554af03b9b0f2",
+    "src/LibraryWindow.css": "07d86f13a8a2310b9e14d335251a81946e28d67ec862b6cecb3002dd0ccebbff",
+    "src/platform/library.ts": "0b8b71b308e4382544f557e46aa72964c4fef43d93afe76688662ad4c4ae2ada",
+    "src-tauri/src/lib.rs": "e3686db00d71886625e7143707ee01b19ad94779e258508f1ff934ef2da896b3",
+    "src-tauri/src/library_window.rs": "c5657bd1afccf772a20881dbc1cab598d5b0af53c6d568482705312fb5582eeb",
+    "src/features/editor/konva/KonvaWorkbench.tsx": "6b30ac5e86e23eb3fa9c80d80559fe462ee2cbf65d680de6e6dd5590a736886e",
+    "src/styles/tokens.css": "683990eae64dc85a9237aaf54cbbb77e5919d99ffaa46ea52f891227026c2b57",
+    "tests/e2e/codex-v1-editor.spec.ts": "b534baa701e830a8fe79d6229c9fd99ae1e65f983af93828ed5246ecc4f75561",
+    "tests/e2e/helpers/v1-ipc.ts": "91049a9fd61b203819d02ece5c21d115e516c6d65801c5c842fb2850aed52e5e"
+  },
+  "checks": [
+    "npm run version:check: passed (1.0.0 consistent)",
+    "npm run typecheck: passed",
+    "Playwright codex-v1-editor + codex-v1-settings: 42 passed, synthetic IPC only; initial regressions corrected and final suites passed",
+    "Native build/compilation, real clipboard, FTP and OS acceptance: NOT RUN per user no-build restriction; no formatting/lint"
+  ],
+  "risks": [
+    "Native multi-file clipboard source remains uncompiled and requires macOS Finder paste acceptance after an authorized build; real FTP bulk deletion requires disposable user-approved objects",
+    "Helvetica Neue is a deliberate UI choice supported by saved C88 static font declarations, not exact global runtime parity; annotation fonts unchanged",
+    "Phase-2 acceptance remains 85%; USER_WAIVED_REVIEW is not independent peer/native approval"
+  ],
+  "review": "pending"
+}

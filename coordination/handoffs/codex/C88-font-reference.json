@@ -1,0 +1,148 @@
+{
+  "classification": "STATIC_OBSERVED",
+  "source_evidence_id": "ev_7a54c59efe5ad259d8b8b7c187965d29df9ca99f3686ffa068c92add599df2ca",
+  "source_export": "evidence/raw/interface-builder.json",
+  "target": {
+    "version": "1.9.3",
+    "build": "137",
+    "executable_sha256": "4a1ea879e1079b81b1c501e7ef0c399cf7d0890c2b33fc79f97c4124620360a3"
+  },
+  "font_objects": [
+    {
+      "id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":object:[\"41\"]",
+      "kind": "resource",
+      "name": ".AppleSystemUIFont",
+      "location": null,
+      "attributes": {
+        "nibValues": {
+          "NSName": ".AppleSystemUIFont",
+          "NSSize": 13,
+          "NSfFlags": 1044
+        },
+        "interface_builder_object_id": "41",
+        "class_name": "NSFont"
+      },
+      "evidence": [
+        {
+          "kind": "interface_builder_resource",
+          "description": "object 41",
+          "location": {
+            "address": null,
+            "file_offset": null
+          },
+          "artifact_path": "Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib",
+          "artifact_sha256": "3cf372b4c468bafaad79e90055413aa57721b013668f3cb1c1b00587757c2842"
+        }
+      ]
+    },
+    {
+      "id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":object:[\"175\"]",
+      "kind": "resource",
+      "name": ".AppleSystemUIFont",
+      "location": null,
+      "attributes": {
+        "nibValues": {
+          "NSName": ".AppleSystemUIFont",
+          "NSSize": 12,
+          "NSfFlags": 4883
+        },
+        "interface_builder_object_id": "175",
+        "class_name": "NSFont"
+      },
+      "evidence": [
+        {
+          "kind": "interface_builder_resource",
+          "description": "object 175",
+          "location": {
+            "address": null,
+            "file_offset": null
+          },
+          "artifact_path": "Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib",
+          "artifact_sha256": "3cf372b4c468bafaad79e90055413aa57721b013668f3cb1c1b00587757c2842"
+        }
+      ]
+    },
+    {
+      "id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":object:[\"431\"]",
+      "kind": "resource",
+      "name": ".AppleSystemUIFontLight",
+      "location": null,
+      "attributes": {
+        "nibValues": {
+          "NSName": ".AppleSystemUIFontLight",
+          "NSSize": 14,
+          "NSfFlags": 5652
+        },
+        "interface_builder_object_id": "431",
+        "class_name": "NSFont"
+      },
+      "evidence": [
+        {
+          "kind": "interface_builder_resource",
+          "description": "object 431",
+          "location": {
+            "address": null,
+            "file_offset": null
+          },
+          "artifact_path": "Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib",
+          "artifact_sha256": "3cf372b4c468bafaad79e90055413aa57721b013668f3cb1c1b00587757c2842"
+        }
+      ]
+    },
+    {
+      "id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":object:[\"528\"]",
+      "kind": "resource",
+      "name": ".AppleSystemUIFontMedium",
+      "location": null,
+      "attributes": {
+        "nibValues": {
+          "NSName": ".AppleSystemUIFontMedium",
+          "NSSize": 11,
+          "NSfFlags": 5908
+        },
+        "interface_builder_object_id": "528",
+        "class_name": "NSFont"
+      },
+      "evidence": [
+        {
+          "kind": "interface_builder_resource",
+          "description": "object 528",
+          "location": {
+            "address": null,
+            "file_offset": null
+          },
+          "artifact_path": "Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib",
+          "artifact_sha256": "3cf372b4c468bafaad79e90055413aa57721b013668f3cb1c1b00587757c2842"
+        }
+      ]
+    },
+    {
+      "id": "ib:\"Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib\":object:[\"794\"]",
+      "kind": "resource",
+      "name": "HelveticaNeue",
+      "location": null,
+      "attributes": {
+        "nibValues": {
+          "NSName": "HelveticaNeue",
+          "NSSize": 12,
+          "NSfFlags": 16
+        },
+        "interface_builder_object_id": "794",
+        "class_name": "NSFont"
+      },
+      "evidence": [
+        {
+          "kind": "interface_builder_resource",
+          "description": "object 794",
+          "location": {
+            "address": null,
+            "file_offset": null
+          },
+          "artifact_path": "Contents/Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib",
+          "artifact_sha256": "3cf372b4c468bafaad79e90055413aa57721b013668f3cb1c1b00587757c2842"
+        }
+      ]
+    }
+  ],
+  "limitations": "Archived decoded resources show declared fonts, not the complete live UI or exact runtime font substitutions. No target launch, OS automation or font resource copying."
+}

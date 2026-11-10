@@ -5066,6 +5066,76 @@
       "shared_claim": "root-wiring",
       "owned_paths": "src/components/WindowTitleBar.tsx; src/PreferencesWindow.tsx; task docs/coordination",
       "inputs": "User all-window version request; existing Settings metadata and app-info version"
+    },
+    {
+      "id": "C87",
+      "agent": "codex",
+      "title": "Repair immediate manipulation, Select hover/outside behavior, directional counter and release checklist",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "Konva workbench/counter/model; editor contract/export validation; shared radio/palette; toolbar/window CSS; scoped tests; release acceptance docs and task coordination",
+      "inputs": "Latest user editor bug report and supplied counter shape; earlier pending acceptance-list request; existing external source snapshots"
+    },
+    {
+      "id": "C88",
+      "agent": "codex",
+      "title": "Restore original interface surfaces and refine native macOS typography",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "shared font/palette tokens and UI/window/status CSS; bounded saved font evidence; task docs/coordination",
+      "inputs": "User restore-background/native reference font request; target-bound saved Interface Builder font objects"
+    },
+    {
+      "id": "C89",
+      "agent": "codex",
+      "title": "Remove stale upload success UI, Library multi-selection and repeated click tools; visible reference typography",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "Library window/platform and bounded native clipboard command; workspace upload state; Konva click behavior; shared font token; focused tests and task coordination",
+      "inputs": "Latest user four corrections; stopped C89/root-wiring transfer; C88 saved static font reference"
+    },
+    {
+      "id": "C90",
+      "agent": "codex",
+      "title": "Menu-only app naming, centered confirmation, Add Image, instant fixed-key tool hints and targeted responsiveness repairs",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "Native lifecycle/name configuration; shared dialog and tool hint; editor add-image/keyboard/status and pointer store; Library refresh; Settings copy/lazy panels; local history deduplication; scoped tests and release docs",
+      "inputs": "Latest user Dock/name/delete/add-image/performance/tooltip/acceptance request; installed API source and active renderer consumers"
+    },
+    {
+      "id": "C91",
+      "agent": "codex",
+      "title": "Correct opening zoom presets, insert editable image layers, persistent move-only Freehand",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "Workspace/Editor insertion and zoom; Add Image/toolbar hint control; advanced image type/validation/export; Konva geometry/artwork/Freehand; bounded draft/cache quota; scoped tests and acceptance docs",
+      "inputs": "User zoom/Add Image/Freehand correction; active renderer/native draft consumers"
+    },
+    {
+      "id": "C92",
+      "agent": "codex",
+      "title": "Prevent opening image overflow, center reopened windows, Freehand transforms only in Select",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "Workspace viewport CSS and zoom calculation; Konva manipulation policies; native editor geometry and common foreground centering; focused tests and release docs",
+      "inputs": "Latest user unused-space/scroll/centering and Freehand Select-only manipulation clarification; existing no-build restriction"
+    },
+    {
+      "id": "C93",
+      "agent": "codex",
+      "title": "Manual acceptance corrections: 80% Edit, touchpad pan/pinch, Escape Copy, scrolling target/errors, technical logs and native UI text",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "Window title/status/shared typography CSS; editor gestures/shortcuts/Freehand; native window geometry/scroll target/technical diagnostics; scoped tests; acceptance ledger and docs",
+      "inputs": "Latest user 23-case manual result; bounded local error metadata; installed framework API source; prior no-build restriction"
     }
   ],
   "allocation": "Codex sole active client; external Antigravity and Copilot inactive; preserve historical authorship.",
@@ -5163,7 +5233,14 @@
       "C83",
       "C84",
       "C85",
-      "C86"
+      "C86",
+      "C87",
+      "C88",
+      "C89",
+      "C90",
+      "C91",
+      "C92",
+      "C93"
     ],
     "copilot": []
   },

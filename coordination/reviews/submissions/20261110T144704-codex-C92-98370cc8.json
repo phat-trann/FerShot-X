@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "id": "20261110T144704-codex-C92-98370cc8",
+  "created_at": "2026-11-10T14:47:04.052607+07:00",
+  "agent": "codex",
+  "request": "C92-fit-center-freehand-select",
+  "task": "C92",
+  "completion": "done",
+  "summary": "Keep full image visible on automatic opening, reserve native chrome/padding and center all reopened views; Freehand draws only until Select enables movement/proportional resize; inline manual acceptance requested",
+  "files": [
+    "AGENTS.md",
+    "coordination/build-tasks.json",
+    "docs/agents/codex/C92-fit-center-freehand.md",
+    "docs/releases/1.0.0-manual-acceptance.md",
+    "src/Workspace.editor.tsx",
+    "src/Workspace.css",
+    "src/features/editor/konva/zoom.ts",
+    "src/features/editor/konva/zoom.test.ts",
+    "src/features/editor/konva/manipulation.ts",
+    "src/features/editor/konva/manipulation.test.ts",
+    "src/features/editor/konva/KonvaWorkbench.tsx",
+    "src-tauri/src/library_window.rs",
+    "src-tauri/src/lifecycle.rs",
+    "tests/e2e/codex-v1-editor.spec.ts"
+  ],
+  "file_sha256": {
+    "AGENTS.md": "2190f8029383dc5b4b5c283419d262bfaad800b72ff02626d16740f00f988a36",
+    "coordination/build-tasks.json": "db6a0c42cb0ceb306a98c0a8857b73738f14abfa8614199ff71488e7e89aae4a",
+    "docs/agents/codex/C92-fit-center-freehand.md": "91a583da038f8b8656efa12d6f26830807e41a79d8ae1312c9f09eeb691c7bb1",
+    "docs/releases/1.0.0-manual-acceptance.md": "4790c38a75c29d80b8099888868f1cacd3695969c29999ad564e08f79879d21b",
+    "src/Workspace.editor.tsx": "74a88a5f235455d1cc1f4d51aa9c752c452d92f9e2e13555af14b24ae12716d4",
+    "src/Workspace.css": "e74e3c7fca10586ec6a35f05754c9806678ef6ae58d94f56922cac3a5c46f8d0",
+    "src/features/editor/konva/zoom.ts": "d092afb47d5d0a44bc78cf5de18b4ad971c5749ed0135ed766fd9128b86496d5",
+    "src/features/editor/konva/zoom.test.ts": "297ef1ab05fb1cf860d0cc3bc6fdc00234bfd05f0567369c86fb45e36e6006af",
+    "src/features/editor/konva/manipulation.ts": "a6f0c4e0b7da618b5f5d474d8ef9eab6a748ffab76116e1d3da3197105560e7e",
+    "src/features/editor/konva/manipulation.test.ts": "f76aae4678fc428226069adffb29fd355c308ead18ed70d8ff22466ab0e1497d",
+    "src/features/editor/konva/KonvaWorkbench.tsx": "ae1ba02cf4390d6fbbbb8be3e6731b23acc65e92571987372227077dcead9fbf",
+    "src-tauri/src/library_window.rs": "93276444576b00078ec6ba505ac696f814466533209904f313823ff96d21e793",
+    "src-tauri/src/lifecycle.rs": "3c5f449eba0f16b327a18ada250d0035c00d0290d8841f6079b7778f898e74d8",
+    "tests/e2e/codex-v1-editor.spec.ts": "9a80a5db8c7fdd7dd2cd675dc2af1845b6f41d6900c832302106b107753f4742"
+  },
+  "checks": [
+    "npm run typecheck passed",
+    "npm run test:unit: 436 tests in 117 files passed",
+    "Playwright Edit/Settings full suite: 51 passed, synthetic IPC; wide/tall/compact image full visibility and Freehand draw-over-existing/Select resize covered",
+    "npm run version:check passed: 1.0.0 consistent",
+    "Native geometry assertion updated/expanded but NOT RUN; native compilation/build and OS/server acceptance deferred under user no-build restriction"
+  ],
+  "risks": [
+    "Full opening visibility supersedes unconditional numeric zoom: 100 only when it fits, otherwise at most 80 and smaller as needed; explicit manual zoom can scroll",
+    "Native compact sizing and center-on-foreground changes need an authorized fresh build and Retina/secondary-monitor manual retest; installed app is unchanged until rebuilt",
+    "Phase-2 acceptance remains 85%; USER_WAIVED_REVIEW is not native/independent acceptance; no release publication"
+  ],
+  "review": "pending"
+}

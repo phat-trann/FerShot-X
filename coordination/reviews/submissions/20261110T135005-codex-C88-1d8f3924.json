@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "id": "20261110T135005-codex-C88-1d8f3924",
+  "created_at": "2026-11-10T13:50:05.337877+07:00",
+  "agent": "codex",
+  "request": "restore-palette-font-20261110",
+  "task": "C88",
+  "completion": "done",
+  "summary": "Restore #232427/#303136 surfaces and refine shared native macOS UI typography using archived static font references.",
+  "files": [
+    "src/styles/tokens.css",
+    "src/ui.css",
+    "src/Workspace.css",
+    "src/PreferencesWindow.css",
+    "src/LibraryWindow.css",
+    "src/components/ui/controls.css",
+    "src/components/WindowTitleBar.css",
+    "src/components/EditorImageStatus.css",
+    "AGENTS.md",
+    "coordination/build-tasks.json",
+    "coordination/handoffs/codex/C88-font-reference.json",
+    "docs/agents/codex/C88-native-typography.md"
+  ],
+  "file_sha256": {
+    "src/styles/tokens.css": "bd674bbfa40f7d549bd3c04bb6dc4299826edd495f7b9fae15593f4d0f4cf209",
+    "src/ui.css": "0eed3d104522af1f3657b597b05e6b0ad1986a78356a151e89645ae29604a6f1",
+    "src/Workspace.css": "0ae2069d73a6d165e201043357bf4c313dee4671f15d76bad71cae8535b038bb",
+    "src/PreferencesWindow.css": "4bd7a9dd33a237d3e4b3aa5bbe771be3aafd06ecc4175766c5e06402c7588888",
+    "src/LibraryWindow.css": "4078d036568dca691e643a4c2b59505fc98f8fd27c19b42a783a04c906b7b2b8",
+    "src/components/ui/controls.css": "e95cacf43366d184a130dd12a53771aa87e1780f05351f1f730f47f457cef86b",
+    "src/components/WindowTitleBar.css": "aa6aea657dd8528d0c27a4144ee5dd295c4d089cd4cb637589f513226d24d272",
+    "src/components/EditorImageStatus.css": "0e2a292b6a44f17f783e85e53b0b837056163af8f610c6910be8587ad62787e3",
+    "AGENTS.md": "4afe90276f59ca0ab379c234ad8e6fc7d8154bd46f7ea8bfadec721c62ef323a",
+    "coordination/build-tasks.json": "326ddaaff72b75a4d6b79fb391e4018db3e4fe0f6ab514532f4f86578f94aac6",
+    "coordination/handoffs/codex/C88-font-reference.json": "fbf84abe02cf6f9802fc99a14d3859165c472bafad2761355b021d8e6ff31011",
+    "docs/agents/codex/C88-native-typography.md": "681d4d93482f53241c45d1205056a109e73e08eaa5d163c365e50b446c84f06e"
+  },
+  "checks": [
+    "PASS no-emit TypeScript, six focused browser cases and version 1.0.0 guard; Settings/Library screenshots inspected. Reused target-bound archived REA font evidence. No build/format/lint or new unit tests for CSS-only change."
+  ],
+  "risks": [
+    "Archived static fonts do not prove complete original runtime typography. Annotation/image fonts unchanged; native visual verification and acceptance remain pending at 85%."
+  ],
+  "review": "pending"
+}

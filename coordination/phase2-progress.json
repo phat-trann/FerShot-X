@@ -14,43 +14,43 @@
       "id": "ftp-settings-credentials",
       "weight": 10,
       "accepted": true,
-      "evidence": "docs/agents/codex/C73-user-acceptance.md",
-      "evidence_kind": "USER_REPORTED: user confirms other preceding checklist points working, 2026-11-10; not an automated native/server check"
+      "evidence": "docs/agents/codex/C93-user-acceptance.md",
+      "evidence_kind": "USER_REPORTED: C92 checklist item(s) 22 passed by user; not an automated native/server run or C93 acceptance"
     },
     {
       "id": "immediate-predicted-url",
       "weight": 15,
       "accepted": true,
-      "evidence": "docs/agents/codex/C48-phase2-integration.md",
-      "evidence_kind": "synthetic functional acceptance; injected IPC plus scoped native core tests; not real server acceptance"
+      "evidence": "docs/agents/codex/C93-user-acceptance.md",
+      "evidence_kind": "USER_REPORTED: C92 checklist item(s) 16 passed by user; not an automated native/server run or C93 acceptance"
     },
     {
       "id": "persistent-ftp-retry",
       "weight": 15,
       "accepted": true,
-      "evidence": "docs/agents/codex/C73-user-acceptance.md",
-      "evidence_kind": "USER_REPORTED: user confirms other preceding checklist points working, 2026-11-10; not an automated native/server check"
+      "evidence": "docs/agents/codex/C93-user-acceptance.md",
+      "evidence_kind": "USER_REPORTED: C92 checklist item(s) 17 passed by user; not an automated native/server run or C93 acceptance"
     },
     {
       "id": "local-cache-30-days",
       "weight": 15,
       "accepted": true,
-      "evidence": "docs/agents/codex/C50-local-history.md",
-      "evidence_kind": "Integrated synthetic browser restart/action coverage and native temporary-filesystem retention/validation tests; no real FTP acceptance"
+      "evidence": "docs/agents/codex/C93-user-acceptance.md",
+      "evidence_kind": "USER_REPORTED: C92 checklist item(s) 21 (draft persistence; existing retention tests remain historical) passed by user; not an automated native/server run or C93 acceptance"
     },
     {
       "id": "library-local-ftp",
       "weight": 10,
       "accepted": true,
-      "evidence": "docs/agents/codex/C48-phase2-integration.md",
-      "evidence_kind": "synthetic functional acceptance; injected IPC plus scoped native core tests; not real server acceptance"
+      "evidence": "docs/agents/codex/C93-user-acceptance.md",
+      "evidence_kind": "USER_REPORTED: C92 checklist item(s) 18\u201320 passed by user; not an automated native/server run or C93 acceptance"
     },
     {
       "id": "direct-editor",
       "weight": 15,
       "accepted": true,
-      "evidence": "docs/agents/codex/C51-direct-integration.md",
-      "evidence_kind": "Integrated synthetic browser gestures/history/pixel-equivalence and reviewed A214 geometry invalidation; not native capture or real FTP acceptance"
+      "evidence": "docs/agents/codex/C93-user-acceptance.md",
+      "evidence_kind": "USER_REPORTED: C92 checklist item(s) 7, 8, 10\u201315; Freehand stroke-width correction remains pending passed by user; not an automated native/server run or C93 acceptance"
     },
     {
       "id": "english-no-ocr-cleanup",
@@ -66,5 +66,5 @@
       "evidence": null
     }
   ],
-  "remaining": "C73 native UI/blur/resize/rotation/window-exclusivity retest and final accepted branding/release build/commit/push remain. Other preceding checklist points accepted as USER_REPORTED; no new build was run."
+  "remaining": "C93 pending retest: version/window sizing, touchpad pinch/pan, Escape Copy/hide, scrolling capture, Freehand stroke width, technical logs/typography. Branding/release and final integration remain unaccepted. No native build was run."
 }

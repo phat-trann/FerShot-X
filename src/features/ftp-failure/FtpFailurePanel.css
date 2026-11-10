@@ -1,0 +1,81 @@
+.fershot-ftp-failure-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.875rem 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid #7f1d1d;
+  background-color: #1f1418;
+  color: #f9fafb;
+  font-size: 0.85rem;
+}
+
+.fershot-ftp-failure-panel__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.fershot-ftp-failure-panel__title {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #fecaca;
+}
+
+.fershot-ftp-failure-panel__code {
+  padding: 0.125rem 0.45rem;
+  border-radius: 0.25rem;
+  background-color: #371b24;
+  border: 1px solid #991b1b;
+  color: #fca5a5;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.75rem;
+}
+
+.fershot-ftp-failure-panel__message,
+.fershot-ftp-failure-panel__summary {
+  margin: 0;
+  line-height: 1.4;
+  color: #e5e7eb;
+}
+
+.fershot-ftp-failure-panel__steps {
+  margin: 0;
+  padding-left: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  color: #d1d5db;
+}
+
+.fershot-ftp-failure-panel__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+}
+
+.fershot-ftp-failure-panel__btn {
+  padding: 0.4rem 0.75rem;
+  border-radius: 0.375rem;
+  border: 1px solid #4b5563;
+  background-color: #262b36;
+  color: #f3f4f6;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.fershot-ftp-failure-panel__btn--primary {
+  background-color: #2563eb;
+  border-color: #60a5fa;
+  color: #ffffff;
+}
+
+.fershot-ftp-failure-panel__btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

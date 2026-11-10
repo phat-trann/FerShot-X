@@ -4,6 +4,7 @@ import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom/vitest";
 import { LibraryPanel } from "./LibraryPanel";
 import type { ImageDocument } from "../../contracts/media";
+import type { FtpQueueItem } from "../../contracts/phase2";
 
 const SYNTHETIC_IMAGES: readonly ImageDocument[] = [
   {
@@ -116,43 +117,42 @@ describe("LibraryPanel", () => {
     revokeSpy.mockRestore();
   });
 
-  it("toggles between list and grid presentation and supports arrow-key navigation", () => {
+  it("shows FTP status, selected details, and controlled actions", () => {
+    const ftpItem: FtpQueueItem = {
+      id: "upload-1",
+      sourceId: "img-1",
+      name: "fullscreen-dashboard.png",
+      remotePath: "/captures/fullscreen-dashboard.png",
+      url: "https://example.test/captures/fullscreen-dashboard.png",
+      status: "pending",
+      createdAt: 1,
+      updatedAt: 1,
+      error: null,
+    };
+    const onRetryUpload = vi.fn();
+    const onCopyUploadUrl = vi.fn();
+    const onRemoveUpload = vi.fn();
     render(
       <LibraryPanel
         images={SYNTHETIC_IMAGES}
         selectedId="img-1"
         onSelect={vi.fn()}
         onRemove={vi.fn()}
+        ftpItems={[ftpItem]}
+        onRetryUpload={onRetryUpload}
+        onCopyUploadUrl={onCopyUploadUrl}
+        onRemoveUpload={onRemoveUpload}
       />,
     );
-
-    const panel = screen.getByRole("region", { name: /session library/i });
-    const listBtn = screen.getByRole("button", { name: /list view/i });
-    const gridBtn = screen.getByRole("button", { name: /grid view/i });
-
-    expect(panel).toHaveAttribute("data-layout", "list");
-    expect(listBtn).toHaveAttribute("aria-pressed", "true");
-
-    fireEvent.click(gridBtn);
-    expect(panel).toHaveAttribute("data-layout", "grid");
-    expect(gridBtn).toHaveAttribute("aria-pressed", "true");
-    expect(listBtn).toHaveAttribute("aria-pressed", "false");
-
-    const firstSelect = screen.getByRole("button", {
-      name: "Select fullscreen-dashboard.png",
-    });
-    const secondSelect = screen.getByRole("button", {
-      name: "Select receipt-crop.jpeg",
-    });
-
-    firstSelect.focus();
-    expect(firstSelect).toHaveFocus();
-
-    fireEvent.keyDown(firstSelect, { key: "ArrowDown" });
-    expect(secondSelect).toHaveFocus();
-
-    fireEvent.keyDown(secondSelect, { key: "ArrowUp" });
-    expect(firstSelect).toHaveFocus();
+    expect(screen.queryByRole("button", { name: /grid view/i })).toBeNull();
+    fireEvent.click(screen.getByRole("tab", { name: "FTP" }));
+    fireEvent.click(screen.getByRole("button", { name: "Select upload fullscreen-dashboard.png" }));
+    expect(screen.getByLabelText("Selected upload details")).toHaveTextContent("pending");
+    fireEvent.click(screen.getByRole("button", { name: "Retry" }));
+    fireEvent.click(screen.getByRole("button", { name: "Copy URL" }));
+    fireEvent.click(screen.getByRole("button", { name: "Remove history" }));
+    expect(onRetryUpload).toHaveBeenCalledWith("upload-1");
+    expect(onCopyUploadUrl).toHaveBeenCalledWith(ftpItem.url);
+    expect(onRemoveUpload).toHaveBeenCalledWith("upload-1");
   });
 });
-

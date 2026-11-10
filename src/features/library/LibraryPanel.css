@@ -1,4 +1,4 @@
-.ferby-library-panel {
+.fershot-library-panel {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
@@ -9,7 +9,7 @@
   border: 1px solid #2b2f38;
 }
 
-.ferby-library-panel__header {
+.fershot-library-panel__header {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -17,40 +17,41 @@
   gap: 0.5rem;
 }
 
-.ferby-library-panel__title {
+.fershot-library-panel__title {
   margin: 0;
   font-size: 0.95rem;
   font-weight: 600;
 }
 
-.ferby-library-panel__layout-group {
-  display: inline-flex;
-  gap: 0.25rem;
-}
-
-.ferby-library-panel__layout-btn {
-  padding: 0.3rem 0.6rem;
-  border-radius: 0.375rem;
-  border: 1px solid #374151;
-  background-color: #222630;
-  color: #e5e7eb;
-  font-size: 0.75rem;
-  cursor: pointer;
-}
-
-.ferby-library-panel__layout-btn[aria-pressed="true"] {
-  background-color: #2563eb;
-  border-color: #60a5fa;
-  color: #ffffff;
-}
-
-.ferby-library-panel__search {
+.fershot-library-panel__search {
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
 
-.ferby-library-panel__search-input {
+.fershot-library-panel__tabs {
+  display: flex;
+  gap: 0.375rem;
+  border-bottom: 1px solid #2e3440;
+  padding-bottom: 0.375rem;
+}
+
+.fershot-library-panel__tabs button {
+  padding: 0.35rem 0.75rem;
+  border: 1px solid #374151;
+  border-radius: 0.375rem;
+  background: #222630;
+  color: #e5e7eb;
+  cursor: pointer;
+}
+
+.fershot-library-panel__tabs button[aria-selected="true"] {
+  background: #2563eb;
+  border-color: #60a5fa;
+  color: #fff;
+}
+
+.fershot-library-panel__search-input {
   flex: 1;
   padding: 0.45rem 0.65rem;
   border-radius: 0.375rem;
@@ -60,7 +61,7 @@
   font-size: 0.85rem;
 }
 
-.ferby-library-panel__clear-btn {
+.fershot-library-panel__clear-btn {
   padding: 0.4rem 0.6rem;
   border-radius: 0.375rem;
   border: 1px solid #374151;
@@ -70,7 +71,7 @@
   cursor: pointer;
 }
 
-.ferby-library-panel__items {
+.fershot-library-panel__items {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -78,15 +79,7 @@
   gap: 0.625rem;
 }
 
-.ferby-library-panel__items--list {
-  grid-template-columns: 1fr;
-}
-
-.ferby-library-panel__items--grid {
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-}
-
-.ferby-library-panel__item {
+.fershot-library-panel__item {
   display: flex;
   align-items: stretch;
   gap: 0.375rem;
@@ -96,12 +89,12 @@
   background-color: #20242d;
 }
 
-.ferby-library-panel__item--selected {
+.fershot-library-panel__item--selected {
   border-color: #60a5fa;
   background-color: rgba(37, 99, 235, 0.16);
 }
 
-.ferby-library-panel__select-btn {
+.fershot-library-panel__select-btn {
   flex: 1;
   display: flex;
   align-items: center;
@@ -115,12 +108,7 @@
   border-radius: 0.25rem;
 }
 
-.ferby-library-panel__items--grid .ferby-library-panel__select-btn {
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.ferby-library-panel__thumb {
+.fershot-library-panel__thumb {
   width: 48px;
   height: 48px;
   object-fit: cover;
@@ -129,14 +117,14 @@
   flex-shrink: 0;
 }
 
-.ferby-library-panel__meta {
+.fershot-library-panel__meta {
   display: flex;
   flex-direction: column;
   gap: 0.125rem;
   min-width: 0;
 }
 
-.ferby-library-panel__name {
+.fershot-library-panel__name {
   font-size: 0.85rem;
   font-weight: 500;
   overflow: hidden;
@@ -144,12 +132,12 @@
   white-space: nowrap;
 }
 
-.ferby-library-panel__details {
+.fershot-library-panel__details {
   font-size: 0.75rem;
   color: #9ca3af;
 }
 
-.ferby-library-panel__remove-btn {
+.fershot-library-panel__remove-btn {
   align-self: center;
   padding: 0.35rem 0.55rem;
   border-radius: 0.25rem;
@@ -160,7 +148,25 @@
   cursor: pointer;
 }
 
-.ferby-library-panel__empty {
+.fershot-library-panel__remove-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.fershot-library-panel__url-status--success {
+  color: #6ee7b7;
+}
+
+.fershot-library-panel__url-status--failed {
+  color: #fca5a5;
+}
+
+.fershot-library-panel__url-status--pending,
+.fershot-library-panel__url-status--uploading {
+  color: #fcd34d;
+}
+
+.fershot-library-panel__empty {
   margin: 0;
   padding: 1rem;
   text-align: center;
@@ -170,3 +176,13 @@
   background-color: #14161b;
 }
 
+.fershot-library-panel__upload-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.75rem;
+  border: 1px solid #374151;
+  border-radius: 0.375rem;
+  color: #d1d5db;
+  font-size: 0.8rem;
+}

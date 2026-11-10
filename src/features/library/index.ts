@@ -1,5 +1,5 @@
 export {
   LibraryPanel,
-  type LibraryLayoutMode,
+  type LibraryTab,
+  type Phase2LibraryProps,
 } from "./LibraryPanel";
-

@@ -149,7 +149,7 @@ pub struct DraftRequest{ id:String,name:String,png_base64:Option<String>,draft:s
 fn checksum(bytes:&[u8])->String{let mut hash=14695981039346656037u64;for byte in bytes{hash^=u64::from(*byte);hash=hash.wrapping_mul(1099511628211);}format!("{hash:016x}")}
 fn validate_draft(value:&serde_json::Value,width:u32,height:u32)->Result<(),NativeError>{
  if value.get("schemaVersion").and_then(|v|v.as_u64())!=Some(1)||value.get("width").and_then(|v|v.as_u64())!=Some(u64::from(width))||value.get("height").and_then(|v|v.as_u64())!=Some(u64::from(height)){return Err(fail())}
- let annotations=value.get("annotations").and_then(|v|v.as_array()).ok_or_else(fail)?;let advanced=value.get("advanced").and_then(|v|v.as_array()).ok_or_else(fail)?;if annotations.len()+advanced.len()>1024||serde_json::to_vec(value).map_err(|_|fail())?.len()>1000000{return Err(fail())}Ok(())
+ let annotations=value.get("annotations").and_then(|v|v.as_array()).ok_or_else(fail)?;let advanced=value.get("advanced").and_then(|v|v.as_array()).ok_or_else(fail)?;if annotations.len()+advanced.len()>1024||serde_json::to_vec(value).map_err(|_|fail())?.len()>32*1024*1024{return Err(fail())}Ok(())
 }
 #[tauri::command]pub async fn local_cache_save_draft(request:DraftRequest,window:tauri::WebviewWindow,app:tauri::AppHandle)->Result<Entry,NativeError>{
  validate_window_label(window.label())?;tauri::async_runtime::spawn_blocking(move||{

@@ -9,6 +9,8 @@ export function useLocalHistory() {
   const alive = useRef(false);
   const chain = useRef<Promise<unknown>>(Promise.resolve());
   const forgotten = useRef(new Set<string>());
+  const removed = useRef(new Set<string>());
+  const removals = useRef(new Map<string,Promise<void>>());
   const activeVersions=useRef(new Map<string,string>());
   const activate=useCallback((image:ImageDocument)=>{activeVersions.current.set(image.localId??image.id,image.id);},[]);
   const savedPixels = useRef(new Map<string,string>());
@@ -50,11 +52,16 @@ export function useLocalHistory() {
     return next;
   }, [run]);
   const forget = useCallback((id: string) => {
+    if(removed.current.has(id))return Promise.resolve();
+    const existing=removals.current.get(id);if(existing)return existing;
     forgotten.current.add(id);
     if (alive.current) setEntries(rows => rows.filter(row => row.id !== id));
-    return run(async () => {
-      if (localCacheAvailable()) await removeLocalCache(id);
+    const next=run(async () => {
+      if (localCacheAvailable()) {await removeLocalCache(id);removed.current.add(id);}
     });
+    removals.current.set(id,next);
+    void next.finally(()=>{if(removals.current.get(id)===next)removals.current.delete(id);});
+    return next;
   }, [run]);
   const open = useCallback(async (id: string) => {
     const entry = entries.find(row => row.id === id);

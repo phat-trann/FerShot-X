@@ -13,6 +13,7 @@ use std::sync::atomic::{AtomicU64, Ordering};
 
 pub const LOCAL_RETENTION_SECONDS: u64 = 30 * 24 * 60 * 60;
 pub const MAX_ENTRY_BYTES: usize = 32 * 1024 * 1024;
+pub const MAX_DRAFT_BYTES: usize = 32 * 1024 * 1024;
 pub const MAX_ENTRY_COUNT: usize = 256;
 pub const MAX_TOTAL_BYTES: u64 = 256 * 1024 * 1024;
 const META_SUFFIX: &str = ".json";
@@ -301,7 +302,7 @@ impl LocalCache {
         if entries.len() - usize::from(existing_size > 0) >= self.limits.max_entries {
             return Err(CacheError::EntryCountLimit);
         }
-        let total = entries.iter().map(|entry| entry.byte_size).sum::<u64>();
+        let total = self.storage_bytes(&entries)?;
         let new_total = total.saturating_sub(existing_size).saturating_add(png_bytes.len() as u64);
         if new_total > self.limits.max_total_bytes {
             return Err(CacheError::TotalBytesLimit);
@@ -341,7 +342,7 @@ impl LocalCache {
                 path: path.clone(),
                 source,
             })?;
-            if path.extension().and_then(|value| value.to_str()) == Some("png") {
+            if matches!(path.extension().and_then(|value| value.to_str()),Some("png"|"draft")) {
                 if metadata.file_type().is_symlink() { return Err(CacheError::SymlinkRejected(path)); }
                 if !metadata.is_file() { return Err(CacheError::NotDirectory(path)); }
                 image_bytes = image_bytes.saturating_add(metadata.len());
@@ -440,16 +441,23 @@ impl LocalCache {
         &self.root
     }
 
+    fn draft_size(&self,id:&str)->Result<u64,CacheError>{
+        let path=file_path(&self.root,id,".draft");
+        match fs::symlink_metadata(&path){Ok(meta)=>{if meta.file_type().is_symlink(){return Err(CacheError::SymlinkRejected(path))}if !meta.is_file(){return Err(CacheError::NotDirectory(path))}Ok(meta.len())},Err(e)if e.kind()==io::ErrorKind::NotFound=>Ok(0),Err(source)=>Err(CacheError::Io{path,source})}
+    }
+    fn storage_bytes(&self,entries:&[CacheEntry])->Result<u64,CacheError>{entries.iter().try_fold(0u64,|sum,entry|Ok(sum.saturating_add(entry.byte_size).saturating_add(self.draft_size(&entry.id)?)))}
     /// Bounded, private companion document; never scans or removes user files.
     pub fn write_draft(&self,id:&str,bytes:&[u8])->Result<(),CacheError>{
         validate_id(id)?;
-        if bytes.len()>1024*1024{return Err(CacheError::EntryTooLarge{size:bytes.len(),max:1024*1024})}
+        if bytes.len()>MAX_DRAFT_BYTES{return Err(CacheError::EntryTooLarge{size:bytes.len(),max:MAX_DRAFT_BYTES})}
         self.read(id)?;
+        let total=self.storage_bytes(&self.list()?)?.saturating_sub(self.draft_size(id)?).saturating_add(bytes.len()as u64);
+        if total>self.limits.max_total_bytes{return Err(CacheError::TotalBytesLimit)}
         atomic_write(&file_path(&self.root,id,".draft"),bytes)
     }
     pub fn read_draft(&self,id:&str)->Result<Option<Vec<u8>>,CacheError>{
         validate_id(id)?;let path=file_path(&self.root,id,".draft");
-        match fs::symlink_metadata(&path){Ok(_)=>read_bounded(&path,1024*1024).map(Some),Err(e)if e.kind()==io::ErrorKind::NotFound=>Ok(None),Err(source)=>Err(CacheError::Io{path,source})}
+        match fs::symlink_metadata(&path){Ok(_)=>read_bounded(&path,MAX_DRAFT_BYTES as u64).map(Some),Err(e)if e.kind()==io::ErrorKind::NotFound=>Ok(None),Err(source)=>Err(CacheError::Io{path,source})}
     }
 }
 
@@ -489,7 +497,7 @@ mod tests {
     fn draft_is_private_bounded_and_removed_with_the_single_image(){
         let dir=tempdir().unwrap();let cache=LocalCache::open(dir.path(),CacheLimits::default()).unwrap();
         cache.store("one","One.png",&png(),100).unwrap();cache.write_draft("one",br#"{"schemaVersion":1,"advanced":[]}"#).unwrap();
-        let original=cache.read_draft("one").unwrap().unwrap();assert!(cache.write_draft("one",&vec![0;1024*1024+1]).is_err());assert_eq!(cache.read_draft("one").unwrap().unwrap(),original);
+        let original=cache.read_draft("one").unwrap().unwrap();assert!(cache.write_draft("one",&vec![0;MAX_DRAFT_BYTES+1]).is_err());assert_eq!(cache.read_draft("one").unwrap().unwrap(),original);
         assert_eq!(cache.list().unwrap().len(),1);cache.prune(100+LOCAL_RETENTION_SECONDS).unwrap();assert!(cache.read_draft("one").unwrap().is_none());
     }
 
@@ -505,5 +513,12 @@ mod tests {
             symlink(dir.path(), &link).unwrap();
             assert!(matches!(LocalCache::open(link, CacheLimits::default()), Err(CacheError::SymlinkRejected(_))));
         }
+    }
+    #[test]
+    fn draft_bytes_share_the_cache_budget_and_failed_growth_preserves_draft(){
+        let tmp=tempdir().unwrap();let limits=CacheLimits{max_entry_bytes:64,max_entries:4,max_total_bytes:64,retention:Duration::from_secs(60)};
+        let cache=LocalCache::open(tmp.path().join("cache"),limits).unwrap();cache.store("one","One.png",&png(),100).unwrap();cache.write_draft("one",b"small").unwrap();
+        assert!(matches!(cache.write_draft("one",&vec![0;64]),Err(CacheError::TotalBytesLimit)));
+        assert_eq!(cache.read_draft("one").unwrap().unwrap(),b"small");
     }
 }

@@ -2,9 +2,9 @@ import { parseLocalDraft,type LocalDraft } from "../contracts/local-draft";
 import { renderWorkspaceDocument } from "./annotations";
 import { recordDiagnostic } from "./diagnostics";
 import { invoke,isTauri } from "@tauri-apps/api/core";
-import { documentFromPayload, type ImagePayload } from "./native";
+import { rasterizeDocument, documentFromPayload, type ImagePayload } from "./native";
 export type LibraryKind="local"|"ftp";
-async function call<T>(command:string,args?:Record<string,unknown>):Promise<T>{if(!isTauri())throw new Error("Library images are available in the desktop app.");try{return await invoke<T>(command,args);}catch(error){recordDiagnostic("image","failed",error&&typeof error==="object"&&"code"in error?error.code:"other");throw new Error(error&&typeof error==="object"&&"message"in error?String(error.message):"Library operation failed. Refresh and retry.");}}
+async function call<T>(command:string,args?:Record<string,unknown>):Promise<T>{if(!isTauri())throw new Error("Library images are available in the desktop app.");try{return await invoke<T>(command,args);}catch(error){recordDiagnostic(args?.kind==="ftp"?"ftp":"image","failed",error&&typeof error==="object"&&"code"in error?error.code:"other",{operation:command});throw new Error(error&&typeof error==="object"&&"message"in error?String(error.message):"Library operation failed. Refresh and retry.");}}
 type LibraryPayload={name:string;image:ImagePayload;localId?:string;draft?:LocalDraft};
 export async function readLibraryImage(kind:LibraryKind,id:string){const value=await call<LibraryPayload>("library_image",{kind,id});const base=documentFromPayload(value.image,value.name);if(!value.draft)return base;try{const draft=parseLocalDraft(value.draft,base.width,base.height);const rendered=await renderWorkspaceDocument(base,draft.annotations,draft.advanced);return rendered;}finally{URL.revokeObjectURL(base.src);}}
 export async function readLibraryThumbnail(kind:LibraryKind,id:string){return documentFromPayload(await call<ImagePayload>("library_thumbnail",{kind,id}),"Thumbnail");}
@@ -15,3 +15,11 @@ export async function showLibrary(){if(isTauri())await call<void>("show_library"
 export async function listenLibrary(event:string,handler:()=>void){if(!isTauri())return()=>{};const {listen}=await import("@tauri-apps/api/event");return listen(event,handler);}
 
 export async function fitEditorWindow(width:number,height:number){if(isTauri())await call<void>("fit_editor_window",{width,height});}
+
+/** Copy rendered draft snapshots as one native file-list clipboard operation. */
+export async function copyLibraryImages(ids:readonly string[]){
+ if(!ids.length||ids.length>32)throw new Error("Select between 1 and 32 images to copy.");
+ const images:string[]=[];let total=0;
+ for(const id of ids){const image=await readLibraryImage("local",id);try{const png=await rasterizeDocument(image);total+=png.length;if(total>64*1024*1024)throw new Error("Selected images are too large to copy together. Select fewer images.");images.push(png);}finally{URL.revokeObjectURL(image.src);}}
+ await call<void>("copy_library_images",{images});
+}

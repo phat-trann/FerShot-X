@@ -5,6 +5,9 @@ import {
   type SettingsPanelProps,
 } from "../../contracts/settings";
 import "./SettingsPanel.css";
+import { NativeSelect } from "../../components/ui/select";
+import { Input } from "../../components/ui/input";
+import { Switch } from "../../components/ui/switch";
 
 export const MIN_JPEG_QUALITY = 1;
 export const MAX_JPEG_QUALITY = 100;
@@ -45,51 +48,51 @@ export function SettingsPanel({
   };
 
   return (
-    <section className="ferby-settings-panel" aria-label="Ferby Settings">
-      <div className="ferby-settings-panel__header">
-        <h2 className="ferby-settings-panel__title">Ferby Settings</h2>
+    <section className="fershot-settings-panel" aria-label="FerShot Settings">
+      <div className="fershot-settings-panel__header">
+        <h2 className="fershot-settings-panel__title">FerShot Settings</h2>
         <button
           type="button"
-          className="ferby-settings-panel__reset-btn"
+          className="fershot-settings-panel__reset-btn"
           onClick={() => onChange({ ...DEFAULT_SETTINGS })}
         >
           Reset to Defaults
         </button>
       </div>
 
-      <div className="ferby-settings-panel__field">
-        <div className="ferby-settings-panel__row">
+      <div className="fershot-settings-panel__field">
+        <div className="fershot-settings-panel__row">
           <label
-            className="ferby-settings-panel__label"
-            htmlFor="ferby-settings-save-format"
+            className="fershot-settings-panel__label"
+            htmlFor="fershot-settings-save-format"
           >
             Save Format
           </label>
-          <select
-            id="ferby-settings-save-format"
-            className="ferby-settings-panel__select"
+          <NativeSelect
+            id="fershot-settings-save-format"
+            className="fershot-settings-panel__select"
             value={value.saveFormat}
             onChange={handleFormatChange}
           >
             <option value="png">PNG (Lossless)</option>
             <option value="jpeg">JPEG (Compressed)</option>
-          </select>
+          </NativeSelect>
         </div>
       </div>
 
       {value.saveFormat === "jpeg" && (
-        <div className="ferby-settings-panel__field">
-          <div className="ferby-settings-panel__row">
+        <div className="fershot-settings-panel__field">
+          <div className="fershot-settings-panel__row">
             <label
-              className="ferby-settings-panel__label"
-              htmlFor="ferby-settings-jpeg-quality"
+              className="fershot-settings-panel__label"
+              htmlFor="fershot-settings-jpeg-quality"
             >
               JPEG Quality (1–100)
             </label>
-            <input
-              id="ferby-settings-jpeg-quality"
+            <Input
+              id="fershot-settings-jpeg-quality"
               type="number"
-              className="ferby-settings-panel__number"
+              className="fershot-settings-panel__number"
               min={MIN_JPEG_QUALITY}
               max={MAX_JPEG_QUALITY}
               step={1}
@@ -100,33 +103,29 @@ export function SettingsPanel({
         </div>
       )}
 
-      <div className="ferby-settings-panel__field">
-        <label className="ferby-settings-panel__checkbox-label">
-          <input
-            type="checkbox"
+      <div className="fershot-settings-panel__field">
+        <label className="fershot-settings-panel__checkbox-label">
+          <Switch
+            
             checked={value.downscaleRetina}
-            onChange={(event) =>
-              emitChange({ downscaleRetina: event.target.checked })
-            }
+            onCheckedChange={checked => emitChange({ downscaleRetina: checked })}
           />
           <span>Downscale Retina captures to 1x</span>
         </label>
       </div>
 
-      <div className="ferby-settings-panel__field">
-        <label className="ferby-settings-panel__checkbox-label">
-          <input
-            type="checkbox"
+      <div className="fershot-settings-panel__field">
+        <label className="fershot-settings-panel__checkbox-label">
+          <Switch
+            
             checked={value.showPreview}
-            onChange={(event) =>
-              emitChange({ showPreview: event.target.checked })
-            }
+            onCheckedChange={checked => emitChange({ showPreview: checked })}
           />
           <span>Show floating preview after capture</span>
         </label>
       </div>
 
-      <p className="ferby-settings-panel__hint">
+      <p className="fershot-settings-panel__hint">
         Changes apply to the current session state; disk persistence is not yet
         wired.
       </p>

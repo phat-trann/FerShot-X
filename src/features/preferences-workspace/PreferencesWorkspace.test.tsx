@@ -3,7 +3,7 @@ import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import {
   DEFAULT_APP_PREFERENCES,
-  type FerbyPreferenceCapabilities,
+  type FerShotPreferenceCapabilities,
 } from "../app-preferences";
 import {
   DEFAULT_PREFERENCES_WORKSPACE_SNAPSHOT,
@@ -32,7 +32,7 @@ describe("PreferencesWorkspace (A37)", () => {
       "preserve-me-123",
     );
 
-    const capabilities: FerbyPreferenceCapabilities = Object.freeze({
+    const capabilities: FerShotPreferenceCapabilities = Object.freeze({
       alwaysOnTopSupported: true,
       notificationsSupported: true,
       launchAtLoginSupported: false,

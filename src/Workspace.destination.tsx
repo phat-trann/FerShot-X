@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { ExportDestinationPanel, validateBasename } from "./features/export-destination-panel";
 import { chooseExportDirectory, readExportDestination, supportsNativeOutput, updateExportDestination, type ExportDestination } from "./platform/native";
 
-export function WorkspaceDestination({ busy, run }: { busy: boolean; run: (operation: () => Promise<void>) => Promise<void> }) {
+export function WorkspaceDestination({ busy, run, expanded = false }: { busy: boolean; run: (operation: () => Promise<void>) => Promise<void>; expanded?: boolean }) {
   const [value, setValue] = useState<ExportDestination>({ folderLabel: null, basename: "Capture" });
   const [basename, setBasename] = useState("Capture");
   const [ready, setReady] = useState(false);
@@ -17,7 +17,7 @@ export function WorkspaceDestination({ busy, run }: { busy: boolean; run: (opera
   function apply(operation: () => Promise<ExportDestination>) {
     void run(async () => { const next = await operation(); if (alive.current) { setValue(next); setNotice("Export destination saved."); } });
   }
-  return <details className="preference-controls"><summary>Save destination</summary><div className="preference-popover">
+  return <details open={expanded || undefined} className="preference-controls"><summary>Save destination</summary><div className="preference-popover">
     <ExportDestinationPanel folderLabel={value.folderLabel} defaultBasename={basename} busy={busy || !ready || !supportsNativeOutput()}
       onBasenameChange={setBasename} onChooseFolder={() => apply(chooseExportDirectory)}
       onClearFolder={() => apply(() => updateExportDestination(null, true))} />

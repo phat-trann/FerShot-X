@@ -4,14 +4,14 @@ import { describe, expect, it, vi } from "vitest";
 import {
   AppPreferencesPanel,
   DEFAULT_APP_PREFERENCES,
-  type FerbyPreferenceCapabilities,
+  type FerShotPreferenceCapabilities,
 } from "./AppPreferencesPanel";
 
 describe("AppPreferencesPanel (A28)", () => {
   it("gates unsupported backend options via capability props and emits immutable clamped updates without mutating inputs", () => {
     const onChange = vi.fn();
     const initial = Object.freeze({ ...DEFAULT_APP_PREFERENCES });
-    const capabilities: FerbyPreferenceCapabilities = Object.freeze({
+    const capabilities: FerShotPreferenceCapabilities = Object.freeze({
       alwaysOnTopSupported: true,
       notificationsSupported: false,
       launchAtLoginSupported: false,
@@ -33,10 +33,10 @@ describe("AppPreferencesPanel (A28)", () => {
       /Show capture notifications/i,
     );
     const launchAtLoginCheckbox = screen.getByLabelText(
-      /Launch Ferby at login/i,
+      /Launch FerShot X at login/i,
     );
     const menuBarCheckbox = screen.getByLabelText(
-      /Show Ferby icon in menu bar/i,
+      /Show FerShot X icon in menu bar/i,
     );
 
     expect(alwaysOnTopCheckbox).not.toBeDisabled();

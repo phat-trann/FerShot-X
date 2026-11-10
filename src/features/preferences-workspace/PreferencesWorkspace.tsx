@@ -5,8 +5,8 @@ import {
   AppPreferencesPanel,
   DEFAULT_APP_PREFERENCES,
   DEFAULT_PREFERENCE_CAPABILITIES,
-  type FerbyAppPreferences,
-  type FerbyPreferenceCapabilities,
+  type FerShotAppPreferences,
+  type FerShotPreferenceCapabilities,
 } from "../app-preferences";
 import {
   ExportPanel,
@@ -26,10 +26,10 @@ import "./PreferencesWorkspace.css";
 /**
  * Documented incompatible / unresolved preference boundaries (`A37`):
  * - Frozen `src/contracts/settings.ts` (`AppSettings`) only defines `saveFormat`, `jpegQuality`,
- *   `downscaleRetina`, and `showPreview`. Extended preferences (`FerbyAppPreferences`), global
+ *   `downscaleRetina`, and `showPreview`. Extended preferences (`FerShotAppPreferences`), global
  *   shortcut bindings (`HotkeyItem[]`), and forward-compatible `unknownFields` are carried in the
  *   composed `PreferencesWorkspaceSnapshot` view-model without altering `AppSettings` or inferring
- *   new defaults from Shottr.
+ *   new defaults from reference application.
  * - Any unrecognized or incompatible raw record fields passed into `fromRawPreferenceRecord` are
  *   preserved verbatim in `unknownFields` and emitted untouched on save rather than coerced.
  */
@@ -37,7 +37,7 @@ export const PREFERENCES_WORKSPACE_INCOMPATIBLE_FIELD_NOTES = Object.freeze({
   frozenRootSettingsContract: "src/contracts/settings.ts#AppSettings",
   preservedAdapterEnvelope: "PreferencesWorkspaceSnapshot",
   coercionPolicy: "never_coerce_incompatible_or_unknown_fields" as const,
-  shottrDefaultInferenceForbidden: true,
+  referenceDefaultInferenceForbidden: true,
 });
 
 export const PREFERENCES_WORKSPACE_INTEGRATION_EXAMPLE = `
@@ -79,7 +79,7 @@ export const DEFAULT_HOTKEY_ITEMS: readonly HotkeyItem[] = Object.freeze([
 ]);
 
 export interface PreferencesWorkspaceSnapshot {
-  readonly appPreferences: Readonly<FerbyAppPreferences>;
+  readonly appPreferences: Readonly<FerShotAppPreferences>;
   readonly hotkeys: readonly HotkeyItem[];
   readonly suggestedExportBasename?: string;
   readonly unknownFields: Readonly<Record<string, unknown>>;
@@ -89,7 +89,7 @@ export const DEFAULT_PREFERENCES_WORKSPACE_SNAPSHOT: Readonly<PreferencesWorkspa
   Object.freeze({
     appPreferences: DEFAULT_APP_PREFERENCES,
     hotkeys: DEFAULT_HOTKEY_ITEMS,
-    suggestedExportBasename: "ferby-capture",
+    suggestedExportBasename: "fershot-capture",
     unknownFields: Object.freeze({}),
   });
 
@@ -150,7 +150,7 @@ export function fromRawPreferenceRecord(
     raw.appPreferences &&
     typeof raw.appPreferences === "object" &&
     !Array.isArray(raw.appPreferences)
-      ? (raw.appPreferences as FerbyAppPreferences)
+      ? (raw.appPreferences as FerShotAppPreferences)
       : fallback.appPreferences;
 
   const hotkeys = Array.isArray(raw.hotkeys)
@@ -184,11 +184,11 @@ export function toRawPreferenceRecord(
 
 export function applyGuardedPreferencePatch(
   current: Readonly<PreferencesWorkspaceSnapshot>,
-  nextPreferences: Readonly<FerbyAppPreferences>,
-  capabilities: Readonly<FerbyPreferenceCapabilities>,
+  nextPreferences: Readonly<FerShotAppPreferences>,
+  capabilities: Readonly<FerShotPreferenceCapabilities>,
 ): Readonly<PreferencesWorkspaceSnapshot> {
   const prevPrefs = current.appPreferences;
-  const guardedPrefs: FerbyAppPreferences = Object.freeze({
+  const guardedPrefs: FerShotAppPreferences = Object.freeze({
     postCaptureBehavior: nextPreferences.postCaptureBehavior,
     defaultZoomPercent: nextPreferences.defaultZoomPercent,
     // Preserve existing capability-disabled fields untouched
@@ -264,7 +264,7 @@ export function snapshotsEqual(
 }
 
 export function listUnsupportedPreferenceReasons(
-  capabilities: Readonly<FerbyPreferenceCapabilities>,
+  capabilities: Readonly<FerShotPreferenceCapabilities>,
   hotkeyPermissionState: "granted" | "missing" | "unknown",
 ): readonly string[] {
   const reasons: string[] = [];
@@ -291,7 +291,7 @@ export function listUnsupportedPreferenceReasons(
 export interface PreferencesWorkspaceProps {
   readonly initialSnapshot?: Readonly<PreferencesWorkspaceSnapshot>;
   readonly externalSnapshot?: Readonly<PreferencesWorkspaceSnapshot>;
-  readonly capabilities?: Readonly<FerbyPreferenceCapabilities>;
+  readonly capabilities?: Readonly<FerShotPreferenceCapabilities>;
   readonly hotkeyPermissionState?: "granted" | "missing" | "unknown";
   readonly previewDocument?: ImageDocument | null;
   readonly exportBusy?: boolean;
@@ -356,7 +356,7 @@ export const PreferencesWorkspace: React.FC<PreferencesWorkspaceProps> = ({
     );
   };
 
-  const handleAppPreferencesChange = (nextPrefs: FerbyAppPreferences) => {
+  const handleAppPreferencesChange = (nextPrefs: FerShotAppPreferences) => {
     setDraft((prev) =>
       applyGuardedPreferencePatch(prev, nextPrefs, capabilities),
     );
@@ -417,15 +417,15 @@ export const PreferencesWorkspace: React.FC<PreferencesWorkspaceProps> = ({
 
   return (
     <div
-      className="ferby-preferences-workspace"
+      className="fershot-preferences-workspace"
       aria-label="Capabilities-aware preferences workspace"
     >
-      <header className="ferby-preferences-workspace__header">
-        <h2 className="ferby-preferences-workspace__title">
+      <header className="fershot-preferences-workspace__header">
+        <h2 className="fershot-preferences-workspace__title">
           Preferences Workspace
         </h2>
         <span
-          className="ferby-preferences-workspace__badge"
+          className="fershot-preferences-workspace__badge"
           aria-label="Workspace dirty state"
         >
           {isDirty ? "Unsaved changes" : "Saved"}
@@ -434,7 +434,7 @@ export const PreferencesWorkspace: React.FC<PreferencesWorkspaceProps> = ({
 
       {unsupportedReasons.length > 0 && (
         <section
-          className="ferby-preferences-workspace__banner ferby-preferences-workspace__banner--info"
+          className="fershot-preferences-workspace__banner fershot-preferences-workspace__banner--info"
           aria-label="Capability explanations"
         >
           <strong>Capability notes:</strong>
@@ -449,12 +449,12 @@ export const PreferencesWorkspace: React.FC<PreferencesWorkspaceProps> = ({
       {conflictSnapshot && (
         <div
           role="alert"
-          className="ferby-preferences-workspace__banner ferby-preferences-workspace__banner--conflict"
+          className="fershot-preferences-workspace__banner fershot-preferences-workspace__banner--conflict"
         >
           <span>
             External preferences changed on disk while you have unsaved edits.
           </span>
-          <div className="ferby-preferences-workspace__actions">
+          <div className="fershot-preferences-workspace__actions">
             <button
               type="button"
               onClick={() => {
@@ -482,7 +482,7 @@ export const PreferencesWorkspace: React.FC<PreferencesWorkspaceProps> = ({
       {saveError && (
         <div
           role="alert"
-          className="ferby-preferences-workspace__banner ferby-preferences-workspace__banner--error"
+          className="fershot-preferences-workspace__banner fershot-preferences-workspace__banner--error"
         >
           <span>Save failed: {saveError}</span>
           <button
@@ -526,7 +526,7 @@ export const PreferencesWorkspace: React.FC<PreferencesWorkspaceProps> = ({
         onExport={(payload) => onExport?.(payload)}
       />
 
-      <footer className="ferby-preferences-workspace__actions">
+      <footer className="fershot-preferences-workspace__actions">
         <button
           type="button"
           disabled={!isDirty || saving}

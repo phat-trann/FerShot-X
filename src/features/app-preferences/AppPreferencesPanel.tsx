@@ -1,6 +1,9 @@
 import React from "react";
 import { DEFAULT_SETTINGS, type AppSettings } from "../../contracts/settings";
 import "./AppPreferencesPanel.css";
+import { NativeSelect } from "../../components/ui/select";
+import { Input } from "../../components/ui/input";
+import { Switch } from "../../components/ui/switch";
 
 export const MIN_DEFAULT_ZOOM_PERCENT = 25;
 export const MAX_DEFAULT_ZOOM_PERCENT = 400;
@@ -11,7 +14,7 @@ export type PostCaptureBehavior =
   | "copy-only"
   | "save-only";
 
-export interface FerbyAppPreferences {
+export interface FerShotAppPreferences {
   readonly postCaptureBehavior: PostCaptureBehavior;
   readonly defaultZoomPercent: number;
   readonly keepEditorAlwaysOnTop: boolean;
@@ -21,14 +24,14 @@ export interface FerbyAppPreferences {
   readonly baseSettings: Readonly<AppSettings>;
 }
 
-export interface FerbyPreferenceCapabilities {
+export interface FerShotPreferenceCapabilities {
   readonly alwaysOnTopSupported: boolean;
   readonly notificationsSupported: boolean;
   readonly launchAtLoginSupported: boolean;
   readonly menuBarSupported: boolean;
 }
 
-export const DEFAULT_APP_PREFERENCES: Readonly<FerbyAppPreferences> =
+export const DEFAULT_APP_PREFERENCES: Readonly<FerShotAppPreferences> =
   Object.freeze({
     postCaptureBehavior: "open-editor",
     defaultZoomPercent: 100,
@@ -39,7 +42,7 @@ export const DEFAULT_APP_PREFERENCES: Readonly<FerbyAppPreferences> =
     baseSettings: Object.freeze({ ...DEFAULT_SETTINGS }),
   });
 
-export const DEFAULT_PREFERENCE_CAPABILITIES: Readonly<FerbyPreferenceCapabilities> =
+export const DEFAULT_PREFERENCE_CAPABILITIES: Readonly<FerShotPreferenceCapabilities> =
   Object.freeze({
     alwaysOnTopSupported: true,
     notificationsSupported: true,
@@ -48,10 +51,11 @@ export const DEFAULT_PREFERENCE_CAPABILITIES: Readonly<FerbyPreferenceCapabiliti
   });
 
 export interface AppPreferencesPanelProps {
-  readonly value: Readonly<FerbyAppPreferences>;
-  readonly capabilities?: Readonly<FerbyPreferenceCapabilities>;
+  readonly value: Readonly<FerShotAppPreferences>;
+  readonly capabilities?: Readonly<FerShotPreferenceCapabilities>;
   readonly disabled?: boolean;
-  readonly onChange: (next: FerbyAppPreferences) => void;
+  readonly editorAfterCapture?: boolean;
+  readonly onChange: (next: FerShotAppPreferences) => void;
 }
 
 export function clampDefaultZoomPercent(value: number): number {
@@ -66,9 +70,9 @@ export function clampDefaultZoomPercent(value: number): number {
 }
 
 function cloneFrozenPreferences(
-  base: Readonly<FerbyAppPreferences>,
-  patch: Partial<FerbyAppPreferences>,
-): FerbyAppPreferences {
+  base: Readonly<FerShotAppPreferences>,
+  patch: Partial<FerShotAppPreferences>,
+): FerShotAppPreferences {
   const mergedBaseSettings = patch.baseSettings ?? base.baseSettings;
   return Object.freeze({
     ...base,
@@ -81,24 +85,25 @@ export const AppPreferencesPanel: React.FC<AppPreferencesPanelProps> = ({
   value,
   capabilities = DEFAULT_PREFERENCE_CAPABILITIES,
   disabled = false,
+  editorAfterCapture = false,
   onChange,
 }) => {
-  const emitPatch = (patch: Partial<FerbyAppPreferences>) => {
+  const emitPatch = (patch: Partial<FerShotAppPreferences>) => {
     if (disabled) return;
     onChange(cloneFrozenPreferences(value, patch));
   };
 
   return (
     <section
-      className="ferby-app-preferences"
+      className="fershot-app-preferences"
       aria-label="Application preferences"
     >
-      <h3 className="ferby-app-preferences__title">Application Preferences</h3>
+      <h3 className="fershot-app-preferences__title">Application Preferences</h3>
 
-      <div className="ferby-app-preferences__field">
-        <label htmlFor="ferby-pref-post-capture">After capture</label>
-        <select
-          id="ferby-pref-post-capture"
+      {!editorAfterCapture && <div className="fershot-app-preferences__field">
+        <label htmlFor="fershot-pref-post-capture">After capture</label>
+        <NativeSelect
+          id="fershot-pref-post-capture"
           disabled={disabled}
           value={value.postCaptureBehavior}
           onChange={(e) =>
@@ -111,13 +116,14 @@ export const AppPreferencesPanel: React.FC<AppPreferencesPanelProps> = ({
           <option value="show-preview">Show floating preview</option>
           <option value="copy-only">Copy to clipboard only</option>
           <option value="save-only">Save to disk only</option>
-        </select>
-      </div>
+        </NativeSelect>
+      </div>}
+      {editorAfterCapture && <p>Captures open in the editor. Press ⌘S when ready to upload.</p>}
 
-      <div className="ferby-app-preferences__field">
-        <label htmlFor="ferby-pref-default-zoom">Default zoom (%)</label>
-        <input
-          id="ferby-pref-default-zoom"
+      <div className="fershot-app-preferences__field">
+        <label htmlFor="fershot-pref-default-zoom">Default zoom (%)</label>
+        <Input
+          id="fershot-pref-default-zoom"
           type="number"
           min={MIN_DEFAULT_ZOOM_PERCENT}
           max={MAX_DEFAULT_ZOOM_PERCENT}
@@ -133,74 +139,74 @@ export const AppPreferencesPanel: React.FC<AppPreferencesPanelProps> = ({
         />
       </div>
 
-      <div className="ferby-app-preferences__toggles">
-        <label className="ferby-app-preferences__checkbox">
-          <input
-            type="checkbox"
+      <div className="fershot-app-preferences__toggles">
+        <label className="fershot-app-preferences__checkbox">
+          <Switch
+            
             checked={value.keepEditorAlwaysOnTop}
             disabled={disabled || !capabilities.alwaysOnTopSupported}
-            onChange={(e) => {
+            onCheckedChange={checked => {
               if (!capabilities.alwaysOnTopSupported) return;
-              emitPatch({ keepEditorAlwaysOnTop: e.target.checked });
+              emitPatch({ keepEditorAlwaysOnTop: checked });
             }}
           />
           <span>Keep editor window on top</span>
           {!capabilities.alwaysOnTopSupported && (
-            <small className="ferby-app-preferences__unsupported">
+            <small className="fershot-app-preferences__unsupported">
               (Unsupported by current backend)
             </small>
           )}
         </label>
 
-        <label className="ferby-app-preferences__checkbox">
-          <input
-            type="checkbox"
+        <label className="fershot-app-preferences__checkbox">
+          <Switch
+            
             checked={value.showSystemNotifications}
             disabled={disabled || !capabilities.notificationsSupported}
-            onChange={(e) => {
+            onCheckedChange={checked => {
               if (!capabilities.notificationsSupported) return;
-              emitPatch({ showSystemNotifications: e.target.checked });
+              emitPatch({ showSystemNotifications: checked });
             }}
           />
           <span>Show capture notifications</span>
           {!capabilities.notificationsSupported && (
-            <small className="ferby-app-preferences__unsupported">
+            <small className="fershot-app-preferences__unsupported">
               (Unsupported by current backend)
             </small>
           )}
         </label>
 
-        <label className="ferby-app-preferences__checkbox">
-          <input
-            type="checkbox"
+        <label className="fershot-app-preferences__checkbox">
+          <Switch
+            
             checked={value.launchAtLogin}
             disabled={disabled || !capabilities.launchAtLoginSupported}
-            onChange={(e) => {
+            onCheckedChange={checked => {
               if (!capabilities.launchAtLoginSupported) return;
-              emitPatch({ launchAtLogin: e.target.checked });
+              emitPatch({ launchAtLogin: checked });
             }}
           />
-          <span>Launch Ferby at login</span>
+          <span>Launch FerShot X at login</span>
           {!capabilities.launchAtLoginSupported && (
-            <small className="ferby-app-preferences__unsupported">
+            <small className="fershot-app-preferences__unsupported">
               (Unsupported by current backend)
             </small>
           )}
         </label>
 
-        <label className="ferby-app-preferences__checkbox">
-          <input
-            type="checkbox"
+        <label className="fershot-app-preferences__checkbox">
+          <Switch
+            
             checked={value.showInMenuBar}
             disabled={disabled || !capabilities.menuBarSupported}
-            onChange={(e) => {
+            onCheckedChange={checked => {
               if (!capabilities.menuBarSupported) return;
-              emitPatch({ showInMenuBar: e.target.checked });
+              emitPatch({ showInMenuBar: checked });
             }}
           />
-          <span>Show Ferby icon in menu bar</span>
+          <span>Show FerShot X icon in menu bar</span>
           {!capabilities.menuBarSupported && (
-            <small className="ferby-app-preferences__unsupported">
+            <small className="fershot-app-preferences__unsupported">
               (Unsupported by current backend)
             </small>
           )}

@@ -8,8 +8,8 @@ export {
 } from "./AppPreferencesPanel";
 export type {
   AppPreferencesPanelProps,
-  FerbyAppPreferences,
-  FerbyPreferenceCapabilities,
+  FerShotAppPreferences,
+  FerShotPreferenceCapabilities,
   PostCaptureBehavior,
 } from "./AppPreferencesPanel";
 

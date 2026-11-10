@@ -1,3 +1,4 @@
+import { Radio } from "./components/ui/radio";
 import { WindowTitleBar } from "./components/WindowTitleBar";
 import { useEffect, useRef, useState } from "react";
 import { DEFAULT_APP_PREFERENCES, type FerShotAppPreferences } from "./features/app-preferences";
@@ -25,6 +26,8 @@ export default function PreferencesWindow() {
   const initial = new URLSearchParams(location.search).get("tab");
   const [tab, setTab] = useState<Tab>(TABS.includes(initial as Tab) ? initial as Tab : "general");
   const [value, setValue] = useState<FerShotAppPreferences>({ ...DEFAULT_APP_PREFERENCES, baseSettings: { ...DEFAULT_APP_PREFERENCES.baseSettings } });
+  const [uploadingVisited,setUploadingVisited]=useState(initial==="uploading");
+  useEffect(()=>{if(tab==="uploading")setUploadingVisited(true);},[tab]);
   const [ready, setReady] = useState(false);
   const [loginSupported, setLoginSupported] = useState(false);
   const [loginHint,setLoginHint]=useState("");
@@ -80,11 +83,11 @@ export default function PreferencesWindow() {
       <section role="tabpanel" id="pane-general" aria-labelledby="tab-general" hidden={tab !== "general"}>
         <fieldset disabled={!ready || busy}><legend>Capture &amp; export</legend>
           <div className="preference-row"><span>Save format</span><div role="radiogroup" aria-label="Preferred export format" className="preference-segment">
-            {(["png", "jpeg"] as const).map(format => <label key={format}><input type="radio" name="save-format" checked={value.baseSettings.saveFormat === format} onChange={() => setBase("saveFormat", format)} />{format.toUpperCase()}</label>)}
+            {(["png", "jpeg"] as const).map(format => <label key={format}><Radio name="save-format" checked={value.baseSettings.saveFormat === format} onChange={() => setBase("saveFormat", format)} />{format.toUpperCase()}</label>)}
           </div></div>
           <label className="preference-row"><span>JPEG quality</span><div className="preference-range"><Slider aria-label="Preferred JPEG quality"  min="1" max="100" value={value.baseSettings.jpegQuality} onValueChange={sliderValue => setBase("jpegQuality", Number(sliderValue))}/><output>{value.baseSettings.jpegQuality}%</output></div></label>
           <label className="preference-check"><Switch checked={value.baseSettings.downscaleRetina} onCheckedChange={enabled => setBase("downscaleRetina", enabled)}/>Downscale Retina captures to 1× when copying or saving</label>
-          <p className="preference-help">New captures open in the editor. Imported images keep their original pixel size.</p>
+          
         </fieldset>
         <WorkspaceDestination expanded busy={busy} run={run}/>
         <fieldset disabled={!ready || busy}><legend>Application</legend>
@@ -95,17 +98,17 @@ export default function PreferencesWindow() {
         </fieldset>
       </section>
       <section role="tabpanel" id="pane-hotkeys" aria-labelledby="tab-hotkeys" hidden={tab !== "hotkeys"}>{tab === "hotkeys" && <WorkspaceShortcuts blocked={busy}/>}</section>
-      <section role="tabpanel" id="pane-uploading" aria-labelledby="tab-uploading" hidden={tab !== "uploading"}><WorkspaceFtpSettings expanded/></section>
+      <section role="tabpanel" id="pane-uploading" aria-labelledby="tab-uploading" hidden={tab !== "uploading"}>{uploadingVisited&&<WorkspaceFtpSettings expanded/>}</section>
       <section role="tabpanel" id="pane-advanced" aria-labelledby="tab-advanced" hidden={tab !== "advanced"}>
         <fieldset disabled={!ready || busy}><legend>Editor</legend>
           <label className="preference-row"><span>Default zoom</span><div className="preference-range"><Slider aria-label="Default zoom"  min="25" max="400" step="25" value={value.defaultZoomPercent} onValueChange={sliderValue => patch("defaultZoomPercent", Number(sliderValue))}/><output>{value.defaultZoomPercent}%</output></div></label>
           <label className="preference-check"><Switch checked={value.keepEditorAlwaysOnTop} onCheckedChange={enabled => nativeToggle("keepEditorAlwaysOnTop", enabled)}/>Keep the editor above other windows</label>
         </fieldset>
         <LogSettings/>
-        <div className="preference-info"><strong>Private by default</strong><p>Local copies expire after 30 days. FTP transfers start only when you choose Upload or Retry. Passwords stay in macOS Keychain.</p></div>
+        
       </section>
     </motion.div>
-    <footer className="preferences-footer"><p role="status">{notice || "Preferences are stored on this Mac."}</p><div>
+    <footer className="preferences-footer"><p role="status">{notice}</p><div>
       <Button variant="outline" size="sm" onClick={() => { void closePreferencesWindow().catch(() => setNotice("Settings could not be closed. Use the window close button.")); }}>Done</Button>
       {(tab === "general" || tab === "advanced") && <Button size="sm" className="preferences-save" disabled={!ready || busy || !supportsNativeOutput()} onClick={save}>{busy ? "Saving…" : "Save preferences"}</Button>}
     </div></footer>

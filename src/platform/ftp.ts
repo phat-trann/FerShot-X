@@ -6,7 +6,7 @@ import { rasterizeDocument } from "./native";
 async function call<T>(command: string, args?: Record<string, unknown>): Promise<T> {
   if (!isTauri()) throw new Error("FTP publishing requires the desktop app.");
   try { return await invoke<T>(command, args); }
-  catch (error) { recordDiagnostic("ftp", "failed", typeof error === "object" && error && "code" in error ? error.code : "other"); throw new Error(typeof error === "object" && error && "message" in error ? String(error.message) : "FTP operation failed. Please retry."); }
+  catch (error) { recordDiagnostic("ftp", "failed", typeof error === "object" && error && "code" in error ? error.code : "other",{operation:command}); throw new Error(typeof error === "object" && error && "message" in error ? String(error.message) : "FTP operation failed. Please retry."); }
 }
 export const readFtpSettings = () => call<FtpSettings | null>("ftp_read_settings");
 export const saveFtpSettings = (settings: FtpSettings, password: string | null) => call<FtpSettings>("ftp_save_settings", { settings, password });

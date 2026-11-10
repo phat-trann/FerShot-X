@@ -3,7 +3,7 @@ import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import {
   DEFAULT_APP_PREFERENCES,
-  type FerbyPreferenceCapabilities,
+  type FerShotPreferenceCapabilities,
 } from "../features/app-preferences";
 import {
   DEFAULT_PREFERENCES_WORKSPACE_SNAPSHOT,
@@ -13,7 +13,7 @@ import {
   type PreferencesWorkspaceProps,
 } from "../features/preferences-workspace/PreferencesWorkspace";
 
-const limitedCapabilities: FerbyPreferenceCapabilities = Object.freeze({
+const limitedCapabilities: FerShotPreferenceCapabilities = Object.freeze({
   alwaysOnTopSupported: false,
   notificationsSupported: false,
   launchAtLoginSupported: false,

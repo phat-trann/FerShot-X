@@ -13,7 +13,7 @@ export default defineConfig({
     baseURL: "http://127.0.0.1:1422",
     viewport: { width: 1180, height: 780 },
     launchOptions: {
-      executablePath: process.env.FERBY_CHROME_PATH ?? (existsSync(macChrome) ? macChrome : undefined),
+      executablePath: process.env.FERSHOT_CHROME_PATH ?? (existsSync(macChrome) ? macChrome : undefined),
     },
   },
   webServer: {

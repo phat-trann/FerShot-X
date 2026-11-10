@@ -3,9 +3,9 @@ import {
   parseAppPreferencesJson,
   serializeAppPreferencesJson,
 } from "../features/app-preferences-codec";
-import type { FerbyAppPreferences } from "../features/app-preferences/AppPreferencesPanel";
+import type { FerShotAppPreferences } from "../features/app-preferences/AppPreferencesPanel";
 
-const preferences: FerbyAppPreferences = {
+const preferences: FerShotAppPreferences = {
   postCaptureBehavior: "save-only",
   defaultZoomPercent: 175,
   keepEditorAlwaysOnTop: true,

@@ -40,6 +40,7 @@ describe("copyImage boundary", () => {
     }) } });
     runtime.invoke.mockRejectedValue({ code: "clipboard_failed", message: "Clipboard unavailable." });
     await expect(copyImage(documentImage)).rejects.toMatchObject({ code: "clipboard_failed", message: "Clipboard unavailable." });
-    expect(runtime.invoke).toHaveBeenCalledOnce();
+    expect(runtime.invoke.mock.calls.filter(([command])=>command==="copy_image")).toHaveLength(1);
+    expect(runtime.invoke).toHaveBeenCalledWith("record_diagnostic",{input:{area:"clipboard",event:"failed",code:"clipboard_failed"}});
   });
 });

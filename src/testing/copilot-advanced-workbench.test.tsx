@@ -46,7 +46,7 @@ describe("AdvancedWorkbench independent regressions", () => {
           itemKind: "contract",
           annotation: {
             id: "unsupported",
-            tool: "blur",
+            tool: "unsupported" as never,
             points: [{ x: 1, y: 1 }],
             style: { color: "#000000", strokeWidth: 1, opacity: 1 },
           },
@@ -65,14 +65,14 @@ describe("AdvancedWorkbench independent regressions", () => {
       />,
     );
 
-    fireEvent.click(screen.getByRole("button", { name: "Tool: text" }));
+    fireEvent.click(screen.getByRole("button", { name: "text tool" }));
     fireEvent.click(screen.getByRole("button", { name: "Place Text" }));
-    fireEvent.click(screen.getByRole("button", { name: "Undo Advanced" }));
-    expect(screen.getByRole("button", { name: "Redo Advanced" })).not.toBeDisabled();
+    fireEvent.click(screen.getByRole("button", { name: "Undo" }));
+    expect(screen.getByRole("button", { name: "Redo" })).not.toBeDisabled();
 
-    fireEvent.click(screen.getByRole("button", { name: "Tool: highlight" }));
+    fireEvent.click(screen.getByRole("button", { name: "highlight tool" }));
     fireEvent.click(screen.getByRole("button", { name: "Add highlight effect" }));
-    expect(screen.getByRole("button", { name: "Redo Advanced" })).toBeDisabled();
+    expect(screen.getByRole("button", { name: "Redo" })).toBeDisabled();
     expect(screen.getByLabelText("Advanced item count")).toHaveTextContent("1 items");
   });
 
@@ -87,12 +87,12 @@ describe("AdvancedWorkbench independent regressions", () => {
       />,
     );
 
-    expect(screen.getByRole("button", { name: "Tool: highlight" })).toHaveAttribute(
+    expect(screen.getByRole("button", { name: "highlight tool" })).toHaveAttribute(
       "aria-pressed",
       "true",
     );
-    fireEvent.click(screen.getByRole("button", { name: "Tool: select" }));
-    fireEvent.click(screen.getByRole("button", { name: "Tool: highlight" }));
+    fireEvent.click(screen.getByRole("button", { name: "select tool" }));
+    fireEvent.click(screen.getByRole("button", { name: "highlight tool" }));
     fireEvent.click(screen.getByRole("button", { name: "Add highlight effect" }));
 
     const latest = onSnapshotChange.mock.lastCall?.[0];

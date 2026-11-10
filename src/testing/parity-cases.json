@@ -27,5 +27,5 @@
   {"id":"F26","fixture":"synthetic window pixels","trigger":"background/trim/shadow action","expectedEvidence":"derived pixels and trim bounds","nativeStatus":"NOT_EXECUTED"},
   {"id":"F30","fixture":"isolated shortcut assignment form","trigger":"shortcut assignment action","expectedEvidence":"validated shortcut descriptor","nativeStatus":"NOT_EXECUTED"},
   {"id":"F31","fixture":"synthetic lifecycle settings","trigger":"lifecycle preference action","expectedEvidence":"validated preference transition","nativeStatus":"NOT_EXECUTED"},
-  {"id":"F32","fixture":"inert Ferby deep link string","trigger":"deep-link request","expectedEvidence":"allowlisted intent requiring confirmation","nativeStatus":"NOT_EXECUTED"}
+  {"id":"F32","fixture":"inert FerShot deep link string","trigger":"deep-link request","expectedEvidence":"allowlisted intent requiring confirmation","nativeStatus":"NOT_EXECUTED"}
 ]

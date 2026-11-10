@@ -9,6 +9,7 @@ export interface Annotation {
   style: AnnotationStyle;
   text?: string;
   counter?: number;
+  blurRadius?: number;
 }
 export interface EditorViewProps {
   imageSrc: string;

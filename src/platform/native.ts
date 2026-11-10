@@ -1,30 +1,28 @@
+import { logNativeOperation } from "./diagnostics";
 import { invoke, isTauri } from "@tauri-apps/api/core";
 import { DEFAULT_SETTINGS, type AppSettings } from "../contracts/settings";
-import { DEFAULT_APP_PREFERENCES, type FerbyAppPreferences } from "../features/app-preferences";
+import { DEFAULT_APP_PREFERENCES, type FerShotAppPreferences } from "../features/app-preferences";
 import { parseAppPreferencesJson, serializeAppPreferencesJson } from "../features/app-preferences-codec";
 import { parseSettingsJson } from "../features/settings-codec";
 import type { CaptureMode, ImageDocument } from "../contracts/media";
 import { validateCrop } from "../features/crop/validate";
 import { safeExportName, type ExportFormat } from "../features/export/names";
 import { assertImageDimensions, MAX_NATIVE_BYTES } from "./image-limits";
-import type { VisionPortRequest } from "../features/vision-backend-adapter";
 import type { CaptureArea, DisplayGeometry } from "../features/capture-session";
 import type { PixelEffectRequest } from "../features/effects-panel";
 import type { PrintSheetOptions } from "../features/local-output";
 import { parsePrintPreferencesJson, serializePrintPreferencesJson } from "../features/print-preferences-codec";
 import { importImage } from "./import-image";
-import { DEFAULT_RECOGNITION_PREFERENCES, parseRecognitionPreferencesJson, serializeRecognitionPreferencesJson,
-  type RecognitionPreferences } from "../features/recognition-preferences-codec";
 export { MAX_NATIVE_BYTES } from "./image-limits";
 export interface AppInfo { name: string; version: string; platform: string }
 export async function readAppInfo(): Promise<AppInfo | null> {
   return isTauri() ? invoke<AppInfo>("app_info") : null;
 }
 
-export async function listenForWorkspaceClose(handler: () => void): Promise<() => void> {
+export async function listenForWorkspaceClose(handler: (quit?: boolean) => void): Promise<() => void> {
   if (!isTauri()) return () => {};
   const { listen } = await import("@tauri-apps/api/event");
-  return listen("ferby-workspace-close-requested", handler);
+  return listen<{quit?:boolean}|null>("fershot-workspace-close-requested", event => handler(event.payload?.quit === true));
 }
 export interface OpenedDocument { id: string; name: string }
 export async function readOpenedDocuments(): Promise<readonly OpenedDocument[]> {
@@ -36,21 +34,27 @@ export async function readOpenedDocuments(): Promise<readonly OpenedDocument[]> 
 }
 export async function openRequestedDocument(id: string): Promise<ImageDocument> {
   const value = await nativeCall<{ name: string; mimeType: string; base64: string }>("read_open_document", { id });
+  return importOpenedPayload(value);
+}
+function importOpenedPayload(value: { name: string; mimeType: string; base64: string }): Promise<ImageDocument> {
   if (!value || typeof value.name !== "string" || value.name.length > 480 || !["image/png", "image/jpeg", "image/gif", "image/webp"].includes(value.mimeType) ||
       typeof value.base64 !== "string" || value.base64.length > Math.ceil(20 * 1024 * 1024 / 3) * 4) throw new TypeError("Invalid native image response.");
   const binary = atob(value.base64); if (binary.length > 20 * 1024 * 1024) throw new RangeError("Image exceeds import limits.");
   const bytes = Uint8Array.from(binary, character => character.charCodeAt(0));
   return importImage(new File([bytes], value.name, { type: value.mimeType }));
 }
+export async function openImageDialog(): Promise<ImageDocument | null> {
+  const value = await nativeCall<{name:string;mimeType:string;base64:string}|null>("open_image_dialog",{});
+  return value === null ? null : importOpenedPayload(value);
+}
+export async function quitApplication(): Promise<void> { await nativeCall<void>("quit_application",{}); }
 export async function acknowledgeOpenedDocument(id: string): Promise<void> { await nativeCall<void>("acknowledge_document", { id }); }
 export async function listenOpenedDocuments(handler: () => void): Promise<() => void> {
   if (!isTauri()) return () => {};
-  const { listen } = await import("@tauri-apps/api/event"); return listen("ferby-documents-pending", handler);
+  const { listen } = await import("@tauri-apps/api/event"); return listen("fershot-documents-pending", handler);
 }
 
-export async function closeWorkspace(): Promise<void> { await nativeCall<void>("close_workspace", {}); }
-export async function readLocalArchive(): Promise<string | null> { return nativeCall<string | null>("read_local_archive", {}); }
-export async function writeLocalArchive(raw: string): Promise<boolean> { return nativeCall<boolean>("write_local_archive", { raw }); }
+export async function hideWorkspace(): Promise<void> { if (isTauri()) await nativeCall<void>("hide_workspace", {}); }
 export function supportsNativeOutput(): boolean { return isTauri(); }
 export interface ExportDestination { folderLabel: string | null; basename: string }
 function destinationView(value: unknown): ExportDestination {
@@ -95,39 +99,12 @@ export async function applyNativeShortcuts(bindings: Readonly<Record<string, str
 export async function listenGlobalActions(handler: (action: unknown) => void): Promise<() => void> {
   if (!isTauri()) return () => {};
   const { listen } = await import("@tauri-apps/api/event");
-  return listen<unknown>("ferby-global-action", event => handler(event.payload));
+  return listen<unknown>("fershot-global-action", event => handler(event.payload));
 }
 export async function listenWorkspaceMenu(handler: (action: unknown) => void): Promise<() => void> {
   if (!isTauri()) return () => {};
   const { listen } = await import("@tauri-apps/api/event");
-  return listen<unknown>("ferby-menu-action", event => handler(event.payload));
-}
-export interface PendingDeepLink { id: string; url: string }
-export async function readLinkPolicy(): Promise<boolean> {
-  if (!isTauri()) return false;
-  const value = await nativeCall<unknown>("read_link_policy", {});
-  if (typeof value !== "boolean") throw new TypeError("Invalid native link policy."); return value;
-}
-export async function saveLinkPolicy(enabled: boolean): Promise<boolean> {
-  if (typeof enabled !== "boolean") throw new TypeError("Expected a link-policy boolean.");
-  const value = await nativeCall<unknown>("save_link_policy", { enabled });
-  if (value !== enabled) throw new TypeError("Native link policy did not apply."); return enabled;
-}
-export async function readPendingDeepLinks(): Promise<readonly PendingDeepLink[]> {
-  if (!isTauri()) return [];
-  const value = await nativeCall<unknown>("read_pending_deep_links", {});
-  if (!Array.isArray(value) || value.length > 16 || !value.every(item => item &&
-    typeof item.id === "string" && /^native-link-[0-9]{1,20}$/.test(item.id) &&
-    typeof item.url === "string" && item.url.length <= 2048)) throw new TypeError("Invalid pending link response.");
-  return value as PendingDeepLink[];
-}
-export async function acknowledgeDeepLink(id: string): Promise<void> {
-  await nativeCall<void>("acknowledge_deep_links", { ids: [id] });
-}
-export async function listenForDeepLinks(handler: () => void): Promise<() => void> {
-  if (!isTauri()) return () => {};
-  const { listen } = await import("@tauri-apps/api/event");
-  return listen("ferby-deep-links-pending", handler);
+  return listen<unknown>("fershot-menu-action", event => handler(event.payload));
 }
 export async function setWorkspaceOnTop(enabled: boolean): Promise<void> {
   if (typeof enabled !== "boolean") throw new TypeError("Expected window on-top flag.");
@@ -168,8 +145,9 @@ function requireDesktop() {
 }
 async function nativeCall<T>(command: string, args: Record<string, unknown>): Promise<T> {
   requireDesktop();
-  try { return await invoke<T>(command, args); }
+  try { const result = await invoke<T>(command, args); logNativeOperation(command, false); return result; }
   catch (error) {
+    logNativeOperation(command, true, typeof error === "object" && error && "code" in error ? error.code : "other");
     if (typeof error === "object" && error !== null && "message" in error) {
       const value = error as { message: unknown; code?: unknown };
       throw new NativeOperationError(typeof value.code === "string" ? value.code : "native_failed", String(value.message));
@@ -233,11 +211,6 @@ export async function readCaptureDisplay(): Promise<DisplayGeometry> {
   }
   return { ...value };
 }
-export async function beginAutoScroll(display: DisplayGeometry, region: CaptureArea): Promise<string> {
-  return nativeCall<string>("begin_auto_scroll", { request: { display, ...region } });
-}
-export async function advanceAutoScroll(token: string, pixels: number): Promise<void> { await nativeCall<void>("advance_auto_scroll", { token, pixels }); }
-export async function endAutoScroll(token: string): Promise<void> { await nativeCall<void>("end_auto_scroll", { token }); }
 
 export async function stitchCapturedFrames(frames: readonly ImageDocument[], options: { reverseDirection: boolean; maxHeight: number }, signal: AbortSignal): Promise<ImageDocument> {
   const check = () => { if (signal.aborted) throw new NativeOperationError("cancelled", "Frame collection cancelled."); };
@@ -279,6 +252,17 @@ export async function captureImageWithScale(mode: CaptureMode): Promise<{ image:
   const scale = payload?.displayScale ?? null;
   if (scale !== null && (typeof scale !== "number" || !Number.isFinite(scale) || scale <= 0 || scale > 8)) throw new NativeOperationError("invalid_payload", "The capture display scale is invalid.");
   return { image: documentFromPayload(payload, `Capture-${Date.now()}.png`), displayScale: scale };
+}
+export async function readRepeatAreaAvailable(): Promise<boolean> {
+  const value = await nativeCall<unknown>("repeat_area_available", {});
+  if (typeof value !== "boolean") throw new NativeOperationError("invalid_payload", "Invalid remembered area status.");
+  return value;
+}
+export async function captureRepeatArea(): Promise<{ image: ImageDocument; displayScale: number | null }> {
+  const payload = await nativeCall<ImagePayload>("capture_repeat_area", {});
+  const scale = payload?.displayScale ?? null;
+  if (scale !== null && (typeof scale !== "number" || !Number.isFinite(scale) || scale <= 0 || scale > 8)) throw new NativeOperationError("invalid_payload", "The capture display scale is invalid.");
+  return { image: documentFromPayload(payload, `Area-${Date.now()}.png`), displayScale: scale };
 }
 export async function captureActiveWindow(): Promise<{ image: ImageDocument; displayScale: null }> {
   const payload = await nativeCall<ImagePayload>("capture_active_window", {});
@@ -327,7 +311,7 @@ export async function savePreferences(settings: AppSettings): Promise<AppSetting
   return preferencesFromWire(await nativeCall<unknown>("save_preferences", { settings: validated }));
 }
 
-export async function readApplicationPreferences(): Promise<Readonly<FerbyAppPreferences>> {
+export async function readApplicationPreferences(): Promise<Readonly<FerShotAppPreferences>> {
   if (!isTauri()) return { ...DEFAULT_APP_PREFERENCES, baseSettings: { ...DEFAULT_SETTINGS } };
   try {
     const preferences = await nativeCall<unknown>("load_application_preferences", {});
@@ -342,23 +326,12 @@ export async function readApplicationPreferences(): Promise<Readonly<FerbyAppPre
   }
 }
 
-export async function saveApplicationPreferences(preferences: FerbyAppPreferences): Promise<Readonly<FerbyAppPreferences>> {
+export async function saveApplicationPreferences(preferences: FerShotAppPreferences): Promise<Readonly<FerShotAppPreferences>> {
   requireDesktop();
   const validated = parseAppPreferencesJson(serializeAppPreferencesJson(preferences));
   const saved = await nativeCall<unknown>("save_application_preferences", { preferences: validated });
   return parseAppPreferencesJson(JSON.stringify({ version: 1, preferences: saved }));
 }
-export async function readRecognitionPreferences(): Promise<Readonly<RecognitionPreferences>> {
-  if (!isTauri()) return DEFAULT_RECOGNITION_PREFERENCES;
-  const recognition = await nativeCall<unknown>("load_recognition_preferences", {});
-  return parseRecognitionPreferencesJson(JSON.stringify({ version: 1, recognition }));
-}
-export async function saveRecognitionPreferences(preferences: RecognitionPreferences): Promise<Readonly<RecognitionPreferences>> {
-  const validated = parseRecognitionPreferencesJson(serializeRecognitionPreferencesJson(preferences));
-  const recognition = await nativeCall<unknown>("save_recognition_preferences", { preferences: validated });
-  return parseRecognitionPreferencesJson(JSON.stringify({ version: 1, recognition }));
-}
-
 export interface PinWire { sourceId: string; name: string; image: ImagePayload }
 export async function pinImage(document: ImageDocument): Promise<string> {
   requireDesktop();
@@ -384,22 +357,9 @@ export async function importClipboardImage(): Promise<ImageDocument> {
   return documentFromPayload(await nativeCall<ImagePayload>("import_clipboard", {}), `Clipboard-${Date.now()}.png`);
 }
 
-export async function readRecognitionLanguages(): Promise<unknown> {
-  return nativeCall<unknown>("recognition_languages", {});
+export async function copyText(text: string): Promise<void> {
+  if (typeof text !== "string" || !text || text.length > 256 * 1024 || new TextEncoder().encode(text).length > 256 * 1024) throw new NativeOperationError("clipboard_limit", "Choose bounded text to copy.");
+  await nativeCall<void>("copy_text", { request: { text } });
 }
 
-export async function recognizeRaster(request: Readonly<VisionPortRequest>): Promise<unknown> {
-  requireDesktop();
-  if (!(request.imageBytes instanceof Uint8Array) || !request.imageBytes.length || request.imageBytes.length > MAX_NATIVE_BYTES) throw new NativeOperationError("recognition_limit", "Recognition image exceeds bounds.");
-  const chunks: string[] = [];
-  for (let offset = 0; offset < request.imageBytes.length; offset += 8192) {
-    chunks.push(String.fromCharCode(...request.imageBytes.subarray(offset, offset + 8192)));
-  }
-  const pngBase64 = btoa(chunks.join(""));
-  return nativeCall<unknown>("recognize_image", { request: { pngBase64, mode: request.mode, languages: [...request.languages], preserveLineBreaks: request.preserveLineBreaks, maxResults: request.maxResults } });
-}
-
-export async function copyRecognizedText(text: string): Promise<void> {
-  if (typeof text !== "string" || !text || text.length > 256 * 1024 || new TextEncoder().encode(text).length > 256 * 1024) throw new NativeOperationError("recognition_limit", "Choose bounded recognized text to copy.");
-  await nativeCall<void>("copy_recognized_text", { request: { text } });
-}
+export async function captureScrollImage(){return documentFromPayload(await nativeCall<ImagePayload>("capture_scroll_image",{}),`Scroll-${Date.now()}.png`);}

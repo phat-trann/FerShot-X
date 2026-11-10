@@ -20,7 +20,8 @@ describe("native adapter boundary", () => {
     runtime.desktop = true;
     runtime.invoke.mockRejectedValue({ code: "cancelled", message: "Capture cancelled." });
     await expect(captureImage("window")).rejects.toMatchObject({ code: "cancelled", message: "Capture cancelled." });
-    expect(runtime.invoke).toHaveBeenCalledExactlyOnceWith("capture_image", { mode: "window" });
+    expect(runtime.invoke).toHaveBeenCalledWith("capture_image", { mode: "window" });
+    expect(runtime.invoke.mock.calls.filter(([command]) => command === "capture_image")).toHaveLength(1);
   });
   it("accepts a validated native image and gives the caller URL ownership", async () => {
     runtime.desktop = true; runtime.invoke.mockResolvedValue(valid());

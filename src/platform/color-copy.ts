@@ -1,6 +1,6 @@
 import { rgbToHex } from "../features/color/color";
 import type { Rgba } from "../features/pixel-sample";
-import { copyRecognizedText } from "./native";
+import { copyText } from "./native";
 
 export type ColorCopyFormat = "hex" | "rgb" | "rgba";
 export function formatColorForCopy(color: Rgba, format: ColorCopyFormat): string {
@@ -15,5 +15,5 @@ export function formatColorForCopy(color: Rgba, format: ColorCopyFormat): string
 
 /** Explicit user intent only; uses the existing restricted native text clipboard boundary. */
 export async function copyColor(color: Rgba, format: ColorCopyFormat): Promise<void> {
-  await copyRecognizedText(formatColorForCopy(color, format));
+  await copyText(formatColorForCopy(color, format));
 }

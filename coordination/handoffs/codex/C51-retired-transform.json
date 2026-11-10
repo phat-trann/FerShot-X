@@ -1,0 +1,6 @@
+{
+  "path": "src/Workspace.tools.tsx",
+  "sha256": "000c15783e9d14d9de80f94b3f641c0c41527f1ed699b89b5b22f519e8bc36e5",
+  "archive": "artifacts/retired/C51-numeric-transform.tar.gz",
+  "reason": "Unreferenced numeric forms replaced by central direct manipulation tools"
+}

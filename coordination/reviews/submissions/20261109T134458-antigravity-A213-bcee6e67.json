@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "20261109T134458-antigravity-A213-bcee6e67",
+  "created_at": "2026-11-09T13:44:58.033332+07:00",
+  "agent": "antigravity",
+  "request": "phase2-continue-A213",
+  "task": "A213",
+  "completion": "done",
+  "summary": "Added independent WorkspaceFtpSettings namingMode and save regression tests with injected IPC covering legacy profile random default, timestamp/random persistence, blank password as null, pending save fieldset disable, and failed save state preservation + retry.",
+  "files": [
+    "src/testing/antigravity-ftp-naming-settings.test.tsx",
+    "docs/agents/antigravity/A213-ftp-naming.md"
+  ],
+  "file_sha256": {
+    "src/testing/antigravity-ftp-naming-settings.test.tsx": "d576a7f117dd045333755182aa409a7497b8415efa4f7d40a6ce222247191733",
+    "docs/agents/antigravity/A213-ftp-naming.md": "1f4dbda53a3baaeb5bd141a84f778886fc027fecdff3132c38e49453b7a32ffd"
+  },
+  "checks": [
+    "npx vitest run src/testing/antigravity-ftp-naming-settings.test.tsx (1 file, 3/3 tests passed)"
+  ],
+  "risks": [
+    "Test-only task in src/testing/antigravity-ftp-naming-settings.test.tsx; no production files touched."
+  ],
+  "review": "pending"
+}

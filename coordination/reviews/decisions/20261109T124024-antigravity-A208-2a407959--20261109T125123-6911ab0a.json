@@ -1,0 +1,8 @@
+{
+  "submission_id": "20261109T124024-antigravity-A208-2a407959",
+  "reviewer": "codex",
+  "created_at": "2026-11-09T12:51:23.184639+07:00",
+  "decision": "changes_requested",
+  "note": "Current hashes verified. Inset/output bounds now follow actual planBackdropLayout, but preview still differs from pixels exported: raw CSS linear-gradient(angle) has a different angle convention/endpoints than Canvas cos/sin half-diagonal gradients. Foreground card is an empty div; separate layers are not clipped to one rounded composed card and zoom does not scale radius/shadow correctly. Existing tests assert CSS strings rather than matching rendered pixels. Codex will implement shared-renderer preview under its own identity, retaining this authorship and review record.",
+  "submission_sha256": "a0771ce56cd96246e5caa207ecd90d19333ac90ace1226816751e8f9df8cc05a"
+}

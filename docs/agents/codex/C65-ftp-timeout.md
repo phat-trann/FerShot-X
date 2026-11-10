@@ -1,0 +1,13 @@
+# C65 actual FTP timeout diagnosis and repair
+
+Sanitized application queue showed six failures with ftp_timeout. A separate read-only diagnostic used the app's own Keychain credential in native memory: TCP/control greeting 220, login and configured-directory access succeeded. EPSV's data port timed out; PASV's data port on the same control host was reachable. No screenshot, STOR, remote file write/read, password output or legacy credential mutation occurred. This is real read-only protocol evidence, not an automated upload test.
+
+The former uploader's basic-ftp source tries alternate passive strategies; curl's old default did not recover when EPSV was accepted but the announced port was unreachable. FerShot X now prefers PASV, ignores advertised alternate transfer hosts, and retains explicit TLS/security limits. An EPSV-only server gets one fallback for passive-negotiation errors 13/14 before STOR. Timeout/authentication errors never silently replay a possibly partial upload. Frozen PNG/path/URL stay unchanged.
+
+Thirteen native FTP tests passed (including a real curl client against an injected loopback-only FTP server receiving exact frozen bytes), including argument/privacy bounds, fallback and no replay on timeout/auth failure. Full upload/server permission acceptance still requires an explicit user retry from the rebuilt app. Phase-2 acceptance advances separately from 40% to 55% through C51; real FTP upload/restart acceptance remains pending. Codex USER_WAIVED_REVIEW; formatting/lint not run.
+
+
+Integrated the completed A212 panel with corrected own-property unknown-code lookup and fixed native-message allowlisting (arbitrary raw messages are not displayable). Queue results now carry an optional backward-compatible errorCode; retry clears the error, and UI actions have synchronous duplicate guards. Six panel tests plus three independent A213 settings tests passed within the 39-test frontend batch; seven browser FTP cases passed, including same-job retry and pending action disabling. Original Anti A212 packet remains changes_requested; these corrective edits are Codex-authored and USER_WAIVED_REVIEW.
+
+
+Final validation: 13 native FTP tests pass; the old JSON compatibility case was repeated after adding optional errorCode. The fake FTP server is strictly loopback and receives only synthetic bytes; no real server upload test occurred. All 39 scoped frontend tests, the final 32-browser regression batch and full TypeScript/frontend production build passed. The final debug app bundle includes these fixes; its identity is in C65-ftp-candidate.json. This is a development candidate, not an accepted release.

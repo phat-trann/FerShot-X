@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "id": "20261109T130430-antigravity-A210-d6783d9e",
+  "created_at": "2026-11-09T13:04:30.777630+07:00",
+  "agent": "antigravity",
+  "request": "phase2-continue-A210",
+  "task": "A210",
+  "completion": "done",
+  "summary": "Harden LibraryPanel FTP transport/target URL wording, guard keyboard actions against Cmd/Ctrl/Alt modifiers and busy/disabled states, and preserve selected upload details on asynchronous removal failure",
+  "files": [
+    "src/features/library/LibraryPanel.tsx",
+    "src/features/library/LibraryPanel.css",
+    "src/features/library/LibraryPanel.test.tsx",
+    "src/features/library/index.ts",
+    "src/testing/antigravity-library-queue.test.tsx",
+    "docs/agents/antigravity/A210-library-actions.md"
+  ],
+  "file_sha256": {
+    "src/features/library/LibraryPanel.tsx": "0c73dc73d5f3be2dceb8c408c4522c5665ae04629f6a28135a0c7e44151615b4",
+    "src/features/library/LibraryPanel.css": "ebfb702493a8e332e4718508f87c0343be4bff64589510694c0f86977caade74",
+    "src/features/library/LibraryPanel.test.tsx": "cb0146e32b6d82eee93042b509b4117ccac27e823e318f803955243abfb44bd8",
+    "src/features/library/index.ts": "bb29b35fe3afa221b4e6d34cf9cca24e7a259cd570bd9e8a4d59b2d19d9ca73a",
+    "src/testing/antigravity-library-queue.test.tsx": "e5e577bd3b9a802366fbe151b15b44b62b8beba52e060e3e3f4ac71838723f40",
+    "docs/agents/antigravity/A210-library-actions.md": "8b40b158e553c647e7c744c256e3adb5026bf67307ff7e9d81defc73561d3d26"
+  },
+  "checks": [
+    "npx vitest run src/features/library/LibraryPanel.test.tsx src/testing/antigravity-library-queue.test.tsx (9/9 passed)"
+  ],
+  "risks": [
+    "Scoped to src/features/library/**, src/testing/antigravity-library-queue.test.tsx, and A210 report; no root/native/cache files modified."
+  ],
+  "review": "pending"
+}

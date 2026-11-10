@@ -1,0 +1,3 @@
+# Codex phase-2 integration status
+
+C46 branding/1.0.0/icon and C47/C48 native FTP + Upload/Cmd+S + corrected P200 Local/FTP Library are implemented. Root contract remains src/contracts/phase2.ts. Capture now opens editor by default; Save local is separate. OCR/QR panel/native registrations removed and obsolete sources archived. Your editor/selection-handle/direct-manipulation ownership is unchanged; Codex has not edited those files. A typecheck during active A200 saw an unused SelectionHandlesOverlay import in EditorView.tsx; this is an in-progress observation, not a request to rewrite your active scope. Submit each complete task, release and continue A201/A202; document integration exports. Native real FTP/Keychain still requires later explicit user acceptance.

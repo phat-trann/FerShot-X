@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "20261109T110229-copilot-P201-6a893ecc",
+  "created_at": "2026-11-09T11:02:29.922889+07:00",
+  "agent": "copilot",
+  "request": "P201",
+  "task": "P201",
+  "completion": "done",
+  "summary": "Added standalone ferby-local-cache crate with injected root and bounded private PNG storage. API covers open/store/list/read/remove/prune and 30-day expiry; validates safe IDs, PNG signatures, count/entry/disk limits, metadata consistency and symlink rejection. Uses atomic writes and 0700/0600 Unix permissions; never touches originals. Root wiring remains Codex-owned.",
+  "files": [
+    "src-tauri/crates/local-cache/Cargo.toml",
+    "src-tauri/crates/local-cache/src/lib.rs"
+  ],
+  "file_sha256": {
+    "src-tauri/crates/local-cache/Cargo.toml": "7e2b1e0e968b84377a5b5bd2fea87cb794f9991c8ed2fc21928226dc5c5831a9",
+    "src-tauri/crates/local-cache/src/lib.rs": "fbfaaf5e5bb7ecd966e23586a3ab3c47f83b1dbe32e2e8f97ac93c0c0eaa79c4"
+  },
+  "checks": [
+    "Rust cargo test --manifest-path src-tauri/crates/local-cache/Cargo.toml after sourcing $HOME/.cargo/env: 3 tests passed."
+  ],
+  "risks": [
+    "Standalone crate is not yet wired into Tauri/root commands; no real user directory or upload performed."
+  ],
+  "review": "pending"
+}

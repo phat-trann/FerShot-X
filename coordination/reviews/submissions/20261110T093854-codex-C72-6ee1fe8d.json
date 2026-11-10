@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "id": "20261110T093854-codex-C72-6ee1fe8d",
+  "created_at": "2026-11-10T09:38:54.964310+07:00",
+  "agent": "codex",
+  "request": "release-verification-checklist-20261110",
+  "task": "C72",
+  "completion": "done",
+  "summary": "Read current 1.0.0 checklist and phase-2 gates; identified native build prerequisite and manual editor, capture, authenticated FTP, restart and release checks. No implementation or acceptance changes.",
+  "files": [
+    "docs/releases/1.0.0-checklist.md",
+    "coordination/phase2-progress.json"
+  ],
+  "file_sha256": {
+    "docs/releases/1.0.0-checklist.md": "1d81bdb22b470c58a3dbf978fe57fb630a5e1fa964f9d54f10bae086d72adc07",
+    "coordination/phase2-progress.json": "f2b8d2250df71cad61a0fddaddea34edafc44645ce197f9212d8e91b0a4d1546"
+  },
+  "checks": [
+    "Read current checklist and weighted gates; acceptance remains 55%.",
+    "Analysis only. No tests, native actions, build, formatting/lint or Git publication run."
+  ],
+  "risks": [
+    "Current source has no final native build; an older installed app cannot validate C70/C71 changes."
+  ],
+  "review": "pending"
+}

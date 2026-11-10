@@ -1,0 +1,206 @@
+{
+  "archive": "artifacts/phase1-ocr-source-20261109.tar.gz",
+  "archive_sha256": "e6fb67f679028c7325998ff2ed0ba8abc25c660cdfa58d8bb17e54598f4431fe",
+  "sources": {
+    "src/features/ocr-languages/index.test.ts": {
+      "bytes": 1026,
+      "sha256": "4062b6537bae65af971b503ed5a8c79779d73ad251a4ccabd9cc2fba7dcdf56d"
+    },
+    "src/features/ocr-languages/index.ts": {
+      "bytes": 1385,
+      "sha256": "57368270ec486a0b28cfc3ff7cb33cab4bd611404562bfe4f739f1dea7243ebe"
+    },
+    "src/features/ocr-panel/OcrPanel.test.tsx": {
+      "bytes": 4725,
+      "sha256": "829bee82eb447f49f6b7b0464084e676454e48ab943ae1102f713b0ca101caf9"
+    },
+    "src/features/ocr-panel/OcrPanel.tsx": {
+      "bytes": 5741,
+      "sha256": "0969cd7e719e7e30ab2ab764ddda3233fc43c70e0b7ffe7819ad95b1fd5ce087"
+    },
+    "src/features/ocr-panel/OcrPanel.css": {
+      "bytes": 1936,
+      "sha256": "dfadcc1f854eba923f4f3c5a71c9cdac25cc1c4d805616851852252a12d83950"
+    },
+    "src/features/ocr-panel/index.ts": {
+      "bytes": 171,
+      "sha256": "82a32ad05fc509bd33fde20debc63548d9b0cef5f07855a157714b74cdad46a6"
+    },
+    "src/features/ocr-text/index.test.ts": {
+      "bytes": 605,
+      "sha256": "f50a1910021d7f0741048493648d7482cb0d847420315e156f917df0250de05a"
+    },
+    "src/features/ocr-text/index.ts": {
+      "bytes": 425,
+      "sha256": "1db5f701ee726e84c50292ee10665f5b445542f872707fab3db44f93ae34cb48"
+    },
+    "src/features/recognition-profile-panel/RecognitionProfilePanel.css": {
+      "bytes": 3735,
+      "sha256": "4c73b7922cc54d1cc46cc4bcf962c420b936f2b8ee7e04e326ce36c5329275c4"
+    },
+    "src/features/recognition-profile-panel/RecognitionProfilePanel.tsx": {
+      "bytes": 8853,
+      "sha256": "8e192d99b552b11df1964e065a30f30a7136ec9b16e73d60237787cde766a883"
+    },
+    "src/features/recognition-profile-panel/README.md": {
+      "bytes": 726,
+      "sha256": "b21f57630f984653c1a079e4123fc8f80385f2a6503a5bdc10484f5b535f5148"
+    },
+    "src/features/recognition-profile-panel/index.ts": {
+      "bytes": 110,
+      "sha256": "55681e7ce63891c85d1f28d5472ab62a6a4d1d643764f7cad7da44dfd118f287"
+    },
+    "src/features/recognition-workflow/index.test.ts": {
+      "bytes": 4540,
+      "sha256": "278ecd8b98b1b06e4a0c2ccfb3d6d34057f0ad6235c11307aa6be8265d3f072b"
+    },
+    "src/features/recognition-workflow/README.md": {
+      "bytes": 1602,
+      "sha256": "669b90e7f11c73ae225451849d026539beef0e00ad26d4f34f2a1a2d83d79c64"
+    },
+    "src/features/recognition-workflow/index.ts": {
+      "bytes": 6916,
+      "sha256": "a74e9918d2141c0dd1eab2844d9993d26c87e6da292b325448c2e3a51e537410"
+    },
+    "src/features/recognition-workspace/RecognitionWorkspace.css": {
+      "bytes": 1029,
+      "sha256": "8d80634851ea0bc36e21602f4819ff151207deed66bb4191f94d723330b6dcd3"
+    },
+    "src/features/recognition-workspace/RecognitionWorkspace.tsx": {
+      "bytes": 2951,
+      "sha256": "fb9d3983e83c94872f4a9d24130f9fafee97de3858397f76c6bbdc7cf2067169"
+    },
+    "src/features/recognition-workspace/README.md": {
+      "bytes": 707,
+      "sha256": "571b72152e2a66b5ae18fe25da5dc54cb58d9c226ca9f88a8b80ddd8184cf63f"
+    },
+    "src/features/recognition-workspace/index.ts": {
+      "bytes": 136,
+      "sha256": "04efb112b3598c585f1a1af54b7da9c2bd809f522eb36e01aea237f6d127c9b3"
+    },
+    "src/features/vision-backend-adapter/index.test.ts": {
+      "bytes": 6827,
+      "sha256": "88fccdc8ebc1c87c7cc7f263dde156fecb3fd30abe426f4f9ccbfea15c220e9f"
+    },
+    "src/features/vision-backend-adapter/README.md": {
+      "bytes": 2227,
+      "sha256": "fcb6d1af17ef83ee1bd7fb6b1a28d80ce252cd8a366409616befc3643368ff0b"
+    },
+    "src/features/vision-backend-adapter/index.ts": {
+      "bytes": 7857,
+      "sha256": "f3ac1202d63b7cc819e8ef16cf30e37b60dddd8a3b5f194cf5f7e328e82b6ad2"
+    },
+    "src/features/recognition-preferences-codec/codec.ts": {
+      "bytes": 4816,
+      "sha256": "a4a0793b918140d8359be825a0c68d84d14245c2e8a579183035f070bc0e76d1"
+    },
+    "src/features/recognition-preferences-codec/README.md": {
+      "bytes": 714,
+      "sha256": "82b9fa33c3197f6f46b2d140974ff67ed30dd25c6a46b66963ee4b2c1bc2fbd1"
+    },
+    "src/features/recognition-preferences-codec/index.ts": {
+      "bytes": 363,
+      "sha256": "782a4fc1abbfd7ff651de53f74669e78290c6dea64c4764787a6f6ca1178184c"
+    },
+    "src/features/qr-panel/QrPanel.css": {
+      "bytes": 2178,
+      "sha256": "20bf2ca196c8532d28c1c06c975a79cc98ef64b096b21bee9a6489317dde594e"
+    },
+    "src/features/qr-panel/QrPanel.tsx": {
+      "bytes": 5236,
+      "sha256": "a860635d073bc96af084ad82afc5043eb2131d9412acdbf0d63642292c4ffdde"
+    },
+    "src/features/qr-panel/index.ts": {
+      "bytes": 74,
+      "sha256": "1be92f555d77897d1719464e8a84f614772cba595001cfd73583a82049357865"
+    },
+    "src/features/qr-panel/QrPanel.test.tsx": {
+      "bytes": 4882,
+      "sha256": "7888582a894d839fb590690c409a03d0a8310fd4f825051889951dde0dc38da4"
+    },
+    "src/Workspace.recognition.tsx": {
+      "bytes": 7947,
+      "sha256": "2a1ee5f9200c480cbbbdd17f13181f110f57d99d13995af077fe285d9e9cc894"
+    },
+    "src/platform/recognition.ts": {
+      "bytes": 2213,
+      "sha256": "639db0b4ff81fd45f6412be3bb3e0e41ddec05efb7a3cb533c8c8fab4c6e7ae8"
+    },
+    "src-tauri/src/recognition.rs": {
+      "bytes": 4177,
+      "sha256": "369b5af06bd8bb4fb66a77cb23c6b2ba19f102ba17389ce62eb33303d9461d30"
+    },
+    "src-tauri/src/recognition_preferences.rs": {
+      "bytes": 2282,
+      "sha256": "318697bf1d643a2ef69599cea1feea5768eaec0077bdd70e15a96a006bf414a6"
+    },
+    "native/vision-core/README.md": {
+      "bytes": 897,
+      "sha256": "c51166c687aea53ab3614b01871cac7042ba59feceae157d394f5d3f51ce53bb"
+    },
+    "native/vision-core/Package.swift": {
+      "bytes": 517,
+      "sha256": "7da0b4dfe795d58a44dd2817ad9e2290e33e3ebf14d5fc6e5e74cf05f18b0d32"
+    },
+    "native/vision-core/Tests/FerbyVisionCoreTests/FerbyVisionCoreTests.swift": {
+      "bytes": 6231,
+      "sha256": "b11ae445b75980514dfffb5d7eb4256eb0e7115dba86ca4c56620d9ada41c987"
+    },
+    "native/vision-core/Sources/FerbyVisionCore/FerbyVisionCore.swift": {
+      "bytes": 10015,
+      "sha256": "29c41c2539314c002e2323ac0324e4cc4940379ab3e3c9fa670fd8f68ade03b3"
+    },
+    "src-tauri/crates/vision-core/Cargo.toml": {
+      "bytes": 795,
+      "sha256": "b190ea55a12e88f4838015fc5f0358e12afe8c5ca4f4cce51dcb16026c3693b0"
+    },
+    "src-tauri/crates/vision-core/Cargo.lock": {
+      "bytes": 8527,
+      "sha256": "1c162fdae78154bd2c7ac822f03297ec7c3780fcdbf1de17ec2a47daf83c0957"
+    },
+    "src-tauri/crates/vision-core/README.md": {
+      "bytes": 2302,
+      "sha256": "91bf725100208e7cc828c24f7e43157c7b3c1d25542359d24a05ec5417a116c8"
+    },
+    "src-tauri/crates/vision-core/tests/copilot_p64.rs": {
+      "bytes": 4129,
+      "sha256": "d07736d043952ffd54fb884665cf8b718d9391a415362becd6c7a245ec366634"
+    },
+    "src-tauri/crates/vision-core/tests/codex_output_budget.rs": {
+      "bytes": 3091,
+      "sha256": "9e7f06c770673b315f2f35a86043f944fe2890c3c5e41abb919aebe5978efa8f"
+    },
+    "src-tauri/crates/vision-core/src/lib.rs": {
+      "bytes": 29485,
+      "sha256": "4fe3829a11c7aec6b11ec4794aeec93c1661badd42afed3d25c9b9dd1dd741ab"
+    },
+    "src/testing/copilot-vision-backend-adapter.test.ts": {
+      "bytes": 4192,
+      "sha256": "a2a51095f383f20b17c353bbf305e080eda01db17d85e532c4691e0480a52d77"
+    },
+    "src/testing/copilot-recognition-workflow.test.ts": {
+      "bytes": 3666,
+      "sha256": "2236580b2e9d34facc52da6e2e3a9b3bd0e70b5aeef162327b5b22b7f6e23ce6"
+    },
+    "src/testing/copilot-workspace-recognition.test.tsx": {
+      "bytes": 5382,
+      "sha256": "186ab1ba5952959e51f7f9120b25d6dcd817b1dc60eb7e9ed7057e55395a4c0c"
+    },
+    "tests/e2e/codex-recognition.spec.ts": {
+      "bytes": 4436,
+      "sha256": "e2bbb5579fe477173592f6111f985f2d488a0b2ef4a25e0513b769a03ea2a9c8"
+    }
+  },
+  "deleted_regenerable_cache": {
+    "path": "src-tauri/target/debug/incremental",
+    "files": 13325,
+    "logical_bytes": 6644091102
+  },
+  "preserved": [
+    "immutable packets/reviews",
+    "user images/settings/credentials",
+    "evidence/raw",
+    "release bundle and phase-1 acceptance reports",
+    "active producer source"
+  ]
+}

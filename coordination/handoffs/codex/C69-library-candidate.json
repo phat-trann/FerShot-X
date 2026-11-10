@@ -1,0 +1,56 @@
+{
+  "product": "FerShot X",
+  "version": "1.0.0",
+  "kind": "debug development candidate; three-window native manual verification pending",
+  "bundle": "src-tauri/target/debug/bundle/macos/FerShot X.app",
+  "binary_sha256": "6a6fe7230a68841fe09d48bb9059f14e213ea476b22e062a53f4510dc0769e59",
+  "source_sha256": {
+    "src/App.tsx": "f682167cb1be1f5c372063c480cd997fd90a3578c9d64d43b35982b0183b5cd7",
+    "src/LibraryWindow.tsx": "82030bf900a73cab7c74fed50605c82bf835e5909b658ed3eaa697e851d1d6c5",
+    "src/LibraryWindow.css": "ae550d49c6af3fb514dad5c14d954bf5759b5e0888f13f2c294a74bcc82e85ed",
+    "src/Workspace.tsx": "1cb1898022aeb118244eb629f37e79bfc988c398f4606361b09296b4f5776dbf",
+    "src/Workspace.css": "8f216fe8a19a933eadf31f5baf05868d8194aa5aa2db75abf01a67f1d45ac1bf",
+    "src/platform/library.ts": "9cacfe1b137618f0dcbd9130953c3af969043be4524e025ed5601c8263698a8a",
+    "src/ui.css": "19f4ca145e25f310ddb12a4c1447aef8f607dcd2ceabdf1dc647cc1882be72cb",
+    "src-tauri/src/library_window.rs": "5f9ecbeee56b99be2e3d6837616d08a297c7aa99db95a94e8f5af47e491e472c",
+    "src-tauri/src/lib.rs": "62c659111fd06683a6a3c003338927385f61fc483d12cd7f928a2bf7ece5aa2d",
+    "src-tauri/src/lifecycle.rs": "6adade7bc19cb2d4a3229062d023bccb55516129d807684e99dfd600370d62e5",
+    "src-tauri/src/imaging.rs": "c4614548753c7b505fd8780351ba99f01e62aaf0b034562d417636baef8a7331",
+    "src-tauri/src/local_cache.rs": "e8911f87bc2646d3d48fd1d14af5f978ca7b3dc07d2c29e5a045473fab94f4e3",
+    "src-tauri/src/ftp.rs": "10a433b1b312a3213f65641129b2725fe9db027ee82f0ae269cb6cbebe12fadd",
+    "src-tauri/src/diagnostics.rs": "1d22a77a637fe2f5c89ce95fac93c14d8c6e6267a47c2c47fd3849cf261eb83a",
+    "src-tauri/src/menu_bar.rs": "03a6fbd2a0234c7bdf0d16dc99882e77de16929eb2663d5c3f8457f39f102766",
+    "src-tauri/src/desktop_menu.rs": "9cb16a96673cb28cf1c4dc4478548b6d5982f0969a923dc5077f041ec85259c2",
+    "src-tauri/src/preferences_window.rs": "207c35e5d5907ba902e9bb494d60915fddeb9a62cb581c15c4e77c23504c33a5",
+    "src-tauri/src/shortcuts.rs": "be0014859c97698a27c88c2ba3aff0b5ac41c564347dafd03164ff0b069c5548",
+    "src-tauri/tauri.conf.json": "9bd79b437ca8e857561e58cd3a48df296769aab1994bb1d7d4611ffe052b8bf1",
+    "src-tauri/capabilities/library.json": "00184bb3efe03035cc8f8fde561d5cc98c789212de14e0e47ccfca49d68bc799"
+  },
+  "frontend_assets_sha256": {
+    "dist/assets/event-Bx7ftv9B.js": "6103d63bf686cbfe2d7a80285976ba5333364160190eaa3a51e19bff7381fdec",
+    "dist/assets/index-AMWygQwg.js": "87a08a371bddf11a64bf30b7c81163873c8c7b1f8d427d00c995cdeb1426df49",
+    "dist/assets/index-BaW-otGd.css": "76524f382540c1ce684a463e077790f1d84f27a1d9702f545d9ba8e34895a35f"
+  },
+  "checks": [
+    "54 native Rust tests passed, including retained FTP preview/symlink isolation and window guards",
+    "11 browser tests passed: 8 Library/Edit/capture/file/crop scenarios plus 3 unchanged Settings regressions; IPC injected and images synthetic",
+    "21 frontend tests passed across EditorView, SelectionHandlesOverlay, lifecycle/native adapters and FTP naming",
+    "Default Tauri app build, TypeScript/Vite and version consistency passed",
+    "Ad-hoc codesign strict verification passed",
+    "Library and Editor screenshots visually inspected in light/dark modes"
+  ],
+  "limitations": [
+    "Native Library-default startup, menu icons and capture window restoration require macOS manual verification",
+    "No real capture/upload/startup mutation by automated tests",
+    "Legacy sidebar-specific browser cases retain historical assertions and were not counted as current acceptance",
+    "Not notarized or a final accepted release",
+    "Formatting/lint not run; external lanes inactive"
+  ],
+  "source_reference": {
+    "queue": "../upload-screenshot/src/renderer/pages/QueuePage.tsx:589",
+    "preview_rules": "../upload-screenshot/src/renderer/styles/app.css:1192",
+    "classification": "Source-grounded natural-size contain preview rules; retained local FTP pixel loading is a FerShot X implementation decision, not original runtime equivalence"
+  },
+  "phase2_acceptance_before": 55,
+  "phase2_acceptance_after": 55
+}

@@ -1,0 +1,8 @@
+{
+  "submission_id": "20261109T120402-antigravity-A204-67ff98dd",
+  "reviewer": "codex",
+  "created_at": "2026-11-09T12:19:37.221061+07:00",
+  "decision": "approved",
+  "note": "Codex reviewed current crop/effects hit targets, pointer capture and rollback, bounds and aspect-fit resize. Current hashes verified and scoped direct-manipulation tests passed within the 21-test run. Resize preview is a frame over the source image; source approval does not claim native/browser end-to-end acceptance or final app integration.",
+  "submission_sha256": "5297dabbd779a0ae774061b516dc0e41edc9075b7af87311881c7bd8a7c04ec1"
+}

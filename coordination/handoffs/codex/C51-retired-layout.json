@@ -1,0 +1,6 @@
+{
+  "path": "src/Workspace.layout.tsx",
+  "sha256": "7c24ae1b245cf24a3ee033c40886102e1bb22f1e11e74e2b2972b4513378e44c",
+  "archive": "artifacts/retired/C51-numeric-layout.tar.gz",
+  "reason": "Unreferenced numeric composition panel replaced by direct layout surface"
+}

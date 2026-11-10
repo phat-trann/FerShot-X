@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "id": "20261109T134326-antigravity-A212-b16219f0",
+  "created_at": "2026-11-09T13:43:26.174270+07:00",
+  "agent": "antigravity",
+  "request": "phase2-continue-A212",
+  "task": "A212",
+  "completion": "done",
+  "summary": "Implemented privacy-safe FtpFailurePanel with English recovery guidance for ftp_timeout/ftp_connection/ftp_authentication/ftp_tls/ftp_credentials/ftp_failed, explicit PASV/EPSV timeout clarification without blaming password, endpoint/credential redaction, and accessible busy-guarded retry/settings actions.",
+  "files": [
+    "src/features/ftp-failure/FtpFailurePanel.tsx",
+    "src/features/ftp-failure/FtpFailurePanel.css",
+    "src/features/ftp-failure/index.ts",
+    "src/features/ftp-failure/FtpFailurePanel.test.tsx",
+    "docs/agents/antigravity/A212-ftp-failure.md"
+  ],
+  "file_sha256": {
+    "src/features/ftp-failure/FtpFailurePanel.tsx": "f3397970a3e3bfd2764f2b9e000d46ef0bb2672ae934e7f964700913d12bbb6e",
+    "src/features/ftp-failure/FtpFailurePanel.css": "53b5234a29c78349fb3a8555d1492816db0813ec1dae2c92fe968f4e746c34c1",
+    "src/features/ftp-failure/index.ts": "993fd46c6cdb3f7a8def28a505c229a1965771efede70b89a70cb5c1e041d18d",
+    "src/features/ftp-failure/FtpFailurePanel.test.tsx": "c6f882a2084e03d45f117ae829431eaf1a9c5e5077c4370a92c6afa0cbde0762",
+    "docs/agents/antigravity/A212-ftp-failure.md": "f46f57abfcc710035c15999052633e38bdd0cc478752487fb2df2249c5d688c8"
+  },
+  "checks": [
+    "npx vitest run src/features/ftp-failure/FtpFailurePanel.test.tsx (1 file, 5/5 tests passed)"
+  ],
+  "risks": [
+    "Scoped to src/features/ftp-failure/** as required by A212; root/native/transport untouched."
+  ],
+  "review": "pending"
+}

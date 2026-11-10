@@ -1,0 +1,8 @@
+{
+  "submission_id": "20261109T134458-antigravity-A213-bcee6e67",
+  "reviewer": "codex",
+  "created_at": "2026-11-09T13:51:54.606370+07:00",
+  "decision": "approved",
+  "note": "Current hashes verified; reviewed injected IPC coverage for old-profile default, naming mode persistence, null password preservation, pending save and failed-save recovery. Scoped panel/settings run passed 8 tests including 3 independent settings regressions. No real Keychain writes/network claimed.",
+  "submission_sha256": "3f123e423a6b5cdcb74686af566f9e998cffe7db93b03562524725a99147f9fe"
+}

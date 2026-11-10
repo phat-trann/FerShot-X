@@ -1,0 +1,7 @@
+# C59 — One-time FTP copy with independent credentials
+
+Latest user explicitly removes sharing/import controls and requests a one-time copy. Copied the existing uploader endpoint into FerShot X's private app-data settings and copied the password directly from the existing native Keychain item to a distinct FerShot X service/account. Security APIs returned success for both read and write; the secret stayed in native allocated memory and was freed, never printed, stored in JSON, passed on argv or sent to the renderer. No source-app settings or Keychain item was changed. Existing FerShot X non-secret settings were privately backed up before replacement. The tracked result contains only success flags/status codes; no endpoint or password is hardcoded into source.
+
+Removed the sharing checkbox, Use uploader settings button, shared-settings native command, runtime legacy config reads/writes and shared-Keychain provider. Blank password now retains only FerShot X's independent Keychain value. An obsolete sharedUploader field is tolerated only for reading old snapshots and is never serialized or used to choose credentials. Existing upload targets stay frozen. No actual FTP transfer occurred.
+
+Five current FTP browser cases pass, including no sharing/import UI and independent blank-password save. Native schema compatibility is covered in the root suite; actual one-time native migration success is recorded separately in C59-independent-import.json. Phase 1 remains 100%; phase 2 remains 25% pending integrated native/server acceptance. No formatting/lint.

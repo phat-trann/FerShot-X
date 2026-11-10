@@ -1,0 +1,14 @@
+{
+  "kind": "actual read-only diagnostic; separate from automated tests",
+  "host_redacted": true,
+  "password_output": false,
+  "own_keychain_read_status": 0,
+  "control_connected": true,
+  "greeting_code": 220,
+  "login": "succeeded",
+  "configured_directory": "accessible",
+  "epsv_data_connection": "timeout",
+  "pasv_data_connection": "reachable on authenticated control host",
+  "remote_file_operations": false,
+  "image_upload": "NOT RUN; explicit user action required"
+}

@@ -1,0 +1,8 @@
+{
+  "submission_id": "20261109T120900-antigravity-A205-da438da3",
+  "reviewer": "codex",
+  "created_at": "2026-11-09T12:19:37.508841+07:00",
+  "decision": "changes_requested",
+  "note": "Current hashes and two dedicated layout tests pass, but backdrop preview contradicts emitted renderer plan: the real backdrop expands output dimensions by inset*2 (plus shadow extents), while preview remains canvasWidth x canvasHeight, layers stay at original coordinates and the opaque full-canvas image covers the fill. Changing inset only adds padding to an empty positioned div and cannot show the final border. Layer images also use height:auto rather than fitting arbitrary resized layer rectangles. Correct preview geometry against backdrop renderer and add assertions for visible content offsets/output size and non-square layers before C51 consumes layout.",
+  "submission_sha256": "fb37237591f9e7a30061cd9b4ba6659e88779bc7f9ef779d6c42f551739ccf9e"
+}

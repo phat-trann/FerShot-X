@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "id": "20261110T113346-codex-C85-6ced8d1a",
+  "created_at": "2026-11-10T11:33:46.469528+07:00",
+  "agent": "codex",
+  "request": "ui-controls-readonly-audit-20261110",
+  "task": "C85",
+  "completion": "done",
+  "summary": "Read-only control inventory and test impact audit before user-authorized shared claim transfer.",
+  "files": [
+    "docs/agents/codex/C85-control-audit.md"
+  ],
+  "file_sha256": {
+    "docs/agents/codex/C85-control-audit.md": "470888b25d6a3cb2eb66d4caac4d5504a1598802a98157f4899f7d098be369ee"
+  },
+  "checks": [
+    "Read named control sources and tests; version 1.0.0 synchronization passed. No functional execution in this audit."
+  ],
+  "risks": [
+    "Implementation continues under user-transferred C84/root-wiring; acceptance remains 85%."
+  ],
+  "review": "pending"
+}

@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "id": "20261109T120833-codex-C60-c418db3e",
+  "created_at": "2026-11-09T12:08:33.000643+07:00",
+  "agent": "codex",
+  "request": "FTP-LOGS-20261109",
+  "task": "C60",
+  "completion": "done",
+  "summary": "Add persistent privacy-bounded Logs viewer with copy/export/clear, structured native/frontend events and version/build metadata",
+  "files": [
+    "src-tauri/src/diagnostics.rs",
+    "src-tauri/src/lib.rs",
+    "src-tauri/src/ftp.rs",
+    "src-tauri/build.rs",
+    "src/platform/diagnostics.ts",
+    "src/platform/native.ts",
+    "src/platform/native.test.ts",
+    "src/platform/ftp.ts",
+    "src/Workspace.tsx",
+    "src/Workspace.logs.tsx",
+    "src/Workspace.settings-dialog.tsx",
+    "src/Workspace.css",
+    "tests/e2e/codex-logs.spec.ts",
+    "tests/e2e/codex-phase2-ftp.spec.ts",
+    "docs/agents/codex/C60-diagnostics.md",
+    "coordination/handoffs/codex/C60-logs-candidate.json"
+  ],
+  "file_sha256": {
+    "src-tauri/src/diagnostics.rs": "c23cf5190feb7d3780f3d392578c19fbfbb78c5bc935de40a9f4098e49b11b6d",
+    "src-tauri/src/lib.rs": "8d2e3b91f21830cc5f244efb74fa018314e00ded5b66fa6e25b670645a0ca8af",
+    "src-tauri/src/ftp.rs": "d5dab76f39c68a7a669dc8df37e50064cce50868f733bd74d4996a51ca601169",
+    "src-tauri/build.rs": "7bd9fb86e0d123ea9b31c71ebc69e72b9d37381178c4ed723b0aec4d1d357188",
+    "src/platform/diagnostics.ts": "a52dacda4a7bac3fa96e70df9fcf635c118534ad27e54256ee692194cd858d0f",
+    "src/platform/native.ts": "96410b5641d45822478d2f347277b9cd735bdb1e73d9d41cf04442bd4da4e946",
+    "src/platform/native.test.ts": "fc28474ef713648706e122ed33968be69ae0847f3693ac4184f32da692021254",
+    "src/platform/ftp.ts": "7e649e11e9adb3c0388a5669c0fdb34303afd78b371f9f78276a393cd8affe5e",
+    "src/Workspace.tsx": "e2b044ee4764e4b4b61b55dd59fcf6af5c1ffd4bb75fa1adc549c1b3d6c508a5",
+    "src/Workspace.logs.tsx": "e2e11be161fa9098087288c60d15e0057cf2bf28426807bf0d177850ec79c5f5",
+    "src/Workspace.settings-dialog.tsx": "c9111f243565bc4f417ae8ed662de7f2b09244fffb197da53e95296f11a59dc3",
+    "src/Workspace.css": "ca2be15cbd1e7e78d1ddfc558ef2afad0904ddc3a70860b4bc80e29a3ac81bf8",
+    "tests/e2e/codex-logs.spec.ts": "c35702407a878312640e8354d0b9f9d2e63041401a0dd2b355c9b35b67f9c975",
+    "tests/e2e/codex-phase2-ftp.spec.ts": "96120459e4705fbe4d7a7ebb61d7cab5963301e891d2edbfeec792b8e8e6ef65",
+    "docs/agents/codex/C60-diagnostics.md": "e7f22e97d949eb344a2ebf6bd14b98133e7879f9bc96cc0b2a41d31ca67585c7",
+    "coordination/handoffs/codex/C60-logs-candidate.json": "cc3a99bdf0ce7c9a52b168bc31084338d9f5b7df9b47060dc7558de699a5de8d"
+  },
+  "checks": [
+    "Root Rust 37 passed; 7 Logs/FTP browser cases and 4 native frontend tests passed",
+    "Production app-entry typecheck, Vite/native debug bundle, ad-hoc signing and strict verification passed; version/progress guards passed",
+    "Logs schema excludes free text/args/secrets; bounded persistence/restart/expiry, corruption preservation and non-clobber exports tested; no formatting/lint"
+  ],
+  "risks": [
+    "Actual native report Save dialog and real FTP transport remain manual checks; no release commit/push; phase1 100 unchanged and phase2 25 unchanged"
+  ],
+  "review": "pending"
+}

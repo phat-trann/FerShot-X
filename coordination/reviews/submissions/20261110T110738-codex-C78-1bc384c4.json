@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "id": "20261110T110738-codex-C78-1bc384c4",
+  "created_at": "2026-11-10T11:07:38.126986+07:00",
+  "agent": "codex",
+  "request": "match-editor-status-css-20261110",
+  "task": "C78",
+  "completion": "done",
+  "summary": "Match Color/Image size/Zoom status CSS with shared dimensions, typography, spacing, separators and interactive states.",
+  "files": [
+    "coordination/build-tasks.json",
+    "src/components/EditorImageStatus.tsx",
+    "src/components/EditorImageStatus.css",
+    "src/Workspace.css",
+    "docs/agents/codex/C78-editor-status-css.md"
+  ],
+  "file_sha256": {
+    "coordination/build-tasks.json": "f52dabd6f51a3151b5937eebb42e6271ee117dd20032e2c03232a6ab14d6ec7c",
+    "src/components/EditorImageStatus.tsx": "87ce5978143e38f998a49cfeedc497d1cb250ea29c09d2943bb2b74dff449084",
+    "src/components/EditorImageStatus.css": "58d79e962c748f1c20055ba9b87ae86e9dd504bce772fa03e5886d8d3ad7a662",
+    "src/Workspace.css": "af48978ae4b3d6d2f8ec2bb9b91975a1a6b74b71dd06086465a5233f470b8fb8",
+    "docs/agents/codex/C78-editor-status-css.md": "3fb0f0497b63af1ba555929001ccdc19a3f610da4d8b7c8902ebdf9bd773c05b"
+  },
+  "checks": [
+    "PASS tsc --noEmit; 4 injected Playwright cases; version guard; editor screenshot inspected. Build/format/lint NOT RUN."
+  ],
+  "risks": [
+    "No native build requested; phase-2 acceptance unchanged 85%."
+  ],
+  "review": "pending"
+}

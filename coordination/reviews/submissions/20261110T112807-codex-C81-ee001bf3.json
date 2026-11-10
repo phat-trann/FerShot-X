@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "id": "20261110T112807-codex-C81-ee001bf3",
+  "created_at": "2026-11-10T11:28:07.455550+07:00",
+  "agent": "codex",
+  "request": "ftp-folders-settings-20261110",
+  "task": "C81",
+  "completion": "partial",
+  "summary": "White primary interface, separate user/monthly FTP folders with frozen queued paths, compact Settings, explicit packaged-app startup guidance and no focus outlines.",
+  "files": [
+    "AGENTS.md",
+    "README.md",
+    "coordination/build-tasks.json",
+    "src/Workspace.css",
+    "src/styles/tokens.css",
+    "src/ui.css",
+    "src/PreferencesWindow.tsx",
+    "src/PreferencesWindow.css",
+    "src/Workspace.ftp.tsx",
+    "src/contracts/phase2.ts",
+    "src-tauri/src/ftp.rs",
+    "src-tauri/src/preferences_window.rs",
+    "src/testing/antigravity-ftp-naming-settings.test.tsx",
+    "tests/e2e/codex-v1-settings.spec.ts",
+    "tests/e2e/helpers/v1-settings.ts",
+    "docs/releases/1.0.0-checklist.md",
+    "docs/agents/codex/C81-settings-folders.md",
+    "coordination/handoffs/codex/C81-source-candidate.json"
+  ],
+  "file_sha256": {
+    "AGENTS.md": "3a49d84cc0314de6e9c202176ba9042a75ae361c554561fca319dd72d4fbd62d",
+    "README.md": "8b116d9ab769c4f98ba8c44ee69f9ce5e40977e3ca4205b938beff28722702e4",
+    "coordination/build-tasks.json": "f26f5a6cda93fd7fb93bd97019ee63ceea6590465e6d7f4b5731165d87bbadd1",
+    "src/Workspace.css": "4b6a5f7dfe14033978189e01eeb1744acb7cdac608564d471e5ae0dd3151a2e2",
+    "src/styles/tokens.css": "c5c47dd480f3bb09a6bf0977ed15415f29c0094ac8ddb9dce64893e199b11a49",
+    "src/ui.css": "64b79e26e4b43e33be9b9757c072ef57d6ee329fb85bcc720eab464fb69ad728",
+    "src/PreferencesWindow.tsx": "f7024d146e5a136f03418fdc30a61dbfaa311fd68ba716b7869a65b5e3c4369b",
+    "src/PreferencesWindow.css": "ff44148a67cc55ff536f1e9b9345fe8ec3543099204d6e6cddb2d14e8ebe1d48",
+    "src/Workspace.ftp.tsx": "5ac1f9a92180df4a6253dddd6798cffd557b89a5e88853e8e448cd9dcc49a406",
+    "src/contracts/phase2.ts": "824504f2d77a651da398415dfee74cf2fa6ed894b88097d3e4ccf10b5077aba1",
+    "src-tauri/src/ftp.rs": "5bca48084ea816a95c016b2d79aa8d5ce7b07717e64b3efb90903b8af8790187",
+    "src-tauri/src/preferences_window.rs": "a495a00322157eec045ec89e9f7d92a35cd083b65ff0abd9386664431ca915d3",
+    "src/testing/antigravity-ftp-naming-settings.test.tsx": "8e2061a67774f29e970a8752b1533502347f466ccd20cc4990417f37b01590f6",
+    "tests/e2e/codex-v1-settings.spec.ts": "ec8e47d73d36e23c0ed8c7b16ad9720c753e92f32f6f8229b8619663266855db",
+    "tests/e2e/helpers/v1-settings.ts": "dfb2d551b740f2403784e18e9662a381b85f4ef91b76435ccf37f528efae22a8",
+    "docs/releases/1.0.0-checklist.md": "8a1b32838f9a2f4fbea720156f8b5dd432c287348b5427738b039509d6a90caf",
+    "docs/agents/codex/C81-settings-folders.md": "2ca21c6ca9ca958a64b53c9f1a331b55eaa446e41cb1ed05817b958c40669b86",
+    "coordination/handoffs/codex/C81-source-candidate.json": "db7630065e4c36393dd8afec2ed8e89e108db0ec3a9845d2d44de8ce60eaffd6"
+  },
+  "checks": [
+    "PASS 10 browser cases plus toolbar rerun, three FTP unit tests, no-emit TypeScript and version guard; compact screenshot inspected. Native folder tests written but NOT RUN; no build/lint/format or real FTP/startup actions."
+  ],
+  "risks": [
+    "Native changes uncompiled under no-build instruction; installed-app startup and native folder migration/queue behavior await retest. Phase-2 acceptance remains 85%."
+  ],
+  "review": "pending"
+}

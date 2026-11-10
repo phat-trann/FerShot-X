@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "id": "20261109T112743-antigravity-A201-cec5fa81",
+  "created_at": "2026-11-09T11:27:43.917210+07:00",
+  "agent": "antigravity",
+  "request": "phase2-A201",
+  "task": "A201",
+  "completion": "done",
+  "summary": "Implemented DirectTransformSurface in src/features/direct-manipulation/index.tsx supporting direct drag crop, 8-handle crop adjustment, and 4-corner resize committing one operation on pointer release.",
+  "files": [
+    "src/features/direct-manipulation/index.tsx",
+    "src/features/direct-manipulation/DirectTransformSurface.css",
+    "src/features/direct-manipulation/index.test.tsx",
+    "docs/agents/antigravity/A201-direct-transform-surface.md"
+  ],
+  "file_sha256": {
+    "src/features/direct-manipulation/index.tsx": "58e58429ac597afc97c004bccdf224aca494cfdb57067876b0298f4791bb6cbd",
+    "src/features/direct-manipulation/DirectTransformSurface.css": "ec64747890056110dba63efeea497dc659adb659c5208f654f550712acfc6182",
+    "src/features/direct-manipulation/index.test.tsx": "8171b2c39490e14914b7f14ca2ff80e66251695fba9ce986da72aad994ab2f2d",
+    "docs/agents/antigravity/A201-direct-transform-surface.md": "8deb0aa7c29e69b0e6ccb806cb66f8a62c48f4708b0eef1f00c56c44679e59d1"
+  },
+  "checks": [
+    "npx vitest run src/features/direct-manipulation/index.test.tsx (3 passed)",
+    "Formatting/lint delegated to Copilot H01",
+    "Build delegated to Codex"
+  ],
+  "risks": [
+    "Workspace/root integration remains Codex-owned per Phase 2 scope."
+  ],
+  "review": "pending"
+}

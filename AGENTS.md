@@ -1,5 +1,98 @@
 # Agent instructions
 
+## C84 shared control system (2026-11-10)
+
+Use shared Slider, Radix Switch, Input, NativeSelect and item-selection Checkbox components across active and retained feature sources. Slider encapsulates a custom 4px filled track/16px thumb over native range semantics, retaining keyboard, pointer, forms and disabled-fieldset behavior without dependency upgrades. Toggle settings use Switch; item inclusion keeps Checkbox semantics. Preserve all callbacks and IPC payloads. Standard text/select/button controls are 32px high with 6px radius; specialized switch/checkbox/picker/geometry handles keep appropriate dimensions. Base #232427, accent #257EFE, primary white, secondary #DEDEDF; selected background #0F1216 with a thin actual border, including hover/focus. Keyboard focus uses brightness(1.15), no outline/ring. C84/root-wiring were transferred after explicit user confirmation that the earlier session stopped; preserve the handoff record and historical authorship. Keep no-build and 85% acceptance.
+
+## C83 taller Settings (2026-11-10)
+
+Settings opens at 532×637 logical pixels: increase the C81 default height of 490 by 30%, retaining the 532px width. Minimum size remains 532×490 for resizing; contained scrolling remains. No build until requested; native initial geometry awaits verification. Phase-2 acceptance remains 85%.
+
+## C81 compact Settings and monthly FTP folders (2026-11-10)
+
+Primary interface text/icons use white; #DEDEDF stays secondary. Configure a fixed FTP user/base folder (for example /s) plus a persisted monthly-folder switch. Enabled uploads append local YYMM (2611 for November 2026); freeze the effective path in the queued job so settings/month changes never retarget retries. Old mutable profiles with a valid trailing YYMM may split into base plus monthly mode; do not reinterpret frozen job snapshots. Settings defaults/minimum become 532×490 (30% smaller in each dimension), with contained scrolling. Startup remains restricted to packaged .app runs; explain unavailable state and allow status retry rather than faking support. Remove interface focus outlines/rings/visited recoloring; keep keyboard operation and subtle focus brightness. Keep no-build instruction and 85% acceptance.
+
+## C80 persistent drawing and window polish (2026-11-10)
+
+Remove Open Image from the Edit toolbar (tray/file loading remains) and remove active Pin UI/native registrations. Drawing tools remain active after creation; Select is only the initial/Escape default. Keep selection handles visible after creation; switch to Select to move existing elements. Add tool separators and a gap before drawing tools, fixed numeric-property widths, and consistent shared button/control/panel sizing. Hide sampled Blur/Magnifier artwork while moving/resizing, restoring/resampling after commit or cancellation. All three windows share foreground restoration; synchronize Always on top to Library too. No native compilation/build until requested; changed native behavior requires manual retest. Acceptance stays 85%.
+
+## C79 unified interface palette (2026-11-10)
+
+Use #232427 for the interface base, #257EFE for accents and #DEDEDF for primary text/icons across Edit, Library and Settings, independent of OS light/dark preference. Shared surface/border/muted states derive from these colors; retain distinct destructive/warning semantics and authentic image/annotation colors. Settings and shadcn tokens consume the same palette. Keep no-build instruction and 85% phase-2 acceptance.
+
+## C77 remove image composition (2026-11-10)
+
+Remove Compose images from the active Edit toolbar and workspace callbacks/state/direct-tools path. Preserve unrelated image edits, crop, resize and output. Historical immutable evidence and isolated legacy utilities do not imply a supported Compose entry point. Keep no-build instruction and phase-2 acceptance at 85%.
+
+## C76 shared left-aligned window titles (2026-11-10)
+
+Edit, Library and Settings share one custom draggable title bar with the white uploader icon and FerShot X — section title aligned left, inset for native macOS window buttons. Library/Settings use overlay hidden native titles and narrowly scoped start-dragging capability; keep other window/command restrictions. Remove duplicate Library content branding. Keep phase-2 acceptance at 85%; native overlay/drag behavior awaits an explicitly requested build and manual retest.
+
+## C75 tool-specific manipulation (2026-11-10)
+
+Select is the default and returns after creation/Escape. Box areas (rectangle, ellipse, highlight, spotlight, blur) use eight perimeter handles plus center movement. Lines/arrows and two-point straight pen strokes use two endpoint handles plus whole-line movement, never a bounding-box resize. Endpoint edits preserve the opposite end/style, support Shift, abort safely and enter undo/draft history only on completion. Text/counter are move-only on canvas; color and explicit font/diameter controls set size. Freehand paths and magnifiers resize proportionally with four corners; magnifiers stay circular. Expose only relevant color, stroke/font/counter size, opacity/dimming, blur strength or magnification settings; remember edited defaults by property family. No rotation controls. Keep acceptance 85% and no-build restriction; do not fabricate native acceptance.
+
+## C74 compact toolbar and native closing (2026-11-10)
+
+Edit has no custom close, Settings, Library, Print, rotation or standalone Crop/Resize controls. Use standard native Close Window (Command-W) for the focused window, preserving close-to-hide and draft persistence. All fixed-size tools align left and overflow into an ellipsis menu without remounting the editor. The right cluster has only live pointer color (read-only, Tab copies), Image size (resize presets/dimensions plus Crop Region) and the actual zoom percentage (click Fit). Shift constrains box/ellipse gestures and straight-line directions. All three headers use the white uploader silhouette without a background; Library/Settings headings omit the app-name repetition and description. Product display/Dock/process name is FerShot X. Keep the 85% acceptance checkpoint and no-build instruction; changed native closing/naming requires retest. Preserve old rotated drafts while removing rotation controls.
+
+## C73 fixed image viewport and editable blur (2026-11-10)
+
+The image viewport, not the native outer Edit window, is 16:9. Contextual properties float absolutely without affecting Fit/layout. Only Edit or Library may be visible at once; Settings is independent. Elements provide eight perimeter resize handles, a draggable center region and rotation; resizing preserves stroke settings. Blur is a nondestructive editable draft element, committed on pointer release, not an Enter-applied raster operation. Crop/Resize retain Enter confirmation. Remove prepared-PNG drag UI; use borderless grouped toolbar controls and clear title-cased hover labels. Show app icon/title on all three screens. Local double-click opens Edit; FTP double-click opens the frozen HTTPS URL in the browser. User reports the other preceding checklist items working: phase-2 acceptance is 85% USER_REPORTED/synthetic evidence, with C73 native integration and final release gates pending. Preserve no-build instruction until explicitly revoked.
+
+## C71 editor and HTTPS preview correction (2026-11-09)
+
+Use the uploader silhouette for the status-bar app icon; menu items stay Lucide, white, with 60% of their C70 stroke. Remove Merge annotations. Wheel zoom, immediate post-creation selection handles, geometry-correct live previews and selection-specific style controls are required. New elements inherit the last edited style. Closing the active document hides Edit without selecting an older session image. Add a dedicated native drag region. User authorizes separate HTTP Basic preview credentials following uploader logic: exact HTTPS origin matching, native Keychain storage, one-time old-profile import and no stored-secret return to the renderer. Never forward authenticated redirects or put secrets in process arguments/logs/JSON. Real preview returned HTTP 401; do not claim authenticated acceptance without evidence. Keep the no-build instruction and release publication deferral.
+
+## Konva and resumable Local drafts (2026-11-09)
+
+Latest user instruction: restore the uploader application symbol, retaining padded macOS tile styling. Menu glyphs are 80% of their previous geometry and have double stroke width. Use Konva/react-konva for active drawing, selection, region tools and composition. Local uses one stable identity per image and persists its bitmap plus bounded editable vector draft; raster derivatives update the same entry, and Copy/Save must never replace it with flattened output. FTP behavior stays unchanged. Remove Library search. Do not run application/native compilation, builds or bundling until the user explicitly requests it. Renderer tests and no-emit type checks may validate source; they do not establish native persistence acceptance. The prior release build was stopped; defer release publication until the changed native source can be validated. No additional external clients are active.
+
+## Unified 1.0.0 workflow (2026-11-09)
+
+Latest user request supersedes the old toolbar, 35% sidebar and external-link workflow. Keep one top editor toolbar, Lucide-only controls, Enter-to-apply crop/resize/blur, native region autoscroll, a 16:9 Edit window bounded to 80% of the display and a 25% Library sidebar with FTP selected by default. Successful FTP jobs retain only bounded thumbnails; full previews load over HTTPS. Remote deletion is a user-confirmed Library action, never an automatic test against a real server. Retire external links, tonal adjustment, Measure and manual scroll. Codex is the sole client. User explicitly requests the completed 1.0.0 source commit/push; distinguish checked source/internal bundle from unexecuted native/server acceptance. Never claim 100% acceptance or notarized distribution without evidence.
+
+## Three-window workflow (2026-11-09)
+
+Library is the visible default window with a 35% Local/FTP row list and right preview. Edit retains the main native label and opens after capture, file import or explicit Library Edit. Edit has no sidebar. Settings UI remains unchanged. Restrict library IPC to cache/queue preview and user actions; never grant it native capture or main image commands. Library Edit creates a fresh independent document from retained pixels through a bounded native inbox. Use native tray icons; Quit uses Command-Q, with no Command-Shift-Q accelerator. Hide Library/Settings temporarily during explicit user capture and restore them afterward.
+
+
+## macOS workflow and UI stack (2026-11-09)
+
+Codex owns the stopped C67/root-wiring session after explicit user handoff. Default workspace size is 80% of the active monitor work area; close hides the view while the menu process remains; Command-Q quits without the retired Close workspace workflow. Successful captured-image Copy/Save/Upload hides the editor; cancellation and failures keep it visible. Move error-only diagnostics into Settings with configurable 1–90 day retention and a user-triggered logs-folder action. Keep structured private metadata and no secrets, image data, paths or URLs. Use the installed shadcn/Radix, Tailwind, Lucide and Motion stack plus native window vibrancy; honor Apple macOS HIG, keyboard access and reduced motion. Existing autostart plugin remains the startup provider.
+
+
+## Sole-client menu and preferences update (2026-11-09)
+
+Codex is the sole active client again. Close external Antigravity allocation without deleting its submissions, reviews or authorship; assign no new Anti/Copilot work. Review completed sources and take over corrections under Codex identity. Implement the provided native menu arrangement using existing features only, and move Settings to a dedicated native window. Preserve image-command window isolation and synchronize persisted settings across windows. Report only phase-2 acceptance (currently 55%).
+
+## Progress reporting and configurable upload names (2026-11-09)
+
+The user requests reporting only phase-2 progress from now on; stop repeating completed phase-1 percentages. Preserve its historical acceptance records. Add a persistent FTP upload naming choice between current random names and the uploader's timestamp algorithm, grounded in its actual source. Previously queued remote names/URLs remain frozen through settings changes and retries.
+
+## Independent FTP and local diagnostics (2026-11-09)
+
+Latest user correction: remove shared-storage mode and import controls. Copy the uploader FTP profile once into FerShot X and store the copied password in a separate FerShot X Keychain entry. Do not read/write the uploader settings or password during normal runtime. One-time migration is authorized; never expose passwords to the renderer, source, JSON files or logs. Add a local diagnostics viewer with user-triggered copy/export/clear, bounded retention and structured non-sensitive events. No raw request arguments, image data, credentials, filenames, server URLs or arbitrary error text in diagnostics. This supersedes the shared-mode authorization below. Existing phase-1 acceptance remains 100%; phase-2 progress stays evidence-gated.
+
+## FTP sharing and final phase-1 acceptance (2026-11-09)
+
+User authorizes reusing the uploader app's FTP settings AND password through its existing settings file and Keychain service/account. This supersedes the earlier no-password-import/no-legacy-sharing restriction for this explicit integration only. Never log, expose to the renderer, hardcode or commit passwords. No automatic real FTP transfer in tests. Preserve unrelated old-app settings and existing queued destination snapshots. Copilot remains inactive; Antigravity receives A203–A205 corrections before C51 integration. User explicitly accepts all phase-1 behavior: record 100% USER_REPORTED manual MVP acceptance separately from the incomplete phase-2 1.0.0 scope.
+
+## Native area capture priority (2026-11-09)
+
+Capture Area must use direct native desktop selection and open the editor after mouse release, without a fullscreen image selection step inside the app. Remove Fixed Region; Repeat Region reuses the last successful Area selection. Never infer coordinates from a cropped bitmap or pointer guess. Preserve permission/cancel restoration and require user retest for changed native behavior.
+
+## Release authorization and two-client staffing (2026-11-09)
+
+Current product naming is FerShot X throughout active code, manifests, native identities, protocols, styles and user-facing documentation. Historical immutable evidence/review records and the hash-bound 0.1.0 bundle needed for manual verification preserve provenance; do not rewrite their bytes or falsify original research. Remove original-product comparisons from active product documentation. Copilot is unavailable for this cycle: assign no further tasks or hygiene work to it. Codex reviews all existing Copilot phase-2 packets and completes remaining cache/QA work under its own identity; Antigravity retains its active editor claim. Preserve historical authorship/claims. Latest explicit user authorization permits release commits and pushes: after the version has evidence-backed acceptance and no unresolved release-blocking defects, prepare a release summary, stage only reviewed completed source, commit with a meaningful version/change message and push to the configured upstream without another confirmation. Never include active producer work, secrets, private captures, raw artifacts or unrelated changes; never force-push. If rejected or credentials fail, report the actual failure. This supersedes the old blanket no-Git-operations rule for accepted releases only. Current 1.0.0 is not yet accepted, so do not publish it as a completed release.
+
+package.json is the canonical product version. UI reads it directly; scripts/sync_version.py synchronizes the root native Cargo package/lock, Tauri metadata, npm lock and README heading. Run version:check before development/build/release. Data schema versions, historical evidence and standalone internal library versions are not product display versions. Current acceptance is phase 1 93.75%, phase 2 25%. User-reported permission/restoration and Save dialog checks passed; direct native Area/Repeat and the full native matrix await retest.
+
+
+## Phase 2 authorization (2026-11-09)
+
+The current product is FerShot X, starting at version 1.0.0. Follow coordination/PHASE-2.md and the phase-2 queue; this supersedes the 0.1.0 product-version freeze, FTP exclusion, OCR inclusion and old staffing/allocation rules. Dependency upgrades are not implied. Three external clients (Codex, Antigravity, Copilot) have distinct scopes. Codex owns FTP/native/root integration; Antigravity owns direct-manipulation editing; Copilot owns Local/FTP library and 30-day local cache. English only, remove OCR/Text Recognition and language controls. Use the user-owned upload-screenshot source as the FTP/icon reference. No automatic real server uploads in tests; inject network boundaries. Preserve credentials, personal screenshots, authorship and immutable historical records; archive obsolete generated material before deletion. Track phase-2 acceptance separately from the historical 87.50% phase-1 baseline.
+
 ## Current user request: final review, validation and UI completion (2026-11-06)
 
 Codex is now the sole active client. Resume functional tests, type checks, builds and source review of flagged Codex/Copilot/Antigravity changes; fix defects and improve the functional UI. This supersedes earlier test/build deferrals and the UI-polish deferral. Preserve authorship, immutable records, the frozen dependency stack, privacy boundaries and exclusions. Review credit is not native or original runtime acceptance. Use REA for Shottr comparisons, retaining static/runtime distinctions.

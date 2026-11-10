@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "id": "20261110T105920-codex-C75-3a1944d0",
+  "created_at": "2026-11-10T10:59:20.226481+07:00",
+  "agent": "codex",
+  "request": "tool-specific-manipulation-20261110",
+  "task": "C75",
+  "completion": "done",
+  "summary": "Implemented default Select and per-tool manipulation: box areas use 8 perimeter handles plus move; lines/arrows/straight pen use endpoint handles; text/counter are move-only with explicit sizes; freehand/magnifier resize proportionally. Added relevant opacity/dimming/blur/magnification controls and family defaults. Endpoint drags preserve opposite geometry/style, preview without document commits, undo/redo and cancel safely.",
+  "files": [
+    "AGENTS.md",
+    "README.md",
+    "coordination/build-tasks.json",
+    "src/features/editor/konva/KonvaWorkbench.tsx",
+    "src/features/editor/konva/manipulation.ts",
+    "src/features/editor/konva/manipulation.test.ts",
+    "tests/e2e/codex-v1-editor.spec.ts",
+    "docs/agents/codex/C75-tool-behavior.md",
+    "docs/releases/1.0.0-checklist.md",
+    "coordination/handoffs/codex/C75-source-candidate.json"
+  ],
+  "file_sha256": {
+    "AGENTS.md": "65b3561039bdc22016bdbdaa05c95af2028a75a3bce943f48916bd16958db2e9",
+    "README.md": "a05147729ad1d1dc558179a31a7fb233fd8d89c2b630104184a7d30bf4f988e4",
+    "coordination/build-tasks.json": "f741b36482bc223e2c47abcd27cc482c7a98f1e82f09118baeb71a98e2e0ede3",
+    "src/features/editor/konva/KonvaWorkbench.tsx": "d0ee8ae62ccf6d656f4043ac2091928d74c4a27c0b0781f1aa94f6292cb8c31b",
+    "src/features/editor/konva/manipulation.ts": "359cc193df125579ba24197f6dcd3427f39369b7772e7abd70f042f7ef067b73",
+    "src/features/editor/konva/manipulation.test.ts": "23a58acbd1f5c6a987d0397ad386f047b367368a2b8309cbb4b11f927f0384ec",
+    "tests/e2e/codex-v1-editor.spec.ts": "1897f7302e51aaaba3e53e92a078af25a76a707366566ac84d947010a474c1fa",
+    "docs/agents/codex/C75-tool-behavior.md": "2fa6f17b33a957749eb5d749292b1313a2dba10c936f0baddc60b2ff63d8ea53",
+    "docs/releases/1.0.0-checklist.md": "312f74f3b5d0e5b154c53d5a309d4840cf487c5dfa7a5ea0571a0821615c7d7e",
+    "coordination/handoffs/codex/C75-source-candidate.json": "7399ba456f0f61005783016e9fc98bd8c518d130cd9c50d38b59e50b0cc38963"
+  },
+  "checks": [
+    "418 unit tests passed. 29 full-suite browser cases passed, followed by 4 focused final cases including one additional cancellation case: 30 distinct browser cases. Final endpoint cancellation checks absence of page errors.",
+    "No-emit TypeScript and 1.0.0 version consistency passed.",
+    "No native build, compilation, OS capture/FTP/browser launch or formatting/lint performed. Native IPC injected in browser checks."
+  ],
+  "risks": [
+    "Renderer implementation is complete; native WebView interaction retest and accepted release/build/commit/push remain deferred by standing no-build instruction.",
+    "Acceptance remains 85%. USER_WAIVED_REVIEW is user-authorized credit, not independent peer/native acceptance. Former H01 client inactive; formatting/lint NOT RUN."
+  ],
+  "review": "pending"
+}

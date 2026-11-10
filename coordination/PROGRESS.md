@@ -1,25 +1,25 @@
 # Project progress
 
-**87.5% accepted against the declared MVP baseline** (rounded: 88%). Updated: 2026-11-06.
+**100% accepted against the declared MVP baseline** (rounded: 100%). Updated: 2026-11-09.
 
 Ferby macOS MVP v0.1: local capture/import, basic annotations, crop/resize, PNG/JPEG save, session library, settings, native pin and local OCR.
 
 **Excluded/deferred:** Cloud/S3/upload, FTP (deferred), scrolling capture/stitching, advanced tools and full Shottr parity. Scope expansion must create a new baseline.
 
-This is an evidence-based delivery score, not elapsed time, token consumption or full Shottr parity. Each milestone has equally weighted acceptance gates. Formula: sum(weight × accepted gates / total gates). Code existing, a DONE packet, or an isolated mock does not automatically pass a gate. Codex updates this ledger after review; workers propose evidence in completion packets. Native acceptance gates require real manual validation and remain unchecked.
+This is an evidence-based delivery score, not elapsed time, token consumption or full feature completeness. Each milestone has equally weighted acceptance gates. Formula: sum(weight × accepted gates / total gates). Code existing, a DONE packet, or an isolated mock does not automatically pass a gate. Codex updates this ledger after review; workers propose evidence in completion packets. Native acceptance gates require real manual validation; unexecuted cases remain unchecked and user-reported results are labeled explicitly.
 
 | Milestone | Weight | Accepted gates | Earned |
 | --- | --- | --- | --- |
 | Runnable foundation | 10% | 4/4 | 10% |
-| Native capture | 15% | 2/4 | 7.5% |
+| Native capture | 15% | 4/4 | 15% |
 | Annotations and history | 20% | 4/4 | 20% |
 | Crop and resize | 10% | 4/4 | 10% |
-| PNG/JPEG export | 10% | 3/4 | 7.5% |
+| PNG/JPEG export | 10% | 4/4 | 10% |
 | Session library | 5% | 4/4 | 5% |
 | Ferby settings | 5% | 4/4 | 5% |
 | Native pin and preview | 5% | 4/4 | 5% |
 | Local OCR | 10% | 4/4 | 10% |
-| Quality and release | 10% | 3/4 | 7.5% |
+| Quality and release | 10% | 4/4 | 10% |
 
 ## Current work and blockers
 
@@ -37,6 +37,8 @@ This is an evidence-based delivery score, not elapsed time, token consumption or
 - Real capture/permission restoration, system Save dialog, full manual matrix and release decision remain separate; no original Shottr runtime equality or no-bug guarantee. Native test feature is opt-in and disabled in ordinary release builds.
 - C45 ordinary optimized arm64 0.1.0 app build passed, native test-driver markers absent, macOS minimum 12.0 verified. Repaired generated bundle ad-hoc resource signature; strict codesign verification passed. Local internal only, no public distribution/notarization. This accepts the release build/decision gate and raises the MVP to 87.50%.
 - Remaining 12.50%: actual capture modes/cancel and permission/error/window restoration, actual Save dialog/existing-file behavior, and the completed native manual matrix. See docs/agents/codex/C45-manual-acceptance.md; unexecuted cases remain open.
+- C55: user reports permission/restoration and Save dialog/existing-file checks passed; those USER_REPORTED gates add 6.25%, reaching 93.75%. Capture Area behavior rejected; native Area/Repeat correction and final matrix await user retest. No automated real capture or new release acceptance inferred.
+- User explicitly confirms all phase-1 parts working and requests phase-1 completion. Remaining capture/full matrix gates accepted as USER_REPORTED. Declared phase-1 MVP is 100%; current 1.0.0 phase-2 scope remains separately incomplete (25%).
 
 See [build queue](BUILD-QUEUE.md), [kickoff prompts](START-HERE.md), [review inbox](reviews/INDEX.md) and [C05 checks](../docs/agents/codex/C05-validation.md).
 
@@ -53,8 +55,8 @@ See [build queue](BUILD-QUEUE.md), [kickoff prompts](START-HERE.md), [review inb
 
 - [x] Fake-runner capture core. [Evidence](../docs/agents/codex/C04-integration.md).
 - [x] Typed user-action native wiring. [Evidence](../docs/agents/codex/C04-integration.md).
-- [ ] Real mode/cancel acceptance.
-- [ ] Real permission/error/window restoration acceptance.
+- [x] Real mode/cancel acceptance. [Evidence](../docs/agents/codex/C56-phase1-accepted.md).
+- [x] Real permission/error/window restoration acceptance. [Evidence](../docs/agents/codex/C55-area-capture.md).
 
 ### Annotations and history
 
@@ -74,7 +76,7 @@ See [build queue](BUILD-QUEUE.md), [kickoff prompts](START-HERE.md), [review inb
 
 - [x] Bounded codecs and non-clobber save core. [Evidence](../docs/agents/codex/C05-validation.md).
 - [x] Typed dialog wiring with cancellation checks. [Evidence](../docs/agents/codex/C05-validation.md).
-- [ ] Real dialog/existing-file acceptance.
+- [x] Real dialog/existing-file acceptance. [Evidence](../docs/agents/codex/C55-area-capture.md).
 - [x] Annotated-pixel export acceptance. [Evidence](../docs/agents/codex/C44-native-acceptance.md).
 
 ### Session library
@@ -109,7 +111,7 @@ See [build queue](BUILD-QUEUE.md), [kickoff prompts](START-HERE.md), [review inb
 
 - [x] Automated frontend/Rust regression baseline. [Evidence](../docs/agents/codex/C05-validation.md).
 - [x] Local debug app bundle. [Evidence](../docs/agents/codex/C05-validation.md).
-- [ ] Native manual acceptance matrix.
+- [x] Native manual acceptance matrix. [Evidence](../docs/agents/codex/C56-phase1-accepted.md).
 - [x] Release build/signing/distribution decision. [Evidence](../docs/agents/codex/C45-release-decision.md).
 
 ## Update procedure

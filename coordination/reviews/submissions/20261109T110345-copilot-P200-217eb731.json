@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "id": "20261109T110345-copilot-P200-217eb731",
+  "created_at": "2026-11-09T11:03:45.743578+07:00",
+  "agent": "copilot",
+  "request": "P200",
+  "task": "P200",
+  "completion": "done",
+  "summary": "Applied Phase 2 review correction: removed Grid View controls/state/API; Local remains the default and now reports a truthful all-sources-uploaded empty state. FTP supports selected upload details, Retry for pending/failed entries, Copy URL, and disables Remove history while uploading. Updated scoped library test to cover FTP callbacks/status and assert no Grid View.",
+  "files": [
+    "src/features/library/LibraryPanel.tsx",
+    "src/features/library/LibraryPanel.css",
+    "src/features/library/index.ts",
+    "src/features/library/LibraryPanel.test.tsx"
+  ],
+  "file_sha256": {
+    "src/features/library/LibraryPanel.tsx": "917120c8ad09ea16613424fd55ff9c6d5000caff9c7a59bacbef5b9fc8f9be05",
+    "src/features/library/LibraryPanel.css": "c51b4c15f06ca933894d4e3bae67d4c4cb0334516386471242943793ab89906c",
+    "src/features/library/index.ts": "bb29b35fe3afa221b4e6d34cf9cca24e7a259cd570bd9e8a4d59b2d19d9ca73a",
+    "src/features/library/LibraryPanel.test.tsx": "cb0146e32b6d82eee93042b509b4117ccac27e823e318f803955243abfb44bd8"
+  },
+  "checks": [
+    "Node 26 vitest run src/features/library/LibraryPanel.test.tsx: 1 file passed, 4 tests passed."
+  ],
+  "risks": [
+    "Codex still owns Workspace/FTP command wiring; no real server upload or remote deletion performed."
+  ],
+  "review": "pending"
+}

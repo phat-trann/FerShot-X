@@ -1,0 +1,73 @@
+{
+  "archive": "artifacts/retired/C58-unused-icons.tar.gz",
+  "archive_sha256": "f5dfba9ae0cffbfa3728e202733b499805c4b48ac7c379ddc356e179a9516717",
+  "unused_icons": {
+    "src-tauri/icons/icon.png": {
+      "bytes": 5664,
+      "sha256": "b5d93c8ec365c08b11bd006e46a46e227c681d30bb295af3d017573bfc752a83"
+    },
+    "src-tauri/icons/Square30x30Logo.png": {
+      "bytes": 536,
+      "sha256": "c3ce70e22ec2ed3ea2d0362a767d087e6cadb93ec71e80010649f892520175f4"
+    },
+    "src-tauri/icons/Square150x150Logo.png": {
+      "bytes": 1738,
+      "sha256": "d46dc2bc568f911b9cb978de68b4a7e3ad458fbac15196597849c43c40f4b65a"
+    },
+    "src-tauri/icons/StoreLogo.png": {
+      "bytes": 848,
+      "sha256": "5412fce324344999aad82f6b69abcaa6c8792eac7b79a4b321aaaeacd0525eaf"
+    },
+    "src-tauri/icons/Square107x107Logo.png": {
+      "bytes": 1340,
+      "sha256": "fd8658ff0e2c177ce0779d11fea1574e9d7d82a52a3a9197038f37b07fe24475"
+    },
+    "src-tauri/icons/Square89x89Logo.png": {
+      "bytes": 1181,
+      "sha256": "fe8da53273722bb6fd66e98bf6810e8a7db22aeff27c6c1a096d57ba556b9ef4"
+    },
+    "src-tauri/icons/Square310x310Logo.png": {
+      "bytes": 3447,
+      "sha256": "624dd93ddb1f0d69f2a4aa7af0b0646ae3ae6347cbb42dab56ef88dba7f38d07"
+    },
+    "src-tauri/icons/icon.ico": {
+      "bytes": 37710,
+      "sha256": "e38ca88e1d5490f3dcbc3c3fa525f7fcb7b80fff3cb2f3a4eb1b2d018c0915c1"
+    },
+    "src-tauri/icons/Square142x142Logo.png": {
+      "bytes": 1691,
+      "sha256": "c348fcf2d2f2f9714a41925184926f77f440676987d233ae1daf4fd94fda245f"
+    },
+    "src-tauri/icons/Square284x284Logo.png": {
+      "bytes": 3115,
+      "sha256": "80d93a5257c89ea57023c30500c889b4df062430ffb0b4fed4ca4785d13e29ac"
+    },
+    "src-tauri/icons/Square44x44Logo.png": {
+      "bytes": 777,
+      "sha256": "f9eca6f00dba41cfecfedbc9a6f88014b4ee0f9dbf016e202c7ede09c60107ef"
+    },
+    "src-tauri/icons/Square71x71Logo.png": {
+      "bytes": 1020,
+      "sha256": "66a6b51da8962a9472c9d29b1b08e3309561521bf7fbaac52b9f680df13ff487"
+    }
+  },
+  "preserved": [
+    "configured macOS icons",
+    "current FerShot X bundle",
+    "accepted historical release bundle",
+    "user images/config/Keychain",
+    "immutable review/evidence records",
+    "active Antigravity source"
+  ],
+  "deleted_regenerable_compiler_outputs": {
+    "paths": 18466,
+    "files": 19568,
+    "logical_bytes": 8536112258,
+    "details": "artifacts/C58-cleanup-details.json",
+    "details_sha256": "d6ff1c05458635272be45d4159a192a8d896dac51fe247d14f19b500c7a7fb1f"
+  },
+  "accepted_phase1_bundle_preserved": {
+    "path": "/Users/phattran/Documents/Code/Personal/ferby-shottr/artifacts/accepted/C55-phase1-FerShot-X.app",
+    "binary_sha256": "24b373a29d749111a870de4fe9914bf1838333576a1ab5d88679fe40b01e0026"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "id": "20261109T122607-antigravity-A205-4cc667c0",
+  "created_at": "2026-11-09T12:26:07.803558+07:00",
+  "agent": "antigravity",
+  "request": "phase2-A205-v2",
+  "task": "A205",
+  "completion": "done",
+  "summary": "Completed A205 review fixes: expanded stage and backdrop preview to true output dimensions (canvasWidth + inset*2 x canvasHeight + inset*2), offset content card and layers by (inset, inset) so backdrop fill border is visibly exposed, fitted resized layer images across non-square layer rectangles (width/height 100% objectFit fill), and added assertions in DirectLayoutSurface.test.tsx.",
+  "files": [
+    "src/features/direct-manipulation/DirectLayoutSurface.tsx",
+    "src/features/direct-manipulation/DirectLayoutSurface.test.tsx",
+    "docs/agents/antigravity/A205-direct-layout-surface.md"
+  ],
+  "file_sha256": {
+    "src/features/direct-manipulation/DirectLayoutSurface.tsx": "237145803b16899a795f97d626a4fff4846b8bb106c240ff4a6b478cbca05bee",
+    "src/features/direct-manipulation/DirectLayoutSurface.test.tsx": "0e7c438246bc7757b9a099ddd5c63e530d877e0a6f77b2b573527b928ce7202b",
+    "docs/agents/antigravity/A205-direct-layout-surface.md": "c7d775f0cbdce3cc29791d3e2a21aa0685971f688468bbdc655a199905111f3b"
+  },
+  "checks": [
+    "npx vitest run src/features/direct-manipulation/DirectLayoutSurface.test.tsx: 2 tests passed"
+  ],
+  "risks": [
+    "No root files or A204 index/test files modified"
+  ],
+  "review": "pending"
+}

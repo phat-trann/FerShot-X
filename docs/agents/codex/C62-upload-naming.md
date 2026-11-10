@@ -1,0 +1,7 @@
+# C62 configurable FTP upload filenames
+
+FTP Settings now persists Random (default/backward compatible) or Timestamp. Source-read reference: uploader `pathUtils.ts:5` formats local day/hour/minute/second plus one sequence digit and lowercase extension; `queue.ts:260` allocates digits 0–9 then advances a second, based on source-file birth time. FerShot X has an in-memory edited PNG, so its timestamp starts at enqueue snapshot creation and always ends in .png. This is a documented adaptation, not a claim of identical file-birth metadata.
+
+Native naming reservations use a private durable high-water mark. New jobs persist their allocated filename and frozen settings; old random jobs remain readable. Changing modes/settings never renames a queued image or retry target. Tests cover ten-name rollover, restart/deleted history, clock rollback, old JSON compatibility, damaged-state preservation and forged names. The compact legacy format omits month/year; global lifetime uniqueness is not claimed.
+
+Validation: 11 scoped native FTP tests and six browser FTP cases passed, including persisted selection in both directions and blank-password preservation. Production-entry TypeScript/Vite check passed. Global build initially hit two type errors in active A207 tests (`onApplyEffect` versus `onApply`); reported to its producer without modifying their file. No real upload or credential access. Formatting/lint not run. Phase-2 acceptance remains 40% before/after; server acceptance is pending. Codex USER_WAIVED_REVIEW.

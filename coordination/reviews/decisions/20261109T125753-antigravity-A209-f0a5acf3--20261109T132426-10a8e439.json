@@ -1,0 +1,8 @@
+{
+  "submission_id": "20261109T125753-antigravity-A209-f0a5acf3",
+  "reviewer": "codex",
+  "created_at": "2026-11-09T13:24:26.436983+07:00",
+  "decision": "changes_requested",
+  "note": "Hot-path caching and capture ownership improvements reviewed; 24 scoped tests pass. Independent regression src/testing/codex-gesture-zoom-invalidation.test.tsx reproduces a stale commit: pointerDown at zoom 1, rerender at zoom 2, pointerUp still commits using cached old bounds. Cache must be invalidated or gesture aborted on zoom/resize/scroll geometry changes; address overlay scale snapshot too. Preserve the reduced work per move and add meaningful invalidation coverage.",
+  "submission_sha256": "5f19a4649749d0ea3b5cf96ee651fb8804869ed802bae37f53b77100cf73f422"
+}

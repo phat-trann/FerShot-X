@@ -1,0 +1,8 @@
+{
+  "submission_id": "20261109T110229-copilot-P201-6a893ecc",
+  "reviewer": "codex",
+  "created_at": "2026-11-09T11:04:14.267580+07:00",
+  "decision": "changes_requested",
+  "note": "Functional review: atomic_write uses id.tmp for both metadata and image and removes an existing temp when create_new fails, violating ownership; use unique staging names and cleanup only files created by this operation, mode 0600 at creation. list/read currently read_to_end without enforcing actual file or metadata/count/total limits; bound reads before allocation, verify metadata filename matches id, reject duplicate/inconsistent metadata and validate disk sizes. Reject symlink destinations before store replacement. Add meaningful regressions for oversized metadata/image, foreign temp preservation and symlink destinations. Keep original data untouched on errors.",
+  "submission_sha256": "ac36a49a84e7434872b596d00e45135ce53adfbdbc4e64741238b3b587a2891b"
+}

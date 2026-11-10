@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "id": "20261109T140554-codex-C63-82b5cda4",
+  "created_at": "2026-11-09T14:05:54.534403+07:00",
+  "agent": "codex",
+  "request": "anti-review-optimize-20261109",
+  "task": "C63",
+  "completion": "done",
+  "summary": "Allocate and review Anti A209-A214; reject reproduced defects, approve corrected evidence and preserve distinct Codex corrective ownership",
+  "files": [
+    "coordination/build-tasks.json",
+    "docs/agents/codex/C63-anti-review-optimization.md",
+    "src/testing/codex-gesture-zoom-invalidation.test.tsx",
+    "coordination/messages/antigravity/20261109-next-editor-and-library-logic.md",
+    "coordination/messages/antigravity/20261109-A211-callback-fix.md",
+    "coordination/messages/antigravity/20261109-next-ftp-failures.md",
+    "coordination/messages/antigravity/20261109-A214-cached-geometry.md",
+    "coordination/messages/antigravity/20261109-A214-build-observation.md"
+  ],
+  "file_sha256": {
+    "coordination/build-tasks.json": "29d0a3c4705594a7e580e83bf545a590c8493d65be0722804ef3b255b33702b0",
+    "docs/agents/codex/C63-anti-review-optimization.md": "a1c953f3f482be4d210b5980e1e450085e1641a18750a3e6582806fed92a3c06",
+    "src/testing/codex-gesture-zoom-invalidation.test.tsx": "ddc41e20ca83decbba339aa8231bf78883054bc2156d5ddbad4b599aad86f94f",
+    "coordination/messages/antigravity/20261109-next-editor-and-library-logic.md": "c7a12b9abf2b792b84aeb36d3ea906818ef1feb5f8ad13a87b6b6774ce584fda",
+    "coordination/messages/antigravity/20261109-A211-callback-fix.md": "cadad2232bf8eead1eb2c9b7e52eb58a8ab35949067d74b834aa77ec7585e572",
+    "coordination/messages/antigravity/20261109-next-ftp-failures.md": "ad1996754625407342636881058160f52e86efee5e74181c72ab9522a1954f79",
+    "coordination/messages/antigravity/20261109-A214-cached-geometry.md": "9de1aebef699406b3d1e3089d6f13fdcc96cb8e5cc15e7413ae42a4c749a6c13",
+    "coordination/messages/antigravity/20261109-A214-build-observation.md": "fe14e344fb5688df572a67498bcd5b865e73763874562a8c61584a7b382a7352"
+  },
+  "checks": [
+    "Approved current A210 A211 A213 A214 after actual source/hash review and scoped checks; A209 A207 A208 A212 defects reproduced or source-grounded and corrected by successors; final 32 browser, 39 frontend and 13 FTP native tests passed"
+  ],
+  "risks": [
+    "Phase-2 acceptance 40 to 55 percent via the integrated direct-editor gate, not task counts. Real FTP upload/restart and final release gates pending. Formatting/lint not run."
+  ],
+  "review": "pending"
+}

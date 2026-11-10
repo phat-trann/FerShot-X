@@ -1,71 +1,36 @@
-# Ferby Shottr
+# FerShot X 1.0.0
 
-A local screenshot/image workspace built with **Tauri 2 + Rust + React/TypeScript**. macOS is the first native target. Shottr 1.9.3 was investigated as a feature reference; its evidence and limitations are preserved separately from Ferby implementation choices.
+A macOS screenshot editor and explicit FTP publisher built with Tauri, Rust and React.
 
-## What works now
+- **Capture:** screen, native area selection, repeat area, active/selected window, and automatic scrolling capture. Start from the menu bar. Scrolling capture selects a desktop region, collects overlapping frames and finishes on Escape or unchanged content, within image/memory limits.
+- **Edit:** one compact React Konva toolbar and canvas for selection, shapes, arrows, pen, text/counters, emphasis, crop, resize, blur/pixel effects, color, clipboard, local Save, FTP Upload. Crop applies after Enter; Escape cancels. Image size opens resize presets/dimensions and Crop Region. Blur is an editable, movable layer that preserves source pixels. Select is the initial default; drawing tools stay active after creation until changed or Escape is pressed. Area elements have eight resize handles and center dragging; lines/arrows use endpoint handles. Counter/text move without resize handles and use explicit size controls. Freehand and magnifiers resize proportionally; resizing preserves stroke settings. Color/size properties float over a stable 16:9 image viewport. Tools align left with ellipsis overflow; the right status shows live pointer color (Tab to copy), image size and zoom (click to Fit). Shift constrains circular/square and straight-line gestures. The native window sizes to the image within 80% of available display space, uses Fit for large images and hides when empty. Edit and Library are mutually exclusive views; Settings stays independent. Copy/Save/Upload from captures hides the view after successful output/submission.
+- **Library:** opens on FTP by default, with a 25% Local/FTP row list and right preview. Rows show relative remote paths, thumbnail, date and status. Double-click Local to resume Edit; double-click FTP to open the frozen HTTPS link in your browser. Thumbnails load lazily and use a bounded cache. Local keeps one entry per image, with a bounded editable draft and its bitmap, for 30 days. Crop/resize derivatives update that entry; copying/saving retains the editable elements. Search is omitted. Successfully uploaded jobs retain thumbnails only; clicking loads the full image through HTTPS. Failed/pending jobs keep the frozen full image for explicit retry. Remote FTP deletion requires confirmation; removing local history does not delete server files.
+- **Settings:** independent window for General, Hotkeys, Uploading and Advanced. Error-only logs have configurable 1–90 day retention and Open Logs Folder. Passwords stay in FerShot X's own Keychain entry. Normal runtime does not share the uploader's settings or credentials.
 
-The foundation imports local PNG/JPEG/WebP/GIF images, keeps a searchable session-only image library with list/grid views, previews dimensions, zooms/fits and closes images, and handles invalid files. Inspect color samples a decoded image pixel as HEX/RGBA via click or keyboard-entered coordinates, accounting for display zoom. A typed native `app_info` command connects the frontend to Rust. No image is uploaded.
+Command-W closes the focused window; Command-Q quits; closing a window hides its view and keeps the menu-bar app running. Settings uses Command-comma. FTP Upload uses Command-S; local Save remains a separate explicit action. A predicted/copied URL is pending until the queue reports a completed transfer. Retries preserve the original name, destination and pixels. Random and timestamp naming are selectable for new jobs.
 
-User-triggered native capture (main display/area/window), non-destructive crop/resize and PNG/JPEG export through a native save dialog are wired. Existing export files are refused. Copy image is wired to the macOS image clipboard after an explicit button click; it copies the current raster, with native paste acceptance still pending. Browser mode reports that these actions require the desktop app. Synthetic/mock checks pass; real capture permissions and native dialog interaction still require manual acceptance. Rectangle/arrow/pen editing, per-image undo/redo, original-preserving merge and annotated copy/save/transform are wired. Native owner-bound pin actions, clipboard image import and explicit format/quality preference persistence are also wired; actual OS GUI acceptance remains pending. Rust OCR/QR and broader parity remain incomplete; the Swift prototype is inactive. Persistent archives are not integrated. The current app bundle is a local development build, not a signed/notarized release.
+The interface uses shadcn/Radix, Tailwind, Lucide, Motion and native window materials. The app icon retains the uploader symbol in a padded macOS tile; menu glyphs are Lucide-derived. Attribution is in docs/third-party/. Screen Recording and input-event permission may be required for user-triggered capture/scrolling. Native macOS and real-server acceptance is tracked separately from injected tests; see docs/releases/1.0.0.md.
 
-## Start development
+Current release publication is pending user-requested native validation/build after the Konva/draft changes. No current bundle is claimed to include these final changes.
 
-From this directory:
+## Development
 
-```sh
-rtk proxy zsh -lc 'source "$HOME/.nvm/nvm.sh"; nvm use 26.13.0; source "$HOME/.cargo/env"; npm run tauri dev'
-```
-
-Node 26.13.0, Rust stable 1.99.1/Cargo, rustfmt/clippy and project npm dependencies were installed/verified for this request. Existing Xcode Command Line Tools provide the macOS compiler. The global Node 8 default and shell profile files were preserved. On another machine, use the [official Tauri prerequisites](https://v2.tauri.app/start/prerequisites/), then install dependencies with the project's lockfiles.
-
-Build a local macOS application:
+Use Node 26 and the existing Rust toolchain. Do not change global Node defaults.
 
 ```sh
-rtk proxy zsh -lc 'source "$HOME/.nvm/nvm.sh"; nvm use 26.13.0; source "$HOME/.cargo/env"; npm run tauri build -- --debug --bundles app'
+npm ci
+npm run version:check
+npm run tauri dev
 ```
-
-Output: `src-tauri/target/debug/bundle/macos/Ferby Shottr.app`. It was built successfully on this Mac; no installation into `/Applications` or distribution was performed.
-
-## Parallel agents and mandatory summaries
-
-- [Full continuous work lists and selector](coordination/CONTINUOUS.md).
-- [Feature-to-task coverage](coordination/FUNCTION-MAP.md).
-- [Copyable kickoff prompts](coordination/START-HERE.md): one queue per client.
-- [Current pixel integration and build blocker](docs/agents/codex/C04-pixel-checkpoint.md).
-- [Clipboard implementation/checks](docs/agents/codex/C06-clipboard.md).
-- [Project progress](coordination/PROGRESS.md): weighted MVP acceptance gates, evidence and remaining work.
-- [Build queue](coordination/BUILD-QUEUE.md): Continuous roadmap: Antigravity A01-A33 (A13 superseded), Copilot P01-P42 + H01, and Codex native/root integration.
-- [Architecture/contracts](docs/implementation/ARCHITECTURE.md): integration seams and validation commands.
-- [One review inbox](coordination/reviews/INDEX.md): completion packets plus historical handoffs for Codex.
-- [Completion protocol](coordination/reviews/README.md): required after EVERY agent request/task, including partial or blocked work.
-
-Codex focuses on review and shared/native wiring; Antigravity builds editor composition, bitmap rendering, presentation and standalone settings persistence; Copilot handles small utility/test pairs. Agents submit independent immutable packets and continue the next owned task without waiting for review. Only Codex edits root wiring, shared contracts and review decisions. Files do not automatically launch or notify another client.
-
-## Validation
-
-Copilot owns formatting/lint (H01). Codex runs functional/integration checks and builds. Antigravity runs scoped functional tests, with no formatting/lint or standalone builds/packaging. Follow the current [ownership policy](AGENTS.md); delegated checks are recorded without blocking feature work. The clippy example below belongs to Copilot only.
 
 ```sh
-rtk proxy npm run build
-rtk proxy npm run test:e2e
-rtk proxy cargo test --manifest-path src-tauri/Cargo.toml --lib
-rtk proxy cargo clippy --manifest-path src-tauri/Cargo.toml --all-targets -- -D warnings
-rtk proxy python3 -m unittest discover -s scripts -p test_review_queue.py -v
+npm run test:unit
+npm run test:e2e
+npm run build
+cargo test --manifest-path src-tauri/Cargo.toml --lib --offline
+npm run tauri build -- --bundles app
 ```
 
-Select the Node/Cargo environment as above before commands. E2E tests use installed macOS Chrome when available, otherwise Playwright Chromium; set `FERBY_CHROME_PATH` to an existing executable or install Chromium with `rtk proxy npx playwright install chromium`. `npm run test:unit -- <owned-scope>` runs future feature-specific Vitest tests; no feature test should be reported as passing before it exists.
+package.json is the product-version source. Run `npm run version:sync` after an intentional version change; `npm run version:check` validates UI/native/lockfile/README consistency. Accepted fixes use patch versions; compatible feature releases use minor versions. Completed versions receive a release summary and scoped commit/push. No credentials, captures, raw investigation evidence or build output belong in Git.
 
-See [C05 validation](docs/agents/codex/C05-validation.md) for the latest implementation checks and [foundation validation](docs/implementation/VALIDATION.md) for actual checks and limitations. Browser tests do not prove every WKWebView/native behavior. Screen Recording/Accessibility permission for the REA host was denied during target research; no OS privacy settings were changed by installing development tools.
-
-## Preserved investigation
-
-- [Phase 1 feature map](docs/phase-1-features.md), [integration review](docs/integration-review.md) and [decoded UI inventory](docs/ui-inventory.md).
-- `evidence/target.json`: Shottr target version/build and executable SHA-256.
-- `evidence/ui-signals.json`, `evidence/native-summary.json`, `evidence/agents/`: curated REA-derived observations and Codex task projections.
-- `evidence/raw/`: complete local records, Git-ignored; retained IDs are not transferable between independent MCP sessions without portable records.
-
-Research collection/projection scripts remain available under `scripts/`. Do not recollect over another agent's evidence or treat a static label/import as tested behavior.
-
-Git remains on `main` with the existing INIT commit. No new commit, staging or remote change was performed for this request. `.vscode/`, captures, raw evidence, application copies, node_modules, Rust target directories and build/test output remain ignored; source and lockfiles are reviewable.
-
-Native language update: no Swift implementation/compiler/runtime helpers. A33 Rust Vision replaces A13; the old Swift source is preserved as reference only.
+FTP settings separate the fixed user folder (for example `/s`) from optional local month grouping (`/s/2611` for November 2026). New uploads freeze their destination when queued; retries retain it. Launch at startup is available in the installed macOS `.app`, not unbundled development/browser runs.

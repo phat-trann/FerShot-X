@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "id": "20261109T105747-codex-C47-819b5f79",
+  "created_at": "2026-11-09T10:57:47.440001+07:00",
+  "agent": "codex",
+  "request": "PHASE2-20261109",
+  "task": "C47",
+  "completion": "done",
+  "summary": "Implement native explicit FTP enqueue/start/retry queue, fixed predicted URL and Keychain credentials",
+  "files": [
+    "src-tauri/src/ftp.rs",
+    "src-tauri/src/ftp_keychain.rs",
+    "src-tauri/src/lib.rs",
+    "src-tauri/Cargo.lock",
+    "docs/agents/codex/C47-ftp.md"
+  ],
+  "file_sha256": {
+    "src-tauri/src/ftp.rs": "6a9b111801c2c3d525cee58b639c55290573df2b3327271ae25600cc1e6af042",
+    "src-tauri/src/ftp_keychain.rs": "7ede5c03fea56b6054dd8989dbf3f6f9461d21c8dab565a79119f4ff268ede79",
+    "src-tauri/src/lib.rs": "ab6863d01b2c4c65277b3e9b7540bd79a2862e6052b0cc1a6d5b00ac7d1e72fe",
+    "src-tauri/Cargo.lock": "1571e03d9640ad470c97117829a5358bb28155cf73f2e7390bb586ac89610862",
+    "docs/agents/codex/C47-ftp.md": "a0232d6b5ca8f967aba8fe009bd790f8e6388340d17e1703cb3fe5568c1c51e0"
+  },
+  "checks": [
+    "cargo test --manifest-path src-tauri/Cargo.toml ftp:: --lib: 5 passed",
+    "Formatting/lint delegated to Copilot H01"
+  ],
+  "risks": [
+    "Real FTP/Keychain not executed; frontend integration C48 remains; terminal disk-write failures require user-visible reconciliation"
+  ],
+  "review": "pending"
+}

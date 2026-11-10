@@ -1,3 +1,7 @@
+# Current: Codex only (2026-11-09)
+
+Antigravity and Copilot are inactive for this cycle. Preserve their published work and review records; assign no new external work. Codex owns C66 native quick-menu and separate Settings window, functional validation and final assembly. Use current AGENTS.md and build-tasks.json. Only report phase-2 acceptance (55%); new native UI still needs its actual runtime check. Historical instructions below are superseded where they conflict.
+
 # Codex implementation prompts
 
 ## Latest user authorization: Anti may integrate features (2026-11-06)

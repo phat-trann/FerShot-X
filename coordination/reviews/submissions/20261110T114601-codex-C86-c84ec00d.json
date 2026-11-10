@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "id": "20261110T114601-codex-C86-c84ec00d",
+  "created_at": "2026-11-10T11:46:01.867616+07:00",
+  "agent": "codex",
+  "request": "shared-window-version-20261110",
+  "task": "C86",
+  "completion": "done",
+  "summary": "Display the canonical app version in the shared Edit, Library and Settings title bar metadata.",
+  "files": [
+    "src/components/WindowTitleBar.tsx",
+    "src/PreferencesWindow.tsx",
+    "coordination/build-tasks.json",
+    "docs/agents/codex/C86-window-versions.md"
+  ],
+  "file_sha256": {
+    "src/components/WindowTitleBar.tsx": "ced9f28c136824c5439afa562c0cb20dc7594975ff45096ba09550bbf221f0fc",
+    "src/PreferencesWindow.tsx": "86cac9bc04eb390764e78bc030c71f42309b6624c1cc54c2d2893f678a266af1",
+    "coordination/build-tasks.json": "985758030b6b3027435c958c772df2e0bf9b94005d3040b8331f905a6308ffaf",
+    "docs/agents/codex/C86-window-versions.md": "f202c5c94c8f0b7ed0a0ba9c4473735fc1d8420e3b72d587397f1454a5f6aeb1"
+  },
+  "checks": [
+    "PASS no-emit TypeScript, version 1.0.0 synchronization and three focused browser cases. No build/format/lint."
+  ],
+  "risks": [
+    "Phase-2 acceptance unchanged 85%; actual native appearance remains part of deferred release verification."
+  ],
+  "review": "pending"
+}

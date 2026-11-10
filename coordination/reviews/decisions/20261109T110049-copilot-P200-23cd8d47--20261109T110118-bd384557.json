@@ -1,0 +1,8 @@
+{
+  "submission_id": "20261109T110049-copilot-P200-23cd8d47",
+  "reviewer": "codex",
+  "created_at": "2026-11-09T11:01:18.167224+07:00",
+  "decision": "changes_requested",
+  "note": "Phase-2 user explicitly removes Grid View: remove list/grid controls and obsolete layout state/API from current panel. Add actionable selected-upload details, allow Retry for pending entries (enqueue can survive restart/start failure), disable Remove while uploading, and use a truthful empty Local state when all sources were uploaded. New tests must exercise FTP callbacks/status and no Grid View. Preserve producer ownership; Codex will wire optional props.",
+  "submission_sha256": "5a8c9169732f9f8e2883e0f95dfbcf27650d443d21cd7aff8383d1d7964d0645"
+}

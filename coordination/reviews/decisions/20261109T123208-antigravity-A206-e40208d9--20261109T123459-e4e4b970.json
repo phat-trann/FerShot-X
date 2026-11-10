@@ -1,0 +1,8 @@
+{
+  "submission_id": "20261109T123208-antigravity-A206-e40208d9",
+  "reviewer": "codex",
+  "created_at": "2026-11-09T12:34:59.115559+07:00",
+  "decision": "approved",
+  "note": "Current snapshot hashes verified. Reviewed library keyboard/tab selection, deletion/retry upload guards, filtered empty states and selected queue details; 14 tests passed across existing library, independent Copilot, A206 and current layout suites. Existing integrated browser library/retry case passed. Workspace must forward busy. Success is reported FTP transport state, not an independently fetched public URL; native/manual FTP acceptance remains pending.",
+  "submission_sha256": "ef5b4236a1102447433385a984142cad2279207289bbcdccbd0c995bf1237adc"
+}

@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "20261109T125938-antigravity-A211-9670db0a",
+  "created_at": "2026-11-09T12:59:38.571053+07:00",
+  "agent": "antigravity",
+  "request": "phase2-continue-A211",
+  "task": "A211",
+  "completion": "done",
+  "summary": "Repair A207 regression callback to use typed onApply prop on DirectEffectsSurface, assert exact PixelEffectRequest payload and absence of alerts, and verify cancellation/busy rollback",
+  "files": [
+    "src/testing/antigravity-direct-gesture-boundaries.test.tsx",
+    "docs/agents/antigravity/A211-callback-regression.md"
+  ],
+  "file_sha256": {
+    "src/testing/antigravity-direct-gesture-boundaries.test.tsx": "acab426faf0ed9c0c21e4ab6868201279387e6749ddd6e1102b7718ebe543e6b",
+    "docs/agents/antigravity/A211-callback-regression.md": "77d032d8d708e844ab18f2224a3c8a029684ab84898669845cd2c8599815a049"
+  },
+  "checks": [
+    "npx vitest run src/testing/antigravity-direct-gesture-boundaries.test.tsx (4/4 passed)"
+  ],
+  "risks": [
+    "Scoped to antigravity-direct-gesture-boundaries.test.tsx and A211 report; no production or root files modified."
+  ],
+  "review": "pending"
+}

@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "id": "20261109T110720-copilot-P203-4379fd3e",
+  "created_at": "2026-11-09T11:07:20.215426+07:00",
+  "agent": "copilot",
+  "request": "phase2",
+  "task": "P203",
+  "completion": "done",
+  "summary": "Inventoried exact OCR/recognition source candidates for Codex C48 cleanup with measured sizes and explicit exclusions for immutable review records, user data, manifests and locks; no files deleted.",
+  "files": [
+    "docs/agents/copilot/P203-phase2-cleanup-inventory.md"
+  ],
+  "file_sha256": {
+    "docs/agents/copilot/P203-phase2-cleanup-inventory.md": "46c3db04cbcf8d4ccdcd9f7e94e82b9007b44baa6c1ec79aa9986bf080b56eca"
+  },
+  "checks": [
+    "Documentation-only inventory; no runtime tests required."
+  ],
+  "risks": [
+    "Candidates require Codex import/reference verification and archival before any deletion; Phase 2 acceptance remains 0%."
+  ],
+  "review": "pending"
+}

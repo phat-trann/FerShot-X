@@ -1,0 +1,35 @@
+{
+  "bundle": "/Users/phattran/Documents/Code/Personal/ferby-shottr/src-tauri/target/debug/bundle/macos/FerShot X.app",
+  "version": "1.0.0",
+  "identifier": "dev.fershot.x",
+  "binary_sha256": "a0c2219f82baf8f7eb114e2dd45e2a5235ccc9e430e328c5c9fbb7ec338496b8",
+  "kind": "Local development candidate: independent FTP and structured logs",
+  "signature": "Local ad-hoc; strict verification passed",
+  "checks": [
+    "production app-entry typecheck",
+    "Vite/native debug app packaging",
+    "37 Rust unit tests",
+    "7 FTP/log browser tests",
+    "4 native frontend tests"
+  ],
+  "source_sha256": {
+    "src-tauri/src/diagnostics.rs": "c23cf5190feb7d3780f3d392578c19fbfbb78c5bc935de40a9f4098e49b11b6d",
+    "src-tauri/src/ftp.rs": "d5dab76f39c68a7a669dc8df37e50064cce50868f733bd74d4996a51ca601169",
+    "src-tauri/src/ftp_keychain.rs": "8d75823922a15bcc55c649b341a0ddbef52da17094ab41acef844e3728290ff2",
+    "src-tauri/src/lib.rs": "8d2e3b91f21830cc5f244efb74fa018314e00ded5b66fa6e25b670645a0ca8af",
+    "src-tauri/build.rs": "7bd9fb86e0d123ea9b31c71ebc69e72b9d37381178c4ed723b0aec4d1d357188",
+    "src/Workspace.tsx": "e2b044ee4764e4b4b61b55dd59fcf6af5c1ffd4bb75fa1adc549c1b3d6c508a5",
+    "src/Workspace.logs.tsx": "e2e11be161fa9098087288c60d15e0057cf2bf28426807bf0d177850ec79c5f5",
+    "src/Workspace.ftp.tsx": "02a2112c5724cfc209b94da81ac4d18d0356f76abfd0f64edb56c0b88be46400",
+    "src/Workspace.settings-dialog.tsx": "c9111f243565bc4f417ae8ed662de7f2b09244fffb197da53e95296f11a59dc3",
+    "src/platform/diagnostics.ts": "a52dacda4a7bac3fa96e70df9fcf635c118534ad27e54256ee692194cd858d0f",
+    "src/platform/native.ts": "96410b5641d45822478d2f347277b9cd735bdb1e73d9d41cf04442bd4da4e946",
+    "src/platform/ftp.ts": "7e649e11e9adb3c0388a5669c0fdb34303afd78b371f9f78276a393cd8affe5e"
+  },
+  "one_time_profile_password_copy": "Successful; metadata-only result in C59-independent-import.json",
+  "not_executed": [
+    "real FTP/FTPS transfer",
+    "actual native log export dialog",
+    "phase2 final release acceptance"
+  ]
+}

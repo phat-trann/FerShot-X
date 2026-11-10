@@ -1,0 +1,37 @@
+{
+  "product": "FerShot X",
+  "version": "1.0.0",
+  "identifier": "dev.fershot.x",
+  "bundle": "/Users/phattran/Documents/Code/Personal/ferby-shottr/src-tauri/target/debug/bundle/macos/FerShot X.app",
+  "binary_sha256": "24b373a29d749111a870de4fe9914bf1838333576a1ab5d88679fe40b01e0026",
+  "bytes": 51303984,
+  "kind": "Local development capture retest candidate; not accepted release",
+  "signature": "Local ad-hoc bundle signature; strict verification passed",
+  "typecheck": "Production app entry dependency graph and existing Vite declaration; full global check blocked by active external A202 module",
+  "manual_retest": [
+    "Capture Area: desktop selection -> release -> editor",
+    "Repeat Region: same last Area coordinates without selector",
+    "Capture Area Escape: no new image; old selection preserved"
+  ],
+  "source_sha256": {
+    "src/Workspace.tsx": "c2792af57c188bd0a3e99246dcbc5fc5de262f6863d0fbc97ec3bc7280d6e7dc",
+    "src/platform/native.ts": "042eb1ad9d8e3cf0d92e6f84ea1da03d2860708da6bfc65006681437ddddbff4",
+    "src/features/capture-action-controls/CaptureActionControls.tsx": "522b8a1e6da3d7b41d2ff24c7e9be012c4ff62128b4116bf870702fdad533142",
+    "src-tauri/src/area_capture.rs": "0f92e8e2be1ed38a85f1f751aa61bb2839b184c0c770b111f187ac5170aa92ac",
+    "src-tauri/src/imaging.rs": "db835409b7d9a55c3c99b56ba7383da6edafdad703bfdd13e481984a3bd64714",
+    "src-tauri/src/lib.rs": "930c2d7d4726b2e85f4411ac9954a427cb0c84b4bb7e79402249bb935697bcfd",
+    "src-tauri/crates/capture-core/src/lib.rs": "5769b38bde601eb602ae2050b7f68d9cabfadae963dfba862621e124ce62ad17",
+    "src-tauri/Cargo.toml": "fc96045ceda938de18c039d3143bf587b6635698b43f2c7207dae421a623e6c1",
+    "src-tauri/Cargo.lock": "6a5357eafdc4a0f1ceac94ca49e6e6f98b8bcb1a487ea065e2b1bca5cc04bb03",
+    "scripts/build_capture_candidate.mjs": "19ab37bf5fa4b64fcec83ef467d6b81d3aefc4ea3e4d221a85dae4dfcbc935c7",
+    "scripts/sync_version.py": "61c9339abba429e080017c991dc06eae7c87dbdddf88cdc41b67bacde04eccf5",
+    "tests/e2e/codex-native-area.spec.ts": "1f25b1026ccf974dfe91e3ca8462b6c57ec27de855ff68b9f173023d0911ceaa",
+    "tests/e2e/codex-final-review.spec.ts": "a150092d547d5f561de3897fe1c50ec388a92ecdfeac450f769f41a00751417e"
+  },
+  "not_executed": [
+    "real screen capture",
+    "actual native selection metadata on a real screenshot",
+    "real repeat capture",
+    "public release commit/push"
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "version": "1.0.0",
+  "product": "FerShot X",
+  "phase1_acceptance_percent": 100,
+  "acceptance_percent": 85,
+  "gates": [
+    {
+      "id": "branding-release",
+      "weight": 10,
+      "accepted": false,
+      "evidence": null
+    },
+    {
+      "id": "ftp-settings-credentials",
+      "weight": 10,
+      "accepted": true,
+      "evidence": "docs/agents/codex/C73-user-acceptance.md",
+      "evidence_kind": "USER_REPORTED: user confirms other preceding checklist points working, 2026-11-10; not an automated native/server check"
+    },
+    {
+      "id": "immediate-predicted-url",
+      "weight": 15,
+      "accepted": true,
+      "evidence": "docs/agents/codex/C48-phase2-integration.md",
+      "evidence_kind": "synthetic functional acceptance; injected IPC plus scoped native core tests; not real server acceptance"
+    },
+    {
+      "id": "persistent-ftp-retry",
+      "weight": 15,
+      "accepted": true,
+      "evidence": "docs/agents/codex/C73-user-acceptance.md",
+      "evidence_kind": "USER_REPORTED: user confirms other preceding checklist points working, 2026-11-10; not an automated native/server check"
+    },
+    {
+      "id": "local-cache-30-days",
+      "weight": 15,
+      "accepted": true,
+      "evidence": "docs/agents/codex/C50-local-history.md",
+      "evidence_kind": "Integrated synthetic browser restart/action coverage and native temporary-filesystem retention/validation tests; no real FTP acceptance"
+    },
+    {
+      "id": "library-local-ftp",
+      "weight": 10,
+      "accepted": true,
+      "evidence": "docs/agents/codex/C48-phase2-integration.md",
+      "evidence_kind": "synthetic functional acceptance; injected IPC plus scoped native core tests; not real server acceptance"
+    },
+    {
+      "id": "direct-editor",
+      "weight": 15,
+      "accepted": true,
+      "evidence": "docs/agents/codex/C51-direct-integration.md",
+      "evidence_kind": "Integrated synthetic browser gestures/history/pixel-equivalence and reviewed A214 geometry invalidation; not native capture or real FTP acceptance"
+    },
+    {
+      "id": "english-no-ocr-cleanup",
+      "weight": 5,
+      "accepted": true,
+      "evidence": "docs/agents/codex/C73-user-acceptance.md",
+      "evidence_kind": "USER_REPORTED: user confirms other preceding checklist points working, 2026-11-10; not an automated native/server check"
+    },
+    {
+      "id": "integrated-acceptance",
+      "weight": 5,
+      "accepted": false,
+      "evidence": null
+    }
+  ],
+  "remaining": "C73 native UI/blur/resize/rotation/window-exclusivity retest and final accepted branding/release build/commit/push remain. Other preceding checklist points accepted as USER_REPORTED; no new build was run."
+}

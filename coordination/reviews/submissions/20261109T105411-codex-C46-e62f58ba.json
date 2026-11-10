@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "id": "20261109T105411-codex-C46-e62f58ba",
+  "created_at": "2026-11-09T10:54:11.606151+07:00",
+  "agent": "codex",
+  "request": "PHASE2-20261109",
+  "task": "C46",
+  "completion": "done",
+  "summary": "Initialize FerShot X 1.0.0, reference icon, new scope baseline and three external implementation lanes",
+  "files": [
+    "AGENTS.md",
+    "coordination/PHASE-2.md",
+    "coordination/phase2-progress.json",
+    "coordination/build-tasks.json",
+    "coordination/START-HERE.md",
+    "src/contracts/phase2.ts",
+    "package.json",
+    "package-lock.json",
+    "src-tauri/Cargo.toml",
+    "src-tauri/tauri.conf.json",
+    "src-tauri/icons/icon.icns",
+    "src-tauri/icons/32x32.png",
+    "src-tauri/icons/128x128.png",
+    "src-tauri/icons/128x128@2x.png",
+    "docs/agents/codex/C46-phase2.md"
+  ],
+  "file_sha256": {
+    "AGENTS.md": "962cfd403a6f990773a9dabdf91ac16f15b8efd1a1a0c70632a20140506a4707",
+    "coordination/PHASE-2.md": "48c4fd3720c003dd955decc39d3640a2f1af172c0f07233c17c84e16bae07fdc",
+    "coordination/phase2-progress.json": "3e5db965bdc6a04779cabc7e1e8ea087c1e2c4a996160ecc0d1c6f7e930d521e",
+    "coordination/build-tasks.json": "9450ccfe89c6c506d1ce3f0cf796c5066f3489c3d7c47befa9a6db30e05f37b6",
+    "coordination/START-HERE.md": "a753bf7bc66629304b690dc4c39e16f79b6c9740e545874b9fd6ecb4270378ae",
+    "src/contracts/phase2.ts": "d2a421bd54850efaa5a017a6fb6bd5be444c6a686ea942f0d775502c3440ea17",
+    "package.json": "4beaf8507040c09e57306e00fd32a3c1ca185d961ada3bf2bec05aab245c3de5",
+    "package-lock.json": "146d85467ce57f48bfd12c8e87a515f3a8330ba51ae72c7c798fb8d39d00c1a8",
+    "src-tauri/Cargo.toml": "ab4a0e8466fb446d90e168adfef8295797be499d93e65d07cad41114445f7d03",
+    "src-tauri/tauri.conf.json": "37958ec8728481ec537686663f5fe982102bb0e28c233cef8ef8cccb379fa470",
+    "src-tauri/icons/icon.icns": "3d8a7c612ae582745ca7a656cf1c42ed46bf7237e15e618cf2972f9499e83095",
+    "src-tauri/icons/32x32.png": "9e2429dd5e9ef45f255b7194db2e1e71ef3e72984dfa6fae5ab24e1b1fcc18a9",
+    "src-tauri/icons/128x128.png": "825ab9fc433e2f7f361013882dde3015d87f45e1a473890b6fc8090f707178eb",
+    "src-tauri/icons/128x128@2x.png": "60a030a15de981694263ed503f80f88194b54ace24d9c9cc841a07706138b1c2",
+    "docs/agents/codex/C46-phase2.md": "bedf4f5817a82c2fe4bdf14d782b23a3ea3c49cbe13183fccef57100308a7753"
+  },
+  "checks": [
+    "JSON metadata parsed during update; exact user-owned icon assets copied",
+    "Formatting/lint delegated to Copilot H01"
+  ],
+  "risks": [
+    "Phase-2 functionality and release acceptance pending; external clients must run their queues"
+  ],
+  "review": "pending"
+}

@@ -1,3 +1,7 @@
+# Lane closed (2026-11-09)
+
+The user ended Antigravity support for this cycle. Do not claim new work or refresh completed snapshots. Preserve published source, authorship, claims and immutable records. Codex owns remaining implementation and final assembly. The dispatcher allowlist is empty. Historical instructions below are superseded.
+
 # Antigravity implementation prompts
 
 ## Latest user authorization: Anti may integrate features (2026-11-06)

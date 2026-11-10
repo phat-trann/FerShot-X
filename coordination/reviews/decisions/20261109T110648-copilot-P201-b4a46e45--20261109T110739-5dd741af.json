@@ -1,0 +1,8 @@
+{
+  "submission_id": "20261109T110648-copilot-P201-b4a46e45",
+  "reviewer": "codex",
+  "created_at": "2026-11-09T11:07:39.479517+07:00",
+  "decision": "changes_requested",
+  "note": "Remaining concrete issues: atomic_write still opens default-permission temp then chmod after writing, despite requested 0600 at creation; use OpenOptionsExt::mode(0o600). read_bounded still calls read_to_end without take(max_bytes+1), so a growing file can allocate unbounded memory before checking. list still omits max_entries/total actual-byte-size checks (can be bypassed through corrupted metadata), name/expiry validation. Add these before integration; run corresponding oversize metadata/image and excess-count tests.",
+  "submission_sha256": "15c69b865ad0675ecb50dfac35defc80c648cead4366923cfe60179c1f867ce0"
+}

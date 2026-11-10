@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "id": "20261109T122743-codex-C50-8bc407b4",
+  "created_at": "2026-11-09T12:27:43.032644+07:00",
+  "agent": "codex",
+  "request": "phase2-review-integration-20261109",
+  "task": "C50",
+  "completion": "done",
+  "summary": "Integrate private 30-day lazy Local history with retained Copy/Save snapshots and app-owned deletion",
+  "files": [
+    "src-tauri/src/local_cache.rs",
+    "src-tauri/src/lib.rs",
+    "src-tauri/Cargo.toml",
+    "src-tauri/Cargo.lock",
+    "src/Workspace.tsx",
+    "src/Workspace.local-cache.ts",
+    "src/platform/local-cache.ts",
+    "src/contracts/phase2.ts",
+    "tests/e2e/codex-local-history.spec.ts",
+    "docs/agents/codex/C50-local-history.md",
+    "coordination/phase2-progress.json",
+    "README.md"
+  ],
+  "file_sha256": {
+    "src-tauri/src/local_cache.rs": "f8923ddbf964021dfcbbaac38db2f26da6efb50768f3d106363f4aca5054670e",
+    "src-tauri/src/lib.rs": "c03584a413c894500c75e72f828bfc29e074261f6e7d31ef4ba4a2c075980b1d",
+    "src-tauri/Cargo.toml": "ae8bf52a3cba2ae7ca9ec9aec9d14e38a935fd3105d2cf2821a910d0178e05fe",
+    "src-tauri/Cargo.lock": "e8696c1c4b08de07bd348874ed3ed07342b18d84828f2396736450b23836a87c",
+    "src/Workspace.tsx": "c661570a78e5edfd8c552060d931f6df4c2d0281028c066cdea871818052bed8",
+    "src/Workspace.local-cache.ts": "570e9b4f3565ade620ba22bc4e0649eba51444c922e0cf48124ff842628e6134",
+    "src/platform/local-cache.ts": "5540d986534aaf569a3971f5c01aaac2761bad0e6acc9b8c29fb0ce04c4f0ffd",
+    "src/contracts/phase2.ts": "994aac9a5c503ebce9e78ec1d760cf6b12171c77e157bdd167da5d51ee0a2ddc",
+    "tests/e2e/codex-local-history.spec.ts": "74dbc4f2357f80c237109d7c776528cdb231fdbd211c8238658409a71d937c37",
+    "docs/agents/codex/C50-local-history.md": "2345f1e11fc6f2518e7956ded8eab3332bb8ef5f2df04f11ddb298b0b03330e8",
+    "coordination/phase2-progress.json": "b88399aed597ea1f2be80cb18595a274a97068eaaafb0de120302ecbf7e063f9",
+    "README.md": "596e3d5c44064b374473c11375f1c2930ed7c4bc9e48ce7b6d89b774ebcd3343"
+  },
+  "checks": [
+    "11 cache crate tests; 2 root native cache tests; 3 browser history tests passed; existing 7 FTP/log browser tests passed; full tsc and npm run build passed"
+  ],
+  "risks": [
+    "Codex USER_WAIVED_REVIEW; real FTP/native manual release checks remain pending. Generic cached thumbnails load pixels only on selection. Formatting/lint not run; Copilot inactive."
+  ],
+  "review": "pending"
+}

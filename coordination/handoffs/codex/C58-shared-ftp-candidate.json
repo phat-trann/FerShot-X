@@ -1,0 +1,26 @@
+{
+  "bundle": "/Users/phattran/Documents/Code/Personal/ferby-shottr/src-tauri/target/debug/bundle/macos/FerShot X.app",
+  "version": "1.0.0",
+  "identifier": "dev.fershot.x",
+  "binary_sha256": "3a6c9cb71a6d988a7511439b5835707d686a7a459e3c2248f029b17419156d47",
+  "kind": "Shared FTP local development candidate; phase2 not accepted",
+  "checks": [
+    "scoped app-entry typecheck passed",
+    "Vite and native debug app bundle passed",
+    "local ad-hoc signing and strict codesign verification passed",
+    "shared Keychain item metadata found; password not requested by tool inspection"
+  ],
+  "source_sha256": {
+    "src-tauri/src/ftp.rs": "57ce30408ca02a2a10b61ab37a7f2fb3f04410d629f4555abb95946bfac58b6c",
+    "src-tauri/src/ftp_keychain.rs": "1733c78274fc1908bbec5d3aaf05edb9800f6539b60c3e752a4aba95e0a0bf87",
+    "src-tauri/src/lib.rs": "6a527b615c964210df0635b01fb36a19a69b4aacb26308570de60eefc0931ccc",
+    "src/Workspace.ftp.tsx": "8886b8d5f24fe2f94ecd47f4b496fe3e8cfbd0ac0434fdfb395ab3b31fdd0b60",
+    "src/platform/ftp.ts": "908ca7aaef00036af93c128d76e842e7a0959dad80fe519638c1b1f2bc16f350",
+    "src/contracts/phase2.ts": "d4c492724cd85707948edfcb79eedf89e72601c0b8fee6ada77a6f7606c009bf"
+  },
+  "not_executed": [
+    "actual password retrieval by new app",
+    "real FTP/FTPS transfer",
+    "full A203-A205 editor integration acceptance"
+  ]
+}

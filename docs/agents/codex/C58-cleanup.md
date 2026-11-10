@@ -1,0 +1,11 @@
+# C58 — Audited unused assets and obsolete compiler outputs
+
+Removed 12 unreferenced starter Windows/source icon variants. Every configured macOS icon and the actual UI icon remains present. Before deletion, unused source assets were archived and their extracted bytes verified against SHA-256. The concise tracked manifest is coordination/handoffs/codex/C58-cleanup.json; large exact cache-path details are in ignored artifacts/C58-cleanup-details.json.
+
+Removed only regenerable old-brand compiler outputs under debug deps/fingerprint/build/incremental (18,466 matched paths, 8,536,112,258 logical bytes). This does not claim the same available-disk increase because of hard links/APFS sharing. Current source/native artifacts, user images/settings/Keychain, immutable research/review history and the historical accepted release remain untouched. No broad clean/reset or personal-folder deletion. Planned Anti features are retained, not classified as junk merely because integration is pending.
+
+Preserved the exact C55 phase-1 manual-test app under artifacts/accepted before creating an updated shared-FTP development bundle; its binary hash is recorded in the cleanup manifest. This keeps the accepted core artifact distinct from subsequent phase-2 work. Full typecheck still has the known A205 producer defects; the candidate build uses the production app dependency graph, not a false global-pass claim. Formatting/lint not run.
+
+The Anti review was refined: effects starts with an inset region up to 120×80, not a full-image region. The earlier overgeneralized effects claim was corrected in a new immutable decision, queue wording and producer message. Confirmed crop/layout/pointer-capture/build defects remain changes_requested. Phase 1 is 100% USER_REPORTED accepted; phase 2 remains 25%.
+
+Updated shared-FTP development bundle completed successfully with the scoped app-entry check, Vite build and native debug packaging. Local ad-hoc signature and strict codesign verification passed. Exact binary/source hashes are in C58-shared-ftp-candidate.json. This is a development candidate; real shared-Keychain password retrieval and server transfer have not been executed by Codex. Version guards and the 100% phase-1 ledger validate.

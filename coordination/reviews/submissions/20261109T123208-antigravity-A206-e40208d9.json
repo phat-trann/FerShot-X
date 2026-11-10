@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "id": "20261109T123208-antigravity-A206-e40208d9",
+  "created_at": "2026-11-09T12:32:08.657343+07:00",
+  "agent": "antigravity",
+  "request": "phase2-continue-A206",
+  "task": "A206",
+  "completion": "done",
+  "summary": "Complete A206 Local/FTP library keyboard navigation, shortcut actions, selected-detail sync after retry/removal, pending vs live URL status, empty/search states, and busy guards",
+  "files": [
+    "src/features/library/LibraryPanel.tsx",
+    "src/features/library/LibraryPanel.css",
+    "src/features/library/LibraryPanel.test.tsx",
+    "src/features/library/index.ts",
+    "src/testing/antigravity-library-queue.test.tsx",
+    "docs/agents/antigravity/A206-library-queue.md"
+  ],
+  "file_sha256": {
+    "src/features/library/LibraryPanel.tsx": "8250db5ecff4aa340912d6595be636b875732867b1a1791bd9c2c6548c1113f7",
+    "src/features/library/LibraryPanel.css": "ebfb702493a8e332e4718508f87c0343be4bff64589510694c0f86977caade74",
+    "src/features/library/LibraryPanel.test.tsx": "cb0146e32b6d82eee93042b509b4117ccac27e823e318f803955243abfb44bd8",
+    "src/features/library/index.ts": "bb29b35fe3afa221b4e6d34cf9cca24e7a259cd570bd9e8a4d59b2d19d9ca73a",
+    "src/testing/antigravity-library-queue.test.tsx": "3c2cf7e699c064bbc8c18bf58346350a1f9956b8c3c1927480c7980542370c4d",
+    "docs/agents/antigravity/A206-library-queue.md": "5ded0665d5509ca3b04e403adcd915f12995a63f532a37cc94e14317d18a257d"
+  },
+  "checks": [
+    "npx vitest run src/features/library/LibraryPanel.test.tsx src/testing/antigravity-library-queue.test.tsx (9/9 passed)"
+  ],
+  "risks": [
+    "Scoped to src/features/library/** and src/testing/antigravity-library-queue.test.tsx; no cache/native/root files modified."
+  ],
+  "review": "pending"
+}

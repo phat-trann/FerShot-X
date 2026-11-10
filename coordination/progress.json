@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated": "2026-11-06",
+  "updated": "2026-11-09",
   "scope": "Ferby macOS MVP v0.1: local capture/import, basic annotations, crop/resize, PNG/JPEG save, session library, settings, native pin and local OCR.",
   "excluded": "Cloud/S3/upload, FTP (deferred), scrolling capture/stitching, advanced tools and full Shottr parity. Scope expansion must create a new baseline.",
   "milestones": [
@@ -48,13 +48,15 @@
         },
         {
           "name": "Real mode/cancel acceptance",
-          "done": false,
-          "evidence": "Not accepted yet"
+          "done": true,
+          "evidence": "docs/agents/codex/C56-phase1-accepted.md",
+          "evidence_kind": "USER_REPORTED final manual acceptance, 2026-11-09"
         },
         {
           "name": "Real permission/error/window restoration acceptance",
-          "done": false,
-          "evidence": "Not accepted yet"
+          "done": true,
+          "evidence": "docs/agents/codex/C55-area-capture.md",
+          "evidence_kind": "USER_REPORTED manual results, 2026-11-09"
         }
       ]
     },
@@ -129,8 +131,9 @@
         },
         {
           "name": "Real dialog/existing-file acceptance",
-          "done": false,
-          "evidence": "Not accepted yet"
+          "done": true,
+          "evidence": "docs/agents/codex/C55-area-capture.md",
+          "evidence_kind": "USER_REPORTED manual results, 2026-11-09"
         },
         {
           "name": "Annotated-pixel export acceptance",
@@ -264,8 +267,9 @@
         },
         {
           "name": "Native manual acceptance matrix",
-          "done": false,
-          "evidence": "Not accepted yet"
+          "done": true,
+          "evidence": "docs/agents/codex/C56-phase1-accepted.md",
+          "evidence_kind": "USER_REPORTED final manual acceptance, 2026-11-09"
         },
         {
           "name": "Release build/signing/distribution decision",
@@ -289,6 +293,8 @@
     "- C44 raises accepted MVP from 68.75% to 85.00% using three actual isolated native app processes: real crop/annotated file export, native pin ownership/window controls, real Vision OCR UI, actual restart and corrupt-preference recovery. See docs/agents/codex/C44-native-acceptance.md.",
     "- Real capture/permission restoration, system Save dialog, full manual matrix and release decision remain separate; no original Shottr runtime equality or no-bug guarantee. Native test feature is opt-in and disabled in ordinary release builds.",
     "- C45 ordinary optimized arm64 0.1.0 app build passed, native test-driver markers absent, macOS minimum 12.0 verified. Repaired generated bundle ad-hoc resource signature; strict codesign verification passed. Local internal only, no public distribution/notarization. This accepts the release build/decision gate and raises the MVP to 87.50%.",
-    "- Remaining 12.50%: actual capture modes/cancel and permission/error/window restoration, actual Save dialog/existing-file behavior, and the completed native manual matrix. See docs/agents/codex/C45-manual-acceptance.md; unexecuted cases remain open."
+    "- Remaining 12.50%: actual capture modes/cancel and permission/error/window restoration, actual Save dialog/existing-file behavior, and the completed native manual matrix. See docs/agents/codex/C45-manual-acceptance.md; unexecuted cases remain open.",
+    "- C55: user reports permission/restoration and Save dialog/existing-file checks passed; those USER_REPORTED gates add 6.25%, reaching 93.75%. Capture Area behavior rejected; native Area/Repeat correction and final matrix await user retest. No automated real capture or new release acceptance inferred.",
+    "- User explicitly confirms all phase-1 parts working and requests phase-1 completion. Remaining capture/full matrix gates accepted as USER_REPORTED. Declared phase-1 MVP is 100%; current 1.0.0 phase-2 scope remains separately incomplete (25%)."
   ]
 }

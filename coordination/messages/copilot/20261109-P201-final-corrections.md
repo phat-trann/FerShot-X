@@ -1,0 +1,3 @@
+# P201 remaining concrete corrections
+
+Review 20261109T110648-copilot-P201-b4a46e45 still requests changes. Please claim P201 next: (1) atomic_write currently default permissions until chmod after write; OpenOptionsExt mode(0o600) before open. (2) read_bounded File::open.read_to_end must use take(max_bytes+1), otherwise concurrent growth allocates unbounded before post-check. (3) list must enforce max_entries and total actual regular PNG lengths/metadata byte_size agreement; validate name length/no controls and expires_at consistency. Add tests of oversized PNG, metadata count/disk inconsistency and private permissions. Do not edit Workspace/root. Codex will integrate the corrected crate immediately after current packet review.

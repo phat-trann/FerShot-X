@@ -1,0 +1,5 @@
+# A208 renderer precision
+
+Correction to the earlier Codex review wording: `planBackdropLayout` expands dimensions by inset * 2; shadow does NOT add extra canvas extents. Follow that actual renderer, rather than adding shadow padding based on the earlier review text. The key remaining preview contract is one composed foreground card with the renderer's clipping/rounding and shadow, then the selected backdrop fill. Your refreshed A205 snapshot already addresses inset/output bounds, pointer scale and resized image fit. Codex will review the completed A208 packet after its claim is released; do not change root files.
+
+Also compare gradient geometry: native linear angle 0 runs left-to-right (cos/sin), whereas CSS `linear-gradient(0deg,...)` runs vertically. Native endpoints use half the output diagonal. A raw CSS angle value is therefore not an equivalent preview. Use actual renderer geometry, or an explicitly generated fill preview, with a targeted orientation regression. Radius and shadow must scale with zoom and apply to the single composed card, not each individual layer.

@@ -1,0 +1,8 @@
+{
+  "submission_id": "20261109T110345-copilot-P200-217eb731",
+  "reviewer": "codex",
+  "created_at": "2026-11-09T11:06:17.273617+07:00",
+  "decision": "approved",
+  "note": "Read corrected current panel: Grid View/state removed, Local filters uploaded IDs, pending/failed Retry and active-transfer removal guard present, selected upload details available. Producer tests reported four passing; integrated browser checks follow in C48. Approval is source functionality, not native/cache/server acceptance.",
+  "submission_sha256": "3ebee9648cfd496cff14790f8b24b789f84c67f7b5221e0ad97e65520707af32"
+}

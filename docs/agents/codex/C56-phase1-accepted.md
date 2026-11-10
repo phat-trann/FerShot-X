@@ -1,0 +1,5 @@
+# Phase 1 final user acceptance — 2026-11-09
+
+The user explicitly confirmed that all phase-1 parts now work and instructed Codex to complete phase 1. This closes the remaining real capture/cancellation and full native matrix gates as USER_REPORTED manual acceptance, following the prior permission/restoration and Save-dialog PASS. The current directed retest artifact is the C55 development candidate recorded in coordination/handoffs/codex/C55-capture-candidate.json; the user did not independently provide a binary hash, so artifact identity is contextual, not freshly observed by Codex.
+
+Phase-1 declared MVP acceptance: 93.75% → 100%. This is finite scope acceptance, not a zero-defect guarantee, original-product runtime equivalence, phase-2 completion, or permission to label the unfinished 1.0.0 feature set accepted. Phase 2 stays 25%. FTP sharing, durable local cache integration and the new editing surfaces retain their separate gates. No release commit/push is made while current 1.0.0 phase-2 work remains unaccepted.

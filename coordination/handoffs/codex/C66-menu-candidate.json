@@ -1,0 +1,52 @@
+{
+  "product": "FerShot X",
+  "version": "1.0.0",
+  "kind": "debug development candidate; native UI acceptance pending",
+  "bundle": "src-tauri/target/debug/bundle/macos/FerShot X.app",
+  "binary_sha256": "6cf3b0892767567a7b0d50a795bb44bcb6d7020e53ed7eb983e8af21465fe0db",
+  "source_sha256": {
+    "src-tauri/src/preferences_window.rs": "df636faf044c96e64a3e5dd3ac4f2166c913128beae841e70e842b26ab73c5b1",
+    "src-tauri/src/menu_bar.rs": "e161be7c4950f8f982fc5a9dae6f343b6dd06b6f9cd4aa4dd58153fc88074aed",
+    "src-tauri/src/desktop_menu.rs": "13696b89dbba42a49aeb53cf7096b6f51d36585c532d2f281fd7e61b0c4ccacf",
+    "src-tauri/src/lib.rs": "f34ba81c3fe0ef90531849f223707a05edee5560a8458bfda6f435b594b3bca8",
+    "src-tauri/src/preferences.rs": "10b800960510a77cca2643630b53e57a17db838d4d91374b2992f81210061ab4",
+    "src-tauri/src/export_destination.rs": "5a39b7bef0262181b2a7f1295f853eab567d32f3288f2f85aa002919804ee8a8",
+    "src-tauri/src/application_services.rs": "2982c627063b01926ced47ee406ecb589a9be15c3fd5fa4d884252ae13a24af6",
+    "src-tauri/src/shortcuts.rs": "3e0d82969110f57c968a35484b57c7daab62f942879c72d5683fde17f178a7f7",
+    "src-tauri/src/ftp.rs": "d1d03c90135945d93ce8f3382d81fdf7dfced9f0d999ac1bfa6e94b82b60e35a",
+    "src-tauri/src/diagnostics.rs": "f31d2514563cf47183f754e2d9266cb18d1f6349cce958e9c39167a0e7b41213",
+    "src-tauri/src/lifecycle.rs": "e129899e5112f88d0a041644fe41fe38c5ccff1993e2a7c032e14f9ad172d4a9",
+    "src-tauri/src/area_capture.rs": "698502ab7409747b5e0877181ae548b492ee0191953778fc425a89dcea198a56",
+    "src-tauri/src/document_open.rs": "9cf75b90364f56bb1c2f657030e07c9045f0e54e8a0269e4fea4f2a4c2e00144",
+    "src-tauri/capabilities/preferences.json": "9b9385cadedd9f62004e637af3a41ff95bf43fb09a64c12d64925109373d047f",
+    "src/PreferencesWindow.tsx": "45b7b817ec2c3ac638e1eeff348c8345f6ce5aa559567b455db80f2d8d3775ba",
+    "src/PreferencesWindow.css": "e6bb26b0e7b93a1da94ea051ce51380d2fdc3f3b5a3f47068e28fed78320682f",
+    "src/App.tsx": "56e6559119922111a28a3e0c33fd722fdaa49e69455de3a56c133594ff06a35c",
+    "src/platform/preferences-window.ts": "334e586a63b361c11bd1880cea2e4ca1851db3f6cf1e5602054f7082252f8777",
+    "src/platform/native.ts": "3b2be563cc092be06de801bf94caf453f03efec712f9cf3e2103bda76a402438",
+    "src/Workspace.tsx": "9866e4141d11b3ff803152a94a18558e3d504eb276d8180e7e6512c79741ae39",
+    "src/Workspace.lifecycle.tsx": "48c8510519ec04b15fbe49c37fb9d2faa9b5598f301b258cb970a63cb01005e3",
+    "src/Workspace.ftp.tsx": "45db3eaa2b9b2a25b09cfe6c7a85a33e30875c392febf0f538e00edab0f20fa9",
+    "src/Workspace.destination.tsx": "62c54100b72b8bcdf8d6d0e8e9ef3433f25a2d8fb9781e378ed2fe757bccb052"
+  },
+  "frontend_assets_sha256": {
+    "dist/assets/event-D3Iom4F8.js": "8a3d08725dd25a61c0b2fb56a015f049a5b9c0a8cef03a8cdfc57b46a4f141c8",
+    "dist/assets/index-B4shUeKy.css": "927f4d391554388d81c3ce26e231b6f960892aecdfb915aa43324b16b86bc17e",
+    "dist/assets/index-CaLhgDc_.js": "b6f0bf1502963e82098b7e8c7308e587f741593cf741f05aabe7c3f74d1a7a46"
+  },
+  "checks": [
+    "TypeScript, Vite and product version consistency passed through default Tauri build",
+    "Tauri debug app bundle passed",
+    "Ad-hoc codesign strict verification passed",
+    "37 integrated browser tests passed",
+    "40 distinct scoped frontend tests passed",
+    "Final current-source Rust suite passed: 47 tests, including loopback-only FTP wire protocol"
+  ],
+  "limitations": [
+    "Native menu clicks, window focus and file picker require macOS manual verification",
+    "No real image upload, capture or OS startup mutation performed by automated checks",
+    "Not notarized or a final accepted release"
+  ],
+  "phase2_acceptance_before": 55,
+  "phase2_acceptance_after": 55
+}

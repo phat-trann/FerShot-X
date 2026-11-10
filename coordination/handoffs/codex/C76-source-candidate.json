@@ -1,0 +1,31 @@
+{
+  "version": "1.0.0",
+  "status": "RENDERER_CHECKED_NATIVE_BUILD_DEFERRED",
+  "review_credit": "USER_WAIVED_REVIEW",
+  "acceptance_before": 85,
+  "acceptance_after": 85,
+  "checks": {
+    "browser": "30 injected Playwright cases passed",
+    "typecheck": "PASS tsc --noEmit",
+    "version": "PASS 1.0.0 consistent",
+    "build_native": "NOT RUN \u2014 user no-build instruction",
+    "format_lint": "NOT RUN \u2014 H01 client inactive"
+  },
+  "remaining": "Manual native overlay, traffic-light placement and dragging after explicitly requested build.",
+  "files": {
+    "AGENTS.md": "b3b8f36adb532e8cbdd5acbc0e04fa6246937776efd4d18b121fc016fbb1fe4d",
+    "coordination/build-tasks.json": "4575da3e862716a3af3a3669dcafc331476d34726148a56da997775580a39bd8",
+    "src/components/WindowTitleBar.tsx": "68fcbce62e105307657584d47de1b11233b3e77ecf3179c5fe4e59b466a9f896",
+    "src/components/WindowTitleBar.css": "ee526ce9ab13fb3fe9c611c92e07aa3a5f9af91f11b7842441adee53a8e8d45c",
+    "src/components/AppWindowTitle.tsx": "f60eb6241ca2afa758b94713802f2ce3641c7ece787a8ee5a72ffd7cce95b5e4",
+    "src/Workspace.tsx": "06c66340e4f06c67673c65cd6c56411077226b697bf5c4045accb775dff20aa2",
+    "src/LibraryWindow.tsx": "94e1418479535d28d42fa24d4b32626add18a406b24386b1723aa302e0566a76",
+    "src/LibraryWindow.css": "e81611674e72ba956d69ba8bffe5f1e280fb2fd9cf8b07746d74f0c3b31f41ad",
+    "src/PreferencesWindow.tsx": "1a8f1e42e939e2871e3b5ed4d3937a9e6479e1cb3f4661ccb6d19d5b824dbf74",
+    "src-tauri/tauri.conf.json": "50b6740cfd8eb076a8ae2fe106e31c16f3497b1224877dcc206fc309c2981673",
+    "src-tauri/capabilities/library.json": "00fe4ae9210df29dad780eb2c9396808ec465c718f51555e041646420a6cc0de",
+    "src-tauri/capabilities/preferences.json": "0b222cd45a5c0515f87e148ee0fcb8407b54b67cb06c49de7ae8ac18c886c32f",
+    "src-tauri/src/preferences_window.rs": "079cb3cc5e68bc7bba8509e4596d03e950dac485e0c33eed57db292b86b4f556",
+    "docs/agents/codex/C76-shared-titlebars.md": "6b338714b1f285f64e28da8cbca4ad0715915675fbcdba132409c48aeb930b5b"
+  }
+}

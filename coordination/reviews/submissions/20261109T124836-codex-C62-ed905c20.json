@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "id": "20261109T124836-codex-C62-ed905c20",
+  "created_at": "2026-11-09T12:48:36.813033+07:00",
+  "agent": "codex",
+  "request": "ftp-naming-20261109",
+  "task": "C62",
+  "completion": "done",
+  "summary": "Add persistent Random or uploader-style DDHHmmssN FTP filenames with frozen retry targets and backward-compatible queue loading",
+  "files": [
+    "AGENTS.md",
+    "README.md",
+    "coordination/build-tasks.json",
+    "src-tauri/Cargo.toml",
+    "src-tauri/Cargo.lock",
+    "src-tauri/src/ftp.rs",
+    "src/Workspace.ftp.tsx",
+    "src/contracts/phase2.ts",
+    "tests/e2e/codex-phase2-ftp.spec.ts",
+    "docs/agents/codex/C62-upload-naming.md",
+    "coordination/handoffs/codex/C62-upload-naming-source.json",
+    "coordination/messages/antigravity/20261109-A207-typecheck-feedback.md"
+  ],
+  "file_sha256": {
+    "AGENTS.md": "35e2d82fb634027b200d862b7b9d3ab9efbaae686703324030431251c9477c2e",
+    "README.md": "babc3588e814595f0b12d2d64da5fb653d3ed38eb7aa779ea2f2bde5139d6d8f",
+    "coordination/build-tasks.json": "ff95bc49c6cc4461927bfbfa6d97c180f721bca44504c142557cd643af0ed881",
+    "src-tauri/Cargo.toml": "a345f6218a3af52c0c0c8952d916adf4962cb6dee958e28a07ab773d80cf4950",
+    "src-tauri/Cargo.lock": "53bb59b94f0bc55a7d5987a5eedcfab5d6b636acbb69a9420799db68c91f3677",
+    "src-tauri/src/ftp.rs": "5029dc73fa70e242f5beeb04cd0042560d9b85810b5bf577c85f72f242f1aba5",
+    "src/Workspace.ftp.tsx": "3cf0451ea2a8c49f1083ce8c4b4706cb94e77126b552a906e8ea2ec6e6fb5adc",
+    "src/contracts/phase2.ts": "90a3a83f1830e2e2bc28eda1151d47d2e47bed241e4a5397197cc8d82c57e4c9",
+    "tests/e2e/codex-phase2-ftp.spec.ts": "bf44e76e43fa91e87af08f8233dd3ca89cef2c4f824221b014eb68467e3e489d",
+    "docs/agents/codex/C62-upload-naming.md": "7a06fa9bf4225f34e57f2d7d761ec7d11565499aa709fafd379fbeefac9b26f6",
+    "coordination/handoffs/codex/C62-upload-naming-source.json": "1a758eb38bbe90575ca3979bb13784911dc8479044b3102c438eef2954d6ca5d",
+    "coordination/messages/antigravity/20261109-A207-typecheck-feedback.md": "00122ec6c81813fe2dc90943d30d050242011db1eb83428571342961a8c3208a"
+  },
+  "checks": [
+    "11 native FTP tests and 6 browser FTP tests passed; production-entry TypeScript/Vite build and canonical version guard passed"
+  ],
+  "risks": [
+    "Global frontend build initially blocked by two active A207 test prop errors; producer notified. Timestamp uses local enqueue snapshot time, not unavailable source-file birth time; compact legacy format omits month/year. No real upload. Phase-2 acceptance 40 to 40 percent. Codex USER_WAIVED_REVIEW; formatting/lint not run."
+  ],
+  "review": "pending"
+}

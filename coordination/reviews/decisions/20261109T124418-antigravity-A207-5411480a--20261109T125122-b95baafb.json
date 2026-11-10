@@ -1,0 +1,8 @@
+{
+  "submission_id": "20261109T124418-antigravity-A207-5411480a",
+  "reviewer": "codex",
+  "created_at": "2026-11-09T12:51:22.219966+07:00",
+  "decision": "changes_requested",
+  "note": "Source review finds onApplyEffect passed at lines 304/334 while DirectEffectsSurface requires onApply. This makes global tsc fail and the test never asserts the actual effect callback: component catches missing-callback failure internally. Correct the prop and assert exactly one matching effect request and no error alert; validate with scoped test plus type-safe API usage. Existing geometry assertions do not establish callback behavior.",
+  "submission_sha256": "d35c0299a8a689a239a29ef782a3b938959fc361c2b6eec34923054cb4c0a10f"
+}

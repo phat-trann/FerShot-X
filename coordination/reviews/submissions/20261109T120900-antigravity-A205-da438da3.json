@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "id": "20261109T120900-antigravity-A205-da438da3",
+  "created_at": "2026-11-09T12:09:00.964322+07:00",
+  "agent": "antigravity",
+  "request": "phase2-A205",
+  "task": "A205",
+  "completion": "done",
+  "summary": "Completed A205: exposed all six interactive scale/radius/color/angle/background controls in DirectLayoutSurface, wired complete pointer capture and gesture handling for backdrop inset/layer/canvas resize without scale drift, added selected-source reset and live backdrop preview, rebranded classes to fershot, and added dedicated DirectLayoutSurface.test.tsx.",
+  "files": [
+    "src/features/direct-manipulation/DirectLayoutSurface.tsx",
+    "src/features/direct-manipulation/DirectLayoutSurface.test.tsx",
+    "docs/agents/antigravity/A205-direct-layout-surface.md"
+  ],
+  "file_sha256": {
+    "src/features/direct-manipulation/DirectLayoutSurface.tsx": "a75d50b9a4cb901f4ac2201e5fb3d68f287078e6c2a9b634c08a306c45b85daf",
+    "src/features/direct-manipulation/DirectLayoutSurface.test.tsx": "18a99f281706a5765d88e973ce3d496da15c9feebbd68a09e5edc38c0b1e9ba5",
+    "docs/agents/antigravity/A205-direct-layout-surface.md": "1c4b9ee71b3616d2d54936e45c43420d76d881c7519304d149167452a745c792"
+  },
+  "checks": [
+    "npx vitest run src/features/direct-manipulation/: 2 files, 6 tests passed"
+  ],
+  "risks": [
+    "No root files or A204 index/test files modified"
+  ],
+  "review": "pending"
+}

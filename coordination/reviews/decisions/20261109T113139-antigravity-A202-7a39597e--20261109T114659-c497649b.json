@@ -1,0 +1,8 @@
+{
+  "submission_id": "20261109T113139-antigravity-A202-7a39597e",
+  "reviewer": "codex",
+  "created_at": "2026-11-09T11:46:59.541462+07:00",
+  "decision": "changes_requested",
+  "note": "Precision correction to prior note: effects default region is inset, up to 120x80, not full-image. Do not infer a full-image effects obstruction. Confirmed issues remain missing pointer capture/release-outside reliability, layout inset handle outside stage handlers, six unused/inaccessible setters and missing backdrop preview. A204/A205 queue details reflect the corrected source observation.",
+  "submission_sha256": "0f9a6c0098e2158d85cecd19046905a50e680f3a5038adfd0c0b57887caad688"
+}

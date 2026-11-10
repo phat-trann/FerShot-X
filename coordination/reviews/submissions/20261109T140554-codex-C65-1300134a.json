@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "id": "20261109T140554-codex-C65-1300134a",
+  "created_at": "2026-11-09T14:05:54.219767+07:00",
+  "agent": "codex",
+  "request": "anti-review-optimize-20261109",
+  "task": "C65",
+  "completion": "done",
+  "summary": "Repair observed EPSV data timeout with PASV-first transport, safe negotiation fallback and coded retry UI; build signed debug app candidate",
+  "files": [
+    "src-tauri/src/ftp.rs",
+    "src/contracts/phase2.ts",
+    "src/Workspace.tsx",
+    "src/Workspace.ftp.tsx",
+    "src/features/ftp-failure/FtpFailurePanel.tsx",
+    "src/features/ftp-failure/FtpFailurePanel.test.tsx",
+    "src/features/ftp-failure/FtpFailurePanel.css",
+    "src/features/ftp-failure/index.ts",
+    "tests/e2e/codex-phase2-ftp.spec.ts",
+    "docs/agents/codex/C65-ftp-timeout.md",
+    "coordination/handoffs/codex/C65-readonly-ftp-probe.json",
+    "coordination/handoffs/codex/C65-ftp-candidate.json"
+  ],
+  "file_sha256": {
+    "src-tauri/src/ftp.rs": "53be41ea3f7f9b8c78f66e10b012d6daa3440d30772400e51a87063be50d4960",
+    "src/contracts/phase2.ts": "b9a06af1eaa07b8ce02797b8c116761dc52c0256d86596983ebdac0ffaf18e21",
+    "src/Workspace.tsx": "67a8302413fb032ecb751d8c00be8bbf061387e4c84cfa2813e4211550ca3c9e",
+    "src/Workspace.ftp.tsx": "22934c5bef9428afe890890fe5a9ef95fd818ff217121dc9f64f3ebb8898dab8",
+    "src/features/ftp-failure/FtpFailurePanel.tsx": "fba238b05dd2c5a5359ce0d4bcd025ee2065f8292df9a9d1091f273b801d039f",
+    "src/features/ftp-failure/FtpFailurePanel.test.tsx": "0b60077e75ef278336bccae64bba2dcc2b720ee15e6b55b049b64546a74f119a",
+    "src/features/ftp-failure/FtpFailurePanel.css": "53b5234a29c78349fb3a8555d1492816db0813ec1dae2c92fe968f4e746c34c1",
+    "src/features/ftp-failure/index.ts": "993fd46c6cdb3f7a8def28a505c229a1965771efede70b89a70cb5c1e041d18d",
+    "tests/e2e/codex-phase2-ftp.spec.ts": "c253c8c31b2ecb6232da91df5cdd7c0fea9e3a6b3079757e7df9e9d76ec5be04",
+    "docs/agents/codex/C65-ftp-timeout.md": "a9a933982354817c96e53bb677aa965ee3e0af42a114ed3ab157851c92107a4f",
+    "coordination/handoffs/codex/C65-readonly-ftp-probe.json": "e0b3b236b97cf1b1d451f48763a8131c679eef52cbc4c0719d478cf706561e3b",
+    "coordination/handoffs/codex/C65-ftp-candidate.json": "c4c2cf2394ee26b313de2c6c477123284e47c7d4f64b7a8dc218ed32cb1d6be2"
+  },
+  "checks": [
+    "Actual read-only server login/CWD succeed; EPSV data timeout versus PASV reachable. 13 native FTP tests including loopback curl wire transfer passed; old queue compatibility repeated passed; 39 frontend tests and final 32 browser tests passed; default full Tauri debug app build and strict local ad-hoc codesign verification passed"
+  ],
+  "risks": [
+    "No real server image upload by agent; user Retry required. Development candidate, not notarized/final release. A212 corrected under Codex USER_WAIVED_REVIEW; no peer impersonation. Formatting/lint not run."
+  ],
+  "review": "pending"
+}

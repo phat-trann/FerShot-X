@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "id": "20261109T120348-codex-C59-9f358df8",
+  "created_at": "2026-11-09T12:03:48.617824+07:00",
+  "agent": "codex",
+  "request": "FTP-LOGS-20261109",
+  "task": "C59",
+  "completion": "done",
+  "summary": "Remove shared FTP mode/import controls and copy configured profile/password once into independent FerShot X storage",
+  "files": [
+    "src/Workspace.ftp.tsx",
+    "src/platform/ftp.ts",
+    "src/contracts/phase2.ts",
+    "src-tauri/src/ftp.rs",
+    "src-tauri/src/ftp_keychain.rs",
+    "src-tauri/src/lib.rs",
+    "tests/e2e/codex-phase2-ftp.spec.ts",
+    "AGENTS.md",
+    "README.md",
+    "coordination/build-tasks.json",
+    "coordination/PHASE-2.md",
+    "coordination/handoffs/codex/C59-independent-import.json",
+    "docs/agents/codex/C59-independent-ftp.md"
+  ],
+  "file_sha256": {
+    "src/Workspace.ftp.tsx": "02a2112c5724cfc209b94da81ac4d18d0356f76abfd0f64edb56c0b88be46400",
+    "src/platform/ftp.ts": "7e649e11e9adb3c0388a5669c0fdb34303afd78b371f9f78276a393cd8affe5e",
+    "src/contracts/phase2.ts": "d2a421bd54850efaa5a017a6fb6bd5be444c6a686ea942f0d775502c3440ea17",
+    "src-tauri/src/ftp.rs": "d5dab76f39c68a7a669dc8df37e50064cce50868f733bd74d4996a51ca601169",
+    "src-tauri/src/ftp_keychain.rs": "8d75823922a15bcc55c649b341a0ddbef52da17094ab41acef844e3728290ff2",
+    "src-tauri/src/lib.rs": "8d2e3b91f21830cc5f244efb74fa018314e00ded5b66fa6e25b670645a0ca8af",
+    "tests/e2e/codex-phase2-ftp.spec.ts": "96120459e4705fbe4d7a7ebb61d7cab5963301e891d2edbfeec792b8e8e6ef65",
+    "AGENTS.md": "38ff4933e778ef9cd27337e5f81444a5a2da43979e3e16a08a4c42c6ca4dfb8b",
+    "README.md": "ba5813080ce651643e2b8feb80f1a0d8eba6f1886c6d5ff360f0c1e9b64e66ac",
+    "coordination/build-tasks.json": "03c290d6a72d642f2a61703f96bedc8312f00977b699406ba6401baa48a18a6f",
+    "coordination/PHASE-2.md": "4d8050a04090a5cbef885a180a8369e327c6705fa0bd34bd2b98394a6787eef8",
+    "coordination/handoffs/codex/C59-independent-import.json": "2cb2caca312b2154c91b33c043c8381117f47650012e3390f69dd1efe4dfb4fe",
+    "docs/agents/codex/C59-independent-ftp.md": "b5a1061510e4ed6c71ae28579de71a113165fb0092b958271569bb8095ba3999"
+  },
+  "checks": [
+    "Actual authorized one-time Security API migration: source read and independent target write status 0; source app unchanged; no password output/JSON/argv",
+    "Root Rust suite 37 passed; five FTP browser cases passed; production-entry typecheck passed; no real FTP or formatting/lint"
+  ],
+  "risks": [
+    "New app may require macOS authorization for its independent Keychain item; actual server upload remains untested; phase1 stays 100 and phase2 stays 25"
+  ],
+  "review": "pending"
+}

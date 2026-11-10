@@ -1,0 +1,33 @@
+{
+  "product": "FerShot X",
+  "version": "1.0.0",
+  "kind": "debug development candidate; not final release acceptance",
+  "bundle": "src-tauri/target/debug/bundle/macos/FerShot X.app",
+  "binary_sha256": "67bc5e5e76f7abab7526b75fde8f61c6aed079664349c666e82d9231d14daae5",
+  "source_sha256": {
+    "src-tauri/src/ftp.rs": "53be41ea3f7f9b8c78f66e10b012d6daa3440d30772400e51a87063be50d4960",
+    "src/Workspace.tsx": "67a8302413fb032ecb751d8c00be8bbf061387e4c84cfa2813e4211550ca3c9e",
+    "src/Workspace.ftp.tsx": "22934c5bef9428afe890890fe5a9ef95fd818ff217121dc9f64f3ebb8898dab8",
+    "src/features/ftp-failure/FtpFailurePanel.tsx": "fba238b05dd2c5a5359ce0d4bcd025ee2065f8292df9a9d1091f273b801d039f",
+    "src/features/direct-manipulation/DirectLayoutSurface.tsx": "0f1a222026af68382e76875b22fc0cdf0fe67ff8a621b528fd78dbb63392601e",
+    "src/features/direct-manipulation/DirectLayoutRasterPreview.tsx": "2cc1fb62fe1de3b06c062a1ee54cbb3cc7d80734834c224e75c44701ef18bdb7"
+  },
+  "frontend_assets_sha256": {
+    "dist/assets/index-BCCtCiyx.js": "9c9a6f72b6f9cd5bb99fac27d5a1a428c5d3315904099de01bc3ff95720f4776",
+    "dist/assets/event-xhkMT-iB.js": "ddc4cdb6e7dd81908fba4045f937f31089cc4691243de4234f9a6200d48dcbf2",
+    "dist/assets/index-jDXNkxot.css": "23990ef0ecfcd5f2e721b6909b8f244eee04896852e3d32f3fef076112ca5d27"
+  },
+  "checks": [
+    "default Tauri debug app build with full TypeScript/Vite before-build passed",
+    "local ad-hoc codesign strict verification passed",
+    "32 browser tests passed",
+    "39 scoped frontend tests passed",
+    "13 FTP native tests passed, including loopback-only curl wire transfer"
+  ],
+  "limitations": [
+    "No real server image upload by agent",
+    "Read-only real server diagnostic verified login/CWD, EPSV timeout and reachable PASV port",
+    "User Retry of an existing queue item required for real transfer acceptance",
+    "Not notarized or accepted release"
+  ]
+}

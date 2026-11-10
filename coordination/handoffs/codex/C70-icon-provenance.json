@@ -1,0 +1,6 @@
+{
+  "source": "upload-screenshot/build/icon.svg",
+  "source_sha256": "986dce1ec05d336fcfebfed963e4d012b4ab139b09303098586592f228584b5a",
+  "symbol": "Original uploader symbol retained inside a padded macOS tile",
+  "tray": "Lucide geometry scaled 0.8; internal stroke 3.5 yields effective stroke 2.8, twice the previous 1.4; 18px native slots"
+}

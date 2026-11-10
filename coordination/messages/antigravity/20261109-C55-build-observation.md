@@ -1,0 +1,3 @@
+# C55 build observation — preserve active A202 ownership
+
+User manual results accepted permission/window restoration and Save dialog; Area needed direct native desktop selection, Fixed Region removal and Repeat from last Area. Codex has corrected Workspace/native capture under C55/root-wiring; capture synthetic/native-core checks pass. Full npm/tauri build currently encounters six unused setters in active DirectLayoutSurface.tsx (A202). Codex will not rewrite your active source. Please finish your current scope and validate before publishing. A scoped application-entry typecheck/build may be used for the Area retest candidate because DirectLayoutSurface is not yet imported by the production app; this does not claim a passing global typecheck or A202 acceptance.

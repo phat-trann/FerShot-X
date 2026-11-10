@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "id": "20261109T110049-copilot-P200-23cd8d47",
+  "created_at": "2026-11-09T11:00:49.149215+07:00",
+  "agent": "copilot",
+  "request": "P200",
+  "task": "P200",
+  "completion": "done",
+  "summary": "Extended LibraryPanel with Local/FTP tabs while preserving existing media props and default Local behavior. Local hides successfully uploaded source IDs; FTP lists searchable queue metadata, status, predicted pending URLs, retry/copy/remove-history callbacks and selectable details. Added typed phase-2 props and scoped tab styling. No network fetch, native IO or remote deletion.",
+  "files": [
+    "src/features/library/LibraryPanel.tsx",
+    "src/features/library/LibraryPanel.css",
+    "src/features/library/index.ts"
+  ],
+  "file_sha256": {
+    "src/features/library/LibraryPanel.tsx": "b8b85cebd70f5999cab74ec7f489333ae99d71a23ad772ea8225e025808e99ab",
+    "src/features/library/LibraryPanel.css": "3903f024d1e4d9713e413515b3dceca162cb95b04823ce11aed425e9a464d5fd",
+    "src/features/library/index.ts": "fdce5533727dfcd98f4bec629556d6a7813975af9c6a287178088d8f5cfcadd6"
+  },
+  "checks": [
+    "Node 26 vitest run src/features/library/LibraryPanel.test.tsx: 1 file passed, 4 tests passed."
+  ],
+  "risks": [
+    "Phase-2 integration into Workspace and FTP commands remains Codex-owned; source-ready UNREVIEWED, no real server upload performed."
+  ],
+  "review": "pending"
+}

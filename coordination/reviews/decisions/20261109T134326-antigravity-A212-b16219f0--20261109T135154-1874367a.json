@@ -1,0 +1,8 @@
+{
+  "submission_id": "20261109T134326-antigravity-A212-b16219f0",
+  "reviewer": "codex",
+  "created_at": "2026-11-09T13:51:54.423202+07:00",
+  "decision": "changes_requested",
+  "note": "Five panel tests pass but source review found unknown-code fallback uses the in operator: constructor/toString/__proto__ resolve inherited properties instead of UNKNOWN_GUIDANCE. Regex redaction also cannot guarantee privacy for arbitrary multi-word secrets/plain IPv6 or filenames in supplied messages. Codex will fix own-property lookup and allow only native fixed status strings before integrating this completed panel; preserve the original producer packet and tests.",
+  "submission_sha256": "d26ee8290b8ef17c6eaf6a4bfb61f052a6b173996258a7808d297af97c473ec6"
+}

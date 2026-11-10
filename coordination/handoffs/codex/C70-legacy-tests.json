@@ -1,0 +1,126 @@
+{
+  "archive": "artifacts/archived/C70-legacy-browser-tests.tar.gz",
+  "files": [
+    {
+      "path": "tests/e2e/codex-logs.spec.ts",
+      "sha256": "17e43b2e04a2fed0f5edc66a2ffa9fb3341c5bad29b1ec91b9e989df7a168933"
+    },
+    {
+      "path": "tests/e2e/codex-pixels.spec.ts",
+      "sha256": "441bdf7bea4cf9a58bc9c94e3203b19884853014a0944a446f0193be1803bbc1"
+    },
+    {
+      "path": "tests/e2e/codex-direct-tools.spec.ts",
+      "sha256": "3798f2a4154bb03c4f59f98edbad0b1c3e0cb19f5aa5e3a39a1f599a0087714c"
+    },
+    {
+      "path": "tests/e2e/codex-local-history.spec.ts",
+      "sha256": "74dbc4f2357f80c237109d7c776528cdb231fdbd211c8238658409a71d937c37"
+    },
+    {
+      "path": "tests/e2e/codex-preferences.spec.ts",
+      "sha256": "44048cbe406cfba718eddd634867306c9ed26219bc8141905c76dcc08294c6db"
+    },
+    {
+      "path": "tests/e2e/codex-native-area.spec.ts",
+      "sha256": "1f25b1026ccf974dfe91e3ca8462b6c57ec27de855ff68b9f173023d0911ceaa"
+    },
+    {
+      "path": "tests/e2e/antigravity-window-appearance.spec.ts",
+      "sha256": "2cfc65d628c974dbfb34d8999d82b822a9028203816da53693ac65766b0820e6"
+    },
+    {
+      "path": "tests/e2e/antigravity-auto-adjust.spec.ts",
+      "sha256": "02690a5bd361fbf5f63ac0d15d64e6f8607a8a202eb5654c77cfcefaa475df59"
+    },
+    {
+      "path": "tests/e2e/codex-design-system.spec.ts",
+      "sha256": "cb2c9ee9b8e5232e2234083c0e0bd83291a40c15ad8d302758a27534a4609482"
+    },
+    {
+      "path": "tests/e2e/codex-final-review.spec.ts",
+      "sha256": "600fd774f8c1f138f9fd6e64c2bdf0fc876d0a6c2b95597c257dab378a08e8c4"
+    },
+    {
+      "path": "tests/e2e/antigravity-backdrop.spec.ts",
+      "sha256": "1442a3b9dc7f6e822c7ae52b30c3d2ef2ce0b11181fbc327f88e0911a02c2eab"
+    },
+    {
+      "path": "tests/e2e/codex-archive.spec.ts",
+      "sha256": "7067e00e120ef4cd634d427ba0c251d415813969373c62eeaaa34a20bdcff90f"
+    },
+    {
+      "path": "tests/e2e/codex-measurement.spec.ts",
+      "sha256": "b1fbc86cb959cc0f6d7f1c37c7abaa524a1b517f6629387121a6ed97be745244"
+    },
+    {
+      "path": "tests/e2e/workspace.spec.ts",
+      "sha256": "f39aa95f0d6df8bfb20687856bcbba37b1ea41140ae4d72fdd6ad45580fd32bb"
+    },
+    {
+      "path": "tests/e2e/antigravity-layout-workspace.spec.ts",
+      "sha256": "7df098a2c35d72ab2c3b7284e087f133eccf47de2d7f8b773b31e926e3e4c4b9"
+    },
+    {
+      "path": "tests/e2e/codex-editor.spec.ts",
+      "sha256": "3f9fa32d49321a25cfec8d2892af037bcb60554af9d2edbad50178e61f843463"
+    },
+    {
+      "path": "tests/e2e/codex-regressions.spec.ts",
+      "sha256": "788117a2fad1a0d1b4d7ac620ee6d16f95576df64f99841b05d9a1cfbc79b6d6"
+    },
+    {
+      "path": "tests/e2e/antigravity-render.spec.ts",
+      "sha256": "0081a29e010ac3b20c34d1ff6bdf2942760fa85efca803377493102df6cc125e"
+    },
+    {
+      "path": "tests/e2e/antigravity-composition.spec.ts",
+      "sha256": "efd91714108006cca0e41d5b1563d99d2e00c2af59efc951992089c3e3ec154e"
+    },
+    {
+      "path": "tests/e2e/codex-clipboard-import.spec.ts",
+      "sha256": "539006a64a787a0f1ca5740c87e44a58fde8ee11f418ed5a0bc32c1f2a3900ca"
+    },
+    {
+      "path": "tests/e2e/codex-clipboard.spec.ts",
+      "sha256": "e3a13c02426641fdc4f7a475d7977c4acf80cadc25367f5367dc3a28dd09afb4"
+    },
+    {
+      "path": "tests/e2e/codex-phase2-ftp.spec.ts",
+      "sha256": "7b805f46aa1d4b0d808a76da50da8621312ba088ee9d6793299ae32cb63f5df4"
+    },
+    {
+      "path": "tests/e2e/antigravity-emphasis.spec.ts",
+      "sha256": "c8129c8b248c9a11006ece8c981d7745a519dda856664694f8cbfeebefd5fc44"
+    },
+    {
+      "path": "tests/e2e/codex-library-windows.spec.ts",
+      "sha256": "c68b0a12bdb9d6a88d95e6b7d406826eb0d317a3179faf258270170b6b1c1e53"
+    },
+    {
+      "path": "tests/e2e/codex-pins.spec.ts",
+      "sha256": "87c97d186a52c143e46b00d54ba3a85dc95acda104a8a8617b66d0ce1c4ef48b"
+    },
+    {
+      "path": "tests/e2e/codex-library.spec.ts",
+      "sha256": "cfbea34178a093bbc943612bbb3e1b7800496ac47fd5beffd18cf6ed62094a23"
+    },
+    {
+      "path": "tests/e2e/antigravity-advanced-workbench.spec.ts",
+      "sha256": "dc417101831a955a0f9142508459312611403e4d22250cd1dbc50281d5be7d4d"
+    },
+    {
+      "path": "tests/e2e/codex-print.spec.ts",
+      "sha256": "ae9fd579278819e40d1da45d16cfb9b5042e0e0508fc5ea79b9f8519c7980df1"
+    },
+    {
+      "path": "tests/e2e/codex-shortcuts.spec.ts",
+      "sha256": "80ef5c10dd4e04249f94682e728314e73b22634466aa0c77387cd60feac9596d"
+    },
+    {
+      "path": "tests/e2e/antigravity-local-output.spec.ts",
+      "sha256": "452ffe7a7693f1ba3547e400f83a37242aedf1e6bf3c69b07c05e920f8d70db9"
+    }
+  ],
+  "reason": "Retired pre-1.0 sidebar/mode/release-on-pointer-up UI assumptions. Active release suites are codex-v1-editor and codex-v1-settings; functional unit/native coverage remains active."
+}

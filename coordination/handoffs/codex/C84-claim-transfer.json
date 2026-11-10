@@ -1,0 +1,18 @@
+{
+  "authorization": "User explicitly confirmed previous session stopped and transferred both claims on 2026-11-10.",
+  "previous_claims": {
+    "C84": {
+      "agent": "codex",
+      "task": "C84",
+      "request": "unified-controls-20261110",
+      "started_at": "2026-11-10T11:30:28.418091+07:00"
+    },
+    "root-wiring": {
+      "agent": "codex",
+      "task": "root-wiring",
+      "request": "unified-controls-20261110",
+      "started_at": "2026-11-10T11:30:28.589493+07:00"
+    }
+  },
+  "new_request": "unified-ui-controls-20261110"
+}

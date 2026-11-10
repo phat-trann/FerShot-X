@@ -1,0 +1,5 @@
+{
+  "archive": "artifacts/archived/C74-previous-editor-tests.tar.gz",
+  "sha256": "652bdb3b29598d5083c3ac56a3efc0e09cef83c68dd29f3b2c3a9586a91977c0",
+  "reason": "C73 browser source preserved before adapting removed toolbar buttons and rotation controls to C74 status/overflow/crop workflow."
+}

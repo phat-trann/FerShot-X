@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "id": "20261109T114959-codex-C54-5ff70ffd",
+  "created_at": "2026-11-09T11:49:59.827963+07:00",
+  "agent": "codex",
+  "request": "FTP-ANTI-20261109",
+  "task": "C54",
+  "completion": "done",
+  "summary": "Refresh unchanged tested Copilot takeover producer snapshot without mutable queue files so cache integration can proceed",
+  "files": [
+    "src-tauri/crates/local-cache/Cargo.toml",
+    "src-tauri/crates/local-cache/src/lib.rs",
+    "src-tauri/crates/local-cache/tests/copilot_p202.rs",
+    "src-tauri/crates/local-cache/tests/codex_cache_limits.rs",
+    "src/features/library/LibraryPanel.tsx",
+    "src/features/library/LibraryPanel.css",
+    "src/features/library/LibraryPanel.test.tsx",
+    "src/features/library/index.ts",
+    "src/testing/copilot-phase2-library.test.tsx",
+    "docs/agents/codex/C54-copilot-closeout.md"
+  ],
+  "file_sha256": {
+    "src-tauri/crates/local-cache/Cargo.toml": "3502a03ef7313c9b9cd297d47abe6f164c8c4d6ac198869f0f16a2ea38553fb9",
+    "src-tauri/crates/local-cache/src/lib.rs": "dc68d7c5cc86cfcb6735559f7f0adaba1405797fff4f7dc768d1e99f12ba0f70",
+    "src-tauri/crates/local-cache/tests/copilot_p202.rs": "19d65e5ef504249f358aef3d7f9fd6526643f9f21f1eca7baa620c16881b72ac",
+    "src-tauri/crates/local-cache/tests/codex_cache_limits.rs": "410c5c06c041430eb6764109c4d8c4949d030ae351aa56ad6ebe49a609b5cee4",
+    "src/features/library/LibraryPanel.tsx": "00f69b09023f37065284c69f8b6b93b13b462d279a7b96e12409c7b4869c12a4",
+    "src/features/library/LibraryPanel.css": "081f8fd8d6ab47c7599dfcee2f6040b1f75daab3d394e91657a32620b13f3d2b",
+    "src/features/library/LibraryPanel.test.tsx": "cb0146e32b6d82eee93042b509b4117ccac27e823e318f803955243abfb44bd8",
+    "src/features/library/index.ts": "bb29b35fe3afa221b4e6d34cf9cca24e7a259cd570bd9e8a4d59b2d19d9ca73a",
+    "src/testing/copilot-phase2-library.test.tsx": "8b795803941888e2c06f4aec0cdb80cf6eaa8aaf6393cd49e11f149cb7315cde",
+    "docs/agents/codex/C54-copilot-closeout.md": "d2275dffd7033003093a56427a8d53da69f71d4dfbf0c88e2563c129340e0a68"
+  },
+  "checks": [
+    "Compared all producer source hashes with prior tested C54 packet: unchanged; reuse actual prior 11 Rust cache and 7 library/frontend passed results; no redundant test claim",
+    "Mutable coordination queue intentionally excluded from source producer snapshot; no formatting/lint"
+  ],
+  "risks": [
+    "C50 must integrate durable cache; source snapshot alone does not accept runtime recovery or real FTP"
+  ],
+  "review": "pending"
+}

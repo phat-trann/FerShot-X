@@ -1,0 +1,159 @@
+{
+  "archive": "artifacts/archived/C70-retired-source.tar.gz",
+  "files": [
+    {
+      "path": "src/Workspace.archive.tsx",
+      "sha256": "c304f938dc6964035f5fe04526cf7fefa1e6c05d7775ba430355d34bc9d8bc17"
+    },
+    {
+      "path": "src/Workspace.auto-scroll.tsx",
+      "sha256": "1dadf5b5998185399df8591570a1951dc377f0508aa0c9d0127865b84ebcbf8f"
+    },
+    {
+      "path": "src/Workspace.deep-links.tsx",
+      "sha256": "cae14d779571b586610a0a7caf71d991f7a66e874e73e73c2114e276a6bae253"
+    },
+    {
+      "path": "src/Workspace.measurement.tsx",
+      "sha256": "494d7a9b8af9c2cfaee809a18a5b227c8a896c1acf9bda377c49200fc22a41d1"
+    },
+    {
+      "path": "src/Workspace.scroll.tsx",
+      "sha256": "081bfe44b914ee2efcc2b815be1e7a1c6eeec18ab96721eef2fd1a18915f97c0"
+    },
+    {
+      "path": "src/features/archive-panel/ArchivePanel.css",
+      "sha256": "1b005f26ba4656fbaed7fe8fb2dd103a4950a1c8bd04760f71ec271faaeee975"
+    },
+    {
+      "path": "src/features/archive-panel/ArchivePanel.tsx",
+      "sha256": "117201be68c17623221389f1563e48cc9f6ef2d9ad99d4f668fc0352f0f736a8"
+    },
+    {
+      "path": "src/features/archive-panel/README.md",
+      "sha256": "ccfa32cf5118a751afef1683f24eb7518f5184706b847904b36f841a1191bda9"
+    },
+    {
+      "path": "src/features/archive-panel/index.ts",
+      "sha256": "7e728aff9c0b8ce4f2ac0878c671f1f4eb37cff632105b06366052929a0e0462"
+    },
+    {
+      "path": "src/features/archive-workflow/README.md",
+      "sha256": "e6b43386862a80fbe11a9cbddba1caf83e9380d21ff7dbd876242cd26e491227"
+    },
+    {
+      "path": "src/features/archive-workflow/index.test.ts",
+      "sha256": "d20867bf51b00e359c2ad156d8e4a754b6ec678e19cca317e0e32a4a37334da2"
+    },
+    {
+      "path": "src/features/archive-workflow/index.ts",
+      "sha256": "102ca3a9734a500335731d443b5930e54d59206d6a268229bffa64a7700b79fd"
+    },
+    {
+      "path": "src/features/auto-adjust/auto-adjust.test.ts",
+      "sha256": "8aba0ff9eb777171d7adfde10ec306575613264fca56a6913018a018cb865c83"
+    },
+    {
+      "path": "src/features/auto-adjust/auto-adjust.ts",
+      "sha256": "ffa3d7d3ba2d6248df86033017176915aea9a10b4ff8341e1c884c80f388cb99"
+    },
+    {
+      "path": "src/features/auto-adjust/index.ts",
+      "sha256": "26269aac94bbeeb3b5d3442b25f7059233d2ccc9b95a68d065c287b8ce533e80"
+    },
+    {
+      "path": "src/features/auto-adjust-panel/AutoAdjustPanel.css",
+      "sha256": "cd9437650b7ac090ae9ad53399da745b29454ea189cfd6de9d038b0e05593e71"
+    },
+    {
+      "path": "src/features/auto-adjust-panel/AutoAdjustPanel.tsx",
+      "sha256": "219efc78e6de1881ea119a4587220179967a994169c091a94f9cac192e55bb0a"
+    },
+    {
+      "path": "src/features/auto-adjust-panel/README.md",
+      "sha256": "ea569a0128b2ad4f1bdbeeb7b67962916d0773df2e5ffa2fcf063c33fe778c1a"
+    },
+    {
+      "path": "src/features/auto-adjust-panel/index.ts",
+      "sha256": "4575a4cf0df06987d51c97db503b187e9a987041cc698e2b2273fc7b3f2c8820"
+    },
+    {
+      "path": "src/features/deep-link-parser/index.test.ts",
+      "sha256": "ee35ab7adf121876bb75d4f7b7d1e1f1f725eae4a7833ba23ba4510fdb366773"
+    },
+    {
+      "path": "src/features/deep-link-parser/index.ts",
+      "sha256": "a1f90d3890c087b95b0d984678a59b115d2f9da580a83f5e2b31734a7bebd6a2"
+    },
+    {
+      "path": "src/features/lifecycle-policy/index.test.ts",
+      "sha256": "bf0aaf176ac8bf83e59f25f62cbbb4679534e48746077c61ff132273aa2edf7f"
+    },
+    {
+      "path": "src/features/lifecycle-policy/index.ts",
+      "sha256": "5b72ab1615f4310c3a6379cacb38552da29701b7b44e891c28e004dfcdf86cdb"
+    },
+    {
+      "path": "src/platform/archive.test.ts",
+      "sha256": "d560a7635eb71b510b78f01cd1e5e5e771b19855765f8504e76c0eb743898ab8"
+    },
+    {
+      "path": "src/platform/archive.ts",
+      "sha256": "82f630c485061c172d6624d6a9d332e35180ec56175fa7019c74ad5fa6783b1a"
+    },
+    {
+      "path": "src/platform/auto-adjust.ts",
+      "sha256": "06b97c7ef76c9e4817a7dbdd5172c722ad88503d7937022e6c7ea95a20ed3dd2"
+    },
+    {
+      "path": "src/platform/measurement.test.ts",
+      "sha256": "70854f60813749022048f04dd441e053d6bdd53dce40a3c559ba32c48b80238f"
+    },
+    {
+      "path": "src/platform/measurement.ts",
+      "sha256": "cd5f9a772ee247862bb2b0f8b5887486c79072a662e2f0f5416657b050b567ce"
+    },
+    {
+      "path": "src/testing/antigravity-archive-panel.test.tsx",
+      "sha256": "85cd3db845b52755c3c82532c8b9cc8e4f450fe10d2e6dba3bb24531cffdf6ca"
+    },
+    {
+      "path": "src/testing/copilot-adjust-panel.test.tsx",
+      "sha256": "5d6ed23c742e1f49e5b15f6c2ffbb61dc1a2731607c6462ff1dc534b97cd1948"
+    },
+    {
+      "path": "src/testing/copilot-archive-workflow.test.ts",
+      "sha256": "e673026aafa3c45eb9565c6a0753c5994b726ca26dc7856326c739a8ec6d101f"
+    },
+    {
+      "path": "src/testing/copilot-lifecycle-policy.test.ts",
+      "sha256": "5cd4062c49e456fa853b9d0106b3736e73b6d726fed8a91786c05fe1e6c8b9e6"
+    },
+    {
+      "path": "src/testing/copilot-portable-archive.test.ts",
+      "sha256": "f4133842e65339be32bd6fc99d0a7180dc292828d648a76e9c207d074682e332"
+    },
+    {
+      "path": "src-tauri/src/archive.rs",
+      "sha256": "b2c5ec843cb422d178c9375aac1455c3384ebfc0d49c17438ad43a2c9a90b1a6"
+    },
+    {
+      "path": "src-tauri/src/auto_scroll.rs",
+      "sha256": "44f3d22148197c8ebb8189fb28106081e3c83f30141e7184a067634d888949d2"
+    },
+    {
+      "path": "src-tauri/src/deep_links.rs",
+      "sha256": "cb4016ebd8b15b6f1893f03da59d4b2e6da7199090919bbbaf18b13ac598ce2c"
+    },
+    {
+      "path": "src/testing/copilot-archive-workspace.test.tsx",
+      "sha256": "c024217c85816bef31cfa7f43bca91dc6d3eca4f7293bb4e2786091529db5e3e"
+    },
+    {
+      "path": "src/Workspace.measurement.test.tsx",
+      "sha256": "d3e638b5657d8f240ae3c4fb3a24b21ae586abc0a94681eb8fbe29482f514f4a"
+    }
+  ],
+  "retained_shared": "MeasurementPanel definitions remain a transitive dependency of existing layout types; no Measure UI or route is exposed.",
+  "rule": "Explicitly retired features outside active app dependency graph and their non-active consumers. Bytes verified before deletion."
+}

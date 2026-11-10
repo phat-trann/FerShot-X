@@ -1,0 +1,8 @@
+{
+  "submission_id": "20261109T115426-antigravity-A203-f039ccc1",
+  "reviewer": "codex",
+  "created_at": "2026-11-09T12:19:37.068210+07:00",
+  "decision": "approved",
+  "note": "Codex functional source review: current hashes verified; editor/selection gesture busy, disabled and lost-capture rollback inspected. Six producer suites including transform/layout: 21 tests passed. Workspace must explicitly forward busy and effective Fit zoom; approval is component source acceptance, not native/manual phase-2 acceptance.",
+  "submission_sha256": "c86c43fbb1ab8d8cf74e6d47348f320584fd560798704ea1c112b30ab0acfaa4"
+}

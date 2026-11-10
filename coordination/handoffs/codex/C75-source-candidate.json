@@ -1,0 +1,28 @@
+{
+  "version": "1.0.0",
+  "status": "IMPLEMENTED_RENDERER_CHECKED_NATIVE_BUILD_DEFERRED",
+  "review_credit": "USER_WAIVED_REVIEW",
+  "acceptance_before": 85,
+  "acceptance_after": 85,
+  "checks": {
+    "unit": 418,
+    "browser": "29 full-suite cases passed; final 4 focused cases passed including one new interrupted-endpoint case (30 distinct cases). Final cancellation case checks for page errors.",
+    "typecheck": "PASS tsc --noEmit",
+    "version": "PASS 1.0.0 consistent",
+    "build_native": "NOT RUN \u2014 standing no-build instruction",
+    "format_lint": "NOT RUN \u2014 former H01 client inactive"
+  },
+  "behavior": "Default Select; box/area 8 anchors plus move; lines/arrows/straight pen 2 endpoints plus whole-line move; text/counter move-only with explicit font/diameter; freehand/magnifier 4 proportional corners plus move; relevant effect controls and independent family defaults. Endpoint preview commits once, supports undo/redo and cancellation.",
+  "remaining": "Native WebView interaction retest and accepted 1.0.0 build/release publication remain deferred.",
+  "files": {
+    "AGENTS.md": "65b3561039bdc22016bdbdaa05c95af2028a75a3bce943f48916bd16958db2e9",
+    "README.md": "a05147729ad1d1dc558179a31a7fb233fd8d89c2b630104184a7d30bf4f988e4",
+    "coordination/build-tasks.json": "f741b36482bc223e2c47abcd27cc482c7a98f1e82f09118baeb71a98e2e0ede3",
+    "src/features/editor/konva/KonvaWorkbench.tsx": "d0ee8ae62ccf6d656f4043ac2091928d74c4a27c0b0781f1aa94f6292cb8c31b",
+    "src/features/editor/konva/manipulation.ts": "359cc193df125579ba24197f6dcd3427f39369b7772e7abd70f042f7ef067b73",
+    "src/features/editor/konva/manipulation.test.ts": "23a58acbd1f5c6a987d0397ad386f047b367368a2b8309cbb4b11f927f0384ec",
+    "tests/e2e/codex-v1-editor.spec.ts": "1897f7302e51aaaba3e53e92a078af25a76a707366566ac84d947010a474c1fa",
+    "docs/agents/codex/C75-tool-behavior.md": "2fa6f17b33a957749eb5d749292b1313a2dba10c936f0baddc60b2ff63d8ea53",
+    "docs/releases/1.0.0-checklist.md": "312f74f3b5d0e5b154c53d5a309d4840cf487c5dfa7a5ea0571a0821615c7d7e"
+  }
+}

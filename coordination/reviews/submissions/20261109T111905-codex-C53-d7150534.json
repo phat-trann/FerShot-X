@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "id": "20261109T111905-codex-C53-d7150534",
+  "created_at": "2026-11-09T11:19:05.039682+07:00",
+  "agent": "codex",
+  "request": "RELEASE-POLICY-20261109",
+  "task": "C53",
+  "completion": "partial",
+  "summary": "Rebrand active product and README, add synchronized product version/release policy, close Copilot allocation and hand off occupied editor rebrand",
+  "files": [
+    "AGENTS.md",
+    "README.md",
+    "package.json",
+    "package-lock.json",
+    "src/app-info.ts",
+    "src/Workspace.tsx",
+    "scripts/sync_version.py",
+    "scripts/test_sync_version.py",
+    "src-tauri/Cargo.toml",
+    "src-tauri/Cargo.lock",
+    "src-tauri/tauri.conf.json",
+    "src-tauri/Info.plist",
+    "coordination/build-tasks.json",
+    "coordination/START-HERE.md",
+    "coordination/PHASE-2.md",
+    "coordination/handoffs/codex/C53-branding-files.json",
+    "docs/agents/codex/C53-release-policy.md"
+  ],
+  "file_sha256": {
+    "AGENTS.md": "9c7fc390d799662f619915f401a590644d36a882575ce2d36d4678cb1c01f93d",
+    "README.md": "4559163671075f607b5f58872c355ab3443df1fb790680d9b2de65591b144b32",
+    "package.json": "b860dadc9762ed86688c6a4f2144f3d4882da9e0c4bced2b440a73dbd779f34b",
+    "package-lock.json": "146d85467ce57f48bfd12c8e87a515f3a8330ba51ae72c7c798fb8d39d00c1a8",
+    "src/app-info.ts": "76fc977a46eb0c5ce9792dea7b0f39193b155eb113775028bae22a9deb438c0d",
+    "src/Workspace.tsx": "be200b1fb1047b44cae0a7c86e2bffdc48ab4c7529829503a40944fb4a5ce845",
+    "scripts/sync_version.py": "637689fb5c003ae22a53831c263a06114b29e6ca8ac8a4079629a7558371fc50",
+    "scripts/test_sync_version.py": "9fd3e2c4304320c720f17f23511402404cffbf9c97ce106905b1feb6154f97f0",
+    "src-tauri/Cargo.toml": "bc959f2ed00ef13152fbad7de7202167c635d663f27262debddc80332c5da3cc",
+    "src-tauri/Cargo.lock": "390fe7ba811f1220f217fe844049551730f06c55e4d6cfa46a09ba3d8976236b",
+    "src-tauri/tauri.conf.json": "b44a643ef50750b0dfd60dc7fd7c8c4d1507526c3e67fac231dc1379436a9c9a",
+    "src-tauri/Info.plist": "0cded9becdb80b07c24cb0fb0793c64c20193944d168de3f414389f95ac35bd5",
+    "coordination/build-tasks.json": "2ef1cac987598de00d068926755c0f407a1f7c9195e515c4fab1b8e9a5ab8372",
+    "coordination/START-HERE.md": "a9a2dcc9d7e1f798c95e71c8520fef9c331c14e039fbbbadced300fad8b181ce",
+    "coordination/PHASE-2.md": "81477421ecc986fb76a75aa74f2ae94bdefe6c1a11de4edcd58e49cc703578bb",
+    "coordination/handoffs/codex/C53-branding-files.json": "b077c7ca30d96b5fffe76e5f57bab3bce7e3fa8eb200ec4d291afd0cef987ec6",
+    "docs/agents/codex/C53-release-policy.md": "fe62ab0b6f095eace1e3fa26cee36398313391539abb3e86aba336206325897d"
+  },
+  "checks": [
+    "Product version check passed; two sync/drift tests passed; frontend typecheck passed",
+    "No commit/push: release acceptance incomplete; no formatting/lint"
+  ],
+  "risks": [
+    "Occupied Antigravity editor rebrand still pending; immutable history and old acceptance binary preserved"
+  ],
+  "review": "pending"
+}

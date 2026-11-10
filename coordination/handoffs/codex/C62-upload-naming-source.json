@@ -1,0 +1,17 @@
+{
+  "kind": "ordinary source reads, not REA/runtime evidence",
+  "references": [
+    {
+      "path": "../upload-screenshot/src/main/pathUtils.ts",
+      "sha256": "27173a0fbf977ed2953c23beaf48edc5f20db8494bcc4aa65fcb92eba898a44e"
+    },
+    {
+      "path": "../upload-screenshot/src/main/queue.ts",
+      "sha256": "837309f4c649cbbd7a9c0d2e7ad24a1dc965e6358d16a20d8dca4db0fc789914"
+    }
+  ],
+  "format": "DDHHmmssN.png",
+  "default": "random",
+  "clock": "local snapshot enqueue time; uploader source uses file birth time",
+  "queued_names": "immutable"
+}

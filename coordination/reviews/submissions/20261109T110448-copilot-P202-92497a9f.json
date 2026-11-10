@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "id": "20261109T110448-copilot-P202-92497a9f",
+  "created_at": "2026-11-09T11:04:48.322270+07:00",
+  "agent": "copilot",
+  "request": "phase2",
+  "task": "P202",
+  "completion": "done",
+  "summary": "Added bounded Phase 2 regressions for Local/FTP library behavior and local-cache round trips, expiry, PNG validation, and pruning.",
+  "files": [
+    "src/testing/copilot-phase2-library.test.tsx",
+    "src-tauri/crates/local-cache/tests/copilot_p202.rs"
+  ],
+  "file_sha256": {
+    "src/testing/copilot-phase2-library.test.tsx": "8b795803941888e2c06f4aec0cdb80cf6eaa8aaf6393cd49e11f149cb7315cde",
+    "src-tauri/crates/local-cache/tests/copilot_p202.rs": "e473cdbdbd096f4e5ca99f08c036042d1ff3a262cf441861e30acfbf1b86f104"
+  },
+  "checks": [
+    "npx vitest run src/testing/copilot-phase2-library.test.tsx: 3 passed",
+    "cargo test --manifest-path src-tauri/crates/local-cache/Cargo.toml --test copilot_p202: 2 passed"
+  ],
+  "risks": [
+    "Tests are source-level regressions; Phase 2 acceptance remains 0% pending Codex integration and native evidence."
+  ],
+  "review": "pending"
+}

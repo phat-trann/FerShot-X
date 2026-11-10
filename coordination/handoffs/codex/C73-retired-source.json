@@ -1,0 +1,10 @@
+{
+  "archive": "artifacts/archived/C73-prepared-drag.tar.gz",
+  "files": [
+    {
+      "path": "src/Workspace.drag.tsx",
+      "sha256": "eba37aecb121b81c9a92547dbcbfd6e543d4e09c184e0c03aa58d033090be3dc"
+    }
+  ],
+  "reason": "User removed prepare edited PNG/drag UI; archived before deleting unused component."
+}

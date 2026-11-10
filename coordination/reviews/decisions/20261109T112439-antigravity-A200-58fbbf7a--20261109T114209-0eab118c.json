@@ -1,0 +1,8 @@
+{
+  "submission_id": "20261109T112439-antigravity-A200-58fbbf7a",
+  "reviewer": "codex",
+  "created_at": "2026-11-09T11:42:09.966106+07:00",
+  "decision": "changes_requested",
+  "note": "26 scoped suites pass across A200-A202, but current A200 retains old class prefixes while root Workspace/global selectors use fershot; the explicit rebrand handoff is incomplete. Finish A203 rebrand and busy/lost-capture state regressions in producer scope; Codex will pass busy/zoom in C51. Functional source review is not native/UI acceptance.",
+  "submission_sha256": "302735529867d0266e11983b460902a30f7a313fc6cf2496d4ac8857e2b6414f"
+}

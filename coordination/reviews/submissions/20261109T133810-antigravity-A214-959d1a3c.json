@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "id": "20261109T133810-antigravity-A214-959d1a3c",
+  "created_at": "2026-11-09T13:38:10.272666+07:00",
+  "agent": "antigravity",
+  "request": "phase2-continue-A214",
+  "task": "A214",
+  "completion": "done",
+  "summary": "Fix cached gesture geometry invalidation across zoom rerenders and viewport resize/scroll events in EditorView and SelectionHandlesOverlay while keeping normal pointerMoves free of layout reads",
+  "files": [
+    "src/features/editor/view/EditorView.tsx",
+    "src/features/editor/view/EditorView.test.tsx",
+    "src/features/selection-handles/SelectionHandlesOverlay.tsx",
+    "src/features/selection-handles/SelectionHandlesOverlay.test.tsx",
+    "src/testing/codex-gesture-zoom-invalidation.test.tsx",
+    "docs/agents/antigravity/A214-geometry-invalidation.md"
+  ],
+  "file_sha256": {
+    "src/features/editor/view/EditorView.tsx": "3a2186b5dc78d7a83d30c33706eb1c6a512b6be5b7b97275af46f31b45c99929",
+    "src/features/editor/view/EditorView.test.tsx": "1d96a204ab9d90653235f1435c2809371bbdf5f3201c89fb8a53f79ed9110726",
+    "src/features/selection-handles/SelectionHandlesOverlay.tsx": "ab8e8e612ed2a1896c1783ce7fb0851bac37d9221cd2bd2e83eb1c2d65a50a48",
+    "src/features/selection-handles/SelectionHandlesOverlay.test.tsx": "9aa22f3b2e65790d03c96c74c0dbad7c7794e2d57b3cfd78707ce074d7fccb62",
+    "src/testing/codex-gesture-zoom-invalidation.test.tsx": "ddc41e20ca83decbba339aa8231bf78883054bc2156d5ddbad4b599aad86f94f",
+    "docs/agents/antigravity/A214-geometry-invalidation.md": "0b15f8356dd8719e56c25169662fee8533207c296d92bc246c2a20d2a3a819fe"
+  },
+  "checks": [
+    "npx vitest run src/testing/codex-gesture-zoom-invalidation.test.tsx src/features/editor/view/EditorView.test.tsx src/features/selection-handles/SelectionHandlesOverlay.test.tsx (14/14 passed)"
+  ],
+  "risks": [
+    "Scoped to EditorView, SelectionHandlesOverlay, and codex-gesture-zoom-invalidation.test.tsx; no root or direct-manipulation files modified."
+  ],
+  "review": "pending"
+}

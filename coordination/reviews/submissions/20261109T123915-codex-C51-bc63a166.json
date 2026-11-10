@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "id": "20261109T123915-codex-C51-bc63a166",
+  "created_at": "2026-11-09T12:39:15.424646+07:00",
+  "agent": "codex",
+  "request": "phase2-review-integration-20261109",
+  "task": "C51",
+  "completion": "partial",
+  "summary": "Wire reviewed central Crop/Resize/Effects gestures and editor busy/Fit behavior; layout awaits active A208 correction",
+  "files": [
+    "src/Workspace.tsx",
+    "src/Workspace.editor.tsx",
+    "src/Workspace.direct-tools.tsx",
+    "src/Workspace.css",
+    "tests/e2e/codex-direct-tools.spec.ts",
+    "tests/e2e/codex-regressions.spec.ts",
+    "coordination/handoffs/codex/C51-retired-transform.json",
+    "docs/agents/codex/C51-direct-integration.md"
+  ],
+  "file_sha256": {
+    "src/Workspace.tsx": "bebf2d447d08fb6b1b96d027cdb6440244af72ff364378617c7e0b28a2a62d58",
+    "src/Workspace.editor.tsx": "6bb7c058fcb68dc20da4cd33749385882a6923fa9a4b0b2f0070b2028479365c",
+    "src/Workspace.direct-tools.tsx": "f0113516311349cab3e8322080949ad9d1a8568de07a0b426187fede83583964",
+    "src/Workspace.css": "8daacde21b16a55f5bc395c851833ac2dd9fdb6b0b390fe4443f53527a9a1a56",
+    "tests/e2e/codex-direct-tools.spec.ts": "7e628b73473c19fdb67546992d85c0ab65ee06716689b312037140ad8b45c853",
+    "tests/e2e/codex-regressions.spec.ts": "788117a2fad1a0d1b4d7ac620ee6d16f95576df64f99841b05d9a1cfbc79b6d6",
+    "coordination/handoffs/codex/C51-retired-transform.json": "26a76cbeb72ac9c7a6148ca796a82036d4873a0c7008ffd52f19ceddd6fee1a1",
+    "docs/agents/codex/C51-direct-integration.md": "fc85ac2035dc550e2efa972312d3a69896fc8ca4d3f4621db014031bd39ca23d"
+  },
+  "checks": [
+    "18 browser tests passed across direct tools, local history, FTP, logs and existing regressions; full tsc and production frontend build passed; inspected synthetic Crop screenshot"
+  ],
+  "risks": [
+    "A208 producer currently active; composition/backdrop not integrated or accepted. Codex USER_WAIVED_REVIEW. No real capture/FTP/dialog actions; formatting/lint not run."
+  ],
+  "review": "pending"
+}

@@ -1,0 +1,8 @@
+{
+  "submission_id": "20261109T113139-antigravity-A202-7a39597e",
+  "reviewer": "codex",
+  "created_at": "2026-11-09T11:42:10.285326+07:00",
+  "decision": "changes_requested",
+  "note": "Existing tests pass but source has functional blockers: initial effect full-region body intercepts draw; layout backdrop inset begins outside stage move/up handlers and cannot update; no pointer capture on layer/canvas gestures; six unused state setters block global typecheck and meaningful color/radius/angle/background controls are absent. Preview omits backdrop fill while emitted plan includes it. A204/A205 own corrections, current exports and focused regressions.",
+  "submission_sha256": "0f9a6c0098e2158d85cecd19046905a50e680f3a5038adfd0c0b57887caad688"
+}

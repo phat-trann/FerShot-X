@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "id": "20261109T140146-codex-C51-98c6ca3b",
+  "created_at": "2026-11-09T14:01:46.573765+07:00",
+  "agent": "codex",
+  "request": "anti-review-optimize-20261109",
+  "task": "C51",
+  "completion": "done",
+  "summary": "Complete source-preserving direct editor/composition integration with reviewed A214 invalidation and exact preview/export pixels; phase-2 acceptance 55 percent",
+  "files": [
+    "src/Workspace.tsx",
+    "src/Workspace.direct-tools.tsx",
+    "src/Workspace.editor.tsx",
+    "src/Workspace.css",
+    "tests/e2e/codex-direct-tools.spec.ts",
+    "tests/e2e/codex-final-review.spec.ts",
+    "tests/e2e/codex-regressions.spec.ts",
+    "coordination/handoffs/codex/C51-retired-layout.json",
+    "coordination/handoffs/codex/C51-retired-transform.json",
+    "docs/agents/codex/C51-direct-integration.md",
+    "coordination/phase2-progress.json",
+    "README.md"
+  ],
+  "file_sha256": {
+    "src/Workspace.tsx": "67a8302413fb032ecb751d8c00be8bbf061387e4c84cfa2813e4211550ca3c9e",
+    "src/Workspace.direct-tools.tsx": "efb9f233590fa2bd5e3fab6c53e8bab08732751c26d45df140379979aa4e72eb",
+    "src/Workspace.editor.tsx": "6bb7c058fcb68dc20da4cd33749385882a6923fa9a4b0b2f0070b2028479365c",
+    "src/Workspace.css": "d100fafeedb26eab5038d090ed57d011f17e980acea9db60dc3ef7e1c42b2089",
+    "tests/e2e/codex-direct-tools.spec.ts": "3798f2a4154bb03c4f59f98edbad0b1c3e0cb19f5aa5e3a39a1f599a0087714c",
+    "tests/e2e/codex-final-review.spec.ts": "4a7fe1e0b1131130cb281a8770d630a4a57dbda37f533a8353c15a2681127390",
+    "tests/e2e/codex-regressions.spec.ts": "788117a2fad1a0d1b4d7ac620ee6d16f95576df64f99841b05d9a1cfbc79b6d6",
+    "coordination/handoffs/codex/C51-retired-layout.json": "05fd5ff67e80a8a1743c10fcfe10b0526c1cf6d92c19d2b5e5852a57b2fb3abe",
+    "coordination/handoffs/codex/C51-retired-transform.json": "26a76cbeb72ac9c7a6148ca796a82036d4873a0c7008ffd52f19ceddd6fee1a1",
+    "docs/agents/codex/C51-direct-integration.md": "56f3f2d991a700498b4109dfcb50b4ad90e053b189be38a7254832b70233e65d",
+    "coordination/phase2-progress.json": "f2b8d2250df71cad61a0fddaddea34edafc44645ce197f9212d8e91b0a4d1546",
+    "README.md": "552319f156a11727d9b61dd35100f3b62a35b7bc23713dc0ddc084ea0e049389"
+  },
+  "checks": [
+    "32 integrated browser tests passed; 39 scoped frontend unit tests passed; current A214 reviewed; full TypeScript and frontend build passed"
+  ],
+  "risks": [
+    "Synthetic browser/native boundaries do not establish real FTP upload acceptance. Codex USER_WAIVED_REVIEW. Retired numeric panels archived; formatting/lint not run."
+  ],
+  "review": "pending"
+}

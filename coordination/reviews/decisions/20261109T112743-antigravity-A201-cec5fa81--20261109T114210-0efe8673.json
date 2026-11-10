@@ -1,0 +1,8 @@
+{
+  "submission_id": "20261109T112743-antigravity-A201-cec5fa81",
+  "reviewer": "codex",
+  "created_at": "2026-11-09T11:42:10.120022+07:00",
+  "decision": "changes_requested",
+  "note": "A201 snapshot is stale after A202 shared index/test exports; publish a current packet via A204. Initial full-image crop body covers entire stage and starts crop-move, preventing ordinary fresh drag selection. Resize emits independent width/height while native transform preserves aspect ratio and preview clips growth to 100%. Add real body/handle hit-target and release/cancel/busy tests; correct geometry before integration.",
+  "submission_sha256": "e014b94f2212382ed224be3411205038519061b2537e8dc189fcbf46704720b4"
+}

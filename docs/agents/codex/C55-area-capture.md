@@ -1,0 +1,22 @@
+# C55 — User manual results and native Area correction
+
+On 2026-11-09 the user reported the permission/error/window-restoration checklist and PNG/JPEG Save dialog/cancel/existing-file checklist as good. These two phase-1 gates are accepted as USER_REPORTED, not independently observed by Codex. The user had been directed to the C45 0.1.0 release; the running binary hash was not supplied in the reply, so the C45 artifact hash remains the expected baseline rather than a newly verified runtime identity. Capture was explicitly reported defective: Area captured a full image before selection inside the app. Capture and the complete native matrix remain open. Phase 1 rises 87.50% → 93.75%; phase 2 stays 25%.
+
+Frontend Area now calls the existing native interactive `screencapture -i -s` path directly; no fullscreen screenshot or in-app capture-selection dialog is created. Mouse release returns the selected image to the editor; Escape preserves the prior image/remembered selection. Fixed Region controls and the unused numeric rectangle form are removed. Repeat Region uses the last successful Area selection, stored natively for this app session, and uses `screencapture -R` rather than capturing/cropping a whole display.
+
+Coordinates are read only from the just-created private PNG's macOS `com.apple.metadata:kMDItemScreenCaptureGlobalRect` binary-plist xattr. Primary first-hand reference: [capture app author's implementation notes](https://tendedero.app/blog/shipping-without-xcode/); CLI flags checked against the installed tool's own usage output. Metadata is bounded/validated, pixel ratios checked and complete display-topology signatures bound to the remembered region. Missing/untrustworthy coordinates disable Repeat with a clear notice; no mouse-position guess or unrelated screenshot metadata read. Display changes invalidate repeat. This metadata behavior still needs actual manual confirmation on this machine; synthetic tests cannot establish its availability.
+
+No real capture was triggered by Codex. The new Area/Repeat flow needs user retest before the remaining 6.25% is accepted. The unchanged phase-1 binary's prior manual results do not automatically accept the changed 1.0.0 development app.
+
+Validation: root native suite 32 tests passed before adding one additional owned-file xattr test; all three Area metadata/state tests then passed, including real xattr round-trip on an isolated synthetic temporary file. Capture-core suite 8 passed using injected command runners (no screen capture). Six Area/FTP browser checks passed with mocked IPC; the updated older native-cancel regression also runs separately. Typecheck initially passed, but the full build later encountered unused setters in active external A202 DirectLayoutSurface. That file was not rewritten. The C55 development build therefore checks the production app entry graph (plus Vite declarations), excluding unintegrated producer modules; this is not a passing global typecheck or A202 acceptance. Initial scoped config omitted CSS/Vite declarations; adding the existing declaration file corrected the build recipe. Version guard's Python tomllib import was incompatible with the system Python used by npm; replaced it with bounded root-manifest parsing without adding dependencies, and both version tests pass on system Python.
+
+## Ready for user retest
+
+Local development bundle: `src-tauri/target/debug/bundle/macos/FerShot X.app`, version 1.0.0. Scoped application typecheck/Vite/native debug packaging passed; local ad-hoc signing and strict codesign verification passed. Exact executable hash and source snapshots are in coordination/handoffs/codex/C55-capture-candidate.json. This is a retest candidate, not a fully accepted release or a claim that unrelated active editor work passed validation.
+
+1. Open this new bundle rather than the old 0.1.0 binary.
+2. Capture Area: drag directly on the desktop, release, and verify only the chosen image opens in the editor.
+3. Repeat Region: verify the same screen rectangle is captured without choosing it again. If disabled, record the on-screen metadata notice.
+4. Capture Area then Escape: verify no new image is added and the last successful region remains repeatable.
+
+User results for these changed cases are pending. Previous user-reported permission/restoration and Save dialog PASS remain attributed to the prior directed baseline; they do not automatically establish every behavior of this new development app.

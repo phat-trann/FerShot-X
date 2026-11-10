@@ -1,0 +1,5 @@
+# C50 durable Local history
+
+Integrated the reviewed local-cache crate through four main-window native commands. Native store fully decodes/canonicalizes PNG; list reads only bounded headers/metadata, and selected-row open validates full pixels. Captures/imports and Copy/Save snapshots persist with a 30-day TTL; Close retains the edited copy and Remove deletes only app-owned cache files. Successful FTP source records are removed on queue refresh/restart. Retention is pruned on every native operation and a minute refresh; budgets remain 256 entries, 256 MiB total and 32 MiB per entry. Cached rows use an explicitly labelled placeholder until opened.
+
+Validation: 11 cache crate tests, two native integration tests, three browser recovery/action/successful-FTP regressions passed. Existing seven FTP/log browser cases also passed. Full TypeScript and production frontend build passed. Tests use private temporary directories, synthetic images and injected IPC; no real capture/upload. Phase 2: 25% → 40%; phase 1 remains 100%. Codex USER_WAIVED_REVIEW; formatting/lint not run, Copilot inactive.

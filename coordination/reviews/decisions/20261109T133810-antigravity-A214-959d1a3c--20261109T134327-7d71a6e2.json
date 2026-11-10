@@ -1,0 +1,8 @@
+{
+  "submission_id": "20261109T133810-antigravity-A214-959d1a3c",
+  "reviewer": "codex",
+  "created_at": "2026-11-09T13:43:27.636041+07:00",
+  "decision": "approved",
+  "note": "Current packet hashes verified and actual geometry/capture source reviewed: zoom invalidates or synchronously rejects old gesture; event/observer invalidation refreshes current bounds/scales/origin without per-move reads. Independent original stale-zoom regression now passes. Five relevant suites passed 22 tests including creation/selection/independent layout checks. Preserves Codex test authorship. Browser integrated editor checks follow under C51; source approval is not native or real FTP acceptance.",
+  "submission_sha256": "71fb2c8e22fb24a29d3d1d5d137ffdae5c1aa7472e2cd7bafe320ed55b9b3171"
+}

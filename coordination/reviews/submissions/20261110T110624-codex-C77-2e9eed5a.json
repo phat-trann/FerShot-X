@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "id": "20261110T110624-codex-C77-2e9eed5a",
+  "created_at": "2026-11-10T11:06:24.007654+07:00",
+  "agent": "codex",
+  "request": "remove-compose-20261110",
+  "task": "C77",
+  "completion": "done",
+  "summary": "Remove Compose images from Edit toolbar and active workspace/direct-tool wiring.",
+  "files": [
+    "AGENTS.md",
+    "README.md",
+    "coordination/build-tasks.json",
+    "src/Workspace.tsx",
+    "src/Workspace.direct-tools.tsx",
+    "tests/e2e/codex-v1-editor.spec.ts",
+    "docs/releases/1.0.0-checklist.md",
+    "docs/agents/codex/C77-remove-compose.md"
+  ],
+  "file_sha256": {
+    "AGENTS.md": "d1b38d3a872e957f79c6672a5afa518ff83dd4cb8cc29d5bfebae1d0a3142119",
+    "README.md": "d5bb64a6a72ed18745b5dd6710c3b7e82b08ff01fc1d4c00e261e8b3e4abccf8",
+    "coordination/build-tasks.json": "3020c21eab913ad37df97aaab0aab1bc469079a5db8445af36a3c951333117c6",
+    "src/Workspace.tsx": "e83f83ad6f896ada59d29ffb96868e37ae86d82e106bf8f9ee11e40d812330fc",
+    "src/Workspace.direct-tools.tsx": "19958b20ca362da3fcfb8cf30002aed54b14803e6291600bfbcddf71fb919539",
+    "tests/e2e/codex-v1-editor.spec.ts": "9429792f74f21be5528511b0936b779ab420f65f43e103d531c352b453d74d25",
+    "docs/releases/1.0.0-checklist.md": "3817e8cb08f260603437580cba4f8fe39a40e519412b0b9d641d1e6a45be0b31",
+    "docs/agents/codex/C77-remove-compose.md": "3f2bb76c939f8122b6bd50715fa26c1a2e79a0417b2dcc9bccaa95173ab1cb84"
+  },
+  "checks": [
+    "PASS tsc --noEmit; 3 focused injected Playwright cases; version 1.0.0 guard. No build, formatting or lint."
+  ],
+  "risks": [
+    "Phase-2 acceptance unchanged 85%; isolated legacy utilities/historical evidence preserved."
+  ],
+  "review": "pending"
+}

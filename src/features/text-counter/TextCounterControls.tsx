@@ -5,6 +5,7 @@ import type {
   Point,
 } from "../../contracts/editor";
 import "./TextCounterControls.css";
+import { Input } from "../../components/ui/input";
 
 export const MAX_ANNOTATION_TEXT_LENGTH = 500;
 export const MIN_ANNOTATION_STROKE_WIDTH = 1;
@@ -170,15 +171,15 @@ export function TextCounterControls({
 
   return (
     <section
-      className="ferby-text-counter"
+      className="fershot-text-counter"
       aria-label="Text and counter annotation controls"
       onKeyDown={handleKeyDown}
     >
-      <div className="ferby-text-counter__toolbar">
+      <div className="fershot-text-counter__toolbar">
         <div role="group" aria-label="Annotation mode">
           <button
             type="button"
-            className="ferby-text-counter__btn"
+            className="fershot-text-counter__btn"
             aria-pressed={mode === "text"}
             onClick={() => onModeChange("text")}
           >
@@ -186,7 +187,7 @@ export function TextCounterControls({
           </button>
           <button
             type="button"
-            className="ferby-text-counter__btn"
+            className="fershot-text-counter__btn"
             aria-pressed={mode === "counter"}
             onClick={() => onModeChange("counter")}
           >
@@ -194,9 +195,9 @@ export function TextCounterControls({
           </button>
         </div>
 
-        <div className="ferby-text-counter__field">
+        <div className="fershot-text-counter__field">
           <label htmlFor={sizeInputId}>Stroke/Size</label>
-          <input
+          <Input
             id={sizeInputId}
             type="number"
             aria-label="Stroke and font size scale"
@@ -220,9 +221,9 @@ export function TextCounterControls({
       </div>
 
       {mode === "text" ? (
-        <div className="ferby-text-counter__editor">
+        <div className="fershot-text-counter__editor">
           <label htmlFor={textInputId}>Annotation text</label>
-          <input
+          <Input
             id={textInputId}
             type="text"
             value={draftText}
@@ -235,7 +236,7 @@ export function TextCounterControls({
           />
         </div>
       ) : (
-        <div className="ferby-text-counter__counter-preview">
+        <div className="fershot-text-counter__counter-preview">
           <span>
             Next counter badge:{" "}
             <strong data-testid="counter-preview-badge">
@@ -245,10 +246,10 @@ export function TextCounterControls({
         </div>
       )}
 
-      <div className="ferby-text-counter__actions">
+      <div className="fershot-text-counter__actions">
         <button
           type="button"
-          className="ferby-text-counter__btn ferby-text-counter__btn--primary"
+          className="fershot-text-counter__btn fershot-text-counter__btn--primary"
           disabled={!canCommit}
           onClick={handleCommit}
         >
@@ -256,7 +257,7 @@ export function TextCounterControls({
         </button>
         <button
           type="button"
-          className="ferby-text-counter__btn"
+          className="fershot-text-counter__btn"
           onClick={onCancel}
         >
           Cancel
@@ -264,13 +265,13 @@ export function TextCounterControls({
       </div>
 
       <ul
-        className="ferby-text-counter__list"
+        className="fershot-text-counter__list"
         aria-label="Placed text and counter annotations"
       >
         {visibleItems.map((item) => (
           <li
             key={item.id}
-            className="ferby-text-counter__item"
+            className="fershot-text-counter__item"
             data-testid={`placed-item-${item.id}`}
           >
             {item.tool === "counter"

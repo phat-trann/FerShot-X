@@ -1,5 +1,6 @@
 import React, { useId } from "react";
 import "./PostCapturePlanner.css";
+import { Switch } from "../../components/ui/switch";
 
 export type PostCaptureStep = "copy" | "save" | "preview" | "edit" | "show";
 
@@ -194,47 +195,47 @@ export function PostCapturePreferencesPanel({
   return (
     <section aria-label="Post-capture actions">
       <div>
-        <input
+        <Switch
           id={`${baseId}-copy`}
-          type="checkbox"
+          
           checked={value.copyToClipboard}
-          onChange={(e) => toggle("copyToClipboard", e.target.checked)}
+          onCheckedChange={checked => toggle("copyToClipboard", checked)}
         />
         <label htmlFor={`${baseId}-copy`}>Copy to clipboard</label>
       </div>
       <div>
-        <input
+        <Switch
           id={`${baseId}-save`}
-          type="checkbox"
+          
           checked={value.autoSave}
-          onChange={(e) => toggle("autoSave", e.target.checked)}
+          onCheckedChange={checked => toggle("autoSave", checked)}
         />
         <label htmlFor={`${baseId}-save`}>Auto-save image</label>
       </div>
       <div>
-        <input
+        <Switch
           id={`${baseId}-preview`}
-          type="checkbox"
+          
           checked={value.showPreview}
-          onChange={(e) => toggle("showPreview", e.target.checked)}
+          onCheckedChange={checked => toggle("showPreview", checked)}
         />
         <label htmlFor={`${baseId}-preview`}>Show floating preview</label>
       </div>
       <div>
-        <input
+        <Switch
           id={`${baseId}-edit`}
-          type="checkbox"
+          
           checked={value.openInEditor}
-          onChange={(e) => toggle("openInEditor", e.target.checked)}
+          onCheckedChange={checked => toggle("openInEditor", checked)}
         />
         <label htmlFor={`${baseId}-edit`}>Open in editor</label>
       </div>
       <div>
-        <input
+        <Switch
           id={`${baseId}-show`}
-          type="checkbox"
+          
           checked={value.revealWindow}
-          onChange={(e) => toggle("revealWindow", e.target.checked)}
+          onCheckedChange={checked => toggle("revealWindow", checked)}
         />
         <label htmlFor={`${baseId}-show`}>Show main window</label>
       </div>

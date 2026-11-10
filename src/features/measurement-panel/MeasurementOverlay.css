@@ -1,4 +1,4 @@
-.ferby-measurement-overlay {
+.fershot-measurement-overlay {
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -9,14 +9,14 @@
   font-size: 13px;
 }
 
-.ferby-measurement-overlay__header {
+.fershot-measurement-overlay__header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   font-weight: 600;
 }
 
-.ferby-measurement-overlay__scale {
+.fershot-measurement-overlay__scale {
   font-size: 11px;
   padding: 2px 6px;
   border-radius: 4px;
@@ -24,29 +24,29 @@
   color: #38bdf8;
 }
 
-.ferby-measurement-overlay__values {
+.fershot-measurement-overlay__values {
   display: flex;
   flex-direction: column;
   gap: 2px;
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 
-.ferby-measurement-overlay__readout--pt {
+.fershot-measurement-overlay__readout--pt {
   color: #cbd5e1;
 }
 
-.ferby-measurement-overlay__origin {
+.fershot-measurement-overlay__origin {
   font-size: 11px;
   color: #94a3b8;
 }
 
-.ferby-measurement-overlay__error {
+.fershot-measurement-overlay__error {
   color: #fca5a5;
   font-size: 12px;
 }
 
-.ferby-measurement-overlay__units,
-.ferby-measurement-overlay__actions {
+.fershot-measurement-overlay__units,
+.fershot-measurement-overlay__actions {
   display: flex;
   gap: 6px;
 }

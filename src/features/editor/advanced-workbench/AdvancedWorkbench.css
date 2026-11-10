@@ -1,4 +1,4 @@
-.ferby-advanced-workbench {
+.fershot-advanced-workbench {
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -7,29 +7,50 @@
   color: #f8fafc;
 }
 
-.ferby-advanced-workbench__toolbar,
-.ferby-advanced-workbench__history,
-.ferby-advanced-workbench__emphasis-bar {
+.fershot-advanced-workbench__toolbar,
+.fershot-advanced-workbench__history,
+.fershot-advanced-workbench__emphasis-bar {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 8px;
 }
 
-.ferby-advanced-workbench__stage {
+.fershot-advanced-workbench__stage {
   position: relative;
   overflow: hidden;
   background: #1e293b;
 }
 
-.ferby-advanced-workbench__stage svg {
+.fershot-advanced-workbench__stage svg {
   width: 100%;
   height: 100%;
   display: block;
 }
 
-.ferby-advanced-workbench__error {
+.fershot-advanced-workbench__error {
   color: #fca5a5;
   font-size: 12px;
 }
+
+.fershot-advanced-workbench__gesture-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+}
+
+.fershot-advanced-workbench__inline-text {
+  position: absolute;
+  z-index: 30;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 6px;
+  background: rgba(15, 23, 42, 0.94);
+  border: 1px solid #38bdf8;
+}
+
 

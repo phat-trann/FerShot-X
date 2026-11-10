@@ -263,15 +263,16 @@ function traceRoundedRect(
   ctx.closePath();
 }
 
-export async function renderBackdropToPngBlob(
+export function renderBackdropToCanvas(
   options: BackdropRenderOptions,
-): Promise<Blob> {
+  target?: HTMLCanvasElement,
+): HTMLCanvasElement {
   const layout = planBackdropLayout(options);
   const { canvasWidth, canvasHeight, drawX, drawY } = layout;
   const { source, sourceWidth, sourceHeight, cornerRadius, fill, shadow } =
     options;
 
-  const canvas = document.createElement("canvas");
+  const canvas = target ?? document.createElement("canvas");
   canvas.width = canvasWidth;
   canvas.height = canvasHeight;
   const ctx = canvas.getContext("2d");
@@ -332,6 +333,11 @@ export async function renderBackdropToPngBlob(
   ctx.drawImage(source, drawX, drawY, sourceWidth, sourceHeight);
   ctx.restore();
 
+  return canvas;
+}
+
+export async function renderBackdropToPngBlob(options: BackdropRenderOptions): Promise<Blob> {
+  const canvas = renderBackdropToCanvas(options);
   return new Promise<Blob>((resolve, reject) => {
     canvas.toBlob((blob) => {
       if (!blob) {

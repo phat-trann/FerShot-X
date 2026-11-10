@@ -132,13 +132,13 @@ export const MeasurementOverlay: React.FC<MeasurementOverlayProps> = ({
 
   return (
     <section
-      className="ferby-measurement-overlay"
+      className="fershot-measurement-overlay"
       aria-label="Measurement overlay"
     >
-      <header className="ferby-measurement-overlay__header">
-        <span className="ferby-measurement-overlay__title">Measurement</span>
+      <header className="fershot-measurement-overlay__header">
+        <span className="fershot-measurement-overlay__title">Measurement</span>
         <span
-          className="ferby-measurement-overlay__scale"
+          className="fershot-measurement-overlay__scale"
           aria-label="Display scale"
         >
           {Number.isFinite(displayScale) ? `${displayScale}x` : "Invalid scale"}
@@ -146,15 +146,15 @@ export const MeasurementOverlay: React.FC<MeasurementOverlayProps> = ({
       </header>
 
       {validationError ? (
-        <div role="alert" className="ferby-measurement-overlay__error">
+        <div role="alert" className="fershot-measurement-overlay__error">
           {validationError}
         </div>
       ) : (
         readout && (
-          <div className="ferby-measurement-overlay__values">
+          <div className="fershot-measurement-overlay__values">
             {(unitMode === "px" || unitMode === "both") && (
               <div
-                className="ferby-measurement-overlay__readout"
+                className="fershot-measurement-overlay__readout"
                 aria-label="Pixel dimensions"
               >
                 {readout.formattedPx}
@@ -162,14 +162,14 @@ export const MeasurementOverlay: React.FC<MeasurementOverlayProps> = ({
             )}
             {(unitMode === "pt" || unitMode === "both") && (
               <div
-                className="ferby-measurement-overlay__readout ferby-measurement-overlay__readout--pt"
+                className="fershot-measurement-overlay__readout fershot-measurement-overlay__readout--pt"
                 aria-label="Point dimensions"
               >
                 {readout.formattedPt}
               </div>
             )}
             <div
-              className="ferby-measurement-overlay__origin"
+              className="fershot-measurement-overlay__origin"
               aria-label="Selection origin"
             >
               Origin: ({formatDimensionNumber(readout.rectPx.x)},{" "}
@@ -180,7 +180,7 @@ export const MeasurementOverlay: React.FC<MeasurementOverlayProps> = ({
       )}
 
       <div
-        className="ferby-measurement-overlay__units"
+        className="fershot-measurement-overlay__units"
         role="group"
         aria-label="Measurement units"
       >
@@ -197,7 +197,7 @@ export const MeasurementOverlay: React.FC<MeasurementOverlayProps> = ({
         ))}
       </div>
 
-      <div className="ferby-measurement-overlay__actions">
+      <div className="fershot-measurement-overlay__actions">
         <button
           type="button"
           disabled={!canImprint}

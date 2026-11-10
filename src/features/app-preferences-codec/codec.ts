@@ -2,7 +2,7 @@ import {
   DEFAULT_APP_PREFERENCES,
   MAX_DEFAULT_ZOOM_PERCENT,
   MIN_DEFAULT_ZOOM_PERCENT,
-  type FerbyAppPreferences,
+  type FerShotAppPreferences,
   type PostCaptureBehavior,
 } from "../app-preferences/AppPreferencesPanel";
 
@@ -32,7 +32,7 @@ const settingsKeys = [
 
 export interface AppPreferencesSidecarV1 {
   readonly version: 1;
-  readonly preferences: FerbyAppPreferences;
+  readonly preferences: FerShotAppPreferences;
 }
 
 function reject(message: string): never {
@@ -55,7 +55,7 @@ function exactKeys(value: Record<string, unknown>, keys: readonly string[], name
   }
 }
 
-function parseSettings(value: unknown): Readonly<FerbyAppPreferences["baseSettings"]> {
+function parseSettings(value: unknown): Readonly<FerShotAppPreferences["baseSettings"]> {
   const settings = record(value, "baseSettings");
   exactKeys(settings, settingsKeys, "baseSettings");
   if (settings.saveFormat !== "png" && settings.saveFormat !== "jpeg") {
@@ -84,7 +84,7 @@ function parseSettings(value: unknown): Readonly<FerbyAppPreferences["baseSettin
   });
 }
 
-function parsePreferences(value: unknown): Readonly<FerbyAppPreferences> {
+function parsePreferences(value: unknown): Readonly<FerShotAppPreferences> {
   const preferences = record(value, "preferences");
   exactKeys(preferences, preferenceKeys, "preferences");
   if (!behaviors.includes(preferences.postCaptureBehavior as PostCaptureBehavior)) {
@@ -120,7 +120,7 @@ function parsePreferences(value: unknown): Readonly<FerbyAppPreferences> {
   });
 }
 
-export function parseAppPreferencesJson(raw: string): Readonly<FerbyAppPreferences> {
+export function parseAppPreferencesJson(raw: string): Readonly<FerShotAppPreferences> {
   if (typeof raw !== "string" || utf8.encode(raw).byteLength > MAX_UTF8_BYTES) {
     throw new RangeError(`App preferences exceed ${MAX_UTF8_BYTES} UTF-8 bytes`);
   }
@@ -139,7 +139,7 @@ export function parseAppPreferencesJson(raw: string): Readonly<FerbyAppPreferenc
 }
 
 export function serializeAppPreferencesJson(
-  preferences: FerbyAppPreferences,
+  preferences: FerShotAppPreferences,
 ): string {
   const owned = parsePreferences(preferences);
   const raw = JSON.stringify({ version: 1, preferences: owned });
@@ -149,7 +149,7 @@ export function serializeAppPreferencesJson(
   return raw;
 }
 
-export const DEFAULT_APP_PREFERENCES_SIDECAR: Readonly<FerbyAppPreferences> =
+export const DEFAULT_APP_PREFERENCES_SIDECAR: Readonly<FerShotAppPreferences> =
   Object.freeze({
     ...DEFAULT_APP_PREFERENCES,
     baseSettings: Object.freeze({ ...DEFAULT_APP_PREFERENCES.baseSettings }),

@@ -1,4 +1,4 @@
-.ferby-layout-workspace {
+.fershot-layout-workspace {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -8,30 +8,30 @@
   color: #f8fafc;
 }
 
-.ferby-layout-workspace__header {
+.fershot-layout-workspace__header {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.ferby-layout-workspace__title {
+.fershot-layout-workspace__title {
   margin: 0;
   font-size: 14px;
 }
 
-.ferby-layout-workspace__dimensions,
-.ferby-layout-workspace__layers {
+.fershot-layout-workspace__dimensions,
+.fershot-layout-workspace__layers {
   font-size: 12px;
   color: #cbd5e1;
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 
-.ferby-layout-workspace__error {
+.fershot-layout-workspace__error {
   color: #fca5a5;
   font-size: 12px;
 }
 
-.ferby-layout-workspace__actions {
+.fershot-layout-workspace__actions {
   display: flex;
   gap: 8px;
 }

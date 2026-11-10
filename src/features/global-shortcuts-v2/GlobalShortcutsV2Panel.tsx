@@ -119,31 +119,31 @@ export function GlobalShortcutsV2Panel({
 
   return (
     <section
-      className="ferby-shortcuts-v2-panel"
-      aria-label="Global keyboard shortcuts (8 actions)"
+      className="fershot-shortcuts-v2-panel"
+      aria-label="Global keyboard shortcuts (7 actions)"
       data-testid="global-shortcuts-v2-panel"
     >
-      <header className="ferby-shortcuts-v2-panel__header">
-        <h3 className="ferby-shortcuts-v2-panel__title">Global Shortcuts</h3>
+      <header className="fershot-shortcuts-v2-panel__header">
+        <h3 className="fershot-shortcuts-v2-panel__title">Global Shortcuts</h3>
       </header>
 
       {errorMessage && (
-        <div role="alert" className="ferby-shortcuts-v2-panel__error">
+        <div role="alert" className="fershot-shortcuts-v2-panel__error">
           {errorMessage}
         </div>
       )}
 
-      <div className="ferby-shortcuts-v2-panel__list">
-        {GLOBAL_ACTIONS_V2.map((actionId) => {
+      <div className="fershot-shortcuts-v2-panel__list">
+        {GLOBAL_ACTIONS_V2.filter(action => action !== "ocr-capture").map((actionId) => {
           const binding = value[actionId];
           const isRecording = recordingAction === actionId;
 
           return (
-            <div key={actionId} className="ferby-shortcuts-v2-panel__row">
-              <span className="ferby-shortcuts-v2-panel__label">
+            <div key={actionId} className="fershot-shortcuts-v2-panel__row">
+              <span className="fershot-shortcuts-v2-panel__label">
                 {ACTION_LABELS_V2[actionId]}
               </span>
-              <div className="ferby-shortcuts-v2-panel__binding-controls">
+              <div className="fershot-shortcuts-v2-panel__binding-controls">
                 <button
                   type="button"
                   disabled={disabled}
@@ -156,9 +156,9 @@ export function GlobalShortcutsV2Panel({
                             : ACTION_LABELS_V2[actionId]
                         }`
                   }
-                  className={`ferby-shortcuts-v2-panel__btn ${
+                  className={`fershot-shortcuts-v2-panel__btn ${
                     isRecording
-                      ? "ferby-shortcuts-v2-panel__btn--recording"
+                      ? "fershot-shortcuts-v2-panel__btn--recording"
                       : ""
                   }`}
                   onClick={() => {
@@ -178,7 +178,7 @@ export function GlobalShortcutsV2Panel({
                   <button
                     type="button"
                     disabled={disabled}
-                    className="ferby-shortcuts-v2-panel__btn"
+                    className="fershot-shortcuts-v2-panel__btn"
                     onClick={() => handleClearAction(actionId)}
                   >
                     Clear
@@ -190,11 +190,11 @@ export function GlobalShortcutsV2Panel({
         })}
       </div>
 
-      <footer className="ferby-shortcuts-v2-panel__footer">
+      <footer className="fershot-shortcuts-v2-panel__footer">
         <button
           type="button"
           disabled={disabled}
-          className="ferby-shortcuts-v2-panel__btn"
+          className="fershot-shortcuts-v2-panel__btn"
           onClick={onApply}
         >
           Apply shortcuts for this session
@@ -202,7 +202,7 @@ export function GlobalShortcutsV2Panel({
         <button
           type="button"
           disabled={disabled}
-          className="ferby-shortcuts-v2-panel__btn"
+          className="fershot-shortcuts-v2-panel__btn"
           onClick={onClear}
         >
           Clear all shortcuts
@@ -210,7 +210,7 @@ export function GlobalShortcutsV2Panel({
         <button
           type="button"
           disabled={disabled}
-          className="ferby-shortcuts-v2-panel__btn"
+          className="fershot-shortcuts-v2-panel__btn"
           onClick={onSave}
         >
           Save assignments
@@ -218,7 +218,7 @@ export function GlobalShortcutsV2Panel({
         <button
           type="button"
           disabled={disabled}
-          className="ferby-shortcuts-v2-panel__btn"
+          className="fershot-shortcuts-v2-panel__btn"
           onClick={onForget}
         >
           Forget saved assignments

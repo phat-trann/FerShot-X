@@ -18,6 +18,7 @@ const BINDING_KEYS = [
 ] as const;
 
 const RESERVED_MAC_SHORTCUTS: readonly ShortcutBinding[] = Object.freeze([
+  { key: "s", metaKey: true, ctrlKey: false, altKey: false, shiftKey: false },
   Object.freeze({
     key: "q",
     metaKey: true,
@@ -281,7 +282,7 @@ export function toNativeGlobalBindingsV2(
     if (binding.altKey) modifiers.push("Alt");
     if (binding.shiftKey) modifiers.push("Shift");
     const accelerator = [...modifiers, code].join("+");
-    if (["KeyQ", "KeyW", "Tab", "Space"].includes(code) && modifiers.length === 1 && modifiers[0] === "Super") {
+    if (["KeyQ", "KeyW", "KeyS", "Tab", "Space"].includes(code) && modifiers.length === 1 && modifiers[0] === "Super") {
       throw new TypeError("Reserved macOS shortcut accelerator.");
     }
     if (accelerators.has(accelerator)) throw new TypeError("Duplicate native shortcut accelerator.");

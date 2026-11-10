@@ -5,6 +5,9 @@ import {
   type AppSettings,
 } from "../../contracts/settings";
 import "./ExportPanel.css";
+import { Input } from "../../components/ui/input";
+import { NativeSelect } from "../../components/ui/select";
+import { Switch } from "../../components/ui/switch";
 
 export const MIN_EXPORT_JPEG_QUALITY = 1;
 export const MAX_EXPORT_JPEG_QUALITY = 100;
@@ -30,10 +33,10 @@ export function deriveSuggestedBasename(
   }
   const rawName = document?.name.trim() ?? "";
   if (!rawName) {
-    return "ferby-capture";
+    return "fershot-capture";
   }
   const stripped = rawName.replace(/\.(png|jpe?g|webp|gif)$/i, "").trim();
-  return stripped || "ferby-capture";
+  return stripped || "fershot-capture";
 }
 
 export type ExportFeedbackState = "idle" | "cancelled" | "success";
@@ -114,25 +117,25 @@ export function ExportPanel({
 
   return (
     <section
-      className="ferby-export-panel"
+      className="fershot-export-panel"
       aria-label="Export Image Options"
       aria-busy={busy}
     >
-      <div className="ferby-export-panel__header">
-        <h2 className="ferby-export-panel__title">Local Export</h2>
+      <div className="fershot-export-panel__header">
+        <h2 className="fershot-export-panel__title">Local Export</h2>
       </div>
 
-      <div className="ferby-export-panel__field">
+      <div className="fershot-export-panel__field">
         <label
-          className="ferby-export-panel__label"
-          htmlFor="ferby-export-basename"
+          className="fershot-export-panel__label"
+          htmlFor="fershot-export-basename"
         >
           Suggested Filename
         </label>
-        <input
-          id="ferby-export-basename"
+        <Input
+          id="fershot-export-basename"
           type="text"
-          className="ferby-export-panel__input"
+          className="fershot-export-panel__input"
           aria-label="Suggested filename"
           disabled={busy || !document}
           value={basenameInput}
@@ -140,17 +143,17 @@ export function ExportPanel({
         />
       </div>
 
-      <div className="ferby-export-panel__field">
-        <div className="ferby-export-panel__row">
+      <div className="fershot-export-panel__field">
+        <div className="fershot-export-panel__row">
           <label
-            className="ferby-export-panel__label"
-            htmlFor="ferby-export-format"
+            className="fershot-export-panel__label"
+            htmlFor="fershot-export-format"
           >
             Export Format
           </label>
-          <select
-            id="ferby-export-format"
-            className="ferby-export-panel__select"
+          <NativeSelect
+            id="fershot-export-format"
+            className="fershot-export-panel__select"
             aria-label="Export format"
             disabled={busy}
             value={settings.saveFormat}
@@ -162,23 +165,23 @@ export function ExportPanel({
           >
             <option value="png">PNG</option>
             <option value="jpeg">JPEG</option>
-          </select>
+          </NativeSelect>
         </div>
       </div>
 
       {settings.saveFormat === "jpeg" && (
-        <div className="ferby-export-panel__field">
-          <div className="ferby-export-panel__row">
+        <div className="fershot-export-panel__field">
+          <div className="fershot-export-panel__row">
             <label
-              className="ferby-export-panel__label"
-              htmlFor="ferby-export-jpeg-quality"
+              className="fershot-export-panel__label"
+              htmlFor="fershot-export-jpeg-quality"
             >
               JPEG Quality (1–100)
             </label>
-            <input
-              id="ferby-export-jpeg-quality"
+            <Input
+              id="fershot-export-jpeg-quality"
               type="number"
-              className="ferby-export-panel__input"
+              className="fershot-export-panel__input"
               aria-label="Export JPEG quality"
               disabled={busy}
               min={MIN_EXPORT_JPEG_QUALITY}
@@ -191,15 +194,13 @@ export function ExportPanel({
         </div>
       )}
 
-      <div className="ferby-export-panel__field">
-        <label className="ferby-export-panel__checkbox">
-          <input
-            type="checkbox"
+      <div className="fershot-export-panel__field">
+        <label className="fershot-export-panel__checkbox">
+          <Switch
+            
             disabled={busy}
             checked={settings.downscaleRetina}
-            onChange={(event) =>
-              emitSettings({ downscaleRetina: event.target.checked })
-            }
+            onCheckedChange={checked => emitSettings({ downscaleRetina: checked })}
           />
           <span>Downscale Retina to 1x when saving</span>
         </label>
@@ -207,7 +208,7 @@ export function ExportPanel({
 
       <button
         type="button"
-        className="ferby-export-panel__submit-btn"
+        className="fershot-export-panel__submit-btn"
         disabled={busy || !document}
         onClick={handleExportClick}
       >
@@ -218,7 +219,7 @@ export function ExportPanel({
 
       {busy && (
         <p
-          className="ferby-export-panel__feedback ferby-export-panel__feedback--status"
+          className="fershot-export-panel__feedback fershot-export-panel__feedback--status"
           role="status"
           aria-live="polite"
         >
@@ -228,7 +229,7 @@ export function ExportPanel({
 
       {!busy && status === "cancelled" && (
         <p
-          className="ferby-export-panel__feedback ferby-export-panel__feedback--status"
+          className="fershot-export-panel__feedback fershot-export-panel__feedback--status"
           role="status"
           aria-live="polite"
         >
@@ -238,7 +239,7 @@ export function ExportPanel({
 
       {!busy && status === "success" && (
         <p
-          className="ferby-export-panel__feedback ferby-export-panel__feedback--success"
+          className="fershot-export-panel__feedback fershot-export-panel__feedback--success"
           role="status"
           aria-live="polite"
         >
@@ -248,7 +249,7 @@ export function ExportPanel({
 
       {trimmedError ? (
         <p
-          className="ferby-export-panel__feedback ferby-export-panel__feedback--error"
+          className="fershot-export-panel__feedback fershot-export-panel__feedback--error"
           role="alert"
         >
           {trimmedError}

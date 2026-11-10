@@ -4,13 +4,13 @@ export const MAX_COMPOSITION_LAYERS = 32;
 export const DEFAULT_SNAP_THRESHOLD_PX = 8;
 
 /**
- * Deterministic Ferby geometric edge/center snapping rule:
+ * Deterministic FerShot geometric edge/center snapping rule:
  * Evaluates candidate left/right/centerX against canvas boundaries [0, canvasWidth]
  * and peer layer edges [x, x + width, x + width / 2]. Chooses the smallest absolute
  * delta within `thresholdPx` (ties broken by smaller target coordinate).
- * Note: This is a Ferby design rule, not a claim of a recovered Shottr similarity algorithm.
+ * Note: This is a FerShot design rule, not a claim of a recovered reference application similarity algorithm.
  */
-export const FERBY_EDGE_SNAPPING_RULE =
+export const FERSHOT_EDGE_SNAPPING_RULE =
   "Nearest edge/center within thresholdPx (ties broken by smaller coordinate); geometric only, no pixel-similarity matching.";
 
 export interface PlacementBox {
@@ -226,9 +226,10 @@ export function validateCompositionOptions(options: CompositionOptions): void {
   }
 }
 
-export async function renderCompositionToPngBlob(
+export function renderCompositionToCanvas(
   options: CompositionOptions,
-): Promise<Blob> {
+  target?: HTMLCanvasElement,
+): HTMLCanvasElement {
   if (options.signal?.aborted) {
     throw new Error("Multi-image composition was cancelled.");
   }
@@ -243,7 +244,7 @@ export async function renderCompositionToPngBlob(
     onLayerPlaced,
   } = options;
 
-  const canvas = document.createElement("canvas");
+  const canvas = target ?? document.createElement("canvas");
   canvas.width = canvasWidth;
   canvas.height = canvasHeight;
   const ctx = canvas.getContext("2d");
@@ -270,6 +271,12 @@ export async function renderCompositionToPngBlob(
     onLayerPlaced?.(layer.id);
   }
 
+  return canvas;
+}
+
+export async function renderCompositionToPngBlob(options: CompositionOptions): Promise<Blob> {
+  const canvas = renderCompositionToCanvas(options);
+  const { signal } = options;
   return new Promise<Blob>((resolve, reject) => {
     if (signal?.aborted) {
       reject(new Error("Multi-image composition was cancelled."));

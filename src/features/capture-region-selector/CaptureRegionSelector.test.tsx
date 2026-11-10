@@ -14,7 +14,7 @@ function setup(busy = false) {
   const confirm = vi.fn(), cancel = vi.fn();
   const result = render(<CaptureRegionSelector image={image} busy={busy} onConfirm={confirm} onCancel={cancel} />);
   vi.spyOn(screen.getByRole("img"), "getBoundingClientRect").mockReturnValue({ x: 100, y: 50, left: 100, top: 50, width: 333, height: 266.4, right: 433, bottom: 316.4, toJSON() {} });
-  return { ...result, confirm, cancel, wrap: result.container.querySelector(".ferby-region-selector__canvas-wrap")! };
+  return { ...result, confirm, cancel, wrap: result.container.querySelector(".fershot-region-selector__canvas-wrap")! };
 }
 describe("area selector physical pixel and keyboard boundaries", () => {
   it("rounds fractional scaled pointer origins before reverse dragging", () => {
@@ -33,7 +33,7 @@ describe("area selector physical pixel and keyboard boundaries", () => {
     fireEvent.change(screen.getByLabelText("Width (px)"), { target: { value: "400" } });
     fireEvent.change(screen.getByLabelText("Height (px)"), { target: { value: "320" } });
     const box = screen.getByTestId("region-selector-overlay");
-    expect(box.parentElement).toBe(container.querySelector(".ferby-region-selector__image-wrap"));
+    expect(box.parentElement).toBe(container.querySelector(".fershot-region-selector__image-wrap"));
     expect(box).toHaveStyle({ left: "10%", top: "10%", width: "40%", height: "40%" });
   });
   it("bounds manual rectangles, traps keyboard focus, and cancels with Escape", () => {

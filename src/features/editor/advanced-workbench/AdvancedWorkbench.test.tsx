@@ -70,14 +70,14 @@ describe("AdvancedWorkbench (A34)", () => {
     ]);
 
     // Place a text annotation via TextCounterControls
-    fireEvent.click(screen.getByRole("button", { name: "Tool: text" }));
+    fireEvent.click(screen.getByRole("button", { name: "text tool" }));
     fireEvent.click(screen.getByRole("button", { name: "Place Text" }));
     expect(screen.getByLabelText("Advanced item count")).toHaveTextContent(
       "2 items",
     );
 
     // Add a highlight emphasis effect
-    fireEvent.click(screen.getByRole("button", { name: "Tool: highlight" }));
+    fireEvent.click(screen.getByRole("button", { name: "highlight tool" }));
     fireEvent.click(
       screen.getByRole("button", { name: "Add highlight effect" }),
     );
@@ -86,11 +86,11 @@ describe("AdvancedWorkbench (A34)", () => {
     );
 
     // Undo and Redo
-    fireEvent.click(screen.getByRole("button", { name: "Undo Advanced" }));
+    fireEvent.click(screen.getByRole("button", { name: "Undo" }));
     expect(screen.getByLabelText("Advanced item count")).toHaveTextContent(
       "2 items",
     );
-    fireEvent.click(screen.getByRole("button", { name: "Redo Advanced" }));
+    fireEvent.click(screen.getByRole("button", { name: "Redo" }));
     expect(screen.getByLabelText("Advanced item count")).toHaveTextContent(
       "3 items",
     );
@@ -122,7 +122,7 @@ describe("AdvancedWorkbench (A34)", () => {
           itemKind: "contract",
           annotation: {
             id: "bad-blur",
-            tool: "blur",
+            tool: "unsupported" as never,
             points: [{ x: 1, y: 1 }],
             style: { color: "#000", strokeWidth: 2, opacity: 1 },
           },
@@ -137,6 +137,147 @@ describe("AdvancedWorkbench (A34)", () => {
       x: 15,
       y: 15,
     });
+  });
+
+  it("supports direct canvas gestures for highlight, counter, click-to-place text, emphasis handle resize, Escape rollback, and busy/disabled guards", () => {
+    const onSnapshotChange = vi.fn();
+
+    const { rerender } = render(
+      <AdvancedWorkbench
+        imageId="img-adv-direct"
+        imageSrc="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR4nGP4z8DwHwAFAAH/iZk9HQAAAABJRU5ErkJggg=="
+        imageWidth={200}
+        imageHeight={150}
+        zoom={2}
+        defaultTool="highlight"
+        onSnapshotChange={onSnapshotChange}
+      />,
+    );
+
+    const stage = screen.getByTestId("advanced-workbench-stage");
+
+    // 1. Drag highlight directly on stage with zoom=2: screen (20,20)->(100,80) => image (10,10) 40x30
+    fireEvent.pointerDown(stage, {
+      button: 0,
+      pointerId: 1,
+      clientX: 20,
+      clientY: 20,
+    });
+    fireEvent.pointerMove(stage, { pointerId: 1, clientX: 100, clientY: 80 });
+    fireEvent.pointerUp(stage, { pointerId: 1, clientX: 100, clientY: 80 });
+
+    expect(screen.getByLabelText("Advanced item count")).toHaveTextContent(
+      "1 items",
+    );
+    const createdHighlight = onSnapshotChange.mock.lastCall?.[0]?.items[0];
+    expect(createdHighlight?.effect).toMatchObject({
+      kind: "highlight",
+      rect: { x: 10, y: 10, width: 40, height: 30 },
+    });
+
+    // 2. Resize the selected highlight directly via SE handle
+    const seHandle = screen.getByRole("button", { name: "Resize handle SE" });
+    const group = screen.getByRole("group", {
+      name: `Selection handles for ${createdHighlight.id}`,
+    });
+    fireEvent.pointerDown(seHandle, {
+      button: 0,
+      pointerId: 2,
+      clientX: 100,
+      clientY: 80,
+    });
+    fireEvent.pointerUp(group, {
+      pointerId: 2,
+      clientX: 140,
+      clientY: 100,
+    });
+    const resizedHighlight = onSnapshotChange.mock.lastCall?.[0]?.items[0];
+    expect(resizedHighlight?.effect).toMatchObject({
+      kind: "highlight",
+      rect: { x: 10, y: 10, width: 60, height: 40 },
+    });
+
+    // 3. Click on stage with counter tool -> places counter directly
+    fireEvent.click(screen.getByRole("button", { name: "counter tool" }));
+    fireEvent.pointerDown(stage, {
+      button: 0,
+      pointerId: 3,
+      clientX: 80,
+      clientY: 60,
+    });
+    fireEvent.pointerUp(stage, {
+      pointerId: 3,
+      clientX: 80,
+      clientY: 60,
+    });
+    expect(screen.getByLabelText("Advanced item count")).toHaveTextContent(
+      "2 items",
+    );
+
+    // 4. Click on stage with text tool -> opens inline input -> Enter commits; Escape cancels
+    fireEvent.click(screen.getByRole("button", { name: "text tool" }));
+    fireEvent.pointerDown(stage, {
+      button: 0,
+      pointerId: 4,
+      clientX: 60,
+      clientY: 40,
+    });
+    fireEvent.pointerUp(stage, {
+      pointerId: 4,
+      clientX: 60,
+      clientY: 40,
+    });
+    const inlineInput = screen.getByRole("textbox", {
+      name: /inline canvas text input/i,
+    });
+    fireEvent.change(inlineInput, { target: { value: "Direct Note" } });
+    fireEvent.keyDown(inlineInput, { key: "Enter" });
+    expect(screen.getByLabelText("Advanced item count")).toHaveTextContent(
+      "3 items",
+    );
+
+    // 5. lostpointercapture and mid-gesture busy transitions cancel active stageDraft without committing
+    fireEvent.click(screen.getByRole("button", { name: "highlight tool" }));
+    fireEvent.pointerDown(stage, {
+      button: 0,
+      pointerId: 40,
+      clientX: 20,
+      clientY: 20,
+    });
+    fireEvent.pointerMove(stage, { pointerId: 40, clientX: 80, clientY: 80 });
+    fireEvent(
+      stage,
+      new PointerEvent("lostpointercapture", { bubbles: true, pointerId: 40 }),
+    );
+    fireEvent.pointerUp(stage, { pointerId: 40, clientX: 80, clientY: 80 });
+    expect(screen.getByLabelText("Advanced item count")).toHaveTextContent(
+      "3 items",
+    );
+
+    fireEvent.pointerDown(stage, {
+      button: 0,
+      pointerId: 41,
+      clientX: 20,
+      clientY: 20,
+    });
+    fireEvent.pointerMove(stage, { pointerId: 41, clientX: 80, clientY: 80 });
+    rerender(
+      <AdvancedWorkbench
+        imageId="img-adv-direct"
+        imageSrc="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR4nGP4z8DwHwAFAAH/iZk9HQAAAABJRU5ErkJggg=="
+        imageWidth={200}
+        imageHeight={150}
+        zoom={2}
+        busy={true}
+        defaultTool="highlight"
+        onSnapshotChange={onSnapshotChange}
+      />,
+    );
+    fireEvent.pointerUp(stage, { pointerId: 41, clientX: 80, clientY: 80 });
+    expect(screen.getByLabelText("Advanced item count")).toHaveTextContent(
+      "3 items",
+    );
+    expect(stage).toHaveClass("fershot-advanced-workbench__stage");
   });
 });
 

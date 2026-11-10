@@ -1,62 +1,62 @@
-.ferby-export-destination-panel {
+.fershot-export-destination-panel {
   display: flex;
   flex-direction: column;
   gap: 1rem;
   padding: 0.85rem;
-  background-color: var(--ferby-surface-bg, #1e1e24);
-  color: var(--ferby-text-color, #e0e0e0);
+  background-color: var(--fershot-surface-bg, #1e1e24);
+  color: var(--fershot-text-color, #e0e0e0);
   border-radius: 6px;
 }
 
-.ferby-export-destination-panel__field {
+.fershot-export-destination-panel__field {
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
 }
 
-.ferby-export-destination-panel__label {
+.fershot-export-destination-panel__label {
   font-size: 0.82rem;
   font-weight: 600;
-  color: var(--ferby-text-muted, #b0b0b8);
+  color: var(--fershot-text-muted, #b0b0b8);
 }
 
-.ferby-export-destination-panel__input {
+.fershot-export-destination-panel__input {
   padding: 0.45rem 0.65rem;
   font-size: 0.875rem;
-  border: 1px solid var(--ferby-input-border, #3a3a46);
+  border: 1px solid var(--fershot-input-border, #3a3a46);
   border-radius: 4px;
-  background-color: var(--ferby-input-bg, #141418);
+  background-color: var(--fershot-input-bg, #141418);
   color: inherit;
   outline: none;
   transition: border-color 0.15s ease;
 }
 
-.ferby-export-destination-panel__input:focus {
-  border-color: var(--ferby-accent, #4f80ff);
+.fershot-export-destination-panel__input:focus {
+  border-color: var(--fershot-accent, #4f80ff);
 }
 
-.ferby-export-destination-panel__input--invalid {
-  border-color: var(--ferby-error, #f25555);
+.fershot-export-destination-panel__input--invalid {
+  border-color: var(--fershot-error, #f25555);
 }
 
-.ferby-export-destination-panel__error {
+.fershot-export-destination-panel__error {
   font-size: 0.75rem;
-  color: var(--ferby-error, #f25555);
+  color: var(--fershot-error, #f25555);
   margin-top: 0.15rem;
 }
 
-.ferby-export-destination-panel__folder-row {
+.fershot-export-destination-panel__folder-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 0.75rem;
   padding: 0.45rem 0.65rem;
-  background-color: var(--ferby-input-bg, #141418);
-  border: 1px solid var(--ferby-input-border, #3a3a46);
+  background-color: var(--fershot-input-bg, #141418);
+  border: 1px solid var(--fershot-input-border, #3a3a46);
   border-radius: 4px;
 }
 
-.ferby-export-destination-panel__folder-display {
+.fershot-export-destination-panel__folder-display {
   font-size: 0.82rem;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -64,34 +64,34 @@
   flex: 1;
 }
 
-.ferby-export-destination-panel__folder-actions {
+.fershot-export-destination-panel__folder-actions {
   display: flex;
   align-items: center;
   gap: 0.4rem;
   flex-shrink: 0;
 }
 
-.ferby-export-destination-panel__button {
+.fershot-export-destination-panel__button {
   padding: 0.35rem 0.6rem;
   font-size: 0.8rem;
-  border: 1px solid var(--ferby-button-border, #3a3a46);
+  border: 1px solid var(--fershot-button-border, #3a3a46);
   border-radius: 4px;
-  background-color: var(--ferby-button-bg, #2a2a34);
+  background-color: var(--fershot-button-bg, #2a2a34);
   color: inherit;
   cursor: pointer;
   transition: background-color 0.15s ease, border-color 0.15s ease, opacity 0.15s ease;
 }
 
-.ferby-export-destination-panel__button:not(:disabled):hover {
-  background-color: var(--ferby-button-hover-bg, #383846);
-  border-color: var(--ferby-accent, #4f80ff);
+.fershot-export-destination-panel__button:not(:disabled):hover {
+  background-color: var(--fershot-button-hover-bg, #383846);
+  border-color: var(--fershot-accent, #4f80ff);
 }
 
-.ferby-export-destination-panel__button--secondary {
+.fershot-export-destination-panel__button--secondary {
   opacity: 0.85;
 }
 
-.ferby-export-destination-panel__button:disabled {
+.fershot-export-destination-panel__button:disabled {
   opacity: 0.4;
   cursor: not-allowed;
 }

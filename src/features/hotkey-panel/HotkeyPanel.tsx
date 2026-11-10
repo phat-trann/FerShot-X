@@ -225,36 +225,36 @@ export function HotkeyPanel({
   };
 
   return (
-    <section className="ferby-hotkey-panel" aria-label="Shortcut assignments">
+    <section className="fershot-hotkey-panel" aria-label="Shortcut assignments">
       {permissionState === "missing" && (
-        <p className="ferby-hotkey-panel__permission" role="status">
+        <p className="fershot-hotkey-panel__permission" role="status">
           Global shortcut permission is missing. Shortcuts remain local proposals
           until granted.
         </p>
       )}
 
       {validationError && (
-        <p className="ferby-hotkey-panel__error" role="alert">
+        <p className="fershot-hotkey-panel__error" role="alert">
           {validationError}
         </p>
       )}
 
-      <ul className="ferby-hotkey-panel__list">
+      <ul className="fershot-hotkey-panel__list">
         {items.map((item) => {
           const isRecording = recordingActionId === item.actionId;
           return (
-            <li key={item.actionId} className="ferby-hotkey-panel__row">
-              <span className="ferby-hotkey-panel__label">{item.label}</span>
+            <li key={item.actionId} className="fershot-hotkey-panel__row">
+              <span className="fershot-hotkey-panel__label">{item.label}</span>
               <kbd
-                className="ferby-hotkey-panel__kbd"
+                className="fershot-hotkey-panel__kbd"
                 data-testid={`hotkey-binding-${item.actionId}`}
               >
                 {formatShortcutBinding(item.binding)}
               </kbd>
-              <div className="ferby-hotkey-panel__actions">
+              <div className="fershot-hotkey-panel__actions">
                 <button
                   type="button"
-                  className="ferby-hotkey-panel__btn"
+                  className="fershot-hotkey-panel__btn"
                   aria-pressed={isRecording}
                   aria-label={
                     isRecording
@@ -274,7 +274,7 @@ export function HotkeyPanel({
                 {isRecording && (
                   <button
                     type="button"
-                    className="ferby-hotkey-panel__btn"
+                    className="fershot-hotkey-panel__btn"
                     aria-label={`Cancel recording for ${item.label}`}
                     onClick={() => {
                       setRecordingActionId(null);
@@ -286,7 +286,7 @@ export function HotkeyPanel({
                 )}
                 <button
                   type="button"
-                  className="ferby-hotkey-panel__btn"
+                  className="fershot-hotkey-panel__btn"
                   aria-label={`Clear shortcut for ${item.label}`}
                   disabled={item.binding === null}
                   onClick={() => {

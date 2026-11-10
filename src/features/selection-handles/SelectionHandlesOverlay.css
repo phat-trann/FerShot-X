@@ -1,4 +1,4 @@
-.ferby-selection-handles {
+.fershot-selection-handles {
   position: absolute;
   box-sizing: border-box;
   border: 1px solid #38bdf8;
@@ -6,13 +6,13 @@
   touch-action: none;
 }
 
-.ferby-selection-handles__body {
+.fershot-selection-handles__body {
   position: absolute;
   inset: 0;
   cursor: move;
 }
 
-.ferby-selection-handles__handle {
+.fershot-selection-handles__handle {
   position: absolute;
   width: 10px;
   height: 10px;
@@ -20,5 +20,16 @@
   border: 1px solid #0f172a;
   border-radius: 2px;
   background: #38bdf8;
+  transform: translate(-50%, -50%);
 }
+
+.fershot-selection-handles__handle--nw { left: 0%; top: 0%; cursor: nwse-resize; }
+.fershot-selection-handles__handle--n  { left: 50%; top: 0%; cursor: ns-resize; }
+.fershot-selection-handles__handle--ne { left: 100%; top: 0%; cursor: nesw-resize; }
+.fershot-selection-handles__handle--e  { left: 100%; top: 50%; cursor: ew-resize; }
+.fershot-selection-handles__handle--se { left: 100%; top: 100%; cursor: nwse-resize; }
+.fershot-selection-handles__handle--s  { left: 50%; top: 100%; cursor: ns-resize; }
+.fershot-selection-handles__handle--sw { left: 0%; top: 100%; cursor: nesw-resize; }
+.fershot-selection-handles__handle--w  { left: 0%; top: 50%; cursor: ew-resize; }
+
 

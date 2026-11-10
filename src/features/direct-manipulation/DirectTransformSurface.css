@@ -1,0 +1,89 @@
+.fershot-direct-transform {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  background: rgba(15, 23, 42, 0.92);
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  color: #f8fafc;
+  user-select: none;
+}
+
+.fershot-direct-transform__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.fershot-direct-transform__readout {
+  font-size: 0.8125rem;
+  font-variant-numeric: tabular-nums;
+  color: #bae6fd;
+}
+
+.fershot-direct-transform__stage {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  border-radius: 0.375rem;
+  border: 1px solid #334155;
+  background: #090d16;
+  touch-action: none;
+  cursor: crosshair;
+}
+
+.fershot-direct-transform__stage--resize {
+  overflow: visible;
+}
+
+.fershot-direct-transform__image {
+  display: block;
+  width: 100%;
+  height: auto;
+  pointer-events: none;
+}
+
+.fershot-direct-transform__box {
+  position: absolute;
+  box-sizing: border-box;
+  border: 2px solid #38bdf8;
+  background: rgba(56, 189, 248, 0.14);
+  box-shadow: 0 0 0 9999px rgba(2, 6, 23, 0.52);
+  pointer-events: none;
+}
+
+.fershot-direct-transform__body {
+  position: absolute;
+  inset: 0;
+  cursor: move;
+  pointer-events: auto;
+}
+
+.fershot-direct-transform__body--passthrough {
+  pointer-events: none;
+  cursor: crosshair;
+}
+
+.fershot-direct-transform__handle {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  padding: 0;
+  border-radius: 50%;
+  border: 2px solid #0f172a;
+  background: #38bdf8;
+  transform: translate(-50%, -50%);
+  pointer-events: auto;
+}
+
+.fershot-direct-transform__handle--nw { left: 0%; top: 0%; cursor: nwse-resize; }
+.fershot-direct-transform__handle--n  { left: 50%; top: 0%; cursor: ns-resize; }
+.fershot-direct-transform__handle--ne { left: 100%; top: 0%; cursor: nesw-resize; }
+.fershot-direct-transform__handle--e  { left: 100%; top: 50%; cursor: ew-resize; }
+.fershot-direct-transform__handle--se { left: 100%; top: 100%; cursor: nwse-resize; }
+.fershot-direct-transform__handle--s  { left: 50%; top: 100%; cursor: ns-resize; }
+.fershot-direct-transform__handle--sw { left: 0%; top: 100%; cursor: nesw-resize; }
+.fershot-direct-transform__handle--w  { left: 0%; top: 50%; cursor: ew-resize; }

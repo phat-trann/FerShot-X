@@ -15,6 +15,7 @@ export interface CaptureActionControlsProps {
   disabled: boolean;
   activeWindowSupported: boolean;
   fixedRegionSupported: boolean;
+  repeatRegionSupported?: boolean;
   onAction: (action: CaptureActionId) => void;
   className?: string;
 }
@@ -52,16 +53,10 @@ const ACTIONS: readonly ActionDescriptor[] = [
     isSupported: (props) => props.activeWindowSupported,
   },
   {
-    id: "fixed-region",
-    label: "Fixed Region",
-    description: "Capture with fixed size or aspect ratio",
-    isSupported: (props) => props.fixedRegionSupported,
-  },
-  {
     id: "repeat-region",
     label: "Repeat Region",
     description: "Re-capture the last selected region",
-    isSupported: (props) => props.fixedRegionSupported,
+    isSupported: (props) => props.repeatRegionSupported ?? false,
   },
   {
     id: "scrolling",
@@ -69,12 +64,7 @@ const ACTIONS: readonly ActionDescriptor[] = [
     description: "Capture long scrollable content",
     isSupported: () => true,
   },
-  {
-    id: "ocr",
-    label: "OCR / Text Recognition",
-    description: "Capture screen region for text and QR recognition",
-    isSupported: () => true,
-  },
+
 ];
 
 export function CaptureActionControls(
@@ -90,7 +80,7 @@ export function CaptureActionControls(
   };
 
   const containerClasses = [
-    "ferby-capture-action-controls",
+    "fershot-capture-action-controls",
     className,
   ]
     .filter(Boolean)
@@ -103,7 +93,7 @@ export function CaptureActionControls(
       aria-disabled={disabled}
     >
       <div
-        className="ferby-capture-action-controls__grid"
+        className="fershot-capture-action-controls__grid"
         role="group"
         aria-label="Capture Actions"
       >
@@ -115,7 +105,7 @@ export function CaptureActionControls(
             <button
               key={action.id}
               type="button"
-              className="ferby-capture-action-controls__button"
+              className="fershot-capture-action-controls__button"
               disabled={isButtonDisabled}
               data-action={action.id}
               data-supported={supported ? "true" : "false"}
@@ -126,10 +116,10 @@ export function CaptureActionControls(
                   : action.description
               }
             >
-              <span className="ferby-capture-action-controls__label">
+              <span className="fershot-capture-action-controls__label">
                 {action.label}
               </span>
-              <span className="ferby-capture-action-controls__desc">
+              <span className="fershot-capture-action-controls__desc">
                 {action.description}
               </span>
             </button>

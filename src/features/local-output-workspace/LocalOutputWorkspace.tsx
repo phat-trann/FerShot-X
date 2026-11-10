@@ -9,6 +9,7 @@ import {
   type PrintScaleMode,
   type PrintSheetOptions,
 } from "../local-output";
+import { NativeSelect } from "../../components/ui/select";
 
 export interface LocalOutputWorkspaceProps {
   readonly image: ImageDocument;
@@ -50,10 +51,10 @@ export function LocalOutputWorkspace({
 
   return (
     <section
-      className="ferby-local-output-workspace"
+      className="fershot-local-output-workspace"
       aria-label="Local output workspace"
     >
-      <div className="ferby-local-output-workspace__actions">
+      <div className="fershot-local-output-workspace__actions">
         <button type="button" disabled={busy} onClick={onCopy}>
           Copy Image
         </button>
@@ -63,7 +64,7 @@ export function LocalOutputWorkspace({
       </div>
       <label>
         Print scale
-        <select
+        <NativeSelect
           aria-label="Print scale"
           value={scaleMode}
           disabled={busy || !canPrint}
@@ -75,7 +76,7 @@ export function LocalOutputWorkspace({
         >
           <option value="fit">Fit to sheet</option>
           <option value="actual">Actual size (fit oversized image)</option>
-        </select>
+        </NativeSelect>
       </label>
       <LocalOutputPanel
         document={image}

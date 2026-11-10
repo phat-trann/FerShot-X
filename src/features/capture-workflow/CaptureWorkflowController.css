@@ -1,4 +1,4 @@
-.ferby-capture-workflow {
+.fershot-capture-workflow {
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -8,17 +8,17 @@
   color: #f8fafc;
 }
 
-.ferby-capture-workflow__triggers {
+.fershot-capture-workflow__triggers {
   display: flex;
   gap: 8px;
 }
 
-.ferby-capture-workflow__status {
+.fershot-capture-workflow__status {
   font-size: 12px;
   color: #94a3b8;
 }
 
-.ferby-capture-workflow__error {
+.fershot-capture-workflow__error {
   display: flex;
   align-items: center;
   gap: 8px;

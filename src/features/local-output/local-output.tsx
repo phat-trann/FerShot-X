@@ -1,6 +1,8 @@
 import React from "react";
 import type { ImageDocument } from "../../contracts/media";
 import "./LocalOutputPanel.css";
+import { NativeSelect } from "../../components/ui/select";
+import { Input } from "../../components/ui/input";
 
 /**
  * Note on OS integration boundary (`A30`):
@@ -215,7 +217,7 @@ function sanitizeExportFileName(name: string, mimeType: AllowedDragImageMime): s
     .replace(/^[.-]+|[.-]+$/g, "")
     .slice(0, 80);
   const ext = mimeType === "image/png" ? ".png" : ".jpg";
-  const stem = base.length > 0 ? base.replace(/\.(png|jpe?g)$/i, "") : "ferby-image";
+  const stem = base.length > 0 ? base.replace(/\.(png|jpe?g)$/i, "") : "fershot-image";
   return `${stem}${ext}`;
 }
 
@@ -316,14 +318,14 @@ export const LocalOutputPanel: React.FC<LocalOutputPanelProps> = ({
 
   return (
     <section
-      className="ferby-local-output-panel"
+      className="fershot-local-output-panel"
       aria-label="Local output and print presentation"
     >
-      <header className="ferby-local-output-panel__header">
-        <h3 className="ferby-local-output-panel__title">Print & Drag Output</h3>
+      <header className="fershot-local-output-panel__header">
+        <h3 className="fershot-local-output-panel__title">Print & Drag Output</h3>
         {layout && (
           <span
-            className="ferby-local-output-panel__page-size"
+            className="fershot-local-output-panel__page-size"
             aria-label="Sheet dimensions"
           >
             {layout.pageWidthPt} × {layout.pageHeightPt} pt
@@ -332,15 +334,15 @@ export const LocalOutputPanel: React.FC<LocalOutputPanelProps> = ({
       </header>
 
       {errorText && (
-        <div role="alert" className="ferby-local-output-panel__error">
+        <div role="alert" className="fershot-local-output-panel__error">
           {errorText}
         </div>
       )}
 
-      <div className="ferby-local-output-panel__controls">
+      <div className="fershot-local-output-panel__controls">
         <label>
           Paper
-          <select
+          <NativeSelect
             aria-label="Paper size"
             disabled={busy}
             value={paper}
@@ -350,12 +352,12 @@ export const LocalOutputPanel: React.FC<LocalOutputPanelProps> = ({
           >
             <option value="a4">A4 (595 × 842 pt)</option>
             <option value="letter">US Letter (612 × 792 pt)</option>
-          </select>
+          </NativeSelect>
         </label>
 
         <label>
           Orientation
-          <select
+          <NativeSelect
             aria-label="Page orientation"
             disabled={busy}
             value={orientation}
@@ -367,12 +369,12 @@ export const LocalOutputPanel: React.FC<LocalOutputPanelProps> = ({
           >
             <option value="portrait">Portrait</option>
             <option value="landscape">Landscape</option>
-          </select>
+          </NativeSelect>
         </label>
 
         <label>
           Margin (pt)
-          <input
+          <Input
             aria-label="Margin (pt)"
             type="number"
             min={MIN_PRINT_MARGIN_PT}
@@ -388,7 +390,7 @@ export const LocalOutputPanel: React.FC<LocalOutputPanelProps> = ({
 
       {layout && (
         <div
-          className="ferby-local-output-panel__preview"
+          className="fershot-local-output-panel__preview"
           aria-label="Fitted image placement"
         >
           Fitted image: {layout.drawWidthPt} × {layout.drawHeightPt} pt at (
@@ -396,7 +398,7 @@ export const LocalOutputPanel: React.FC<LocalOutputPanelProps> = ({
         </div>
       )}
 
-      <div className="ferby-local-output-panel__actions">
+      <div className="fershot-local-output-panel__actions">
         <button
           type="button"
           disabled={busy || !layout || !onRequestNativePrint}
@@ -414,7 +416,7 @@ export const LocalOutputPanel: React.FC<LocalOutputPanelProps> = ({
           draggable={!busy && dragPayload !== null && Boolean(onInitiateImageDrag)}
           aria-disabled={busy || !dragPayload || !onInitiateImageDrag}
           aria-label="Drag image payload"
-          className="ferby-local-output-panel__drag-chip"
+          className="fershot-local-output-panel__drag-chip"
           onDragStart={(e) => {
             if (!dragPayload || busy || !onInitiateImageDrag) {
               e.preventDefault();

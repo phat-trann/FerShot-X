@@ -247,4 +247,93 @@ describe("EditorWorkbench", () => {
     );
     expect(screen.getByText("0 annotations")).toBeInTheDocument();
   });
+
+  it("supports direct move and resize of selected annotation as a single committed undo/redo gesture", () => {
+    const onAnnotationsChange = vi.fn();
+    render(
+      <EditorWorkbench
+        imageId="img-direct-move"
+        imageSrc="blob:direct"
+        imageWidth={400}
+        imageHeight={300}
+        zoom={1}
+        defaultTool="rectangle"
+        onAnnotationsChange={onAnnotationsChange}
+      />,
+    );
+
+    const overlay = screen.getByRole("application", {
+      name: /annotation canvas overlay/i,
+    });
+    mockOverlayBounds(overlay);
+
+    // 1. Create rectangle at (20,30) -> (120,130)
+    fireEvent.pointerDown(overlay, {
+      button: 0,
+      pointerId: 1,
+      clientX: 20,
+      clientY: 30,
+    });
+    fireEvent.pointerUp(overlay, {
+      pointerId: 1,
+      clientX: 120,
+      clientY: 130,
+    });
+    expect(onAnnotationsChange).toHaveBeenCalledTimes(1);
+
+    // 2. Drag move handle across multiple pointerMove steps -> commits only ONCE on pointerUp
+    const moveBody = screen.getByRole("button", {
+      name: "Move selected annotation",
+    });
+    const handleGroup = moveBody.parentElement!;
+    fireEvent.pointerDown(moveBody, {
+      button: 0,
+      pointerId: 2,
+      clientX: 50,
+      clientY: 50,
+    });
+    fireEvent.pointerMove(handleGroup, {
+      pointerId: 2,
+      clientX: 60,
+      clientY: 60,
+    });
+    fireEvent.pointerMove(handleGroup, {
+      pointerId: 2,
+      clientX: 80,
+      clientY: 70,
+    });
+    // Still only 1 history commit (creation) before pointerUp
+    expect(onAnnotationsChange).toHaveBeenCalledTimes(1);
+
+    fireEvent.pointerUp(handleGroup, {
+      pointerId: 2,
+      clientX: 80,
+      clientY: 70,
+    });
+    expect(onAnnotationsChange).toHaveBeenCalledTimes(2);
+    expect(onAnnotationsChange.mock.calls[1]?.[1]?.[0]?.points).toEqual([
+      { x: 50, y: 50 },
+      { x: 150, y: 150 },
+    ]);
+
+    // 3. Single Undo restores original (20,30)->(120,130); Single Redo reapplies (50,50)->(150,150)
+    fireEvent.click(screen.getByRole("button", { name: "Undo" }));
+    expect(onAnnotationsChange).toHaveBeenCalledTimes(3);
+    expect(onAnnotationsChange.mock.calls[2]?.[1]?.[0]?.points).toEqual([
+      { x: 20, y: 30 },
+      { x: 120, y: 130 },
+    ]);
+
+    fireEvent.click(screen.getByRole("button", { name: "Redo" }));
+    expect(onAnnotationsChange).toHaveBeenCalledTimes(4);
+    expect(onAnnotationsChange.mock.calls[3]?.[1]?.[0]?.points).toEqual([
+      { x: 50, y: 50 },
+      { x: 150, y: 150 },
+    ]);
+    expect(
+      screen.getByRole("region", {
+        name: /editor workbench for img-direct-move/i,
+      }),
+    ).toHaveClass("fershot-editor-workbench");
+  });
 });

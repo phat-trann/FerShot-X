@@ -57,7 +57,7 @@ export function ColorFormatControls({
   const isValid = isColorPresent && validateRgbaColor(color);
 
   const containerClasses = [
-    "ferby-color-format-controls",
+    "fershot-color-format-controls",
     className,
   ]
     .filter(Boolean)
@@ -76,11 +76,11 @@ export function ColorFormatControls({
       aria-label="Color Format Copy Controls"
       aria-busy={busy}
     >
-      <div className="ferby-color-format-controls__header">
-        <h3 className="ferby-color-format-controls__title">Sampled Color</h3>
+      <div className="fershot-color-format-controls__header">
+        <h3 className="fershot-color-format-controls__title">Sampled Color</h3>
         {isValid && (
           <div
-            className="ferby-color-format-controls__swatch"
+            className="fershot-color-format-controls__swatch"
             style={{
               backgroundColor: formatted?.rgba,
             }}
@@ -90,26 +90,26 @@ export function ColorFormatControls({
       </div>
 
       {!isColorPresent ? (
-        <p className="ferby-color-format-controls__status ferby-color-format-controls__status--empty">
+        <p className="fershot-color-format-controls__status fershot-color-format-controls__status--empty">
           No color sampled. Hover or click an image pixel to inspect.
         </p>
       ) : !isValid ? (
         <p
-          className="ferby-color-format-controls__status ferby-color-format-controls__status--invalid"
+          className="fershot-color-format-controls__status fershot-color-format-controls__status--invalid"
           role="alert"
         >
           Invalid color: channels must be integers from 0 to 255.
         </p>
       ) : (
-        <div className="ferby-color-format-controls__formats">
-          <div className="ferby-color-format-controls__row">
-            <span className="ferby-color-format-controls__label">HEX</span>
-            <code className="ferby-color-format-controls__value">
+        <div className="fershot-color-format-controls__formats">
+          <div className="fershot-color-format-controls__row">
+            <span className="fershot-color-format-controls__label">HEX</span>
+            <code className="fershot-color-format-controls__value">
               {formatted?.hex}
             </code>
             <button
               type="button"
-              className="ferby-color-format-controls__button"
+              className="fershot-color-format-controls__button"
               disabled={busy}
               onClick={() => formatted && handleCopy(formatted.hex)}
             >
@@ -117,14 +117,14 @@ export function ColorFormatControls({
             </button>
           </div>
 
-          <div className="ferby-color-format-controls__row">
-            <span className="ferby-color-format-controls__label">RGB</span>
-            <code className="ferby-color-format-controls__value">
+          <div className="fershot-color-format-controls__row">
+            <span className="fershot-color-format-controls__label">RGB</span>
+            <code className="fershot-color-format-controls__value">
               {formatted?.rgb}
             </code>
             <button
               type="button"
-              className="ferby-color-format-controls__button"
+              className="fershot-color-format-controls__button"
               disabled={busy}
               onClick={() => formatted && handleCopy(formatted.rgb)}
             >
@@ -132,14 +132,14 @@ export function ColorFormatControls({
             </button>
           </div>
 
-          <div className="ferby-color-format-controls__row">
-            <span className="ferby-color-format-controls__label">RGBA</span>
-            <code className="ferby-color-format-controls__value">
+          <div className="fershot-color-format-controls__row">
+            <span className="fershot-color-format-controls__label">RGBA</span>
+            <code className="fershot-color-format-controls__value">
               {formatted?.rgba}
             </code>
             <button
               type="button"
-              className="ferby-color-format-controls__button"
+              className="fershot-color-format-controls__button"
               disabled={busy}
               onClick={() => formatted && handleCopy(formatted.rgba)}
             >

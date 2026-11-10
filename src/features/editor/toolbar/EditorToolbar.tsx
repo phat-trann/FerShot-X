@@ -42,6 +42,7 @@ const SHORTCUT_BY_TOOL: Readonly<Partial<Record<AnnotationTool, string>>> =
 export interface EditorToolbarProps {
   readonly selectedTool: AnnotationTool;
   readonly allowedTools?: readonly AnnotationTool[];
+  readonly supportedTools?: readonly AnnotationTool[];
   readonly canUndo: boolean;
   readonly canRedo: boolean;
   readonly canDeleteSelected: boolean;
@@ -54,6 +55,7 @@ export interface EditorToolbarProps {
 export function EditorToolbar({
   selectedTool,
   allowedTools = DEFAULT_ALLOWED_EDITOR_TOOLS,
+  supportedTools,
   canUndo,
   canRedo,
   canDeleteSelected,
@@ -65,17 +67,20 @@ export function EditorToolbar({
   const toolButtonRefs = useRef<Array<HTMLButtonElement | null>>([]);
 
   const visibleTools = useMemo<readonly AnnotationTool[]>(() => {
+    const supportedSet = supportedTools
+      ? new Set<AnnotationTool>(supportedTools)
+      : SUPPORTED_EDITOR_TOOLS;
     const unique: AnnotationTool[] = [];
     for (const candidate of allowedTools) {
       if (
-        SUPPORTED_EDITOR_TOOLS.has(candidate) &&
+        supportedSet.has(candidate) &&
         !unique.includes(candidate)
       ) {
         unique.push(candidate);
       }
     }
     return unique;
-  }, [allowedTools]);
+  }, [allowedTools, supportedTools]);
 
   const handleToolButtonKeyDown = (
     event: React.KeyboardEvent<HTMLButtonElement>,
@@ -121,12 +126,12 @@ export function EditorToolbar({
 
   return (
     <div
-      className="ferby-editor-toolbar"
+      className="fershot-editor-toolbar"
       role="toolbar"
       aria-label="Annotation tools"
     >
       <div
-        className="ferby-editor-toolbar__group"
+        className="fershot-editor-toolbar__group"
         role="group"
         aria-label="Drawing tools"
       >
@@ -141,7 +146,7 @@ export function EditorToolbar({
                 toolButtonRefs.current[index] = el;
               }}
               type="button"
-              className="ferby-editor-toolbar__btn"
+              className="fershot-editor-toolbar__btn"
               aria-pressed={isSelected}
               aria-label={`${label} tool`}
               onClick={() => onSelectTool(tool)}
@@ -150,7 +155,7 @@ export function EditorToolbar({
               <span>{label}</span>
               {shortcut && (
                 <kbd
-                  className="ferby-editor-toolbar__shortcut"
+                  className="fershot-editor-toolbar__shortcut"
                   aria-hidden="true"
                 >
                   {shortcut}
@@ -162,13 +167,13 @@ export function EditorToolbar({
       </div>
 
       <div
-        className="ferby-editor-toolbar__group"
+        className="fershot-editor-toolbar__group"
         role="group"
         aria-label="History and selection actions"
       >
         <button
           type="button"
-          className="ferby-editor-toolbar__btn"
+          className="fershot-editor-toolbar__btn"
           disabled={!canUndo}
           onClick={() => {
             if (canUndo) {
@@ -180,7 +185,7 @@ export function EditorToolbar({
         </button>
         <button
           type="button"
-          className="ferby-editor-toolbar__btn"
+          className="fershot-editor-toolbar__btn"
           disabled={!canRedo}
           onClick={() => {
             if (canRedo) {
@@ -192,7 +197,7 @@ export function EditorToolbar({
         </button>
         <button
           type="button"
-          className="ferby-editor-toolbar__btn ferby-editor-toolbar__btn--danger"
+          className="fershot-editor-toolbar__btn fershot-editor-toolbar__btn--danger"
           disabled={!canDeleteSelected}
           onClick={() => {
             if (canDeleteSelected) {

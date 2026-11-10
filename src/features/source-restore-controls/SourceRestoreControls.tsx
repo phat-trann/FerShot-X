@@ -27,7 +27,7 @@ export function SourceRestoreControls({
   };
 
   const containerClasses = [
-    "ferby-source-restore-controls",
+    "fershot-source-restore-controls",
     className,
   ]
     .filter(Boolean)
@@ -39,38 +39,38 @@ export function SourceRestoreControls({
       aria-label="Source Image Restoration"
       aria-busy={busy}
     >
-      <div className="ferby-source-restore-controls__header">
-        <h3 className="ferby-source-restore-controls__title">
+      <div className="fershot-source-restore-controls__header">
+        <h3 className="fershot-source-restore-controls__title">
           Original Source Capture
         </h3>
         <span
-          className={`ferby-source-restore-controls__badge ${
+          className={`fershot-source-restore-controls__badge ${
             isAvailable
-              ? "ferby-source-restore-controls__badge--available"
-              : "ferby-source-restore-controls__badge--unavailable"
+              ? "fershot-source-restore-controls__badge--available"
+              : "fershot-source-restore-controls__badge--unavailable"
           }`}
         >
           {isAvailable ? "Retained" : "Unavailable"}
         </span>
       </div>
 
-      <div className="ferby-source-restore-controls__content">
-        <div className="ferby-source-restore-controls__row">
-          <span className="ferby-source-restore-controls__label">
+      <div className="fershot-source-restore-controls__content">
+        <div className="fershot-source-restore-controls__row">
+          <span className="fershot-source-restore-controls__label">
             Current Document:
           </span>
-          <span className="ferby-source-restore-controls__value" title={currentName}>
+          <span className="fershot-source-restore-controls__value" title={currentName}>
             {currentName || "Untitled Capture"}
           </span>
         </div>
 
-        <div className="ferby-source-restore-controls__row">
-          <span className="ferby-source-restore-controls__label">
+        <div className="fershot-source-restore-controls__row">
+          <span className="fershot-source-restore-controls__label">
             Source Origin:
           </span>
           <span
-            className={`ferby-source-restore-controls__value ${
-              !sourceName ? "ferby-source-restore-controls__value--muted" : ""
+            className={`fershot-source-restore-controls__value ${
+              !sourceName ? "fershot-source-restore-controls__value--muted" : ""
             }`}
             title={sourceName ?? "No source document retained"}
           >
@@ -78,17 +78,17 @@ export function SourceRestoreControls({
           </span>
         </div>
 
-        <p className="ferby-source-restore-controls__explanation">
+        <p className="fershot-source-restore-controls__explanation">
           {isAvailable
             ? `Restoring switches back to the original unmodified capture (${sourceName}). Your derived annotations and edits on the current image remain preserved in the session.`
             : "The original source capture is closed, detached, or already at origin. No ancestral source is available to restore."}
         </p>
       </div>
 
-      <div className="ferby-source-restore-controls__actions">
+      <div className="fershot-source-restore-controls__actions">
         <button
           type="button"
-          className="ferby-source-restore-controls__button"
+          className="fershot-source-restore-controls__button"
           disabled={isButtonDisabled}
           aria-disabled={isButtonDisabled}
           onClick={handleRestore}

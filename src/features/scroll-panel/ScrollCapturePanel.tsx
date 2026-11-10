@@ -1,5 +1,8 @@
 import React, { useId } from "react";
 import "./ScrollCapturePanel.css";
+import { Input } from "../../components/ui/input";
+import { NativeSelect } from "../../components/ui/select";
+import { Switch } from "../../components/ui/switch";
 
 export const MIN_SCROLL_MAX_HEIGHT = 400;
 export const MAX_SCROLL_MAX_HEIGHT = 32_768;
@@ -33,7 +36,7 @@ export const SCROLL_CAPTURE_CONTRACT_PROPOSAL = Object.freeze({
     "cancel_scrolling_capture",
   ] as const),
   rationale:
-    "Codex C11 can bridge ScrollCapturePanel to ferby-scroll-core over main-window-only Tauri commands.",
+    "Codex C11 can bridge ScrollCapturePanel to fershot-scroll-core over main-window-only Tauri commands.",
 });
 
 export function clampScrollMaxHeight(value: number): number {
@@ -102,15 +105,15 @@ export function ScrollCapturePanel({
 
   return (
     <section
-      className="ferby-scroll-panel"
+      className="fershot-scroll-panel"
       aria-label="Scrolling capture controls"
       aria-busy={isBusy}
       onKeyDown={handleKeyDown}
     >
-      <div className="ferby-scroll-panel__controls">
-        <div className="ferby-scroll-panel__field">
+      <div className="fershot-scroll-panel__controls">
+        <div className="fershot-scroll-panel__field">
           <label htmlFor={maxHeightId}>Max output height (px)</label>
-          <input
+          <Input
             id={maxHeightId}
             type="number"
             min={MIN_SCROLL_MAX_HEIGHT}
@@ -128,9 +131,9 @@ export function ScrollCapturePanel({
           />
         </div>
 
-        <div className="ferby-scroll-panel__field">
+        <div className="fershot-scroll-panel__field">
           <label htmlFor={speedId}>Scroll speed</label>
-          <select
+          <NativeSelect
             id={speedId}
             value={config.speed}
             disabled={isBusy}
@@ -141,27 +144,25 @@ export function ScrollCapturePanel({
             <option value="slow">Slow</option>
             <option value="normal">Normal</option>
             <option value="fast">Fast</option>
-          </select>
+          </NativeSelect>
         </div>
 
-        <div className="ferby-scroll-panel__checkbox">
-          <input
+        <div className="fershot-scroll-panel__checkbox">
+          <Switch
             id={reverseId}
-            type="checkbox"
+            
             checked={config.reverseDirection}
             disabled={isBusy}
-            onChange={(event) =>
-              emitConfig({ reverseDirection: event.target.checked })
-            }
+            onCheckedChange={checked => emitConfig({ reverseDirection: checked })}
           />
           <label htmlFor={reverseId}>Reverse scroll (bottom-to-top)</label>
         </div>
       </div>
 
-      <div className="ferby-scroll-panel__actions">
+      <div className="fershot-scroll-panel__actions">
         <button
           type="button"
-          className="ferby-scroll-panel__btn ferby-scroll-panel__btn--primary"
+          className="fershot-scroll-panel__btn fershot-scroll-panel__btn--primary"
           disabled={!canStart}
           onClick={() => {
             if (!canStart) {
@@ -180,7 +181,7 @@ export function ScrollCapturePanel({
         </button>
         <button
           type="button"
-          className="ferby-scroll-panel__btn"
+          className="fershot-scroll-panel__btn"
           disabled={!canStop}
           onClick={() => {
             if (canStop) {
@@ -192,7 +193,7 @@ export function ScrollCapturePanel({
         </button>
         <button
           type="button"
-          className="ferby-scroll-panel__btn"
+          className="fershot-scroll-panel__btn"
           disabled={!canCancel}
           onClick={() => {
             if (canCancel) {
@@ -204,13 +205,13 @@ export function ScrollCapturePanel({
         </button>
       </div>
 
-      <p className="ferby-scroll-panel__status" role="status" aria-live="polite">
+      <p className="fershot-scroll-panel__status" role="status" aria-live="polite">
         State: <strong>{state}</strong> — {progress.frameCount} frames (
         {progress.stitchedHeight} / {safeMaxHeight} px)
       </p>
 
       {error && error.trim().length > 0 && (
-        <p className="ferby-scroll-panel__error" role="alert">
+        <p className="fershot-scroll-panel__error" role="alert">
           {error}
         </p>
       )}

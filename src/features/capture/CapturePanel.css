@@ -1,4 +1,4 @@
-.ferby-capture-panel {
+.fershot-capture-panel {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
@@ -9,32 +9,32 @@
   border: 1px solid #2b2f38;
 }
 
-.ferby-capture-panel__header {
+.fershot-capture-panel__header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 0.5rem;
 }
 
-.ferby-capture-panel__title {
+.fershot-capture-panel__title {
   margin: 0;
   font-size: 0.95rem;
   font-weight: 600;
   letter-spacing: 0.01em;
 }
 
-.ferby-capture-panel__status {
+.fershot-capture-panel__status {
   font-size: 0.8rem;
   color: #93c5fd;
 }
 
-.ferby-capture-panel__actions {
+.fershot-capture-panel__actions {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0.625rem;
 }
 
-.ferby-capture-panel__button {
+.fershot-capture-panel__button {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -51,28 +51,28 @@
   transition: background-color 120ms ease, border-color 120ms ease;
 }
 
-.ferby-capture-panel__button:hover:not(:disabled) {
+.fershot-capture-panel__button:hover:not(:disabled) {
   background-color: #2c3240;
   border-color: #60a5fa;
 }
 
-.ferby-capture-panel__button:focus-visible {
+.fershot-capture-panel__button:focus-visible {
   outline: 2px solid #60a5fa;
   outline-offset: 2px;
 }
 
-.ferby-capture-panel__button:disabled {
+.fershot-capture-panel__button:disabled {
   opacity: 0.55;
   cursor: not-allowed;
 }
 
-.ferby-capture-panel__button-desc {
+.fershot-capture-panel__button-desc {
   font-size: 0.75rem;
   font-weight: 400;
   color: #9ca3af;
 }
 
-.ferby-capture-panel__error {
+.fershot-capture-panel__error {
   margin: 0;
   padding: 0.5rem 0.75rem;
   border-radius: 0.375rem;

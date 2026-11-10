@@ -5,6 +5,8 @@ import {
   MAX_SCROLL_MAX_HEIGHT,
   MIN_SCROLL_MAX_HEIGHT,
 } from "../scroll-panel/ScrollCapturePanel";
+import { Input } from "../../components/ui/input";
+import { Switch } from "../../components/ui/switch";
 
 export type ScrollWorkspaceState =
   | "idle"
@@ -63,7 +65,7 @@ export function ScrollWorkspace({
         stitching.
       </p>
       <label htmlFor={maxHeightId}>Max output height (px)</label>
-      <input
+      <Input
         id={maxHeightId}
         type="number"
         min={MIN_SCROLL_MAX_HEIGHT}
@@ -82,16 +84,14 @@ export function ScrollWorkspace({
         }}
       />
       <label>
-        <input
-          type="checkbox"
+        <Switch
+          
           checked={Boolean(config.reverseDirection)}
           disabled={isRunning}
-          onChange={(event) =>
-            onConfigChange({
+          onCheckedChange={checked => onConfigChange({
               maxHeight: safeMaxHeight,
-              reverseDirection: event.target.checked,
-            })
-          }
+              reverseDirection: checked,
+            })}
         />
         Reverse direction
       </label>

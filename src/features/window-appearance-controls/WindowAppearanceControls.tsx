@@ -5,6 +5,8 @@ import type {
   WindowBackgroundAppearance,
 } from "../window-appearance";
 import "./WindowAppearanceControls.css";
+import { Input } from "../../components/ui/input";
+import { Switch } from "../../components/ui/switch";
 
 export type BackgroundKind = "transparent" | "solid";
 
@@ -116,7 +118,7 @@ export function WindowAppearanceControls({
   };
 
   const containerClasses = [
-    "ferby-window-appearance-controls",
+    "fershot-window-appearance-controls",
     className,
   ]
     .filter(Boolean)
@@ -128,16 +130,16 @@ export function WindowAppearanceControls({
       aria-label="Window Appearance Controls"
       aria-busy={busy}
     >
-      <div className="ferby-window-appearance-controls__field">
-        <label className="ferby-window-appearance-controls__label">
+      <div className="fershot-window-appearance-controls__field">
+        <label className="fershot-window-appearance-controls__label">
           Background
         </label>
         <div
-          className="ferby-window-appearance-controls__radio-group"
+          className="fershot-window-appearance-controls__radio-group"
           role="radiogroup"
           aria-label="Background Type"
         >
-          <label className="ferby-window-appearance-controls__radio-label">
+          <label className="fershot-window-appearance-controls__radio-label">
             <input
               type="radio"
               name="window-appearance-bg"
@@ -148,7 +150,7 @@ export function WindowAppearanceControls({
             />
             <span>Transparent</span>
           </label>
-          <label className="ferby-window-appearance-controls__radio-label">
+          <label className="fershot-window-appearance-controls__radio-label">
             <input
               type="radio"
               name="window-appearance-bg"
@@ -162,7 +164,7 @@ export function WindowAppearanceControls({
         </div>
 
         {backgroundKind === "solid" && (
-          <div className="ferby-window-appearance-controls__color-picker">
+          <div className="fershot-window-appearance-controls__color-picker">
             <input
               type="color"
               aria-label="Pick Solid Background Color"
@@ -170,10 +172,10 @@ export function WindowAppearanceControls({
               disabled={busy}
               onChange={(e) => setSolidColor(e.target.value)}
             />
-            <input
+            <Input
               type="text"
               aria-label="Solid Hex Color"
-              className="ferby-window-appearance-controls__color-input"
+              className="fershot-window-appearance-controls__color-input"
               value={solidColor}
               disabled={busy}
               maxLength={9}
@@ -183,22 +185,22 @@ export function WindowAppearanceControls({
         )}
       </div>
 
-      <div className="ferby-window-appearance-controls__field">
-        <label className="ferby-window-appearance-controls__checkbox-label">
-          <input
-            type="checkbox"
+      <div className="fershot-window-appearance-controls__field">
+        <label className="fershot-window-appearance-controls__checkbox-label">
+          <Switch
+            
             checked={enableTrim}
             disabled={busy}
-            onChange={(e) => setEnableTrim(e.target.checked)}
+            onCheckedChange={checked => setEnableTrim(checked)}
           />
           <span>Trim Window Shadow Insets</span>
         </label>
 
         {enableTrim && (
-          <div className="ferby-window-appearance-controls__insets-grid">
-            <label className="ferby-window-appearance-controls__inset-label">
+          <div className="fershot-window-appearance-controls__insets-grid">
+            <label className="fershot-window-appearance-controls__inset-label">
               <span>Top</span>
-              <input
+              <Input
                 type="number"
                 min={0}
                 max={Math.max(0, imageHeight - 1)}
@@ -207,9 +209,9 @@ export function WindowAppearanceControls({
                 onChange={(e) => setTrimTop(Math.max(0, parseInt(e.target.value, 10) || 0))}
               />
             </label>
-            <label className="ferby-window-appearance-controls__inset-label">
+            <label className="fershot-window-appearance-controls__inset-label">
               <span>Right</span>
-              <input
+              <Input
                 type="number"
                 min={0}
                 max={Math.max(0, imageWidth - 1)}
@@ -218,9 +220,9 @@ export function WindowAppearanceControls({
                 onChange={(e) => setTrimRight(Math.max(0, parseInt(e.target.value, 10) || 0))}
               />
             </label>
-            <label className="ferby-window-appearance-controls__inset-label">
+            <label className="fershot-window-appearance-controls__inset-label">
               <span>Bottom</span>
-              <input
+              <Input
                 type="number"
                 min={0}
                 max={Math.max(0, imageHeight - 1)}
@@ -229,9 +231,9 @@ export function WindowAppearanceControls({
                 onChange={(e) => setTrimBottom(Math.max(0, parseInt(e.target.value, 10) || 0))}
               />
             </label>
-            <label className="ferby-window-appearance-controls__inset-label">
+            <label className="fershot-window-appearance-controls__inset-label">
               <span>Left</span>
-              <input
+              <Input
                 type="number"
                 min={0}
                 max={Math.max(0, imageWidth - 1)}
@@ -245,15 +247,15 @@ export function WindowAppearanceControls({
       </div>
 
       {validationError && (
-        <p className="ferby-window-appearance-controls__error" role="alert">
+        <p className="fershot-window-appearance-controls__error" role="alert">
           {validationError}
         </p>
       )}
 
-      <div className="ferby-window-appearance-controls__actions">
+      <div className="fershot-window-appearance-controls__actions">
         <button
           type="button"
-          className="ferby-window-appearance-controls__apply-button"
+          className="fershot-window-appearance-controls__apply-button"
           disabled={busy || Boolean(validationError)}
           onClick={handleApply}
         >

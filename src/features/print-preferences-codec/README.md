@@ -1,6 +1,6 @@
 # Print preferences codec
 
-This local Ferby sidecar stores version `1` `PrintSheetOptions` only. It
+This local FerShot sidecar stores version `1` `PrintSheetOptions` only. It
 strictly validates image dimensions, paper/orientation/scale enums, finite
 margins and printable dimensions using the existing layout validator. The
 optional `scaleMode` remains optional; omitted values retain producer

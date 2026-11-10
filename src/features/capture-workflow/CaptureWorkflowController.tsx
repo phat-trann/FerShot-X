@@ -19,14 +19,14 @@ import "./CaptureWorkflowController.css";
 
 /**
  * Evidence note (`A35`):
- * Exact target Shottr post-capture step scheduling/concurrency semantics are `UNKNOWN`.
- * Ferby's deterministic workflow order (`copy -> save -> preview -> edit -> show`) and
- * per-operation token + capture-scoped idempotency ledger are explicit Ferby design choices,
- * not inferred Shottr runtime behavior.
+ * Exact target reference application post-capture step scheduling/concurrency semantics are `UNKNOWN`.
+ * FerShot's deterministic workflow order (`copy -> save -> preview -> edit -> show`) and
+ * per-operation token + capture-scoped idempotency ledger are explicit FerShot design choices,
+ * not inferred reference application runtime behavior.
  */
 export const CAPTURE_WORKFLOW_SEMANTICS_NOTE = Object.freeze({
   targetSchedulingEvidence: "UNKNOWN" as const,
-  ferbyStepOrder: Object.freeze([
+  fershotStepOrder: Object.freeze([
     "copy",
     "save",
     "preview",
@@ -452,11 +452,11 @@ export const CaptureWorkflowController: React.FC<
 
   return (
     <section
-      className="ferby-capture-workflow"
+      className="fershot-capture-workflow"
       aria-label="Composed post-capture workflow"
     >
       <div
-        className="ferby-capture-workflow__triggers"
+        className="fershot-capture-workflow__triggers"
         role="group"
         aria-label="Start capture"
       >
@@ -478,14 +478,14 @@ export const CaptureWorkflowController: React.FC<
       </div>
 
       <div
-        className="ferby-capture-workflow__status"
+        className="fershot-capture-workflow__status"
         aria-label="Workflow status"
       >
         Phase: {state.phase}
       </div>
 
       {state.errorMessage !== null && (
-        <div role="alert" className="ferby-capture-workflow__error">
+        <div role="alert" className="fershot-capture-workflow__error">
           <span>
             {state.failedStep
               ? `Step "${state.failedStep}" failed: `

@@ -1,29 +1,29 @@
-.ferby-local-output-workspace {
+.fershot-local-output-workspace {
   display: flex;
   flex-direction: column;
   gap: 16px;
   padding: 16px;
-  background: var(--ferby-surface, #1e1e24);
-  color: var(--ferby-text, #ffffff);
+  background: var(--fershot-surface, #1e1e24);
+  color: var(--fershot-text, #ffffff);
   border-radius: 8px;
 }
 
-.ferby-local-output-workspace__actions {
+.fershot-local-output-workspace__actions {
   display: flex;
   gap: 8px;
 }
 
-.ferby-local-output-workspace__actions button {
+.fershot-local-output-workspace__actions button {
   padding: 6px 12px;
   border-radius: 4px;
-  border: 1px solid var(--ferby-border, #334155);
-  background: var(--ferby-button-bg, #27272a);
+  border: 1px solid var(--fershot-border, #334155);
+  background: var(--fershot-button-bg, #27272a);
   color: inherit;
   font-size: 12px;
   cursor: pointer;
 }
 
-.ferby-local-output-workspace__actions button:disabled {
+.fershot-local-output-workspace__actions button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }

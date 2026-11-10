@@ -7,7 +7,7 @@ const HEX_COLOR_RE = /^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$/;
 
 /**
  * Explicit caller-provided shadow-trim crop insets in source pixels.
- * Target Shottr automatic shadow-trim heuristics are not invented here;
+ * Target reference application automatic shadow-trim heuristics are not invented here;
  * callers supply exact deterministic trim insets when trimming window shadow margins.
  */
 export interface ShadowTrimInsets {

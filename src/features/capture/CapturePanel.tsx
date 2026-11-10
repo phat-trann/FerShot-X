@@ -49,20 +49,20 @@ export function CapturePanel({ onCapture, busy, error }: CapturePanelProps): Rea
 
   return (
     <section
-      className="ferby-capture-panel"
+      className="fershot-capture-panel"
       aria-label="Screen Capture"
       aria-busy={busy}
     >
-      <div className="ferby-capture-panel__header">
-        <h2 className="ferby-capture-panel__title">Capture</h2>
+      <div className="fershot-capture-panel__header">
+        <h2 className="fershot-capture-panel__title">Capture</h2>
         {busy && (
-          <span className="ferby-capture-panel__status" role="status" aria-live="polite">
+          <span className="fershot-capture-panel__status" role="status" aria-live="polite">
             Capturing in progress…
           </span>
         )}
       </div>
 
-      <div className="ferby-capture-panel__actions" role="group" aria-label="Capture Modes">
+      <div className="fershot-capture-panel__actions" role="group" aria-label="Capture Modes">
         {CAPTURE_OPTIONS.map((option, index) => (
           <button
             key={option.mode}
@@ -70,19 +70,19 @@ export function CapturePanel({ onCapture, busy, error }: CapturePanelProps): Rea
               buttonRefs.current[index] = el;
             }}
             type="button"
-            className="ferby-capture-panel__button"
+            className="fershot-capture-panel__button"
             disabled={busy}
             onClick={() => handleTrigger(option.mode)}
             onKeyDown={(event) => handleKeyDown(event, index)}
           >
             <span>{option.label}</span>
-            <span className="ferby-capture-panel__button-desc">{option.description}</span>
+            <span className="fershot-capture-panel__button-desc">{option.description}</span>
           </button>
         ))}
       </div>
 
       {trimmedError ? (
-        <p className="ferby-capture-panel__error" role="alert">
+        <p className="fershot-capture-panel__error" role="alert">
           {trimmedError}
         </p>
       ) : null}

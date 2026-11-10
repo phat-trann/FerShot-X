@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import "./EffectsPanel.css";
+import { NativeSelect } from "../../components/ui/select";
+import { Input } from "../../components/ui/input";
 
 export interface EffectRect {
   readonly x: number;
@@ -118,23 +120,23 @@ export function EffectsPanel({
   };
 
   return (
-    <section className="ferby-effects-panel" aria-label="Pixel effects" aria-busy={busy}>
+    <section className="fershot-effects-panel" aria-label="Pixel effects" aria-busy={busy}>
       <h2>Pixel effects</h2>
       <label>
         Effect
-        <select value={kind} disabled={busy} onChange={(event) => setKind(event.target.value as EffectKind)}>
+        <NativeSelect value={kind} disabled={busy} onChange={(event) => setKind(event.target.value as EffectKind)}>
           <option value="blur">Blur</option>
           <option value="mosaic">Mosaic</option>
           <option value="solidCover">Solid cover</option>
           <option value="transparentErase">Transparent erase</option>
-        </select>
+        </NativeSelect>
       </label>
       <fieldset disabled={busy}>
         <legend>Image-pixel region</legend>
         {(["x", "y", "width", "height"] as const).map((key) => (
           <label key={key}>
             {key}
-            <input
+            <Input
               type="number"
               min={key === "width" || key === "height" ? 1 : 0}
               step={1}
@@ -147,24 +149,24 @@ export function EffectsPanel({
       {kind === "blur" ? (
         <label>
           Radius
-          <input type="number" min={1} max={64} value={radius} onChange={(event) => setRadius(integer(event.target.value))} />
+          <Input type="number" min={1} max={64} value={radius} onChange={(event) => setRadius(integer(event.target.value))} />
         </label>
       ) : null}
       {kind === "mosaic" ? (
         <label>
           Block size
-          <input type="number" min={2} max={128} value={blockSize} onChange={(event) => setBlockSize(integer(event.target.value))} />
+          <Input type="number" min={2} max={128} value={blockSize} onChange={(event) => setBlockSize(integer(event.target.value))} />
         </label>
       ) : null}
       {kind === "solidCover" ? (
         <>
           <label>
             Color
-            <input type="text" value={color} onChange={(event) => setColor(event.target.value)} />
+            <Input type="text" value={color} onChange={(event) => setColor(event.target.value)} />
           </label>
           <label>
             Alpha
-            <input type="number" min={0} max={255} value={alpha} onChange={(event) => setAlpha(event.target.value)} />
+            <Input type="number" min={0} max={255} value={alpha} onChange={(event) => setAlpha(event.target.value)} />
           </label>
         </>
       ) : null}

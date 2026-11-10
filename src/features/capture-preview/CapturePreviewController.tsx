@@ -15,7 +15,7 @@ export interface CapturePreviewControllerProps {
   readonly onEdit: (id: string) => void;
   readonly onCopy: (id: string) => void;
   readonly onSave: (id: string) => void;
-  readonly onOcr: (id: string) => void;
+  readonly onOcr?: (id: string) => void;
   readonly onPin: (id: string) => void;
   readonly onClose: (id: string, reason: CapturePreviewCloseReason) => void;
   readonly onCancelAutoDismiss?: (id: string) => void;
@@ -108,22 +108,22 @@ export function CapturePreviewController({
 
   return (
     <section
-      className="ferby-capture-preview"
+      className="fershot-capture-preview"
       role="dialog"
       aria-label={`Post-capture preview: ${document.name}`}
       tabIndex={-1}
       onKeyDown={handleKeyDown}
     >
-      <header className="ferby-capture-preview__header">
-        <span className="ferby-capture-preview__title">{document.name}</span>
-        <span className="ferby-capture-preview__meta">
+      <header className="fershot-capture-preview__header">
+        <span className="fershot-capture-preview__title">{document.name}</span>
+        <span className="fershot-capture-preview__meta">
           {document.width}×{document.height} px
         </span>
       </header>
 
-      <div className="ferby-capture-preview__body">
+      <div className="fershot-capture-preview__body">
         <img
-          className="ferby-capture-preview__img"
+          className="fershot-capture-preview__img"
           src={document.src}
           alt={document.name}
           width={previewWidth}
@@ -132,41 +132,35 @@ export function CapturePreviewController({
       </div>
 
       <footer
-        className="ferby-capture-preview__actions"
+        className="fershot-capture-preview__actions"
         role="group"
         aria-label="Post-capture actions"
       >
         <button
           type="button"
-          className="ferby-capture-preview__btn ferby-capture-preview__btn--primary"
+          className="fershot-capture-preview__btn fershot-capture-preview__btn--primary"
           onClick={() => runOnce(() => onEdit(document.id))}
         >
           Edit
         </button>
         <button
           type="button"
-          className="ferby-capture-preview__btn"
+          className="fershot-capture-preview__btn"
           onClick={() => runOnce(() => onCopy(document.id))}
         >
           Copy
         </button>
         <button
           type="button"
-          className="ferby-capture-preview__btn"
+          className="fershot-capture-preview__btn"
           onClick={() => runOnce(() => onSave(document.id))}
         >
           Save
         </button>
+        {onOcr && <button type="button" className="fershot-capture-preview__btn" onClick={() => runOnce(() => onOcr(document.id))}>OCR</button>}
         <button
           type="button"
-          className="ferby-capture-preview__btn"
-          onClick={() => runOnce(() => onOcr(document.id))}
-        >
-          OCR
-        </button>
-        <button
-          type="button"
-          className="ferby-capture-preview__btn"
+          className="fershot-capture-preview__btn"
           onClick={() => runOnce(() => onPin(document.id))}
         >
           Pin
@@ -177,7 +171,7 @@ export function CapturePreviewController({
           !paused && (
             <button
               type="button"
-              className="ferby-capture-preview__btn"
+              className="fershot-capture-preview__btn"
               onClick={handleCancelTimer}
             >
               Keep Open
@@ -185,7 +179,7 @@ export function CapturePreviewController({
           )}
         <button
           type="button"
-          className="ferby-capture-preview__btn"
+          className="fershot-capture-preview__btn"
           onClick={() => runOnce(() => onClose(document.id, "manual"))}
         >
           Close Preview

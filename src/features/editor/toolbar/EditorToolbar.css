@@ -1,4 +1,4 @@
-.ferby-editor-toolbar {
+.fershot-editor-toolbar {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -11,14 +11,14 @@
   border: 1px solid #2b2f38;
 }
 
-.ferby-editor-toolbar__group {
+.fershot-editor-toolbar__group {
   display: inline-flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 0.375rem;
 }
 
-.ferby-editor-toolbar__btn {
+.fershot-editor-toolbar__btn {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
@@ -33,28 +33,28 @@
   transition: background-color 120ms ease, border-color 120ms ease;
 }
 
-.ferby-editor-toolbar__btn:hover:not(:disabled) {
+.fershot-editor-toolbar__btn:hover:not(:disabled) {
   background-color: #2c3240;
   border-color: #60a5fa;
 }
 
-.ferby-editor-toolbar__btn[aria-pressed="true"] {
+.fershot-editor-toolbar__btn[aria-pressed="true"] {
   background-color: #2563eb;
   border-color: #60a5fa;
   color: #ffffff;
 }
 
-.ferby-editor-toolbar__btn:focus-visible {
+.fershot-editor-toolbar__btn:focus-visible {
   outline: 2px solid #60a5fa;
   outline-offset: 2px;
 }
 
-.ferby-editor-toolbar__btn:disabled {
+.fershot-editor-toolbar__btn:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.ferby-editor-toolbar__shortcut {
+.fershot-editor-toolbar__shortcut {
   padding: 0.05rem 0.3rem;
   border-radius: 0.25rem;
   background-color: rgba(15, 17, 21, 0.55);
@@ -63,7 +63,7 @@
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
-.ferby-editor-toolbar__btn--danger:not(:disabled) {
+.fershot-editor-toolbar__btn--danger:not(:disabled) {
   border-color: rgba(239, 68, 68, 0.5);
   color: #fca5a5;
 }

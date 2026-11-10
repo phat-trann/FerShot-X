@@ -21,6 +21,10 @@ export interface EditorWorkbenchProps {
   readonly initialAnnotations?: readonly Annotation[];
   readonly historyLimit?: number;
   readonly defaultTool?: AnnotationTool;
+  readonly allowedTools?: readonly AnnotationTool[];
+  readonly zoom?: number;
+  readonly disabled?: boolean;
+  readonly busy?: boolean;
   readonly onAnnotationsChange?: (
     imageId: string,
     annotations: readonly Annotation[],
@@ -53,11 +57,16 @@ export function EditorWorkbench({
   initialAnnotations = [],
   historyLimit = 100,
   defaultTool = "select",
+  allowedTools = DEFAULT_ALLOWED_EDITOR_TOOLS,
+  zoom,
+  disabled = false,
+  busy = false,
   onAnnotationsChange,
   onExportAnnotations,
 }: EditorWorkbenchProps): React.JSX.Element {
+  const isBlocked = Boolean(disabled || busy);
   const [selectedTool, setSelectedTool] = useState<AnnotationTool>(() =>
-    DEFAULT_ALLOWED_EDITOR_TOOLS.includes(defaultTool) ? defaultTool : "select",
+    allowedTools.includes(defaultTool) ? defaultTool : "select",
   );
   const [historiesByImageId, setHistoriesByImageId] = useState<
     ReadonlyMap<string, EditorState>
@@ -82,6 +91,9 @@ export function EditorWorkbench({
     });
 
   const dispatchForCurrentImage = (action: EditorAction) => {
+    if (isBlocked) {
+      return;
+    }
     const baseState =
       historiesByImageId.get(imageId) ??
       createEditorState({
@@ -111,36 +123,42 @@ export function EditorWorkbench({
   };
 
   const { present, past, future } = currentEditorState;
-  const canUndo = past.length > 0;
-  const canRedo = future.length > 0;
-  const canDeleteSelected = present.selectedId !== null;
+  const canUndo = !isBlocked && past.length > 0;
+  const canRedo = !isBlocked && future.length > 0;
+  const canDeleteSelected = !isBlocked && present.selectedId !== null;
 
   const handleDeleteSelected = () => {
-    if (!present.selectedId) {
+    if (isBlocked || !present.selectedId) {
       return;
     }
     dispatchForCurrentImage({ type: "delete", id: present.selectedId });
   };
 
   const handleExport = () => {
+    if (isBlocked) {
+      return;
+    }
     onExportAnnotations?.(imageId, cloneAnnotations(present.annotations));
   };
 
   return (
     <section
-      className="ferby-editor-workbench"
+      className="fershot-editor-workbench"
       aria-label={`Editor workbench for ${imageId}`}
+      aria-busy={busy || undefined}
+      aria-disabled={isBlocked || undefined}
       data-image-id={imageId}
     >
-      <div className="ferby-editor-workbench__bar">
+      <div className="fershot-editor-workbench__bar">
         <EditorToolbar
           selectedTool={selectedTool}
-          allowedTools={DEFAULT_ALLOWED_EDITOR_TOOLS}
+          allowedTools={allowedTools}
+          supportedTools={allowedTools}
           canUndo={canUndo}
           canRedo={canRedo}
           canDeleteSelected={canDeleteSelected}
           onSelectTool={(tool) => {
-            if (DEFAULT_ALLOWED_EDITOR_TOOLS.includes(tool)) {
+            if (!isBlocked && allowedTools.includes(tool)) {
               setSelectedTool(tool);
             }
           }}
@@ -149,7 +167,7 @@ export function EditorWorkbench({
           onDeleteSelected={handleDeleteSelected}
         />
 
-        <div className="ferby-editor-workbench__status">
+        <div className="fershot-editor-workbench__status">
           <span aria-live="polite">
             {present.annotations.length}{" "}
             {present.annotations.length === 1 ? "annotation" : "annotations"}
@@ -157,7 +175,8 @@ export function EditorWorkbench({
           {onExportAnnotations && (
             <button
               type="button"
-              className="ferby-editor-workbench__export-btn"
+              disabled={isBlocked}
+              className="fershot-editor-workbench__export-btn"
               onClick={handleExport}
             >
               Export Annotations
@@ -172,12 +191,28 @@ export function EditorWorkbench({
         imageWidth={imageWidth}
         imageHeight={imageHeight}
         annotations={present.annotations}
+        selectedAnnotationId={present.selectedId}
         tool={selectedTool}
+        zoom={zoom}
+        disabled={disabled}
+        busy={busy}
         onAnnotationCreate={(annotation) =>
           dispatchForCurrentImage({ type: "add", annotation })
         }
         onAnnotationSelect={(id) =>
           dispatchForCurrentImage({ type: "select", id })
+        }
+        onAnnotationUpdate={(updated) =>
+          dispatchForCurrentImage({
+            type: "update",
+            id: updated.id,
+            changes: {
+              points: updated.points,
+              text: updated.text,
+              counter: updated.counter,
+              style: updated.style,
+            },
+          })
         }
       />
     </section>

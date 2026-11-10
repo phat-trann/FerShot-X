@@ -1,0 +1,10 @@
+import {describe,it,expect} from "vitest";
+import type { AdvancedEditorItem } from "../advanced-workbench";
+import {manipulationPolicy,editEndpoint,lineEndpoints} from "./manipulation";
+const style={color:"#ff0000",strokeWidth:3,opacity:1};
+const contract=(tool:"arrow"|"rectangle"|"ellipse"|"text"|"counter"|"pen"|"blur"):AdvancedEditorItem=>({id:"one",itemKind:"contract",annotation:{id:"one",tool,points:[{x:10,y:20},{x:90,y:60}],style}});
+describe("tool-specific manipulation",()=>{
+ it("uses eight perimeter anchors for areas, only endpoints for lines, and no resize for text/counters",()=>{for(const tool of ["rectangle","ellipse","blur"]as const)expect(manipulationPolicy(contract(tool)).anchors).toHaveLength(8);expect(manipulationPolicy(contract("arrow")).kind).toBe("endpoints");for(const tool of ["text","counter"]as const)expect(manipulationPolicy(contract(tool))).toMatchObject({kind:"move",anchors:[]});const pen=contract("pen");if(pen.itemKind!=="contract")throw new Error("Wrong kind");expect(manipulationPolicy({...pen,annotation:{...pen.annotation,points:[...pen.annotation.points,{x:80,y:30}]}})).toMatchObject({kind:"uniform",keepRatio:true});expect(manipulationPolicy(pen).kind).toBe("endpoints");});
+ it("moves one endpoint while preserving the other and the stroke style",()=>{const before=contract("arrow"),after=editEndpoint(before,1,{x:70,y:30},100,80);expect(after?.itemKind).toBe("contract");if(after?.itemKind!=="contract")throw new Error("Wrong kind");expect(after.annotation.points).toEqual([{x:10,y:20},{x:70,y:30}]);expect(after.annotation.style).toEqual(style);expect(editEndpoint(before,1,{x:10,y:20},100,80)).toBeNull();});
+ it("supports Shift, bounds and lossless legacy rotated-line endpoints",()=>{const before={...contract("arrow"),rotation:90},points=lineEndpoints(before)!;const after=editEndpoint(before,1,{x:99,y:39},100,80,true)!;expect(lineEndpoints(after)![0].x).toBeCloseTo(points[0].x,10);expect(lineEndpoints(after)![0].y).toBeCloseTo(points[0].y,10);expect(after.rotation).toBe(0);const bounded=editEndpoint(contract("arrow"),1,{x:500,y:-40},100,80)!;expect(lineEndpoints(bounded)![1]).toEqual({x:100,y:0});});
+});

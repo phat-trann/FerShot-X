@@ -1,26 +1,26 @@
-.ferby-source-restore-controls {
+.fershot-source-restore-controls {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
   padding: 0.85rem;
-  background-color: var(--ferby-surface-bg, #1e1e24);
-  color: var(--ferby-text-color, #e0e0e0);
+  background-color: var(--fershot-surface-bg, #1e1e24);
+  color: var(--fershot-text-color, #e0e0e0);
   border-radius: 6px;
 }
 
-.ferby-source-restore-controls__header {
+.fershot-source-restore-controls__header {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.ferby-source-restore-controls__title {
+.fershot-source-restore-controls__title {
   margin: 0;
   font-size: 0.88rem;
   font-weight: 600;
 }
 
-.ferby-source-restore-controls__badge {
+.fershot-source-restore-controls__badge {
   padding: 0.15rem 0.45rem;
   font-size: 0.7rem;
   font-weight: 600;
@@ -28,77 +28,77 @@
   text-transform: uppercase;
 }
 
-.ferby-source-restore-controls__badge--available {
+.fershot-source-restore-controls__badge--available {
   background-color: rgba(60, 180, 100, 0.2);
   color: #4cd964;
 }
 
-.ferby-source-restore-controls__badge--unavailable {
+.fershot-source-restore-controls__badge--unavailable {
   background-color: rgba(140, 140, 150, 0.2);
   color: #90909a;
 }
 
-.ferby-source-restore-controls__content {
+.fershot-source-restore-controls__content {
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
 }
 
-.ferby-source-restore-controls__row {
+.fershot-source-restore-controls__row {
   display: flex;
   justify-content: space-between;
   font-size: 0.8rem;
   gap: 0.75rem;
 }
 
-.ferby-source-restore-controls__label {
-  color: var(--ferby-text-muted, #a0a0aa);
+.fershot-source-restore-controls__label {
+  color: var(--fershot-text-muted, #a0a0aa);
   flex-shrink: 0;
 }
 
-.ferby-source-restore-controls__value {
+.fershot-source-restore-controls__value {
   font-weight: 500;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.ferby-source-restore-controls__value--muted {
-  color: var(--ferby-text-muted, #70707a);
+.fershot-source-restore-controls__value--muted {
+  color: var(--fershot-text-muted, #70707a);
   font-style: italic;
 }
 
-.ferby-source-restore-controls__explanation {
+.fershot-source-restore-controls__explanation {
   margin: 0.35rem 0 0;
   font-size: 0.75rem;
   line-height: 1.35;
-  color: var(--ferby-text-muted, #9999a4);
+  color: var(--fershot-text-muted, #9999a4);
 }
 
-.ferby-source-restore-controls__actions {
+.fershot-source-restore-controls__actions {
   display: flex;
   justify-content: flex-end;
   margin-top: 0.3rem;
 }
 
-.ferby-source-restore-controls__button {
+.fershot-source-restore-controls__button {
   padding: 0.4rem 0.85rem;
   font-size: 0.82rem;
   font-weight: 600;
-  border: 1px solid var(--ferby-button-border, #3a3a46);
+  border: 1px solid var(--fershot-button-border, #3a3a46);
   border-radius: 4px;
-  background-color: var(--ferby-button-bg, #2a2a34);
+  background-color: var(--fershot-button-bg, #2a2a34);
   color: inherit;
   cursor: pointer;
   transition: opacity 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
 }
 
-.ferby-source-restore-controls__button:not(:disabled):hover {
-  background-color: var(--ferby-button-hover-bg, #383846);
-  border-color: var(--ferby-accent, #4f80ff);
+.fershot-source-restore-controls__button:not(:disabled):hover {
+  background-color: var(--fershot-button-hover-bg, #383846);
+  border-color: var(--fershot-accent, #4f80ff);
 }
 
-.ferby-source-restore-controls__button:disabled {
+.fershot-source-restore-controls__button:disabled {
   opacity: 0.4;
   cursor: not-allowed;
 }

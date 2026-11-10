@@ -3,6 +3,7 @@ import type { ImageDocument } from "../../contracts/media";
 import type { Point } from "../../contracts/editor";
 import { mapClientPoint } from "../point-map";
 import "./CaptureRegionSelector.css";
+import { Input } from "../../components/ui/input";
 
 export interface CaptureSelectedArea {
   readonly x: number;
@@ -162,7 +163,7 @@ export function CaptureRegionSelector({
   return (
     <section
       ref={hostRef}
-      className="ferby-region-selector"
+      className="fershot-region-selector"
       aria-label="Area selection workspace"
       data-testid="capture-region-selector"
       onKeyDown={event => {
@@ -174,31 +175,31 @@ export function CaptureRegionSelector({
         else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus(); }
       }}
     >
-      <header className="ferby-region-selector__header">
-        <h3 className="ferby-region-selector__title">Select Capture Region</h3>
-        <span className="ferby-region-selector__meta">
+      <header className="fershot-region-selector__header">
+        <h3 className="fershot-region-selector__title">Select Capture Region</h3>
+        <span className="fershot-region-selector__meta">
           Source: {image.width} × {image.height} px
         </span>
       </header>
 
       <div
-        className="ferby-region-selector__canvas-wrap"
+        className="fershot-region-selector__canvas-wrap"
         onPointerDown={handlePointerDown}
         onPointerMove={handlePointerMove}
         onPointerUp={handlePointerUp}
         onPointerCancel={handlePointerUp}
       >
-        <div className="ferby-region-selector__image-wrap">
+        <div className="fershot-region-selector__image-wrap">
         <img
           ref={imgRef}
           src={image.src}
           alt={image.name || "Capture preview"}
-          className="ferby-region-selector__image"
+          className="fershot-region-selector__image"
           draggable={false}
         />
         {overlayStyle && (
           <div
-            className="ferby-region-selector__box"
+            className="fershot-region-selector__box"
             style={overlayStyle}
             data-testid="region-selector-overlay"
           />
@@ -206,10 +207,10 @@ export function CaptureRegionSelector({
         </div>
       </div>
 
-      <div className="ferby-region-selector__inputs">
-        <label className="ferby-region-selector__field">
+      <div className="fershot-region-selector__inputs">
+        <label className="fershot-region-selector__field">
           X (px)
-          <input
+          <Input
             type="number"
             min={0}
             max={image.width}
@@ -218,9 +219,9 @@ export function CaptureRegionSelector({
             onChange={(e) => handleManualChange("x", e.target.value)}
           />
         </label>
-        <label className="ferby-region-selector__field">
+        <label className="fershot-region-selector__field">
           Y (px)
-          <input
+          <Input
             type="number"
             min={0}
             max={image.height}
@@ -229,9 +230,9 @@ export function CaptureRegionSelector({
             onChange={(e) => handleManualChange("y", e.target.value)}
           />
         </label>
-        <label className="ferby-region-selector__field">
+        <label className="fershot-region-selector__field">
           Width (px)
-          <input
+          <Input
             type="number"
             min={0}
             max={image.width - area.x}
@@ -240,9 +241,9 @@ export function CaptureRegionSelector({
             onChange={(e) => handleManualChange("width", e.target.value)}
           />
         </label>
-        <label className="ferby-region-selector__field">
+        <label className="fershot-region-selector__field">
           Height (px)
-          <input
+          <Input
             type="number"
             min={0}
             max={image.height - area.y}
@@ -253,10 +254,10 @@ export function CaptureRegionSelector({
         </label>
       </div>
 
-      <footer className="ferby-region-selector__actions">
+      <footer className="fershot-region-selector__actions">
         <button
           type="button"
-          className="ferby-region-selector__btn"
+          className="fershot-region-selector__btn"
           disabled={busy}
           onClick={onCancel}
         >
@@ -264,7 +265,7 @@ export function CaptureRegionSelector({
         </button>
         <button
           type="button"
-          className="ferby-region-selector__btn ferby-region-selector__btn--primary"
+          className="fershot-region-selector__btn fershot-region-selector__btn--primary"
           disabled={busy || !hasValidSelection}
           onClick={() => onConfirm(area)}
         >

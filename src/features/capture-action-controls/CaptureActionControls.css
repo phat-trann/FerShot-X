@@ -1,4 +1,4 @@
-.ferby-capture-action-controls {
+.fershot-capture-action-controls {
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
@@ -7,13 +7,13 @@
   color: var(--text, #f5f5f7);
 }
 
-.ferby-capture-action-controls__grid {
+.fershot-capture-action-controls__grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: 0.35rem;
 }
 
-.ferby-capture-action-controls__button {
+.fershot-capture-action-controls__button {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -28,32 +28,32 @@
   transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.ferby-capture-action-controls__button:not(:disabled):hover {
+.fershot-capture-action-controls__button:not(:disabled):hover {
   background: linear-gradient(180deg, #282d3b 0%, #1d212b 100%);
   border-color: rgba(255, 255, 255, 0.18);
   transform: translateY(-0.5px);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-.ferby-capture-action-controls__button:not(:disabled):active {
+.fershot-capture-action-controls__button:not(:disabled):active {
   background: #15171f;
   transform: translateY(0);
 }
 
-.ferby-capture-action-controls__button:disabled {
+.fershot-capture-action-controls__button:disabled {
   opacity: 0.42;
   cursor: not-allowed;
   box-shadow: none;
 }
 
-.ferby-capture-action-controls__label {
+.fershot-capture-action-controls__label {
   font-size: 0.8rem;
   font-weight: 600;
   margin-bottom: 0.15rem;
   color: var(--text, #f5f5f7);
 }
 
-.ferby-capture-action-controls__desc {
+.fershot-capture-action-controls__desc {
   font-size: 0.68rem;
   color: var(--muted, #8c909e);
   line-height: 1.25;

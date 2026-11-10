@@ -15,7 +15,7 @@ function keyCode(key: string): string {
   throw new RangeError(`Unsupported native shortcut key: ${JSON.stringify(key)}`);
 }
 
-/** Pure Ferby subset adapter; root owns registration and native parsing. */
+/** Pure FerShot subset adapter; root owns registration and native parsing. */
 export function toNativeHotkeyBindings(input: Readonly<Record<GlobalActionId, ShortcutBinding | null>>): NativeHotkeyBindings {
   const validated = parseHotkeyPreferencesJson(serializeHotkeyPreferencesJson(input));
   const result = {} as Record<GlobalActionId, string | null>;

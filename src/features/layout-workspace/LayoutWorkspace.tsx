@@ -8,7 +8,7 @@ import {
 } from "../backdrop";
 import {
   DEFAULT_SNAP_THRESHOLD_PX,
-  FERBY_EDGE_SNAPPING_RULE,
+  FERSHOT_EDGE_SNAPPING_RULE,
   renderCompositionToPngBlob,
   snapPlacementToEdges,
   sortLayersByZOrder,
@@ -31,19 +31,19 @@ import {
 import "./LayoutWorkspace.css";
 
 /**
- * Documented Ferby design choices vs. unresolved target Shottr semantics (`A36`):
- * - Snapping: Uses `FERBY_EDGE_SNAPPING_RULE` (`A21`, nearest geometric edge/center within
- *   `thresholdPx`); Shottr's internal similarity/auto-alignment heuristic is `UNKNOWN`.
- * - Window shadow trim: Uses explicit caller-supplied `ShadowTrimInsets` (`A26`); Shottr's
+ * Documented FerShot design choices vs. unresolved target reference application semantics (`A36`):
+ * - Snapping: Uses `FERSHOT_EDGE_SNAPPING_RULE` (`A21`, nearest geometric edge/center within
+ *   `thresholdPx`); reference application's internal similarity/auto-alignment heuristic is `UNKNOWN`.
+ * - Window shadow trim: Uses explicit caller-supplied `ShadowTrimInsets` (`A26`); reference application's
  *   automatic shadow alpha threshold is `UNKNOWN`.
- * - Measurement text color / contrast adaptation: Shottr's dynamic measurement label contrast
- *   rule is `UNKNOWN`; Ferby uses high-contrast overlay badges and explicit `displayScale`.
+ * - Measurement text color / contrast adaptation: reference application's dynamic measurement label contrast
+ *   rule is `UNKNOWN`; FerShot uses high-contrast overlay badges and explicit `displayScale`.
  */
 export const LAYOUT_WORKSPACE_EVIDENCE_NOTES = Object.freeze({
-  snappingRule: FERBY_EDGE_SNAPPING_RULE,
-  shottrAutoAlignHeuristic: "UNKNOWN" as const,
-  shottrAutoShadowTrimHeuristic: "UNKNOWN" as const,
-  shottrMeasurementTextColorRule: "UNKNOWN" as const,
+  snappingRule: FERSHOT_EDGE_SNAPPING_RULE,
+  referenceAutoAlignHeuristic: "UNKNOWN" as const,
+  referenceAutoShadowTrimHeuristic: "UNKNOWN" as const,
+  referenceMeasurementTextColorRule: "UNKNOWN" as const,
   retinaScaleInferenceForbidden: true,
 });
 
@@ -299,14 +299,14 @@ export const LayoutWorkspace: React.FC<LayoutWorkspaceProps> = ({
 
   return (
     <section
-      className="ferby-layout-workspace"
+      className="fershot-layout-workspace"
       aria-label="Composed image layout workspace"
     >
-      <header className="ferby-layout-workspace__header">
-        <h3 className="ferby-layout-workspace__title">Layout Workspace</h3>
+      <header className="fershot-layout-workspace__header">
+        <h3 className="fershot-layout-workspace__title">Layout Workspace</h3>
         {summary && (
           <div
-            className="ferby-layout-workspace__dimensions"
+            className="fershot-layout-workspace__dimensions"
             aria-label="Planned output size"
           >
             Output: {summary.outputMeasurement.formattedPx} (
@@ -316,21 +316,21 @@ export const LayoutWorkspace: React.FC<LayoutWorkspaceProps> = ({
       </header>
 
       {activeError && (
-        <div role="alert" className="ferby-layout-workspace__error">
+        <div role="alert" className="fershot-layout-workspace__error">
           {activeError}
         </div>
       )}
 
       {summary && (
         <div
-          className="ferby-layout-workspace__layers"
+          className="fershot-layout-workspace__layers"
           aria-label="Ordered layers"
         >
           Z-Order: {summary.orderedLayerIds.join(" -> ")}
         </div>
       )}
 
-      <div className="ferby-layout-workspace__actions">
+      <div className="fershot-layout-workspace__actions">
         {onSnapLayer && layers.length > 0 && (
           <button type="button" onClick={handleSnapFirstLayer}>
             Snap Primary Layer to Edges

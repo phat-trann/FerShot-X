@@ -38,7 +38,7 @@ export function NavigationControls({
   const canZoomOut = !busy && clampedZoom > minZoomPercent;
 
   const containerClasses = [
-    "ferby-navigation-controls",
+    "fershot-navigation-controls",
     className,
   ]
     .filter(Boolean)
@@ -50,10 +50,10 @@ export function NavigationControls({
       aria-label="Canvas Zoom and Navigation Controls"
       aria-busy={busy}
     >
-      <div className="ferby-navigation-controls__group">
+      <div className="fershot-navigation-controls__group">
         <button
           type="button"
-          className="ferby-navigation-controls__button"
+          className="fershot-navigation-controls__button"
           disabled={!canZoomOut}
           aria-label="Zoom Out"
           title="Zoom Out"
@@ -62,7 +62,7 @@ export function NavigationControls({
           −
         </button>
         <span
-          className="ferby-navigation-controls__zoom-display"
+          className="fershot-navigation-controls__zoom-display"
           title={`Current Zoom: ${clampedZoom}%`}
           aria-live="polite"
         >
@@ -70,7 +70,7 @@ export function NavigationControls({
         </span>
         <button
           type="button"
-          className="ferby-navigation-controls__button"
+          className="fershot-navigation-controls__button"
           disabled={!canZoomIn}
           aria-label="Zoom In"
           title="Zoom In"
@@ -80,12 +80,12 @@ export function NavigationControls({
         </button>
       </div>
 
-      <div className="ferby-navigation-controls__divider" aria-hidden="true" />
+      <div className="fershot-navigation-controls__divider" aria-hidden="true" />
 
-      <div className="ferby-navigation-controls__group">
+      <div className="fershot-navigation-controls__group">
         <button
           type="button"
-          className="ferby-navigation-controls__button ferby-navigation-controls__button--preset"
+          className="fershot-navigation-controls__button fershot-navigation-controls__button--preset"
           disabled={busy || clampedZoom === 100}
           title="Reset Zoom to 100% (Actual Size)"
           onClick={onZoomReset}
@@ -94,7 +94,7 @@ export function NavigationControls({
         </button>
         <button
           type="button"
-          className="ferby-navigation-controls__button ferby-navigation-controls__button--preset"
+          className="fershot-navigation-controls__button fershot-navigation-controls__button--preset"
           disabled={busy}
           title="Fit Image to Viewport"
           onClick={onFitToWindow}

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import type { Annotation, Point, Rect } from "../../contracts/editor";
 import "./SelectionHandlesOverlay.css";
 
@@ -45,12 +45,14 @@ export interface SelectionHandlesOverlayProps {
   readonly imageHeight: number;
   readonly zoom?: number;
   readonly disabled?: boolean;
+  readonly busy?: boolean;
   readonly onMove: (next: Annotation, deltaImagePx: Readonly<Point>) => void;
   readonly onResize: (
     next: Annotation,
     handle: ResizeHandleId,
     boundsImagePx: Readonly<Rect>,
   ) => void;
+  readonly onPreviewChange?: (preview: Annotation | null) => void;
   readonly onCancel?: () => void;
 }
 
@@ -117,19 +119,14 @@ export function computeAnnotationBounds(
   });
 }
 
-export function moveAnnotationPoints(
+function moveAnnotationPointsWithBounds(
   annotation: Readonly<Annotation>,
+  bounds: Readonly<Rect>,
   deltaX: number,
   deltaY: number,
   imageWidth: number,
   imageHeight: number,
 ): Annotation {
-  validateImageBounds(imageWidth, imageHeight);
-  if (!Number.isFinite(deltaX) || !Number.isFinite(deltaY)) {
-    throw new RangeError("Move deltas must be finite numbers.");
-  }
-
-  const bounds = computeAnnotationBounds(annotation);
   const clampedDx = Math.min(
     imageWidth - (bounds.x + bounds.width),
     Math.max(-bounds.x, deltaX),
@@ -147,9 +144,8 @@ export function moveAnnotationPoints(
   return cloneFrozenAnnotation(annotation, nextPoints);
 }
 
-export function resizeAnnotationPoints(
+export function moveAnnotationPoints(
   annotation: Readonly<Annotation>,
-  handle: ResizeHandleId,
   deltaX: number,
   deltaY: number,
   imageWidth: number,
@@ -157,10 +153,29 @@ export function resizeAnnotationPoints(
 ): Annotation {
   validateImageBounds(imageWidth, imageHeight);
   if (!Number.isFinite(deltaX) || !Number.isFinite(deltaY)) {
-    throw new RangeError("Resize deltas must be finite numbers.");
+    throw new RangeError("Move deltas must be finite numbers.");
   }
 
   const bounds = computeAnnotationBounds(annotation);
+  return moveAnnotationPointsWithBounds(
+    annotation,
+    bounds,
+    deltaX,
+    deltaY,
+    imageWidth,
+    imageHeight,
+  );
+}
+
+function resizeAnnotationPointsWithBounds(
+  annotation: Readonly<Annotation>,
+  bounds: Readonly<Rect>,
+  handle: ResizeHandleId,
+  deltaX: number,
+  deltaY: number,
+  imageWidth: number,
+  imageHeight: number,
+): Annotation {
   let left = bounds.x;
   let top = bounds.y;
   let right = bounds.x + Math.max(MIN_SELECTION_SIZE_PX, bounds.width);
@@ -208,119 +223,444 @@ export function resizeAnnotationPoints(
   return cloneFrozenAnnotation(annotation, nextPoints);
 }
 
+export function resizeAnnotationPoints(
+  annotation: Readonly<Annotation>,
+  handle: ResizeHandleId,
+  deltaX: number,
+  deltaY: number,
+  imageWidth: number,
+  imageHeight: number,
+): Annotation {
+  validateImageBounds(imageWidth, imageHeight);
+  if (!Number.isFinite(deltaX) || !Number.isFinite(deltaY)) {
+    throw new RangeError("Resize deltas must be finite numbers.");
+  }
+
+  const bounds = computeAnnotationBounds(annotation);
+  return resizeAnnotationPointsWithBounds(
+    annotation,
+    bounds,
+    handle,
+    deltaX,
+    deltaY,
+    imageWidth,
+    imageHeight,
+  );
+}
+
+function pointsAreIdentical(
+  a: readonly Point[],
+  b: readonly Point[],
+): boolean {
+  if (a.length !== b.length) return false;
+  for (let i = 0; i < a.length; i += 1) {
+    const pa = a[i];
+    const pb = b[i];
+    if (!pa || !pb || pa.x !== pb.x || pa.y !== pb.y) {
+      return false;
+    }
+  }
+  return true;
+}
+
+interface ResolvedStageGeometry {
+  readonly originLeft: number;
+  readonly originTop: number;
+  readonly scaleX: number;
+  readonly scaleY: number;
+}
+
 interface ActiveGesture {
   readonly pointerId: number;
   readonly mode: "move" | ResizeHandleId;
+  readonly zoom: number;
+  readonly captureTarget: HTMLElement | null;
   readonly startClientX: number;
   readonly startClientY: number;
   readonly lastClientX: number;
   readonly lastClientY: number;
+  readonly originLeft: number;
+  readonly originTop: number;
+  readonly scaleX: number;
+  readonly scaleY: number;
+  readonly currentOriginLeft: number;
+  readonly currentOriginTop: number;
+  readonly currentScaleX: number;
+  readonly currentScaleY: number;
+  readonly baseAnnotation: Readonly<Annotation>;
+  readonly baseBounds: Readonly<Rect>;
+  readonly previewAnnotation: Annotation | null;
+  readonly previewBounds: Readonly<Rect>;
 }
 
 export const SelectionHandlesOverlay: React.FC<SelectionHandlesOverlayProps> = ({
   annotation,
   imageWidth,
   imageHeight,
-  zoom = 1,
+  zoom,
   disabled = false,
+  busy = false,
   onMove,
   onResize,
+  onPreviewChange,
   onCancel,
 }) => {
-  const safeZoom = Number.isFinite(zoom) && zoom > 0 ? zoom : 1;
+  const isBlocked = Boolean(disabled || busy);
+  const safeZoom =
+    zoom !== undefined && Number.isFinite(zoom) && zoom > 0 ? zoom : 1;
+  const groupRef = useRef<HTMLDivElement | null>(null);
   const gestureRef = useRef<ActiveGesture | null>(null);
+  const geometryInvalidatedRef = useRef<boolean>(false);
   const [, setTick] = useState(0);
 
-  const bounds = computeAnnotationBounds(annotation);
+  const baseBounds = useMemo(
+    () => computeAnnotationBounds(annotation),
+    [annotation],
+  );
+
+  const resolveGeometry = (): ResolvedStageGeometry => {
+    const parent = groupRef.current?.parentElement;
+    if (parent && imageWidth > 0 && imageHeight > 0) {
+      const siblingSvg = parent.querySelector("svg");
+      const svgRect = siblingSvg?.getBoundingClientRect();
+      if (svgRect && svgRect.width > 0 && svgRect.height > 0) {
+        return {
+          originLeft: svgRect.left,
+          originTop: svgRect.top,
+          scaleX: svgRect.width / imageWidth,
+          scaleY: svgRect.height / imageHeight,
+        };
+      }
+      const parentRect = parent.getBoundingClientRect();
+      if (parentRect && parentRect.width > 0 && parentRect.height > 0) {
+        return {
+          originLeft: parentRect.left,
+          originTop: parentRect.top,
+          scaleX: parentRect.width / imageWidth,
+          scaleY: parentRect.height / imageHeight,
+        };
+      }
+    }
+    return {
+      originLeft: 0,
+      originTop: 0,
+      scaleX: safeZoom,
+      scaleY: safeZoom,
+    };
+  };
+
+  const computeTransformedFromGesture = (
+    active: ActiveGesture,
+    clientX: number,
+    clientY: number,
+  ): Annotation => {
+    const startImgX =
+      (active.startClientX - active.originLeft) / active.scaleX;
+    const startImgY =
+      (active.startClientY - active.originTop) / active.scaleY;
+    const currImgX =
+      (clientX - active.currentOriginLeft) / active.currentScaleX;
+    const currImgY =
+      (clientY - active.currentOriginTop) / active.currentScaleY;
+    const deltaX = currImgX - startImgX;
+    const deltaY = currImgY - startImgY;
+    if (active.mode === "move") {
+      return moveAnnotationPointsWithBounds(
+        active.baseAnnotation,
+        active.baseBounds,
+        deltaX,
+        deltaY,
+        imageWidth,
+        imageHeight,
+      );
+    }
+    return resizeAnnotationPointsWithBounds(
+      active.baseAnnotation,
+      active.baseBounds,
+      active.mode,
+      deltaX,
+      deltaY,
+      imageWidth,
+      imageHeight,
+    );
+  };
+
+  const activeGesture = isBlocked ? null : gestureRef.current;
+  const bounds = activeGesture ? activeGesture.previewBounds : baseBounds;
+
+  const releaseCaptureOnTarget = (
+    target: HTMLElement | null,
+    pointerId: number,
+  ) => {
+    for (const candidate of [target, groupRef.current]) {
+      if (!candidate || typeof candidate.releasePointerCapture !== "function") {
+        continue;
+      }
+      try {
+        if (
+          typeof candidate.hasPointerCapture !== "function" ||
+          candidate.hasPointerCapture(pointerId)
+        ) {
+          candidate.releasePointerCapture(pointerId);
+        }
+      } catch {
+        // Ignore synthetic environments
+      }
+    }
+  };
+
+  const cancelGesture = () => {
+    const active = gestureRef.current;
+    geometryInvalidatedRef.current = false;
+    if (!active) return;
+    gestureRef.current = null;
+    releaseCaptureOnTarget(active.captureTarget, active.pointerId);
+    setTick((t) => t + 1);
+    onPreviewChange?.(null);
+    onCancel?.();
+  };
+
+  useEffect(() => {
+    if (isBlocked && gestureRef.current) {
+      const active = gestureRef.current;
+      geometryInvalidatedRef.current = false;
+      gestureRef.current = null;
+      releaseCaptureOnTarget(active.captureTarget, active.pointerId);
+      setTick((t) => t + 1);
+      onPreviewChange?.(null);
+      onCancel?.();
+    }
+  }, [isBlocked, onPreviewChange, onCancel]);
+
+  useEffect(() => {
+    if (gestureRef.current) {
+      const active = gestureRef.current;
+      geometryInvalidatedRef.current = false;
+      gestureRef.current = null;
+      releaseCaptureOnTarget(active.captureTarget, active.pointerId);
+      setTick((t) => t + 1);
+      onPreviewChange?.(null);
+      onCancel?.();
+    }
+    // Abort in-flight gesture if target annotation ID, source dimensions, or zoom change mid-drag
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [annotation.id, imageWidth, imageHeight, safeZoom]);
+
+  useEffect(() => {
+    const invalidateCachedGeometry = () => {
+      if (gestureRef.current) {
+        geometryInvalidatedRef.current = true;
+      }
+    };
+    window.addEventListener("resize", invalidateCachedGeometry);
+    window.addEventListener("scroll", invalidateCachedGeometry, true);
+
+    let observer: ResizeObserver | null = null;
+    const parent = groupRef.current?.parentElement;
+    if (typeof ResizeObserver === "function" && parent) {
+      let skipInitialCallback = true;
+      observer = new ResizeObserver(() => {
+        if (skipInitialCallback) {
+          skipInitialCallback = false;
+          return;
+        }
+        if (gestureRef.current) {
+          geometryInvalidatedRef.current = true;
+        }
+      });
+      observer.observe(parent);
+    }
+
+    return () => {
+      window.removeEventListener("resize", invalidateCachedGeometry);
+      window.removeEventListener("scroll", invalidateCachedGeometry, true);
+      observer?.disconnect();
+    };
+  }, []);
+
+  useEffect(
+    () => () => {
+      const active = gestureRef.current;
+      if (active) {
+        gestureRef.current = null;
+        releaseCaptureOnTarget(active.captureTarget, active.pointerId);
+      }
+    },
+    [],
+  );
 
   const startGesture = (
     mode: "move" | ResizeHandleId,
     e: React.PointerEvent<HTMLElement>,
   ) => {
-    if (disabled) return;
+    if (isBlocked) return;
     // Ignore non-primary buttons or concurrent second pointers
     if (e.button !== 0 || gestureRef.current !== null) {
       return;
     }
     e.stopPropagation();
-    if (typeof e.currentTarget.setPointerCapture === "function") {
+    const captureTarget = groupRef.current ?? e.currentTarget;
+    if (typeof captureTarget.setPointerCapture === "function") {
       try {
-        e.currentTarget.setPointerCapture(e.pointerId);
+        captureTarget.setPointerCapture(e.pointerId);
       } catch {
         // Ignore synthetic test environments without pointer capture table
       }
     }
+    geometryInvalidatedRef.current = false;
+    const geom = resolveGeometry();
     gestureRef.current = {
       pointerId: e.pointerId,
       mode,
+      zoom: safeZoom,
+      captureTarget,
       startClientX: e.clientX,
       startClientY: e.clientY,
       lastClientX: e.clientX,
       lastClientY: e.clientY,
+      originLeft: geom.originLeft,
+      originTop: geom.originTop,
+      scaleX: geom.scaleX,
+      scaleY: geom.scaleY,
+      currentOriginLeft: geom.originLeft,
+      currentOriginTop: geom.originTop,
+      currentScaleX: geom.scaleX,
+      currentScaleY: geom.scaleY,
+      baseAnnotation: annotation,
+      baseBounds,
+      previewAnnotation: null,
+      previewBounds: baseBounds,
     };
     setTick((t) => t + 1);
   };
 
   const updateGesture = (e: React.PointerEvent<HTMLElement>) => {
+    if (isBlocked) {
+      cancelGesture();
+      return;
+    }
     const active = gestureRef.current;
     if (!active || active.pointerId !== e.pointerId) return;
+    if (active.zoom !== safeZoom) {
+      cancelGesture();
+      return;
+    }
+    const wasInvalidated = geometryInvalidatedRef.current;
+    if (
+      !wasInvalidated &&
+      active.lastClientX === e.clientX &&
+      active.lastClientY === e.clientY
+    ) {
+      return;
+    }
+    let effectiveActive = active;
+    if (wasInvalidated) {
+      geometryInvalidatedRef.current = false;
+      const freshGeom = resolveGeometry();
+      effectiveActive = {
+        ...active,
+        currentOriginLeft: freshGeom.originLeft,
+        currentOriginTop: freshGeom.originTop,
+        currentScaleX: freshGeom.scaleX,
+        currentScaleY: freshGeom.scaleY,
+      };
+    }
+    const nextPreview = computeTransformedFromGesture(
+      effectiveActive,
+      e.clientX,
+      e.clientY,
+    );
+    const currentPoints =
+      effectiveActive.previewAnnotation?.points ??
+      effectiveActive.baseAnnotation.points;
+    if (pointsAreIdentical(currentPoints, nextPreview.points)) {
+      gestureRef.current = {
+        ...effectiveActive,
+        lastClientX: e.clientX,
+        lastClientY: e.clientY,
+      };
+      return;
+    }
+    const nextBounds = computeAnnotationBounds(nextPreview);
     gestureRef.current = {
-      ...active,
+      ...effectiveActive,
       lastClientX: e.clientX,
       lastClientY: e.clientY,
+      previewAnnotation: nextPreview,
+      previewBounds: nextBounds,
     };
+    setTick((t) => t + 1);
+    onPreviewChange?.(nextPreview);
   };
 
   const finishGesture = (e: React.PointerEvent<HTMLElement>) => {
+    if (isBlocked) {
+      cancelGesture();
+      return;
+    }
     const active = gestureRef.current;
     if (!active || active.pointerId !== e.pointerId) return;
+    if (active.zoom !== safeZoom) {
+      cancelGesture();
+      return;
+    }
+    const wasInvalidated = geometryInvalidatedRef.current;
+    geometryInvalidatedRef.current = false;
     gestureRef.current = null;
+    releaseCaptureOnTarget(active.captureTarget, active.pointerId);
     setTick((t) => t + 1);
+    onPreviewChange?.(null);
 
-    const deltaX = (e.clientX - active.startClientX) / safeZoom;
-    const deltaY = (e.clientY - active.startClientY) / safeZoom;
+    const effectiveActive = wasInvalidated
+      ? (() => {
+          const freshGeom = resolveGeometry();
+          return {
+            ...active,
+            currentOriginLeft: freshGeom.originLeft,
+            currentOriginTop: freshGeom.originTop,
+            currentScaleX: freshGeom.scaleX,
+            currentScaleY: freshGeom.scaleY,
+          };
+        })()
+      : active;
+
+    const finalized =
+      !wasInvalidated &&
+      effectiveActive.lastClientX === e.clientX &&
+      effectiveActive.lastClientY === e.clientY &&
+      effectiveActive.previewAnnotation
+        ? effectiveActive.previewAnnotation
+        : computeTransformedFromGesture(effectiveActive, e.clientX, e.clientY);
+
+    if (pointsAreIdentical(active.baseAnnotation.points, finalized.points)) {
+      return;
+    }
+
+    const nextBounds =
+      finalized === active.previewAnnotation
+        ? active.previewBounds
+        : computeAnnotationBounds(finalized);
 
     if (active.mode === "move") {
-      const moved = moveAnnotationPoints(
-        annotation,
-        deltaX,
-        deltaY,
-        imageWidth,
-        imageHeight,
-      );
-      const nextBounds = computeAnnotationBounds(moved);
       onMove(
-        moved,
+        finalized,
         Object.freeze({
-          x: Math.round((nextBounds.x - bounds.x) * 100) / 100,
-          y: Math.round((nextBounds.y - bounds.y) * 100) / 100,
+          x: Math.round((nextBounds.x - active.baseBounds.x) * 100) / 100,
+          y: Math.round((nextBounds.y - active.baseBounds.y) * 100) / 100,
         }),
       );
     } else {
-      const resized = resizeAnnotationPoints(
-        annotation,
-        active.mode,
-        deltaX,
-        deltaY,
-        imageWidth,
-        imageHeight,
-      );
-      onResize(resized, active.mode, computeAnnotationBounds(resized));
+      onResize(finalized, active.mode, nextBounds);
     }
-  };
-
-  const cancelGesture = () => {
-    if (!gestureRef.current) return;
-    gestureRef.current = null;
-    setTick((t) => t + 1);
-    onCancel?.();
   };
 
   return (
     <div
-      className="ferby-selection-handles"
+      ref={groupRef}
+      className="fershot-selection-handles"
       role="group"
       aria-label={`Selection handles for ${annotation.id}`}
+      aria-disabled={isBlocked}
       tabIndex={0}
       style={{
         left: `${bounds.x * safeZoom}px`,
@@ -344,11 +684,20 @@ export const SelectionHandlesOverlay: React.FC<SelectionHandlesOverlayProps> = (
           cancelGesture();
         }
       }}
+      onLostPointerCapture={(e) => {
+        if (
+          gestureRef.current &&
+          gestureRef.current.pointerId === e.pointerId
+        ) {
+          cancelGesture();
+        }
+      }}
     >
       <div
         role="button"
         aria-label="Move selected annotation"
-        className="ferby-selection-handles__body"
+        aria-disabled={isBlocked}
+        className="fershot-selection-handles__body"
         onPointerDown={(e) => startGesture("move", e)}
       />
 
@@ -356,10 +705,10 @@ export const SelectionHandlesOverlay: React.FC<SelectionHandlesOverlayProps> = (
         <button
           key={handle}
           type="button"
-          disabled={disabled}
+          disabled={isBlocked}
           aria-label={`Resize handle ${handle.toUpperCase()}`}
           data-handle={handle}
-          className={`ferby-selection-handles__handle ferby-selection-handles__handle--${handle}`}
+          className={`fershot-selection-handles__handle fershot-selection-handles__handle--${handle}`}
           onPointerDown={(e) => startGesture(handle, e)}
         />
       ))}

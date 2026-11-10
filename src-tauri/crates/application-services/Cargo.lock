@@ -953,7 +953,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "ferby-application-services"
+name = "fershot-application-services"
 version = "0.1.0"
 dependencies = [
  "serde",

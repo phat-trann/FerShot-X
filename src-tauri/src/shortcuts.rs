@@ -1,4 +1,4 @@
-use crate::imaging::{NativeError, NativeJobs, validate_window_label};
+use crate::imaging::{NativeError, NativeJobs};
 use serde::{Serialize, Deserialize};
 use std::{collections::{BTreeMap, BTreeSet}, str::FromStr, sync::Mutex};
 use tauri::{Emitter, Manager};
@@ -31,7 +31,7 @@ pub fn load_saved_at(path: &std::path::Path) -> Result<ShortcutStatus, NativeErr
         let mut full = empty();
         for (k, v) in saved.bindings {
             if ACTIONS.contains(&k.as_str()) {
-                full.insert(k, v);
+                full.insert(k.clone(), if k == "ocr-capture" { None } else { v });
             }
         }
         parse(&full)?;
@@ -57,10 +57,11 @@ fn parse(input: &Bindings) -> Result<Vec<(String, Shortcut)>, NativeError> {
     let mut ids = BTreeSet::new(); let mut parsed = Vec::new();
     for (action, raw) in input {
         let Some(raw) = raw else { continue; };
+        if action == "ocr-capture" { return Err(NativeError::new("unsupported_action", "Text recognition has been removed.")); }
         if raw.is_empty() || raw.len() > 128 { return Err(NativeError::new("invalid_shortcut", "Shortcut exceeds bounds.")); }
         let shortcut = Shortcut::from_str(raw).map_err(|error| NativeError::new("invalid_shortcut", error.to_string()))?;
         if !shortcut.mods.intersects(Modifiers::SUPER | Modifiers::CONTROL | Modifiers::ALT)
-            || [Code::KeyQ, Code::KeyW, Code::Tab, Code::Space].iter().any(|key| shortcut.matches(Modifiers::SUPER, key))
+            || [Code::KeyQ, Code::KeyW, Code::KeyS, Code::Tab, Code::Space].iter().any(|key| shortcut.matches(Modifiers::SUPER, key))
             || !ids.insert(shortcut.id()) {
             return Err(NativeError::new("invalid_shortcut", "Unmodified, reserved or duplicate shortcut."));
         }
@@ -142,19 +143,20 @@ pub fn on_shortcut(app: &tauri::AppHandle, shortcut: &Shortcut, event: ShortcutE
     }
     let action = store.config.lock().ok().and_then(|config| config.as_ref().filter(|state| !state.faulted)
         .and_then(|state| state.parsed.iter().find(|(_, key)| key == shortcut).map(|(action, _)| action.clone())));
-    if let Some(action) = action { let _ = app.emit_to("main", "ferby-global-action", action); }
+    if app.get_webview_window("preferences").is_some_and(|w|w.is_focused().unwrap_or(false)) { return; }
+    if let Some(action) = action { if action=="show-workspace" { let _=crate::library_window::show(app,"library");return; } if action=="capture-scrolling" {let _=crate::library_window::show(app,"main");} let _ = app.emit_to("main", "fershot-global-action", action); }
 }
 
 pub fn clear_on_close(app: &tauri::AppHandle) -> Result<(), NativeError> { apply(app, &app.state::<ShortcutStore>(), empty()).map(|_| ()) }
 
 #[tauri::command]
 pub fn get_shortcuts(window: tauri::WebviewWindow, store: tauri::State<'_, ShortcutStore>) -> Result<ShortcutStatus, NativeError> {
-    validate_window_label(window.label())?; status(&store)
+    crate::preferences_window::validate_label(window.label())?; status(&store)
 }
 #[tauri::command]
 pub async fn apply_shortcuts(bindings: Bindings, window: tauri::WebviewWindow, app: tauri::AppHandle,
     store: tauri::State<'_, ShortcutStore>, jobs: tauri::State<'_, NativeJobs>) -> Result<ShortcutStatus, NativeError> {
-    validate_window_label(window.label())?; let _guard = jobs.acquire()?; apply(&app, &store, bindings)
+    crate::preferences_window::validate_label(window.label())?; let _guard = jobs.acquire()?; apply(&app, &store, bindings)
 }
 
 #[cfg(test)]
@@ -173,7 +175,7 @@ mod tests {
     }
     #[test] fn validates_full_map_modifiers_reserved_aliases_and_duplicates_without_os_registration() {
         let mut map = empty(); map.insert("capture-area".into(), Some("Super+Shift+KeyA".into())); assert_eq!(parse(&map).unwrap().len(), 1);
-        for bad in ["KeyA", "Super+Space", "Super+KeyQ"] { map.insert("capture-area".into(), Some(bad.into())); assert!(parse(&map).is_err()); }
+        for bad in ["KeyA", "Super+Space", "Super+KeyQ", "Super+KeyS"] { map.insert("capture-area".into(), Some(bad.into())); assert!(parse(&map).is_err()); }
         map.insert("capture-area".into(), Some("Super+Shift+KeyA".into())); map.insert("capture-window".into(), Some("Super+Shift+KeyA".into())); assert!(parse(&map).is_err());
     }
     #[test] fn failed_addition_preserves_old_registration_and_cleans_earlier_additions() {

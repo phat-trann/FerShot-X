@@ -1,4 +1,4 @@
-//! Standalone native application services for Ferby Shottr.
+//! Standalone native application services for FerShot X.
 //!
 //! Provides login autostart state queries/mutations and static system notifications
 //! using official pinned Tauri plugins (`tauri-plugin-autostart` and `tauri-plugin-notification`).
@@ -93,7 +93,7 @@ pub fn notify_capture_completed<R: tauri::Runtime>(
 ) -> Result<(), String> {
     app.notification()
         .builder()
-        .title("Ferby Shottr")
+        .title("FerShot X")
         .body(action.static_body())
         .show()
         .map_err(|err| err.to_string())

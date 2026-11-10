@@ -201,7 +201,7 @@ impl Raster {
             .unwrap_or(Path::new("."));
         let bytes = self.encode(format)?;
         let mut file = tempfile::Builder::new()
-            .prefix(".ferby-export-")
+            .prefix(".fershot-export-")
             .tempfile_in(parent)?;
         file.write_all(&bytes)?;
         file.as_file().sync_all()?;

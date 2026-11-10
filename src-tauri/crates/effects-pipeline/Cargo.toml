@@ -1,9 +1,9 @@
 [package]
-name = "ferby-effects-pipeline"
+name = "fershot-effects-pipeline"
 version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-ferby-image-core = { path = "../image-core" }
-ferby-effects-core = { path = "../effects-core" }
+fershot-image-core = { path = "../image-core" }
+fershot-effects-core = { path = "../effects-core" }
 image = { version = "=0.25.10", default-features = false, features = ["png", "jpeg"] }

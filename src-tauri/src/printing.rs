@@ -57,7 +57,7 @@ pub async fn open_print_preview(request: PrintRequest, window: tauri::WebviewWin
     let label = format!("print-{}", NEXT_PRINT.fetch_add(1, Ordering::Relaxed));
     store.insert(label.clone(), document)?;
     let created = tauri::WebviewWindowBuilder::new(&app, &label, tauri::WebviewUrl::App("index.html?print=1".into()))
-        .title("Ferby print preview").inner_size(850.0, 850.0).min_inner_size(500.0, 400.0).build();
+        .title("FerShot print preview").inner_size(850.0, 850.0).min_inner_size(500.0, 400.0).build();
     let child = match created { Ok(child) => child, Err(error) => { store.remove(&label); return Err(NativeError::new("print_failed", error.to_string())); } };
     let owned = store.inner().clone(); let closing = label.clone();
     child.on_window_event(move |event| { if matches!(event, tauri::WindowEvent::Destroyed) { owned.remove(&closing); } });

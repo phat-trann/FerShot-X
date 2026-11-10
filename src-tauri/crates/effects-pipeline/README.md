@@ -4,9 +4,9 @@ Standalone Rust orchestration over existing C03 image-core and A19 effects-core.
 
 ```rust
 // C12 main-window adapter: validate caller and request, then run on the native blocking worker.
-let output = ferby_effects_pipeline::run_pipeline(&owned_png_or_jpeg, &owned_effects,
-    ferby_effects_pipeline::PipelineLimits::default())?;
+let output = fershot_effects_pipeline::run_pipeline(&owned_png_or_jpeg, &owned_effects,
+    fershot_effects_pipeline::PipelineLimits::default())?;
 // Return output.png through the existing bounded image payload adapter.
 ```
 
-Limits can only tighten hard caps: 32 MiB input/output, 16777216 pixels, 64 effects, per-operation regions and blur/mosaic parameters from A19. Aggregate work and transient-memory preflight use conservative policy estimates, not a measured CPU/memory quota. Existing codecs may allocate before returning; output size is checked after bounded raster encoding. These checks are not a process sandbox. Caller must serialize/cancel user work and keep source revision/lifetime correct. PNG/JPEG input only; no root manifest/lockfile or producer core was changed. Errors expose stable codes and effect indices. Visual blur/mosaic do not establish irreversible redaction or Shottr algorithm parity. Independent Antigravity review and C12 native integration remain required; H01 owns format/lint.
+Limits can only tighten hard caps: 32 MiB input/output, 16777216 pixels, 64 effects, per-operation regions and blur/mosaic parameters from A19. Aggregate work and transient-memory preflight use conservative policy estimates, not a measured CPU/memory quota. Existing codecs may allocate before returning; output size is checked after bounded raster encoding. These checks are not a process sandbox. Caller must serialize/cancel user work and keep source revision/lifetime correct. PNG/JPEG input only; no root manifest/lockfile or producer core was changed. Errors expose stable codes and effect indices. Visual blur/mosaic do not establish irreversible redaction or reference application algorithm parity. Independent Antigravity review and C12 native integration remain required; H01 owns format/lint.

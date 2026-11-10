@@ -3,5 +3,5 @@
 version = 4
 
 [[package]]
-name = "ferby-scroll-core"
+name = "fershot-scroll-core"
 version = "0.1.0"

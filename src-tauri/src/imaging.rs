@@ -1,12 +1,13 @@
 use base64::{Engine as _, engine::general_purpose::STANDARD};
-use ferby_capture_core::{CaptureError, CaptureMode};
-use ferby_image_core::{CropRect, ExportFormat, MAX_INPUT_BYTES, Raster};
+use fershot_capture_core::{CaptureError, CaptureMode};
+use fershot_image_core::{CropRect, ExportFormat, MAX_INPUT_BYTES, Raster};
 use serde::{Deserialize, Serialize};
 use std::sync::{
     Arc,
     atomic::{AtomicBool, Ordering},
 };
 use tauri_plugin_dialog::DialogExt;
+use tauri::Manager;
 
 #[derive(Debug, Serialize)]
 pub struct NativeError {
@@ -158,13 +159,19 @@ pub async fn process_image(
     .map_err(|_| NativeError::new("worker_failed", "Image processing stopped unexpectedly."))?
 }
 
+fn restore_after_capture(was_visible:bool,captured:bool)->bool { was_visible || captured }
+
 struct RestoreWindow {
     window: tauri::WebviewWindow,
     was_visible: bool,
+    captured: bool,
+    other_windows: Vec<tauri::WebviewWindow>,
 }
 impl Drop for RestoreWindow {
     fn drop(&mut self) {
-        if self.was_visible {
+        for window in &self.other_windows { let _=window.show(); }
+        if restore_after_capture(self.was_visible,self.captured) {
+            let _ = self.window.unminimize();
             let _ = self.window.show();
             let _ = self.window.set_focus();
         }
@@ -177,7 +184,7 @@ pub async fn capture_image(
     window: tauri::WebviewWindow,
     jobs: tauri::State<'_, NativeJobs>,
 ) -> Result<ImagePayload, NativeError> {
-    capture_with_region(mode, None, None, window, jobs).await
+    capture_with_region(mode, None, None, None, window, jobs).await
 }
 
 #[derive(Deserialize)]
@@ -187,18 +194,25 @@ pub struct CaptureRegionRequest { display: crate::scrolling::DisplayGeometry, re
 #[tauri::command]
 pub async fn capture_region(request: CaptureRegionRequest, window: tauri::WebviewWindow,
     jobs: tauri::State<'_, NativeJobs>) -> Result<ImagePayload, NativeError> {
-    capture_with_region(Mode::Fullscreen, Some(request), None, window, jobs).await
+    capture_with_region(Mode::Fullscreen, Some(request), None, None, window, jobs).await
 }
 
 #[tauri::command]
 pub async fn capture_active_window(window: tauri::WebviewWindow, jobs: tauri::State<'_, NativeJobs>) -> Result<ImagePayload, NativeError> {
     validate_window_label(window.label())?;
     let target = crate::active_window::target()?;
-    capture_with_region(Mode::Window, None, Some(target), window, jobs).await
+    capture_with_region(Mode::Window, None, Some(target), None, window, jobs).await
+}
+
+#[tauri::command]
+pub async fn capture_repeat_area(window: tauri::WebviewWindow, jobs: tauri::State<'_, NativeJobs>) -> Result<ImagePayload, NativeError> {
+    validate_window_label(window.label())?;
+    let rect = crate::area_capture::previous(&window.state::<crate::area_capture::AreaStore>(), &crate::area_capture::topology(&window)?)?;
+    capture_with_region(Mode::Area, None, None, Some(rect), window, jobs).await
 }
 
 async fn capture_with_region(mode: Mode, region: Option<CaptureRegionRequest>,
-    active_window: Option<(u32, u32)>,
+    active_window: Option<(u32, u32)>, repeat_rect: Option<fershot_capture_core::ScreenRect>,
     window: tauri::WebviewWindow, jobs: tauri::State<'_, NativeJobs>) -> Result<ImagePayload, NativeError> {
     validate_window_label(window.label())?;
     if !cfg!(target_os = "macos") {
@@ -208,6 +222,7 @@ async fn capture_with_region(mode: Mode, region: Option<CaptureRegionRequest>,
         ));
     }
     let guard = jobs.acquire()?;
+    let area_topology = if matches!(mode, Mode::Area) { Some(crate::area_capture::topology(&window)?) } else { None };
     if let Some(request) = &region {
         let current = crate::scrolling::current_display(&window)?;
         if current != request.display { return Err(NativeError::new("display_changed", "Display geometry changed. Define the capture region again.")); }
@@ -220,14 +235,18 @@ async fn capture_with_region(mode: Mode, region: Option<CaptureRegionRequest>,
     let visible = window
         .is_visible()
         .map_err(|e| NativeError::new("window_failed", e.to_string()))?;
+    let other_windows:Vec<_>=["library","preferences"].into_iter().filter_map(|label|window.app_handle().get_webview_window(label)).filter(|w|w.is_visible().unwrap_or(false)).collect();
     let restore = RestoreWindow {
         window: window.clone(),
         was_visible: visible,
+        captured: false,
+        other_windows,
     };
     let display_scale = if matches!(mode, Mode::Fullscreen) {
         window.primary_monitor().ok().flatten().map(|monitor| monitor.scale_factor())
             .filter(|value| value.is_finite() && *value > 0.0 && *value <= 8.0)
     } else { None };
+    for other in &restore.other_windows { other.hide().map_err(|_|NativeError::new("window_failed","The app could not be hidden for capture."))?; }
     if visible {
         window
             .hide()
@@ -235,7 +254,8 @@ async fn capture_with_region(mode: Mode, region: Option<CaptureRegionRequest>,
     }
     tauri::async_runtime::spawn_blocking(move || {
         // Ownership stays in the blocking job even if the IPC caller disappears.
-        let (_guard, _restore) = (guard, restore);
+        let (_guard, mut _restore) = (guard, restore);
+        let mut display_scale = display_scale;
         std::thread::sleep(std::time::Duration::from_millis(150));
         let mode = match mode {
             Mode::Fullscreen => CaptureMode::Fullscreen,
@@ -245,8 +265,8 @@ async fn capture_with_region(mode: Mode, region: Option<CaptureRegionRequest>,
         let mode = if let Some((pid, window)) = active_window {
             crate::active_window::confirm(pid, window)?;
             CaptureMode::WindowId(window)
-        } else { mode };
-        let captured = ferby_capture_core::capture(mode).map_err(|error| {
+        } else if let Some(rect) = repeat_rect { CaptureMode::Region(rect) } else { mode };
+        let captured = fershot_capture_core::capture(mode).map_err(|error| {
             let code = match error {
                 CaptureError::Cancelled => "cancelled",
                 CaptureError::PermissionDenied => "permission_denied",
@@ -267,8 +287,24 @@ async fn capture_with_region(mode: Mode, region: Option<CaptureRegionRequest>,
             raster = raster.crop(CropRect { x: rect.x, y: rect.y, width: rect.width, height: rect.height })
                 .map_err(|error| NativeError::new("invalid_bounds", error.to_string()))?;
         }
+        if let Some(before) = &area_topology {
+            let after = crate::area_capture::topology(&_restore.window)?;
+            if repeat_rect.is_some() && before != &after {
+                return Err(NativeError::new("display_changed", "Displays changed during repeat capture. Select an area again."));
+            }
+            let selected = repeat_rect.or_else(|| crate::area_capture::selected_rect(captured.path(), raster.dimensions()));
+            if let Some(rect) = selected {
+                let dimensions = raster.dimensions();
+                let scale = dimensions.0 as f64 / rect.width as f64;
+                if (1.0..=8.0).contains(&scale) && (scale - dimensions.1 as f64 / rect.height as f64).abs() < 0.001 { display_scale = Some(scale); }
+            }
+            if repeat_rect.is_none() {
+                crate::area_capture::remember(&_restore.window.state::<crate::area_capture::AreaStore>(), selected, before, &after);
+            }
+        }
         let mut result = payload(raster)?;
         result.display_scale = display_scale;
+        _restore.captured = true;
         Ok(result)
     })
     .await
@@ -450,6 +486,7 @@ pub async fn copy_image(
 
 #[cfg(test)]
 mod tests {
+    #[test] fn successful_capture_reopens_a_hidden_view_but_cancel_restores_previous_visibility() { assert!(super::restore_after_capture(false,true)); assert!(super::restore_after_capture(true,false)); assert!(!super::restore_after_capture(false,false)); }
     use super::*;
     const PNG: &str = "iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAIAAAD91JpzAAAAEklEQVR4nGP4z8DAAMIM/4EAAB/uBfsL2WiLAAAAAElFTkSuQmCC";
     #[test]
@@ -597,4 +634,22 @@ pub(crate) fn copy_encoded_image(text: &str) -> Result<(), NativeError> {
     { let raster = decode_input(text)?; let (width, height) = raster.dimensions(); system_clipboard(width as usize, height as usize, raster.rgba_bytes()) }
     #[cfg(not(target_os = "macos"))]
     { let _ = text; Err(NativeError::new("unsupported", "Clipboard copy is currently supported on macOS only.")) }
+}
+
+#[derive(Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct CopyTextRequest { text: String }
+#[tauri::command]
+pub async fn copy_text(window: tauri::WebviewWindow, jobs: tauri::State<'_, NativeJobs>, request: CopyTextRequest) -> Result<(), NativeError> {
+    crate::library_window::validate_reader(window.label())?;
+    if request.text.is_empty() || request.text.len() > 256 * 1024 || request.text.contains('\0') { return Err(NativeError::new("clipboard_limit", "Choose bounded text to copy.")); }
+    let guard = jobs.acquire()?;
+    tauri::async_runtime::spawn_blocking(move || {
+        let _guard = guard;
+        #[cfg(target_os = "macos")]
+        { let mut clipboard = arboard::Clipboard::new().map_err(|error| NativeError::new("clipboard_unavailable", error.to_string()))?;
+          clipboard.set_text(request.text).map_err(|error| NativeError::new("clipboard_failed", error.to_string())) }
+        #[cfg(not(target_os = "macos"))]
+        { let _ = request; Err(NativeError::new("unsupported", "Text copy currently requires macOS.")) }
+    }).await.map_err(|_| NativeError::new("worker_failed", "Text copy stopped unexpectedly."))?
 }

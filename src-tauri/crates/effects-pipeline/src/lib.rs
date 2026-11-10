@@ -1,7 +1,7 @@
 //! Ordered, immutable, bounded orchestration over the existing image and effects cores.
-use ferby_image_core::{Raster, TransformError, MAX_DIMENSION, MAX_INPUT_BYTES, MAX_PIXELS};
-use ferby_effects_core::{EffectRaster, EffectsError, MAX_BLUR_RADIUS, MAX_EFFECT_REGION_PIXELS, MAX_MOSAIC_BLOCK_SIZE};
-pub use ferby_effects_core::{EffectRect, PixelEffect, RgbaColor};
+use fershot_image_core::{Raster, TransformError, MAX_DIMENSION, MAX_INPUT_BYTES, MAX_PIXELS};
+use fershot_effects_core::{EffectRaster, EffectsError, MAX_BLUR_RADIUS, MAX_EFFECT_REGION_PIXELS, MAX_MOSAIC_BLOCK_SIZE};
+pub use fershot_effects_core::{EffectRect, PixelEffect, RgbaColor};
 use image::{ImageFormat, ImageReader, Limits};
 use std::{fmt, io::Cursor};
 
@@ -199,7 +199,7 @@ mod tests {
     }
     #[test]
     fn jpeg_input_is_decoded_by_existing_core_and_output_is_owned_png() {
-        let jpeg = Raster::decode(&fixture()).unwrap().encode(ferby_image_core::ExportFormat::Jpeg { quality: 90 }).unwrap();
+        let jpeg = Raster::decode(&fixture()).unwrap().encode(fershot_image_core::ExportFormat::Jpeg { quality: 90 }).unwrap();
         let out = run_pipeline(&jpeg, &[], PipelineLimits::default()).unwrap();
         assert!(out.png.starts_with(b"\x89PNG\r\n\x1a\n")); assert_eq!(Raster::decode(&out.png).unwrap().dimensions(), (2, 2));
     }

@@ -1,5 +1,5 @@
 [package]
-name = "ferby-clipboard-import-core"
+name = "fershot-clipboard-import-core"
 version = "0.1.0"
 edition = "2021"
 

@@ -57,7 +57,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "ferby-effects-core"
+name = "fershot-effects-core"
 version = "0.1.0"
 dependencies = [
  "image",

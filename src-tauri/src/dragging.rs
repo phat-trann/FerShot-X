@@ -1,5 +1,5 @@
 use crate::imaging::{self, NativeError, NativeJobs};
-use ferby_image_core::ExportFormat;
+use fershot_image_core::ExportFormat;
 use serde::Deserialize;
 use std::{collections::VecDeque, fs::{self, OpenOptions}, io::Write, path::PathBuf,
     sync::{Arc, Mutex, atomic::{AtomicU64, Ordering}}};
@@ -24,11 +24,11 @@ fn prepare(request: PrepareRequest) -> Result<Prepared, NativeError> {
     if !request.name.to_ascii_lowercase().ends_with(".png") { return Err(error("Drag image must have a PNG filename.")); }
     let raster = imaging::decode_input(&request.png_base64)?;
     let bytes = raster.encode(ExportFormat::Png).map_err(error)?;
-    if bytes.len() > ferby_image_core::MAX_INPUT_BYTES { return Err(error("Drag image exceeds the native byte budget.")); }
+    if bytes.len() > fershot_image_core::MAX_INPUT_BYTES { return Err(error("Drag image exceeds the native byte budget.")); }
     let icon = raster.resize(128, 128).map_err(error)?.encode(ExportFormat::Png).map_err(error)?;
     let time = std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH).map_err(error)?.as_nanos();
     let token = format!("drag-{}-{}-{}", std::process::id(), time, SEQUENCE.fetch_add(1, Ordering::Relaxed));
-    let directory = std::env::temp_dir().join(format!("ferby-{token}"));
+    let directory = std::env::temp_dir().join(format!("fershot-{token}"));
     let mut builder = fs::DirBuilder::new();
     #[cfg(unix)] { use std::os::unix::fs::DirBuilderExt; builder.mode(0o700); }
     builder.create(&directory).map_err(error)?;

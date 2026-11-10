@@ -1,0 +1,12 @@
+{
+  "identifier": "library",
+  "description": "Library event subscriptions and custom title-bar dragging; library commands validate their callers.",
+  "windows": [
+    "library"
+  ],
+  "permissions": [
+    "core:event:allow-listen",
+    "core:event:allow-unlisten",
+    "core:window:allow-start-dragging"
+  ]
+}

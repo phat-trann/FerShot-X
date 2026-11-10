@@ -3,6 +3,7 @@ use base64::{Engine as _, engine::general_purpose::STANDARD};
 use serde::Serialize;
 use std::{collections::VecDeque, fs::File, io::Read, path::PathBuf, sync::Mutex};
 use tauri::{Emitter, Manager};
+use tauri_plugin_dialog::DialogExt;
 
 const MAX_BYTES: u64 = 20 * 1024 * 1024;
 #[derive(Clone)]
@@ -34,7 +35,7 @@ pub fn on_event(app: &tauri::AppHandle, event: &tauri::RunEvent) {
             queue.entries.push_back(Entry { id, name, path });
         }
         drop(queue);
-        if let Some(main) = app.get_webview_window("main") { let _ = main.emit("ferby-documents-pending", ()); }
+        if let Some(main) = app.get_webview_window("main") { let _ = main.emit("fershot-documents-pending", ()); }
     }
     #[cfg(not(target_os = "macos"))] let _ = (app, event);
 }
@@ -68,6 +69,20 @@ fn read(entry: Entry) -> Result<DocumentBytes, NativeError> {
         else if bytes.len() >= 12 && &bytes[..4] == b"RIFF" && &bytes[8..12] == b"WEBP" { "image/webp" }
         else { return Err(error("Choose a PNG, JPEG, WebP or GIF image.")); };
     Ok(DocumentBytes { name: entry.name, mime_type, base64: STANDARD.encode(bytes) })
+}
+
+#[tauri::command]
+pub async fn open_image_dialog(window: tauri::WebviewWindow, app: tauri::AppHandle, jobs: tauri::State<'_, NativeJobs>) -> Result<Option<DocumentBytes>, NativeError> {
+    validate_window_label(window.label())?; let guard=jobs.acquire()?;
+    tauri::async_runtime::spawn_blocking(move || {
+        let _guard=guard;
+        let selected=app.dialog().file().set_parent(&window).set_title("Open image")
+            .add_filter("Images", &["png","jpg","jpeg","webp","gif"]).blocking_pick_file();
+        let Some(selected)=selected else{return Ok(None)};
+        let path=selected.into_path().map_err(error)?;
+        let name=path.file_name().map(|name|name.to_string_lossy().chars().take(240).collect()).unwrap_or_else(||"Opened image".into());
+        read(Entry{id:"file-dialog".into(),name,path}).map(Some)
+    }).await.map_err(|_|error("Image selection stopped unexpectedly."))?
 }
 
 #[tauri::command]

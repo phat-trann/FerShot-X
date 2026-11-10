@@ -3,7 +3,7 @@
 version = 4
 
 [[package]]
-name = "ferby-pin-window-core"
+name = "fershot-pin-window-core"
 version = "0.1.0"
 dependencies = [
  "serde",

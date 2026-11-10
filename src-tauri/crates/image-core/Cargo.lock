@@ -73,7 +73,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "ferby-image-core"
+name = "fershot-image-core"
 version = "0.1.0"
 dependencies = [
  "image",

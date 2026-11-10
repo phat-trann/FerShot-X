@@ -73,23 +73,23 @@ dependencies = [
 ]
 
 [[package]]
-name = "ferby-effects-core"
+name = "fershot-effects-core"
 version = "0.1.0"
 dependencies = [
  "image",
 ]
 
 [[package]]
-name = "ferby-effects-pipeline"
+name = "fershot-effects-pipeline"
 version = "0.1.0"
 dependencies = [
- "ferby-effects-core",
- "ferby-image-core",
+ "fershot-effects-core",
+ "fershot-image-core",
  "image",
 ]
 
 [[package]]
-name = "ferby-image-core"
+name = "fershot-image-core"
 version = "0.1.0"
 dependencies = [
  "image",

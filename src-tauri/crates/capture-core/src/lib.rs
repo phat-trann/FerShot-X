@@ -16,6 +16,14 @@ pub enum CaptureMode {
     Area,
     Window,
     WindowId(u32),
+    Region(ScreenRect),
+}
+
+/// Global screen points in the same coordinate system as screencapture -R.
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct ScreenRect { pub x: i32, pub y: i32, pub width: u32, pub height: u32 }
+impl ScreenRect {
+    pub fn is_valid(self) -> bool { self.x.unsigned_abs() <= 1_000_000 && self.y.unsigned_abs() <= 1_000_000 && (1..=16384).contains(&self.width) && (1..=16384).contains(&self.height) }
 }
 
 #[derive(Debug, Clone)]
@@ -61,6 +69,7 @@ pub enum CaptureError {
     ProcessFailure { code: Option<i32>, detail: String },
     InvalidOutput,
     InvalidWindowId,
+    InvalidRegion,
     Io(io::Error),
 }
 impl fmt::Display for CaptureError {
@@ -76,6 +85,7 @@ impl fmt::Display for CaptureError {
             }
             Self::InvalidOutput => write!(f, "Capture did not produce a bounded regular PNG file."),
             Self::InvalidWindowId => write!(f, "A nonzero native window ID is required."),
+            Self::InvalidRegion => write!(f, "Choose a bounded screen rectangle."),
             Self::Io(error) => write!(f, "Capture IO error: {error}"),
         }
     }
@@ -121,6 +131,7 @@ fn command(mode: CaptureMode, path: &Path) -> CaptureCommand {
         CaptureMode::Area => args.extend(["-i".into(), "-s".into()]),
         CaptureMode::Window => args.extend(["-i".into(), "-w".into()]),
         CaptureMode::WindowId(id) => args.extend(["-l".into(), id.to_string().into()]),
+        CaptureMode::Region(rect) => args.push(format!("-R{},{},{},{}", rect.x, rect.y, rect.width, rect.height).into()),
     }
     args.push(path.as_os_str().to_owned());
     CaptureCommand {
@@ -149,8 +160,9 @@ fn capture_on_platform(
         return Err(CaptureError::UnsupportedPlatform);
     }
     if matches!(mode, CaptureMode::WindowId(0)) { return Err(CaptureError::InvalidWindowId); }
+    if matches!(mode, CaptureMode::Region(rect) if !rect.is_valid()) { return Err(CaptureError::InvalidRegion); }
     let directory = tempfile::Builder::new()
-        .prefix("ferby-capture-")
+        .prefix("fershot-capture-")
         .tempdir()?;
     let path = directory.path().join("capture.png");
     let output = runner.run(&command(mode, &path))?;
@@ -255,12 +267,22 @@ mod tests {
                     .file_name()
                     .unwrap()
                     .to_string_lossy()
-                    .starts_with("ferby-capture-")
+                    .starts_with("fershot-capture-")
             );
             let path = result.path().to_owned();
             drop(result);
             assert!(!path.exists());
         }
+    }
+    #[test]
+    fn repeat_uses_exact_global_rectangle_and_rejects_invalid_input_before_execution() {
+        let runner = Fake::success();
+        let rect = ScreenRect { x: -500, y: 40, width: 240, height: 160 };
+        let _file = capture_on_platform(CaptureMode::Region(rect), &runner, true).unwrap();
+        assert!(runner.seen.lock().unwrap()[0].args.contains(&OsString::from("-R-500,40,240,160")));
+        let invalid = Fake::success();
+        assert!(matches!(capture_on_platform(CaptureMode::Region(ScreenRect { width: 0, ..rect }), &invalid, true), Err(CaptureError::InvalidRegion)));
+        assert!(invalid.seen.lock().unwrap().is_empty());
     }
     #[test]
     fn interactive_cancel_without_file_is_not_a_permission_claim() {

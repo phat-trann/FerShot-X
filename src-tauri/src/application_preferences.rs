@@ -1,15 +1,15 @@
 use crate::imaging::NativeError;
-use ferby_settings_core::AppSettings;
+use fershot_settings_core::AppSettings;
 use serde::{Deserialize, Serialize};
 use std::{fs::{self, File, OpenOptions}, io::{Read, Write}, path::Path, sync::atomic::{AtomicU64, Ordering}};
 
-const FILE_NAME: &str = "ferby-application-preferences.json";
+const FILE_NAME: &str = "fershot-application-preferences.json";
 const MAX_BYTES: u64 = 16_384;
 static SEQUENCE: AtomicU64 = AtomicU64::new(0);
 
-pub enum Document { Application, Shortcuts, Recognition, ExportDestination, DeepLinks }
+pub enum Document { Application, Shortcuts, ExportDestination }
 impl Document {
-    fn name(&self) -> &'static str { match self { Self::Application => FILE_NAME, Self::Shortcuts => "ferby-shortcuts.json", Self::Recognition => "ferby-recognition-preferences.json", Self::ExportDestination => "ferby-export-destination.json", Self::DeepLinks => "ferby-link-policy.json" } }
+    fn name(&self) -> &'static str { match self { Self::Application => FILE_NAME, Self::Shortcuts => "fershot-shortcuts.json", Self::ExportDestination => "fershot-export-destination.json" } }
 }
 
 #[derive(Clone, Serialize, Deserialize)]

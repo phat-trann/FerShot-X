@@ -1,4 +1,4 @@
-use ferby_scroll_core::{stitch_frames, ScrollFrame, StitchError, StitchOptions, MAX_OUTPUT_PIXELS};
+use fershot_scroll_core::{stitch_frames, ScrollFrame, StitchError, StitchOptions, MAX_OUTPUT_PIXELS};
 
 #[test]
 fn first_frame_over_pixel_budget_is_rejected_before_reading_rgba() {

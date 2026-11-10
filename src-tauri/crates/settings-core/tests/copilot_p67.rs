@@ -1,4 +1,4 @@
-use ferby_settings_core::{
+use fershot_settings_core::{
     load_settings, parse_settings_str, save_settings, serialize_settings_string, AppSettings,
     SaveFormat, SettingsError, MAX_SETTINGS_BYTES,
 };

@@ -1,7 +1,7 @@
 //! Standalone versioned local session archive manifest and bounded image store (`A29`).
 //!
-//! This local archive is a Ferby-owned persistence design for an explicit caller-provided
-//! directory and image bytes; it does not claim or touch Shottr storage or scan arbitrary
+//! This local archive is a FerShot-owned persistence design for an explicit caller-provided
+//! directory and image bytes; it does not claim or touch reference application storage or scan arbitrary
 //! filesystem directories.
 //!
 //! # Proposed Root Integration (`Codex`)
@@ -17,7 +17,7 @@ use std::sync::atomic::{AtomicU64, Ordering};
 use std::time::{SystemTime, UNIX_EPOCH};
 use thiserror::Error;
 
-pub const SESSION_MANIFEST_FILE_NAME: &str = "ferby-session-manifest.json";
+pub const SESSION_MANIFEST_FILE_NAME: &str = "fershot-session-manifest.json";
 pub const SESSION_SCHEMA_VERSION: u32 = 1;
 pub const MAX_MANIFEST_BYTES: u64 = 256 * 1024;
 pub const MAX_SESSION_ITEMS: usize = 64;

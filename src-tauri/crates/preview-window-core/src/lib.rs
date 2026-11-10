@@ -1,4 +1,4 @@
-//! Native floating capture preview window geometry, placement, and auto-dismiss logic for Ferby Shottr.
+//! Native floating capture preview window geometry, placement, and auto-dismiss logic for FerShot X.
 
 use serde::{Deserialize, Serialize};
 

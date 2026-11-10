@@ -1093,7 +1093,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "ferby-application-services"
+name = "fershot-application-services"
 version = "0.1.0"
 dependencies = [
  "serde",
@@ -1104,14 +1104,14 @@ dependencies = [
 ]
 
 [[package]]
-name = "ferby-capture-core"
+name = "fershot-capture-core"
 version = "0.1.0"
 dependencies = [
  "tempfile",
 ]
 
 [[package]]
-name = "ferby-clipboard-import-core"
+name = "fershot-clipboard-import-core"
 version = "0.1.0"
 dependencies = [
  "arboard",
@@ -1119,23 +1119,23 @@ dependencies = [
 ]
 
 [[package]]
-name = "ferby-effects-core"
+name = "fershot-effects-core"
 version = "0.1.0"
 dependencies = [
  "image",
 ]
 
 [[package]]
-name = "ferby-effects-pipeline"
+name = "fershot-effects-pipeline"
 version = "0.1.0"
 dependencies = [
- "ferby-effects-core",
- "ferby-image-core",
+ "fershot-effects-core",
+ "fershot-image-core",
  "image",
 ]
 
 [[package]]
-name = "ferby-image-core"
+name = "fershot-image-core"
 version = "0.1.0"
 dependencies = [
  "image",
@@ -1143,11 +1143,19 @@ dependencies = [
 ]
 
 [[package]]
-name = "ferby-scroll-core"
+name = "fershot-local-cache"
+version = "1.0.0"
+dependencies = [
+ "serde",
+ "serde_json",
+]
+
+[[package]]
+name = "fershot-scroll-core"
 version = "0.1.0"
 
 [[package]]
-name = "ferby-settings-core"
+name = "fershot-settings-core"
 version = "0.1.0"
 dependencies = [
  "serde",
@@ -1156,28 +1164,30 @@ dependencies = [
 ]
 
 [[package]]
-name = "ferby-shottr"
-version = "0.1.0"
+name = "fershot-x"
+version = "1.0.0"
 dependencies = [
  "arboard",
  "base64 0.22.1",
  "block2",
+ "chrono",
  "core-foundation",
  "core-graphics 0.24.0",
  "drag",
- "ferby-application-services",
- "ferby-capture-core",
- "ferby-clipboard-import-core",
- "ferby-effects-pipeline",
- "ferby-image-core",
- "ferby-scroll-core",
- "ferby-settings-core",
- "ferby-vision-core",
+ "fershot-application-services",
+ "fershot-capture-core",
+ "fershot-clipboard-import-core",
+ "fershot-effects-pipeline",
+ "fershot-image-core",
+ "fershot-local-cache",
+ "fershot-scroll-core",
+ "fershot-settings-core",
  "foreign-types",
  "image",
  "objc2",
  "objc2-app-kit",
  "objc2-foundation",
+ "plist",
  "serde",
  "serde_json",
  "tauri",
@@ -1187,19 +1197,6 @@ dependencies = [
  "tauri-plugin-global-shortcut",
  "tauri-plugin-notification",
  "tempfile",
-]
-
-[[package]]
-name = "ferby-vision-core"
-version = "0.1.0"
-dependencies = [
- "image",
- "objc2",
- "objc2-foundation",
- "objc2-vision",
- "serde",
- "serde_json",
- "thiserror 2.0.21",
 ]
 
 [[package]]
@@ -2703,16 +2700,6 @@ name = "objc2-user-notifications"
 version = "0.3.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9df9128cbbfef73cda168416ccf7f837b62737d748333bfe9ab71c245d76613e"
-dependencies = [
- "objc2",
- "objc2-foundation",
-]
-
-[[package]]
-name = "objc2-vision"
-version = "0.3.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "bfc194758a2d5d7540b1ad283bfb9ca318ec608991892326e95b428230b2689b"
 dependencies = [
  "objc2",
  "objc2-foundation",

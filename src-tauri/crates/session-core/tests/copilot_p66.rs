@@ -1,4 +1,4 @@
-use ferby_session_core::{
+use fershot_session_core::{
     load_session_archive, parse_session_manifest_str, save_session_archive, SessionArchiveInput,
     SessionError, SESSION_MANIFEST_FILE_NAME,
 };

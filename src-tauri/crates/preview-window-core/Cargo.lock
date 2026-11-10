@@ -3,7 +3,7 @@
 version = 4
 
 [[package]]
-name = "ferby-preview-window-core"
+name = "fershot-preview-window-core"
 version = "0.1.0"
 dependencies = [
  "serde",

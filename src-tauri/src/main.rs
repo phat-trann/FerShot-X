@@ -2,5 +2,5 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 fn main() {
-    ferby_shottr_lib::run()
+    fershot_x_lib::run()
 }

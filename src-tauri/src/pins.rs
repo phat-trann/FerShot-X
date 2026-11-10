@@ -89,7 +89,7 @@ pub async fn edit_pin(window: tauri::WebviewWindow, app: tauri::AppHandle,
     pins: tauri::State<'_, PinStore>) -> Result<(), NativeError> {
     let document = pins.get(window.label())?;
     let main = app.get_webview_window("main").ok_or_else(|| NativeError::new("pin_failed", "Main workspace is unavailable."))?;
-    app.emit_to("main", "ferby-pin-edit", document.as_ref()).map_err(|e| NativeError::new("pin_failed", e.to_string()))?;
+    app.emit_to("main", "fershot-pin-edit", document.as_ref()).map_err(|e| NativeError::new("pin_failed", e.to_string()))?;
     main.show().and_then(|_| main.set_focus()).map_err(|e| NativeError::new("pin_failed", e.to_string()))?;
     window.close().map_err(|e| NativeError::new("pin_failed", e.to_string()))?;
     pins.remove(window.label()); Ok(())

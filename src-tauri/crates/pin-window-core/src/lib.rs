@@ -1,4 +1,4 @@
-//! Native pinned window management and geometry calculation for Ferby Shottr.
+//! Native pinned window management and geometry calculation for FerShot X.
 
 use serde::{Deserialize, Serialize};
 

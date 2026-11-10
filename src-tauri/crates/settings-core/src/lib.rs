@@ -1,8 +1,8 @@
-//! Standalone settings schema, validation, and bounded atomic persistence for Ferby Shottr.
+//! Standalone settings schema, validation, and bounded atomic persistence for FerShot X.
 //!
 //! # Concurrency and Atomicity Limits
 //! - Writes stage a new sibling file inside the caller-supplied directory using `create_new(true)`,
-//!   flush with `File::sync_all`, and replace `ferby-settings.json` via `std::fs::rename`.
+//!   flush with `File::sync_all`, and replace `fershot-settings.json` via `std::fs::rename`.
 //! - On POSIX filesystems (`macOS`), `rename` within the same directory is atomic with respect to
 //!   concurrent readers and crash recovery, provided the underlying filesystem honors `fsync`.
 //! - Concurrent writers in separate processes or threads follow a last-writer-wins policy; no
@@ -20,8 +20,8 @@ use std::sync::atomic::{AtomicU64, Ordering};
 use std::time::{SystemTime, UNIX_EPOCH};
 use thiserror::Error;
 
-/// Canonical settings filename inside the caller-provided Ferby settings directory.
-pub const SETTINGS_FILE_NAME: &str = "ferby-settings.json";
+/// Canonical settings filename inside the caller-provided FerShot settings directory.
+pub const SETTINGS_FILE_NAME: &str = "fershot-settings.json";
 
 /// Current version of the persisted settings JSON envelope.
 pub const SETTINGS_SCHEMA_VERSION: u32 = 1;
@@ -48,7 +48,7 @@ pub enum SaveFormat {
     Jpeg,
 }
 
-/// Ferby application settings matching the frozen TypeScript `AppSettings` contract.
+/// FerShot application settings matching the frozen TypeScript `AppSettings` contract.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct AppSettings {
@@ -93,7 +93,7 @@ struct VersionProbe {
     version: Option<u32>,
 }
 
-/// Typed errors returned by `ferby-settings-core`.
+/// Typed errors returned by `fershot-settings-core`.
 #[derive(Debug, Error)]
 pub enum SettingsError {
     #[error("settings directory path must not be empty")]
@@ -239,7 +239,7 @@ fn inspect_target_file(target: &Path) -> Result<Option<fs::Metadata>, SettingsEr
     }
 }
 
-/// Resolves the canonical settings file path inside a caller-provided Ferby directory.
+/// Resolves the canonical settings file path inside a caller-provided FerShot directory.
 pub fn resolve_settings_file_path(dir: &Path) -> Result<PathBuf, SettingsError> {
     if dir.as_os_str().is_empty() {
         return Err(SettingsError::EmptyDirectoryPath);
@@ -247,7 +247,7 @@ pub fn resolve_settings_file_path(dir: &Path) -> Result<PathBuf, SettingsError> 
     Ok(dir.join(SETTINGS_FILE_NAME))
 }
 
-/// Loads `AppSettings` from `dir/ferby-settings.json`, returning `AppSettings::default()` when
+/// Loads `AppSettings` from `dir/fershot-settings.json`, returning `AppSettings::default()` when
 /// the directory or file does not yet exist.
 pub fn load_settings(dir: &Path) -> Result<AppSettings, SettingsError> {
     validate_directory_no_symlink(dir, false)?;
@@ -290,7 +290,7 @@ pub fn load_settings(dir: &Path) -> Result<AppSettings, SettingsError> {
     parse_settings_str(raw)
 }
 
-/// Validates and atomically writes `AppSettings` to `dir/ferby-settings.json`.
+/// Validates and atomically writes `AppSettings` to `dir/fershot-settings.json`.
 ///
 /// Any pre-existing valid settings file is preserved untouched if validation or temporary file
 /// staging fails.
@@ -366,7 +366,7 @@ mod tests {
     #[test]
     fn returns_default_settings_when_directory_or_file_is_missing() {
         let temp = TempDir::new().expect("tempdir");
-        let missing_dir = temp.path().join("nonexistent-ferby-dir");
+        let missing_dir = temp.path().join("nonexistent-fershot-dir");
 
         let loaded = load_settings(&missing_dir).expect("missing dir should yield defaults");
         assert_eq!(loaded, AppSettings::default());
@@ -492,7 +492,7 @@ mod tests {
         let outside_file = temp.path().join("outside.json");
         fs::write(&outside_file, b"outside-content").unwrap();
 
-        let crate_dir = temp.path().join("ferby-config");
+        let crate_dir = temp.path().join("fershot-config");
         fs::create_dir(&crate_dir).unwrap();
         let symlink_target = crate_dir.join(SETTINGS_FILE_NAME);
         symlink(&outside_file, &symlink_target).unwrap();
@@ -509,7 +509,7 @@ mod tests {
         assert_eq!(fs::read(&outside_file).unwrap(), b"outside-content");
 
         // Must also refuse a symlinked directory path
-        let symlink_dir = temp.path().join("ferby-config-link");
+        let symlink_dir = temp.path().join("fershot-config-link");
         symlink(&crate_dir, &symlink_dir).unwrap();
         assert!(matches!(
             load_settings(&symlink_dir),

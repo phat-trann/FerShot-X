@@ -45,7 +45,7 @@ fn save(path: &Path, destination: &Destination) -> Result<DestinationView, Nativ
 #[tauri::command]
 pub async fn read_export_destination(window: tauri::WebviewWindow, app: tauri::AppHandle,
     gate: tauri::State<'_, PreferenceGate>) -> Result<DestinationView, NativeError> {
-    imaging::validate_window_label(window.label())?;
+    crate::preferences_window::validate_label(window.label())?;
     let path = app.path().app_config_dir().map_err(error)?; let gate = gate.shared();
     tauri::async_runtime::spawn_blocking(move || { let _guard = gate.lock().map_err(|_| error("Preferences unavailable."))?; Ok(load(&path)?.view()) })
         .await.map_err(|_| error("Destination loading stopped unexpectedly."))?
@@ -54,7 +54,7 @@ pub async fn read_export_destination(window: tauri::WebviewWindow, app: tauri::A
 #[tauri::command]
 pub async fn choose_export_directory(window: tauri::WebviewWindow, app: tauri::AppHandle,
     gate: tauri::State<'_, PreferenceGate>) -> Result<DestinationView, NativeError> {
-    imaging::validate_window_label(window.label())?;
+    crate::preferences_window::validate_label(window.label())?;
     let path = app.path().app_config_dir().map_err(error)?; let gate = gate.shared();
     tauri::async_runtime::spawn_blocking(move || {
         let selected = app.dialog().file().set_parent(&window).set_title("Choose image export folder").blocking_pick_folder();
@@ -70,7 +70,7 @@ pub async fn choose_export_directory(window: tauri::WebviewWindow, app: tauri::A
 #[tauri::command]
 pub async fn update_export_destination(basename: Option<String>, clear_folder: bool, window: tauri::WebviewWindow,
     app: tauri::AppHandle, gate: tauri::State<'_, PreferenceGate>) -> Result<DestinationView, NativeError> {
-    imaging::validate_window_label(window.label())?;
+    crate::preferences_window::validate_label(window.label())?;
     let path = app.path().app_config_dir().map_err(error)?; let gate = gate.shared();
     tauri::async_runtime::spawn_blocking(move || {
         let _guard = gate.lock().map_err(|_| error("Preferences unavailable."))?; let mut destination = load(&path)?;
@@ -80,8 +80,8 @@ pub async fn update_export_destination(basename: Option<String>, clear_folder: b
     }).await.map_err(|_| error("Destination update stopped unexpectedly."))?
 }
 
-pub(crate) fn save_to_folder(raster: &ferby_image_core::Raster, destination: &Destination,
-    format: ferby_image_core::ExportFormat, extension: &str) -> Result<Option<String>, NativeError> {
+pub(crate) fn save_to_folder(raster: &fershot_image_core::Raster, destination: &Destination,
+    format: fershot_image_core::ExportFormat, extension: &str) -> Result<Option<String>, NativeError> {
     let Some(folder) = &destination.folder else { return Ok(None); };
     let metadata = std::fs::symlink_metadata(folder).map_err(error)?;
     if !metadata.is_dir() || metadata.file_type().is_symlink() || folder.canonicalize().map_err(error)? != *folder {
@@ -97,7 +97,7 @@ pub(crate) fn save_to_folder(raster: &ferby_image_core::Raster, destination: &De
         }
         match raster.save_new(&path, format) {
             Ok(()) => return Ok(Some(path.to_string_lossy().into_owned())),
-            Err(ferby_image_core::TransformError::Io(e)) if e.kind() == std::io::ErrorKind::AlreadyExists => continue,
+            Err(fershot_image_core::TransformError::Io(e)) if e.kind() == std::io::ErrorKind::AlreadyExists => continue,
             Err(e) => return Err(error(e)),
         }
     }

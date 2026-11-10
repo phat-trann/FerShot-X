@@ -1,19 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0"><dict>
-  <key>CFBundleDocumentTypes</key><array><dict>
-    <key>CFBundleTypeName</key><string>Image</string>
-    <key>CFBundleTypeRole</key><string>Editor</string>
-    <key>LSHandlerRank</key><string>Alternate</string>
-    <key>LSItemContentTypes</key><array>
-      <string>public.png</string><string>public.jpeg</string><string>com.compuserve.gif</string><string>org.webmproject.webp</string>
-    </array>
-  </dict></array>
-  <key>CFBundleURLTypes</key><array><dict>
-    <key>CFBundleTypeRole</key><string>Viewer</string>
-    <key>CFBundleURLName</key><string>dev.ferby.shottr.links</string>
-    <key>CFBundleURLSchemes</key><array><string>ferby</string></array>
-  </dict></array>
-  <key>NSScreenCaptureUsageDescription</key>
-  <string>Ferby Shottr requires screen recording permission to capture your screen, windows, and selected regions.</string>
-</dict></plist>
+<plist version="1.0">
+<dict>
+	<key>CFBundleName</key><string>FerShot X</string>
+	<key>CFBundleDisplayName</key><string>FerShot X</string>
+	<key>CFBundleDocumentTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeName</key>
+			<string>Image</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSHandlerRank</key>
+			<string>Alternate</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>public.png</string>
+				<string>public.jpeg</string>
+				<string>com.compuserve.gif</string>
+				<string>org.webmproject.webp</string>
+			</array>
+		</dict>
+	</array>
+	<key>NSScreenCaptureUsageDescription</key>
+	<string>FerShot X requires screen recording permission to capture your screen, windows, and selected regions.</string>
+</dict>
+</plist>

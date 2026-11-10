@@ -1,7 +1,7 @@
 use crate::imaging::{ImagePayload, NativeError, NativeJobs, validate_window_label};
 use base64::{Engine as _, engine::general_purpose::STANDARD};
-use ferby_effects_pipeline::{EffectRect, PixelEffect, RgbaColor, PipelineLimits, run_pipeline};
-use ferby_image_core::MAX_INPUT_BYTES;
+use fershot_effects_pipeline::{EffectRect, PixelEffect, RgbaColor, PipelineLimits, run_pipeline};
+use fershot_image_core::MAX_INPUT_BYTES;
 use serde::Deserialize;
 
 #[derive(Deserialize)]

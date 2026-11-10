@@ -10,7 +10,7 @@ pub struct AppInfo {
 #[tauri::command]
 pub fn app_info() -> AppInfo {
     AppInfo {
-        name: "Ferby Shottr",
+        name: "FerShot X",
         version: env!("CARGO_PKG_VERSION"),
         platform: std::env::consts::OS,
     }
@@ -21,7 +21,7 @@ mod tests {
     #[test]
     fn app_info_matches_frontend_wire_contract() {
         let value = serde_json::to_value(super::app_info()).unwrap();
-        assert_eq!(value["name"], "Ferby Shottr");
+        assert_eq!(value["name"], "FerShot X");
         assert_eq!(value["version"], env!("CARGO_PKG_VERSION"));
         assert!(value["platform"].as_str().is_some_and(|s| !s.is_empty()));
     }

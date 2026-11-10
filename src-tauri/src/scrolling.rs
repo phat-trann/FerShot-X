@@ -1,7 +1,7 @@
 use crate::imaging::{decode_input, ImagePayload, NativeError, NativeJobs, validate_window_label};
 use base64::{Engine as _, engine::general_purpose::STANDARD};
-use ferby_image_core::{MAX_DIMENSION, MAX_INPUT_BYTES, MAX_PIXELS};
-use ferby_scroll_core::{ScrollDirection, ScrollFrame, StitchOptions, stitch_frames};
+use fershot_image_core::{MAX_DIMENSION, MAX_INPUT_BYTES, MAX_PIXELS};
+use fershot_scroll_core::{ScrollDirection, ScrollFrame, StitchOptions, stitch_frames};
 use serde::{Deserialize, Serialize};
 use std::io::Cursor;
 

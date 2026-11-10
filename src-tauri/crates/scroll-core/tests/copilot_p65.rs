@@ -1,4 +1,4 @@
-use ferby_scroll_core::{
+use fershot_scroll_core::{
     stitch_frames, ScrollDirection, ScrollFrame, StitchError, StitchOptions,
 };
 

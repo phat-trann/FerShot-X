@@ -1,8 +1,8 @@
 [package]
-name = "ferby-shottr"
-version = "0.1.0"
-description = "A local screenshot and annotation workspace"
-authors = ["Ferby contributors"]
+name = "fershot-x"
+version = "1.0.0"
+description = "FerShot X screenshot editor and FTP publishing workspace"
+authors = ["FerShot contributors"]
 edition = "2024"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
@@ -11,7 +11,7 @@ edition = "2024"
 # The `_lib` suffix may seem redundant but it is necessary
 # to make the lib name unique and wouldn't conflict with the bin name.
 # This seems to be only an issue on Windows, see https://github.com/rust-lang/cargo/issues/8519
-name = "ferby_shottr_lib"
+name = "fershot_x_lib"
 crate-type = ["staticlib", "cdylib", "rlib"]
 
 [build-dependencies]
@@ -22,14 +22,15 @@ tauri = { version = "2", features = ["tray-icon"] }
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 base64 = "0.22"
-ferby-capture-core = { path = "crates/capture-core" }
-ferby-image-core = { path = "crates/image-core" }
-ferby-settings-core = { path = "crates/settings-core" }
-ferby-application-services = { path = "crates/application-services" }
-ferby-clipboard-import-core = { path = "crates/clipboard-import-core" }
-ferby-vision-core = { path = "crates/vision-core" }
-ferby-scroll-core = { path = "crates/scroll-core" }
-ferby-effects-pipeline = { path = "crates/effects-pipeline" }
+chrono = { version = "=0.4.45", default-features = false, features = ["clock", "std"] }
+fershot-capture-core = { path = "crates/capture-core" }
+fershot-image-core = { path = "crates/image-core" }
+fershot-settings-core = { path = "crates/settings-core" }
+fershot-application-services = { path = "crates/application-services" }
+fershot-clipboard-import-core = { path = "crates/clipboard-import-core" }
+fershot-scroll-core = { path = "crates/scroll-core" }
+fershot-effects-pipeline = { path = "crates/effects-pipeline" }
+fershot-local-cache = { path = "crates/local-cache" }
 image = { version = "=0.25.10", default-features = false, features = ["png", "jpeg"] }
 tauri-plugin-dialog = "2"
 tauri-plugin-autostart = "=2.7.0"
@@ -40,13 +41,14 @@ tauri-plugin-global-shortcut = "=2.4.1"
 tempfile = "=3.27.0"
 
 [target.'cfg(target_os = "macos")'.dependencies]
+plist = "=1.10.3"
 block2 = "=0.6.2"
 foreign-types = "=0.5.0"
 core-foundation = "=0.10.1"
 core-graphics = { version = "=0.24.0", features = ["elcapitan"] }
 objc2 = "=0.6.5"
-objc2-app-kit = { version = "=0.3.2", default-features = false, features = ["NSWorkspace", "NSRunningApplication", "block2"] }
-objc2-foundation = { version = "=0.3.2", default-features = false, features = ["NSNotification", "NSOperation", "NSString", "block2"] }
+objc2-app-kit = { version = "=0.3.2", default-features = false, features = ["NSWorkspace", "NSRunningApplication", "NSWindow", "block2"] }
+objc2-foundation = { version = "=0.3.2", default-features = false, features = ["NSNotification", "NSOperation", "NSString", "NSProcessInfo", "NSGeometry", "block2"] }
 drag = "=2.1.1"
 arboard = { version = "3.7", default-features = false, features = ["image-data"] }
 

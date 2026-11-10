@@ -145,9 +145,10 @@ function requireDesktop() {
 }
 async function nativeCall<T>(command: string, args: Record<string, unknown>): Promise<T> {
   requireDesktop();
+  const started=performance.now();
   try { const result = await invoke<T>(command, args); logNativeOperation(command, false); return result; }
   catch (error) {
-    logNativeOperation(command, true, typeof error === "object" && error && "code" in error ? error.code : "other");
+    logNativeOperation(command, true, typeof error === "object" && error && "code" in error ? error.code : "other",performance.now()-started);
     if (typeof error === "object" && error !== null && "message" in error) {
       const value = error as { message: unknown; code?: unknown };
       throw new NativeOperationError(typeof value.code === "string" ? value.code : "native_failed", String(value.message));
@@ -247,8 +248,8 @@ export async function applyImageEffect(document: ImageDocument, effect: PixelEff
     safeExportName(`${document.name.replace(/\.[^.]+$/, "")}-${effect.kind}`, "png", 60));
 }
 
-export async function captureImageWithScale(mode: CaptureMode): Promise<{ image: ImageDocument; displayScale: number | null }> {
-  const payload = await nativeCall<ImagePayload>("capture_image", { mode });
+export async function captureImageWithScale(mode: CaptureMode,background=false): Promise<{ image: ImageDocument; displayScale: number | null }> {
+  const payload = await nativeCall<ImagePayload>("capture_image", { mode,...(background?{background:true}:{}) });
   const scale = payload?.displayScale ?? null;
   if (scale !== null && (typeof scale !== "number" || !Number.isFinite(scale) || scale <= 0 || scale > 8)) throw new NativeOperationError("invalid_payload", "The capture display scale is invalid.");
   return { image: documentFromPayload(payload, `Capture-${Date.now()}.png`), displayScale: scale };
@@ -258,14 +259,14 @@ export async function readRepeatAreaAvailable(): Promise<boolean> {
   if (typeof value !== "boolean") throw new NativeOperationError("invalid_payload", "Invalid remembered area status.");
   return value;
 }
-export async function captureRepeatArea(): Promise<{ image: ImageDocument; displayScale: number | null }> {
-  const payload = await nativeCall<ImagePayload>("capture_repeat_area", {});
+export async function captureRepeatArea(background=false): Promise<{ image: ImageDocument; displayScale: number | null }> {
+  const payload = await nativeCall<ImagePayload>("capture_repeat_area", background?{background:true}:{});
   const scale = payload?.displayScale ?? null;
   if (scale !== null && (typeof scale !== "number" || !Number.isFinite(scale) || scale <= 0 || scale > 8)) throw new NativeOperationError("invalid_payload", "The capture display scale is invalid.");
   return { image: documentFromPayload(payload, `Area-${Date.now()}.png`), displayScale: scale };
 }
-export async function captureActiveWindow(): Promise<{ image: ImageDocument; displayScale: null }> {
-  const payload = await nativeCall<ImagePayload>("capture_active_window", {});
+export async function captureActiveWindow(background=false): Promise<{ image: ImageDocument; displayScale: null }> {
+  const payload = await nativeCall<ImagePayload>("capture_active_window", background?{background:true}:{});
   return { image: documentFromPayload(payload, `Active-window-${Date.now()}.png`), displayScale: null };
 }
 export async function captureRegion(display: DisplayGeometry, region: CaptureArea): Promise<{ image: ImageDocument; displayScale: number }> {
@@ -362,4 +363,6 @@ export async function copyText(text: string): Promise<void> {
   await nativeCall<void>("copy_text", { request: { text } });
 }
 
-export async function captureScrollImage(){return documentFromPayload(await nativeCall<ImagePayload>("capture_scroll_image",{}),`Scroll-${Date.now()}.png`);}
+export async function captureScrollImage(background=false){return documentFromPayload(await nativeCall<ImagePayload>("capture_scroll_image",background?{background:true}:{}),`Scroll-${Date.now()}.png`);}
+
+export async function readCaptureUploadMode():Promise<boolean>{const enabled=await nativeCall<unknown>("read_capture_upload_mode",{});if(typeof enabled!=="boolean")throw new NativeOperationError("settings_failed","Automatic upload mode is unavailable.");return enabled;}

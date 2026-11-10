@@ -23,6 +23,7 @@ mod shortcuts;
 mod dragging;
 mod desktop_menu;
 mod menu_bar;
+mod capture_upload;
 mod active_window;
 mod document_open;
 
@@ -60,11 +61,13 @@ pub fn run() {
         .plugin(tauri_plugin_global_shortcut::Builder::new().with_handler(shortcuts::on_shortcut).build())
         .invoke_handler(tauri::generate_handler![
             commands::app_info,
+            capture_upload::read_capture_upload_mode,
             automatic_capture::capture_scroll_image,
             library_window::fit_editor_window,
             library_window::show_library,
             library_window::show_editor,
             library_window::library_image,
+            library_window::copy_library_images,
             library_window::library_thumbnail,
             library_window::edit_library_image,
             library_window::take_editor_image,

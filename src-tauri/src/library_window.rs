@@ -32,3 +32,33 @@ pub fn editor_size(image:(u32,u32),available:(f64,f64))->(f64,f64){
 }
 
 #[cfg(test)]mod geometry_tests{#[test]fn editor_is_sixteen_nine_and_bounded_by_eighty_percent(){for image in [(120,60),(4000,6000),(6000,4000)]{let(w,h)=super::editor_size(image,(1440.,900.));assert!((w/(h-110.)-16./9.).abs()<0.0001);assert!(w<=1152.&&h<=720.);}let(small,_)=super::editor_size((120,60),(1440.,900.));let(large,_)=super::editor_size((6000,4000),(1440.,900.));assert!(small<large);}}
+
+// Library receives a narrowly scoped clipboard command, never Edit's image commands.
+#[tauri::command]
+pub async fn copy_library_images(images:Vec<String>,window:tauri::WebviewWindow,app:tauri::AppHandle,jobs:tauri::State<'_,crate::imaging::NativeJobs>)->Result<(),NativeError>{
+ require_library(window.label())?;
+ if images.is_empty()||images.len()>32||images.iter().map(String::len).sum::<usize>()>64*1024*1024{return Err(NativeError::new("clipboard_limit","Select fewer images to copy."))}
+ let guard=jobs.acquire()?;
+ tauri::async_runtime::spawn_blocking(move||{let _guard=guard;
+  #[cfg(target_os="macos")]
+  {
+   use std::{fs,io::Write,time::{SystemTime,UNIX_EPOCH}};
+   use fershot_image_core::ExportFormat;
+   let fail=||NativeError::new("clipboard_failed","Images could not be copied. Please retry.");
+   let root=app.path().app_cache_dir().map_err(|_|fail())?.join("library-clipboard-v1");
+   fs::create_dir_all(&root).map_err(|_|fail())?;
+   let stamp=SystemTime::now().duration_since(UNIX_EPOCH).map_err(|_|fail())?.as_nanos();
+   let folder=root.join(format!("{stamp}"));fs::create_dir(&folder).map_err(|_|fail())?;
+   let result=(||{
+    let mut paths=Vec::new();let mut total=0usize;
+    for(index,image)in images.iter().enumerate(){let png=crate::imaging::decode_input(image)?.encode(ExportFormat::Png).map_err(|_|fail())?;total+=png.len();if total>64*1024*1024{return Err(NativeError::new("clipboard_limit","Selected images are too large to copy together."))}let path=folder.join(format!("Image-{:02}.png",index+1));let mut file=fs::OpenOptions::new().write(true).create_new(true).open(&path).map_err(|_|fail())?;file.write_all(&png).map_err(|_|fail())?;paths.push(path);}
+    let mut clipboard=arboard::Clipboard::new().map_err(|_|fail())?;
+    clipboard.set().file_list(&paths).map_err(|_|fail())
+   })();
+   if result.is_err(){let _=fs::remove_dir_all(&folder);}else if let Ok(entries)=fs::read_dir(&root){for entry in entries.flatten(){if entry.path()!=folder&&entry.file_type().map(|kind|kind.is_dir()).unwrap_or(false){let _=fs::remove_dir_all(entry.path());}}}
+   result
+  }
+  #[cfg(not(target_os="macos"))]
+  {let _=(images,app);Err(NativeError::new("unsupported","Image file-list copy currently requires macOS."))}
+ }).await.map_err(|_|NativeError::new("worker_failed","Copying images stopped unexpectedly."))?
+}

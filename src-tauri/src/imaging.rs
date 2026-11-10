@@ -159,18 +159,19 @@ pub async fn process_image(
     .map_err(|_| NativeError::new("worker_failed", "Image processing stopped unexpectedly."))?
 }
 
-fn restore_after_capture(was_visible:bool,captured:bool)->bool { was_visible || captured }
+fn restore_after_capture(was_visible:bool,captured:bool,background:bool)->bool { (was_visible || captured)&&!(captured&&background) }
 
 struct RestoreWindow {
     window: tauri::WebviewWindow,
     was_visible: bool,
     captured: bool,
     other_windows: Vec<tauri::WebviewWindow>,
+    background:bool,
 }
 impl Drop for RestoreWindow {
     fn drop(&mut self) {
         for window in &self.other_windows { let _=window.show(); }
-        if restore_after_capture(self.was_visible,self.captured) {
+        if restore_after_capture(self.was_visible,self.captured,self.background) {
             let _ = self.window.unminimize();
             let _ = self.window.show();
             let _ = self.window.set_focus();
@@ -181,10 +182,11 @@ impl Drop for RestoreWindow {
 #[tauri::command]
 pub async fn capture_image(
     mode: Mode,
+    background:Option<bool>,
     window: tauri::WebviewWindow,
     jobs: tauri::State<'_, NativeJobs>,
 ) -> Result<ImagePayload, NativeError> {
-    capture_with_region(mode, None, None, None, window, jobs).await
+    capture_with_region(mode, None, None, None, background.unwrap_or(false), window, jobs).await
 }
 
 #[derive(Deserialize)]
@@ -194,25 +196,25 @@ pub struct CaptureRegionRequest { display: crate::scrolling::DisplayGeometry, re
 #[tauri::command]
 pub async fn capture_region(request: CaptureRegionRequest, window: tauri::WebviewWindow,
     jobs: tauri::State<'_, NativeJobs>) -> Result<ImagePayload, NativeError> {
-    capture_with_region(Mode::Fullscreen, Some(request), None, None, window, jobs).await
+    capture_with_region(Mode::Fullscreen, Some(request), None, None, false, window, jobs).await
 }
 
 #[tauri::command]
-pub async fn capture_active_window(window: tauri::WebviewWindow, jobs: tauri::State<'_, NativeJobs>) -> Result<ImagePayload, NativeError> {
+pub async fn capture_active_window(background:Option<bool>,window: tauri::WebviewWindow, jobs: tauri::State<'_, NativeJobs>) -> Result<ImagePayload, NativeError> {
     validate_window_label(window.label())?;
     let target = crate::active_window::target()?;
-    capture_with_region(Mode::Window, None, Some(target), None, window, jobs).await
+    capture_with_region(Mode::Window, None, Some(target), None, background.unwrap_or(false), window, jobs).await
 }
 
 #[tauri::command]
-pub async fn capture_repeat_area(window: tauri::WebviewWindow, jobs: tauri::State<'_, NativeJobs>) -> Result<ImagePayload, NativeError> {
+pub async fn capture_repeat_area(background:Option<bool>,window: tauri::WebviewWindow, jobs: tauri::State<'_, NativeJobs>) -> Result<ImagePayload, NativeError> {
     validate_window_label(window.label())?;
     let rect = crate::area_capture::previous(&window.state::<crate::area_capture::AreaStore>(), &crate::area_capture::topology(&window)?)?;
-    capture_with_region(Mode::Area, None, None, Some(rect), window, jobs).await
+    capture_with_region(Mode::Area, None, None, Some(rect), background.unwrap_or(false), window, jobs).await
 }
 
 async fn capture_with_region(mode: Mode, region: Option<CaptureRegionRequest>,
-    active_window: Option<(u32, u32)>, repeat_rect: Option<fershot_capture_core::ScreenRect>,
+    active_window: Option<(u32, u32)>, repeat_rect: Option<fershot_capture_core::ScreenRect>,background:bool,
     window: tauri::WebviewWindow, jobs: tauri::State<'_, NativeJobs>) -> Result<ImagePayload, NativeError> {
     validate_window_label(window.label())?;
     if !cfg!(target_os = "macos") {
@@ -241,6 +243,7 @@ async fn capture_with_region(mode: Mode, region: Option<CaptureRegionRequest>,
         was_visible: visible,
         captured: false,
         other_windows,
+        background,
     };
     let display_scale = if matches!(mode, Mode::Fullscreen) {
         window.primary_monitor().ok().flatten().map(|monitor| monitor.scale_factor())
@@ -486,7 +489,8 @@ pub async fn copy_image(
 
 #[cfg(test)]
 mod tests {
-    #[test] fn successful_capture_reopens_a_hidden_view_but_cancel_restores_previous_visibility() { assert!(super::restore_after_capture(false,true)); assert!(super::restore_after_capture(true,false)); assert!(!super::restore_after_capture(false,false)); }
+    #[test]fn background_success_stays_hidden_and_cancel_restores_prior_view(){assert!(!super::restore_after_capture(true,true,true));assert!(!super::restore_after_capture(false,true,true));assert!(super::restore_after_capture(true,false,true));assert!(!super::restore_after_capture(false,false,true));}
+    #[test] fn successful_capture_reopens_a_hidden_view_but_cancel_restores_previous_visibility() { assert!(super::restore_after_capture(false,true,false)); assert!(super::restore_after_capture(true,false,false)); assert!(!super::restore_after_capture(false,false,false)); }
     use super::*;
     const PNG: &str = "iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAIAAAD91JpzAAAAEklEQVR4nGP4z8DAAMIM/4EAAB/uBfsL2WiLAAAAAElFTkSuQmCC";
     #[test]

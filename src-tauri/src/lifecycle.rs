@@ -24,6 +24,7 @@ pub fn hide_workspace(window: tauri::WebviewWindow) -> Result<(), NativeError> {
 pub fn bring_to_front(window:&tauri::WebviewWindow)->tauri::Result<()> {
     #[cfg(target_os="macos")]
     window.app_handle().show()?;
+    window.center()?;
     window.unminimize()?;
     window.show()?;
     window.set_focus()
@@ -33,7 +34,12 @@ pub fn initial_geometry(width:u32,height:u32)->(u32,u32){
     (((width as f64*0.8).round() as u32).max(1),((height as f64*0.8).round() as u32).max(1))
 }
 pub fn setup_main(app:&tauri::AppHandle)->tauri::Result<()> {
-    #[cfg(target_os="macos")]objc2_foundation::NSProcessInfo::processInfo().setProcessName(&objc2_foundation::NSString::from_str("FerShot X"));
+    #[cfg(target_os="macos")]
+    {
+        app.set_activation_policy(tauri::ActivationPolicy::Accessory)?;
+        app.set_dock_visibility(false)?;
+        objc2_foundation::NSProcessInfo::processInfo().setProcessName(&objc2_foundation::NSString::from_str("FerShot X"));
+    }
     for label in ["main", "library"] { if let Some(main)=app.get_webview_window(label) {
         if let Some(monitor)=main.current_monitor()?.or(main.primary_monitor()?) {
             let area=monitor.work_area();let (mut width,mut height)=initial_geometry(area.size.width,area.size.height);if label=="main"{width=width.min(((height as f64-110.).max(1.)*16./9.).floor()as u32);height=(width as f64*9./16.+110.).round()as u32;}

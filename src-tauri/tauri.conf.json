@@ -56,5 +56,6 @@
     "macOS": {
       "minimumSystemVersion": "12.0"
     }
-  }
+  },
+  "mainBinaryName": "FerShot X"
 }

@@ -61,14 +61,14 @@ describe("WorkspaceFtpSettings namingMode & save regressions (A213)", () => {
     // Old profile without namingMode defaults to "random"
     expect(select.value).toBe("random");
     expect(
-      screen.getByText(/Allocates a unique screenshot filename, as before\./),
+      screen.getByText(/Unique random filename\./),
     ).toBeTruthy();
 
     // Switch to "timestamp" and save with blank password
     fireEvent.change(select, { target: { value: "timestamp" } });
     expect(select.value).toBe("timestamp");
     expect(
-      screen.getByText(/Uses local snapshot time: day, hour, minute, second and a sequence digit\./),
+      screen.getByText(/Local timestamp: DDHHmmssN\./),
     ).toBeTruthy();
 
     const form = select.closest("form")!;
@@ -91,7 +91,7 @@ describe("WorkspaceFtpSettings namingMode & save regressions (A213)", () => {
     });
 
     expect(screen.getByRole("status",{name:"FTP settings status"}).textContent).toContain(
-      "FTP settings saved. Existing queued uploads keep their original destination.",
+      "FTP settings saved.",
     );
 
     // Switch back to "random" and save again; blank password still remains null
@@ -232,7 +232,7 @@ describe("WorkspaceFtpSettings namingMode & save regressions (A213)", () => {
 
     await waitFor(() => {
       expect(screen.getByRole("status",{name:"FTP settings status"}).textContent).toContain(
-        "FTP settings saved. Existing queued uploads keep their original destination.",
+        "FTP settings saved.",
       );
     });
     expect(select.value).toBe("timestamp");

@@ -1,3 +1,6 @@
+import { readCaptureUploadMode } from "./platform/native";
+import { EditorAddImage } from "./components/EditorAddImage";
+import { createPointerColor } from "./components/pointer-color";
 import { EditorToolbarProvider,EditorToolStrip,EditorTool } from "./components/EditorToolbarLayout";
 import { EditorImageStatus } from "./components/EditorImageStatus";
 import { WindowTitleBar } from "./components/WindowTitleBar";
@@ -22,7 +25,7 @@ import type { AdvancedEditorItem } from "./features/editor/advanced-workbench";
 import { WorkspaceEditor } from "./Workspace.editor";
 import type { CaptureMode, ImageDocument } from "./contracts/media";
 import { importImage } from "./platform/import-image";
-import { captureImageWithScale, copyImage, importClipboardImage, NativeOperationError,  readAppInfo, saveImage, transformImage, readRepeatAreaAvailable, captureRepeatArea, type ProcessOptions } from "./platform/native";
+import { captureImageWithScale, copyImage, importClipboardImage, NativeOperationError,  readAppInfo, rasterizeDocument, saveImage, transformImage, readRepeatAreaAvailable, captureRepeatArea, type ProcessOptions } from "./platform/native";
 import { WorkspaceDirectTools } from "./Workspace.direct-tools";
 import { useWorkspaceFtp } from "./Workspace.ftp";
 import { enqueueFtpUpload, startFtpUpload, copyUploadUrl } from "./platform/ftp";
@@ -42,6 +45,7 @@ const EMPTY_ADVANCED_ITEMS: readonly AdvancedEditorItem[] = Object.freeze([]);
 const EMPTY_ANNOTATIONS: readonly Annotation[] = Object.freeze([]);
 
 export default function Workspace() {
+  const automaticUploads=useRef(new Map<string,ImageDocument>());
   const capturedPreviewIds = useRef(new Set<string>());
   const [images, setImages] = useState<ImageDocument[]>([]);
   const [selectedId, setSelectedId] = useState<string | null>(null);
@@ -74,8 +78,10 @@ export default function Workspace() {
   const originalById = useRef(new Map<string, string>());
   const [annotationsById, setAnnotationsById] = useState<ReadonlyMap<string, readonly Annotation[]>>(() => new Map());
   const [advancedById, setAdvancedById] = useState<ReadonlyMap<string, readonly AdvancedEditorItem[]>>(() => new Map());
-  const [pointerColor,setPointerColor]=useState("#ECECEC");
+  const [pointerColor]=useState(createPointerColor);
   const [displayZoom,setDisplayZoom]=useState(1);
+  const fitZoom=useRef(1);
+  const [imageToInsert,setImageToInsert]=useState<{id:string;src:string;width:number;height:number;target:string}|undefined>();
   const viewportHost=useRef<HTMLDivElement>(null);
   const [viewportWidth,setViewportWidth]=useState<number>();
   useLayoutEffect(()=>{const node=viewportHost.current;if(!node)return;const measure=()=>{const w=node.clientWidth-24,h=node.clientHeight-24;if(w>20&&h>20)setViewportWidth(Math.max(100,Math.min(w,h*16/9)));};const observer=new ResizeObserver(measure);observer.observe(node);measure();return()=>observer.disconnect();},[]);
@@ -96,7 +102,8 @@ export default function Workspace() {
   const withEdits = <T,>(source: ImageDocument, basic: readonly Annotation[], use: (document: ImageDocument) => Promise<T>) => withWorkspaceAnnotations(source, basic, advancedById.get(source.id) ?? EMPTY_ADVANCED_ITEMS, use);
 
 
-  useEffect(() => { setTransformMode(null); }, [image?.id]);
+  useEffect(() => { setTransformMode(null); setLastUploadId(null); setNotice(value=>value.startsWith("Upload queued")?"":value); }, [image?.id]);
+  useEffect(()=>{if(lastUpload?.status==="success")setNotice(value=>value.startsWith("Upload queued")?"":value);},[lastUpload?.status]);
 
   useEffect(() => {
     for (const item of ftpQueue.items) if (item.status === "success") void localHistory.forget(item.sourceId);
@@ -115,6 +122,8 @@ export default function Workspace() {
     void localHistory.remember(next);
     if (select) { setSelectedId(next.id); setZoom(null); }
   }
+
+  useEffect(()=>{for(const [id,captured]of automaticUploads.current){const job=ftpQueue.items.find(item=>item.id===id);if(job?.status==="success"){automaticUploads.current.delete(id);capturedPreviewIds.current.delete(captured.id);captureScales.current.delete(captured.id);URL.revokeObjectURL(captured.src);}else if(job?.status==="failed"){automaticUploads.current.delete(id);addDocument(captured,true);setError("Automatic FTP upload failed. Your image is open in Edit; retry the queued upload from Library.");}}},[ftpQueue.items]);
 
   function addDerivedDocument(next: ImageDocument, parentId: string, preserveScale = true) {
     const originalId = originalById.current.get(parentId) ?? parentId;
@@ -137,7 +146,7 @@ export default function Workspace() {
   }
 
   useEffect(() => {
-    const unexpected = () => recordDiagnostic("app", "unhandled", "other");
+    const unexpected = (event:Event) => recordDiagnostic("app", "unhandled", "other",{operation:event.type==="error"?"renderer_error":"unhandled_rejection"});
     window.addEventListener("error", unexpected); window.addEventListener("unhandledrejection", unexpected);
     return () => { window.removeEventListener("error", unexpected); window.removeEventListener("unhandledrejection", unexpected); };
   }, []);
@@ -158,10 +167,21 @@ export default function Workspace() {
     void operate(async () => { addDocument(await importClipboardImage()); setNotice("Clipboard image opened."); });
   }
 
-  async function finishCapture(capture: { image: ImageDocument; displayScale: number | null }) {
+  async function finishCapture(capture: { image: ImageDocument; displayScale: number | null },instant=false) {
     const captured = capture.image;
     capturedPreviewIds.current.add(captured.id);
     if (capture.displayScale !== null) captureScales.current.set(captured.id, capture.displayScale);
+    if(instant){
+      let queued:string|undefined;
+      try{
+        localHistory.activate(captured);await localHistory.remember(captured);
+        const item=await withOutputPreferences(captured,settings,capture.displayScale,output=>enqueueFtpUpload(captured.localId??captured.id,output));queued=item.id;
+        automaticUploads.current.set(item.id,captured);
+        try{await copyUploadUrl(item.url);}catch{recordDiagnostic("clipboard","failed","clipboard_failed",{operation:"copy_text"});}
+        await startFtpUpload(item.id);await ftpQueue.refresh();
+      }catch(error){if(queued)automaticUploads.current.delete(queued);addDocument(captured,true);throw error;}
+      return;
+    }
     addDocument(captured, true);
     if (!mounted.current) return;
     setCapturePreviewId(null); setEditing(true);  
@@ -174,14 +194,15 @@ export default function Workspace() {
     try { await notifyCaptureCompleted(action); }
     catch { if (mounted.current) setPreferenceNotice("Capture completed; its notification could not be submitted."); }
   }
+  async function captureUploadMode(){try{return await readCaptureUploadMode();}catch(error){await showEditor();throw error;}}
   function capture(mode: CaptureMode) {
     void operate(async () => {
       setCapturing(true);
       try {
-        await finishCapture(await captureImageWithScale(mode));
+        const instant=await captureUploadMode();await finishCapture(await captureImageWithScale(mode,instant),instant);
         if (mode === "area") {
           const available = await readRepeatAreaAvailable().catch(() => false);
-          if (mounted.current) { setHasRepeatArea(available); setNotice(available ? "Area opened in editor. Repeat Region uses this selection." : "Area opened in editor. macOS did not provide repeat coordinates; select again to update Repeat Region."); }
+          if (mounted.current) { setHasRepeatArea(available); if(!instant)setNotice(available ? "Area opened in editor. Repeat Region uses this selection." : "Area opened in editor. macOS did not provide repeat coordinates; select again to update Repeat Region."); }
         }
       } finally {
         if (mounted.current) setCapturing(false);
@@ -190,6 +211,7 @@ export default function Workspace() {
   }
 
   globalAction.current = (action, fromMenu = false) => {
+    if(action==="capture-upload-setting-failed"){setError("Automatic upload mode could not be saved. Please retry from the tray menu.");return;}
     if (action === "startup-failed") { setError("Launch at Startup could not be changed. Check Settings and retry."); return; }
     const focused = document.activeElement;
     if (busyRef.current || document.querySelector('[aria-modal="true"]') || scrollActive || (!fromMenu && document.hasFocus() && focused instanceof HTMLElement && (focused.isContentEditable || ["INPUT", "TEXTAREA", "SELECT"].includes(focused.tagName)))) return;
@@ -208,13 +230,13 @@ export default function Workspace() {
     else if (fromMenu && action === "image-upload") upload();
   };
 
-  function scrollCapture(){void operate(async()=>{await finishCapture({image:await captureScrollImage(),displayScale:null});});}
+  function scrollCapture(){void operate(async()=>{try{const instant=await captureUploadMode();await finishCapture({image:await captureScrollImage(instant),displayScale:null},instant);}catch(error){if(!(error instanceof NativeOperationError&&error.code==="cancelled"))await showEditor();throw error;}});}
 
   function repeatArea() {
     if (busyRef.current || scrollActive || !hasRepeatArea) return;
     void operate(async () => {
       setCapturing(true);
-      try { await finishCapture(await captureRepeatArea()); }
+      try { const instant=await captureUploadMode();await finishCapture(await captureRepeatArea(instant),instant); }
       catch (reason) { if (reason instanceof NativeOperationError && ["display_changed", "repeat_unavailable"].includes(reason.code)) setHasRepeatArea(false); void readRepeatAreaAvailable().catch(() => {}); throw reason; }
       finally { if (mounted.current) setCapturing(false); }
     });
@@ -223,7 +245,7 @@ export default function Workspace() {
   function captureActive() {
     void operate(async () => {
       setCapturing(true);
-      try { await finishCapture(await captureActiveWindow()); }
+      try { const instant=await captureUploadMode();await finishCapture(await captureActiveWindow(instant),instant); }
       finally { if (mounted.current) setCapturing(false); }
     });
   }
@@ -282,7 +304,7 @@ export default function Workspace() {
     void operate(async () => { await withEdits(image, annotations, async rendered => {
       await withOutputPreferences(rendered, settings, captureScales.current.get(image.id), copyImage);
       await localHistory.remember(image,{schemaVersion:1,width:image.width,height:image.height,annotations,advanced:advancedItems});
-    }); setNotice("Image copied to clipboard."); await hideCompletedCapture(image.id); });
+    }); setNotice("Image copied to clipboard."); await hideWorkspace(); });
   }
 
   function save() {
@@ -299,14 +321,17 @@ export default function Workspace() {
     const sourceId = image.localId??image.id;
     void operate(async () => {
       const item = await withEdits(image, annotations, rendered => withOutputPreferences(rendered, settings, captureScales.current.get(sourceId), output => enqueueFtpUpload(sourceId, output)));
-      if (mounted.current) { setLastUploadId(item.id); setNotice(`Upload queued · predicted URL: ${item.url}`); }
+      if (mounted.current) setLastUploadId(item.id);
       await ftpQueue.refresh();
       // URL ownership is committed before any connection. A copy failure must not discard the upload.
-      try { await copyUploadUrl(item.url); } catch { if (mounted.current) setNotice(`Upload queued · copy the URL from FTP: ${item.url}`); }
+      try { await copyUploadUrl(item.url); } catch { if (mounted.current) setError("The upload was queued, but its URL could not be copied. Copy it from Library."); }
       try { await startFtpUpload(item.id); await hideCompletedCapture(image.id); }
       finally { await ftpQueue.refresh(); }
     });
   }
+  function insertImage(action:string){if(!image||busyRef.current)return;const target=image.id;void operate(async()=>{if(advancedItems.length+annotations.length>=1024)throw new Error("Remove an element before adding another image.");let added:ImageDocument|null=null;try{if(action==="open-file")added=await openImageDialog();else if(action==="capture-fullscreen"||action==="capture-area"||action==="capture-window"){const mode=action==="capture-fullscreen"?"fullscreen":action==="capture-area"?"area":"window";added=(await captureImageWithScale(mode)).image;if(mode==="area")setHasRepeatArea(await readRepeatAreaAvailable().catch(()=>false));}if(!added)return;const png=await rasterizeDocument(added);if(png.length>12*1024*1024)throw new Error("This image is too large to insert. Resize it first.");if(JSON.stringify(advancedItems).length+png.length>31*1024*1024)throw new Error("This draft has too many image layers. Remove a layer first.");setImageToInsert({id:crypto.randomUUID(),src:`data:image/png;base64,${png}`,width:added.width,height:added.height,target});}finally{if(added)URL.revokeObjectURL(added.src);await showEditor();}});}
+  const outputActions=useRef({copy,save,canEscape:true});outputActions.current={copy,save,canEscape:!transformMode&&!effectsOpen};
+  useEffect(()=>{const keydown=(event:KeyboardEvent)=>{const escape=event.key==="Escape";if(event.defaultPrevented||event.altKey||event.repeat||busyRef.current||document.querySelector('[aria-modal="true"],.editor-add-menu,.editor-size-popover,.editor-tool-overflow[open]'))return;if(!escape&&!(event.metaKey||event.ctrlKey))return;const target=event.target as HTMLElement|null;if(target?.closest("input,textarea,select,[contenteditable=true]"))return;const key=event.key.toLowerCase();if(escape){if(!outputActions.current.canEscape)return;event.preventDefault();outputActions.current.copy();}else if(key==="c"){event.preventDefault();outputActions.current.copy();}else if(key==="s"&&event.shiftKey){event.preventDefault();outputActions.current.save();}};document.addEventListener("keydown",keydown);return()=>document.removeEventListener("keydown",keydown);},[]);
   const uploadAction = useRef(upload); uploadAction.current = upload;
   useEffect(() => {
     const keydown = (event: KeyboardEvent) => {
@@ -368,10 +393,10 @@ export default function Workspace() {
   }, []);
   useEffect(() => {
     mounted.current = true;
-    return () => { mounted.current = false; liveImages.current.forEach((item) => URL.revokeObjectURL(item.src)); };
+    return () => { mounted.current = false; liveImages.current.forEach((item) => URL.revokeObjectURL(item.src));automaticUploads.current.forEach(image=>URL.revokeObjectURL(image.src));automaticUploads.current.clear(); };
   }, []);
 
-  useEffect(()=>{const keydown=(event:KeyboardEvent)=>{if(event.key!=="Tab"||event.shiftKey||event.metaKey||event.ctrlKey||event.altKey||!image||event.repeat)return;const target=event.target as HTMLElement|null;if(target?.closest("input,textarea,select,button,summary,[contenteditable=true],[aria-modal=true]"))return;event.preventDefault();void copyText(pointerColor).then(()=>setNotice(`Copied ${pointerColor}`)).catch(()=>setError("Color could not be copied."));};window.addEventListener("keydown",keydown);return()=>window.removeEventListener("keydown",keydown);},[image,pointerColor]);
+  useEffect(()=>{const keydown=(event:KeyboardEvent)=>{if(event.key!=="Tab"||event.shiftKey||event.metaKey||event.ctrlKey||event.altKey||!image||event.repeat)return;const target=event.target as HTMLElement|null;if(target?.closest("input,textarea,select,button,summary,[contenteditable=true],[aria-modal=true]"))return;event.preventDefault();void copyText(pointerColor.getSnapshot()).then(()=>setNotice(`Copied ${pointerColor.getSnapshot()}`)).catch(()=>setError("Color could not be copied."));};window.addEventListener("keydown",keydown);return()=>window.removeEventListener("keydown",keydown);},[image,pointerColor]);
 
   async function openFiles(files: File[]) {
     if (!files.length || busyRef.current) return;
@@ -408,21 +433,22 @@ export default function Workspace() {
         <header className="editor-chrome" aria-label="Editor tools">
           <div className="editor-unified-bar" role="toolbar" aria-label="All image tools">
             <EditorToolStrip>
-             <EditorTool order={1} label="Copy Image"><Button variant="ghost" size="icon" disabled={!image||busy} aria-label="Copy image" title="Copy Image" onClick={copy}><Copy/></Button></EditorTool>
-             <EditorTool order={2} label="Save Image"><Button variant="ghost" size="icon" disabled={!image||busy} aria-label="Save image…" title="Save Image" onClick={save}><Save/></Button></EditorTool>
-             <EditorTool order={3} label="Upload"><Button variant="ghost" size="icon" disabled={!image||busy} aria-label="Upload ⌘S" title="Upload (⌘S)" onClick={upload}><CloudUpload/></Button></EditorTool>
+             <EditorTool order={0} label="Add Image" hint={false}><EditorAddImage disabled={!image||busy||!preferencesReady} onAdd={insertImage}/></EditorTool>
+             <EditorTool order={1} label="Copy Image" shortcut="Esc / ⌘C"><Button variant="ghost" size="icon" disabled={!image||busy} aria-label="Copy image" title="Copy Image" onClick={copy}><Copy/></Button></EditorTool>
+             <EditorTool order={2} label="Save Image" shortcut="⌘⇧S"><Button variant="ghost" size="icon" disabled={!image||busy} aria-label="Save image…" title="Save Image" onClick={save}><Save/></Button></EditorTool>
+             <EditorTool order={3} label="Upload" shortcut="⌘S"><Button variant="ghost" size="icon" disabled={!image||busy} aria-label="Upload ⌘S" title="Upload (⌘S)" onClick={upload}><CloudUpload/></Button></EditorTool>
              <div id="editor-annotation-tools"/>
              {originalId&&<EditorTool order={41} label="Return To Source Image"><Button variant="ghost" size="icon" disabled={busy||!originalImage} aria-label="Return to source image" title="Return To Source Image" onClick={restoreOriginal}><Undo2/></Button></EditorTool>}
             </EditorToolStrip>
-            <EditorImageStatus image={image} color={pointerColor} zoom={displayZoom} busy={busy} onFit={()=>setZoom(null)} onCrop={()=>{setTransformMode("crop");setEffectsOpen(false);}} onResize={(width,height)=>transform({resize:{width,height}})}/>
+            <EditorImageStatus image={image} colorSource={pointerColor} zoom={displayZoom} busy={busy} onFit={()=>setZoom(fitZoom.current)} onCrop={()=>{setTransformMode("crop");setEffectsOpen(false);}} onResize={(width,height)=>transform({resize:{width,height}})}/>
             <span className="document-title sr-only">{image?.name}</span>
           </div>
           <div id="editor-element-options"/><div id="editor-tool-options"/>
-          {(transformMode||effectsOpen)&&<p className="editor-draft-hint">Adjust the region, then press Enter to apply. Escape cancels.</p>}
+          {(transformMode||effectsOpen)&&<p className="editor-draft-hint">Enter to apply · Esc to cancel</p>}
           <p className="sr-only" role="status">{notice||preferenceNotice}</p>
         </header>
         {ftpQueue.error && <div className="error-banner" role="alert">{ftpQueue.error}<Button variant="ghost" size="sm" onClick={() => { void ftpQueue.refresh(); }}>Refresh FTP</Button></div>}
-        {lastUpload && <section className="ftp-upload-banner" aria-label="FTP upload status"><strong>{lastUpload.status === "success" ? "Uploaded" : lastUpload.status === "failed" ? "Upload failed" : "Predicted URL"}</strong><output>{lastUpload.url}</output><span>{lastUpload.status === "success" ? "Transfer completed" : "File may not be available yet"}</span><Button variant="ghost" size="sm" disabled={busy} onClick={() => { void ftpQueue.copy(lastUpload.url); }}>Copy URL</Button></section>}
+        {lastUpload && lastUpload.status !== "success" && <section className="ftp-upload-banner" aria-label="FTP upload status"><strong>{lastUpload.status === "failed" ? "Upload failed" : "Predicted URL"}</strong><output>{lastUpload.url}</output><span>File may not be available yet</span><Button variant="ghost" size="sm" disabled={busy} onClick={() => { void ftpQueue.copy(lastUpload.url); }}>Copy URL</Button></section>}
         {lastUpload?.status === "failed" && <FtpFailurePanel code={lastUpload.errorCode ?? null} message={lastUpload.error ?? ""} busy={busy || ftpQueue.pending}
           onRetry={() => { void ftpQueue.retry(lastUpload.id); }} />}
         {localHistory.error&&<div className="error-banner" role="alert">{localHistory.error}</div>}
@@ -434,7 +460,7 @@ export default function Workspace() {
           {image&&<div className="image-stage">
             {(transformMode||effectsOpen)&&<WorkspaceDirectTools key={image.id} image={image} annotations={annotations} advanced={advancedItems} mode={transformMode??"effects"} busy={busy} zoom={zoom} onTransform={transform} onEffect={applyEffect} onCancel={()=>{setTransformMode(null);setEffectsOpen(false);}}/>}
             <div hidden={!!transformMode||effectsOpen}>
-              <WorkspaceEditor image={image} annotations={annotations} advancedItems={advancedItems} active={editing} busy={busy} zoom={zoom} onPixelSample={setPointerColor} onZoomReport={setDisplayZoom} onZoomChange={setZoom} onAdvancedChange={updateAdvanced} onSelectDrawing={()=>{setTransformMode(null);setEffectsOpen(false);setEditing(true);}}/>
+              <WorkspaceEditor imageToInsert={imageToInsert?.target===image.id?imageToInsert:undefined} onImageInserted={()=>setImageToInsert(undefined)} onFitChange={value=>{fitZoom.current=value;}} image={image} annotations={annotations} advancedItems={advancedItems} active={editing} busy={busy} zoom={zoom} onPixelSample={pointerColor.set} onZoomReport={setDisplayZoom} onZoomChange={setZoom} onAdvancedChange={updateAdvanced} onSelectDrawing={()=>{setTransformMode(null);setEffectsOpen(false);setEditing(true);}}/>
             </div>
           </div>}
         </section>

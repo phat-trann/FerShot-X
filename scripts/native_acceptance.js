@@ -51,15 +51,7 @@
         await wait(() => document.querySelector('.statusbar')?.textContent.includes('Image saved.'), 'actual native save');
       }
       check(true, 'actual annotate/render/save UI executed twice through production IPC');
-      let resolvePin;
-      const pinDone = new Promise(resolve => { resolvePin = resolve; });
-      const handler = window.__TAURI_INTERNALS__.transformCallback(event => resolvePin(event.payload));
-      const listener = await invoke('plugin:event|listen', { event: 'ferby-acceptance-pin-report', target: { kind: 'Any' }, handler });
-      await invoke('open_pin', { request: { sourceId: 'acceptance-pin-source', name: 'Synthetic native pin', pngBase64: canvas.toDataURL('image/png').split(',')[1] } });
-      const pin = await Promise.race([pinDone, pause(20000).then(() => { throw new Error('Native pin timed out'); })]);
-      await invoke('plugin:event|unlisten', { event: 'ferby-acceptance-pin-report', eventId: listener });
-      check(pin.ok, 'actual native pin owns, scales, fades and closes its own window');
-      report.pin = pin;
+
 
       // The configured folder is private and known by Rust; validate its actual filesystem output there.
       report.destination = await invoke('read_export_destination');

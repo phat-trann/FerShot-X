@@ -39,7 +39,7 @@ def render(root):
         details.append('')
     lines = ['# Project progress', '', f'**{total:g}% accepted against the declared MVP baseline** (rounded: {total:.0f}%). Updated: {data["updated"]}.', '',
              data['scope'], '', '**Excluded/deferred:** ' + data['excluded'], '',
-             'This is an evidence-based delivery score, not elapsed time, token consumption or full Shottr parity. Each milestone has equally weighted acceptance gates. Formula: sum(weight × accepted gates / total gates). Code existing, a DONE packet, or an isolated mock does not automatically pass a gate. Codex updates this ledger after review; workers propose evidence in completion packets. Native acceptance gates require real manual validation and remain unchecked.', '',
+             'This is an evidence-based delivery score, not elapsed time, token consumption or full feature completeness. Each milestone has equally weighted acceptance gates. Formula: sum(weight × accepted gates / total gates). Code existing, a DONE packet, or an isolated mock does not automatically pass a gate. Codex updates this ledger after review; workers propose evidence in completion packets. Native acceptance gates require real manual validation; unexecuted cases remain unchecked and user-reported results are labeled explicitly.', '',
              '| Milestone | Weight | Accepted gates | Earned |', '| --- | --- | --- | --- |'] + rows + ['',
              '## Current work and blockers', '',
              *data.get('checkpoint_notes', [

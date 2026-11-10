@@ -1,3 +1,5 @@
+import { validateEmbeddedPng } from "../konva/image-source";
+import { traceCounterBadge } from "../konva/counter";
 import { itemBounds } from "../konva/model";
 import { createBlurPatch } from "../konva/blur";
 import { EditorChrome } from "../../../components/EditorChrome";
@@ -113,6 +115,7 @@ export type AdvancedToolMode =
   | "workbench-base";
 
 export type AdvancedEditorItem = (
+  | {readonly id:string;readonly itemKind:"image";readonly src:string;readonly rect:Rect}
   | { readonly id: string; readonly itemKind: "contract"; readonly annotation: Annotation }
   | { readonly id: string; readonly itemKind: "shape"; readonly shape: ShapePrimitiveAnnotation }
   | { readonly id: string; readonly itemKind: "emphasis"; readonly effect: EmphasisEffect }) & {readonly rotation?:number;readonly geometryScale?:{readonly x:number;readonly y:number}};
@@ -164,6 +167,9 @@ export function validateAdvancedItem(
 
   if(item.geometryScale&&(![item.geometryScale.x,item.geometryScale.y].every(n=>Number.isFinite(n)&&n>=.01&&n<=100)))throw new Error("Invalid element scale.");
   if(item.rotation!==undefined&&(!Number.isFinite(item.rotation)||Math.abs(item.rotation)>36000))throw new Error("Invalid element rotation.");
+  if(item.itemKind==="image"){
+    validateEmbeddedPng(item.src);if(![item.rect?.x,item.rect?.y,item.rect?.width,item.rect?.height].every(Number.isFinite)||item.rect.width<1||item.rect.height<1)throw new Error("Invalid inserted image.");return;
+  }
   if (item.itemKind === "contract") {
     const tool = item.annotation?.tool as string;
     if (!SUPPORTED_CONTRACT_TOOLS.has(tool)) {
@@ -175,6 +181,7 @@ export function validateAdvancedItem(
       validateAnnotationText(item.annotation.text ?? "");
     } else if (tool === "counter") {
       validateCounterNumber(item.annotation.counter ?? 0);
+      const angle=item.annotation.counterAngle;if(angle!==undefined&&(!Number.isFinite(angle)||angle<0||angle>=360))throw new Error("Invalid counter corner angle.");
     }
     if (!item.annotation.points || item.annotation.points.length === 0) {
       throw new Error(`Contract annotation "${item.id}" has no points.`);
@@ -234,6 +241,7 @@ export function validateAdvancedItem(
 export function projectItemToFrozenContractAnnotation(
   item: AdvancedEditorItem,
 ): Annotation {
+  if(item.itemKind==="image")throw new UnsupportedAnnotationKindError("image");
   if (item.itemKind === "contract") {
     if (!SUPPORTED_CONTRACT_TOOLS.has(item.annotation.tool)) {
       throw new UnsupportedAnnotationKindError(item.annotation.tool);
@@ -495,6 +503,7 @@ export async function renderAdvancedWorkbenchToPngBlob(options: {
   }
 
   for (const item of items) {
+    if(item.itemKind==="image"){const image=new Image();image.src=item.src;await image.decode();ctx.drawImage(image,item.rect.x,item.rect.y,item.rect.width,item.rect.height);continue;}
     if (item.itemKind === "emphasis") {
       if(item.rotation){const effect=item.effect,b=itemBounds(item),cx=b.x+b.width/2,cy=b.y+b.height/2;ctx.save();
         if(effect.kind==="spotlight"){const hole=new Path2D();hole.rect(b.x,b.y,b.width,b.height);const mask=new Path2D();mask.rect(0,0,width,height);mask.addPath(hole,new DOMMatrix().translate(cx,cy).rotate(item.rotation).translate(-cx,-cy));ctx.fillStyle=`rgba(0,0,0,${effect.dimOpacity})`;ctx.fill(mask,"evenodd");}
@@ -601,8 +610,7 @@ export async function renderAdvancedWorkbenchToPngBlob(options: {
     } else if (ann.tool === "counter" && ann.points.length >= 1) {
       const pt = ann.points[0];
       const radius = Math.max(12, ann.style.strokeWidth * 4);
-      ctx.beginPath();
-      ctx.arc(pt.x, pt.y, radius, 0, Math.PI * 2);
+      traceCounterBadge(ctx,pt,radius,ann.counterAngle);
       ctx.fill();
       ctx.fillStyle = "#ffffff";
       ctx.font = `bold ${Math.round(radius)}px sans-serif`;

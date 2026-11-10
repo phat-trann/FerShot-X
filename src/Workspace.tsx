@@ -57,7 +57,7 @@ export default function Workspace() {
   const [preferenceNotice, setPreferenceNotice] = useState("");
   const [notice, setNotice] = useState("");
 
-  const [editing, setEditing] = useState(false);
+  const [editing, setEditing] = useState(true);
   const ftpQueue = useWorkspaceFtp();
   const localHistory = useLocalHistory();
   const [lastUploadId, setLastUploadId] = useState<string | null>(null);
@@ -78,7 +78,7 @@ export default function Workspace() {
   const [displayZoom,setDisplayZoom]=useState(1);
   const viewportHost=useRef<HTMLDivElement>(null);
   const [viewportWidth,setViewportWidth]=useState<number>();
-  useLayoutEffect(()=>{const node=viewportHost.current;if(!node)return;const measure=()=>setViewportWidth(Math.max(1,Math.min(node.clientWidth-24,(node.clientHeight-24)*16/9)));const observer=new ResizeObserver(measure);observer.observe(node);measure();return()=>observer.disconnect();},[]);
+  useLayoutEffect(()=>{const node=viewportHost.current;if(!node)return;const measure=()=>{const w=node.clientWidth-24,h=node.clientHeight-24;if(w>20&&h>20)setViewportWidth(Math.max(100,Math.min(w,h*16/9)));};const observer=new ResizeObserver(measure);observer.observe(node);measure();return()=>observer.disconnect();},[]);
   const picker = useRef<HTMLInputElement>(null);
   const liveImages = useRef<ImageDocument[]>([]);
   const busyRef = useRef(false);

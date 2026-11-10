@@ -58,7 +58,25 @@ export function KonvaWorkbench({onPixelSample,imageId,imageSrc,imageWidth:width,
   const blocked=!!busy||!!disabled,scale=Number.isFinite(zoom)&&zoom>0?zoom:1;
   const emitted=useRef(items);
   const callback=useRef(onSnapshotChange);callback.current=onSnapshotChange;
-  useEffect(()=>{let live=true;setSource(null);const image=new window.Image();image.src=imageSrc;void image.decode().then(()=>{if(live)setSource(image);}).catch(()=>{});return()=>{live=false;};},[imageSrc]);
+  useEffect(()=>{
+    let live=true;
+    setSource(null);
+    if(!imageSrc)return;
+    const img=new window.Image();
+    const apply=()=>{
+      if(!live)return;
+      setSource(img);
+      stage.current?.batchDraw();
+    };
+    img.onload=apply;
+    img.src=imageSrc;
+    if(img.complete&&img.naturalWidth>0){
+      apply();
+    }else if(typeof img.decode==="function"){
+      img.decode().then(apply).catch(()=>{});
+    }
+    return()=>{live=false;};
+  },[imageSrc]);
   useEffect(()=>{if(items===emitted.current)return;emitted.current=items;callback.current?.({items,selectedId:selected});},[items]);
   useEffect(()=>{if(blocked){cancelManipulation();cancelEndpoint();gesture.current=null;preview.current?.setAttr("draft",null);}},[blocked]);
   useEffect(()=>{const abort=()=>{cancelManipulation();cancelEndpoint();gesture.current=null;preview.current?.setAttr("draft",null);};window.addEventListener("blur",abort);window.addEventListener("resize",abort);window.addEventListener("scroll",abort,true);return()=>{window.removeEventListener("blur",abort);window.removeEventListener("resize",abort);window.removeEventListener("scroll",abort,true);};},[]);
@@ -66,7 +84,7 @@ export function KonvaWorkbench({onPixelSample,imageId,imageSrc,imageWidth:width,
   function beginManipulation(node:Konva.Group){cancelManipulation();manipulation.current={node,x:node.x(),y:node.y(),rotation:node.rotation(),sx:node.scaleX(),sy:node.scaleY()};node.findOne(".sampled-effect")?.visible(false);node.getLayer()?.batchDraw();}
   function endManipulation(node:Konva.Group){if(manipulation.current?.node!==node)return false;manipulation.current=null;node.findOne(".sampled-effect")?.visible(true);return true;}
   function cancelManipulation(){const active=manipulation.current;if(!active)return;manipulation.current=null;active.node.stopDrag();transformer.current?.stopTransform();active.node.position({x:active.x,y:active.y});active.node.scale({x:active.sx,y:active.sy});active.node.rotation(active.rotation);active.node.findOne(".sampled-effect")?.visible(true);active.node.getLayer()?.batchDraw();}
-  useLayoutEffect(()=>{stage.current?.draw();},[tool,selected,items]);
+  useLayoutEffect(()=>{stage.current?.batchDraw();},[tool,selected,items,source,scale]);
   function commit(next:readonly AdvancedEditorItem[]){if(next.length>1024)return;history.current.past.push(current.current);if(history.current.past.length>64)history.current.past.shift();history.current.future=[];current.current=next;setItems(next);setRevision(n=>n+1);}
   useLayoutEffect(()=>{cancelManipulation();},[scale,blocked]);
   function undo(redo=false){cancelManipulation();const from=redo?history.current.future:history.current.past,to=redo?history.current.past:history.current.future;const next=from.pop();if(next){to.push(current.current);current.current=next;setItems(next);setSelected(null);setRevision(n=>n+1);}}

@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "id": "20261112T113435-codex-C98-feb9f332",
+  "created_at": "2026-11-12T11:34:35.991122+07:00",
+  "agent": "codex",
+  "request": "C98-main-version-release-push",
+  "task": "C98",
+  "completion": "partial",
+  "summary": "Source commit f7da61e pushed successfully; actual Actions detection passed, retired macos-14 runner cancelled release; migrate to macos-15 and retry unpublished versions on pipeline repairs",
+  "files": [
+    ".github/workflows/release.yml",
+    "scripts/release_version.py",
+    "scripts/test_release_version.py",
+    "docs/releases/UPDATES.md",
+    "AGENTS.md",
+    "docs/agents/codex/C98-publication.md"
+  ],
+  "file_sha256": {
+    ".github/workflows/release.yml": "a3dbcace0142de5d4bc0d6fa646738c20141e48b5fc93c85e99d74be37e31211",
+    "scripts/release_version.py": "3ead5995d3d97016a02a1b402e89a028f39e982428f8cb894789f0723523dde7",
+    "scripts/test_release_version.py": "828379b672457424db1f8e71c79b594163ff92c41e900acc5c6f7b2552c64fef",
+    "docs/releases/UPDATES.md": "3e7de228d5ee8fa5e481cf9f7ecfdc862b82f55085ace29f094ca399e0b856aa",
+    "AGENTS.md": "6b7d558d21596fd687e3d3e7eb7d89976ceb5e74cf9ae39891fc73a8e725b7d0",
+    "docs/agents/codex/C98-publication.md": "2933d936ff539ecd960f26f9816ca3e6312bd66bf72f7d6a7db0661b7cd2f722"
+  },
+  "checks": [
+    "git push origin main succeeded for f7da61e; run 43155377005 detect job passed; release cancellation annotation identifies unsupported macos-14-arm64-us-default",
+    "8 planner tests and 8 mocked API/tag guard tests passed; macos-15 YAML parsed; official GitHub runner retirement/support docs checked"
+  ],
+  "risks": [
+    "Runner correction commit/push and next hosted CI result pending; no signed release acceptance yet. Manual acceptance remains 85%"
+  ],
+  "review": "pending"
+}

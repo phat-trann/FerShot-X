@@ -9,6 +9,10 @@ class ReleaseVersionTests(unittest.TestCase):
     def test_other_branches_never_publish(self):
         for event in ["push","workflow_dispatch"]:self.assertFalse(plan(event,"refs/heads/feature","1.2.0","1.1.0")[0])
     def test_manual_retry_on_main(self):self.assertTrue(plan("workflow_dispatch","refs/heads/main","1.1.0")[0])
+    def test_pipeline_repair_retries_unpublished_same_version(self):self.assertTrue(plan("push","refs/heads/main","1.1.0","1.1.0",True)[0])
+    def test_pipeline_repair_never_allows_a_decrease_or_other_branch(self):
+        self.assertFalse(plan("push","refs/heads/main","1.1.0","1.2.0",True)[0])
+        self.assertFalse(plan("push","refs/heads/feature","1.1.0","1.1.0",True)[0])
     def test_invalid_versions_fail_closed(self):
         for value in ["01.1.0","1.2","1.2.3-beta",None,"1.2.3\nsecret"]:
             with self.assertRaises(ValueError):version(value)

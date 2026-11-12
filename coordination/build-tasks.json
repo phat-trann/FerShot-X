@@ -5206,6 +5206,16 @@
       "shared_claim": "root-wiring",
       "owned_paths": "Active-window activation; retired native/UI sources, capability files and IPC wrappers; reviewed deletion archive manifest; version 1.1.2 and release docs",
       "inputs": "User compiler warnings and cleanup request; source references; Apple activation API documentation; production Rust warnings-as-errors compilation"
+    },
+    {
+      "id": "C101",
+      "agent": "codex",
+      "title": "Fix pointer-display full-screen capture and native scroll input; support persistent signing identity",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "Capture display resolution, native scroll input and integration tests; updater overlay/CI signing configuration; release and manual acceptance records",
+      "inputs": "User manual failures 1/3/16 and passes 2/4-15; Keychain popup clarification; official CoreGraphics and code identity documentation"
     }
   ],
   "allocation": "Codex sole active client; external Antigravity and Copilot inactive; preserve historical authorship.",
@@ -5317,7 +5327,8 @@
       "C97",
       "C98",
       "C99",
-      "C100"
+      "C100",
+      "C101"
     ],
     "copilot": []
   },

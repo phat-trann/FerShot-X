@@ -235,6 +235,7 @@ async fn capture_with_region(mode: Mode, region: Option<CaptureRegionRequest>,
             return Err(NativeError::new("invalid_bounds", "The repeat region must fit within the primary display's physical pixels."));
         }
     }
+    let fullscreen_display=if matches!(mode,Mode::Fullscreen)&&region.is_none(){Some(crate::display_capture::under_pointer()?)}else{None};
     let visible = window
         .is_visible()
         .map_err(|e| NativeError::new("window_failed", e.to_string()))?;
@@ -247,7 +248,7 @@ async fn capture_with_region(mode: Mode, region: Option<CaptureRegionRequest>,
         background,
     };
     let display_scale = if matches!(mode, Mode::Fullscreen) {
-        window.primary_monitor().ok().flatten().map(|monitor| monitor.scale_factor())
+        fullscreen_display.map(|display|display.scale)
             .filter(|value| value.is_finite() && *value > 0.0 && *value <= 8.0)
     } else { None };
     for other in &restore.other_windows { other.hide().map_err(|_|NativeError::new("window_failed","The app could not be hidden for capture."))?; }
@@ -266,7 +267,7 @@ async fn capture_with_region(mode: Mode, region: Option<CaptureRegionRequest>,
             Mode::Area => CaptureMode::Area,
             Mode::Window => CaptureMode::Window,
         };
-        let mode = if let Some((pid, window)) = active_window {
+        let mode = if let Some(display)=fullscreen_display { crate::display_capture::confirm(display)?;CaptureMode::Region(display.rect) } else if let Some((pid, window)) = active_window {
             crate::active_window::confirm(pid, window)?;
             CaptureMode::WindowId(window)
         } else if let Some(rect) = repeat_rect { CaptureMode::Region(rect) } else { mode };
@@ -282,6 +283,7 @@ async fn capture_with_region(mode: Mode, region: Option<CaptureRegionRequest>,
             .read()
             .map_err(|error| NativeError::new("capture_failed", error.to_string()))?;
         let mut raster = Raster::decode(&bytes).map_err(|error| NativeError::new("invalid_image", error.to_string()))?;
+        if let Some(display)=fullscreen_display{crate::display_capture::confirm(display)?;let (w,h)=raster.dimensions();let scale=w as f64/display.rect.width as f64;if (1.0..=8.0).contains(&scale)&&(scale-h as f64/display.rect.height as f64).abs()<0.001{display_scale=Some(scale);}}
         if let Some(request) = region {
             if crate::scrolling::current_display(&_restore.window)? != request.display ||
                 raster.dimensions() != (request.display.width, request.display.height) {

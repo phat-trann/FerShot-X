@@ -45,3 +45,7 @@ Future releases keep the same application identifier and keypair. Update only th
 Not required for the current public source repository. For a separate destination, set environment variables `UPDATER_RELEASE_OWNER`, `UPDATER_RELEASE_REPO`, `UPDATER_RELEASE_REF` (an existing branch/commit there), and secret `UPDATER_RELEASE_TOKEN` with release write permission for that repository. Configure the local overlay with `--repository OWNER/REPO` so endpoint and release destination agree. No token enters the app.
 
 Sources: [Tauri updater](https://v2.tauri.app/plugin/updater/), [Tauri ad-hoc signing](https://v2.tauri.app/distribute/sign/macos/), [Apple opening guidance](https://support.apple.com/en-us/102445).
+
+## Optional persistent app signing (C101)
+
+The default remains ad-hoc. For repeated Keychain/privacy prompts after upgrades, see [Persistent macOS app identity](STABLE-SIGNING.md). `MACOS_SIGNING_IDENTITY` plus user-managed `APPLE_CERTIFICATE` and `APPLE_CERTIFICATE_PASSWORD` enables the optional certificate path; this supersedes the earlier ad-hoc-only wording when configured. Updater keys are unchanged and still mandatory. No Apple ID/notarization credentials are added. Real certificate continuity acceptance remains pending.

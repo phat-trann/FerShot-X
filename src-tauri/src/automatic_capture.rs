@@ -11,17 +11,44 @@ fn fail(text:&str)->NativeError{NativeError::new("auto_scroll_failed",text)}
 struct Restore{app:tauri::AppHandle,windows:Vec<tauri::WebviewWindow>,success:bool,escape:bool}
 impl Drop for Restore{fn drop(&mut self){if self.escape{let _=self.app.global_shortcut().unregister(Shortcut::new(None,Code::Escape));}for w in &self.windows{if !(self.success&&w.label()=="main"){let _=w.show();}}}}
 fn capture(mode:CaptureMode)->Result<fershot_image_core::Raster,NativeError>{let file=fershot_capture_core::capture(mode).map_err(|_|fail("Native scrolling capture failed or was cancelled."))?;fershot_image_core::Raster::decode(&file.read().map_err(|_|fail("Captured pixels could not be read."))?).map_err(|_|fail("Captured pixels are invalid."))}
+fn scroll_step(rect:ScreenRect)->Result<(f64,f64,i32),NativeError>{
+ if !rect.is_valid()||rect.width<8||rect.height<32{return Err(fail("Select a larger scrollable region."))}
+ Ok((rect.x as f64+rect.width as f64/2.,rect.y as f64+rect.height as f64/2.,-((rect.height as f64*0.35).round()as i32).clamp(12,240)))
+}
 #[cfg(target_os="macos")]
-fn scroll(pid:u32,rect:ScreenRect)->Result<(),NativeError>{
- use core_graphics::geometry::CGPoint;
- #[link(name="CoreGraphics",kind="framework")]unsafe extern "C"{fn CGPreflightPostEventAccess()->bool;fn CGEventCreateScrollWheelEvent2(source:*mut std::ffi::c_void,units:u32,count:u32,a:i32,b:i32,c:i32)->*mut std::ffi::c_void;fn CGEventSetLocation(event:*mut std::ffi::c_void,point:CGPoint);fn CGEventPostToPid(pid:i32,event:*mut std::ffi::c_void);fn CFRelease(value:*const std::ffi::c_void);}
+mod input{
+ use super::*;use core_graphics::geometry::CGPoint;
+ #[link(name="CoreGraphics",kind="framework")]unsafe extern "C"{
+  fn CGPreflightPostEventAccess()->bool;fn CGEventCreate(source:*mut std::ffi::c_void)->*mut std::ffi::c_void;fn CGEventGetLocation(event:*mut std::ffi::c_void)->CGPoint;
+  fn CGEventCreateMouseEvent(source:*mut std::ffi::c_void,kind:u32,point:CGPoint,button:u32)->*mut std::ffi::c_void;
+  fn CGEventCreateScrollWheelEvent2(source:*mut std::ffi::c_void,units:u32,count:u32,a:i32,b:i32,c:i32)->*mut std::ffi::c_void;
+  fn CGEventSetLocation(event:*mut std::ffi::c_void,point:CGPoint);fn CGEventSetIntegerValueField(event:*mut std::ffi::c_void,field:u32,value:i64);fn CGEventPost(tap:u32,event:*mut std::ffi::c_void);
+ }
  #[link(name="ApplicationServices",kind="framework")]unsafe extern "C"{fn AXIsProcessTrusted()->bool;}
- // Accessibility trust is independent evidence. CoreGraphics preflight alone
- // must not override a positive Accessibility trust result. Real OS behavior
- // and ad-hoc identity changes require manual verification.
- let trusted=unsafe{AXIsProcessTrusted()};let preflight=unsafe{CGPreflightPostEventAccess()};
- if !event_access(trusted,preflight){return Err(NativeError::new("scroll_permission_denied","macOS has not granted event access to this running copy. In Privacy & Security > Accessibility, remove and re-add /Applications/FerShot X.app, enable it, then quit and reopen the app. Ad-hoc updates may require granting access again."))}
- let event=unsafe{CGEventCreateScrollWheelEvent2(std::ptr::null_mut(),0,1,-((rect.height as f64*0.65).round()as i32).clamp(1,2048),0,0)};if event.is_null(){return Err(fail("A scroll event could not be created."))}unsafe{CGEventSetLocation(event,CGPoint::new(rect.x as f64+rect.width as f64/2.,rect.y as f64+rect.height as f64/2.));CGEventPostToPid(pid as i32,event);CFRelease(event);}Ok(())
+ #[link(name="CoreFoundation",kind="framework")]unsafe extern "C"{fn CFRelease(value:*const std::ffi::c_void);}
+ struct Event(*mut std::ffi::c_void);
+ impl Event{fn new(raw:*mut std::ffi::c_void)->Result<Self,NativeError>{if raw.is_null(){Err(fail("A scroll input event could not be created."))}else{Ok(Self(raw))}}}
+ impl Drop for Event{fn drop(&mut self){unsafe{CFRelease(self.0)}}}
+ fn location()->Result<CGPoint,NativeError>{let e=Event::new(unsafe{CGEventCreate(std::ptr::null_mut())})?;Ok(unsafe{CGEventGetLocation(e.0)})}
+ fn near(a:CGPoint,b:CGPoint)->bool{(a.x-b.x).abs()<2.&&(a.y-b.y).abs()<2.}
+ fn move_to(point:CGPoint)->Result<(),NativeError>{let e=Event::new(unsafe{CGEventCreateMouseEvent(std::ptr::null_mut(),5,point,0)})?;unsafe{CGEventPost(0,e.0)};Ok(())}
+ pub struct Pointer{original:CGPoint,last:Option<CGPoint>}
+ impl Pointer{
+  pub fn new()->Result<Self,NativeError>{
+   if !event_access(unsafe{AXIsProcessTrusted()},unsafe{CGPreflightPostEventAccess()}){return Err(NativeError::new("scroll_permission_denied","Allow Accessibility for the installed FerShot X.app, then quit and reopen it. Ad-hoc updates may require granting access again."))}
+   Ok(Self{original:location()?,last:None})
+  }
+  pub fn scroll(&mut self,rect:ScreenRect)->Result<(),NativeError>{
+   if let Some(last)=self.last{if !near(location()?,last){return Err(NativeError::new("scroll_interrupted","The pointer moved during automatic scrolling. Keep it still or press Escape to finish."))}}
+   let(x,y,delta)=scroll_step(rect)?;let point=CGPoint::new(x,y);
+   let e=Event::new(unsafe{CGEventCreateScrollWheelEvent2(std::ptr::null_mut(),0,1,delta,0,0)})?;
+   // Route through WindowServer hit testing, as real pointer input. Posting to a
+   // PID alone does not establish the scrollable view under the cursor.
+   move_to(point)?;self.last=Some(point);std::thread::sleep(std::time::Duration::from_millis(40));
+   unsafe{CGEventSetLocation(e.0,point);CGEventSetIntegerValueField(e.0,88,1);CGEventPost(0,e.0)};Ok(())
+  }
+ }
+ impl Drop for Pointer{fn drop(&mut self){if let Some(last)=self.last{if location().is_ok_and(|p|near(p,last)){let _=move_to(self.original);}}}}
 }
 fn raster(width:u32,height:u32,rgba:Vec<u8>)->Result<fershot_image_core::Raster,NativeError>{let image=image::RgbaImage::from_raw(width,height,rgba).ok_or_else(||fail("Invalid scroll pixels."))?;let mut out=std::io::Cursor::new(Vec::new());image::DynamicImage::ImageRgba8(image).write_to(&mut out,image::ImageFormat::Png).map_err(|_|fail("Scrolling output could not be encoded."))?;fershot_image_core::Raster::decode(&out.into_inner()).map_err(|_|fail("Scrolling output exceeds the image limits."))}
 fn unchanged(a:&ScrollFrame,b:&ScrollFrame)->bool{a.width==b.width&&a.height==b.height&&a.rgba==b.rgba}
@@ -42,21 +69,22 @@ fn unchanged(a:&ScrollFrame,b:&ScrollFrame)->bool{a.width==b.width&&a.height==b.
   app.state::<StopState>().0.store(false,Ordering::SeqCst);
   app.global_shortcut().on_shortcut(escape,|app,_,event|{if event.state()==ShortcutState::Pressed{app.state::<StopState>().0.store(true,Ordering::SeqCst);}}).map_err(|_|fail("Escape could not be registered for stopping capture."))?;restore.escape=true;
   let(w,h)=first.dimensions();captured_frames=1;let mut frames=vec![ScrollFrame{width:w,height:h,rgba:first.rgba_bytes()}];let mut used_pixels=u64::from(w)*u64::from(h);let max_pixels=16_777_216u64;if used_pixels*2>max_pixels{return Err(fail("The selected region is too large for two safe frames. Select a smaller scrollable area."))}
+  #[cfg(target_os="macos")]let mut pointer=input::Pointer::new()?;
   while frames.len()<64&&used_pixels+u64::from(w)*u64::from(h)<=max_pixels{
    if app.state::<StopState>().0.load(Ordering::SeqCst){break;}
-   stage=crate::diagnostics::Stage::ResolveTarget;if before!=crate::area_capture::topology(&window)?{return Err(NativeError::new("display_changed","Displays changed during scrolling capture."))}crate::active_window::confirm(target.0,target.1)?;
+   stage=crate::diagnostics::Stage::ResolveTarget;if before!=crate::area_capture::topology(&window)?{return Err(NativeError::new("display_changed","Displays changed during scrolling capture."))}crate::active_window::confirm(target.0,target.1)?;if crate::active_window::target_at(rect)?!=target{return Err(NativeError::new("scroll_target_unavailable","The selected window is covered or changed. Uncover it and retry."))}
    stage=crate::diagnostics::Stage::PostScroll;
-   #[cfg(target_os="macos")]scroll(target.0,rect)?;
+   #[cfg(target_os="macos")]pointer.scroll(rect)?;
    #[cfg(not(target_os="macos"))]return Err(fail("Automatic scrolling requires macOS."));
    for _ in 0..20{if app.state::<StopState>().0.load(Ordering::SeqCst){break;}std::thread::sleep(std::time::Duration::from_millis(25));}
    if app.state::<StopState>().0.load(Ordering::SeqCst){break;}
    stage=crate::diagnostics::Stage::CaptureFrame;let frame=capture(CaptureMode::Region(rect))?;let(width,height)=frame.dimensions();let next=ScrollFrame{width,height,rgba:frame.rgba_bytes()};if unchanged(frames.last().unwrap(),&next){break;}if width!=w||height!=h{return Err(fail("The capture region changed size."))}used_pixels+=u64::from(w)*u64::from(h);frames.push(next);captured_frames=frames.len()as u32;
   }
-  if frames.len()==1&&!app.state::<StopState>().0.load(Ordering::SeqCst){return Err(NativeError::new("scroll_no_movement","The selected content did not scroll. Check Accessibility permission and select the scrollable content area."))}
+  if frames.len()==1&&!app.state::<StopState>().0.load(Ordering::SeqCst){return Err(NativeError::new("scroll_no_movement","The selected content did not move. Start above the end of the page and select inside its scrollable content."))}
   stage=crate::diagnostics::Stage::StitchFrames;
   let output=if frames.len()==1{raster(w,h,frames.remove(0).rgba).map_err(|_|fail("Captured frame is invalid."))?}else{let image=stitch_capture_frames(&frames,StitchOptions{direction:ScrollDirection::Down,min_overlap_rows:(h/10).max(8),max_output_height:16384,max_channel_diff:0}).map_err(|_|fail("The scrolling frames could not be aligned. Select just the scrolling content, avoid animation, and retry."))?;if image.matched_overlaps.is_empty(){return Err(NativeError::new("scroll_no_movement","The selected content did not move. Select the scrolling content and retry."))}raster(image.width,image.height,image.rgba).map_err(|_|fail("The scrolling result is too large."))?};
   stage=crate::diagnostics::Stage::EncodeOutput;let result=crate::imaging::payload(output)?;restore.success=true;Ok(result)
   })();if let Err(ref error)=result{crate::diagnostics::record_scroll_error(&app,error,stage,started.elapsed().as_millis()as u64,captured_frames);}result
  }).await.map_err(|_|fail("Scrolling capture stopped unexpectedly."))?
 }
-#[cfg(test)]mod tests{#[test]fn accessibility_trust_is_not_overruled_by_a_false_preflight(){assert!(super::event_access(true,false));assert!(super::event_access(false,true));assert!(super::event_access(true,true));assert!(!super::event_access(false,false));}#[test]fn end_detection_compares_pixels_and_geometry(){let a=fershot_scroll_core::ScrollFrame{width:1,height:1,rgba:vec![1,2,3,255]};let mut b=a.clone();assert!(super::unchanged(&a,&b));b.rgba[0]=4;assert!(!super::unchanged(&a,&b));}}
+#[cfg(test)]mod tests{#[test]fn scroll_steps_are_pixels_bounded_to_preserve_overlap_and_global_coordinates(){let rect=fershot_capture_core::ScreenRect{x:-1920,y:40,width:600,height:1200};assert_eq!(super::scroll_step(rect).unwrap(),(-1620.,640.,-240));assert_eq!(super::scroll_step(fershot_capture_core::ScreenRect{height:100,..rect}).unwrap().2,-35);assert!(super::scroll_step(fershot_capture_core::ScreenRect{height:0,..rect}).is_err());}#[test]fn accessibility_trust_is_not_overruled_by_a_false_preflight(){assert!(super::event_access(true,false));assert!(super::event_access(false,true));assert!(super::event_access(true,true));assert!(!super::event_access(false,false));}#[test]fn end_detection_compares_pixels_and_geometry(){let a=fershot_scroll_core::ScrollFrame{width:1,height:1,rgba:vec![1,2,3,255]};let mut b=a.clone();assert!(super::unchanged(&a,&b));b.rgba[0]=4;assert!(!super::unchanged(&a,&b));}}

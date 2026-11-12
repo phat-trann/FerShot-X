@@ -25,6 +25,7 @@ mod menu_bar;
 mod capture_upload;
 mod updates;
 mod active_window;
+mod display_capture;
 mod document_open;
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]

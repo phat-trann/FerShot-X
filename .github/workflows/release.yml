@@ -31,6 +31,7 @@ jobs:
     timeout-minutes: 60
     environment: release
     env:
+      APPLE_SIGNING_IDENTITY: ${{ vars.MACOS_SIGNING_IDENTITY || '-' }}
       RELEASE_VERSION: ${{ needs.detect.outputs.version }}
       RELEASE_TAG: ${{ needs.detect.outputs.tag }}
       UPDATER_RELEASE_REF: ${{ vars.UPDATER_RELEASE_REF }}
@@ -75,6 +76,8 @@ jobs:
       - name: Require real updater signing configuration
         if: steps.release_guard.outputs.publish == 'true'
         env:
+          APPLE_CERTIFICATE: ${{ secrets.APPLE_CERTIFICATE }}
+          APPLE_CERTIFICATE_PASSWORD: ${{ secrets.APPLE_CERTIFICATE_PASSWORD }}
           TAURI_UPDATER_PUBLIC_KEY: ${{ vars.TAURI_UPDATER_PUBLIC_KEY }}
           TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
         run: |
@@ -84,6 +87,21 @@ jobs:
               raise SystemExit('Missing TAURI_SIGNING_PRIVATE_KEY release secret')
           PY
           python3 scripts/configure_updater.py --repository "$RELEASE_OWNER/$RELEASE_REPO"
+      - name: Provide certificate only for explicitly configured stable app signing
+        if: steps.release_guard.outputs.publish == 'true' && env.APPLE_SIGNING_IDENTITY != '-'
+        env:
+          APPLE_CERTIFICATE: ${{ secrets.APPLE_CERTIFICATE }}
+          APPLE_CERTIFICATE_PASSWORD: ${{ secrets.APPLE_CERTIFICATE_PASSWORD }}
+        shell: python
+        run: |
+          import os, uuid
+          with open(os.environ['GITHUB_ENV'], 'a') as output:
+              for name in ('APPLE_CERTIFICATE', 'APPLE_CERTIFICATE_PASSWORD'):
+                  value = os.environ[name]
+                  delimiter = 'FERSHOT_' + uuid.uuid4().hex
+                  while delimiter in value:
+                      delimiter = 'FERSHOT_' + uuid.uuid4().hex
+                  output.write(name + '<<' + delimiter + '\n' + value + '\n' + delimiter + '\n')
       - uses: tauri-apps/tauri-action@v1
         if: steps.release_guard.outputs.publish == 'true'
         id: tauri
@@ -91,14 +109,13 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.UPDATER_RELEASE_TOKEN || secrets.GITHUB_TOKEN }}
           TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
           TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
-          APPLE_SIGNING_IDENTITY: '-'
         with:
           owner: ${{ env.RELEASE_OWNER }}
           repo: ${{ env.RELEASE_REPO }}
           releaseCommitish: ${{ vars.UPDATER_RELEASE_REF || github.sha }}
           tagName: v__VERSION__
           releaseName: FerShot X v__VERSION__
-          releaseBody: 'Verification candidate; manual acceptance pending. Tauri-signed updates; macOS app is ad-hoc signed and not notarized. Source commit: ${{ github.sha }}. See docs/releases.'
+          releaseBody: 'Verification candidate; manual acceptance pending. Tauri-signed updates; macOS identity follows release configuration; not notarized. Source commit: ${{ github.sha }}. See docs/releases.'
           releaseDraft: true
           prerelease: false
           uploadUpdaterJson: true

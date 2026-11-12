@@ -220,7 +220,7 @@ describe("WorkspaceFtpSettings namingMode & save regressions (A213)", () => {
 
     // Failed save surfaces the error, re-enables the form, and preserves "timestamp" selection
     await waitFor(() => {
-      expect(screen.getByRole("status",{name:"FTP settings status"}).textContent).toBe(
+      expect(screen.getByRole("alert",{name:"FTP settings status"}).textContent).toBe(
         "Disk write temporarily unavailable.",
       );
     });

@@ -1,3 +1,4 @@
+import {Button} from "../../components/ui/button";
 import React, { useState, useEffect } from "react";
 import type { ShortcutBinding } from "../hotkey-panel/HotkeyPanel";
 import { formatShortcutBinding } from "../hotkey-panel/HotkeyPanel";
@@ -18,8 +19,8 @@ export interface GlobalShortcutsV2PanelProps {
   readonly onChange: (next: GlobalBindingsV2) => void;
   readonly onApply: () => void;
   readonly onClear: () => void;
-  readonly onSave: () => void;
-  readonly onForget: () => void;
+  readonly onSave?: () => void;
+  readonly onForget?: () => void;
 }
 
 const MODIFIER_ONLY_KEYS = new Set([
@@ -36,8 +37,6 @@ export function GlobalShortcutsV2Panel({
   onChange,
   onApply,
   onClear,
-  onSave,
-  onForget,
 }: GlobalShortcutsV2PanelProps): React.JSX.Element {
   const [recordingAction, setRecordingAction] =
     useState<GlobalActionIdV2 | null>(null);
@@ -144,7 +143,7 @@ export function GlobalShortcutsV2Panel({
                 {ACTION_LABELS_V2[actionId]}
               </span>
               <div className="fershot-shortcuts-v2-panel__binding-controls">
-                <button
+                <Button variant="outline" size="sm"
                   type="button"
                   disabled={disabled}
                   aria-label={
@@ -173,16 +172,16 @@ export function GlobalShortcutsV2Panel({
                   {isRecording
                     ? "Press Keys (Esc to cancel)..."
                     : formatShortcutBinding(binding)}
-                </button>
+                </Button>
                 {binding && (
-                  <button
+                  <Button variant="outline" size="sm"
                     type="button"
                     disabled={disabled}
                     className="fershot-shortcuts-v2-panel__btn"
                     onClick={() => handleClearAction(actionId)}
                   >
                     Clear
-                  </button>
+                  </Button>
                 )}
               </div>
             </div>
@@ -191,38 +190,8 @@ export function GlobalShortcutsV2Panel({
       </div>
 
       <footer className="fershot-shortcuts-v2-panel__footer">
-        <button
-          type="button"
-          disabled={disabled}
-          className="fershot-shortcuts-v2-panel__btn"
-          onClick={onApply}
-        >
-          Apply shortcuts for this session
-        </button>
-        <button
-          type="button"
-          disabled={disabled}
-          className="fershot-shortcuts-v2-panel__btn"
-          onClick={onClear}
-        >
-          Clear all shortcuts
-        </button>
-        <button
-          type="button"
-          disabled={disabled}
-          className="fershot-shortcuts-v2-panel__btn"
-          onClick={onSave}
-        >
-          Save assignments
-        </button>
-        <button
-          type="button"
-          disabled={disabled}
-          className="fershot-shortcuts-v2-panel__btn"
-          onClick={onForget}
-        >
-          Forget saved assignments
-        </button>
+        <Button disabled={disabled} onClick={onApply}>Install Shortcuts</Button>
+        <Button variant="outline" disabled={disabled} onClick={onClear}>Remove Shortcuts</Button>
       </footer>
     </section>
   );

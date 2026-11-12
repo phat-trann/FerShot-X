@@ -3,7 +3,7 @@
   flex-direction: column;
   gap: 16px;
   padding: 16px;
-  background: var(--fershot-surface, #1e1e24);
+  background: var(--fershot-surface, #232427);
   color: var(--fershot-text, #ffffff);
   border-radius: 8px;
 }
@@ -33,7 +33,7 @@
   padding: 8px 12px;
   background: rgba(255, 255, 255, 0.03);
   border-radius: 6px;
-  border: 1px solid var(--fershot-border, #334155);
+  border: 1px solid var(--fershot-border, rgba(255,255,255,.1));
 }
 
 .fershot-shortcuts-v2-panel__label {
@@ -49,17 +49,17 @@
 .fershot-shortcuts-v2-panel__btn {
   padding: 6px 12px;
   border-radius: 4px;
-  border: 1px solid var(--fershot-border, #334155);
-  background: var(--fershot-button-bg, #27272a);
+  border: 1px solid var(--fershot-border, rgba(255,255,255,.1));
+  background: var(--fershot-button-bg, #303136);
   color: inherit;
   font-size: 12px;
   cursor: pointer;
 }
 
 .fershot-shortcuts-v2-panel__btn--recording {
-  border-color: var(--fershot-accent, #38bdf8);
-  background: rgba(56, 189, 248, 0.2);
-  color: var(--fershot-accent, #38bdf8);
+  border-color: var(--fershot-accent, #257EFE);
+  background: rgba(37,126,254,.15);
+  color: var(--fershot-accent, #257EFE);
 }
 
 .fershot-shortcuts-v2-panel__btn:disabled {
@@ -76,7 +76,7 @@
   display: flex;
   gap: 8px;
   justify-content: flex-end;
-  border-top: 1px solid var(--fershot-border, #334155);
+  border-top: 1px solid var(--fershot-border, rgba(255,255,255,.1));
   padding-top: 12px;
 }
 

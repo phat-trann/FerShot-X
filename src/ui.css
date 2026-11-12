@@ -68,3 +68,18 @@ input,textarea,[contenteditable="true"]{-webkit-user-select:text;user-select:tex
 .library-row-info strong{font-size:14px;font-weight:600}
 .library-row-info :is(span,time),.library-detail>header span,.library-metadata,.library-sidebar>footer,.preferences-window .preference-help,.preferences-footer p{font-size:12px;font-weight:500}
 .preferences-window :is(legend,summary),.preferences-window section[aria-label="FTP publishing settings"] p{font-size:13px;font-weight:500}
+
+/* Shared semantic status colors; document/annotation colors are unaffected. */
+:root { --status-success:#65D69A; --status-warning:#E9BC63; --status-error:#FF8585; --status-info:#80B5FF; }
+[role="alert"],.error-banner,.library-error { color:var(--status-error); }
+[role="status"] { color:var(--status-info); }
+.ui-status { margin:8px 0; font-size:13px; line-height:1.5; overflow-wrap:anywhere; }
+.ui-status[data-tone="success"],.status-badge[data-tone="success"] { color:var(--status-success); }
+.ui-status[data-tone="warning"],.status-badge[data-tone="warning"] { color:var(--status-warning); }
+.ui-status[data-tone="error"],.status-badge[data-tone="error"] { color:var(--status-error); }
+.ui-status[data-tone="info"],.status-badge[data-tone="info"] { color:var(--status-info); }
+.status-badge { display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:600; }
+.status-badge::before { content:"";width:5px;height:5px;border-radius:50%;background:currentColor;flex:none; }
+
+.ftp-upload-banner[data-tone="error"] strong { color:var(--status-error); }
+.ftp-upload-banner[data-tone="warning"] strong { color:var(--status-warning); }

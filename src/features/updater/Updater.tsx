@@ -1,3 +1,4 @@
+import {StatusMessage,type StatusTone} from "../../components/ui/status";
 import {useEffect,useState} from "react";
 import {invoke,isTauri} from "@tauri-apps/api/core";
 import {listen} from "@tauri-apps/api/event";
@@ -25,16 +26,17 @@ export function UpdaterHost(){useEffect(()=>{
  },[]);return null;}
 function useUpdateState(){const [state,setState]=useState<UpdateState>(INITIAL_UPDATE);useEffect(()=>{if(!isTauri())return;let live=true,off:(()=>void)|undefined;void listen<UpdateState>("fershot-update-state",e=>{if(live)setState(e.payload);}).then(async dispose=>{if(!live){dispose();return;}off=dispose;const value=await invoke<UpdateState>("read_update_state");if(live&&value)setState(value);}).catch(()=>{});return()=>{live=false;off?.();};},[]);return state;}
 const messages:Record<UpdateState["phase"],string>={idle:"Checks daily while the app is running.",unconfigured:"Updates are not configured in this build.",checking:"Checking for updates…",current:"You're up to date.",available:"An update is available.",downloading:"Downloading update…",downloaded:"Download verified. Ready to install.",installing:"Installing update…",installed:"Update installed. Restart to finish.",restarting:"Restarting…",error:"Update failed. Please retry."};
+const phaseTone=(phase:UpdateState["phase"]):StatusTone=>["current","downloaded","installed"].includes(phase)?"success":phase==="error"?"error":phase==="unconfigured"?"warning":"info";
 const errors={check:"Could not check GitHub Releases. Check your connection and try again.",download:"Download or signature verification failed. Check again and retry.",install:"Installation failed. Check app permissions and check again.",restart:"Restart failed. Quit and reopen FerShot X.",busy:"Finish image operations and FTP transfers before installing.",storage:"Update schedule could not be saved. Check storage and retry."};
 export function UpdateSettings(){const state=useUpdateState();const busy=["checking","downloading","installing","restarting"].includes(state.phase);const request=(action:Action)=>{void invoke("request_update",{action}).catch(()=>setRequestError("Update request failed. Reopen Settings and retry."));};const [requestError,setRequestError]=useState("");return <fieldset className="update-settings"><legend><CloudSync size={15} aria-hidden="true"/> App updates</legend>
  <div className="preference-row"><span>Current version</span><strong>{APP_VERSION}</strong></div>
  {state.availableVersion&&<div className="preference-row"><span>Available version</span><strong>{state.availableVersion}</strong></div>}
- <p role="status" className="preference-help">{requestError||messages[state.phase]}</p>
- {state.error&&<p role="alert" className="preference-help">{errors[state.error]}</p>}
+ <StatusMessage tone={requestError?"error":phaseTone(state.phase)} className="preference-help">{requestError||messages[state.phase]}</StatusMessage>
+ {state.error&&<StatusMessage tone="error" className="preference-help">{errors[state.error]}</StatusMessage>}
  {state.phase==="downloading"&&<div className="update-download"><progress aria-label="Update download progress" max={state.total||undefined} value={state.total?Math.min(state.downloaded,state.total):undefined}/><span>{(state.downloaded/1048576).toFixed(1)} MB{state.total?` / ${(state.total/1048576).toFixed(1)} MB`:""}</span></div>}
  <div className="update-actions"><Button variant="outline" size="sm" disabled={busy||state.phase==="installed"||!isTauri()} onClick={()=>{setRequestError("");request("check");}}><CloudSync size={15} aria-hidden="true"/>Check for Updates</Button>
  {state.phase==="available"&&<Button size="sm" onClick={()=>request("download")}>Download Update</Button>}
  {(state.phase==="downloaded"||state.phase==="error"&&state.error==="busy")&&<Button size="sm" onClick={()=>request("install")}>Install Update</Button>}
  {state.phase==="installed"&&<Button size="sm" onClick={()=>request("restart")}>Restart App</Button>}</div>
  </fieldset>;}
-export function UpdateNotice(){const state=useUpdateState();if(state.phase!=="available"&&state.phase!=="downloaded"&&state.phase!=="installed")return null;return <aside className="update-notice" aria-label="App update available"><CloudSync size={16} aria-hidden="true"/><span>{state.phase==="installed"?"Restart to finish updating":`FerShot X ${state.availableVersion} is ready`}</span><Button size="sm" variant="outline" onClick={()=>void openPreferencesWindow("general")}>View Update</Button></aside>;}
+export function UpdateNotice(){const state=useUpdateState();if(state.phase!=="available"&&state.phase!=="downloaded"&&state.phase!=="installed")return null;return <aside className="update-notice" aria-label="App update available"><CloudSync size={16} aria-hidden="true"/><span>{state.phase==="installed"?"Restart to finish updating":`FerShot X ${state.availableVersion} is ready`}</span><Button size="sm" variant="outline" onClick={()=>void openPreferencesWindow("updates")}>View Update</Button></aside>;}

@@ -11,6 +11,8 @@ export async function mock(page:Page){await page.context().addInitScript(({png})
  owner.__CALLS__.push({command,args});
  if(command==="local_cache_save_draft"){const r=args.request;owner.__DRAFTS__??={};owner.__DRAFTS__[r.id]={name:r.name,draft:r.draft,image:{...image,pngBase64:r.pngBase64??owner.__DRAFTS__[r.id]?.image.pngBase64??png,width:r.draft.width,height:r.draft.height,byteSize:atob(r.pngBase64??owner.__DRAFTS__[r.id]?.image.pngBase64??png).length}};const entry={id:r.id,name:r.name,width:r.draft.width,height:r.draft.height,byteSize:90,createdAt:now,expiresAt:now+30*86400000};owner.__LOCAL__=[entry,...owner.__LOCAL__.filter((x:any)=>x.id!==r.id)];return entry;}
  if(command==="plugin:event|listen"){const id=++seq;subs.set(id,args);return id;}if(command==="plugin:event|unlisten"){subs.delete(args.eventId);return;}
+ if(command==="get_shortcuts"||command==="load_saved_shortcuts"){const empty=Object.fromEntries(["capture-fullscreen","capture-area","capture-window","capture-active-window","capture-repeat-region","capture-scrolling","ocr-capture","show-workspace"].map(id=>[id,null]));return {bindings:(command==="get_shortcuts"?owner.__ACTIVE_SHORTCUTS__:owner.__SAVED_SHORTCUTS__)??empty,faulted:false,restorationFailed:false};}
+ if(command==="configure_shortcuts"){owner.__ACTIVE_SHORTCUTS__={...args.bindings};owner.__SAVED_SHORTCUTS__={...args.bindings};return {bindings:args.bindings,faulted:false};}
  if(command==="read_capture_upload_mode")return !!host.__AUTO_UPLOAD__;
  if(command==="local_cache_list")return owner.__LOCAL__;if(command==="ftp_list")return owner.__FTP__;
  if(command==="library_thumbnail")return image;

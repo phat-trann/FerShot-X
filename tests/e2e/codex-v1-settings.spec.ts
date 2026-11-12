@@ -4,7 +4,7 @@ import {installSettingsIpc,setQuality} from "./helpers/v1-settings";
 test("Settings format and quality persist in its independent window",async({page})=>{await installSettingsIpc(page);await page.goto("/");const settings=await openSettingsPopup(page);await settings.getByRole("radio",{name:"JPEG",exact:true}).check();await setQuality(settings,73);await settings.getByRole("button",{name:"Save preferences",exact:true}).click();await expect(settings.locator(".preferences-footer").getByRole("status")).toHaveText("Preferences saved.");const closed=settings.waitForEvent("close");await settings.getByRole("button",{name:"Done",exact:true}).click();await closed;const again=await openSettingsPopup(page);await expect(again.getByRole("radio",{name:"JPEG",exact:true})).toBeChecked();await expect(again.getByRole("slider",{name:"Preferred JPEG quality",exact:true})).toHaveValue("73");});
 test("Settings tabs are keyboard accessible, omit absent features, and fit a small window",async({page})=>{
   await installSettingsIpc(page);await page.goto("/");const preferences=await openSettingsPopup(page);await preferences.setViewportSize({width:620,height:540});
-  const general=preferences.getByRole("tab",{name:"General",exact:true});await general.focus();await preferences.keyboard.press("End");await expect(preferences.getByRole("tab",{name:"Advanced",exact:true})).toBeFocused();
+  const general=preferences.getByRole("tab",{name:"General",exact:true});await general.focus();await preferences.keyboard.press("End");await expect(preferences.getByRole("tab",{name:"Updates",exact:true})).toBeFocused();
   await preferences.keyboard.press("Home");await expect(general).toBeFocused();
   await expect(preferences.getByRole("tab",{name:/license|language|recognition/i})).toHaveCount(0);
   await preferences.getByRole("tab",{name:"Uploading",exact:true}).click();await preferences.getByLabel("FTP host",{exact:true}).fill("draft.example.invalid");
@@ -15,7 +15,7 @@ test("Settings tabs are keyboard accessible, omit absent features, and fit a sma
 
 test("corrupt saved preferences disable saving and never silently replace stored values",async({page})=>{
   await installSettingsIpc(page,"corrupt");await page.goto("/");const preferences=await openSettingsPopup(page);
-  await expect(preferences.locator(".preferences-footer").getByRole("status")).toContainText("Existing settings have been preserved");
+  await expect(preferences.locator(".preferences-footer").getByRole("alert")).toContainText("Existing settings have been preserved");
   await expect(preferences.getByRole("button",{name:"Save preferences",exact:true})).toBeDisabled();
   expect(await page.evaluate(()=>(window as any).__PREFS_CALLS__.filter((c:any)=>c.command.startsWith("save_")).length)).toBe(0);
 });
@@ -23,7 +23,7 @@ test("corrupt saved preferences disable saving and never silently replace stored
 test("failed atomic save preserves the draft and can be retried without partial-success wording",async({page})=>{
   await installSettingsIpc(page,"fail-save");await page.goto("/");const preferences=await openSettingsPopup(page);
   await preferences.getByRole("radio",{name:"JPEG",exact:true}).check();await preferences.getByRole("button",{name:"Save preferences",exact:true}).click();
-  await expect(preferences.locator(".preferences-footer").getByRole("status")).toHaveText("Synthetic write failure");await expect(preferences.getByRole("radio",{name:"JPEG",exact:true})).toBeChecked();
+  await expect(preferences.locator(".preferences-footer").getByRole("alert")).toHaveText("Synthetic write failure");await expect(preferences.getByRole("radio",{name:"JPEG",exact:true})).toBeChecked();
   await preferences.getByRole("button",{name:"Save preferences",exact:true}).click();await expect(preferences.locator(".preferences-footer").getByRole("status")).toHaveText("Preferences saved.");
 });
 

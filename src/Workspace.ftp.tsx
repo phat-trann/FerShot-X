@@ -1,3 +1,4 @@
+import {StatusMessage,type StatusTone} from "./components/ui/status";
 import { Switch } from "./components/ui/switch";
 import { Button } from "./components/ui/button";
 import { readPreviewAuth,savePreviewAuth,type PreviewAuth } from "./platform/ftp";
@@ -14,10 +15,11 @@ export function WorkspaceFtpSettings({ expanded = false }: { expanded?: boolean 
   const [pending, setPending] = useState(false);
   const [ready, setReady] = useState(false);
   const [notice, setNotice] = useState("");
+  const [tone,setTone]=useState<StatusTone>("info");
   const mounted = useRef(false);
   useEffect(() => { mounted.current = true; let live = true;
     if (!isTauri()) { setNotice("FTP settings are available in the desktop app."); return () => { mounted.current = false; }; }
-    void readFtpSettings().then(settings => { if (live) { if (settings) setValue({ ...DEFAULT, ...settings }); setReady(true); } }).catch(error => { if (live) setNotice(error.message); });
+    void readFtpSettings().then(settings => { if (live) { if (settings) setValue({ ...DEFAULT, ...settings }); setReady(true); } }).catch(error => { if (live){setTone("error");setNotice(error.message);} });
     return () => { live = false; mounted.current = false; };
   }, []);
   const date=new Date();const monthFolder=`${String(date.getFullYear()%100).padStart(2,"0")}${String(date.getMonth()+1).padStart(2,"0")}`;
@@ -25,8 +27,8 @@ export function WorkspaceFtpSettings({ expanded = false }: { expanded?: boolean 
   const field = (key: keyof FtpSettings, next: string | number | boolean) => setValue(old => ({ ...old, [key]: next }));
   async function save(event: React.FormEvent) {
     event.preventDefault(); if (pending || !ready) return; setPending(true); setNotice("");
-    try { const saved = await saveFtpSettings(value, password || null); if (mounted.current) { setValue(saved); setPassword(""); setNotice("FTP settings saved."); } }
-    catch (error) { if (mounted.current) setNotice(error instanceof Error ? error.message : "Could not save FTP settings."); }
+    try { const saved = await saveFtpSettings(value, password || null); if (mounted.current) { setValue(saved); setPassword(""); setTone("success");setNotice("FTP settings saved."); } }
+    catch (error) { if (mounted.current){setTone("error");setNotice(error instanceof Error ? error.message : "Could not save FTP settings.");} }
     finally { if (mounted.current) setPending(false); }
   }
   return <section aria-label="FTP publishing settings"><details open={expanded || undefined}><summary>FTP publishing</summary>
@@ -47,9 +49,9 @@ export function WorkspaceFtpSettings({ expanded = false }: { expanded?: boolean 
       </NativeSelect></label>
       <p>{value.namingMode === "timestamp" ? "Local timestamp: DDHHmmssN." : "Unique random filename."} </p>
       <label><Switch  checked={value.secure} onCheckedChange={checked => field("secure", checked)} />Require explicit TLS (FTPS)</label>
-      {!value.secure && <p>Plain FTP sends credentials without transport encryption.</p>}
+      {!value.secure && <StatusMessage tone="warning">Plain FTP sends credentials without transport encryption.</StatusMessage>}
       <button type="submit">{pending ? "Saving…" : "Save FTP settings"}</button>
-    </fieldset></form><p role="status" aria-label="FTP settings status">{notice}</p><HttpPreviewSettings/></details>
+    </fieldset></form><StatusMessage tone={tone} aria-label="FTP settings status">{notice}</StatusMessage><HttpPreviewSettings/></details>
   </section>;
 }
 export function useWorkspaceFtp() {
@@ -75,7 +77,7 @@ export function useWorkspaceFtp() {
 }
 
 function HttpPreviewSettings(){
- const [value,setValue]=useState<PreviewAuth|null>(null),[password,setPassword]=useState(""),[pending,setPending]=useState(false),[notice,setNotice]=useState("");
- useEffect(()=>{let live=true;void readPreviewAuth().then(value=>{if(live)setValue(value);}).catch(e=>{if(live)setNotice(e.message);});return()=>{live=false;};},[]);
- return <section aria-label="HTTPS preview authentication"><h3>HTTPS preview authentication</h3><p>HTTP Basic for this HTTPS origin; passwords stay in Keychain.</p>{value&&<form onSubmit={event=>{event.preventDefault();if(pending)return;setPending(true);void savePreviewAuth(value,password||null).then(saved=>{setValue(saved);setPassword("");setNotice("HTTP settings saved.");}).catch(e=>setNotice(e.message)).finally(()=>setPending(false));}}><fieldset disabled={pending}><label>HTTP authentication<Switch checked={value.enabled} onCheckedChange={enabled=>setValue({...value,enabled})}/></label><label>HTTPS origin<Input type="url" required aria-label="HTTPS preview origin" placeholder="https://images.example.com" value={value.origin} onChange={e=>setValue({...value,origin:e.target.value})}/></label><label>HTTP username<Input autoComplete="off" aria-label="HTTP username" value={value.username} onChange={e=>setValue({...value,username:e.target.value})}/></label><label>HTTP password<Input type="password" autoComplete="new-password" aria-label="HTTP password" placeholder="Leave blank to keep stored password" value={password} onChange={e=>setPassword(e.target.value)}/></label><Button type="submit">{pending?"Saving…":"Save HTTP settings"}</Button></fieldset></form>}<p role="status" aria-label="HTTP settings status">{notice}</p></section>;
+ const [value,setValue]=useState<PreviewAuth|null>(null),[password,setPassword]=useState(""),[pending,setPending]=useState(false),[notice,setNotice]=useState(""),[tone,setTone]=useState<StatusTone>("info");
+ useEffect(()=>{let live=true;void readPreviewAuth().then(value=>{if(live)setValue(value);}).catch(e=>{if(live){setTone("error");setNotice(e.message);}});return()=>{live=false;};},[]);
+ return <section aria-label="HTTPS preview authentication"><h3>HTTPS preview authentication</h3><p>HTTP Basic for this HTTPS origin; passwords stay in Keychain.</p>{value&&<form onSubmit={event=>{event.preventDefault();if(pending)return;setPending(true);void savePreviewAuth(value,password||null).then(saved=>{setValue(saved);setPassword("");setTone("success");setNotice("HTTP settings saved.");}).catch(e=>{setTone("error");setNotice(e.message);}).finally(()=>setPending(false));}}><fieldset disabled={pending}><label>HTTP authentication<Switch checked={value.enabled} onCheckedChange={enabled=>setValue({...value,enabled})}/></label><label>HTTPS origin<Input type="url" required aria-label="HTTPS preview origin" placeholder="https://images.example.com" value={value.origin} onChange={e=>setValue({...value,origin:e.target.value})}/></label><label>HTTP username<Input autoComplete="off" aria-label="HTTP username" value={value.username} onChange={e=>setValue({...value,username:e.target.value})}/></label><label>HTTP password<Input type="password" autoComplete="new-password" aria-label="HTTP password" placeholder="Leave blank to keep stored password" value={password} onChange={e=>setPassword(e.target.value)}/></label><Button type="submit">{pending?"Saving…":"Save HTTP settings"}</Button></fieldset></form>}<StatusMessage tone={tone} aria-label="HTTP settings status">{notice}</StatusMessage></section>;
 }

@@ -6,6 +6,7 @@ use std::sync::atomic::{AtomicBool,Ordering};
 use tauri::Manager;
 use tauri_plugin_global_shortcut::{Code,GlobalShortcutExt,Shortcut,ShortcutState};
 #[derive(Default)]pub struct StopState(pub AtomicBool);
+fn event_access(trusted:bool,preflight:bool)->bool{trusted||preflight}
 fn fail(text:&str)->NativeError{NativeError::new("auto_scroll_failed",text)}
 struct Restore{app:tauri::AppHandle,windows:Vec<tauri::WebviewWindow>,success:bool,escape:bool}
 impl Drop for Restore{fn drop(&mut self){if self.escape{let _=self.app.global_shortcut().unregister(Shortcut::new(None,Code::Escape));}for w in &self.windows{if !(self.success&&w.label()=="main"){let _=w.show();}}}}
@@ -14,7 +15,12 @@ fn capture(mode:CaptureMode)->Result<fershot_image_core::Raster,NativeError>{let
 fn scroll(pid:u32,rect:ScreenRect)->Result<(),NativeError>{
  use core_graphics::geometry::CGPoint;
  #[link(name="CoreGraphics",kind="framework")]unsafe extern "C"{fn CGPreflightPostEventAccess()->bool;fn CGEventCreateScrollWheelEvent2(source:*mut std::ffi::c_void,units:u32,count:u32,a:i32,b:i32,c:i32)->*mut std::ffi::c_void;fn CGEventSetLocation(event:*mut std::ffi::c_void,point:CGPoint);fn CGEventPostToPid(pid:i32,event:*mut std::ffi::c_void);fn CFRelease(value:*const std::ffi::c_void);}
- if !unsafe{CGPreflightPostEventAccess()}{return Err(NativeError::new("scroll_permission_denied","Allow FerShot X in System Settings > Privacy & Security > Accessibility, then retry scrolling capture."))}
+ #[link(name="ApplicationServices",kind="framework")]unsafe extern "C"{fn AXIsProcessTrusted()->bool;}
+ // Accessibility trust is independent evidence. CoreGraphics preflight alone
+ // must not override a positive Accessibility trust result. Real OS behavior
+ // and ad-hoc identity changes require manual verification.
+ let trusted=unsafe{AXIsProcessTrusted()};let preflight=unsafe{CGPreflightPostEventAccess()};
+ if !event_access(trusted,preflight){return Err(NativeError::new("scroll_permission_denied","macOS has not granted event access to this running copy. In Privacy & Security > Accessibility, remove and re-add /Applications/FerShot X.app, enable it, then quit and reopen the app. Ad-hoc updates may require granting access again."))}
  let event=unsafe{CGEventCreateScrollWheelEvent2(std::ptr::null_mut(),0,1,-((rect.height as f64*0.65).round()as i32).clamp(1,2048),0,0)};if event.is_null(){return Err(fail("A scroll event could not be created."))}unsafe{CGEventSetLocation(event,CGPoint::new(rect.x as f64+rect.width as f64/2.,rect.y as f64+rect.height as f64/2.));CGEventPostToPid(pid as i32,event);CFRelease(event);}Ok(())
 }
 fn raster(width:u32,height:u32,rgba:Vec<u8>)->Result<fershot_image_core::Raster,NativeError>{let image=image::RgbaImage::from_raw(width,height,rgba).ok_or_else(||fail("Invalid scroll pixels."))?;let mut out=std::io::Cursor::new(Vec::new());image::DynamicImage::ImageRgba8(image).write_to(&mut out,image::ImageFormat::Png).map_err(|_|fail("Scrolling output could not be encoded."))?;fershot_image_core::Raster::decode(&out.into_inner()).map_err(|_|fail("Scrolling output exceeds the image limits."))}
@@ -53,4 +59,4 @@ fn unchanged(a:&ScrollFrame,b:&ScrollFrame)->bool{a.width==b.width&&a.height==b.
   })();if let Err(ref error)=result{crate::diagnostics::record_scroll_error(&app,error,stage,started.elapsed().as_millis()as u64,captured_frames);}result
  }).await.map_err(|_|fail("Scrolling capture stopped unexpectedly."))?
 }
-#[cfg(test)]mod tests{#[test]fn end_detection_compares_pixels_and_geometry(){let a=fershot_scroll_core::ScrollFrame{width:1,height:1,rgba:vec![1,2,3,255]};let mut b=a.clone();assert!(super::unchanged(&a,&b));b.rgba[0]=4;assert!(!super::unchanged(&a,&b));}}
+#[cfg(test)]mod tests{#[test]fn accessibility_trust_is_not_overruled_by_a_false_preflight(){assert!(super::event_access(true,false));assert!(super::event_access(false,true));assert!(super::event_access(true,true));assert!(!super::event_access(false,false));}#[test]fn end_detection_compares_pixels_and_geometry(){let a=fershot_scroll_core::ScrollFrame{width:1,height:1,rgba:vec![1,2,3,255]};let mut b=a.clone();assert!(super::unchanged(&a,&b));b.rgba[0]=4;assert!(!super::unchanged(&a,&b));}}

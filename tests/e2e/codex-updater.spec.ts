@@ -16,9 +16,9 @@ test("Settings shows update versions, progress, installation and explicit restar
  const emit=w.__EMIT__;w.__EMIT__=(name:string,payload:any)=>{emit(name,payload);if(name==="fershot-update-state"&&w.__SETTINGS__){w.__SETTINGS__.__UPDATE_STATE__=payload;w.__SETTINGS__.__EMIT__(name,payload);}};
  },{version:APP_VERSION});
  await page.goto("/?editor");await expect.poll(()=>page.evaluate(()=>(window as any).__CALLS__.some((c:any)=>c.command==="plugin:event|listen"&&c.args.event==="fershot-updater-action"))).toBe(true);
- const popup=page.waitForEvent("popup");await page.evaluate(()=>{(window as any).__SETTINGS__=window.open("/?preferences","updater-settings");});const settings=await popup;
- await expect(settings.getByText(APP_VERSION,{exact:true})).toBeVisible();await settings.getByRole("button",{name:"Check for Updates",exact:true}).click();await expect(settings.getByText("1.2.0",{exact:true})).toBeVisible();
- await settings.getByRole("button",{name:"Download Update",exact:true}).click();await expect(settings.getByText("Download verified. Ready to install.")).toBeVisible();
+ const popup=page.waitForEvent("popup");await page.evaluate(()=>{(window as any).__SETTINGS__=window.open("/?preferences&tab=updates","updater-settings");});const settings=await popup;
+ await expect(settings.getByRole("tab",{name:"Updates",exact:true})).toHaveAttribute("data-state","active");await expect(settings.getByText(APP_VERSION,{exact:true})).toBeVisible();await settings.getByRole("button",{name:"Check for Updates",exact:true}).click();await expect(settings.getByText("1.2.0",{exact:true})).toBeVisible();
+ await settings.getByRole("button",{name:"Download Update",exact:true}).click();await expect(settings.getByText("Download verified. Ready to install.")).toHaveAttribute("data-tone","success");
  expect(await page.evaluate(()=>(window as any).__CALLS__.filter((c:any)=>c.command==="plugin:updater|install").length)).toBe(0);
  await settings.getByRole("button",{name:"Install Update",exact:true}).click();await expect(settings.getByRole("button",{name:"Restart App",exact:true})).toBeVisible();
  expect(await page.evaluate(()=>(window as any).__CALLS__.filter((c:any)=>c.command==="plugin:process|restart").length)).toBe(0);

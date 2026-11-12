@@ -457,7 +457,7 @@ export default function Workspace() {
           <p className="sr-only" role="status">{notice||preferenceNotice}</p>
         </header>
         {ftpQueue.error && <div className="error-banner" role="alert">{ftpQueue.error}<Button variant="ghost" size="sm" onClick={() => { void ftpQueue.refresh(); }}>Refresh FTP</Button></div>}
-        {lastUpload && lastUpload.status !== "success" && <section className="ftp-upload-banner" aria-label="FTP upload status"><strong>{lastUpload.status === "failed" ? "Upload failed" : "Predicted URL"}</strong><output>{lastUpload.url}</output><span>File may not be available yet</span><Button variant="ghost" size="sm" disabled={busy} onClick={() => { void ftpQueue.copy(lastUpload.url); }}>Copy URL</Button></section>}
+        {lastUpload && lastUpload.status !== "success" && <section className="ftp-upload-banner" data-tone={lastUpload.status==="failed"?"error":"warning"} aria-label="FTP upload status"><strong>{lastUpload.status === "failed" ? "Upload failed" : "Predicted URL"}</strong><output>{lastUpload.url}</output><span>File may not be available yet</span><Button variant="ghost" size="sm" disabled={busy} onClick={() => { void ftpQueue.copy(lastUpload.url); }}>Copy URL</Button></section>}
         {lastUpload?.status === "failed" && <FtpFailurePanel code={lastUpload.errorCode ?? null} message={lastUpload.error ?? ""} busy={busy || ftpQueue.pending}
           onRetry={() => { void ftpQueue.retry(lastUpload.id); }} />}
         {localHistory.error&&<div className="error-banner" role="alert">{localHistory.error}</div>}

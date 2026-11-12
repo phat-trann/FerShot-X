@@ -1,6 +1,6 @@
 import { invoke, isTauri } from "@tauri-apps/api/core";
 
-export async function openPreferencesWindow(tab?: "general" | "hotkeys" | "uploading" | "advanced"): Promise<void> {
+export async function openPreferencesWindow(tab?: "general" | "hotkeys" | "uploading" | "advanced" | "updates"): Promise<void> {
   if (isTauri()) { await invoke("open_preferences_window", tab ? { tab } : {}); return; }
   const popup = window.open(`?preferences${tab ? `&tab=${tab}` : ""}`, "fershot-preferences", "popup,width=760,height=700");
   if (!popup) throw new Error("Allow the Settings window to open, then retry.");

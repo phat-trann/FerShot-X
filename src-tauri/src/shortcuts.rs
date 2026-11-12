@@ -1,6 +1,6 @@
 use crate::imaging::{NativeError, NativeJobs};
 use serde::{Serialize, Deserialize};
-use std::{collections::{BTreeMap, BTreeSet}, str::FromStr, sync::Mutex};
+use std::{collections::{BTreeMap, BTreeSet}, str::FromStr, sync::{Mutex,atomic::{AtomicBool,Ordering}}};
 use tauri::{Emitter, Manager};
 use tauri_plugin_global_shortcut::{Code, GlobalShortcutExt, Modifiers, Shortcut, ShortcutEvent, ShortcutState};
 
@@ -39,7 +39,7 @@ pub fn load_saved_at(path: &std::path::Path) -> Result<ShortcutStatus, NativeErr
     } else {
         empty()
     };
-    Ok(ShortcutStatus { bindings, faulted: false })
+    Ok(ShortcutStatus { bindings, faulted: false, restoration_failed:false })
 }
 
 pub fn save_at(path: &std::path::Path, bindings: Bindings) -> Result<ShortcutStatus, NativeError> {
@@ -47,7 +47,7 @@ pub fn save_at(path: &std::path::Path, bindings: Bindings) -> Result<ShortcutSta
     let raw = serde_json::to_vec(&SavedBindings { version: 2, bindings: bindings.clone() })
         .map_err(|e| NativeError::new("invalid_shortcut", e.to_string()))?;
     crate::application_preferences::write_document(path, crate::application_preferences::Document::Shortcuts, &raw)?;
-    Ok(ShortcutStatus { bindings, faulted: false })
+    Ok(ShortcutStatus { bindings, faulted: false, restoration_failed:false })
 }
 fn empty() -> Bindings { ACTIONS.into_iter().map(|action| (action.into(), None)).collect() }
 fn parse(input: &Bindings) -> Result<Vec<(String, Shortcut)>, NativeError> {
@@ -99,29 +99,32 @@ fn transition(old: &[Shortcut], next: &[Shortcut], registry: &mut impl Registry)
 
 struct Config { bindings: Bindings, parsed: Vec<(String, Shortcut)>, known: Vec<Shortcut>, faulted: bool }
 #[derive(Default)]
-pub struct ShortcutStore { config: Mutex<Option<Config>>, gate: Mutex<()>, pressed: Mutex<BTreeSet<u32>> }
+pub struct ShortcutStore { config: Mutex<Option<Config>>, gate: Mutex<()>, pressed: Mutex<BTreeSet<u32>>, restoration_failed:AtomicBool }
 #[derive(Serialize)]
-pub struct ShortcutStatus { bindings: Bindings, faulted: bool }
+#[serde(rename_all="camelCase")]
+pub struct ShortcutStatus { bindings: Bindings, faulted: bool, restoration_failed:bool }
 fn status(store: &ShortcutStore) -> Result<ShortcutStatus, NativeError> {
     let config = store.config.lock().map_err(|_| NativeError::new("shortcut_failed", "Shortcut state unavailable."))?;
-    Ok(ShortcutStatus { bindings: config.as_ref().map(|state| state.bindings.clone()).unwrap_or_else(empty), faulted: config.as_ref().is_some_and(|state| state.faulted) })
+    Ok(ShortcutStatus { bindings: config.as_ref().map(|state| state.bindings.clone()).unwrap_or_else(empty), faulted: config.as_ref().is_some_and(|state| state.faulted), restoration_failed:store.restoration_failed.load(Ordering::Acquire) })
 }
 
 fn apply(app: &tauri::AppHandle, store: &ShortcutStore, bindings: Bindings) -> Result<ShortcutStatus, NativeError> {
-    let parsed = parse(&bindings)?;
-    let _gate = store.gate.lock().map_err(|_| NativeError::new("shortcut_failed", "Shortcut update unavailable."))?;
+    let _gate=store.gate.lock().map_err(|_|NativeError::new("shortcut_failed","Shortcut update unavailable."))?;
+    apply_registered(store,bindings,&mut NativeRegistry(app))
+}
+fn apply_registered(store:&ShortcutStore,bindings:Bindings,registry:&mut impl Registry)->Result<ShortcutStatus,NativeError>{
+    let parsed=parse(&bindings)?;
     let (old, faulted) = {
         let config = store.config.lock().map_err(|_| NativeError::new("shortcut_failed", "Shortcut state unavailable."))?;
         (config.as_ref().map(|state| state.known.clone()).unwrap_or_default(), config.as_ref().is_some_and(|state| state.faulted))
     };
     let next: Vec<_> = parsed.iter().map(|(_, key)| *key).collect();
     if faulted && !next.is_empty() { return Err(NativeError::new("shortcut_cleanup", "Clear shortcuts before applying after a rollback failure.")); }
-    let mut registry = NativeRegistry(app);
     let result = if faulted {
         let mut errors = Vec::new();
         for key in &old { if let Err(error) = registry.unregister(*key) { errors.push(error); } }
         if errors.is_empty() { Ok(()) } else { Err((errors.join("; "), true)) }
-    } else { transition(&old, &next, &mut registry) };
+    } else { transition(&old, &next, registry) };
     if let Err((message, rollback_failed)) = result {
         if rollback_failed {
             let mut known = old; for key in next { if !known.contains(&key) { known.push(key); } }
@@ -131,6 +134,7 @@ fn apply(app: &tauri::AppHandle, store: &ShortcutStore, bindings: Bindings) -> R
     }
     *store.config.lock().map_err(|_| NativeError::new("shortcut_failed", "Shortcut state unavailable."))? = Some(Config { bindings, parsed, known: next, faulted: false });
     if let Ok(mut pressed) = store.pressed.lock() { pressed.clear(); }
+    store.restoration_failed.store(false,Ordering::Release);
     status(store)
 }
 
@@ -144,7 +148,7 @@ pub fn on_shortcut(app: &tauri::AppHandle, shortcut: &Shortcut, event: ShortcutE
     let action = store.config.lock().ok().and_then(|config| config.as_ref().filter(|state| !state.faulted)
         .and_then(|state| state.parsed.iter().find(|(_, key)| key == shortcut).map(|(action, _)| action.clone())));
     if app.get_webview_window("preferences").is_some_and(|w|w.is_focused().unwrap_or(false)) { return; }
-    if let Some(action) = action { if action=="show-workspace" { let _=crate::library_window::show(app,"library");return; } if action=="capture-scrolling" {let _=crate::library_window::show(app,"main");} let _ = app.emit_to("main", "fershot-global-action", action); }
+    if let Some(action) = action { if action=="show-workspace" { let _=crate::library_window::show(app,"library");return; } let _ = app.emit_to("main", "fershot-global-action", action); }
 }
 
 pub fn clear_on_close(app: &tauri::AppHandle) -> Result<(), NativeError> { apply(app, &app.state::<ShortcutStore>(), empty()).map(|_| ()) }
@@ -157,6 +161,28 @@ pub fn get_shortcuts(window: tauri::WebviewWindow, store: tauri::State<'_, Short
 pub async fn apply_shortcuts(bindings: Bindings, window: tauri::WebviewWindow, app: tauri::AppHandle,
     store: tauri::State<'_, ShortcutStore>, jobs: tauri::State<'_, NativeJobs>) -> Result<ShortcutStatus, NativeError> {
     crate::preferences_window::validate_label(window.label())?; let _guard = jobs.acquire()?; apply(&app, &store, bindings)
+}
+
+fn configure_at(path:&std::path::Path,store:&ShortcutStore,bindings:Bindings,registry:&mut impl Registry)->Result<ShortcutStatus,NativeError>{
+ let _gate=store.gate.lock().map_err(|_|NativeError::new("shortcut_failed","Shortcut update unavailable."))?;
+ let old=status(store)?;apply_registered(store,bindings.clone(),registry)?;
+ if let Err(error)=save_at(path,bindings){
+  if apply_registered(store,old.bindings,registry).is_err(){if let Ok(mut config)=store.config.lock(){if let Some(state)=config.as_mut(){state.faulted=true;state.parsed.clear();}}return Err(NativeError::new("shortcut_cleanup","Saving failed and shortcuts need cleanup. Remove shortcuts, then retry."))}
+  store.restoration_failed.store(old.restoration_failed,Ordering::Release);return Err(error)
+ }
+ status(store)
+}
+fn restore_at(path:&std::path::Path,store:&ShortcutStore,registry:&mut impl Registry)->Result<ShortcutStatus,NativeError>{
+ let _gate=store.gate.lock().map_err(|_|NativeError::new("shortcut_failed","Shortcut update unavailable."))?;
+ let result=load_saved_at(path).and_then(|saved|apply_registered(store,saved.bindings,registry));
+ store.restoration_failed.store(result.is_err(),Ordering::Release);result
+}
+pub fn restore(app:&tauri::AppHandle)->Result<(),NativeError>{let path=app.path().app_config_dir().map_err(|_|NativeError::new("settings_failed","Shortcut settings unavailable."))?;restore_at(&path,&app.state::<ShortcutStore>(),&mut NativeRegistry(app)).map(|_|())}
+#[tauri::command]
+pub async fn configure_shortcuts(bindings:Bindings,window:tauri::WebviewWindow,app:tauri::AppHandle,store:tauri::State<'_,ShortcutStore>,jobs:tauri::State<'_,NativeJobs>,preferences:tauri::State<'_,crate::preferences::PreferenceGate>)->Result<ShortcutStatus,NativeError>{
+ crate::preferences_window::validate_label(window.label())?;let _job=jobs.acquire()?;let gate=preferences.shared();let _preferences=gate.lock().map_err(|_|NativeError::new("settings_failed","Shortcut settings unavailable."))?;
+ let path=app.path().app_config_dir().map_err(|_|NativeError::new("settings_failed","Shortcut settings unavailable."))?;
+ let result=configure_at(&path,&store,bindings,&mut NativeRegistry(&app));if result.is_err(){crate::diagnostics::record(&app,crate::diagnostics::Area::Settings,crate::diagnostics::Event::Failed,crate::diagnostics::Code::SettingsFailed);}result
 }
 
 #[cfg(test)]
@@ -173,6 +199,15 @@ mod tests {
             self.keys.remove(&key.id()); Ok(())
         }
     }
+    #[test]fn installs_persists_restores_and_removes_as_one_configuration(){
+        let dir=tempfile::tempdir().unwrap();let mut bindings=empty();bindings.insert("capture-area".into(),Some("Super+Shift+KeyA".into()));let store=ShortcutStore::default();let mut registry=Fake::default();
+        configure_at(dir.path(),&store,bindings.clone(),&mut registry).unwrap();assert_eq!(registry.keys.len(),1);assert_eq!(load_saved_at(dir.path()).unwrap().bindings,bindings);
+        let restarted=ShortcutStore::default();let mut fresh=Fake::default();restore_at(dir.path(),&restarted,&mut fresh).unwrap();assert_eq!(fresh.keys,registry.keys);
+        configure_at(dir.path(),&restarted,empty(),&mut fresh).unwrap();assert!(fresh.keys.is_empty());assert!(load_saved_at(dir.path()).unwrap().bindings.values().all(Option::is_none));
+    }
+    #[test]fn persistence_failure_restores_previous_registrations(){let store=ShortcutStore::default();let mut registry=Fake::default();let mut old=empty();old.insert("capture-area".into(),Some("Super+Shift+KeyA".into()));apply_registered(&store,old.clone(),&mut registry).unwrap();let file=tempfile::NamedTempFile::new().unwrap();assert!(configure_at(file.path(),&store,empty(),&mut registry).is_err());assert_eq!(status(&store).unwrap().bindings,old);assert_eq!(registry.keys.len(),1);}
+    #[test]fn failed_persistence_rollback_enters_cleanup_instead_of_dispatching_unsaved_bindings(){let store=ShortcutStore::default();let mut registry=Fake::default();let mut old=empty();old.insert("capture-area".into(),Some("Super+Shift+KeyA".into()));apply_registered(&store,old,&mut registry).unwrap();registry.reject_register=Some(Shortcut::from_str("Super+Shift+KeyA").unwrap().id());let mut next=empty();next.insert("capture-area".into(),Some("Super+Shift+KeyB".into()));let file=tempfile::NamedTempFile::new().unwrap();assert_eq!(configure_at(file.path(),&store,next,&mut registry).err().unwrap().code,"shortcut_cleanup");assert!(status(&store).unwrap().faulted);assert!(store.config.lock().unwrap().as_ref().unwrap().parsed.is_empty());}
+    #[test]fn startup_conflict_preserves_saved_bindings_for_retry(){let dir=tempfile::tempdir().unwrap();let mut bindings=empty();bindings.insert("capture-area".into(),Some("Super+Shift+KeyA".into()));save_at(dir.path(),bindings.clone()).unwrap();let store=ShortcutStore::default();let mut registry=Fake{reject_register:Some(Shortcut::from_str("Super+Shift+KeyA").unwrap().id()),..Fake::default()};assert!(restore_at(dir.path(),&store,&mut registry).is_err());assert!(status(&store).unwrap().restoration_failed);assert_eq!(load_saved_at(dir.path()).unwrap().bindings,bindings);}
     #[test] fn validates_full_map_modifiers_reserved_aliases_and_duplicates_without_os_registration() {
         let mut map = empty(); map.insert("capture-area".into(), Some("Super+Shift+KeyA".into())); assert_eq!(parse(&map).unwrap().len(), 1);
         for bad in ["KeyA", "Super+Space", "Super+KeyQ", "Super+KeyS"] { map.insert("capture-area".into(), Some(bad.into())); assert!(parse(&map).is_err()); }

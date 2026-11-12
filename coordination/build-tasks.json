@@ -5186,6 +5186,16 @@
       "shared_claim": "root-wiring",
       "owned_paths": "Release workflow/version and API guards/tests; release policy/docs; explicit reviewed source staging, commit and non-forced push",
       "inputs": "User explicit commit/push and main-version release request; completed C94-C97 sources/checks; current origin/main baseline"
+    },
+    {
+      "id": "C99",
+      "agent": "codex",
+      "title": "Repair scroll permissions, persistent shortcuts and Library preview; add dedicated Updates tab and semantic statuses",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "Native scrolling/shortcuts/preferences/menu; Settings/Library/status controls and regressions; version 1.1.1 and delivery docs",
+      "inputs": "Latest user five-point manual feedback; C98 completed source baseline; injected tests only for OS/server boundaries"
     }
   ],
   "allocation": "Codex sole active client; external Antigravity and Copilot inactive; preserve historical authorship.",
@@ -5295,7 +5305,8 @@
       "C94",
       "C96",
       "C97",
-      "C98"
+      "C98",
+      "C99"
     ],
     "copilot": []
   },

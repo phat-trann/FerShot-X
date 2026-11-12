@@ -48,6 +48,7 @@ pub fn run() {
         .on_window_event(lifecycle::on_window_event)
         .setup(|_app| {
             active_window::install();
+            if shortcuts::restore(_app.handle()).is_err(){diagnostics::record(_app.handle(),diagnostics::Area::Settings,diagnostics::Event::Failed,diagnostics::Code::SettingsFailed);}
             lifecycle::setup_main(_app.handle())?;
             diagnostics::start_cleanup(_app.handle());
             diagnostics::record(_app.handle(),diagnostics::Area::App,diagnostics::Event::Started,diagnostics::Code::None);
@@ -136,6 +137,7 @@ pub fn run() {
             lifecycle::set_workspace_on_top,
             menu_bar::set_menu_bar_icon,
             shortcuts::get_shortcuts,
+            shortcuts::configure_shortcuts,
             shortcuts::apply_shortcuts,
             document_open::pending_documents,
             document_open::open_image_dialog,

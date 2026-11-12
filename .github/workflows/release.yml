@@ -67,6 +67,7 @@ jobs:
           python3 -m unittest discover -s scripts -p test_release_version.py
           node --test scripts/release_gate.test.cjs
           npm run typecheck
+          python3 scripts/test_verify_update_manifest.py
           npm run test:unit
           cargo test --locked --manifest-path src-tauri/Cargo.toml --lib
           cargo test --locked --manifest-path src-tauri/crates/scroll-core/Cargo.toml
@@ -105,9 +106,12 @@ jobs:
         if: steps.release_guard.outputs.publish == 'true'
         env:
           GH_TOKEN: ${{ secrets.UPDATER_RELEASE_TOKEN || secrets.GITHUB_TOKEN }}
+          RELEASE_ID: ${{ steps.tauri.outputs.releaseId }}
         run: |
           brew install minisign
           mkdir -p artifacts/release-check
           gh release download "$RELEASE_TAG" --repo "$RELEASE_OWNER/$RELEASE_REPO" --pattern latest.json --pattern '*.app.tar.gz' --dir artifacts/release-check
-          python3 scripts/verify_update_manifest.py artifacts/release-check/latest.json --tag "$RELEASE_TAG" --repository "$RELEASE_OWNER/$RELEASE_REPO" --assets-dir artifacts/release-check --public-key-config src-tauri/tauri.updater.generated.json
+          gh api "repos/$RELEASE_OWNER/$RELEASE_REPO/releases/$RELEASE_ID" > artifacts/release-check/release.json
+          python3 scripts/verify_update_manifest.py artifacts/release-check/latest.json --tag "$RELEASE_TAG" --repository "$RELEASE_OWNER/$RELEASE_REPO" --assets-dir artifacts/release-check --public-key-config src-tauri/tauri.updater.generated.json --release-metadata artifacts/release-check/release.json
+          gh release upload "$RELEASE_TAG" artifacts/release-check/latest.json --repo "$RELEASE_OWNER/$RELEASE_REPO" --clobber
           gh release edit "$RELEASE_TAG" --repo "$RELEASE_OWNER/$RELEASE_REPO" --draft=false --latest

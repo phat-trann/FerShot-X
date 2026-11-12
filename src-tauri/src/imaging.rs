@@ -634,13 +634,6 @@ mod tests {
     }
 }
 
-pub(crate) fn copy_encoded_image(text: &str) -> Result<(), NativeError> {
-    #[cfg(target_os = "macos")]
-    { let raster = decode_input(text)?; let (width, height) = raster.dimensions(); system_clipboard(width as usize, height as usize, raster.rgba_bytes()) }
-    #[cfg(not(target_os = "macos"))]
-    { let _ = text; Err(NativeError::new("unsupported", "Clipboard copy is currently supported on macOS only.")) }
-}
-
 #[derive(Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct CopyTextRequest { text: String }

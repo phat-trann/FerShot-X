@@ -10,8 +10,6 @@ import { safeExportName, type ExportFormat } from "../features/export/names";
 import { assertImageDimensions, MAX_NATIVE_BYTES } from "./image-limits";
 import type { CaptureArea, DisplayGeometry } from "../features/capture-session";
 import type { PixelEffectRequest } from "../features/effects-panel";
-import type { PrintSheetOptions } from "../features/local-output";
-import { parsePrintPreferencesJson, serializePrintPreferencesJson } from "../features/print-preferences-codec";
 import { importImage } from "./import-image";
 export { MAX_NATIVE_BYTES } from "./image-limits";
 export interface AppInfo { name: string; version: string; platform: string }
@@ -78,20 +76,6 @@ export async function prepareImageDrag(document: ImageDocument): Promise<string>
 }
 export async function startPreparedDrag(token: string): Promise<boolean> { return nativeCall<boolean>("start_prepared_drag", { token }); }
 export async function discardPreparedDrag(token: string): Promise<void> { await nativeCall<void>("discard_prepared_drag", { token }); }
-export async function openPrintPreview(document: ImageDocument, options: PrintSheetOptions): Promise<string> {
-  const validated = parsePrintPreferencesJson(serializePrintPreferencesJson(options));
-  if (validated.imageWidth !== document.width || validated.imageHeight !== document.height) throw new RangeError("Print source dimensions changed.");
-  const pngBase64 = await rasterizeDocument(document);
-  return nativeCall<string>("open_print_preview", { request: { pngBase64, options: validated } });
-}
-export async function readPrintPreview(): Promise<{ image: ImageDocument; options: PrintSheetOptions }> {
-  const wire = await nativeCall<{ image: ImagePayload; options: PrintSheetOptions }>("get_print_preview", {});
-  const options = parsePrintPreferencesJson(JSON.stringify({ version: 1, print: { ...wire.options, scaleMode: wire.options.scaleMode ?? "fit" } }));
-  if (options.imageWidth !== wire.image.width || options.imageHeight !== wire.image.height) throw new RangeError("Print preview dimensions do not match.");
-  return { image: documentFromPayload(wire.image, "Print preview.png"), options };
-}
-export async function requestPrintDialog(): Promise<void> { await nativeCall<void>("print_preview", {}); }
-export async function closePrintPreview(): Promise<void> { await nativeCall<void>("close_print_preview", {}); }
 export async function readNativeShortcuts(): Promise<unknown> { return nativeCall<unknown>("get_shortcuts", {}); }
 export async function readSavedNativeShortcuts(): Promise<unknown> { return nativeCall<unknown>("load_saved_shortcuts", {}); }
 export async function saveNativeShortcuts(bindings: Readonly<Record<string, string | null>>): Promise<unknown> { return nativeCall<unknown>("save_shortcut_preferences", { bindings }); }
@@ -333,27 +317,6 @@ export async function saveApplicationPreferences(preferences: FerShotAppPreferen
   const saved = await nativeCall<unknown>("save_application_preferences", { preferences: validated });
   return parseAppPreferencesJson(JSON.stringify({ version: 1, preferences: saved }));
 }
-export interface PinWire { sourceId: string; name: string; image: ImagePayload }
-export async function pinImage(document: ImageDocument): Promise<string> {
-  requireDesktop();
-  const pngBase64 = await rasterizeDocument(document);
-  return nativeCall<string>("open_pin", { request: { sourceId: document.id,
-    name: safeExportName(document.name, "png", 60), pngBase64 } });
-}
-export function documentFromPin(wire: PinWire): ImageDocument {
-  if (!wire || typeof wire.sourceId !== "string" || !wire.sourceId || wire.sourceId.length > 128 ||
-      typeof wire.name !== "string" || !wire.name || wire.name.length > 240) {
-    throw new NativeOperationError("invalid_pin", "Invalid pinned image metadata.");
-  }
-  return documentFromPayload(wire.image, wire.name);
-}
-export async function readPinnedImage(): Promise<ImageDocument> {
-  return documentFromPin(await nativeCall<PinWire>("get_pin", {}));
-}
-export async function copyPinnedImage(): Promise<void> { await nativeCall<void>("copy_pin", {}); }
-export async function closePinnedImage(): Promise<void> { await nativeCall<void>("close_pin", {}); }
-export async function editPinnedImage(): Promise<void> { await nativeCall<void>("edit_pin", {}); }
-
 export async function importClipboardImage(): Promise<ImageDocument> {
   return documentFromPayload(await nativeCall<ImagePayload>("import_clipboard", {}), `Clipboard-${Date.now()}.png`);
 }

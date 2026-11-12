@@ -77,7 +77,9 @@ mod macos {
     }
     pub fn activate(pid:u32)->Result<(),NativeError>{
         let application=NSRunningApplication::runningApplicationWithProcessIdentifier(pid as i32).ok_or_else(||NativeError::new("scroll_target_unavailable","The selected application is no longer running."))?;
-        if application.isActive()||application.activateWithOptions(objc2_app_kit::NSApplicationActivationOptions::ActivateIgnoringOtherApps){Ok(())}else{Err(NativeError::new("scroll_target_unavailable","The selected application could not be focused."))}
+        // The normal activation request supports macOS 12+; ignoringOtherApps
+        // has no effect on macOS 14+ and must not be requested.
+        if application.isActive()||application.activateWithOptions(objc2_app_kit::NSApplicationActivationOptions::empty()){Ok(())}else{Err(NativeError::new("scroll_target_unavailable","The selected application could not be focused."))}
     }
     pub fn confirm(pid: u32, window: u32) -> Result<(), NativeError> { find(pid, Some(window)).map(|_| ()) }
 

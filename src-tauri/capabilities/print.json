@@ -1,7 +1,0 @@
-{
-  "$schema": "../gen/schemas/desktop-schema.json",
-  "identifier": "print-preview",
-  "description": "Local print preview windows; native commands additionally enforce owned print labels.",
-  "windows": ["print-*"],
-  "permissions": ["core:default"]
-}

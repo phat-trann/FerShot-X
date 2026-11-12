@@ -5196,6 +5196,16 @@
       "shared_claim": "root-wiring",
       "owned_paths": "Native scrolling/shortcuts/preferences/menu; Settings/Library/status controls and regressions; version 1.1.1 and delivery docs",
       "inputs": "Latest user five-point manual feedback; C98 completed source baseline; injected tests only for OS/server boundaries"
+    },
+    {
+      "id": "C100",
+      "agent": "codex",
+      "title": "Remove retired Print/Pin and orphaned interface wrappers; eliminate native warnings",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "Active-window activation; retired native/UI sources, capability files and IPC wrappers; reviewed deletion archive manifest; version 1.1.2 and release docs",
+      "inputs": "User compiler warnings and cleanup request; source references; Apple activation API documentation; production Rust warnings-as-errors compilation"
     }
   ],
   "allocation": "Codex sole active client; external Antigravity and Copilot inactive; preserve historical authorship.",
@@ -5306,7 +5316,8 @@
       "C96",
       "C97",
       "C98",
-      "C99"
+      "C99",
+      "C100"
     ],
     "copilot": []
   },

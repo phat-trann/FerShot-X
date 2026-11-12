@@ -1,0 +1,73 @@
+{
+  "source_commit": "abb164ad0653d413d6046d5bfee1dd4ad5e2f30f",
+  "archive": "artifacts/archive/C100-retired-print-pin.zip",
+  "archive_sha256": "7cb8808f581902f036871bfd0be963be5f5169ceffd81b1a5f60a918ffe0a249",
+  "reason": "Print and Pin workflows previously removed from App routes and native command registrations; retain original author history in Git and byte-verified ignored archive. Also removes five old inline Settings/color/window-appearance wrappers with no remaining imports or consumers.",
+  "files": [
+    {
+      "path": "src-tauri/src/printing.rs",
+      "bytes": 6070,
+      "sha256": "22e496f346b65ee66e2d876cece33a4186890ec94ba6b2ea21ee57f951f64722"
+    },
+    {
+      "path": "src-tauri/src/pins.rs",
+      "bytes": 6957,
+      "sha256": "c3441c89c3a29e8efcd009ff844c2973d46033a6eba5da5c27d50bf26ce6f50f"
+    },
+    {
+      "path": "src-tauri/capabilities/print.json",
+      "bytes": 254,
+      "sha256": "326c3db12afd5921823fe9aab8e9709f06e4cadabf871134ff376f156673d884"
+    },
+    {
+      "path": "src-tauri/capabilities/pin.json",
+      "bytes": 262,
+      "sha256": "965cc039eaef6b6658c7b7537c5abfc4a6e916c3ce0970bd0d27c8a93bcf2936"
+    },
+    {
+      "path": "src/Workspace.print.tsx",
+      "bytes": 3566,
+      "sha256": "7e413178af3bde5bf15c8058c31faf68944371e56ef7897337196fe7fa6881d5"
+    },
+    {
+      "path": "src/Workspace.pin.tsx",
+      "bytes": 2246,
+      "sha256": "a4d0341b01a62953cde002da7a8d093075bae83e0e03ae4612d3e3f5fbb5a38f"
+    },
+    {
+      "path": "src/testing/antigravity-print-preview.test.tsx",
+      "bytes": 3583,
+      "sha256": "933616d014621287b23b8cc013ba529067bd980aa163a4c6a72f7098e7d240a2"
+    },
+    {
+      "path": "src/platform/pins.test.ts",
+      "bytes": 1849,
+      "sha256": "feb43751bd34a391ddd6025c373bd7bd2a316bdaa2264c8701c284cad0b656dc"
+    },
+    {
+      "path": "src/Workspace.settings-dialog.tsx",
+      "bytes": 2963,
+      "sha256": "c9111f243565bc4f417ae8ed662de7f2b09244fffb197da53e95296f11a59dc3"
+    },
+    {
+      "path": "src/Workspace.average-color.tsx",
+      "bytes": 3179,
+      "sha256": "fae247d9e33558dd33de0a21226a5125b7e2690c9cc5ee19d1b014dcc0bdaee1"
+    },
+    {
+      "path": "src/Workspace.window-appearance.tsx",
+      "bytes": 1776,
+      "sha256": "01e3ec2f9b3c24563a9ceb1123efd305404e0fad50ee6891a15ca45db02b0645"
+    },
+    {
+      "path": "src/Workspace.application-preferences.tsx",
+      "bytes": 1149,
+      "sha256": "7f2d9fbda68aeee73930b0820070f1780d238a9a1c6a4a285c33645be5e62e47"
+    },
+    {
+      "path": "src/Workspace.preferences.tsx",
+      "bytes": 2004,
+      "sha256": "31105604c0deffe71ddce1a6bc4f8b4de3feb0e7572ab2b305ad935920596ecb"
+    }
+  ]
+}

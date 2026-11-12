@@ -1,5 +1,9 @@
 # Agent instructions
 
+## C100 retired-source cleanup (2026-11-12)
+
+User requests fixing native warnings and deleting obsolete generated code. Remove retired Print/Pin native backends, unused IPC/window wrappers and capabilities, and orphaned inline UI wrappers only after reference checks and a byte-verified ignored archive. Preserve immutable reviews/research, author history, releases, credentials and user data. Replace the deprecated ignoringOtherApps activation flag with normal supported activation options; do not suppress warnings or upgrade dependencies. Verify production native code with cargo rustc --lib -- -D warnings, functional tests and TypeScript. Ship patch 1.1.2 under existing normal commit/push authorization. Real macOS focus/capture/updater acceptance stays 85% pending manual verification.
+
 ## C99 manual feedback corrections (2026-11-12)
 
 Version 1.1.1 addresses the user's five reported issues. Treat positive Accessibility trust as sufficient scroll-event permission despite a false CoreGraphics preflight; do not bypass denial when both checks fail. Actual ad-hoc OS permission/scroll behavior remains manual. Restore saved global shortcuts on startup, and install/remove active and saved assignments atomically with rollback on persistence failure. Settings exposes a separate Updates tab; tray opens that tab and requests a check, preserving explicit install/restart. Use semantic status colors with text and automatically preview the first Library row without overriding manual selection on refresh. Preserve 85% acceptance, key continuity, injected OS/server tests, and user-authorized versioned verification publication.

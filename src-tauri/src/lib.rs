@@ -18,7 +18,6 @@ mod automatic_capture;
 mod effects;
 mod lifecycle;
 mod library_window;
-mod printing;
 mod shortcuts;
 mod dragging;
 mod desktop_menu;
@@ -41,7 +40,6 @@ pub fn run() {
         .manage(local_cache::LocalStore::default())
         .manage(preferences::PreferenceGate::default())
         .manage(menu_bar::MenuBarState::default())
-        .manage(printing::PrintStore::default())
         .manage(shortcuts::ShortcutStore::default())
         .manage(document_open::DocumentOpenStore::default())
         .manage(dragging::DragStore::default())

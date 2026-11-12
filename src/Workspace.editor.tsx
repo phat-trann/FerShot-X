@@ -6,7 +6,8 @@ import { KonvaWorkbench } from "./features/editor/konva/KonvaWorkbench";
 import { type AdvancedEditorItem } from "./features/editor/advanced-workbench";
 import { renderAnnotatedDocument } from "./platform/annotations";
 
-export function WorkspaceEditor({ image, annotations, advancedItems, active, busy, zoom, onPixelSample,onZoomReport,onZoomChange, onAdvancedChange, onSelectDrawing,onFitChange,imageToInsert,onImageInserted }: {
+export function WorkspaceEditor({ onReady,onLoadError,image, annotations, advancedItems, active, busy, zoom, onPixelSample,onZoomReport,onZoomChange, onAdvancedChange, onSelectDrawing,onFitChange,imageToInsert,onImageInserted }: {
+  onReady?:(id:string)=>void;onLoadError?:()=>void;
   imageToInsert?:{id:string;src:string;width:number;height:number};onImageInserted:()=>void;onFitChange:(zoom:number)=>void;
   image: ImageDocument; annotations: readonly Annotation[]; active: boolean; busy: boolean; zoom: number | null;
   advancedItems: readonly AdvancedEditorItem[];
@@ -56,8 +57,7 @@ export function WorkspaceEditor({ image, annotations, advancedItems, active, bus
     return () => observer.disconnect();
   }, [image.width, image.height, active]);
   const pinchStart=useRef<number|null>(null);
-  const isTrackpad=useRef(false);
-  const trackpadTimer=useRef<ReturnType<typeof setTimeout>|null>(null);
+  const lastTrackpadAt=useRef(-Infinity);
   useEffect(()=>{const node=host.current;if(!node)return;
     const update=(value:number)=>onZoomChange(Math.max(Math.min(.05,fit),Math.min(8,value)));
     const wheel=(event:WheelEvent)=>{
@@ -66,11 +66,9 @@ export function WorkspaceEditor({ image, annotations, advancedItems, active, bus
       if(!isPinch){
         const isContinuous=event.deltaMode===0&&(Math.abs(event.deltaX)>0||event.deltaY%1!==0||Math.abs(event.deltaY)<15);
         if(isContinuous){
-          isTrackpad.current=true;
-          if(trackpadTimer.current)clearTimeout(trackpadTimer.current);
-          trackpadTimer.current=setTimeout(()=>{isTrackpad.current=false;},300);
+          lastTrackpadAt.current=performance.now();
         }
-        if(isTrackpad.current)return;
+        if(event.deltaMode===0&&performance.now()-lastTrackpadAt.current<300)return;
       }
       event.preventDefault();
       if(isPinch){
@@ -84,13 +82,12 @@ export function WorkspaceEditor({ image, annotations, advancedItems, active, bus
     const end=()=>{pinchStart.current=null;};
     node.addEventListener("wheel",wheel,{passive:false});node.addEventListener("gesturestart",start,{passive:false});node.addEventListener("gesturechange",change,{passive:false});node.addEventListener("gestureend",end);
     return()=>{
-      if(trackpadTimer.current)clearTimeout(trackpadTimer.current);
       node.removeEventListener("wheel",wheel);node.removeEventListener("gesturestart",start);node.removeEventListener("gesturechange",change);node.removeEventListener("gestureend",end);
     };
   },[active,busy,zoom,fit,onZoomChange]);
   useEffect(()=>onZoomReport(zoom??fit),[zoom,fit,onZoomReport]);
   return <div ref={host} className="editor-surface" aria-busy={busy}>
-    <KonvaWorkbench imageToInsert={imageToInsert} onImageInserted={onImageInserted} onPixelSample={onPixelSample} key={image.id} compact imageId={image.id} imageSrc={basePreview?.id===image.id?basePreview.src:image.src}
+    <KonvaWorkbench onSourceReady={()=>onReady?.(image.id)} onSourceError={onLoadError} imageToInsert={imageToInsert} onImageInserted={onImageInserted} onPixelSample={onPixelSample} key={image.id} compact imageId={image.id} imageSrc={basePreview?.id===image.id?basePreview.src:image.src}
       imageWidth={image.width} imageHeight={image.height} zoom={zoom??fit} initialItems={advancedItems} busy={busy} disabled={!active}
       onToolChange={onSelectDrawing} onSnapshotChange={snapshot=>onAdvancedChange(image.id,snapshot.items)}/>
   </div>;

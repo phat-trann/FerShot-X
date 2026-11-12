@@ -24,6 +24,7 @@ mod dragging;
 mod desktop_menu;
 mod menu_bar;
 mod capture_upload;
+mod updates;
 mod active_window;
 mod document_open;
 
@@ -31,6 +32,7 @@ mod document_open;
 pub fn run() {
     let builder = tauri::Builder::default()
         .manage(imaging::NativeJobs::default())
+        .manage(updates::UpdateStore::default())
         .manage(automatic_capture::StopState::default())
         .manage(library_window::EditorInbox::default())
         .manage(diagnostics::DiagnosticStore::default())
@@ -56,11 +58,20 @@ pub fn run() {
         .menu(desktop_menu::build)
         .on_menu_event(desktop_menu::on_event)
         .plugin(tauri_plugin_dialog::init())
+        .plugin(tauri_plugin_updater::Builder::new().build())
+        .plugin(tauri_plugin_process::init())
         .plugin(tauri_plugin_autostart::Builder::new().app_name("FerShot X").build())
         .plugin(tauri_plugin_notification::init())
         .plugin(tauri_plugin_global_shortcut::Builder::new().with_handler(shortcuts::on_shortcut).build())
         .invoke_handler(tauri::generate_handler![
             commands::app_info,
+            updates::updater_configuration,
+            updates::read_update_state,
+            updates::request_update,
+            updates::publish_update_state,
+            updates::claim_update_check,
+            updates::begin_update_install,
+            updates::end_update_install,
             capture_upload::read_capture_upload_mode,
             automatic_capture::capture_scroll_image,
             library_window::fit_editor_window,

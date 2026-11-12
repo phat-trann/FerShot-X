@@ -29,3 +29,9 @@ artifacts/
 *.hdb
 *.gpr
 *.rep/
+# Local signing/configuration material
+*.key
+*.key.pub
+*.p12
+*.p8
+src-tauri/tauri.updater.generated.json

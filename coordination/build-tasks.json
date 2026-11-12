@@ -5136,6 +5136,56 @@
       "shared_claim": "root-wiring",
       "owned_paths": "Window title/status/shared typography CSS; editor gestures/shortcuts/Freehand; native window geometry/scroll target/technical diagnostics; scoped tests; acceptance ledger and docs",
       "inputs": "Latest user 23-case manual result; bounded local error metadata; installed framework API source; prior no-build restriction"
+    },
+    {
+      "id": "C94",
+      "agent": "codex",
+      "title": "Persist immediate capture upload mode with FTP failure recovery; review continued source and cloud-upload menu state",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "src-tauri/src/capture_upload.rs; native capture/menu wiring; src/Workspace.tsx; scoped browser tests; docs/agents/codex/C94-instant-upload-review.md",
+      "inputs": "Explicit immediate-upload request; existing FTP queue and native capture boundaries; subsequent cloud-upload menu correction"
+    },
+    {
+      "id": "C95",
+      "agent": "codex",
+      "title": "Capture presentation readiness, WebKit canvas recovery, wheel gesture reset and tolerant native scroll registration",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "src/Workspace.tsx; src/Workspace.editor.tsx; src/features/editor/konva/KonvaWorkbench.tsx; src-tauri/src/imaging.rs; src-tauri/src/automatic_capture.rs; src-tauri/src/library_window.rs; src-tauri/crates/scroll-core/src/lib.rs; scoped browser tests; release and coordination documentation",
+      "inputs": "Latest native bug report; bounded local diagnostics; current capture/render/stitch source; no-build restriction"
+    },
+    {
+      "id": "C96",
+      "agent": "codex",
+      "title": "Official Tauri 2 updater, signed GitHub release workflow, startup menu and 1.1.0 candidate packaging",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "Updater source and UI; native update bridge, FTP install guards, tray/preferences wiring and capabilities; manifests/locks/version sync; GitHub release workflow/configuration scripts; scoped tests and release docs",
+      "inputs": "Current updater request; official Tauri updater/process/action docs; current FTP/native capture and draft persistence source"
+    },
+    {
+      "id": "C97",
+      "agent": "codex",
+      "title": "Ad-hoc macOS updater distribution with real pinned public key and no Apple account requirements",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "Tauri updater/signing configuration; generated overlay script; GitHub release workflow; release/agent docs and candidate packaging",
+      "inputs": "User declined Developer ID and confirmed public repo/existing ~/.tauri keypair; public .pub only; official Tauri ad-hoc signing docs"
+    },
+    {
+      "id": "C98",
+      "agent": "codex",
+      "title": "Publish reviewed 1.1.0 verification source and automatically release stable version increases on main",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "Release workflow/version and API guards/tests; release policy/docs; explicit reviewed source staging, commit and non-forced push",
+      "inputs": "User explicit commit/push and main-version release request; completed C94-C97 sources/checks; current origin/main baseline"
     }
   ],
   "allocation": "Codex sole active client; external Antigravity and Copilot inactive; preserve historical authorship.",
@@ -5240,7 +5290,12 @@
       "C90",
       "C91",
       "C92",
-      "C93"
+      "C93",
+      "C95",
+      "C94",
+      "C96",
+      "C97",
+      "C98"
     ],
     "copilot": []
   },

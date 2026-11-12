@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "id": "20261112T103629-codex-C95-26a7e1b5",
+  "created_at": "2026-11-12T10:36:29.445967+07:00",
+  "agent": "codex",
+  "request": "C95-capture-display-scroll",
+  "task": "C95",
+  "completion": "done",
+  "summary": "Defer Edit until matching image canvas and window size are ready, restore hidden WebKit canvas pixels, expire wheel classification, and improve capture-specific scroll registration",
+  "files": [
+    "AGENTS.md",
+    "coordination/build-tasks.json",
+    "docs/agents/codex/C95-capture-display-scroll.md",
+    "docs/releases/1.0.0-manual-acceptance.md",
+    "docs/releases/1.0.0-checklist.md",
+    "docs/releases/1.0.0.md",
+    "src/Workspace.tsx",
+    "src/Workspace.editor.tsx",
+    "src/features/editor/konva/KonvaWorkbench.tsx",
+    "src-tauri/src/imaging.rs",
+    "src-tauri/src/automatic_capture.rs",
+    "src-tauri/src/library_window.rs",
+    "src-tauri/crates/scroll-core/src/lib.rs",
+    "tests/e2e/codex-v1-editor.spec.ts"
+  ],
+  "file_sha256": {
+    "AGENTS.md": "a37753070b7aabddecbc96b6a9af3f7830df29296587c7a525b09ac970337488",
+    "coordination/build-tasks.json": "75c13c901b9e234cff104939927c5fb6f85aa7bfb90aafd9621f522e8f17dfce",
+    "docs/agents/codex/C95-capture-display-scroll.md": "ff43181e50a8016845f9eb9e5dc298fb251f7fed9c095fab03471ec503bdcb0e",
+    "docs/releases/1.0.0-manual-acceptance.md": "f28b8092eb1a10dd0af013d2b23efe5d81ecdc1410022e1cdfc734985d421d20",
+    "docs/releases/1.0.0-checklist.md": "edc5b3744c6c1b74374a7d8c4c1994da718bd91813ec941b4daee7e509773897",
+    "docs/releases/1.0.0.md": "0cf03aefdeffcf7bb91d51e629d3d0de6a8065b034f1b4e82e49ff773a3742da",
+    "src/Workspace.tsx": "a628b6badb32627704077f074b3a2b6c42165d8d0acb37f97409397de3709994",
+    "src/Workspace.editor.tsx": "69c0a13362b995799516c7d335739367dc3c7de2f7bb0e3be21a21986e569baa",
+    "src/features/editor/konva/KonvaWorkbench.tsx": "14261d56fe89d4ca512ac3f58092c6140a6697f7862b1c476cc1ef6f5af64132",
+    "src-tauri/src/imaging.rs": "f4d3cab54ed3ae58c702dc224f4523570ddc34f973169638643a6fa53fa7ccaf",
+    "src-tauri/src/automatic_capture.rs": "4f5230daac25a554e72dd46b3b98c1fa65b44c096b88c18f38630e04cff60f75",
+    "src-tauri/src/library_window.rs": "2f23b3d06b671a3f276da3feec55af04fd723d125a06cfb3415bf51a871dbdf8",
+    "src-tauri/crates/scroll-core/src/lib.rs": "ecb401a3204de1cabdae92230beaffa83fc5d322e4581a87761365422c374e50",
+    "tests/e2e/codex-v1-editor.spec.ts": "71b063e74563ffd98b059d8a4d32fef9854314be88278c4f9c62b434d1f6cd71"
+  },
+  "checks": [
+    "Vitest 439 tests in 118 files passed; full synthetic browser suite 60 passed, final affected renderer subset 6 passed",
+    "TypeScript no-emit passed; product version consistency 1.0.0 passed",
+    "Source review and allowlisted local diagnostics distinguish permission/no-movement and stitch-stage failures; native regression cases added but NOT RUN"
+  ],
+  "risks": [
+    "Native compilation/build, real captures/permissions/FTP and formatting/lint NOT RUN; no release publication. Native scroll accuracy and WebKit lifecycle require N01-N07 manual retest; acceptance 85% unchanged",
+    "C94/root-wiring belong to this continued Codex request; other client committed source/authorship preserved"
+  ],
+  "review": "pending"
+}

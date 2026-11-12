@@ -1,3 +1,5 @@
+import {readFileSync} from "node:fs";
+const APP_VERSION=JSON.parse(readFileSync("package.json","utf8")).version;
 import {expect,test,type Page} from "@playwright/test";
 import {mock} from "./helpers/v1-ipc";
 async function openImage(page:Page,chooseRectangle=true){await mock(page);await page.goto("/?editor");const png=await page.evaluate(()=>{const c=document.createElement("canvas");c.width=400;c.height=240;const x=c.getContext("2d")!;x.fillStyle="#e9effb";x.fillRect(0,0,400,240);x.fillStyle="#147efb";x.fillRect(40,40,160,100);x.fillStyle="#20242a";x.font="24px sans-serif";x.fillText("FerShot X 1.0",30,190);return c.toDataURL("image/png").split(",")[1];});await page.locator('input[type="file"]').setInputFiles({name:"Release.png",mimeType:"image/png",buffer:Buffer.from(png,"base64")});await expect(page.getByRole("button",{name:"select tool",exact:true})).toHaveAttribute("aria-pressed","true");if(chooseRectangle)await page.getByRole("button",{name:"rectangle tool",exact:true}).click();}
@@ -185,9 +187,9 @@ test("opening wide and tall images uses the available viewport without blank-spa
 
 
 test("touchpad wheel scrolls without zoom and Safari pinch scales continuously",async({page})=>{
- await openImage(page,false);const stage=page.getByTestId("advanced-workbench-stage"),surface=page.locator(".editor-surface");const zoom=page.getByLabel("Zoom percentage",{exact:true});await stage.dispatchEvent("wheel",{deltaY:100,bubbles:true,cancelable:true});await expect(zoom).toHaveText("100%");
+ await openImage(page,false);const stage=page.getByTestId("advanced-workbench-stage"),surface=page.locator(".editor-surface");const zoom=page.getByLabel("Zoom percentage",{exact:true});await stage.dispatchEvent("wheel",{deltaX:3,deltaY:7.5,bubbles:true,cancelable:true});await expect(zoom).toHaveText("100%");
  await surface.evaluate(node=>node.dispatchEvent(new Event("gesturestart",{bubbles:true,cancelable:true})));for(const scale of [1.5,3]){await surface.evaluate((node,scale)=>{const event=new Event("gesturechange",{bubbles:true,cancelable:true});Object.defineProperty(event,"scale",{value:scale});node.dispatchEvent(event);},scale);await expect(zoom).toHaveText(`${scale*100}%`);}await surface.evaluate(node=>node.dispatchEvent(new Event("gestureend",{bubbles:true})));
- await stage.hover();await page.mouse.wheel(0,100);await expect(zoom).toHaveText("300%");await expect.poll(()=>page.locator(".stage").evaluate(el=>el.scrollTop)).toBeGreaterThan(0);
+ await stage.dispatchEvent("wheel",{deltaMode:1,deltaY:3,bubbles:true,cancelable:true});await expect(zoom).not.toHaveText("300%");
 });
 
 test("Escape copies and hides Edit while editable text and crop Escape keep their context",async({page})=>{
@@ -201,7 +203,7 @@ test("scroll capture failures restore Edit and retain a technical diagnostic cod
 });
 
 test("all window versions share spacing and UI labels cannot be selected like web text",async({page})=>{
- await mock(page);const metrics=[];for(const url of ["/?editor","/","/?preferences"]){await page.goto(url);const title=page.getByLabel("App version",{exact:true});await expect(title).toHaveText("v1.0.0");metrics.push(await title.evaluate(el=>{const rect=el.getBoundingClientRect(),parent=el.parentElement!.getBoundingClientRect(),style=getComputedStyle(el);return {right:parent.right-rect.right,height:rect.height,font:style.fontSize,weight:style.fontWeight};}));await expect(page.locator("body")).toHaveCSS("user-select","none");}expect(metrics[0]).toEqual(metrics[1]);expect(metrics[1]).toEqual(metrics[2]);
+ await mock(page);const metrics=[];for(const url of ["/?editor","/","/?preferences"]){await page.goto(url);const title=page.getByLabel("App version",{exact:true});await expect(title).toHaveText(`v${APP_VERSION}`);metrics.push(await title.evaluate(el=>{const rect=el.getBoundingClientRect(),parent=el.parentElement!.getBoundingClientRect(),style=getComputedStyle(el);return {right:parent.right-rect.right,height:rect.height,font:style.fontSize,weight:style.fontWeight};}));await expect(page.locator("body")).toHaveCSS("user-select","none");}expect(metrics[0]).toEqual(metrics[1]);expect(metrics[1]).toEqual(metrics[2]);
 });
 
 
@@ -226,4 +228,29 @@ test("asynchronous instant-upload failure restores the captured image for recove
 test("instant enqueue failure preserves pixels and opens Edit; switching off returns normal capture",async({page})=>{
  await openImage(page,false);await instantUploadMock(page);await page.evaluate(()=>{const w=window as any;w.__AUTO_ENQUEUE_FAIL__=true;w.__EMIT__("fershot-menu-action","capture-window");});await expect(page.getByRole("alert").first()).toContainText("Save FTP settings first");await expect(page.locator(".document-title")).toContainText("Capture-");expect(await calls(page,"ftp_start")).toHaveLength(0);
  await page.evaluate(()=>{const w=window as any;w.__AUTO_UPLOAD__=false;w.__EMIT__("fershot-menu-action","capture-fullscreen");});await expect.poll(()=>calls(page,"capture_image")).toHaveLength(2);expect((await calls(page,"capture_image"))[1].args).toEqual({mode:"fullscreen"});expect(await calls(page,"ftp_enqueue")).toHaveLength(1);
+});
+
+
+test("new capture is painted before Edit is shown and discarded backing pixels repaint on focus",async({page})=>{
+ await openImage(page,false);
+ await expect.poll(()=>calls(page,"show_editor")).toHaveLength(1);
+ await page.evaluate(()=>{
+  const w=window as any,invoke=w.__TAURI_INTERNALS__.invoke;
+  const c=document.createElement("canvas");c.width=80;c.height=60;c.getContext("2d")!.fillStyle="#12b834";c.getContext("2d")!.fillRect(0,0,80,60);
+  const pngBase64=c.toDataURL("image/png").split(",")[1];w.__PRESENTED__=[];
+  w.__TAURI_INTERNALS__.invoke=async(command:string,args:any)=>{
+   if(command==="capture_image"){w.__CALLS__.push({command,args});return {width:80,height:60,pngBase64,byteSize:atob(pngBase64).length};}
+   if(command==="fit_editor_window"){w.__CALLS__.push({command,args});await new Promise<void>(resolve=>{w.__RELEASE_SIZE__=resolve;});return;}
+   if(command==="show_editor"){const canvas=document.querySelector(".konvajs-content canvas")as HTMLCanvasElement;w.__PRESENTED__.push(Array.from(canvas.getContext("2d")!.getImageData(4,4,1,1).data));}
+   return invoke(command,args);
+  };
+  w.__EMIT__("fershot-menu-action","capture-area");
+ });
+ await expect(page.locator(".document-title")).toContainText("Capture-");
+ expect(await calls(page,"show_editor")).toHaveLength(1);
+ await page.evaluate(()=>(window as any).__RELEASE_SIZE__());
+ await expect.poll(()=>page.evaluate(()=>(window as any).__PRESENTED__)).toEqual([[18,184,52,255]]);
+ await page.locator(".konvajs-content canvas").first().evaluate((canvas:HTMLCanvasElement)=>canvas.getContext("2d")!.clearRect(0,0,canvas.width,canvas.height));
+ await page.evaluate(()=>window.dispatchEvent(new Event("focus")));
+ await expect.poll(()=>page.locator(".konvajs-content canvas").first().evaluate((canvas:HTMLCanvasElement)=>Array.from(canvas.getContext("2d")!.getImageData(4,4,1,1).data))).toEqual([18,184,52,255]);
 });

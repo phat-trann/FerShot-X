@@ -51,8 +51,8 @@ const Artwork=memo(function Artwork({item,image,width,height,zoom,counterAngle}:
 });
 
 /** During pointer motion Konva updates only a transient node, never React's document/history. */
-export function KonvaWorkbench({onPixelSample,imageToInsert,onImageInserted,imageId,imageSrc,imageWidth:width,imageHeight:height,zoom=1,initialItems=[],busy,disabled,onToolChange,onSnapshotChange}:AdvancedWorkbenchProps&{onPixelSample?:(hex:string)=>void;imageToInsert?:{id:string;src:string;width:number;height:number};onImageInserted?:()=>void}){
-  const [items,setItems]=useState<readonly AdvancedEditorItem[]>(initialItems),[selected,setSelected]=useState<string|null>(null),[tool,setTool]=useState<Tool>("select"),[color,setColor]=useState(lastStyle.color),[stroke,setStroke]=useState(lastStyle.stroke),[text,setText]=useState("Text"),[source,setSource]=useState<HTMLImageElement|null>(null),[revision,setRevision]=useState(0);
+export function KonvaWorkbench({onSourceReady,onSourceError,onPixelSample,imageToInsert,onImageInserted,imageId,imageSrc,imageWidth:width,imageHeight:height,zoom=1,initialItems=[],busy,disabled,onToolChange,onSnapshotChange}:AdvancedWorkbenchProps&{onSourceReady?:()=>void;onSourceError?:()=>void;onPixelSample?:(hex:string)=>void;imageToInsert?:{id:string;src:string;width:number;height:number};onImageInserted?:()=>void}){
+  const [items,setItems]=useState<readonly AdvancedEditorItem[]>(initialItems),[selected,setSelected]=useState<string|null>(null),[tool,setTool]=useState<Tool>("select"),[color,setColor]=useState(lastStyle.color),[stroke,setStroke]=useState(lastStyle.stroke),[text,setText]=useState("Text"),[loadedSource,setSource]=useState<HTMLImageElement|null>(null),[revision,setRevision]=useState(0);
   const [hovered,setHovered]=useState<string|null>(null),[counterAngleDraft,setCounterAngleDraft]=useState<number|null>(null);
   const counterGesture=useRef<{pointerId:number;item:AdvancedEditorItem;start:Point;moved:boolean;angle:number}|null>(null);
   const stage=useRef<Konva.Stage>(null),transformer=useRef<Konva.Transformer>(null),preview=useRef<Konva.Shape>(null),host=useRef<HTMLDivElement>(null),nodes=useRef(new Map<string,Konva.Group>());
@@ -62,9 +62,11 @@ export function KonvaWorkbench({onPixelSample,imageToInsert,onImageInserted,imag
   const manipulation=useRef<{node:Konva.Group;x:number;y:number;rotation:number;sx:number;sy:number}|null>(null);
   const gesture=useRef<{tool:Tool;points:Point[];pointerId:number;zoom:number;left:number;top:number;hadSelection:boolean}|null>(null);
   const blocked=!!busy||!!disabled,scale=Number.isFinite(zoom)&&zoom>0?zoom:1;
+  const source=loadedSource?.src===imageSrc?loadedSource:null;
   const emitted=useRef(items);
   const callback=useRef(onSnapshotChange);callback.current=onSnapshotChange;
-  useEffect(()=>{
+  const readyCallback=useRef(onSourceReady),errorCallback=useRef(onSourceError);readyCallback.current=onSourceReady;errorCallback.current=onSourceError;
+  useLayoutEffect(()=>{
     let live=true;
     setSource(null);
     if(!imageSrc)return;
@@ -74,6 +76,7 @@ export function KonvaWorkbench({onPixelSample,imageToInsert,onImageInserted,imag
       setSource(img);
       stage.current?.batchDraw();
     };
+    img.onerror=()=>{if(live)errorCallback.current?.();};
     img.onload=apply;
     img.src=imageSrc;
     if(img.complete&&img.naturalWidth>0){
@@ -83,6 +86,18 @@ export function KonvaWorkbench({onPixelSample,imageToInsert,onImageInserted,imag
     }
     return()=>{live=false;};
   },[imageSrc]);
+  useLayoutEffect(()=>{
+    if(!source)return;
+    // Hidden WKWebViews may suspend animation frames: draw the committed image
+    // synchronously before asking native code to bring this document forward.
+    stage.current?.draw();readyCallback.current?.();
+  },[source,width,height,scale]);
+  useEffect(()=>{
+    const repaint=()=>{if(!document.hidden)stage.current?.draw();};
+    // WebKit may discard backing pixels while a native window is hidden.
+    window.addEventListener("focus",repaint);document.addEventListener("visibilitychange",repaint);
+    return()=>{window.removeEventListener("focus",repaint);document.removeEventListener("visibilitychange",repaint);};
+  },[]);
   useEffect(()=>{if(items===emitted.current)return;emitted.current=items;callback.current?.({items,selectedId:selected});},[items]);
   useEffect(()=>{if(blocked){cancelManipulation();cancelEndpoint();gesture.current=null;preview.current?.setAttr("draft",null);}},[blocked]);
   useEffect(()=>{const abort=()=>{counterGesture.current=null;setCounterAngleDraft(null);cancelManipulation();cancelEndpoint();gesture.current=null;preview.current?.setAttr("draft",null);};window.addEventListener("blur",abort);window.addEventListener("resize",abort);window.addEventListener("scroll",abort,true);return()=>{window.removeEventListener("blur",abort);window.removeEventListener("resize",abort);window.removeEventListener("scroll",abort,true);};},[]);

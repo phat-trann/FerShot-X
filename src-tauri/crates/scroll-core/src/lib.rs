@@ -142,11 +142,30 @@ fn bands_match(a: &[u8], b: &[u8], max_diff: u8) -> bool {
         .all(|(&x, &y)| x.abs_diff(y) <= max_diff)
 }
 
+// Capture-only matching tolerates a small animated/antialiased fraction. The
+// deterministic public stitcher retains its strict historical semantics.
+fn capture_bands_match(a:&[u8],b:&[u8],row_bytes:usize)->bool {
+    if a.len()!=b.len()||a.is_empty(){return false}
+    let width=row_bytes/4;let rows=a.len()/row_bytes;
+    // Scrollbars and one-pixel capture borders are not registration landmarks.
+    let margin=(width/20).min(16);let left=margin;let right=width-margin;
+    let matches=|x:usize,y:usize|{let i=y*row_bytes+x*4;(0..3).all(|c|a[i+c].abs_diff(b[i+c])<=3)};
+    let ys=(rows/24).max(1);let xs=((right-left)/48).max(1);
+    let samples=rows.div_ceil(ys)*(right-left).div_ceil(xs);let budget=samples/50;
+    let mut tested=0usize;let mut bad=0usize;
+    for y in (0..rows).step_by(ys){for x in (left..right).step_by(xs){tested+=1;if !matches(x,y){bad+=1;if bad>budget{return false}}}}
+    if bad*100>tested*2{return false}
+    let mut bad=0usize;let limit=rows*(right-left)/50;
+    for y in 0..rows{for x in left..right{if !matches(x,y){bad+=1;if bad>limit{return false}}}}
+    true
+}
+
 fn find_overlap_rows(
     prev: &ScrollFrame,
     next: &ScrollFrame,
     row_bytes: usize,
     options: StitchOptions,
+    capture: bool,
 ) -> Option<u32> {
     let max_overlap = prev.height.min(next.height).saturating_sub(1);
     if max_overlap < options.min_overlap_rows {
@@ -160,13 +179,13 @@ fn find_overlap_rows(
                 let prev_start = prev.rgba.len() - band_bytes;
                 let prev_band = &prev.rgba[prev_start..];
                 let next_band = &next.rgba[..band_bytes];
-                bands_match(prev_band, next_band, options.max_channel_diff)
+                if capture {capture_bands_match(prev_band,next_band,row_bytes)}else{bands_match(prev_band, next_band, options.max_channel_diff)}
             }
             ScrollDirection::Up => {
                 let prev_band = &prev.rgba[..band_bytes];
                 let next_start = next.rgba.len() - band_bytes;
                 let next_band = &next.rgba[next_start..];
-                bands_match(prev_band, next_band, options.max_channel_diff)
+                if capture {capture_bands_match(prev_band,next_band,row_bytes)}else{bands_match(prev_band, next_band, options.max_channel_diff)}
             }
         };
         if matched {
@@ -176,9 +195,33 @@ fn find_overlap_rows(
     None
 }
 
-pub fn stitch_frames(
+pub fn stitch_frames(frames:&[ScrollFrame],options:StitchOptions)->Result<StitchedOutput,StitchError>{stitch_frames_impl(frames,options,false)}
+
+/// Desktop capture registration, excluding stationary top/bottom chrome shared
+/// by all frames. Retain the first header and final footer exactly once.
+pub fn stitch_capture_frames(frames:&[ScrollFrame],options:StitchOptions)->Result<StitchedOutput,StitchError>{
+    if frames.len()<2{return stitch_frames(frames,options)}
+    if frames.len()>MAX_STITCH_FRAMES{return Err(StitchError::TooManyFrames(frames.len()))}
+    if options.max_output_height>MAX_OUTPUT_HEIGHT{return Err(StitchError::InvalidOverlapConfig)}
+    for frame in frames{validate_frame(frame)?;}
+    let first=&frames[0];
+    if frames.iter().any(|f|f.width!=first.width||f.height!=first.height){return stitch_frames(frames,options)}
+    let rb=first.width as usize*4;let h=first.height as usize;
+    let stationary=|y:usize|frames.iter().skip(1).all(|f|capture_bands_match(&first.rgba[y*rb..(y+1)*rb],&f.rgba[y*rb..(y+1)*rb],rb));
+    let top=(0..h/3).take_while(|&y|stationary(y)).count();
+    let bottom=(0..h/3).take_while(|&offset|stationary(h-1-offset)).count();
+    let interiors=frames.iter().map(|f|ScrollFrame{width:f.width,height:(h-top-bottom)as u32,rgba:f.rgba[top*rb..(h-bottom)*rb].to_vec()}).collect::<Vec<_>>();
+    let mut output=stitch_frames_impl(&interiors,StitchOptions{max_output_height:options.max_output_height.saturating_sub((top+bottom)as u32),..options},true)?;
+    let height=output.height+(top+bottom)as u32;
+    if u64::from(height)*u64::from(first.width)>MAX_OUTPUT_PIXELS{return Err(StitchError::OutputHeightLimitExceeded{attempted:height,max_allowed:options.max_output_height})}
+    let mut pixels=Vec::with_capacity(height as usize*rb);pixels.extend_from_slice(&first.rgba[..top*rb]);pixels.append(&mut output.rgba);pixels.extend_from_slice(&frames.last().unwrap().rgba[(h-bottom)*rb..]);
+    output.rgba=pixels;output.height=height;Ok(output)
+}
+
+fn stitch_frames_impl(
     frames: &[ScrollFrame],
     options: StitchOptions,
+    capture:bool,
 ) -> Result<StitchedOutput, StitchError> {
     if frames.is_empty() {
         return Err(StitchError::EmptyFrameList);
@@ -219,13 +262,13 @@ pub fn stitch_frames(
         validate_frame(frame)?;
 
         if frame.height == prev.height
-            && bands_match(&prev.rgba, &frame.rgba, options.max_channel_diff)
+            && (if capture {capture_bands_match(&prev.rgba,&frame.rgba,row_bytes)}else{bands_match(&prev.rgba, &frame.rgba, options.max_channel_diff)})
         {
             skipped_duplicates += 1;
             continue;
         }
 
-        let overlap = find_overlap_rows(prev, frame, row_bytes, options)
+        let overlap = find_overlap_rows(prev, frame, row_bytes, options,capture)
             .ok_or(StitchError::NoOverlapMatch { frame_index: idx })?;
         let added_rows = frame.height - overlap;
         let next_height = out_height
@@ -333,6 +376,25 @@ mod tests {
             extract_row_first_red(&up.rgba, up.width, up.height),
             vec![20, 30, 40, 50, 60, 70]
         );
+    }
+
+    #[test]
+    fn desktop_registration_keeps_fixed_chrome_once_and_tolerates_sparse_changes(){
+        let make=|rows:&[u8]|make_banded_frame(100,rows);
+        let a=make(&[1,10,20,30,40,50,60,70,80,90,2]);
+        let mut b=make(&[1,40,50,60,70,80,90,100,110,120,2]);
+        // A scrollbar and one changed content pixel must not destroy overlap.
+        for y in 0..11{let i=(y*100+99)*4;b.rgba[i]=255;}
+        b.rgba[(2*100+40)*4]=150;
+        let result=stitch_capture_frames(&[a,b],StitchOptions::default()).unwrap();
+        assert_eq!(result.height,14);
+        assert_eq!(extract_row_first_red(&result.rgba,result.width,result.height),vec![1,10,20,30,40,50,60,70,80,90,100,110,120,2]);
+    }
+    #[test]
+    fn desktop_registration_still_rejects_unrelated_content(){
+        let a=make_banded_frame(100,&[10,20,30,40,50,60]);
+        let b=make_banded_frame(100,&[110,120,130,140,150,160]);
+        assert!(matches!(stitch_capture_frames(&[a,b],StitchOptions::default()),Err(StitchError::NoOverlapMatch{..})));
     }
 
     #[test]

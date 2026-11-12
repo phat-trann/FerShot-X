@@ -1,7 +1,7 @@
 {
   "name": "fershot-x",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.1.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -18,7 +18,8 @@
     "version:check": "python3 scripts/sync_version.py --check",
     "prebuild": "python3 scripts/sync_version.py --check",
     "predev": "python3 scripts/sync_version.py --check",
-    "pretauri": "python3 scripts/sync_version.py --check"
+    "pretauri": "python3 scripts/sync_version.py --check",
+    "updater:configure": "python3 scripts/configure_updater.py"
   },
   "dependencies": {
     "@radix-ui/react-alert-dialog": "1.2.1",
@@ -27,6 +28,8 @@
     "@radix-ui/react-tabs": "1.2.1",
     "@radix-ui/react-toggle": "1.2.1",
     "@tauri-apps/api": "^2",
+    "@tauri-apps/plugin-process": "2.4.0",
+    "@tauri-apps/plugin-updater": "2.14.1",
     "class-variance-authority": "0.7.1",
     "clsx": "2.1.1",
     "konva": "10.9.1",

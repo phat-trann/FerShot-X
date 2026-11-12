@@ -1,3 +1,4 @@
+import {UpdateSettings} from "./features/updater/Updater";
 import { Radio } from "./components/ui/radio";
 import { WindowTitleBar } from "./components/WindowTitleBar";
 import { useEffect, useRef, useState } from "react";
@@ -96,6 +97,7 @@ export default function PreferencesWindow() {
           <label className="preference-check"><Switch checked={value.showInMenuBar} onCheckedChange={enabled => nativeToggle("showInMenuBar", enabled)}/>Show menu bar icon</label>
           <label className="preference-check"><Switch checked={value.showSystemNotifications} onCheckedChange={enabled => patch("showSystemNotifications", enabled)}/>Notify when a capture is ready</label>
         </fieldset>
+        <UpdateSettings/>
       </section>
       <section role="tabpanel" id="pane-hotkeys" aria-labelledby="tab-hotkeys" hidden={tab !== "hotkeys"}>{tab === "hotkeys" && <WorkspaceShortcuts blocked={busy}/>}</section>
       <section role="tabpanel" id="pane-uploading" aria-labelledby="tab-uploading" hidden={tab !== "uploading"}>{uploadingVisited&&<WorkspaceFtpSettings expanded/>}</section>

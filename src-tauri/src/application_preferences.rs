@@ -7,9 +7,9 @@ const FILE_NAME: &str = "fershot-application-preferences.json";
 const MAX_BYTES: u64 = 16_384;
 static SEQUENCE: AtomicU64 = AtomicU64::new(0);
 
-pub enum Document { Application, Shortcuts, ExportDestination, CaptureUpload }
+pub enum Document { Application, Shortcuts, ExportDestination, CaptureUpload, UpdateSchedule }
 impl Document {
-    fn name(&self) -> &'static str { match self { Self::Application => FILE_NAME, Self::CaptureUpload => "fershot-capture-upload.json", Self::Shortcuts => "fershot-shortcuts.json", Self::ExportDestination => "fershot-export-destination.json" } }
+    fn name(&self) -> &'static str { match self { Self::Application => FILE_NAME, Self::UpdateSchedule => "fershot-update-schedule.json", Self::CaptureUpload => "fershot-capture-upload.json", Self::Shortcuts => "fershot-shortcuts.json", Self::ExportDestination => "fershot-export-destination.json" } }
 }
 
 #[derive(Clone, Serialize, Deserialize)]

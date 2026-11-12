@@ -1,4 +1,4 @@
-# FerShot X 1.0.0
+# FerShot X 1.1.0
 
 A macOS screenshot editor and explicit FTP publisher built with Tauri, Rust and React.
 
@@ -34,3 +34,9 @@ npm run tauri build -- --bundles app
 package.json is the product-version source. Run `npm run version:sync` after an intentional version change; `npm run version:check` validates UI/native/lockfile/README consistency. Accepted fixes use patch versions; compatible feature releases use minor versions. Completed versions receive a release summary and scoped commit/push. No credentials, captures, raw investigation evidence or build output belong in Git.
 
 FTP settings separate the fixed user folder (for example `/s`) from optional local month grouping (`/s/2611` for November 2026). New uploads freeze their destination when queued; retries retain it. Launch at startup is available in the installed macOS `.app`, not unbundled development/browser runs.
+
+## App updates
+
+Settings and the tray menu provide Check for Updates. GitHub Releases use Tauri-signed updater archives and ad-hoc macOS app signing, without Developer ID/notarization. The bootstrap embeds the real public key; configure the private updater key/password as [release secrets](docs/releases/UPDATES.md) to publish updates. See the [1.1.0 candidate notes](docs/releases/1.1.0.md).
+
+Stable version increases in `package.json` pushed to `main` automatically build and publish a versioned GitHub Release. Pushes without a version increase skip release creation. Verification releases retain their documented manual acceptance status.

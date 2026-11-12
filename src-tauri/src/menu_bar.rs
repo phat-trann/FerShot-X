@@ -1,10 +1,10 @@
 use crate::imaging::{NativeError, NativeJobs};
 use std::sync::{Mutex, atomic::{AtomicBool, Ordering}};
-use tauri::{Manager, menu::{CheckMenuItem, Menu, IconMenuItem, PredefinedMenuItem, Submenu}, tray::TrayIconBuilder};
+use tauri::{Manager, menu::{Menu, IconMenuItem, PredefinedMenuItem, Submenu}, tray::TrayIconBuilder};
 
 const ID: &str = "fershot-menu-bar";
 #[derive(Default)]
-pub struct MenuBarState { startup: Mutex<Option<CheckMenuItem<tauri::Wry>>>, capture_upload:Mutex<Option<IconMenuItem<tauri::Wry>>>, repeat: Mutex<Option<IconMenuItem<tauri::Wry>>>, repeat_available: AtomicBool }
+pub struct MenuBarState { startup: Mutex<Option<IconMenuItem<tauri::Wry>>>, capture_upload:Mutex<Option<IconMenuItem<tauri::Wry>>>, repeat: Mutex<Option<IconMenuItem<tauri::Wry>>>, repeat_available: AtomicBool }
 pub const CAPTURE_ITEMS: &[(&str, &str)] = &[
     ("capture-fullscreen", "Capture Screen"), ("capture-area", "Capture Area"), ("capture-scrolling", "Scrolling Capture"),
 ];
@@ -13,9 +13,10 @@ pub const MORE_ITEMS: &[(&str, &str)] = &[
 ];
 pub fn update_startup_check(app: &tauri::AppHandle, enabled: bool) {
     if let Some(state) = app.try_state::<MenuBarState>() {
-        if let Ok(item) = state.startup.lock() { if let Some(item) = item.as_ref() { let _ = item.set_checked(enabled); } }
+        if let Ok(item) = state.startup.lock() { if let Some(item) = item.as_ref() { let _ = item.set_text(startup_title(enabled)); } }
     }
 }
+pub fn startup_title(enabled:bool)->&'static str{if enabled{"Launch at Startup  ✓"}else{"Launch at Startup"}}
 pub fn capture_upload_title(enabled:bool)->&'static str{if enabled{"Upload Captures Immediately  ✓"}else{"Upload Captures Immediately"}}
 pub fn update_capture_upload(app:&tauri::AppHandle,enabled:bool){if let Some(state)=app.try_state::<MenuBarState>(){if let Ok(item)=state.capture_upload.lock(){if let Some(item)=item.as_ref(){let _=item.set_text(capture_upload_title(enabled));}}}}
 pub fn update_repeat_availability(app: &tauri::AppHandle, available: bool) {
@@ -25,8 +26,8 @@ pub fn update_repeat_availability(app: &tauri::AppHandle, available: bool) {
     }
 }
 fn lucide_icon(name:&str)->tauri::image::Image<'static>{let bytes:&[u8]=match name{
- "square-library"=>include_bytes!("../icons/menu/square-library.png"),"monitor"=>include_bytes!("../icons/menu/monitor.png"),"scan-square"=>include_bytes!("../icons/menu/scan-square.png"),"gallery-vertical"=>include_bytes!("../icons/menu/gallery-vertical.png"),"app-window-mac"=>include_bytes!("../icons/menu/app-window-mac.png"),"folder-open"=>include_bytes!("../icons/menu/folder-open.png"),"clipboard-list"=>include_bytes!("../icons/menu/clipboard-list.png"),"cog"=>include_bytes!("../icons/menu/cog.png"),"circle-power"=>include_bytes!("../icons/menu/circle-power.png"),"cloud-upload"=>include_bytes!("../icons/menu/cloud-upload.png"),_=>include_bytes!("../icons/menu/ellipsis.png")};let image=image::load_from_memory(bytes).expect("Bundled Lucide icon").to_rgba8();let(w,h)=image.dimensions();tauri::image::Image::new_owned(image.into_raw(),w,h)}
-fn icon_for(id:&str)->&str{match id{"show-workspace"=>"square-library","capture-fullscreen"=>"monitor","capture-area"|"capture-repeat-region"=>"scan-square","capture-scrolling"=>"gallery-vertical","capture-active-window"|"capture-window"=>"app-window-mac","open-file"=>"folder-open","open-clipboard"=>"clipboard-list","capture-instant-upload"=>"cloud-upload",_=>"ellipsis"}}
+ "cloud-sync"=>include_bytes!("../icons/menu/cloud-sync.png"),"monitor-cog"=>include_bytes!("../icons/menu/monitor-cog.png"),"square-library"=>include_bytes!("../icons/menu/square-library.png"),"monitor"=>include_bytes!("../icons/menu/monitor.png"),"scan-square"=>include_bytes!("../icons/menu/scan-square.png"),"gallery-vertical"=>include_bytes!("../icons/menu/gallery-vertical.png"),"app-window-mac"=>include_bytes!("../icons/menu/app-window-mac.png"),"folder-open"=>include_bytes!("../icons/menu/folder-open.png"),"clipboard-list"=>include_bytes!("../icons/menu/clipboard-list.png"),"cog"=>include_bytes!("../icons/menu/cog.png"),"circle-power"=>include_bytes!("../icons/menu/circle-power.png"),"cloud-upload"=>include_bytes!("../icons/menu/cloud-upload.png"),_=>include_bytes!("../icons/menu/ellipsis.png")};let image=image::load_from_memory(bytes).expect("Bundled Lucide icon").to_rgba8();let(w,h)=image.dimensions();tauri::image::Image::new_owned(image.into_raw(),w,h)}
+fn icon_for(id:&str)->&str{match id{"check-updates"=>"cloud-sync","launch-startup"=>"monitor-cog","show-workspace"=>"square-library","capture-fullscreen"=>"monitor","capture-area"|"capture-repeat-region"=>"scan-square","capture-scrolling"=>"gallery-vertical","capture-active-window"|"capture-window"=>"app-window-mac","open-file"=>"folder-open","open-clipboard"=>"clipboard-list","capture-instant-upload"=>"cloud-upload",_=>"ellipsis"}}
 pub fn build(app: &tauri::AppHandle) -> tauri::Result<Menu<tauri::Wry>> {
     let menu = Menu::new(app)?;
     let item = |id, title| IconMenuItem::with_id(app, id, title, true, Some(lucide_icon(icon_for(id))), None::<&str>);
@@ -52,11 +53,12 @@ pub fn build(app: &tauri::AppHandle) -> tauri::Result<Menu<tauri::Wry>> {
     menu.append(&instant)?;if let Ok(mut saved)=app.state::<MenuBarState>().capture_upload.lock(){*saved=Some(instant);}
     if let Ok(login) = fershot_application_services::login_state(app) {
         if login.supported {
-            let startup = CheckMenuItem::with_id(app,"launch-startup","Launch at Startup",true,login.enabled,None::<&str>)?;
+            let startup = IconMenuItem::with_id(app,"launch-startup",startup_title(login.enabled),true,Some(lucide_icon("monitor-cog")),None::<&str>)?;
             menu.append(&startup)?;
             if let Ok(mut saved) = app.state::<MenuBarState>().startup.lock() { *saved = Some(startup); }
         }
     }
+    menu.append(&item("check-updates","Check for Updates…")?)?;
     menu.append(&IconMenuItem::with_id(app,"open-preferences","Settings…",true,Some(lucide_icon("cog")),Some("CmdOrCtrl+,"))?)?;
     menu.append(&IconMenuItem::with_id(app,"quit-app","Quit",true,Some(lucide_icon("circle-power")),Some("CmdOrCtrl+Q"))?)?;
     Ok(menu)
@@ -84,6 +86,10 @@ mod tests {
     }
     #[test] fn capture_upload_menu_item_has_cloud_upload_icon_and_toggled_titles() {
         assert_eq!(super::icon_for("capture-instant-upload"), "cloud-upload");
+        assert_eq!(super::icon_for("check-updates"), "cloud-sync");
+        assert_eq!(super::icon_for("launch-startup"), "monitor-cog");
+        assert_eq!(super::startup_title(true), "Launch at Startup  ✓");
+        assert_eq!(super::startup_title(false), "Launch at Startup");
         assert_eq!(super::capture_upload_title(true), "Upload Captures Immediately  ✓");
         assert_eq!(super::capture_upload_title(false), "Upload Captures Immediately");
     }

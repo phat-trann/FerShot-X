@@ -31,6 +31,7 @@ pub fn build(app: &tauri::AppHandle) -> tauri::Result<Menu<tauri::Wry>> {
 
 pub fn on_event(app: &tauri::AppHandle, event: tauri::menu::MenuEvent) {
     let action = event.id().as_ref();
+    if action == "check-updates" { let _=crate::preferences_window::open_tab(app,Some("general"));let _=crate::updates::request(app,crate::updates::Action::Check);return; }
     if action == "open-preferences" { let _ = crate::preferences_window::open(app); return; }
     if action=="capture-instant-upload"{let app=app.clone();tauri::async_runtime::spawn_blocking(move||{if crate::capture_upload::toggle(&app).is_err(){crate::menu_bar::update_capture_upload(&app,crate::capture_upload::read(&app).unwrap_or(false));crate::diagnostics::record(&app,crate::diagnostics::Area::Settings,crate::diagnostics::Event::Failed,crate::diagnostics::Code::SettingsFailed);let _=crate::library_window::show(&app,"main");let _=app.emit_to("main","fershot-menu-action","capture-upload-setting-failed");}});return;}
     if action == "launch-startup" {

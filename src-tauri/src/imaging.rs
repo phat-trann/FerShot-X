@@ -159,7 +159,8 @@ pub async fn process_image(
     .map_err(|_| NativeError::new("worker_failed", "Image processing stopped unexpectedly."))?
 }
 
-fn restore_after_capture(was_visible:bool,captured:bool,background:bool)->bool { (was_visible || captured)&&!(captured&&background) }
+// Successful capture presentation belongs to the renderer after its new canvas is painted.
+fn restore_after_capture(was_visible:bool,captured:bool,_background:bool)->bool { was_visible&&!captured }
 
 struct RestoreWindow {
     window: tauri::WebviewWindow,
@@ -490,7 +491,7 @@ pub async fn copy_image(
 #[cfg(test)]
 mod tests {
     #[test]fn background_success_stays_hidden_and_cancel_restores_prior_view(){assert!(!super::restore_after_capture(true,true,true));assert!(!super::restore_after_capture(false,true,true));assert!(super::restore_after_capture(true,false,true));assert!(!super::restore_after_capture(false,false,true));}
-    #[test] fn successful_capture_reopens_a_hidden_view_but_cancel_restores_previous_visibility() { assert!(super::restore_after_capture(false,true,false)); assert!(super::restore_after_capture(true,false,false)); assert!(!super::restore_after_capture(false,false,false)); }
+    #[test] fn success_waits_for_renderer_and_cancel_restores_previous_visibility() { assert!(!super::restore_after_capture(false,true,false)); assert!(super::restore_after_capture(true,false,false)); assert!(!super::restore_after_capture(false,false,false)); }
     use super::*;
     const PNG: &str = "iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAIAAAD91JpzAAAAEklEQVR4nGP4z8DAAMIM/4EAAB/uBfsL2WiLAAAAAElFTkSuQmCC";
     #[test]

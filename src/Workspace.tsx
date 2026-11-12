@@ -1,3 +1,4 @@
+import {saveLocalDraft} from "./platform/local-cache";
 import { readCaptureUploadMode } from "./platform/native";
 import { EditorAddImage } from "./components/EditorAddImage";
 import { createPointerColor } from "./components/pointer-color";
@@ -97,6 +98,7 @@ export default function Workspace() {
   const annotations = image ? annotationsById.get(image.id) ?? EMPTY_ANNOTATIONS : EMPTY_ANNOTATIONS;
   const advancedItems = image ? advancedById.get(image.id) ?? EMPTY_ADVANCED_ITEMS : EMPTY_ADVANCED_ITEMS;
   useEffect(()=>{if(!image)return;const timer=window.setTimeout(()=>{void localHistory.remember(image,{schemaVersion:1,width:image.width,height:image.height,annotations,advanced:advancedItems});},300);return()=>window.clearTimeout(timer);},[image,annotations,advancedItems,localHistory.remember]);
+  useEffect(()=>{const prepare=(event:Event)=>{const promises=(event as CustomEvent<Promise<unknown>[]>).detail;if(busyRef.current||automaticUploads.current.size){promises.push(Promise.reject(new Error("Finish the active operation before updating.")));return;}if(image&&!ftpQueue.items.some(job=>job.sourceId===(image.localId??image.id)&&job.status==="success"))promises.push(localHistory.pending(image.localId??image.id).then(()=>saveLocalDraft(image,{schemaVersion:1,width:image.width,height:image.height,annotations,advanced:advancedItems},true)));};window.addEventListener("fershot-before-update",prepare);return()=>window.removeEventListener("fershot-before-update",prepare);},[image,annotations,advancedItems,ftpQueue.items]);
   const originalId = image ? originalById.current.get(image.id) : undefined;
   const originalImage = originalId ? images.find(item => item.id === originalId) : undefined;
   const withEdits = <T,>(source: ImageDocument, basic: readonly Annotation[], use: (document: ImageDocument) => Promise<T>) => withWorkspaceAnnotations(source, basic, advancedById.get(source.id) ?? EMPTY_ADVANCED_ITEMS, use);
@@ -109,11 +111,18 @@ export default function Workspace() {
     for (const item of ftpQueue.items) if (item.status === "success") void localHistory.forget(item.sourceId);
   }, [ftpQueue.items, localHistory.forget]);
 
+  const pendingPresentation=useRef<{id:string;sized:boolean;painted:boolean}|null>(null);
+  function presentDocument(id:string,part:"sized"|"painted"){
+    const pending=pendingPresentation.current;if(!mounted.current||pending?.id!==id)return;
+    pending[part]=true;
+    if(pending.sized&&pending.painted){pendingPresentation.current=null;void showEditor().catch(()=>setError("Edit could not be brought forward. Open the image again from Library."));}
+  }
   function addDocument(next: ImageDocument, select = true) {
     if (!mounted.current) { captureScales.current.delete(next.id); URL.revokeObjectURL(next.src); return; }
     if (liveImages.current.length >= 512) { captureScales.current.delete(next.id); URL.revokeObjectURL(next.src); throw new RangeError("Session library is limited to 512 images."); }
     sessionRevision.current++;
-    void fitEditorWindow(next.width,next.height).then(()=>showEditor()).catch(()=>setError("Edit could not be brought forward. Open an image again from Library."));
+    pendingPresentation.current={id:next.id,sized:false,painted:false};
+    void fitEditorWindow(next.width,next.height).then(()=>presentDocument(next.id,"sized")).catch(()=>{if(pendingPresentation.current?.id===next.id){pendingPresentation.current=null;setError("Edit could not be sized. Open the image again from Library.");void showEditor();}});
     setEditing(true);
     liveImages.current = [...liveImages.current, next];
     setImages([...liveImages.current]);
@@ -460,7 +469,7 @@ export default function Workspace() {
           {image&&<div className="image-stage">
             {(transformMode||effectsOpen)&&<WorkspaceDirectTools key={image.id} image={image} annotations={annotations} advanced={advancedItems} mode={transformMode??"effects"} busy={busy} zoom={zoom} onTransform={transform} onEffect={applyEffect} onCancel={()=>{setTransformMode(null);setEffectsOpen(false);}}/>}
             <div hidden={!!transformMode||effectsOpen}>
-              <WorkspaceEditor imageToInsert={imageToInsert?.target===image.id?imageToInsert:undefined} onImageInserted={()=>setImageToInsert(undefined)} onFitChange={value=>{fitZoom.current=value;}} image={image} annotations={annotations} advancedItems={advancedItems} active={editing} busy={busy} zoom={zoom} onPixelSample={pointerColor.set} onZoomReport={setDisplayZoom} onZoomChange={setZoom} onAdvancedChange={updateAdvanced} onSelectDrawing={()=>{setTransformMode(null);setEffectsOpen(false);setEditing(true);}}/>
+              <WorkspaceEditor onReady={id=>presentDocument(id,"painted")} onLoadError={()=>{setError("Image preview could not be loaded. Reopen the image from Library; the original is retained.");void showEditor();}} imageToInsert={imageToInsert?.target===image.id?imageToInsert:undefined} onImageInserted={()=>setImageToInsert(undefined)} onFitChange={value=>{fitZoom.current=value;}} image={image} annotations={annotations} advancedItems={advancedItems} active={editing} busy={busy} zoom={zoom} onPixelSample={pointerColor.set} onZoomReport={setDisplayZoom} onZoomChange={setZoom} onAdvancedChange={updateAdvanced} onSelectDrawing={()=>{setTransformMode(null);setEffectsOpen(false);setEditing(true);}}/>
             </div>
           </div>}
         </section>

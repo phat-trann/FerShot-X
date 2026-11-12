@@ -10,7 +10,7 @@ pub fn changed(app: &tauri::AppHandle) { let _ = app.emit_to("main", "fershot-pr
 pub fn open(app: &tauri::AppHandle) -> Result<(), NativeError> {
     open_tab(app, None)
 }
-fn open_tab(app: &tauri::AppHandle, tab: Option<&str>) -> Result<(), NativeError> {
+pub(crate) fn open_tab(app: &tauri::AppHandle, tab: Option<&str>) -> Result<(), NativeError> {
     let tab=tab.filter(|tab|matches!(*tab,"general"|"hotkeys"|"uploading"|"advanced"));
     let failure = |e: tauri::Error| NativeError::new("preferences_window_failed", e.to_string());
     let on_top=app.get_webview_window("main").is_some_and(|window|window.is_always_on_top().unwrap_or(false));

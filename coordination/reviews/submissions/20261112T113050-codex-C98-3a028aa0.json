@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "id": "20261112T113050-codex-C98-3a028aa0",
+  "created_at": "2026-11-12T11:30:50.177228+07:00",
+  "agent": "codex",
+  "request": "C98-main-version-release-push",
+  "task": "C98",
+  "completion": "partial",
+  "summary": "Main-version release detection and immutable release/tag guards implemented and tested; reviewed 1.1.0 source ready for user-authorized commit/push",
+  "files": [
+    ".github/workflows/release.yml",
+    "scripts/release_version.py",
+    "scripts/test_release_version.py",
+    "scripts/release_gate.cjs",
+    "scripts/release_gate.test.cjs",
+    "AGENTS.md",
+    "README.md",
+    "coordination/build-tasks.json",
+    "docs/releases/UPDATES.md",
+    "docs/releases/1.1.0.md",
+    "docs/agents/codex/C98-main-version-release.md"
+  ],
+  "file_sha256": {
+    ".github/workflows/release.yml": "1d51f67a4b079d7dfeb1ca01e677cba6641439819d96a940756c6c2d9dbdd817",
+    "scripts/release_version.py": "ce3afeb1a445da8fb40323f4a6b3cbcd9b711f275726224630df0e80c93fce72",
+    "scripts/test_release_version.py": "d31167a6d0042448448e59934ef0740eb95626a660f71b29cd41720c2edb61b0",
+    "scripts/release_gate.cjs": "5173551484c45b30facd829dbbb9ab6b6491469c1de35755cdad990e336b309f",
+    "scripts/release_gate.test.cjs": "2da8809c7ea349e9aeec0073b400c683553a2a3d13c53cbedc3ec8cc98999325",
+    "AGENTS.md": "7725de9ce1511941c7f5b009050569b34de19ff9075a487294ec28f73a03a688",
+    "README.md": "e1c1f285118fa89ea66ee4dece89f9ab62853631e15bbb190d82227687017fe0",
+    "coordination/build-tasks.json": "3ca6804423c359f47f5fd53506b2185a9868a05587b2fb5d122662a97ed2f0d0",
+    "docs/releases/UPDATES.md": "178a28bec8d31f19166f2b4d1f61f026ee4d08cb1f214becb9752b5759d814a6",
+    "docs/releases/1.1.0.md": "436ed2d09c2b8c621e7662863d47a656798c9ec132ff8fb4b7887c18ec503a13",
+    "docs/agents/codex/C98-main-version-release.md": "063975336f2fbd2da31c04c20b8c6bebb511ec088c38235b6038d1c6afe424ce"
+  },
+  "checks": [
+    "6 version planner, 8 API/tag guard and 5 updater configuration tests passed; workflow YAML parsed; version sync check passed; dry run with actual HEAD detected 1.0.0 to 1.1.0"
+  ],
+  "risks": [
+    "Commit/push and remote CI outcome pending subsequent publication packet. User authorizes verification release before 100% acceptance; acceptance stays 85%. No real capture/FTP/update installation or formatting/lint"
+  ],
+  "review": "pending"
+}

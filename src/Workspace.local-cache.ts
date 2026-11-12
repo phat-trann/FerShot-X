@@ -1,10 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { LocalDraft } from "./contracts/local-draft";
 import type { ImageDocument } from "./contracts/media";
-import { cachedLibraryDocument, listLocalCache, localCacheAvailable, openLocalCache, removeLocalCache, saveLocalDraft, type CachedLocalEntry } from "./platform/local-cache";
+import { localCacheAvailable, removeLocalCache, saveLocalDraft } from "./platform/local-cache";
 
 export function useLocalHistory() {
-  const [entries, setEntries] = useState<readonly CachedLocalEntry[]>([]);
   const [error, setError] = useState("");
   const alive = useRef(false);
   const chain = useRef<Promise<unknown>>(Promise.resolve());
@@ -22,40 +21,32 @@ export function useLocalHistory() {
     chain.current = next;
     return next;
   }, []);
-  const refresh = useCallback(() => run(async () => {
-    if (!localCacheAvailable()) return;
-    const rows = await listLocalCache();
-    if (alive.current) { setEntries(rows); setError(""); }
-  }), [run]);
-  useEffect(() => {
-    alive.current = true; void refresh();
-    // Prune expired rows in a long-running app as well as on restart/each operation.
-    const timer = window.setInterval(() => { void refresh(); }, 60_000);
-    return () => { alive.current = false; window.clearInterval(timer); };
-  }, [refresh]);
+  useEffect(()=>{alive.current=true;return()=>{alive.current=false;};},[]);
+  const revisions=useRef(new Map<string,number>());
+  const snapshots=useRef(new Map<string,{src:string;name:string;draft:LocalDraft}>());
   const remember = useCallback((image: ImageDocument, draft:LocalDraft=image.draft??{schemaVersion:1,width:image.width,height:image.height,annotations:[],advanced:[]}): Promise<void> => {
     const id=image.localId??image.id;
     if(!activeVersions.current.has(id))activeVersions.current.set(id,image.id);
     if(activeVersions.current.get(id)!==image.id)return Promise.resolve();
     if (!localCacheAvailable() || forgotten.current.has(id)) return Promise.resolve();
+    const revision=(revisions.current.get(id)??0)+1;revisions.current.set(id,revision);
     const next = run(async () => {
-      if (forgotten.current.has(id)||activeVersions.current.get(id)!==image.id) return;
-      const saved = await saveLocalDraft(image,draft,savedPixels.current.get(id)!==image.src).catch(error=>{savedPixels.current.delete(id);throw error;});
+      if (forgotten.current.has(id)||activeVersions.current.get(id)!==image.id||revisions.current.get(id)!==revision) return;
+      const previous=snapshots.current.get(id);
+      if(previous?.src===image.src&&previous.name===image.name&&previous.draft.width===draft.width&&previous.draft.height===draft.height&&previous.draft.annotations===draft.annotations&&previous.draft.advanced===draft.advanced)return;
+      await saveLocalDraft(image,draft,savedPixels.current.get(id)!==image.src).catch(error=>{savedPixels.current.delete(id);snapshots.current.delete(id);throw error;});
       savedPixels.current.set(id,image.src);
-      if (alive.current) {
-        setEntries(rows => [saved, ...rows.filter(row => row.id !== saved.id)]);
-        setError("");
-      }
+      snapshots.current.set(id,{src:image.src,name:image.name,draft});
+      if(alive.current)setError("");
     });
     pending.current.set(id, next);
     void next.finally(() => { if (pending.current.get(id) === next) pending.current.delete(id); });
-    return next;
+    return (async()=>{let waiting=next;for(;;){await waiting;const latest=pending.current.get(id);if(!latest||latest===waiting)return;waiting=latest;}})();
   }, [run]);
   const forget = useCallback((id: string) => {
     if(removed.current.has(id))return Promise.resolve();
     const existing=removals.current.get(id);if(existing)return existing;
     forgotten.current.add(id);
-    if (alive.current) setEntries(rows => rows.filter(row => row.id !== id));
     const next=run(async () => {
       if (localCacheAvailable()) {await removeLocalCache(id);removed.current.add(id);}
     });
@@ -63,13 +54,5 @@ export function useLocalHistory() {
     void next.finally(()=>{if(removals.current.get(id)===next)removals.current.delete(id);});
     return next;
   }, [run]);
-  const open = useCallback(async (id: string) => {
-    const entry = entries.find(row => row.id === id);
-    if (!entry) throw new Error("The cached image is no longer available. Refresh local history.");
-    await chain.current;
-    return openLocalCache(entry);
-  }, [entries]);
-  return { entries, error, remember, activate, forget, open, refresh,
-    pending: (id: string) => pending.current.get(id) ?? Promise.resolve(),
-    libraryDocuments: entries.map(cachedLibraryDocument) };
+  return {error,remember,activate,forget,pending:(id:string)=>pending.current.get(id)??Promise.resolve()};
 }

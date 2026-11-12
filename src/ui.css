@@ -83,3 +83,5 @@ input,textarea,[contenteditable="true"]{-webkit-user-select:text;user-select:tex
 
 .ftp-upload-banner[data-tone="error"] strong { color:var(--status-error); }
 .ftp-upload-banner[data-tone="warning"] strong { color:var(--status-warning); }
+
+.window-loading{min-height:100vh;background:var(--surface-base,#232427);cursor:wait}

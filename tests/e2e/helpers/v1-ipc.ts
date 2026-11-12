@@ -16,7 +16,7 @@ export async function mock(page:Page){await page.context().addInitScript(({png})
  if(command==="get_shortcuts"||command==="load_saved_shortcuts"){const empty=Object.fromEntries(["capture-fullscreen","capture-area","capture-window","capture-active-window","capture-repeat-region","capture-scrolling","ocr-capture","show-workspace"].map(id=>[id,null]));return {bindings:(command==="get_shortcuts"?owner.__ACTIVE_SHORTCUTS__:owner.__SAVED_SHORTCUTS__)??empty,faulted:false,restorationFailed:false};}
  if(command==="configure_shortcuts"){owner.__ACTIVE_SHORTCUTS__={...args.bindings};owner.__SAVED_SHORTCUTS__={...args.bindings};return {bindings:args.bindings,faulted:false};}
  if(command==="read_capture_upload_mode")return !!host.__AUTO_UPLOAD__;
- if(command==="local_cache_list")return owner.__LOCAL__;if(command==="ftp_list")return owner.__FTP__;
+ if(command==="local_cache_list")return owner.__LOCAL__;if(command==="ftp_list")return structuredClone(owner.__FTP__);
  if(command==="library_thumbnail")return image;
  if(command==="library_image"){if(host.__MISSING_PREVIEW__)throw {code:"cache_failed",message:"Retained preview is missing"};if(host.__DELAY_PREVIEW__&&args.id==="local-1")await new Promise(r=>setTimeout(r,250));return {name:args.id==="local-1"?"Design.png":args.id==="local-2"?"Notes.png":"Shared.png",image};}
  if(command==="edit_library_image"){owner.__INBOX__.push(args.kind==="local"&&owner.__DRAFTS__?.[args.id]?{...owner.__DRAFTS__[args.id],localId:args.id}:{name:args.kind==="ftp"?"Shared.png":"Design.png",image,localId:args.kind==="local"?args.id:undefined});const edit=window.open("?editor","fershot-editor","popup,width=1180,height=780");owner.__EDITOR__=edit;if(edit)setTimeout(()=>edit.__EMIT__?.("fershot-editor-image"),200);return;}

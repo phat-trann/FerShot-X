@@ -16,9 +16,3 @@ export interface CapturePanelProps {
   busy: boolean;
   error?: string;
 }
-export interface LibraryPanelProps {
-  images: readonly ImageDocument[];
-  selectedId: string | null;
-  onSelect: (id: string) => void;
-  onRemove: (id: string) => void;
-}

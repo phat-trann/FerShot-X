@@ -20,20 +20,19 @@ export function WorkspaceEditor({ onReady,onLoadError,image, annotations, advanc
 }) {
   const host = useRef<HTMLDivElement>(null);
   const [fit, setFit] = useState(1);
-  const [advancedMode] = useState(true);
   const [basePreview, setBasePreview] = useState<{ id: string; src: string } | null>(null);
   useEffect(() => {
     let live = true;
     let owned: string | undefined;
     setBasePreview(null);
-    if (advancedMode && annotations.length) {
+    if (annotations.length) {
       void renderAnnotatedDocument(image, annotations).then(rendered => {
         if (!live) { URL.revokeObjectURL(rendered.src); return; }
         owned = rendered.src; setBasePreview({ id: image.id, src: owned });
       }).catch(() => { /* Main export reports raster errors; the original remains available. */ });
     }
     return () => { live = false; if (owned) URL.revokeObjectURL(owned); };
-  }, [image.id, image.src, annotations, advancedMode]);
+  }, [image.id, image.src, annotations]);
   useLayoutEffect(() => {
     const node = host.current;
     const stage = node?.closest(".stage");

@@ -1,0 +1,42 @@
+{
+  "reason": "Replaced by active src/LibraryWindow.tsx; reference checks found only this isolated legacy panel and its three test files. Historical submissions/reviews remain immutable.",
+  "archive": "Ignored tmp/retired-C108 (byte-verified before deletion); Git history preserves originals.",
+  "files": [
+    {
+      "path": "src/features/library/LibraryPanel.css",
+      "bytes": 3531,
+      "lines": 188,
+      "sha256": "ebfb702493a8e332e4718508f87c0343be4bff64589510694c0f86977caade74"
+    },
+    {
+      "path": "src/features/library/LibraryPanel.test.tsx",
+      "bytes": 4973,
+      "lines": 158,
+      "sha256": "cb0146e32b6d82eee93042b509b4117ccac27e823e318f803955243abfb44bd8"
+    },
+    {
+      "path": "src/features/library/LibraryPanel.tsx",
+      "bytes": 18919,
+      "lines": 606,
+      "sha256": "34c02008f17ce89ac938acd9ca6ff04fb7116820ee423a13af25ea651bbadd37"
+    },
+    {
+      "path": "src/features/library/index.ts",
+      "bytes": 96,
+      "lines": 5,
+      "sha256": "bb29b35fe3afa221b4e6d34cf9cca24e7a259cd570bd9e8a4d59b2d19d9ca73a"
+    },
+    {
+      "path": "src/testing/copilot-phase2-library.test.tsx",
+      "bytes": 2494,
+      "lines": 77,
+      "sha256": "8b795803941888e2c06f4aec0cdb80cf6eaa8aaf6393cd49e11f149cb7315cde"
+    },
+    {
+      "path": "src/testing/antigravity-library-queue.test.tsx",
+      "bytes": 16024,
+      "lines": 468,
+      "sha256": "e5e577bd3b9a802366fbe151b15b44b62b8beba52e060e3e3f4ac71838723f40"
+    }
+  ]
+}

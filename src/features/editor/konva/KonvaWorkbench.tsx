@@ -98,9 +98,9 @@ export function KonvaWorkbench({onSourceReady,onSourceError,onPixelSample,imageT
   useEffect(()=>{
     let suspended=false,frame=0,second=0;const timers=new Set<ReturnType<typeof setTimeout>>();
     const cancel=()=>{cancelAnimationFrame(frame);cancelAnimationFrame(second);for(const timer of timers)clearTimeout(timer);timers.clear();};
-    const draw=()=>{if(suspended||document.hidden)return;const node=stage.current;if(!node)return;for(const layer of node.getLayers())layer.getCanvas().setSize(node.width(),node.height());node.draw();};
+    const draw=(reset=false)=>{if(suspended||document.hidden)return;const node=stage.current;if(!node)return;if(reset)for(const layer of node.getLayers())layer.getCanvas().setSize(node.width(),node.height());node.draw();};
     const clear=()=>{suspended=true;cancel();if(host.current)host.current.style.visibility="hidden";for(const layer of stage.current?.getLayers()??[])layer.getCanvas().getContext().clear();};
-    const repaint=()=>{if(suspended||document.hidden)return;cancel();draw();frame=requestAnimationFrame(()=>{draw();second=requestAnimationFrame(draw);});for(const delay of [50,150,400]){const timer=setTimeout(()=>{timers.delete(timer);draw();},delay);timers.add(timer);}};
+    const repaint=()=>{if(suspended||document.hidden)return;cancel();draw(true);frame=requestAnimationFrame(()=>{draw();second=requestAnimationFrame(()=>draw());});for(const delay of [50,150,400]){const timer=setTimeout(()=>{timers.delete(timer);draw();},delay);timers.add(timer);}};
     // Native presentation can resize/discard WKWebView backing stores after the
     // first focus/animation frame. Recreate and draw only bounded visible canvases.
     const presented=()=>{suspended=false;if(host.current)host.current.style.visibility="visible";repaint();};window.addEventListener("fershot-capture-starting",clear);window.addEventListener("fershot-editor-presented",presented);window.addEventListener("focus",repaint);document.addEventListener("visibilitychange",repaint);

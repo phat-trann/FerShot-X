@@ -675,5 +675,13 @@
     "remaining": "docs/agents/codex/C45-manual-acceptance.md",
     "original_runtime_parity": "UNKNOWN",
     "release": "docs/agents/codex/C45-release-decision.md"
+  },
+  "current_functional_acceptance": {
+    "percent": 100,
+    "basis": "USER_REPORTED explicit acceptance",
+    "date": "2026-11-12",
+    "scope": "Existing FerShot X features; historical source/runtime parity figures remain unchanged",
+    "pending_separate_check": "Native updater notification delivery/click from installed 1.1.8 to release 1.1.9",
+    "reference": "docs/releases/ACCEPTANCE.md"
   }
 }

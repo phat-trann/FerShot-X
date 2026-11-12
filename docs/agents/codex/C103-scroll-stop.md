@@ -1,0 +1,5 @@
+# C103 scrolling stop recovery
+
+User reports Screen PASS and scrolling movement; Escape still failed output. Sanitized installed 1.1.3 logs show stitch_frames failure with six captured frames. Finalization now preserves the longest aligned prefix on an explicit stop, falling back to the first valid frame instead of losing all pixels. In-flight capture errors after stop preserve earlier frames; non-stop failures still report errors. No estimated overlap is invented and partial alignment failures remain diagnostic.
+
+Four added regressions cover retained multi-frame pixels, an unalignable tail, a single frame and an in-flight error after an explicit stop. All 71 native tests and production compilation with -D warnings passed. Source checks use synthetic pixels and no real OS actions. Version 1.1.4 carries this functional fix; C102 release/version-management logic stays unchanged. Native stop/complete-end behavior and stable-certificate continuity need real verification. Acceptance remains 85%; Screen USER_REPORTED PASS is preserved. Formatting/lint not run; Copilot inactive.

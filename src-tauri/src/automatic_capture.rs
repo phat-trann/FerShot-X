@@ -52,6 +52,28 @@ mod input{
 }
 fn raster(width:u32,height:u32,rgba:Vec<u8>)->Result<fershot_image_core::Raster,NativeError>{let image=image::RgbaImage::from_raw(width,height,rgba).ok_or_else(||fail("Invalid scroll pixels."))?;let mut out=std::io::Cursor::new(Vec::new());image::DynamicImage::ImageRgba8(image).write_to(&mut out,image::ImageFormat::Png).map_err(|_|fail("Scrolling output could not be encoded."))?;fershot_image_core::Raster::decode(&out.into_inner()).map_err(|_|fail("Scrolling output exceeds the image limits."))}
 fn unchanged(a:&ScrollFrame,b:&ScrollFrame)->bool{a.width==b.width&&a.height==b.height&&a.rgba==b.rgba}
+fn capture_step<T>(stop:&AtomicBool,operation:impl FnOnce()->Result<T,NativeError>)->Result<Option<T>,NativeError>{
+ if stop.load(Ordering::SeqCst){return Ok(None)}
+ let result=operation();
+ if stop.load(Ordering::SeqCst){return Ok(None)}
+ result.map(Some)
+}
+fn finish_frames(frames:&[ScrollFrame],stopped:bool)->Result<(fershot_image_core::Raster,usize),NativeError>{
+ if frames.is_empty(){return Err(fail("No scrolling frame was captured."))}
+ let mut count=frames.len();
+ loop{
+  let first=&frames[0];
+  if count==1{return raster(first.width,first.height,first.rgba.clone()).map(|image|(image,1))}
+  match stitch_capture_frames(&frames[..count],StitchOptions{direction:ScrollDirection::Down,min_overlap_rows:(first.height/10).max(8),max_output_height:16384,max_channel_diff:0}){
+   Ok(image)=>{if image.matched_overlaps.is_empty()&&!stopped{return Err(NativeError::new("scroll_no_movement","The selected content did not move. Select the scrolling content and retry."))}return raster(image.width,image.height,image.rgba).map(|image|(image,count))},
+   // Escape finishes the valid prefix. Never invent overlap for an unaligned
+   // tail, or discard all captured pixels merely because the last pair failed.
+   Err(fershot_scroll_core::StitchError::NoOverlapMatch{frame_index})if stopped&&frame_index>0=>count=frame_index.min(count-1),
+   Err(fershot_scroll_core::StitchError::OutputHeightLimitExceeded{..})if stopped=>count-=1,
+   Err(_)=>return Err(fail("The scrolling frames could not be aligned. Select just the scrolling content, avoid animation, and retry.")),
+  }
+ }
+}
 #[tauri::command]pub async fn capture_scroll_image(background:Option<bool>,window:tauri::WebviewWindow,app:tauri::AppHandle,jobs:tauri::State<'_,NativeJobs>)->Result<ImagePayload,NativeError>{
  let _=background;crate::imaging::validate_window_label(window.label())?;let guard=jobs.acquire()?;
  tauri::async_runtime::spawn_blocking(move||{
@@ -72,19 +94,30 @@ fn unchanged(a:&ScrollFrame,b:&ScrollFrame)->bool{a.width==b.width&&a.height==b.
   #[cfg(target_os="macos")]let mut pointer=input::Pointer::new()?;
   while frames.len()<64&&used_pixels+u64::from(w)*u64::from(h)<=max_pixels{
    if app.state::<StopState>().0.load(Ordering::SeqCst){break;}
+   let next=capture_step(&app.state::<StopState>().0,||{
    stage=crate::diagnostics::Stage::ResolveTarget;if before!=crate::area_capture::topology(&window)?{return Err(NativeError::new("display_changed","Displays changed during scrolling capture."))}crate::active_window::confirm(target.0,target.1)?;if crate::active_window::target_at(rect)?!=target{return Err(NativeError::new("scroll_target_unavailable","The selected window is covered or changed. Uncover it and retry."))}
    stage=crate::diagnostics::Stage::PostScroll;
    #[cfg(target_os="macos")]pointer.scroll(rect)?;
    #[cfg(not(target_os="macos"))]return Err(fail("Automatic scrolling requires macOS."));
    for _ in 0..20{if app.state::<StopState>().0.load(Ordering::SeqCst){break;}std::thread::sleep(std::time::Duration::from_millis(25));}
-   if app.state::<StopState>().0.load(Ordering::SeqCst){break;}
-   stage=crate::diagnostics::Stage::CaptureFrame;let frame=capture(CaptureMode::Region(rect))?;let(width,height)=frame.dimensions();let next=ScrollFrame{width,height,rgba:frame.rgba_bytes()};if unchanged(frames.last().unwrap(),&next){break;}if width!=w||height!=h{return Err(fail("The capture region changed size."))}used_pixels+=u64::from(w)*u64::from(h);frames.push(next);captured_frames=frames.len()as u32;
+   if app.state::<StopState>().0.load(Ordering::SeqCst){return Err(NativeError::new("cancelled","Scrolling stopped."))}
+   stage=crate::diagnostics::Stage::CaptureFrame;let frame=capture(CaptureMode::Region(rect))?;let(width,height)=frame.dimensions();Ok(ScrollFrame{width,height,rgba:frame.rgba_bytes()})
+   })?;let Some(next)=next else{break;};let(width,height)=(next.width,next.height);if unchanged(frames.last().unwrap(),&next){break;}if width!=w||height!=h{return Err(fail("The capture region changed size."))}used_pixels+=u64::from(w)*u64::from(h);frames.push(next);captured_frames=frames.len()as u32;
   }
   if frames.len()==1&&!app.state::<StopState>().0.load(Ordering::SeqCst){return Err(NativeError::new("scroll_no_movement","The selected content did not move. Start above the end of the page and select inside its scrollable content."))}
   stage=crate::diagnostics::Stage::StitchFrames;
-  let output=if frames.len()==1{raster(w,h,frames.remove(0).rgba).map_err(|_|fail("Captured frame is invalid."))?}else{let image=stitch_capture_frames(&frames,StitchOptions{direction:ScrollDirection::Down,min_overlap_rows:(h/10).max(8),max_output_height:16384,max_channel_diff:0}).map_err(|_|fail("The scrolling frames could not be aligned. Select just the scrolling content, avoid animation, and retry."))?;if image.matched_overlaps.is_empty(){return Err(NativeError::new("scroll_no_movement","The selected content did not move. Select the scrolling content and retry."))}raster(image.width,image.height,image.rgba).map_err(|_|fail("The scrolling result is too large."))?};
+  let stopped=app.state::<StopState>().0.load(Ordering::SeqCst);
+  let(output,accepted)=finish_frames(&frames,stopped)?;
+  if accepted<frames.len(){crate::diagnostics::record_scroll_error(&app,&fail("Stopped capture retained its aligned prefix."),stage,started.elapsed().as_millis()as u64,captured_frames);}
   stage=crate::diagnostics::Stage::EncodeOutput;let result=crate::imaging::payload(output)?;restore.success=true;Ok(result)
   })();if let Err(ref error)=result{crate::diagnostics::record_scroll_error(&app,error,stage,started.elapsed().as_millis()as u64,captured_frames);}result
  }).await.map_err(|_|fail("Scrolling capture stopped unexpectedly."))?
 }
-#[cfg(test)]mod tests{#[test]fn scroll_steps_are_pixels_bounded_to_preserve_overlap_and_global_coordinates(){let rect=fershot_capture_core::ScreenRect{x:-1920,y:40,width:600,height:1200};assert_eq!(super::scroll_step(rect).unwrap(),(-1620.,640.,-240));assert_eq!(super::scroll_step(fershot_capture_core::ScreenRect{height:100,..rect}).unwrap().2,-35);assert!(super::scroll_step(fershot_capture_core::ScreenRect{height:0,..rect}).is_err());}#[test]fn accessibility_trust_is_not_overruled_by_a_false_preflight(){assert!(super::event_access(true,false));assert!(super::event_access(false,true));assert!(super::event_access(true,true));assert!(!super::event_access(false,false));}#[test]fn end_detection_compares_pixels_and_geometry(){let a=fershot_scroll_core::ScrollFrame{width:1,height:1,rgba:vec![1,2,3,255]};let mut b=a.clone();assert!(super::unchanged(&a,&b));b.rgba[0]=4;assert!(!super::unchanged(&a,&b));}}
+#[cfg(test)]mod tests{
+fn rows(start:u8)->fershot_scroll_core::ScrollFrame{let width=40;let height=32;let rgba=(0..height).flat_map(|y|(0..width).flat_map(move|x|{let seed=(start as u32+y).wrapping_mul(0x9e3779b9)^(x as u32).wrapping_mul(0x85ebca6b);let value=seed.wrapping_mul(seed^0xc2b2ae35);[(value>>24)as u8,(value>>16)as u8,(value>>8)as u8,255]})).collect();fershot_scroll_core::ScrollFrame{width,height,rgba}}
+fn disjoint()->fershot_scroll_core::ScrollFrame{let mut frame=rows(190);for pixel in frame.rgba.chunks_exact_mut(4){pixel[2]=0;}frame}
+#[test]fn stop_during_an_inflight_step_preserves_prior_frames_but_other_failures_propagate(){let stop=std::sync::atomic::AtomicBool::new(false);let result=super::capture_step::<()>(&stop,||{stop.store(true,std::sync::atomic::Ordering::SeqCst);Err(super::fail("injected interrupted capture"))});assert!(result.unwrap().is_none());stop.store(false,std::sync::atomic::Ordering::SeqCst);assert!(super::capture_step::<()>(&stop,||Err(super::fail("injected real capture failure"))).is_err());}
+#[test]fn escape_keeps_aligned_prefix_when_the_tail_cannot_be_registered(){let frames=vec![rows(0),rows(10),disjoint()];let(image,count)=super::finish_frames(&frames,true).unwrap();assert_eq!(count,2);assert_eq!(image.dimensions(),(40,42));assert!(super::finish_frames(&frames,false).is_err());}
+#[test]fn escape_after_first_frame_returns_pixels_even_if_the_next_frame_failed(){let first=rows(0);let(image,count)=super::finish_frames(&[first.clone()],true).unwrap();assert_eq!(count,1);assert_eq!(image.rgba_bytes(),first.rgba);assert!(super::finish_frames(&[],true).is_err());}
+#[test]fn escape_with_no_usable_overlap_still_preserves_the_first_frame(){let(image,count)=super::finish_frames(&[rows(0),disjoint()],true).unwrap();assert_eq!(count,1);assert_eq!(image.dimensions(),(40,32));}
+#[test]fn scroll_steps_are_pixels_bounded_to_preserve_overlap_and_global_coordinates(){let rect=fershot_capture_core::ScreenRect{x:-1920,y:40,width:600,height:1200};assert_eq!(super::scroll_step(rect).unwrap(),(-1620.,640.,-240));assert_eq!(super::scroll_step(fershot_capture_core::ScreenRect{height:100,..rect}).unwrap().2,-35);assert!(super::scroll_step(fershot_capture_core::ScreenRect{height:0,..rect}).is_err());}#[test]fn accessibility_trust_is_not_overruled_by_a_false_preflight(){assert!(super::event_access(true,false));assert!(super::event_access(false,true));assert!(super::event_access(true,true));assert!(!super::event_access(false,false));}#[test]fn end_detection_compares_pixels_and_geometry(){let a=fershot_scroll_core::ScrollFrame{width:1,height:1,rgba:vec![1,2,3,255]};let mut b=a.clone();assert!(super::unchanged(&a,&b));b.rgba[0]=4;assert!(!super::unchanged(&a,&b));}}

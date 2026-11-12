@@ -5226,6 +5226,16 @@
       "shared_claim": "root-wiring",
       "owned_paths": "Release signing workflow/helper/regressions; updater overlay passwordless validation; signing documentation and evidence",
       "inputs": "User supplied release environment APPLE_CERTIFICATE and MACOS_SIGNING_IDENTITY; self-signed FerShot X certificate with no password; preserve release planner/version and updater keys"
+    },
+    {
+      "id": "C103",
+      "agent": "codex",
+      "title": "Finish scrolling capture on Escape with captured/aligned pixels instead of losing output on tail registration failure",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "Native automatic capture finalization and regressions; patch version 1.1.4; user acceptance/result documentation",
+      "inputs": "User Screen PASS and scrolling movement confirmation; Esc returns Edit with error; sanitized 1.1.3 errors.log shows stitch_frames failure with six frames"
     }
   ],
   "allocation": "Codex sole active client; external Antigravity and Copilot inactive; preserve historical authorship.",
@@ -5339,7 +5349,8 @@
       "C99",
       "C100",
       "C101",
-      "C102"
+      "C102",
+      "C103"
     ],
     "copilot": []
   },

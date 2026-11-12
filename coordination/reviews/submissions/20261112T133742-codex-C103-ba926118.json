@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "id": "20261112T133742-codex-C103-ba926118",
+  "created_at": "2026-11-12T13:37:42.979494+07:00",
+  "agent": "codex",
+  "request": "C103-scroll-stop",
+  "task": "C103",
+  "completion": "done",
+  "summary": "Record Screen USER_REPORTED PASS; fix Escape finalization to retain valid captured scrolling pixels and survive an in-flight stop; ship patch 1.1.4 with completed C102 signing pipeline.",
+  "files": [
+    "src-tauri/src/automatic_capture.rs",
+    "package.json",
+    "package-lock.json",
+    "src-tauri/Cargo.toml",
+    "src-tauri/Cargo.lock",
+    "src-tauri/tauri.conf.json",
+    "README.md",
+    "AGENTS.md",
+    "coordination/build-tasks.json",
+    "docs/releases/1.0.0-manual-acceptance.md",
+    "docs/releases/1.1.4.md",
+    "docs/agents/codex/C103-scroll-stop.md"
+  ],
+  "file_sha256": {
+    "src-tauri/src/automatic_capture.rs": "f5d16993e4b05e905ecf3f1b4a766be40d917d2125ea1f1bad7ef265cbc7040e",
+    "package.json": "5040c7fa3ceaff26465e80df3d0dd2314520b236678190bf3622805231629516",
+    "package-lock.json": "54828984e33ff626db67c1236b2f68aa79d05b1cd32c47852a0e026ee43a60d0",
+    "src-tauri/Cargo.toml": "6382f3683c36b6cb2bc809efdceed9b707f68fefb68ddbb9a3f6b41feb808972",
+    "src-tauri/Cargo.lock": "794213811b999726b5d1c792aa63a7fc0c1ddf47c7482a4486ec98d6d595978a",
+    "src-tauri/tauri.conf.json": "71d931ad3ee2e73440e0979fa422cdd97016a5c665146f23635c7467bc504fa3",
+    "README.md": "e62c6b2df5599780738cc2ef582925d659327d97b1c55c7d7062a5554ca77947",
+    "AGENTS.md": "d4f9b1a6d386001e8de43f21714cf34732aab3d7a4d94771120255581c26e6b3",
+    "coordination/build-tasks.json": "a7684bda0a1057d072d23a445ef46c90e8b748b35f8711ee57110a5c75b16e9c",
+    "docs/releases/1.0.0-manual-acceptance.md": "f6878e668de0f53aa67d24a31390819db6a8576d522e4eb6fdd4d47a98d5f26c",
+    "docs/releases/1.1.4.md": "98ee10e1e7d7d8ac2d98bd480b238b4ef4aa474517411bd63c97d28515a96a11",
+    "docs/agents/codex/C103-scroll-stop.md": "e5557aa2423c5287c167581507734b0b16aa066e2db4c809e4bd55c3e6988d00"
+  },
+  "checks": [
+    "71 native tests passed, including four new synthetic stop/finalization regressions.",
+    "Production cargo rustc --locked --lib -- -D warnings passed; version 1.1.4 synchronization checked.",
+    "Sanitized installed 1.1.3 error logs identify stage=stitch_frames, frames=6; no private screenshot content was read.",
+    "Screen USER_REPORTED PASS and scrolling movement confirmed; stop behavior still requires manual retest on new app."
+  ],
+  "risks": [
+    "Acceptance remains 85%. Explicit-stop output may be only the aligned prefix or first valid frame; unaligned pixels are not invented.",
+    "No real OS capture/input, Keychain/permission changes, FTP or update installation performed. CI signing/build acceptance pending.",
+    "Formatting/lint not run; Copilot inactive. Unrelated evidence/native-summary.json change preserved and excluded from commits."
+  ],
+  "review": "pending"
+}

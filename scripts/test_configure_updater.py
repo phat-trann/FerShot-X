@@ -19,9 +19,11 @@ class ConfigureUpdaterTests(unittest.TestCase):
         self.assertEqual(value["bundle"]["macOS"]["signingIdentity"],"FerShot X Local Signing")
         self.assertEqual(value["plugins"]["updater"]["pubkey"],PUBLIC)
     def test_partial_ci_signing_configuration_never_falls_back_to_adhoc(self):
-        for cert,password in [("",""),("test-certificate-presence","")]:
+        for cert,password in [("","")]:
             with self.assertRaises(ValueError):signing_identity("FerShot X Local Signing",cert,password,True)
         with self.assertRaises(ValueError):signing_identity("-","test-certificate-presence","test-export-password",True)
+        with self.assertRaises(ValueError):signing_identity("-",ci=True)
+        self.assertEqual(signing_identity("FerShot X","test-certificate-presence","",True),"FerShot X")
         self.assertEqual(signing_identity("FerShot X Local Signing","test-certificate-presence","test-export-password",True),"FerShot X Local Signing")
         for value in ["","bad\nidentity"]:
             with self.assertRaises(ValueError):signing_identity(value)
@@ -33,7 +35,7 @@ class ConfigureUpdaterTests(unittest.TestCase):
     def test_cli_falls_back_to_pinned_public_key_without_reading_private_file(self):
         with tempfile.TemporaryDirectory() as folder:
             output=Path(folder)/"overlay.json"
-            with patch.dict(os.environ,{"TAURI_UPDATER_PUBLIC_KEY":"","APPLE_SIGNING_IDENTITY":"-","APPLE_CERTIFICATE":"","APPLE_CERTIFICATE_PASSWORD":""}),patch("sys.argv",["configure_updater.py","--output",str(output)]),contextlib.redirect_stdout(io.StringIO()):main()
+            with patch.dict(os.environ,{"TAURI_UPDATER_PUBLIC_KEY":"","APPLE_SIGNING_IDENTITY":"-","APPLE_CERTIFICATE":"","APPLE_CERTIFICATE_PASSWORD":"","GITHUB_ACTIONS":"false"}),patch("sys.argv",["configure_updater.py","--output",str(output)]),contextlib.redirect_stdout(io.StringIO()):main()
             value=json.loads(output.read_text())
             self.assertEqual(value["plugins"]["updater"]["pubkey"],PUBLIC)
             self.assertNotIn("password",output.read_text().lower())
@@ -42,6 +44,6 @@ class ConfigureUpdaterTests(unittest.TestCase):
         lines=base64.b64decode(PUBLIC).decode("ascii").splitlines();raw=bytearray(base64.b64decode(lines[-1]));raw[-1]^=1;lines[-1]=base64.b64encode(raw).decode("ascii");corrupted=base64.b64encode(("\n".join(lines)+"\n").encode()).decode("ascii")
         with tempfile.TemporaryDirectory() as folder:
             output=Path(folder)/"overlay.json"
-            with patch.dict(os.environ,{"TAURI_UPDATER_PUBLIC_KEY":corrupted,"APPLE_SIGNING_IDENTITY":"-","APPLE_CERTIFICATE":"","APPLE_CERTIFICATE_PASSWORD":""}),patch("sys.argv",["configure_updater.py","--output",str(output)]),contextlib.redirect_stderr(io.StringIO()),self.assertRaises(SystemExit):main()
+            with patch.dict(os.environ,{"TAURI_UPDATER_PUBLIC_KEY":corrupted,"APPLE_SIGNING_IDENTITY":"-","APPLE_CERTIFICATE":"","APPLE_CERTIFICATE_PASSWORD":"","GITHUB_ACTIONS":"false"}),patch("sys.argv",["configure_updater.py","--output",str(output)]),contextlib.redirect_stderr(io.StringIO()),self.assertRaises(SystemExit):main()
             self.assertFalse(output.exists())
 if __name__=="__main__":unittest.main()

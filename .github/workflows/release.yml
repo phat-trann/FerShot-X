@@ -31,7 +31,7 @@ jobs:
     timeout-minutes: 60
     environment: release
     env:
-      APPLE_SIGNING_IDENTITY: ${{ vars.MACOS_SIGNING_IDENTITY || '-' }}
+      APPLE_SIGNING_IDENTITY: ${{ vars.MACOS_SIGNING_IDENTITY }}
       RELEASE_VERSION: ${{ needs.detect.outputs.version }}
       RELEASE_TAG: ${{ needs.detect.outputs.tag }}
       UPDATER_RELEASE_REF: ${{ vars.UPDATER_RELEASE_REF }}
@@ -68,6 +68,7 @@ jobs:
           python3 -m unittest discover -s scripts -p test_release_version.py
           node --test scripts/release_gate.test.cjs
           npm run typecheck
+          python3 -m unittest discover -s scripts -p test_macos_signing.py
           python3 scripts/test_verify_update_manifest.py
           npm run test:unit
           cargo test --locked --manifest-path src-tauri/Cargo.toml --lib
@@ -87,21 +88,12 @@ jobs:
               raise SystemExit('Missing TAURI_SIGNING_PRIVATE_KEY release secret')
           PY
           python3 scripts/configure_updater.py --repository "$RELEASE_OWNER/$RELEASE_REPO"
-      - name: Provide certificate only for explicitly configured stable app signing
-        if: steps.release_guard.outputs.publish == 'true' && env.APPLE_SIGNING_IDENTITY != '-'
+      - name: Import and validate macOS signing certificate
+        if: steps.release_guard.outputs.publish == 'true'
         env:
           APPLE_CERTIFICATE: ${{ secrets.APPLE_CERTIFICATE }}
           APPLE_CERTIFICATE_PASSWORD: ${{ secrets.APPLE_CERTIFICATE_PASSWORD }}
-        shell: python
-        run: |
-          import os, uuid
-          with open(os.environ['GITHUB_ENV'], 'a') as output:
-              for name in ('APPLE_CERTIFICATE', 'APPLE_CERTIFICATE_PASSWORD'):
-                  value = os.environ[name]
-                  delimiter = 'FERSHOT_' + uuid.uuid4().hex
-                  while delimiter in value:
-                      delimiter = 'FERSHOT_' + uuid.uuid4().hex
-                  output.write(name + '<<' + delimiter + '\n' + value + '\n' + delimiter + '\n')
+        run: python3 scripts/macos_signing.py prepare
       - uses: tauri-apps/tauri-action@v1
         if: steps.release_guard.outputs.publish == 'true'
         id: tauri
@@ -120,6 +112,9 @@ jobs:
           prerelease: false
           uploadUpdaterJson: true
           args: --target universal-apple-darwin --bundles app,dmg --config src-tauri/tauri.updater.generated.json
+      - name: Verify final universal app certificate
+        if: steps.release_guard.outputs.publish == 'true'
+        run: python3 scripts/macos_signing.py verify --app "src-tauri/target/universal-apple-darwin/release/bundle/macos/FerShot X.app"
       - name: Verify complete updater manifest before publishing
         if: steps.release_guard.outputs.publish == 'true'
         env:
@@ -129,7 +124,11 @@ jobs:
           brew install minisign
           mkdir -p artifacts/release-check
           gh release download "$RELEASE_TAG" --repo "$RELEASE_OWNER/$RELEASE_REPO" --pattern latest.json --pattern '*.app.tar.gz' --dir artifacts/release-check
+          python3 scripts/macos_signing.py verify-archives --assets artifacts/release-check
           gh api "repos/$RELEASE_OWNER/$RELEASE_REPO/releases/$RELEASE_ID" > artifacts/release-check/release.json
           python3 scripts/verify_update_manifest.py artifacts/release-check/latest.json --tag "$RELEASE_TAG" --repository "$RELEASE_OWNER/$RELEASE_REPO" --assets-dir artifacts/release-check --public-key-config src-tauri/tauri.updater.generated.json --release-metadata artifacts/release-check/release.json
           gh release upload "$RELEASE_TAG" artifacts/release-check/latest.json --repo "$RELEASE_OWNER/$RELEASE_REPO" --clobber
           gh release edit "$RELEASE_TAG" --repo "$RELEASE_OWNER/$RELEASE_REPO" --draft=false --latest
+      - name: Clean up temporary signing keychain
+        if: always() && env.FERSHOT_SIGNING_STATE != ''
+        run: python3 scripts/macos_signing.py cleanup

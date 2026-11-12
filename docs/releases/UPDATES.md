@@ -49,3 +49,7 @@ Sources: [Tauri updater](https://v2.tauri.app/plugin/updater/), [Tauri ad-hoc si
 ## Optional persistent app signing (C101)
 
 The default remains ad-hoc. For repeated Keychain/privacy prompts after upgrades, see [Persistent macOS app identity](STABLE-SIGNING.md). `MACOS_SIGNING_IDENTITY` plus user-managed `APPLE_CERTIFICATE` and `APPLE_CERTIFICATE_PASSWORD` enables the optional certificate path; this supersedes the earlier ad-hoc-only wording when configured. Updater keys are unchanged and still mandatory. No Apple ID/notarization credentials are added. Real certificate continuity acceptance remains pending.
+
+## Passwordless FerShot X certificate (C102, current release CI)
+
+The user has configured `APPLE_CERTIFICATE` and `MACOS_SIGNING_IDENTITY` in environment `release`. Empty PKCS#12 passwords are supported; `APPLE_CERTIFICATE_PASSWORD` is optional. Current release CI requires this stable identity rather than falling back to ad-hoc, imports only a new runner keychain, proves signing before build and verifies the exact public certificate in both architectures of the built/distributed app before publication. No notarization is enabled. Existing updater keys and release/version detection remain unchanged. Local default configuration/history may still describe ad-hoc builds; that is not the current CI policy. No local Keychain or macOS permission changes were made.

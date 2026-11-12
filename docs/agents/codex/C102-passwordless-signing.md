@@ -1,0 +1,5 @@
+# C102 passwordless release signing
+
+Release environment maps MACOS_SIGNING_IDENTITY to APPLE_SIGNING_IDENTITY without ad-hoc fallback. A missing export password is valid. CI decodes/imports the user secret only into a new temporary keychain, validates the identity/private key and tests signing before building. Strict signature checks and exact certificate fingerprints cover both app architectures and the downloaded updater archive before publication. Cleanup restores the runner search list and removes only the owned keychain/files, including failure paths.
+
+Passed: eight injected signing tests, seven overlay tests, seven manifest tests, eight release-planner tests, eight release-guard tests and YAML/order checks. No real certificate import/signing, local keychain changes, certificate generation, trust/permission changes or notarization occurred. Updater keys, release/version-management logic and product version are unchanged in this task. Real CI certificate signing and cross-version permission continuity remain external acceptance, at 85%.

@@ -18,7 +18,7 @@ def signing_identity(value,certificate="",password="",ci=False):
     value=value.strip()
     if not value or len(value)>256 or any(ord(c)<32 for c in value):raise ValueError("Use an exact installed code-signing identity or '-'.")
     if value=="-" and certificate:raise ValueError("A certificate is configured but app signing is still ad-hoc. Set MACOS_SIGNING_IDENTITY explicitly.")
-    if ci and value!="-" and (not certificate or not password):raise ValueError("Stable app signing requires APPLE_CERTIFICATE and APPLE_CERTIFICATE_PASSWORD secrets; no ad-hoc fallback is allowed.")
+    if ci and (value=="-" or not certificate):raise ValueError("Release signing requires MACOS_SIGNING_IDENTITY and APPLE_CERTIFICATE; no ad-hoc fallback is allowed. A blank PKCS#12 password is supported.")
     return value
 
 def overlay(key,repository,identity="-"):

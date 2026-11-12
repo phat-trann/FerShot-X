@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "id": "20261112T133242-codex-C102-8a6b251e",
+  "created_at": "2026-11-12T13:32:42.221796+07:00",
+  "agent": "codex",
+  "request": "C102-passwordless-signing",
+  "task": "C102",
+  "completion": "done",
+  "summary": "Require passwordless-capable FerShot X signing in release CI with isolated import/probe and exact per-architecture app/archive certificate verification; preserve updater keys and release/version logic.",
+  "files": [
+    ".github/workflows/release.yml",
+    "scripts/configure_updater.py",
+    "scripts/test_configure_updater.py",
+    "scripts/macos_signing.py",
+    "scripts/test_macos_signing.py",
+    "AGENTS.md",
+    "coordination/build-tasks.json",
+    "docs/releases/STABLE-SIGNING.md",
+    "docs/releases/UPDATES.md",
+    "docs/agents/codex/C102-passwordless-signing.md"
+  ],
+  "file_sha256": {
+    ".github/workflows/release.yml": "769ed85a9281786f0c6cee5cc036891c2622c341a486c222cebab920f18f50a4",
+    "scripts/configure_updater.py": "7f6c9fa4246d35abfa2711b870930ea548ed388655db0162eb1456363b4f6961",
+    "scripts/test_configure_updater.py": "a1832f24a5adf1138e0deb32b91637090f0e14851dfbdd61f14b5b30e1086fff",
+    "scripts/macos_signing.py": "34ee5747c559b65c64fb63fb2d31664f0c8ad15a98c9f510711258a3f901c2c7",
+    "scripts/test_macos_signing.py": "5dee1bf7d21d57b858dd7246671c723cda6785bef33dd8c33f9e763995afa56e",
+    "AGENTS.md": "88e2b2eb02109e046b99b4d4de4c0a19ba0b156412c1b64872468dc0428efc85",
+    "coordination/build-tasks.json": "bceba5396bac4097d7bca39cb81c43e2d9fdbbe388ae78971439f9238757cd28",
+    "docs/releases/STABLE-SIGNING.md": "c2a5a48a74638f048db540bfe2bd1429a5d09dc4ff9957e00234c94a4487ab92",
+    "docs/releases/UPDATES.md": "6126cfde37fc1ed7246307fa715f39487b8092322a5966090c751be757089621",
+    "docs/agents/codex/C102-passwordless-signing.md": "9d8d430283828a73f0bf424c8730d73ad66b57f35621f6380bf0cc9139f75cf9"
+  },
+  "checks": [
+    "Eight injected signing tests passed; no real keys/keychain commands/signing used.",
+    "Seven overlay, seven manifest, eight release planner and eight release guard tests passed.",
+    "Workflow YAML and import/build/verification gate ordering validated.",
+    "Product version remains 1.1.3 in this workflow task; release planner/gate source, updater public key and private-key environment wiring unchanged."
+  ],
+  "risks": [
+    "Actual certificate import/signing requires GitHub release CI; no local certificate access, Keychain/trust/permission changes or notarization performed.",
+    "Acceptance remains 85%; certificate continuity requires a real signed-to-signed update. Formatting/lint not run; Copilot inactive."
+  ],
+  "review": "pending"
+}

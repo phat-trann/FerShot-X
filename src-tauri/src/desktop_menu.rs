@@ -63,7 +63,7 @@ pub fn on_event(app: &tauri::AppHandle, event: tauri::menu::MenuEvent) {
         }
         
         "capture-fullscreen" | "capture-area" | "capture-window" | "capture-active-window" | "capture-repeat-region" | "capture-scrolling" => {
-            let _ = main.emit("fershot-menu-action", action);
+            crate::shortcuts::dispatch_action(app,action,true);
         }
         "image-copy" | "image-save" | "image-upload" if main.is_focused().unwrap_or(false) => {
             let _ = main.emit("fershot-menu-action", action);

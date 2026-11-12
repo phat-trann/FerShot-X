@@ -1,3 +1,4 @@
+import {StatusMessage} from "./components/ui/status";
 import {saveLocalDraft} from "./platform/local-cache";
 import { readCaptureUploadMode } from "./platform/native";
 import { EditorAddImage } from "./components/EditorAddImage";
@@ -6,7 +7,7 @@ import { EditorToolbarProvider,EditorToolStrip,EditorTool } from "./components/E
 import { EditorImageStatus } from "./components/EditorImageStatus";
 import { WindowTitleBar } from "./components/WindowTitleBar";
 import { mapItem } from "./features/editor/konva/model";
-import {captureScrollImage} from "./platform/native";
+import {captureScrollResult} from "./platform/native";
 import {Copy,Save,CloudUpload,Undo2,X} from "lucide-react";
 import { fitEditorWindow } from "./platform/library";
 import { takeEditorImage,showEditor,listenLibrary } from "./platform/library";
@@ -61,6 +62,7 @@ export default function Workspace() {
   const [preferencesReady, setPreferencesReady] = useState(false);
   const [preferenceNotice, setPreferenceNotice] = useState("");
   const [notice, setNotice] = useState("");
+  const [partialScroll,setPartialScroll]=useState<{id:string;message:string}|null>(null);
 
   const [editing, setEditing] = useState(true);
   const ftpQueue = useWorkspaceFtp();
@@ -239,7 +241,7 @@ export default function Workspace() {
     else if (fromMenu && action === "image-upload") upload();
   };
 
-  function scrollCapture(){void operate(async()=>{try{const instant=await captureUploadMode();await finishCapture({image:await captureScrollImage(instant),displayScale:null},instant);}catch(error){if(!(error instanceof NativeOperationError&&error.code==="cancelled"))await showEditor();throw error;}});}
+  function scrollCapture(){void operate(async()=>{try{const instant=await captureUploadMode();const result=await captureScrollResult(instant);await finishCapture({image:result.image,displayScale:null},instant&&!result.partial);if(result.partial)setPartialScroll({id:result.image.id,message:`Partial scroll capture: kept ${result.acceptedFrames} of ${result.capturedFrames} frames. Try a smaller region or slower speed.`});}catch(error){if(!(error instanceof NativeOperationError&&error.code==="cancelled"))await showEditor();throw error;}});}
 
   function repeatArea() {
     if (busyRef.current || scrollActive || !hasRepeatArea) return;
@@ -462,6 +464,7 @@ export default function Workspace() {
           onRetry={() => { void ftpQueue.retry(lastUpload.id); }} />}
         {localHistory.error&&<div className="error-banner" role="alert">{localHistory.error}</div>}
         {error && <div className="error-banner" role="alert">{error}<Button variant="ghost" size="sm" onClick={() => setError("")} aria-label="Dismiss error"><X/></Button></div>}
+        {partialScroll&&partialScroll.id===image?.id&&<div className="scroll-capture-notice"><StatusMessage tone="warning">{partialScroll.message}</StatusMessage><Button variant="ghost" size="icon" aria-label="Dismiss partial capture notice" onClick={()=>setPartialScroll(null)}><X size={14}/></Button></div>}
         <div className="workspace-body" ref={viewportHost}>
         <section className={`stage ${dragging ? "dragging" : ""} ${image ? "has-image" : ""}`} aria-label="Image workspace" aria-busy={busy} style={{width:viewportWidth,aspectRatio:"16 / 9"}}
           onDragOver={(event) => { event.preventDefault(); setDragging(true); }} onDragLeave={() => setDragging(false)}

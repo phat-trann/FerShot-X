@@ -326,6 +326,7 @@ export async function copyText(text: string): Promise<void> {
   await nativeCall<void>("copy_text", { request: { text } });
 }
 
-export async function captureScrollImage(background=false){return documentFromPayload(await nativeCall<ImagePayload>("capture_scroll_image",background?{background:true}:{}),`Scroll-${Date.now()}.png`);}
+export async function captureScrollResult(background=false){const wire=await nativeCall<ImagePayload&{capturedFrames?:number;acceptedFrames?:number;partial?:boolean}>("capture_scroll_image",background?{background:true}:{});const metadata=wire.capturedFrames!==undefined||wire.acceptedFrames!==undefined||wire.partial!==undefined;if(metadata&&(!Number.isInteger(wire.capturedFrames)||!Number.isInteger(wire.acceptedFrames)||wire.capturedFrames!<1||wire.capturedFrames!>64||wire.acceptedFrames!<1||wire.acceptedFrames!>wire.capturedFrames!||typeof wire.partial!=="boolean"))throw new NativeOperationError("invalid_image","Invalid scrolling capture status.");return {image:documentFromPayload(wire,`Scroll-${Date.now()}.png`),partial:wire.partial??false,capturedFrames:wire.capturedFrames??1,acceptedFrames:wire.acceptedFrames??1};}
+export async function captureScrollImage(background=false){return (await captureScrollResult(background)).image;}
 
 export async function readCaptureUploadMode():Promise<boolean>{const enabled=await nativeCall<unknown>("read_capture_upload_mode",{});if(typeof enabled!=="boolean")throw new NativeOperationError("settings_failed","Automatic upload mode is unavailable.");return enabled;}

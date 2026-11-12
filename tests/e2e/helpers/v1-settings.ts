@@ -13,6 +13,8 @@ export async function installSettingsIpc(page: Page, mode="normal") {
     const profile=()=>JSON.parse(localStorage.getItem("synthetic-application-preferences") ?? JSON.stringify(defaults));
     host.__TAURI_INTERNALS__={transformCallback:(callback:any)=>{const id=++sequence;callbacks.set(id,callback);return id;},unregisterCallback:(id:number)=>callbacks.delete(id),invoke:async(command:string,args:any={})=>{
       host.__PREFS_CALLS__.push({command,args});
+ if(command==="read_scroll_preferences")return {speed:Number(localStorage.getItem("synthetic-scroll-speed")??3)};
+ if(command==="save_scroll_preferences"){localStorage.setItem("synthetic-scroll-speed",String(args.speed));return {speed:args.speed};}
       if(command==="plugin:event|listen"){const id=++sequence;subscriptions.set(id,args);return id;}
       if(command==="plugin:event|unlisten"){subscriptions.delete(args.eventId);return;}
       if(command==="open_preferences_window"){window.open(`?preferences${args.tab?`&tab=${args.tab}`:""}`,"fershot-preferences","popup,width=532,height=637");return;}

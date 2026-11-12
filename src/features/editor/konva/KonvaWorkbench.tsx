@@ -36,12 +36,12 @@ const Artwork=memo(function Artwork({item,image,width,height,zoom,counterAngle}:
     if(e.kind==="highlight")return <Rect {...e.rect} fill={e.color} opacity={e.opacity}/>;
     if(e.kind==="spotlight"){const r=e.cutoutRect;return <Group><Rect x={r.x} y={r.y} width={r.width} height={r.height} fill="transparent"/><Shape listening={false} sceneFunc={ctx=>{ctx.save();const cx=r.x+r.width/2,cy=r.y+r.height/2,angle=item.rotation??0;if(angle){ctx.translate(cx,cy);ctx.rotate(-angle*Math.PI/180);ctx.translate(-cx,-cy);}const hole=new Path2D();hole.rect(r.x,r.y,r.width,r.height);const mask=new Path2D();mask.rect(0,0,width,height);mask.addPath(hole,new DOMMatrix().translate(cx,cy).rotate(angle).translate(-cx,-cy));ctx._context.fillStyle=`rgba(0,0,0,${e.dimOpacity})`;ctx._context.fill(mask,"evenodd");ctx.restore();}}/></Group>;}
     const r=e.radius/e.zoom;
-    return <Group><Group clipFunc={ctx=>{ctx.arc(e.center.x,e.center.y,e.radius,0,Math.PI*2);}}>{image&&<CanvasImage name="sampled-effect" image={image} x={e.center.x-e.radius} y={e.center.y-e.radius} width={e.radius*2} height={e.radius*2} crop={{x:e.center.x-r,y:e.center.y-r,width:r*2,height:r*2}}/>}</Group><Circle x={e.center.x} y={e.center.y} radius={e.radius} stroke={e.borderColor} strokeWidth={e.borderWidth} strokeScaleEnabled={false}/></Group>;
+    return <Group><Group clipFunc={ctx=>{ctx.arc(e.center.x,e.center.y,e.radius,0,Math.PI*2);}}>{image&&<CanvasImage name="sampled-effect" image={image} x={e.center.x-e.radius} y={e.center.y-e.radius} width={e.radius*2} height={e.radius*2} crop={{x:e.center.x-r,y:e.center.y-r,width:r*2,height:r*2}}/>}</Group><Circle x={e.center.x} y={e.center.y} radius={e.radius} stroke={e.borderColor} strokeWidth={e.borderWidth} strokeScaleEnabled={true}/></Group>;
   }
   if(item.itemKind==="contract"&&item.annotation.tool==="blur")return <BlurArtwork item={item} image={image}/>;
   const a=item.itemKind==="contract"?item.annotation:item.shape;
   const kind="tool"in a?a.tool:a.kind, p=a.points[0],q=a.points[a.points.length-1]??p;
-  const style={stroke:a.style.color,strokeWidth:a.style.strokeWidth,opacity:a.style.opacity,lineCap:"round" as const,lineJoin:"round" as const,perfectDrawEnabled:false,strokeScaleEnabled:false};
+  const style={stroke:a.style.color,strokeWidth:a.style.strokeWidth,opacity:a.style.opacity,lineCap:"round" as const,lineJoin:"round" as const,perfectDrawEnabled:false,strokeScaleEnabled:true};
   const rect={x:Math.min(p.x,q.x),y:Math.min(p.y,q.y),width:Math.abs(q.x-p.x),height:Math.abs(q.y-p.y)};
   if(kind==="rectangle")return <Rect {...rect} {...style}/>;
   if(kind==="ellipse")return <Ellipse x={rect.x+rect.width/2} y={rect.y+rect.height/2} radiusX={rect.width/2} radiusY={rect.height/2} {...style}/>;
@@ -95,10 +95,10 @@ export function KonvaWorkbench({onSourceReady,onSourceError,onPixelSample,imageT
     stage.current?.draw();readyCallback.current?.();
   },[source,width,height,scale]);
   useEffect(()=>{
-    const repaint=()=>{if(!document.hidden)stage.current?.draw();};
+    let frame=0,second=0;const repaint=()=>{if(document.hidden)return;stage.current?.draw();cancelAnimationFrame(frame);cancelAnimationFrame(second);frame=requestAnimationFrame(()=>{stage.current?.draw();second=requestAnimationFrame(()=>stage.current?.draw());});};
     // WebKit may discard backing pixels while a native window is hidden.
-    window.addEventListener("focus",repaint);document.addEventListener("visibilitychange",repaint);
-    return()=>{window.removeEventListener("focus",repaint);document.removeEventListener("visibilitychange",repaint);};
+    window.addEventListener("fershot-editor-presented",repaint);window.addEventListener("focus",repaint);document.addEventListener("visibilitychange",repaint);
+    return()=>{cancelAnimationFrame(frame);cancelAnimationFrame(second);window.removeEventListener("fershot-editor-presented",repaint);window.removeEventListener("focus",repaint);document.removeEventListener("visibilitychange",repaint);};
   },[]);
   useEffect(()=>{if(items===emitted.current)return;emitted.current=items;callback.current?.({items,selectedId:selected});},[items]);
   useEffect(()=>{if(blocked){cancelManipulation();cancelEndpoint();gesture.current=null;preview.current?.setAttr("draft",null);}},[blocked]);

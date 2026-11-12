@@ -99,7 +99,7 @@ fn transition(old: &[Shortcut], next: &[Shortcut], registry: &mut impl Registry)
 
 struct Config { bindings: Bindings, parsed: Vec<(String, Shortcut)>, known: Vec<Shortcut>, faulted: bool }
 #[derive(Default)]
-pub struct ShortcutStore { config: Mutex<Option<Config>>, gate: Mutex<()>, pressed: Mutex<BTreeSet<u32>>, restoration_failed:AtomicBool }
+pub struct ShortcutStore { config: Mutex<Option<Config>>, gate: Mutex<()>, pressed: Mutex<BTreeSet<u32>>, restoration_failed:AtomicBool,last_dispatch:Mutex<Option<(String,std::time::Instant)>> }
 #[derive(Serialize)]
 #[serde(rename_all="camelCase")]
 pub struct ShortcutStatus { bindings: Bindings, faulted: bool, restoration_failed:bool }
@@ -139,6 +139,8 @@ fn apply_registered(store:&ShortcutStore,bindings:Bindings,registry:&mut impl Re
     status(store)
 }
 
+fn dispatch_once(last:&mut Option<(String,std::time::Instant)>,action:&str,now:std::time::Instant)->bool{if last.as_ref().is_some_and(|(old,time)|old==action&&now.saturating_duration_since(*time)<std::time::Duration::from_millis(250)){return false}*last=Some((action.into(),now));true}
+pub fn dispatch_action(app:&tauri::AppHandle,action:&str,from_menu:bool){let store=app.state::<ShortcutStore>();if let Ok(mut last)=store.last_dispatch.lock(){if !dispatch_once(&mut last,action,std::time::Instant::now()){return;}}if action=="show-workspace"{let _=crate::library_window::show(app,"library");}else{let _=app.emit_to("main",if from_menu{"fershot-menu-action"}else{"fershot-global-action"},action);}}
 pub fn on_shortcut(app: &tauri::AppHandle, shortcut: &Shortcut, event: ShortcutEvent) {
     let store = app.state::<ShortcutStore>();
     {
@@ -149,7 +151,7 @@ pub fn on_shortcut(app: &tauri::AppHandle, shortcut: &Shortcut, event: ShortcutE
     let action = store.config.lock().ok().and_then(|config| config.as_ref().filter(|state| !state.faulted)
         .and_then(|state| state.parsed.iter().find(|(_, key)| key == shortcut).map(|(action, _)| action.clone())));
     if app.get_webview_window("preferences").is_some_and(|w|w.is_focused().unwrap_or(false)) { return; }
-    if let Some(action) = action { if action=="show-workspace" { let _=crate::library_window::show(app,"library");return; } let _ = app.emit_to("main", "fershot-global-action", action); }
+    if let Some(action) = action { dispatch_action(app,&action,false); }
 }
 
 pub fn clear_on_close(app: &tauri::AppHandle) -> Result<(), NativeError> { apply(app, &app.state::<ShortcutStore>(), empty()).map(|_| ()) }
@@ -200,6 +202,7 @@ mod tests {
             self.keys.remove(&key.id()); Ok(())
         }
     }
+    #[test]fn native_and_global_accelerators_dispatch_once_per_key_action(){let now=std::time::Instant::now();let mut last=None;assert!(dispatch_once(&mut last,"capture-area",now));assert!(!dispatch_once(&mut last,"capture-area",now+std::time::Duration::from_millis(30)));assert!(dispatch_once(&mut last,"capture-area",now+std::time::Duration::from_millis(300)));assert!(dispatch_once(&mut last,"capture-fullscreen",now+std::time::Duration::from_millis(310)));}
     #[test]fn installs_persists_restores_and_removes_as_one_configuration(){
         let dir=tempfile::tempdir().unwrap();let mut bindings=empty();bindings.insert("capture-area".into(),Some("Super+Shift+KeyA".into()));let store=ShortcutStore::default();let mut registry=Fake::default();
         configure_at(dir.path(),&store,bindings.clone(),&mut registry).unwrap();assert_eq!(registry.keys.len(),1);assert_eq!(load_saved_at(dir.path()).unwrap().bindings,bindings);

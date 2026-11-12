@@ -1,3 +1,4 @@
+import {ScrollCaptureSettings} from "./features/capture/ScrollCaptureSettings";
 import {StatusMessage,type StatusTone} from "./components/ui/status";
 import {UpdateSettings} from "./features/updater/Updater";
 import { Radio } from "./components/ui/radio";
@@ -92,6 +93,7 @@ export default function PreferencesWindow() {
           <label className="preference-check"><Switch checked={value.baseSettings.downscaleRetina} onCheckedChange={enabled => setBase("downscaleRetina", enabled)}/>Downscale Retina captures to 1× when copying or saving</label>
           
         </fieldset>
+        <ScrollCaptureSettings/>
         <WorkspaceDestination expanded busy={busy} run={run}/>
         <fieldset disabled={!ready || busy}><legend>Application</legend>
           <label className="preference-check"><Switch aria-label="Launch at startup" aria-describedby={!loginSupported?"startup-help":undefined} disabled={!loginSupported || busy} checked={value.launchAtLogin} onCheckedChange={enabled => nativeToggle("launchAtLogin", enabled)}/>Launch at startup</label>

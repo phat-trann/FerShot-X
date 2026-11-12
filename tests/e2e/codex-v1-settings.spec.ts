@@ -58,3 +58,5 @@ test("shared sliders keep native keyboard steps, fill and IPC persistence",async
  const saved=await settings.evaluate(()=>(window as any).__PREFS_CALLS__.filter((c:any)=>c.command==="save_application_preferences").at(-1).args.preferences);expect(saved.baseSettings.jpegQuality).toBe(100);expect(saved.defaultZoomPercent).toBe(50);
  await settings.screenshot({path:"artifacts/qa/C84-shared-controls.png"});
 });
+
+test("scroll speed saves separately and survives Settings reopen",async({page})=>{await installSettingsIpc(page);await page.goto("/");const settings=await openSettingsPopup(page);const slider=settings.getByRole("slider",{name:"Scroll capture speed",exact:true});await slider.press("Home");await settings.getByRole("button",{name:"Save scroll speed",exact:true}).click();await expect(settings.getByText("Scroll speed saved.",{exact:true})).toHaveAttribute("data-tone","success");const closed=settings.waitForEvent("close");await settings.getByRole("button",{name:"Done",exact:true}).click();await closed;const again=await openSettingsPopup(page);await expect(again.getByRole("slider",{name:"Scroll capture speed",exact:true})).toHaveValue("1");});

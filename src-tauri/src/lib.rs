@@ -15,6 +15,7 @@ mod export_destination;
 mod clipboard_import;
 mod scrolling;
 mod automatic_capture;
+mod scroll_preferences;
 mod effects;
 mod lifecycle;
 mod library_window;
@@ -74,6 +75,8 @@ pub fn run() {
             updates::end_update_install,
             capture_upload::read_capture_upload_mode,
             automatic_capture::capture_scroll_image,
+            scroll_preferences::read_scroll_preferences,
+            scroll_preferences::save_scroll_preferences,
             library_window::fit_editor_window,
             library_window::show_library,
             library_window::show_editor,

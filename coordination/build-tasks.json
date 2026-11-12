@@ -5246,6 +5246,16 @@
       "shared_claim": "root-wiring",
       "owned_paths": "Release workflow/signing helper tests; Edit wheel and visible canvas rendering/regressions; native tray shortcut labels and automatic scroll routing; patch 1.1.5 docs",
       "inputs": "User reported codesign --display failure; touchpad edge zoom/lag/blank image; active tray shortcuts; VS Code editor scroll failure while Codex chat works; sanitized diagnostics only"
+    },
+    {
+      "id": "C105",
+      "agent": "codex",
+      "title": "Correct zoom-scaled annotation strokes, native tray shortcuts, capture-only scroll registration and speed, post-show repaint and launch update checks",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "Native automatic capture/preferences/menu/shortcuts; capture-only stitch registration; editor/updater UI and injected regressions; version 1.1.6 and acceptance docs",
+      "inputs": "Latest user checklist: passes 1/3-5; signed-to-signed permissions pending; issues 6-12 and sanitized stitch_frames diagnostics; no real OS/server actions"
     }
   ],
   "allocation": "Codex sole active client; external Antigravity and Copilot inactive; preserve historical authorship.",
@@ -5361,7 +5371,8 @@
       "C101",
       "C102",
       "C103",
-      "C104"
+      "C104",
+      "C105"
     ],
     "copilot": []
   },

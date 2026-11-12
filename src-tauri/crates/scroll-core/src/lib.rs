@@ -7,6 +7,7 @@
 //!   new top rows), and exact consecutive duplicate frames (deterministically skipped).
 //! - Does NOT perform OS scroll synthesis, screen capture, or arbitrary-app sticky-header removal.
 use std::fmt;
+mod registration;
 
 pub const MAX_STITCH_FRAMES: usize = 64;
 pub const MAX_FRAME_WIDTH: u32 = 8_192;
@@ -261,14 +262,15 @@ fn stitch_frames_impl(
         }
         validate_frame(frame)?;
 
+        let registered=if capture{registration::overlap(prev,frame,options)}else{None};
         if frame.height == prev.height
-            && (if capture {capture_bands_match(&prev.rgba,&frame.rgba,row_bytes)}else{bands_match(&prev.rgba, &frame.rgba, options.max_channel_diff)})
+            && (if capture {prev.rgba==frame.rgba||(registered.is_none()&&capture_bands_match(&prev.rgba,&frame.rgba,row_bytes))}else{bands_match(&prev.rgba, &frame.rgba, options.max_channel_diff)})
         {
             skipped_duplicates += 1;
             continue;
         }
 
-        let overlap = find_overlap_rows(prev, frame, row_bytes, options,capture)
+        let overlap = registered.or_else(||find_overlap_rows(prev, frame, row_bytes, options,capture))
             .ok_or(StitchError::NoOverlapMatch { frame_index: idx })?;
         let added_rows = frame.height - overlap;
         let next_height = out_height
@@ -397,6 +399,16 @@ mod tests {
         assert!(matches!(stitch_capture_frames(&[a,b],StitchOptions::default()),Err(StitchError::NoOverlapMatch{..})));
     }
 
+    #[test]fn capture_registration_handles_antialias_and_a_moving_minimap_without_relaxing_generic_stitching(){
+      let make=|offset:u32,changed:bool|{let(w,h)=(240u32,140u32);let mut rgba=Vec::new();for y in 0..h{for x in 0..w{let value=if y<12{[20,30,40]}else if y>=130{[30,40,50]}else{let n=(y-12+offset).wrapping_mul(0x9e3779b9)^(x.wrapping_mul(0x85ebca6b));let n=n.wrapping_mul(n^0xc2b2ae35);let mut c=[(n>>24)as u8,(n>>16)as u8,(n>>8)as u8];if changed{for v in &mut c{*v=v.saturating_add(7)}if x>206{c=[255,0,255]}}c};rgba.extend_from_slice(&[value[0],value[1],value[2],255]);}}ScrollFrame{width:w,height:h,rgba}};
+      let a=make(0,false);let b=make(48,true);assert!(stitch_frames(&[a.clone(),b.clone()],StitchOptions::default()).is_err());let output=stitch_capture_frames(&[a,b],StitchOptions::default()).unwrap();assert_eq!(output.height,188);assert_eq!(output.matched_overlaps,vec![70]);
+    }
+    #[test]fn sparse_code_landmarks_register_over_white_space_and_reject_stationary_blinking(){
+      let make=|offset:u32,changed:bool|{let(w,h)=(300u32,260u32);let mut rgba=Vec::new();for y in 0..h{for x in 0..w{let mut c=if y<10||y>=252{[80u8;3]}else{let gy=y-10+offset;let line=gy/18;let row=gy%18;let cell=x/9;let n=line.wrapping_mul(0x9e3779b9)^cell.wrapping_mul(0x85ebca6b);let ink=x>20&&x<260&&(3..14).contains(&row)&&x%9<5&&(n.rotate_left(row)%5<2);if ink{[170,180,190]}else{[30,30,30]}};if changed&&y>=10&&y<252{for value in &mut c{*value=value.saturating_add(5)}if x>272{c=[220,0,220]}}rgba.extend_from_slice(&[c[0],c[1],c[2],255]);}}ScrollFrame{width:w,height:h,rgba}};
+      let a=make(0,false);let b=make(72,true);let output=stitch_capture_frames(&[a.clone(),b],StitchOptions::default()).unwrap();assert_eq!(output.height,332);
+      let mut blink=a.clone();blink.rgba[(50*300+40)*4]=255;let still=stitch_capture_frames(&[a,blink],StitchOptions::default()).unwrap();assert!(still.matched_overlaps.is_empty());assert_eq!(still.height,260);
+    }
+    #[test]fn landmark_registration_rejects_unrelated_textured_frames(){let make=|seed:u32|{let mut rgba=Vec::new();for y in 0u32..100{for x in 0u32..120{let n=(y+seed).wrapping_mul(0x9e3779b9)^x.wrapping_mul(0x85ebca6b);let n=n.wrapping_mul(n^0xc2b2ae35);rgba.extend_from_slice(&[(n>>24)as u8,(n>>16)as u8,(n>>8)as u8,255]);}}ScrollFrame{width:120,height:100,rgba}};assert!(stitch_capture_frames(&[make(0),make(1000)],StitchOptions::default()).is_err());}
     #[test]
     fn rejects_no_match_and_output_height_limit_violations() {
         let f0 = make_banded_frame(4, &[10, 20, 30, 40]);

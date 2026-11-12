@@ -332,3 +332,5 @@ body { background:transparent; }
 .workspace-body>.stage>.image-stage{flex:0 0 auto;min-width:max-content}
 .image-stage>div:not([hidden]){flex:0 0 auto}
 .editor-surface .fershot-advanced-workbench{gap:0;min-width:0}
+
+.scroll-capture-notice{position:fixed;left:16px;bottom:16px;z-index:70;display:flex;align-items:center;gap:8px;max-width:calc(100vw - 32px);padding:8px 12px;background:var(--surface-card);border:1px solid var(--border-subtle);border-radius:6px;box-shadow:var(--shadow-md)}.scroll-capture-notice .ui-status{margin:0}

@@ -3,7 +3,7 @@ mod acceptance;
 mod commands;
 mod diagnostics;
 mod ftp;
-mod ftp_keychain;
+mod ftp_credentials;
 mod local_cache;
 mod imaging;
 mod area_capture;

@@ -129,9 +129,12 @@ function requireDesktop() {
 }
 async function nativeCall<T>(command: string, args: Record<string, unknown>): Promise<T> {
   requireDesktop();
+  const capture=typeof window!=="undefined"&&["capture_image","capture_repeat_area","capture_active_window","capture_region","capture_scroll_image"].includes(command);
+  if(capture){window.dispatchEvent(new Event("fershot-capture-starting"));if(!document.hidden)await new Promise<void>(resolve=>{let done=false;const finish=()=>{if(!done){done=true;resolve();}};requestAnimationFrame(()=>requestAnimationFrame(finish));setTimeout(finish,100);});}
   const started=performance.now();
   try { const result = await invoke<T>(command, args); logNativeOperation(command, false); return result; }
   catch (error) {
+    if(capture)window.dispatchEvent(new Event("fershot-editor-presented"));
     logNativeOperation(command, true, typeof error === "object" && error && "code" in error ? error.code : "other",performance.now()-started);
     if (typeof error === "object" && error !== null && "message" in error) {
       const value = error as { message: unknown; code?: unknown };

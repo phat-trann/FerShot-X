@@ -334,3 +334,15 @@ body { background:transparent; }
 .editor-surface .fershot-advanced-workbench{gap:0;min-width:0}
 
 .scroll-capture-notice{position:fixed;left:16px;bottom:16px;z-index:70;display:flex;align-items:center;gap:8px;max-width:calc(100vw - 32px);padding:8px 12px;background:var(--surface-card);border:1px solid var(--border-subtle);border-radius:6px;box-shadow:var(--shadow-md)}.scroll-capture-notice .ui-status{margin:0}
+
+/* Operation cursors take precedence over tool/child controls. */
+body:has([aria-busy="true"]) {cursor:progress}
+.editor-surface[aria-busy="true"],.editor-surface[aria-busy="true"] * {cursor:wait!important}
+input:not([type=range]):not([type=checkbox]):not([type=color]),textarea {cursor:text}
+[role=switch]:not(:disabled),[role=checkbox]:not(:disabled),[role=tab]:not(:disabled),select {cursor:pointer}
+:disabled,[aria-disabled="true"] {cursor:not-allowed}
+
+input[type=color] {cursor:pointer}
+
+.ui-slider:not(:disabled) {cursor:ew-resize}
+[role=button]:not([aria-disabled=true]),a[href] {cursor:pointer}

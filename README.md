@@ -1,4 +1,4 @@
-# FerShot X 1.1.6
+# FerShot X 1.1.7
 
 A macOS screenshot editor and explicit FTP publisher built with Tauri, Rust and React.
 

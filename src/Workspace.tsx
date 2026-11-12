@@ -114,6 +114,7 @@ export default function Workspace() {
   }, [ftpQueue.items, localHistory.forget]);
 
   const pendingPresentation=useRef<{id:string;sized:boolean;painted:boolean}|null>(null);
+  useEffect(()=>{const start=()=>{pendingPresentation.current=null;};window.addEventListener("fershot-capture-starting",start);return()=>window.removeEventListener("fershot-capture-starting",start);},[]);
   function presentDocument(id:string,part:"sized"|"painted"){
     const pending=pendingPresentation.current;if(!mounted.current||pending?.id!==id)return;
     pending[part]=true;

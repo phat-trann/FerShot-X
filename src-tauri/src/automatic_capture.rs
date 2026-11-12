@@ -38,14 +38,14 @@ mod input{
    if !event_access(unsafe{AXIsProcessTrusted()},unsafe{CGPreflightPostEventAccess()}){return Err(NativeError::new("scroll_permission_denied","Allow Accessibility for the installed FerShot X.app, then quit and reopen it. Ad-hoc updates may require granting access again."))}
    Ok(Self{original:location()?,last:None})
   }
-  pub fn scroll(&mut self,rect:ScreenRect)->Result<(),NativeError>{
+  pub fn scroll(&mut self,rect:ScreenRect,lines:bool)->Result<(),NativeError>{
    if let Some(last)=self.last{if !near(location()?,last){return Err(NativeError::new("scroll_interrupted","The pointer moved during automatic scrolling. Keep it still or press Escape to finish."))}}
    let(x,y,delta)=scroll_step(rect)?;let point=CGPoint::new(x,y);
-   let e=Event::new(unsafe{CGEventCreateScrollWheelEvent2(std::ptr::null_mut(),0,1,delta,0,0)})?;
+   let e=Event::new(unsafe{CGEventCreateScrollWheelEvent2(std::ptr::null_mut(),if lines{1}else{0},1,if lines{-3}else{delta},0,0)})?;
    // Route through WindowServer hit testing, as real pointer input. Posting to a
    // PID alone does not establish the scrollable view under the cursor.
    move_to(point)?;self.last=Some(point);std::thread::sleep(std::time::Duration::from_millis(40));
-   unsafe{CGEventSetLocation(e.0,point);CGEventSetIntegerValueField(e.0,88,1);CGEventPost(0,e.0)};Ok(())
+   unsafe{CGEventSetLocation(e.0,point);CGEventSetIntegerValueField(e.0,88,if lines{0}else{1});CGEventPost(0,e.0)};Ok(())
   }
  }
  impl Drop for Pointer{fn drop(&mut self){if let Some(last)=self.last{if location().is_ok_and(|p|near(p,last)){let _=move_to(self.original);}}}}
@@ -92,17 +92,18 @@ fn finish_frames(frames:&[ScrollFrame],stopped:bool)->Result<(fershot_image_core
   app.global_shortcut().on_shortcut(escape,|app,_,event|{if event.state()==ShortcutState::Pressed{app.state::<StopState>().0.store(true,Ordering::SeqCst);}}).map_err(|_|fail("Escape could not be registered for stopping capture."))?;restore.escape=true;
   let(w,h)=first.dimensions();captured_frames=1;let mut frames=vec![ScrollFrame{width:w,height:h,rgba:first.rgba_bytes()}];let mut used_pixels=u64::from(w)*u64::from(h);let max_pixels=16_777_216u64;if used_pixels*2>max_pixels{return Err(fail("The selected region is too large for two safe frames. Select a smaller scrollable area."))}
   #[cfg(target_os="macos")]let mut pointer=input::Pointer::new()?;
+  let mut line_input=false;
   while frames.len()<64&&used_pixels+u64::from(w)*u64::from(h)<=max_pixels{
    if app.state::<StopState>().0.load(Ordering::SeqCst){break;}
    let next=capture_step(&app.state::<StopState>().0,||{
    stage=crate::diagnostics::Stage::ResolveTarget;if before!=crate::area_capture::topology(&window)?{return Err(NativeError::new("display_changed","Displays changed during scrolling capture."))}crate::active_window::confirm(target.0,target.1)?;if crate::active_window::target_at(rect)?!=target{return Err(NativeError::new("scroll_target_unavailable","The selected window is covered or changed. Uncover it and retry."))}
    stage=crate::diagnostics::Stage::PostScroll;
-   #[cfg(target_os="macos")]pointer.scroll(rect)?;
+   #[cfg(target_os="macos")]pointer.scroll(rect,line_input)?;
    #[cfg(not(target_os="macos"))]return Err(fail("Automatic scrolling requires macOS."));
    for _ in 0..20{if app.state::<StopState>().0.load(Ordering::SeqCst){break;}std::thread::sleep(std::time::Duration::from_millis(25));}
    if app.state::<StopState>().0.load(Ordering::SeqCst){return Err(NativeError::new("cancelled","Scrolling stopped."))}
    stage=crate::diagnostics::Stage::CaptureFrame;let frame=capture(CaptureMode::Region(rect))?;let(width,height)=frame.dimensions();Ok(ScrollFrame{width,height,rgba:frame.rgba_bytes()})
-   })?;let Some(next)=next else{break;};let(width,height)=(next.width,next.height);if unchanged(frames.last().unwrap(),&next){break;}if width!=w||height!=h{return Err(fail("The capture region changed size."))}used_pixels+=u64::from(w)*u64::from(h);frames.push(next);captured_frames=frames.len()as u32;
+   });let next=match next{Ok(value)=>value,Err(error)if error.code=="scroll_interrupted"=>{app.state::<StopState>().0.store(true,Ordering::SeqCst);break;},Err(error)=>return Err(error)};let Some(next)=next else{break;};let(width,height)=(next.width,next.height);if unchanged(frames.last().unwrap(),&next){if frames.len()==1&&!line_input{line_input=true;continue;}break;}if width!=w||height!=h{return Err(fail("The capture region changed size."))}used_pixels+=u64::from(w)*u64::from(h);frames.push(next);captured_frames=frames.len()as u32;
   }
   if frames.len()==1&&!app.state::<StopState>().0.load(Ordering::SeqCst){return Err(NativeError::new("scroll_no_movement","The selected content did not move. Start above the end of the page and select inside its scrollable content."))}
   stage=crate::diagnostics::Stage::StitchFrames;

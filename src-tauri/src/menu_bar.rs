@@ -1,10 +1,11 @@
 use crate::imaging::{NativeError, NativeJobs};
+use std::collections::BTreeMap;
 use std::sync::{Mutex, atomic::{AtomicBool, Ordering}};
 use tauri::{Manager, menu::{Menu, IconMenuItem, PredefinedMenuItem, Submenu}, tray::TrayIconBuilder};
 
 const ID: &str = "fershot-menu-bar";
 #[derive(Default)]
-pub struct MenuBarState { startup: Mutex<Option<IconMenuItem<tauri::Wry>>>, capture_upload:Mutex<Option<IconMenuItem<tauri::Wry>>>, repeat: Mutex<Option<IconMenuItem<tauri::Wry>>>, repeat_available: AtomicBool }
+pub struct MenuBarState { shortcuts:Mutex<BTreeMap<String,(String,IconMenuItem<tauri::Wry>)>>, startup: Mutex<Option<IconMenuItem<tauri::Wry>>>, capture_upload:Mutex<Option<IconMenuItem<tauri::Wry>>>, repeat: Mutex<Option<IconMenuItem<tauri::Wry>>>, repeat_available: AtomicBool }
 pub const CAPTURE_ITEMS: &[(&str, &str)] = &[
     ("capture-fullscreen", "Capture Screen"), ("capture-area", "Capture Area"), ("capture-scrolling", "Scrolling Capture"),
 ];
@@ -28,9 +29,20 @@ pub fn update_repeat_availability(app: &tauri::AppHandle, available: bool) {
 fn lucide_icon(name:&str)->tauri::image::Image<'static>{let bytes:&[u8]=match name{
  "cloud-sync"=>include_bytes!("../icons/menu/cloud-sync.png"),"monitor-cog"=>include_bytes!("../icons/menu/monitor-cog.png"),"square-library"=>include_bytes!("../icons/menu/square-library.png"),"monitor"=>include_bytes!("../icons/menu/monitor.png"),"scan-square"=>include_bytes!("../icons/menu/scan-square.png"),"gallery-vertical"=>include_bytes!("../icons/menu/gallery-vertical.png"),"app-window-mac"=>include_bytes!("../icons/menu/app-window-mac.png"),"folder-open"=>include_bytes!("../icons/menu/folder-open.png"),"clipboard-list"=>include_bytes!("../icons/menu/clipboard-list.png"),"cog"=>include_bytes!("../icons/menu/cog.png"),"circle-power"=>include_bytes!("../icons/menu/circle-power.png"),"cloud-upload"=>include_bytes!("../icons/menu/cloud-upload.png"),_=>include_bytes!("../icons/menu/ellipsis.png")};let image=image::load_from_memory(bytes).expect("Bundled Lucide icon").to_rgba8();let(w,h)=image.dimensions();tauri::image::Image::new_owned(image.into_raw(),w,h)}
 fn icon_for(id:&str)->&str{match id{"check-updates"=>"cloud-sync","launch-startup"=>"monitor-cog","show-workspace"=>"square-library","capture-fullscreen"=>"monitor","capture-area"|"capture-repeat-region"=>"scan-square","capture-scrolling"=>"gallery-vertical","capture-active-window"|"capture-window"=>"app-window-mac","open-file"=>"folder-open","open-clipboard"=>"clipboard-list","capture-instant-upload"=>"cloud-upload",_=>"ellipsis"}}
+pub fn shortcut_title(title:&str,binding:Option<&str>)->String{
+ let Some(binding)=binding else{return title.into()};let parts=binding.split('+').collect::<Vec<_>>();let Some(key)=parts.last()else{return title.into()};
+ let mut glyphs=String::new();for(token,glyph)in[("Control","⌃"),("Alt","⌥"),("Shift","⇧"),("Super","⌘")]{if parts.contains(&token){glyphs.push_str(glyph);}}
+ let key=key.strip_prefix("Key").or_else(||key.strip_prefix("Digit")).unwrap_or(key);glyphs.push_str(match key{"ArrowUp"=>"↑","ArrowDown"=>"↓","ArrowLeft"=>"←","ArrowRight"=>"→","Space"=>"Space",value=>value});format!("{title}    {glyphs}")
+}
+pub fn update_shortcuts(app:&tauri::AppHandle){
+ let bindings=crate::shortcuts::menu_bindings(app);
+ if let Some(state)=app.try_state::<MenuBarState>(){if let Ok(items)=state.shortcuts.lock(){for(id,(title,item))in items.iter(){let _=item.set_text(shortcut_title(title,bindings.get(id).and_then(|value|value.as_deref())));}}}
+}
 pub fn build(app: &tauri::AppHandle) -> tauri::Result<Menu<tauri::Wry>> {
     let menu = Menu::new(app)?;
-    let item = |id, title| IconMenuItem::with_id(app, id, title, true, Some(lucide_icon(icon_for(id))), None::<&str>);
+    let bindings=crate::shortcuts::menu_bindings(app);
+    let item = |id:&str,title:&str| -> tauri::Result<IconMenuItem<tauri::Wry>> {let entry=IconMenuItem::with_id(app,id,shortcut_title(title,bindings.get(id).and_then(|v|v.as_deref())),true,Some(lucide_icon(icon_for(id))),None::<&str>)?;
+      if id=="show-workspace"||id.starts_with("capture-"){if let Ok(mut items)=app.state::<MenuBarState>().shortcuts.lock(){items.insert(id.into(),(title.into(),entry.clone()));}}Ok(entry)};
     menu.append(&item("show-workspace", "Library")?)?;
     menu.append(&PredefinedMenuItem::separator(app)?)?;
     for (id,title) in CAPTURE_ITEMS { menu.append(&item(*id,*title)?)?; }
@@ -79,6 +91,7 @@ pub async fn set_menu_bar_icon(enabled: bool, window: tauri::WebviewWindow, app:
 }
 #[cfg(test)]
 mod tests {
+    #[test]fn shortcut_labels_are_display_only_and_clear_when_uninstalled(){assert_eq!(super::shortcut_title("Capture Area",Some("Super+Shift+KeyA")),"Capture Area    ⇧⌘A");assert_eq!(super::shortcut_title("Library",Some("Control+Alt+Digit1")),"Library    ⌃⌥1");assert_eq!(super::shortcut_title("Capture Area",None),"Capture Area");}
     #[test] fn quick_menu_contains_only_implemented_capture_routes() {
         assert_eq!(super::CAPTURE_ITEMS.iter().map(|x|x.0).collect::<Vec<_>>(),vec!["capture-fullscreen","capture-area","capture-scrolling"]);
         assert_eq!(super::MORE_ITEMS.iter().map(|x|x.0).collect::<Vec<_>>(),vec!["capture-repeat-region","capture-active-window","capture-window"]);

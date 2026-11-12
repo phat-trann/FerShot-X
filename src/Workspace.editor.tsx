@@ -56,35 +56,26 @@ export function WorkspaceEditor({ onReady,onLoadError,image, annotations, advanc
     measure();
     return () => observer.disconnect();
   }, [image.width, image.height, active]);
-  const pinchStart=useRef<number|null>(null);
-  const lastTrackpadAt=useRef(-Infinity);
-  useEffect(()=>{const node=host.current;if(!node)return;
-    const update=(value:number)=>onZoomChange(Math.max(Math.min(.05,fit),Math.min(8,value)));
-    const wheel=(event:WheelEvent)=>{
-      if(!active||busy||event.deltaY===0)return;
-      const isPinch=event.ctrlKey||event.metaKey;
-      if(!isPinch){
-        const isContinuous=event.deltaMode===0&&(Math.abs(event.deltaX)>0||event.deltaY%1!==0||Math.abs(event.deltaY)<15);
-        if(isContinuous){
-          lastTrackpadAt.current=performance.now();
-        }
-        if(event.deltaMode===0&&performance.now()-lastTrackpadAt.current<300)return;
-      }
+  const wheelState=useRef({active,busy,scale:zoom??fit,fit,onZoomChange});wheelState.current={active,busy,scale:zoom??fit,fit,onZoomChange};
+  useEffect(()=>{const node=host.current?.closest<HTMLElement>(".workspace-body");const scroller=host.current?.closest<HTMLElement>(".stage");if(!node||!scroller)return;
+    let pinchStart:number|null=null,lastPanAt=-Infinity,pending:number|null=null,frame=0;
+    const update=(value:number)=>{const state=wheelState.current;pending=Math.max(Math.min(.05,state.fit),Math.min(8,value));if(!frame)frame=requestAnimationFrame(()=>{frame=0;const value=pending;pending=null;if(value!==null&&wheelState.current.active&&!wheelState.current.busy)wheelState.current.onZoomChange(value);});};
+    const wheel=(event:WheelEvent)=>{const state=wheelState.current;if(!state.active||state.busy||(!event.deltaX&&!event.deltaY)||(event.target instanceof Element&&event.target.closest('input,textarea,select,[contenteditable="true"],[role="slider"],[role="dialog"]')))return;
+      const modified=event.ctrlKey||event.metaKey,now=performance.now(),legacy=(event as WheelEvent&{wheelDeltaY?:number}).wheelDeltaY;
+      const continuous=event.deltaMode===0&&(Math.abs(event.deltaX)>0||event.deltaY%1!==0||Math.abs(event.deltaY)<15||(typeof legacy==="number"&&Math.abs(legacy)===Math.abs(event.deltaY)*3));
+      const pan=!modified&&event.deltaMode===0&&(continuous||now-lastPanAt<300);
       event.preventDefault();
-      if(isPinch){
-        if(pinchStart.current===null)update((zoom??fit)*Math.exp(-event.deltaY*.01));
-      }else{
-        update((zoom??fit)*Math.exp(-event.deltaY*.002));
-      }
+      if(pan){lastPanAt=now;scroller.scrollBy({left:event.deltaX,top:event.deltaY,behavior:"instant"});return;}
+      if(pinchStart!==null)return;
+      const delta=event.deltaY*(event.deltaMode===1?16:event.deltaMode===2?scroller.clientHeight:1);
+      update((pending??state.scale)*Math.exp(-Math.max(-240,Math.min(240,delta))*(event.ctrlKey?.01:.002)));
     };
-    const start=(event:Event)=>{if(!active||busy)return;event.preventDefault();pinchStart.current=zoom??fit;};
-    const change=(event:Event)=>{if(pinchStart.current===null)return;event.preventDefault();const scale=(event as Event&{scale:number}).scale;if(Number.isFinite(scale)&&scale>0)update(pinchStart.current*scale);};
-    const end=()=>{pinchStart.current=null;};
+    const start=(event:Event)=>{if(!wheelState.current.active||wheelState.current.busy)return;event.preventDefault();pinchStart=pending??wheelState.current.scale;};
+    const change=(event:Event)=>{if(pinchStart===null)return;event.preventDefault();const scale=(event as Event&{scale:number}).scale;if(Number.isFinite(scale)&&scale>0)update(pinchStart*scale);};
+    const end=()=>{pinchStart=null;};
     node.addEventListener("wheel",wheel,{passive:false});node.addEventListener("gesturestart",start,{passive:false});node.addEventListener("gesturechange",change,{passive:false});node.addEventListener("gestureend",end);
-    return()=>{
-      node.removeEventListener("wheel",wheel);node.removeEventListener("gesturestart",start);node.removeEventListener("gesturechange",change);node.removeEventListener("gestureend",end);
-    };
-  },[active,busy,zoom,fit,onZoomChange]);
+    return()=>{cancelAnimationFrame(frame);node.removeEventListener("wheel",wheel);node.removeEventListener("gesturestart",start);node.removeEventListener("gesturechange",change);node.removeEventListener("gestureend",end);};
+  },[image.id]);
   useEffect(()=>onZoomReport(zoom??fit),[zoom,fit,onZoomReport]);
   return <div ref={host} className="editor-surface" aria-busy={busy}>
     <KonvaWorkbench onSourceReady={()=>onReady?.(image.id)} onSourceError={onLoadError} imageToInsert={imageToInsert} onImageInserted={onImageInserted} onPixelSample={onPixelSample} key={image.id} compact imageId={image.id} imageSrc={basePreview?.id===image.id?basePreview.src:image.src}

@@ -108,6 +108,7 @@ fn status(store: &ShortcutStore) -> Result<ShortcutStatus, NativeError> {
     Ok(ShortcutStatus { bindings: config.as_ref().map(|state| state.bindings.clone()).unwrap_or_else(empty), faulted: config.as_ref().is_some_and(|state| state.faulted), restoration_failed:store.restoration_failed.load(Ordering::Acquire) })
 }
 
+pub fn menu_bindings(app:&tauri::AppHandle)->BTreeMap<String,Option<String>>{let store=app.state::<ShortcutStore>();store.config.lock().ok().and_then(|state|state.as_ref().filter(|state|!state.faulted).map(|state|state.bindings.clone())).unwrap_or_else(empty)}
 fn apply(app: &tauri::AppHandle, store: &ShortcutStore, bindings: Bindings) -> Result<ShortcutStatus, NativeError> {
     let _gate=store.gate.lock().map_err(|_|NativeError::new("shortcut_failed","Shortcut update unavailable."))?;
     apply_registered(store,bindings,&mut NativeRegistry(app))
@@ -160,7 +161,7 @@ pub fn get_shortcuts(window: tauri::WebviewWindow, store: tauri::State<'_, Short
 #[tauri::command]
 pub async fn apply_shortcuts(bindings: Bindings, window: tauri::WebviewWindow, app: tauri::AppHandle,
     store: tauri::State<'_, ShortcutStore>, jobs: tauri::State<'_, NativeJobs>) -> Result<ShortcutStatus, NativeError> {
-    crate::preferences_window::validate_label(window.label())?; let _guard = jobs.acquire()?; apply(&app, &store, bindings)
+    crate::preferences_window::validate_label(window.label())?; let _guard = jobs.acquire()?; let result=apply(&app, &store, bindings);crate::menu_bar::update_shortcuts(&app);result
 }
 
 fn configure_at(path:&std::path::Path,store:&ShortcutStore,bindings:Bindings,registry:&mut impl Registry)->Result<ShortcutStatus,NativeError>{
@@ -182,7 +183,7 @@ pub fn restore(app:&tauri::AppHandle)->Result<(),NativeError>{let path=app.path(
 pub async fn configure_shortcuts(bindings:Bindings,window:tauri::WebviewWindow,app:tauri::AppHandle,store:tauri::State<'_,ShortcutStore>,jobs:tauri::State<'_,NativeJobs>,preferences:tauri::State<'_,crate::preferences::PreferenceGate>)->Result<ShortcutStatus,NativeError>{
  crate::preferences_window::validate_label(window.label())?;let _job=jobs.acquire()?;let gate=preferences.shared();let _preferences=gate.lock().map_err(|_|NativeError::new("settings_failed","Shortcut settings unavailable."))?;
  let path=app.path().app_config_dir().map_err(|_|NativeError::new("settings_failed","Shortcut settings unavailable."))?;
- let result=configure_at(&path,&store,bindings,&mut NativeRegistry(&app));if result.is_err(){crate::diagnostics::record(&app,crate::diagnostics::Area::Settings,crate::diagnostics::Event::Failed,crate::diagnostics::Code::SettingsFailed);}result
+ let result=configure_at(&path,&store,bindings,&mut NativeRegistry(&app));crate::menu_bar::update_shortcuts(&app);if result.is_err(){crate::diagnostics::record(&app,crate::diagnostics::Area::Settings,crate::diagnostics::Event::Failed,crate::diagnostics::Code::SettingsFailed);}result
 }
 
 #[cfg(test)]

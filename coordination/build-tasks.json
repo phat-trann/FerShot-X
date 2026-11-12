@@ -5236,6 +5236,16 @@
       "shared_claim": "root-wiring",
       "owned_paths": "Native automatic capture finalization and regressions; patch version 1.1.4; user acceptance/result documentation",
       "inputs": "User Screen PASS and scrolling movement confirmation; Esc returns Edit with error; sanitized 1.1.3 errors.log shows stitch_frames failure with six frames"
+    },
+    {
+      "id": "C104",
+      "agent": "codex",
+      "title": "Repair certificate extraction, accelerate CI, stabilize wheel/virtual canvas, show tray shortcuts and add bounded native line-scroll fallback",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "Release workflow/signing helper tests; Edit wheel and visible canvas rendering/regressions; native tray shortcut labels and automatic scroll routing; patch 1.1.5 docs",
+      "inputs": "User reported codesign --display failure; touchpad edge zoom/lag/blank image; active tray shortcuts; VS Code editor scroll failure while Codex chat works; sanitized diagnostics only"
     }
   ],
   "allocation": "Codex sole active client; external Antigravity and Copilot inactive; preserve historical authorship.",
@@ -5350,7 +5360,8 @@
       "C100",
       "C101",
       "C102",
-      "C103"
+      "C103",
+      "C104"
     ],
     "copilot": []
   },

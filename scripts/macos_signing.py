@@ -104,7 +104,7 @@ def verify_binary(binary, folder, state, run=command, architecture=None):
     args = ["/usr/bin/codesign", "--display"]
     if architecture:
         args += ["--architecture", architecture]
-    run([*args, "--extract-certificates", str(prefix), str(binary)])
+    run([*args, "--extract-certificates=" + str(prefix), str(binary)])
     certificate_matches(certificate, state["sha256"])
 
 

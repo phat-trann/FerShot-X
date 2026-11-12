@@ -37,8 +37,8 @@ class FakeCommands:
             if args[1] == "find-identity":
                 name = "Different certificate" if self.wrong_identity else "FerShot X"
                 return f'  1) {SHA1} "{name}"\n'.encode()
-        if tool == "codesign" and "--extract-certificates" in args:
-            prefix = args[args.index("--extract-certificates") + 1]
+        if tool == "codesign" and any(a.startswith("--extract-certificates=") for a in args):
+            prefix = next(a.split("=", 1)[1] for a in args if a.startswith("--extract-certificates="))
             Path(prefix + "0").write_bytes(b"wrong public certificate" if self.wrong_certificate else PUBLIC_DER)
         if tool == "lipo":
             return b"x86_64 arm64\n"
@@ -72,6 +72,7 @@ class MacSigningTests(unittest.TestCase):
         self.assertNotIn("synthetic-p12", path.read_text())
         self.assertNotIn("APPLE_CERTIFICATE=", Path(self.env["GITHUB_ENV"]).read_text())
         verify_app(self.env, path, self.app(), fake)
+        self.assertFalse(any("--extract-certificates" in c for c in fake.calls))
         architectures = {c[c.index("--architecture") + 1] for c in fake.calls if "--architecture" in c}
         self.assertEqual(architectures, {"arm64", "x86_64"})
         cleanup(self.env, path, fake)

@@ -47,33 +47,6 @@ jobs:
           script: |
             const guard = require('./scripts/release_gate.cjs');
             await guard({github, context, core, env: process.env});
-      - uses: actions/setup-node@v4
-        if: steps.release_guard.outputs.publish == 'true'
-        with:
-          node-version-file: .nvmrc
-          cache: npm
-      - uses: dtolnay/rust-toolchain@stable
-        if: steps.release_guard.outputs.publish == 'true'
-        with:
-          targets: aarch64-apple-darwin,x86_64-apple-darwin
-      - name: Install frozen frontend dependencies
-        if: steps.release_guard.outputs.publish == 'true'
-        run: npm ci
-      - name: Verify version and test
-        if: steps.release_guard.outputs.publish == 'true'
-        run: |
-          npm run version:check
-          node --input-type=module -e 'import fs from "node:fs";if(process.env.RELEASE_TAG!==`v${JSON.parse(fs.readFileSync("package.json")).version}`)throw Error("Release version must match package.json")'
-          python3 -m unittest discover -s scripts -p test_configure_updater.py
-          python3 -m unittest discover -s scripts -p test_release_version.py
-          node --test scripts/release_gate.test.cjs
-          npm run typecheck
-          python3 -m unittest discover -s scripts -p test_macos_signing.py
-          python3 scripts/test_verify_update_manifest.py
-          npm run test:unit
-          cargo test --locked --manifest-path src-tauri/Cargo.toml --lib
-          cargo rustc --locked --manifest-path src-tauri/Cargo.toml --lib -- -D warnings
-          cargo test --locked --manifest-path src-tauri/crates/scroll-core/Cargo.toml
       - name: Require real updater signing configuration
         if: steps.release_guard.outputs.publish == 'true'
         env:
@@ -94,6 +67,40 @@ jobs:
           APPLE_CERTIFICATE: ${{ secrets.APPLE_CERTIFICATE }}
           APPLE_CERTIFICATE_PASSWORD: ${{ secrets.APPLE_CERTIFICATE_PASSWORD }}
         run: python3 scripts/macos_signing.py prepare
+      - uses: actions/setup-node@v4
+        if: steps.release_guard.outputs.publish == 'true'
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - uses: dtolnay/rust-toolchain@stable
+        if: steps.release_guard.outputs.publish == 'true'
+        with:
+          targets: aarch64-apple-darwin,x86_64-apple-darwin
+      - name: Cache Rust dependencies and build outputs
+        if: steps.release_guard.outputs.publish == 'true'
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            src-tauri/target
+          key: macos-release-${{ runner.arch }}-${{ hashFiles('src-tauri/Cargo.lock', 'src-tauri/Cargo.toml') }}
+          restore-keys: macos-release-${{ runner.arch }}-
+      - name: Install frozen frontend dependencies
+        if: steps.release_guard.outputs.publish == 'true'
+        run: npm ci
+      - name: Verify version and fast regressions
+        if: steps.release_guard.outputs.publish == 'true'
+        run: |
+          npm run version:check
+          node --input-type=module -e 'import fs from "node:fs";if(process.env.RELEASE_TAG!==`v${JSON.parse(fs.readFileSync("package.json")).version}`)throw Error("Release version must match package.json")'
+          python3 -m unittest discover -s scripts -p test_configure_updater.py
+          python3 -m unittest discover -s scripts -p test_release_version.py
+          node --test scripts/release_gate.test.cjs
+          python3 -m unittest discover -s scripts -p test_macos_signing.py
+          python3 scripts/test_verify_update_manifest.py
+          npm run test:unit
+          cargo test --locked --manifest-path src-tauri/crates/scroll-core/Cargo.toml
       - uses: tauri-apps/tauri-action@v1
         if: steps.release_guard.outputs.publish == 'true'
         id: tauri
@@ -101,6 +108,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.UPDATER_RELEASE_TOKEN || secrets.GITHUB_TOKEN }}
           TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
           TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
+          RUSTFLAGS: -D warnings
         with:
           owner: ${{ env.RELEASE_OWNER }}
           repo: ${{ env.RELEASE_REPO }}

@@ -47,6 +47,7 @@ pub fn run() {
         .manage(dragging::DragStore::default())
         .on_window_event(lifecycle::on_window_event)
         .setup(|_app| {
+            if updates::install_notifications(_app.handle()).is_err(){diagnostics::record(_app.handle(),diagnostics::Area::App,diagnostics::Event::Failed,diagnostics::Code::Other);}
             active_window::install();
             if shortcuts::restore(_app.handle()).is_err(){diagnostics::record(_app.handle(),diagnostics::Area::Settings,diagnostics::Event::Failed,diagnostics::Code::SettingsFailed);}
             lifecycle::setup_main(_app.handle())?;

@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "id": "20261112T164625-codex-C107-8cf7620d",
+  "created_at": "2026-11-12T16:46:25.209577+07:00",
+  "agent": "codex",
+  "request": "C107-native-update-notice-repaint",
+  "task": "C107",
+  "completion": "done",
+  "summary": "Replace update banner with deduplicated native notification/tap handling; restore viewport/backing canvases after repeated capture presentation without zoom. Ship verification patch 1.1.8.",
+  "files": [
+    "AGENTS.md",
+    "README.md",
+    "coordination/build-tasks.json",
+    "docs/releases/1.0.0-manual-acceptance.md",
+    "package-lock.json",
+    "package.json",
+    "src-tauri/Cargo.lock",
+    "src-tauri/Cargo.toml",
+    "src-tauri/src/lib.rs",
+    "src-tauri/src/updates.rs",
+    "src-tauri/tauri.conf.json",
+    "src/App.tsx",
+    "src/features/editor/konva/KonvaWorkbench.tsx",
+    "src/features/editor/konva/viewport.ts",
+    "src/features/updater/Updater.tsx",
+    "src/features/updater/updater.css",
+    "tests/e2e/codex-c104-editor.spec.ts",
+    "tests/e2e/codex-updater.spec.ts",
+    "docs/releases/1.1.8.md",
+    "docs/agents/codex/C107-native-notification-repaint.md"
+  ],
+  "file_sha256": {
+    "AGENTS.md": "b5387941762e8061ddee842b4116b7cd5163c3fa77a38a69284663893bfd0591",
+    "README.md": "796488c49b18fddeac6c762740a60ff4374e0c42b0065cd53b1d3c68ccc0dcec",
+    "coordination/build-tasks.json": "e56fc8bd209827a0de0838f8ac6f131cc2c7f68fe35f52dbad70f5ab6f4f3aa8",
+    "docs/releases/1.0.0-manual-acceptance.md": "5d50d7f76c997aad5cec63358e395f231886ec0235e0680e3b0a5d7eec65c8e6",
+    "package-lock.json": "f9ea911a883680173a56c42eb1bf41fcc57748dadcbfcff8cb56e8873782662e",
+    "package.json": "1a38309bdb21c27b99f1ccfab0764c4e3e60675fe7e835a58ba1cd67279aabdc",
+    "src-tauri/Cargo.lock": "aed37e76fe01d61fbc3ff69ed1c48f1828c7eeb995e6de1f5abed660b5e547ba",
+    "src-tauri/Cargo.toml": "81915da4206d6945b5bf70bd03e10f8eaf78b640363451ea3600089a8aa00c23",
+    "src-tauri/src/lib.rs": "b6ae283f83e9dc60648781b8cdad684a1aa139a3ab76e6bc9be9592fa60b62df",
+    "src-tauri/src/updates.rs": "17f9884c883595742a879287b62dca90560e16e68d1cfbc5141cad7206b5ebd5",
+    "src-tauri/tauri.conf.json": "e35a4952f36e70311b94c889b8fa7f7c79c1660117d3d347478ba025eb1d8da3",
+    "src/App.tsx": "2b85b0a9d6efaae81a44be524ccbdf295994a22dcf7c33be92c4526cced824d6",
+    "src/features/editor/konva/KonvaWorkbench.tsx": "1aca451ca199584567bfe51569ee06420bf0ea07cd3b8a2ffee4f4a2b7a16579",
+    "src/features/editor/konva/viewport.ts": "d43941c4dd163e717881c426ed0377ae818067eba59c109612168a28f0b359ab",
+    "src/features/updater/Updater.tsx": "2a92c711dceb2b8f843b4b0e12b189ddb1f1243bc20fd5787916beca0f584e85",
+    "src/features/updater/updater.css": "f2d0d742408503bdcab3422d9aebe39f61559cf5f8324b5bbe8830bcd1d9f207",
+    "tests/e2e/codex-c104-editor.spec.ts": "a432bf173e901399ebd7eb93784e8414b2c63ca9cbf1540cc4370f7ac2e75a7b",
+    "tests/e2e/codex-updater.spec.ts": "8a93b318ab3965c3480c4422693e78d15c27165adf1717130b657b4e04ee4f04",
+    "docs/releases/1.1.8.md": "39fdf62a1d99b4ec50a1311f934e8a002b22df22579720e3bec3e3b65ff0bd63",
+    "docs/agents/codex/C107-native-notification-repaint.md": "0cb9c7b1636302745cd31a8a11f87279ee4797685fc23bad1870e959c540aa1d"
+  },
+  "checks": [
+    "TypeScript, 441 unit tests, 76 injected native tests and all 72 browser regressions passed; native production compilation with warnings denied and version consistency passed.",
+    "Injected late canvas loss across five presentations recovered without zoom; targeted high-zoom/repaint regressions passed after final viewport callback cancellation refinement. Native notification send/dedup/failure retry uses injected submission only."
+  ],
+  "risks": [
+    "85% acceptance remains. User reports 2/3/5-8 PASS. Actual repeated-capture WKWebView behavior and macOS notification delivery/tap require retest; native notification needs installed 1.1.8 and a later available release. No real notification, capture/input, server, credential or permission changes were automated."
+  ],
+  "review": "pending"
+}

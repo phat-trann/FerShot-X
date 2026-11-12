@@ -5266,6 +5266,16 @@
       "shared_claim": "root-wiring",
       "owned_paths": "Native private credential storage/FTP; capture preparation/editor cursors; scroll preferences; patch 1.1.7 and functional evidence",
       "inputs": "User reports 2/3/4 pass, remaining Keychain prompts and old-image flash, faster scroll and contextual/loading cursors; explicit claim handoff"
+    },
+    {
+      "id": "C107",
+      "agent": "codex",
+      "title": "Native macOS update notifications and repeated-capture canvas restoration",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "Updater native notification bridge/click handling and renderer banner retirement; bounded canvas restoration/viewport remeasurement; patch 1.1.8 and injected regressions",
+      "inputs": "Latest user checklist 2/3/5-8 PASS, native OS update popup request and intermittent blank Edit repaired by zoom; no automated native actions"
     }
   ],
   "allocation": "Codex sole active client; external Antigravity and Copilot inactive; preserve historical authorship.",
@@ -5383,7 +5393,8 @@
       "C103",
       "C104",
       "C105",
-      "C106"
+      "C106",
+      "C107"
     ],
     "copilot": []
   },

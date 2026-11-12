@@ -8,7 +8,6 @@ import {CloudSync} from "lucide-react";
 import {recordDiagnostic} from "../../platform/diagnostics";
 import {APP_VERSION} from "../../app-info";
 import {Button} from "../../components/ui/button";
-import {openPreferencesWindow} from "../../platform/preferences-window";
 import {INITIAL_UPDATE,UpdateController,type UpdateState,type Action} from "./controller";
 import "./updater.css";
 let controller:UpdateController|undefined;
@@ -40,4 +39,3 @@ export function UpdateSettings(){const state=useUpdateState();const busy=["check
  {(state.phase==="downloaded"||state.phase==="error"&&state.error==="busy")&&<Button size="sm" onClick={()=>request("install")}>Install Update</Button>}
  {state.phase==="installed"&&<Button size="sm" onClick={()=>request("restart")}>Restart App</Button>}</div>
  </fieldset>;}
-export function UpdateNotice(){const state=useUpdateState();if(state.phase!=="available"&&state.phase!=="downloaded"&&state.phase!=="installed")return null;return <aside className="update-notice" aria-label="App update available"><CloudSync size={16} aria-hidden="true"/><span>{state.phase==="installed"?"Restart to finish updating":state.phase==="downloaded"?`FerShot X ${state.availableVersion} is ready to install`:`FerShot X ${state.availableVersion} is available`}</span><Button size="sm" variant="outline" onClick={()=>void openPreferencesWindow("updates")}>View Update</Button></aside>;}

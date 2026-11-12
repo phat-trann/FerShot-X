@@ -452,7 +452,7 @@ export default function Workspace() {
              <div id="editor-annotation-tools"/>
              {originalId&&<EditorTool order={41} label="Return To Source Image"><Button variant="ghost" size="icon" disabled={busy||!originalImage} aria-label="Return to source image" title="Return To Source Image" onClick={restoreOriginal}><Undo2/></Button></EditorTool>}
             </EditorToolStrip>
-            <EditorImageStatus image={image} colorSource={pointerColor} zoom={displayZoom} busy={busy} onFit={()=>setZoom(fitZoom.current)} onCrop={()=>{setTransformMode("crop");setEffectsOpen(false);}} onResize={(width,height)=>transform({resize:{width,height}})}/>
+            <EditorImageStatus image={image} colorSource={pointerColor} zoom={displayZoom} busy={busy} onFit={()=>{window.dispatchEvent(new Event("fershot-editor-fit"));setZoom(fitZoom.current);}} onCrop={()=>{setTransformMode("crop");setEffectsOpen(false);}} onResize={(width,height)=>transform({resize:{width,height}})}/>
             <span className="document-title sr-only">{image?.name}</span>
           </div>
           <div id="editor-element-options"/><div id="editor-tool-options"/>

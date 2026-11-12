@@ -577,23 +577,10 @@ export async function renderAdvancedWorkbenchToPngBlob(options: {
         ctx.stroke();
       }
     } else if (ann.tool === "arrow" && ann.points.length >= 2) {
-      const start = ann.points[0];
-      const end = ann.points[ann.points.length - 1];
-      ctx.beginPath();
-      ctx.moveTo(start.x, start.y);
-      ctx.lineTo(end.x, end.y);
-      ctx.stroke();
-      const [tip, leftWing, rightWing] = computeArrowHeadVertices(
-        start,
-        end,
-        ann.style.strokeWidth,
-      );
-      ctx.beginPath();
-      ctx.moveTo(tip.x, tip.y);
-      ctx.lineTo(leftWing.x, leftWing.y);
-      ctx.lineTo(rightWing.x, rightWing.y);
-      ctx.closePath();
-      ctx.fill();
+      const start=ann.points[0],end=ann.points[ann.points.length-1];
+      const [tip,leftWing,rightWing]=computeArrowHeadVertices(start,end,ann.style.strokeWidth);
+      ctx.lineCap="butt";ctx.beginPath();ctx.moveTo(start.x,start.y);ctx.lineTo((leftWing.x+rightWing.x)/2,(leftWing.y+rightWing.y)/2);ctx.stroke();
+      ctx.beginPath();ctx.moveTo(tip.x,tip.y);ctx.lineTo(leftWing.x,leftWing.y);ctx.lineTo(rightWing.x,rightWing.y);ctx.closePath();ctx.fill();
     } else if (ann.tool === "pen" && ann.points.length >= 2) {
       ctx.beginPath();
       ctx.moveTo(ann.points[0].x, ann.points[0].y);

@@ -5286,6 +5286,16 @@
       "shared_claim": "root-wiring",
       "owned_paths": "Route loading, canvas recovery allocation, Local draft/cache/Library render paths; isolated retired Library UI/tests and verified archive manifest; acceptance/release 1.1.9 docs and regressions",
       "inputs": "User explicitly accepts existing features 100%, asks performance/AI-source cleanup, and defers native notification update test to next version; before/after source and synthetic measurements"
+    },
+    {
+      "id": "C109",
+      "agent": "codex",
+      "title": "Repair native macOS updater alerts; add notification test/status, pointer-centered zoom and clean arrow geometry",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "Native notification permission/submission/delegate/logging and updater settings/status; cursor zoom camera and arrow preview/export geometry; version 1.1.10 docs and regressions",
+      "inputs": "Installed 1.1.8 and published 1.1.9 confirmed; user sees available update but no OS notification; request zoom around cursor and arrow defect screenshot; Apple UserNotifications documentation and pinned legacy plugin source"
     }
   ],
   "allocation": "Codex sole active client; external Antigravity and Copilot inactive; preserve historical authorship.",
@@ -5405,7 +5415,8 @@
       "C105",
       "C106",
       "C107",
-      "C108"
+      "C108",
+      "C109"
     ],
     "copilot": []
   },

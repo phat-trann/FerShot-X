@@ -1,4 +1,4 @@
-# FerShot X 1.1.9
+# FerShot X 1.1.10
 
 A macOS screenshot editor and explicit FTP publisher built with Tauri, Rust and React.
 
@@ -11,7 +11,7 @@ Command-W closes the focused window; Command-Q quits; closing a window hides its
 
 The interface uses shadcn/Radix, Tailwind, Lucide, Motion and native window materials. The app icon retains the uploader symbol in a padded macOS tile; menu glyphs are Lucide-derived. Attribution is in docs/third-party/. Screen Recording and input-event permission may be required for user-triggered capture/scrolling. Native macOS and real-server acceptance is tracked separately from injected tests; see docs/releases/1.0.0.md.
 
-Existing features are **100% USER_REPORTED accepted** as of 2026-11-12. Native update notification delivery/click behavior remains a separate pending version-to-version check. See [current acceptance](docs/releases/ACCEPTANCE.md) and [1.1.9 changes](docs/releases/1.1.9.md).
+Existing features are **100% USER_REPORTED accepted** as of 2026-11-12. Native update notification delivery/click behavior remains a separate pending version-to-version check. See [current acceptance](docs/releases/ACCEPTANCE.md) and [1.1.10 changes](docs/releases/1.1.10.md).
 
 ## Development
 

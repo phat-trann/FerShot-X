@@ -5,6 +5,8 @@ const APP_VERSION=JSON.parse(readFileSync("package.json","utf8")).version;
 test("Settings shows update versions, progress, installation and explicit restart through official plugin IPC",async({page})=>{
  await mock(page);await page.context().addInitScript(({version})=>{const w=window as any,invoke=w.__TAURI_INTERNALS__.invoke;w.__UPDATE_STATE__={phase:"idle",availableVersion:null,downloaded:0,total:null,error:null};w.__TAURI_INTERNALS__.invoke=async(command:string,args:any={})=>{
   if(command==="updater_configuration"||command==="claim_update_check"){w.__CALLS__.push({command,args});return true;}
+  if(command==="read_update_notification_status")return "idle";
+  if(command==="test_update_notification"){w.__NOTICE_TRIES__=(w.__NOTICE_TRIES__??0)+1;if(w.__NOTICE_TRIES__===1)throw {code:"notification_denied",message:"denied"};return;}
   if(command==="read_update_state")return w.__UPDATE_STATE__;
   if(command==="publish_update_state"){w.__UPDATE_STATE__=args.snapshot;w.__EMIT__("fershot-update-state",args.snapshot);return;}
   if(command==="request_update"){w.opener.__EMIT__("fershot-updater-action",args.action);return;}
@@ -18,7 +20,7 @@ test("Settings shows update versions, progress, installation and explicit restar
  await page.goto("/?editor");await expect.poll(()=>page.evaluate(()=>(window as any).__CALLS__.some((c:any)=>c.command==="plugin:event|listen"&&c.args.event==="fershot-updater-action"))).toBe(true);
  await expect.poll(()=>page.evaluate(()=>(window as any).__UPDATE_STATE__.phase)).toBe("available");await expect(page.getByRole("complementary",{name:"App update available"})).toHaveCount(0);expect(await page.evaluate(()=>(window as any).__CALLS__.filter((c:any)=>c.command==="plugin:updater|check").length)).toBe(1);
  const popup=page.waitForEvent("popup");await page.evaluate(()=>{(window as any).__SETTINGS__=window.open("/?preferences&tab=updates","updater-settings");});const settings=await popup;
- await expect(settings.getByRole("tab",{name:"Updates",exact:true})).toHaveAttribute("data-state","active");await expect(settings.getByText(APP_VERSION,{exact:true})).toBeVisible();await settings.getByRole("button",{name:"Check for Updates",exact:true}).click();await expect(settings.getByText("1.2.0",{exact:true})).toBeVisible();
+ await expect(settings.getByRole("tab",{name:"Updates",exact:true})).toHaveAttribute("data-state","active");await expect(settings.getByText(APP_VERSION,{exact:true})).toBeVisible();await settings.getByRole("button",{name:"Test Notification",exact:true}).click();await expect(settings.getByLabel("Notification status")).toHaveText("Enable FerShot X in System Settings → Notifications.");await settings.getByRole("button",{name:"Test Notification",exact:true}).click();await expect(settings.getByLabel("Notification status")).toHaveText("Notification submitted to macOS.");await settings.getByRole("button",{name:"Check for Updates",exact:true}).click();await expect(settings.getByText("1.2.0",{exact:true})).toBeVisible();
  await settings.getByRole("button",{name:"Download Update",exact:true}).click();await expect(settings.getByText("Download verified. Ready to install.")).toHaveAttribute("data-tone","success");
  expect(await page.evaluate(()=>(window as any).__CALLS__.filter((c:any)=>c.command==="plugin:updater|install").length)).toBe(0);
  await settings.getByRole("button",{name:"Install Update",exact:true}).click();await expect(settings.getByRole("button",{name:"Restart App",exact:true})).toBeVisible();

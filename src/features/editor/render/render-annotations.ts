@@ -48,19 +48,14 @@ export function computeArrowHeadVertices(
 ): readonly [Point, Point, Point] {
   const dx = end.x - start.x;
   const dy = end.y - start.y;
-  const angle = Math.atan2(dy, dx);
-  const headLength = Math.max(10, strokeWidth * 4);
-  const spread = Math.PI / 6;
-
-  const wing1: Point = {
-    x: end.x - headLength * Math.cos(angle - spread),
-    y: end.y - headLength * Math.sin(angle - spread),
-  };
-  const wing2: Point = {
-    x: end.x - headLength * Math.cos(angle + spread),
-    y: end.y - headLength * Math.sin(angle + spread),
-  };
-
+  const length=Math.hypot(dx,dy);
+  if(!length)return [end,end,end];
+  const depth=Math.min(length*.75,Math.max(10,strokeWidth*3));
+  const halfWidth=Math.max(strokeWidth*.8,depth*.55);
+  const ux=dx/length,uy=dy/length;
+  const base={x:end.x-depth*ux,y:end.y-depth*uy};
+  const wing1:Point={x:base.x-uy*halfWidth,y:base.y+ux*halfWidth};
+  const wing2:Point={x:base.x+uy*halfWidth,y:base.y-ux*halfWidth};
   return [end, wing1, wing2];
 }
 
@@ -253,26 +248,10 @@ function drawAnnotation(
     }
 
     if (tool === "arrow") {
-      const first = points[0];
-      const last = points[points.length - 1] ?? first;
-      ctx.beginPath();
-      ctx.moveTo(first.x, first.y);
-      ctx.lineTo(last.x, last.y);
-      ctx.stroke();
-
-      const [tip, wing1, wing2] = computeArrowHeadVertices(
-        first,
-        last,
-        style.strokeWidth,
-      );
-      ctx.beginPath();
-      ctx.moveTo(tip.x, tip.y);
-      ctx.lineTo(wing1.x, wing1.y);
-      ctx.lineTo(wing2.x, wing2.y);
-      ctx.closePath();
-      ctx.fill();
-      ctx.stroke();
-      return;
+      const first=points[0],last=points[points.length-1]??first;
+      const [tip,wing1,wing2]=computeArrowHeadVertices(first,last,style.strokeWidth);
+      ctx.lineCap="butt";ctx.beginPath();ctx.moveTo(first.x,first.y);ctx.lineTo((wing1.x+wing2.x)/2,(wing1.y+wing2.y)/2);ctx.stroke();
+      ctx.beginPath();ctx.moveTo(tip.x,tip.y);ctx.lineTo(wing1.x,wing1.y);ctx.lineTo(wing2.x,wing2.y);ctx.closePath();ctx.fill();return;
     }
 
     if (tool === "pen") {

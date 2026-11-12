@@ -1,0 +1,3 @@
+import {describe,it,expect} from "vitest";
+import {computeArrowHeadVertices} from "./render-annotations";
+describe("bounded arrow geometry",()=>{it("keeps short thick heads ahead of the tail in every direction without NaN at zero length",()=>{for(const end of [{x:2,y:0},{x:-2,y:0},{x:0,y:2},{x:0,y:-2},{x:20,y:20},{x:-200,y:-200}])for(const width of [1,32,64]){const [tip,a,b]=computeArrowHeadVertices({x:0,y:0},end,width),length=Math.hypot(end.x,end.y),project=(p:{x:number;y:number})=>(p.x*end.x+p.y*end.y)/length;expect(tip).toEqual(end);expect(project(a)).toBeGreaterThanOrEqual(0);expect(project(a)).toBeLessThan(length);expect(project(b)).toBeCloseTo(project(a));}expect(computeArrowHeadVertices({x:3,y:4},{x:3,y:4},64)).toEqual([{x:3,y:4},{x:3,y:4},{x:3,y:4}]);});});

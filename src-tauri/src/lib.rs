@@ -25,6 +25,7 @@ mod desktop_menu;
 mod menu_bar;
 mod capture_upload;
 mod updates;
+mod update_notifications;
 mod active_window;
 mod display_capture;
 mod document_open;
@@ -69,6 +70,8 @@ pub fn run() {
             commands::app_info,
             updates::updater_configuration,
             updates::read_update_state,
+            updates::read_update_notification_status,
+            updates::test_update_notification,
             updates::request_update,
             updates::publish_update_state,
             updates::claim_update_check,

@@ -681,7 +681,7 @@
     "basis": "USER_REPORTED explicit acceptance",
     "date": "2026-11-12",
     "scope": "Existing FerShot X features; historical source/runtime parity figures remain unchanged",
-    "pending_separate_check": "Native updater notification delivery/click from installed 1.1.8 to release 1.1.9",
+    "pending_separate_check": "Native notification failed on installed 1.1.8 despite detecting 1.1.9; install 1.1.10 and use Test Notification, then verify automatic notice on a later available release.",
     "reference": "docs/releases/ACCEPTANCE.md"
   }
 }

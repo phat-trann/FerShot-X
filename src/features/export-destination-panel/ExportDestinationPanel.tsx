@@ -114,14 +114,12 @@ export function ExportDestinationPanel({
           <div className="fershot-export-destination-panel__folder-actions">
             <ToolHint label="Choose Folder"><Button icon={FolderOpen} variant="secondary" size="icon"
               type="button"
-              className="fershot-export-destination-panel__button"
               disabled={busy}
               onClick={handleChoose}
               aria-label="Choose Folder…"
             /></ToolHint>
             <ToolHint label="Reset Folder"><Button icon={RotateCcw} variant="secondary" size="icon"
               type="button"
-              className="fershot-export-destination-panel__button fershot-export-destination-panel__button--secondary"
               disabled={busy || !hasCustomFolder}
               onClick={handleClear}
               aria-label="Reset Folder"

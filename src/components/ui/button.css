@@ -26,10 +26,14 @@
 :is(.workspace,.library-window,.preferences-window,[data-slot="alert-dialog-content"]) [data-slot="button"][data-variant="destructive"] { --button-ink: var(--danger); --button-surface: var(--danger-bg); --button-line: var(--danger-border); }
 :is(.workspace,.library-window,.preferences-window,[data-slot="alert-dialog-content"]) [data-slot="button"][data-variant="success"] { --button-ink: var(--status-success); --button-surface: var(--success-bg); --button-line: var(--success-border); }
 :is(.workspace,.library-window,.preferences-window,[data-slot="alert-dialog-content"]) [data-slot="button"][data-variant="warning"] { --button-ink: var(--status-warning); --button-surface: var(--warning-bg); --button-line: var(--warning-border); }
-:is(.workspace,.library-window,.preferences-window,[data-slot="alert-dialog-content"]) [data-slot="button"]:not([data-variant="plain"]):hover:not(:disabled) { background: var(--button-surface); color: var(--button-ink); filter: brightness(1.12); }
+:is(.workspace,.library-window,.preferences-window,[data-slot="alert-dialog-content"]) [data-slot="button"]:not([data-variant="plain"]):hover:not(:disabled) { background: var(--button-surface); border-color: var(--button-line); color: var(--button-ink); filter: brightness(1.12); }
 :is(.workspace,.library-window,.preferences-window,[data-slot="alert-dialog-content"]) [data-slot="button"]:not([data-variant="plain"])[aria-pressed="true"] { background: var(--selection); }
 :is(.workspace,.library-window,.preferences-window,[data-slot="alert-dialog-content"]) [data-slot="button"][data-size="icon"] { width: var(--control-height); min-width: var(--control-height); padding: var(--space-2); }
 [data-slot="button"]:disabled { opacity: .45; cursor: default; }
 [data-slot="button"] :is(.ui-button-icon,svg) { width: 16px; height: 16px; flex-shrink: 0; stroke-width: 1.75; pointer-events: none; }
 .workspace .editor-size-presets > button[data-slot="button"] { gap: var(--space-1); }
 @media(prefers-reduced-motion:reduce) { [data-slot="button"] { transition: none !important; } }
+
+/* Legacy feature styles must not dim enabled shared actions or diverge disabled ink. */
+:is(.workspace,.library-window,.preferences-window,[data-slot="alert-dialog-content"]) [data-slot="button"]:not([data-variant="plain"]):not(:disabled) { opacity: 1; }
+:is(.workspace,.library-window,.preferences-window,[data-slot="alert-dialog-content"]) [data-slot="button"]:not([data-variant="plain"]):disabled { opacity: .45; }

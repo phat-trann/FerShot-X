@@ -25,3 +25,14 @@ it("keeps direct platform controls inside shared library primitives", () => {
   }
   expect(violations).toEqual([]);
 });
+
+it("prevents legacy feature CSS from restoring accent hover borders on ordinary buttons", async () => {
+  const {default:postcss}=await import("postcss");
+  const files=import.meta.glob<string>(["/src/features/**/*.css"],{query:"?raw",import:"default",eager:true});
+  const violations:string[]=[];
+  for(const [file,source] of Object.entries(files))postcss.parse(source).walkRules(rule=>{
+    if(!/button/.test(rule.selector)||!/:hover/.test(rule.selector))return;
+    rule.walkDecls(/^border(?:-color)?$/,decl=>{if(/var\(--(?:fershot-)?accent[,)]/.test(decl.value))violations.push(`${file}: ${rule.selector}`);});
+  });
+  expect(violations).toEqual([]);
+});

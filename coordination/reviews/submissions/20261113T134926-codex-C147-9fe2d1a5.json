@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "id": "20261113T134926-codex-C147-9fe2d1a5",
+  "created_at": "2026-11-13T13:49:26.414082+07:00",
+  "agent": "codex",
+  "request": "C147-release-1-2-2",
+  "task": "C147",
+  "completion": "done",
+  "summary": "Publish accepted C144-C146 as 1.2.2: ARM-only releases, isolated Settings and consistent controls without updater mock",
+  "files": [
+    "package.json",
+    "package-lock.json",
+    "src-tauri/Cargo.toml",
+    "src-tauri/Cargo.lock",
+    "src-tauri/tauri.conf.json",
+    "README.md",
+    "docs/releases/1.2.2.md",
+    "docs/agents/codex/C147-release-1-2-2.md"
+  ],
+  "file_sha256": {
+    "package.json": "d9c9b86227e4cc2ed63e5e46d37207f550f4f308b1498c9ec8cc3827057a4c7f",
+    "package-lock.json": "dae9def699fcae6c6c8b9b36ace37550e11a572a360a8ede8f5b89e86ba331af",
+    "src-tauri/Cargo.toml": "360f2bace284ff8871ab1b7328cfb9a547b4b75c6d41720f19d585eb0f1f6c88",
+    "src-tauri/Cargo.lock": "88b33e99191303041de888925fbf2c999292048f3196556dd789d3b84462ea75",
+    "src-tauri/tauri.conf.json": "7250eb0a600b92f003fc639e1f035cbf252745b2155946c947a7c64b6bd4de66",
+    "README.md": "7a7db180ec63c6e8b28bc3a6f2e521bd0882df35ef64f5ecd534eec58c1d6c5e",
+    "docs/releases/1.2.2.md": "84d10b162929e9c767b961efe6ef02c1a11ede2ae591def77226343f82243c21",
+    "docs/agents/codex/C147-release-1-2-2.md": "cf5b445e47236393f2c393861b19dbec69978d8854925c9233de3de98ac241ef"
+  },
+  "checks": [
+    "TypeScript; 21 Python cases; 5 browser regressions; prior 419 unit cases on same production changes; ARM-only YAML/version/whitespace checks"
+  ],
+  "risks": [
+    "Native Settings isolation and installed updates remain manual; no new permission flow; CI publication reported separately"
+  ],
+  "review": "pending"
+}

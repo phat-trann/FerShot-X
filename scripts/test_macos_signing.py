@@ -171,6 +171,23 @@ class MacSigningTests(unittest.TestCase):
         with self.assertRaises(SigningFailure):
             verify_archives(self.env, path, assets, FakeCommands(), manifest)
 
+    def test_arm_only_archive_must_contain_arm_binary(self):
+        path = prepare(self.env, FakeCommands())
+        app = self.app()
+        assets = self.root / "assets"
+        assets.mkdir()
+        manifest = self.root / "latest.json"
+        manifest.write_text(json.dumps({"platforms": {"darwin-aarch64": {"url": "https://github.com/owner/repo/releases/download/v1.2.2/arm.app.tar.gz"}}}))
+        for arch in ("arm64", "x86_64"):
+            (app / "Contents/MacOS/FerShot X").write_bytes(arch.encode())
+            with tarfile.open(assets / "arm.app.tar.gz", "w:gz") as stream:
+                stream.add(app, arcname=app.name)
+            if arch == "arm64":
+                verify_archives(self.env, path, assets, FakeCommands(), manifest, [("darwin-aarch64", "arm64")])
+            else:
+                with self.assertRaises(SigningFailure):
+                    verify_archives(self.env, path, assets, FakeCommands(), manifest, [("darwin-aarch64", "arm64")])
+
     def test_cleanup_rejects_foreign_state_without_modifying_keychains(self):
         path = self.root / "foreign" / "state.json"
         path.parent.mkdir()

@@ -1,5 +1,21 @@
 # Agent instructions
 
+## C147 user-authorized 1.2.2 publication (2026-11-13)
+
+User explicitly requests pushing completed C144–C146 updates and declines adding a first-launch permission flow. Synchronize 1.2.2, preserve historical assets, validate safe automated checks and commit/push normally to main to trigger ARM-only release CI. Preserve signing identity/updater key and all real permission/credential state. No OS/server/capture/update-install actions, private-key reads or manual tags; report CI publication separately from installed Settings/updater validation.
+
+## C146 equivalent-control regression protection (2026-11-13)
+
+Shared framed Button hover must retain its semantic border token, with enabled opacity 1 and disabled opacity .45; preserve specialized plain/recording/canvas controls and intentional semantic colors. Remove legacy accent hover borders from ordinary feature buttons. ToolHint must preserve child refs, event handlers, existing aria-describedby and keyboard shortcuts in asChild/wrapped modes. Keep pixel-snapped hints, explicit updater state and Logs Days-inline layout. Check equivalent controls across Settings/Library plus flat Edit/Resize behavior. No build, real OS/server actions or publication before user acceptance.
+
+## C145 remove update mock and align Settings utilities (2026-11-13)
+
+Remove C144 temporary DEV update mock; only actual updater state renders New version. Keep matched row columns. Logs folder is a labelled icon-only action after days on the retention row, outside the input label. Folder actions use shared Button styles without legacy accent-hover borders or extra secondary opacity. Tooltip positioning snaps its final left edge to device pixels without a centering transform. Preserve callbacks, disabled behavior, log autosave and explicit updater actions. No build or publication before acceptance.
+
+## C144 Apple Silicon, isolated Settings and version UI preview (2026-11-13)
+
+User discontinues Intel builds: release job/manifest/archive verification now targets ARM64 only while retaining historical release assets and signing/key continuity. Shared foreground presentation must show/focus only its requested window, without AppHandle::show unhiding retained views. Edit delete tool hint/title is Delete. Current/New version share the Settings row columns. User-requested temporary New version mock is DEV-only when no real update exists; its install action is disabled and no updater state/IPC is fabricated. Disable via previewUpdate=0; remove when user accepts the layout. No build/publication this pass; native Settings isolation awaits installed validation.
+
 ## C143 user-authorized 1.2.1 publication (2026-11-13)
 
 User authorizes publishing accumulated C140–C142 changes. Sync 1.2.1, retain published 1.2.0 assets, run safe checks and commit/push normally to main to trigger the split-architecture release. Permit Blob reads in renderer connect-src for the local preview cache while preserving other CSP restrictions; exercise this under an injected browser CSP. No real OS/capture/server/update installation, private-key reads, local keychain changes or manual tags. Report push/CI status separately from installed updater acceptance.

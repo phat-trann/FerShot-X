@@ -5596,6 +5596,46 @@
       "shared_claim": "root-wiring",
       "owned_paths": "Version metadata, release notes, Blob CSP compatibility, final verification and commit/push",
       "inputs": "User explicitly requests pushing accumulated C140\u2013C142 changes"
+    },
+    {
+      "id": "C144",
+      "agent": "codex",
+      "title": "ARM-only releases, standalone Settings, Delete label and aligned updater preview",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "Release policy/validators, lifecycle presentation, Edit label and updater layout/dev preview",
+      "inputs": "User requests removing Intel, isolated Settings, Delete label and temporary available-version design preview"
+    },
+    {
+      "id": "C145",
+      "agent": "codex",
+      "title": "Remove updater mock and normalize inline logs/folder actions",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "Updater state rendering, logs layout, folder styles, tooltip positioning and focused regressions",
+      "inputs": "User accepts updater layout and requests mock removal, Days-inline logs icon and consistent folder hover"
+    },
+    {
+      "id": "C146",
+      "agent": "codex",
+      "title": "Audit equivalent controls and prevent recurring hover/tooltip issues",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "Shared Button/ToolHint, legacy hover CSS, source guards and cross-window regressions",
+      "inputs": "User requests checking previously fixed issues across equivalent elements"
+    },
+    {
+      "id": "C147",
+      "agent": "codex",
+      "title": "Publish accepted ARM-only Settings/control polish as 1.2.2",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "Release metadata, notes and publication of C144\u2013C146",
+      "inputs": "User requests push and leaves permission flow unchanged"
     }
   ],
   "allocation": "Codex sole active client; external Antigravity and Copilot inactive; preserve historical authorship.",
@@ -5746,7 +5786,11 @@
       "C140",
       "C141",
       "C142",
-      "C143"
+      "C143",
+      "C144",
+      "C145",
+      "C146",
+      "C147"
     ],
     "copilot": []
   },

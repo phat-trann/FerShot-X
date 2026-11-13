@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "id": "20261113T133437-codex-C144-6e86da82",
+  "created_at": "2026-11-13T13:34:37.405515+07:00",
+  "agent": "codex",
+  "request": "C144-arm-settings-update-preview",
+  "task": "C144",
+  "completion": "done",
+  "summary": "ARM-only release validation, per-window presentation, Delete tool label and aligned updater rows with disabled DEV preview",
+  "files": [
+    ".github/workflows/release.yml",
+    "scripts/macos_signing.py",
+    "scripts/verify_update_manifest.py",
+    "src-tauri/src/lifecycle.rs",
+    "src/features/editor/konva/KonvaWorkbench.tsx",
+    "src/features/updater/Updater.tsx",
+    "src/features/updater/updater.css",
+    "tests/e2e/codex-c144.spec.ts",
+    "docs/agents/codex/C144-arm-settings-update-preview.md"
+  ],
+  "file_sha256": {
+    ".github/workflows/release.yml": "d45cff1c6a9a4b97151fad3b650f1fb7b58b987a20b90e08db50faa2c158f7c8",
+    "scripts/macos_signing.py": "643685ecd87a2a965db7ce7b33e3a6f08b4529f63b32800194f3917380ae5361",
+    "scripts/verify_update_manifest.py": "12f0e11cc34dc231ea292223d302c70922938832d4f267545ad13c30fe5a1e08",
+    "src-tauri/src/lifecycle.rs": "9e8e606d7c99934d6277e5ea02b85e06abd65ba6a7551fcd61c662230e3c4d55",
+    "src/features/editor/konva/KonvaWorkbench.tsx": "52196ae40744bbb2f6d33059638e7d07b9e9c978c052001309e6d07619f546b4",
+    "src/features/updater/Updater.tsx": "5d924ef6920420d12f4cd4f2b60310c11415d886e7184b8c76dae167e4afa905",
+    "src/features/updater/updater.css": "746af5fb98d4168cd0e5246a695c2ad3b85c539adbfd9c1c5e76d0d541c83f4b",
+    "tests/e2e/codex-c144.spec.ts": "a089eedef4099e213503568435a0c4a09b4ca15a7c82eaab0f3ba576b52c2fc6",
+    "docs/agents/codex/C144-arm-settings-update-preview.md": "f492e36fbcf2e480f0d693db3686f6071a1e854706a5c77ece584bbfb209f277"
+  },
+  "checks": [
+    "TypeScript; 21 Python cases; 2 browser cases; YAML ARM-only assertions; screenshot inspected"
+  ],
+  "risks": [
+    "Native presentation requires installed verification; DEV mock temporary and non-installable; no build/publication"
+  ],
+  "review": "pending"
+}

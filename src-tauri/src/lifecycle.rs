@@ -41,8 +41,7 @@ fn center_on_active_display(window:&tauri::WebviewWindow)->tauri::Result<()>{
 }
 /// Every product window opens centered in the active display's usable area.
 pub fn bring_to_front(window:&tauri::WebviewWindow)->tauri::Result<()> {
-    #[cfg(target_os="macos")]
-    window.app_handle().show()?;
+    // Show only this view. AppHandle::show unhides every retained macOS window.
     window.unminimize()?;
     center_on_active_display(window)?;
     window.show()?;

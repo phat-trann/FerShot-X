@@ -93,7 +93,6 @@
 
 .fershot-color-format-controls__button:not(:disabled):hover {
   background-color: var(--fershot-button-hover-bg, #383846);
-  border-color: var(--fershot-accent, #4f80ff);
 }
 
 .fershot-color-format-controls__button:disabled {

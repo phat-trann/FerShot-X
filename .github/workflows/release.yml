@@ -75,7 +75,7 @@ jobs:
       - uses: dtolnay/rust-toolchain@stable
         if: steps.release_guard.outputs.publish == 'true'
         with:
-          targets: aarch64-apple-darwin,x86_64-apple-darwin
+          targets: aarch64-apple-darwin
       - name: Cache Rust dependencies and build outputs
         if: steps.release_guard.outputs.publish == 'true'
         uses: actions/cache@v4
@@ -116,37 +116,15 @@ jobs:
           releaseCommitish: ${{ vars.UPDATER_RELEASE_REF || github.sha }}
           tagName: v__VERSION__
           releaseName: FerShot X v__VERSION__
-          releaseBody: 'Choose aarch64 for Apple Silicon (M-series) or x64 for Intel. Verification candidate; manual acceptance pending. Tauri-signed updates; macOS identity follows release configuration; not notarized. Source commit: ${{ github.sha }}. See docs/releases.'
+          releaseBody: 'Apple Silicon (M-series) only. Verification candidate; manual acceptance pending. Tauri-signed updates; macOS identity follows release configuration; not notarized. Source commit: ${{ github.sha }}. See docs/releases.'
           releaseDraft: true
           prerelease: false
           uploadUpdaterJson: true
           args: --target aarch64-apple-darwin --bundles app,dmg --config src-tauri/tauri.updater.generated.json
-      - name: Build and upload Intel
-        uses: tauri-apps/tauri-action@v1
-        if: steps.release_guard.outputs.publish == 'true'
-        id: tauri_intel
-        env:
-          GITHUB_TOKEN: ${{ secrets.UPDATER_RELEASE_TOKEN || secrets.GITHUB_TOKEN }}
-          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
-          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
-          RUSTFLAGS: -D warnings
-        with:
-          owner: ${{ env.RELEASE_OWNER }}
-          repo: ${{ env.RELEASE_REPO }}
-          releaseCommitish: ${{ vars.UPDATER_RELEASE_REF || github.sha }}
-          releaseId: ${{ steps.tauri_arm.outputs.releaseId }}
-          tagName: v__VERSION__
-          releaseName: FerShot X v__VERSION__
-          releaseBody: 'Choose aarch64 for Apple Silicon (M-series) or x64 for Intel. Verification candidate; manual acceptance pending. Tauri-signed updates; macOS identity follows release configuration; not notarized. Source commit: ${{ github.sha }}. See docs/releases.'
-          releaseDraft: true
-          prerelease: false
-          uploadUpdaterJson: true
-          args: --target x86_64-apple-darwin --bundles app,dmg --config src-tauri/tauri.updater.generated.json
-      - name: Verify both architecture-specific app certificates
+      - name: Verify Apple Silicon app certificate
         if: steps.release_guard.outputs.publish == 'true'
         run: |
           python3 scripts/macos_signing.py verify --architecture arm64 --app "src-tauri/target/aarch64-apple-darwin/release/bundle/macos/FerShot X.app"
-          python3 scripts/macos_signing.py verify --architecture x86_64 --app "src-tauri/target/x86_64-apple-darwin/release/bundle/macos/FerShot X.app"
       - name: Verify complete updater manifest before publishing
         if: steps.release_guard.outputs.publish == 'true'
         env:
@@ -157,8 +135,8 @@ jobs:
           mkdir -p artifacts/release-check
           gh release download "$RELEASE_TAG" --repo "$RELEASE_OWNER/$RELEASE_REPO" --pattern latest.json --pattern '*.app.tar.gz' --dir artifacts/release-check
           gh api "repos/$RELEASE_OWNER/$RELEASE_REPO/releases/$RELEASE_ID" > artifacts/release-check/release.json
-          python3 scripts/verify_update_manifest.py artifacts/release-check/latest.json --tag "$RELEASE_TAG" --repository "$RELEASE_OWNER/$RELEASE_REPO" --assets-dir artifacts/release-check --public-key-config src-tauri/tauri.updater.generated.json --release-metadata artifacts/release-check/release.json --require-split
-          python3 scripts/macos_signing.py verify-archives --assets artifacts/release-check --manifest artifacts/release-check/latest.json
+          python3 scripts/verify_update_manifest.py artifacts/release-check/latest.json --tag "$RELEASE_TAG" --repository "$RELEASE_OWNER/$RELEASE_REPO" --assets-dir artifacts/release-check --public-key-config src-tauri/tauri.updater.generated.json --release-metadata artifacts/release-check/release.json --arm64-only
+          python3 scripts/macos_signing.py verify-archives --assets artifacts/release-check --manifest artifacts/release-check/latest.json --architecture arm64
           gh release upload "$RELEASE_TAG" artifacts/release-check/latest.json --repo "$RELEASE_OWNER/$RELEASE_REPO" --clobber
           gh release edit "$RELEASE_TAG" --repo "$RELEASE_OWNER/$RELEASE_REPO" --draft=false --latest
       - name: Clean up temporary signing keychain

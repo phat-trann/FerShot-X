@@ -1,13 +1,13 @@
-# FerShot X 1.2.1
+# FerShot X 1.2.2
 
 Capture, annotate and share screenshots from your Mac’s menu bar. Keep editable Local drafts or upload to your own FTP server and copy a ready-to-share link.
 
-**Requires macOS 12 or later.** Available for Apple Silicon and Intel Macs.
+**Requires macOS 12 or later and Apple Silicon (M-series).** Older releases include Intel builds; new releases target Apple Silicon only.
 
 ## Install
 
 1. Download the latest `.dmg` from [Releases](https://github.com/phat-trann/FerShot-X/releases/latest).
-   For releases with separate downloads, choose **aarch64** for Apple Silicon (M-series), or **x64** for Intel. Version 1.2.0 uses a Universal download.
+   Choose the **aarch64** download for Apple Silicon (M-series). Older Universal/Intel assets remain available in their original releases.
 2. Open it and move **FerShot X** into **Applications**.
 3. Launch FerShot X. Library opens first; the menu-bar icon provides capture actions and Settings.
 4. Allow **Screen Recording** when prompted. Scrolling capture also needs **Accessibility** access in System Settings → Privacy & Security.
@@ -94,4 +94,4 @@ No placeholder screenshots are displayed until these files are supplied.
 
 ## Development and release notes
 
-See [development instructions](docs/DEVELOPMENT.md), [1.2.1 release notes](docs/releases/1.2.1.md) and [updater configuration](docs/releases/UPDATES.md). UI conventions are documented in the [interface system](docs/design/INTERFACE.md). Third-party notices are in [docs/third-party](docs/third-party).
+See [development instructions](docs/DEVELOPMENT.md), [1.2.2 release notes](docs/releases/1.2.2.md) and [updater configuration](docs/releases/UPDATES.md). UI conventions are documented in the [interface system](docs/design/INTERFACE.md). Third-party notices are in [docs/third-party](docs/third-party).

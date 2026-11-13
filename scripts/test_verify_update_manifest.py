@@ -47,4 +47,10 @@ class ManifestTests(unittest.TestCase):
  def test_missing_split_target_is_rejected(self):
   value,meta=self.fixture();normalize_asset_urls(value,meta,TAG,REPO);value["platforms"].pop("darwin-x86_64")
   with self.assertRaises(ValueError):verify(value,TAG,REPO,True)
+ def test_arm_only_release_rejects_intel_and_accepts_matching_alias(self):
+  value,meta=self.fixture();normalize_asset_urls(value,meta,TAG,REPO)
+  with self.assertRaises(ValueError):verify(value,TAG,REPO,targets=["darwin-aarch64"])
+  value["platforms"]={"darwin-aarch64":value["platforms"]["darwin-aarch64"]}
+  value["platforms"]["darwin-aarch64-app"]=copy.deepcopy(value["platforms"]["darwin-aarch64"])
+  self.assertTrue(verify(value,TAG,REPO,targets=["darwin-aarch64"]))
 if __name__=="__main__":unittest.main()

@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "id": "20261113T134454-codex-C146-f12e8302",
+  "created_at": "2026-11-13T13:44:54.529509+07:00",
+  "agent": "codex",
+  "request": "C146-equivalent-control-regressions",
+  "task": "C146",
+  "completion": "done",
+  "summary": "Audit equivalent controls; enforce shared button hover/opacity, preserve tooltip child contracts and add cross-window regression guards",
+  "files": [
+    "src/components/ui/button.css",
+    "src/components/ui/tool-hint.tsx",
+    "src/components/ui/tool-hint.test.tsx",
+    "src/components/ui/design-system.test.ts",
+    "src/features/color-format-controls/ColorFormatControls.css",
+    "src/features/source-restore-controls/SourceRestoreControls.css",
+    "tests/e2e/codex-c146.spec.ts",
+    "docs/agents/codex/C146-equivalent-control-regressions.md"
+  ],
+  "file_sha256": {
+    "src/components/ui/button.css": "14db0dc625dbdfea68e7c706406633a84ed806ca6f2dfd9b10c79045718ae831",
+    "src/components/ui/tool-hint.tsx": "8e6601447bf8a1adf559a1dbcbb0617590ca08c274b7a43ea79f4586943cb171",
+    "src/components/ui/tool-hint.test.tsx": "7dcfaf029395bcab61c138e0252e78b6fac5e8420574c2efb5956c93558f30bb",
+    "src/components/ui/design-system.test.ts": "bfa6c78f6e6c68b7893295b7453441bf99061d5a2be511297473f0ebd8be2236",
+    "src/features/color-format-controls/ColorFormatControls.css": "92d29b09307a1c56dea87bff480f8c3c96165e537db834c7d338e28ac62e1c60",
+    "src/features/source-restore-controls/SourceRestoreControls.css": "1da06ea4199c87c68c60e4663430c096adc0496e8fc08c96b8ca52182e9055fd",
+    "tests/e2e/codex-c146.spec.ts": "f92b61582508118d5dfba93499d8c7db2bf201a1847c2438c116674141dd0e25",
+    "docs/agents/codex/C146-equivalent-control-regressions.md": "f7b29e12a56970666249791e3859e004b95bf035016a7ee7d016c3d7aee3c1f0"
+  },
+  "checks": [
+    "TypeScript; full 419 unit cases; 8 browser regressions across Settings/Library/Edit; version and whitespace checks"
+  ],
+  "risks": [
+    "No build/native/server actions or publication; installed appearance/window behavior remains manual acceptance"
+  ],
+  "review": "pending"
+}

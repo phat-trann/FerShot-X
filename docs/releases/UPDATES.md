@@ -1,5 +1,9 @@
 # FerShot X in-app updates
 
+## Current releases: Apple Silicon only
+
+The user has discontinued Intel builds. Version 1.2.2 and later build only `aarch64-apple-darwin`, publishes only `darwin-aarch64` (and its matching installer alias), and verifies that the signed archive contains only arm64. Existing Intel/Universal releases remain immutable. Intel clients have no matching new update target. Historical split-release notes below describe 1.2.1. No new keys or endpoint changes are required.
+
 Current release CI requires the configured persistent **FerShot X signing certificate**, without Apple notarization. Update archives additionally require authentic Tauri/minisign signatures. Local builds default to ad-hoc signing; CI never falls back to it. Preserve both the certificate and updater keypair across releases.
 
 ## Already configured

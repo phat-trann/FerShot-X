@@ -183,7 +183,7 @@ def verify_app(env, path, app, run=command, expected_architectures=None):
         verify_binary(app, folder, state, run, architecture)
 
 
-def verify_archives(env, path, assets, run=command, manifest=None):
+def verify_archives(env, path, assets, run=command, manifest=None, targets=None):
     ci_only(env)
     archives = list(Path(assets).glob("*.app.tar.gz"))
     if not archives:
@@ -191,13 +191,13 @@ def verify_archives(env, path, assets, run=command, manifest=None):
     expected = {}
     if manifest is not None:
         value = json.loads(Path(manifest).read_text())
-        for target, arch in [("darwin-aarch64", "arm64"), ("darwin-x86_64", "x86_64")]:
+        for target, arch in targets or [("darwin-aarch64", "arm64"), ("darwin-x86_64", "x86_64")]:
             name = unquote(urlparse(value["platforms"][target]["url"]).path.rsplit("/", 1)[-1])
             if not name or Path(name).name != name or "/" in name or "\\" in name or name in expected:
                 raise SigningFailure("Split updater archives must have distinct safe asset names.")
             expected[name] = {arch}
         if {archive.name for archive in archives} != set(expected):
-            raise SigningFailure("Downloaded updater archives do not match both manifest targets.")
+            raise SigningFailure("Downloaded updater archives do not match the expected manifest targets.")
     for archive in archives:
         with tempfile.TemporaryDirectory(prefix="fershot-verify-", dir=env["RUNNER_TEMP"]) as folder:
             with tarfile.open(archive) as stream:
@@ -229,7 +229,7 @@ def main():
             elif args.action == "verify" and args.app:
                 verify_app(env, state, args.app, expected_architectures={args.architecture} if args.architecture else None)
             elif args.action == "verify-archives" and args.assets:
-                verify_archives(env, state, args.assets, manifest=args.manifest)
+                verify_archives(env, state, args.assets, manifest=args.manifest, targets=[("darwin-aarch64", "arm64")] if args.architecture == "arm64" else None)
             else:
                 raise SigningFailure("Missing app/assets argument.")
         print("macOS signing step completed: " + args.action)

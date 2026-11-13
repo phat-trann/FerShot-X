@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "id": "20261113T114744-codex-C123-818bfbbd",
+  "created_at": "2026-11-13T11:47:44.272279+07:00",
+  "agent": "codex",
+  "request": "C123-editor-flat-tools-color-crop",
+  "task": "C123",
+  "completion": "done",
+  "summary": "Flatten idle Edit tools, refine crop/resize spacing and restore full square color picker.",
+  "files": [
+    "AGENTS.md",
+    "coordination/build-tasks.json",
+    "docs/design/MACOS.md",
+    "docs/design/INTERFACE.md",
+    "src/Workspace.css",
+    "src/components/EditorImageStatus.tsx",
+    "src/components/EditorImageStatus.css",
+    "src/styles/macos.css",
+    "tests/e2e/codex-c110.spec.ts",
+    "tests/e2e/codex-v1-editor.spec.ts",
+    "tests/e2e/codex-c123.spec.ts",
+    "docs/agents/codex/C123-flat-edit-tools.md",
+    "docs/releases/1.1.11.md"
+  ],
+  "file_sha256": {
+    "AGENTS.md": "67d945257f1d8c355696dcfcf4de4d9a662297b07da8605e33ca56aadf6cb049",
+    "coordination/build-tasks.json": "af69e5e54141e95c078dc4a9deb870e9b638bf4d6b78f159019ea0307ea68a66",
+    "docs/design/MACOS.md": "ec77128f99022736f7764ada106ed25dfade4186c20723dcfc03e2ba4ea93109",
+    "docs/design/INTERFACE.md": "e13bb6847aee2d98194ec0580563f5f25a8d1819fdbb771af1d48bda018fe4ff",
+    "src/Workspace.css": "02bea737f42cc1e24c176bf2bc8bd88f036e7a7d949f8f17521ede3ff8318d64",
+    "src/components/EditorImageStatus.tsx": "c154f1dc74d594341b7834b4bb875153f5af20d0f617471303c1621fcb76d9a0",
+    "src/components/EditorImageStatus.css": "dff59baf67b3b3773a894fa33910e66f0327ad76ae00b784ae8148a924cd59a8",
+    "src/styles/macos.css": "5d4285ce2abc1e06befdf5b4fcab61f93416cac9ffd6fc7a496d0d739f90ba06",
+    "tests/e2e/codex-c110.spec.ts": "21bd609ddccfbb5201e14aa4bd4b9fe023059b3d7d42701fda16be268ebdc725",
+    "tests/e2e/codex-v1-editor.spec.ts": "ec166448a754da85b1eb06cf3d8a4dbdd41a1631b6a113677a9463343811e5e7",
+    "tests/e2e/codex-c123.spec.ts": "c9401330d57fa8d67e4e0a20c30eafc0bd89dc3d9e281d40f9430c32e43f9906",
+    "docs/agents/codex/C123-flat-edit-tools.md": "0a99bac4e19b23d5a61cf2a0cd6fc0655132084afea35e9d22ac3d34229b5601",
+    "docs/releases/1.1.11.md": "5ee012a4c00ddaffec66062f8ee36d38ea995f98db7eb4278ebfa4168844315e"
+  },
+  "checks": [
+    "TypeScript and six focused browser cases passed; final enhanced hover/color/popup check passed; screenshots inspected."
+  ],
+  "risks": [
+    "Installed visual acceptance pending. No build, real OS/server operations, commit or push."
+  ],
+  "review": "pending"
+}

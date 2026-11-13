@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "id": "20261113T111005-codex-C116-7bc5e026",
+  "created_at": "2026-11-13T11:10:05.824444+07:00",
+  "agent": "codex",
+  "request": "C116-active-window-icon",
+  "task": "C116",
+  "completion": "done",
+  "summary": "Show the shared title glyph only on the active window; preserve inactive layout dimensions and title/version alignment across all routes.",
+  "files": [
+    "AGENTS.md",
+    "coordination/build-tasks.json",
+    "docs/design/MACOS.md",
+    "docs/releases/1.1.11.md",
+    "docs/agents/codex/C116-active-window-icon.md",
+    "src/styles/macos.css",
+    "tests/e2e/codex-c115.spec.ts"
+  ],
+  "file_sha256": {
+    "AGENTS.md": "1e41003da68d75279184f51ffa9cfc9e12a4d6cfe2e2e0d01d613a07cce37a63",
+    "coordination/build-tasks.json": "f87eab7a7fe9f7157d9baf476b19544da2f8cde20bc99b75b46924d2ff4a122e",
+    "docs/design/MACOS.md": "df3ff9f7de834123af6ae41f041e5df8f5ec907afb4c9aec004f5936a847f078",
+    "docs/releases/1.1.11.md": "a4221d7ce3657c8c9f1e04465c930a1d62cab92df736543f1f16fbdc626eb8c8",
+    "docs/agents/codex/C116-active-window-icon.md": "e947615c332472b98d62930c8f3e681811279bddad860dafd1019059ccafe7dd",
+    "src/styles/macos.css": "aefc3c493033517e554c600528d32ecb4ecacaad2ba7067b9206525b90827e17",
+    "tests/e2e/codex-c115.spec.ts": "9305873bf0578d9bfab1f9365646c7ecb47d2609a9e947f5a3b632ae304aa20c"
+  },
+  "checks": [
+    "Focused browser regression PASS: focus/blur glyph visibility and identical title geometry."
+  ],
+  "risks": [
+    "Local candidate awaits user acceptance. CSS-only production change; no native/TypeScript change, build, real OS action, commit or push."
+  ],
+  "review": "pending"
+}

@@ -1,3 +1,5 @@
+import { X } from "lucide-react";
+import { Button } from "../../components/ui/button";
 import { EditorChrome } from "../../components/EditorChrome";
 import React, { useEffect, useRef, useState } from "react";
 import type { ImageDocument } from "../../contracts/media";
@@ -535,7 +537,7 @@ export function DirectTransformSurface({
             ? `${displayCrop.x}, ${displayCrop.y} — ${displayCrop.width} × ${displayCrop.height} px`
             : `${displayResize.width} × ${displayResize.height} px`}
         </span>
-        <button
+        <Button icon={X} variant="secondary"
           type="button"
           onClick={() => {
             if (gesture) {
@@ -546,7 +548,7 @@ export function DirectTransformSurface({
           }}
         >
           Cancel
-        </button>
+        </Button>
       </header></EditorChrome>
 
       <div
@@ -611,7 +613,7 @@ export function DirectTransformSurface({
               }
             />
             {ALL_CROP_HANDLES.map((handle) => (
-              <button
+              <Button variant="plain"
                 key={handle}
                 type="button"
                 disabled={busy}
@@ -635,7 +637,7 @@ export function DirectTransformSurface({
             }}
           >
             {ALL_RESIZE_CORNER_HANDLES.map((handle) => (
-              <button
+              <Button variant="plain"
                 key={handle}
                 type="button"
                 disabled={busy}

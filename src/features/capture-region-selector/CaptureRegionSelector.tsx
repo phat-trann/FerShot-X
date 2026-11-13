@@ -1,3 +1,5 @@
+import { X, Check } from "lucide-react";
+import { Button } from "../../components/ui/button";
 import React, { useRef, useState, useCallback, useEffect } from "react";
 import type { ImageDocument } from "../../contracts/media";
 import type { Point } from "../../contracts/editor";
@@ -255,22 +257,22 @@ export function CaptureRegionSelector({
       </div>
 
       <footer className="fershot-region-selector__actions">
-        <button
+        <Button icon={X} variant="secondary"
           type="button"
           className="fershot-region-selector__btn"
           disabled={busy}
           onClick={onCancel}
         >
           Cancel
-        </button>
-        <button
+        </Button>
+        <Button icon={Check} variant="default"
           type="button"
           className="fershot-region-selector__btn fershot-region-selector__btn--primary"
           disabled={busy || !hasValidSelection}
           onClick={() => onConfirm(area)}
         >
           Confirm Selection
-        </button>
+        </Button>
       </footer>
     </section>
   );

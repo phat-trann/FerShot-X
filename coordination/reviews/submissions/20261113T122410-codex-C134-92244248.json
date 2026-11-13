@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "id": "20261113T122410-codex-C134-92244248",
+  "created_at": "2026-11-13T12:24:10.736948+07:00",
+  "agent": "codex",
+  "request": "C134-background-palette",
+  "task": "C134",
+  "completion": "done",
+  "summary": "Unify base/chrome/sidebar colors and raised panel surfaces through shared tokens.",
+  "files": [
+    "AGENTS.md",
+    "coordination/build-tasks.json",
+    "src/styles/tokens.css",
+    "src/styles/macos.css",
+    "tests/e2e/codex-c134.spec.ts",
+    "docs/design/INTERFACE.md",
+    "docs/design/MACOS.md",
+    "docs/agents/codex/C134-background-palette.md",
+    "docs/releases/1.1.11.md"
+  ],
+  "file_sha256": {
+    "AGENTS.md": "29fe106b4aaf44ec9c05c52353ced74c6acafd844233838aa90257a6a4d3b2d2",
+    "coordination/build-tasks.json": "f5cc2937479f04ea31c56aab94ba32a728046b58343d2bd3c3be1f15086937ff",
+    "src/styles/tokens.css": "34bbe42b8fbc100f84a3ca9ac76f04ec243c5900c3827e7fbda7f135f15e8c92",
+    "src/styles/macos.css": "8068442cd143ad7477f53102164cde4ced7beebaba390a66de9dceaa5629122c",
+    "tests/e2e/codex-c134.spec.ts": "68f490c4cb326c0636ebd42f5a3be326c244ad9a44254fc34950482418dc93cd",
+    "docs/design/INTERFACE.md": "0fadca560a8f344c9e2a66f20515ac99f8ef4516c34d39508c1fcff2d6281eda",
+    "docs/design/MACOS.md": "88617279a2fb2c51dacc53f9061caa494bfc0b4d8d0effaadaf8d777124c3929",
+    "docs/agents/codex/C134-background-palette.md": "57ef8482eea37b6deafb393e6e9591880c9ad9189ecc413930abf99dda09273e",
+    "docs/releases/1.1.11.md": "1c109fc0b149f34ddaa637c58f19e63179e086ea971b712ef791d4dd81be566e"
+  },
+  "checks": [
+    "Two injected browser palette/popup regressions passed; screenshot inspected."
+  ],
+  "risks": [
+    "Installed visual acceptance pending. No build, real OS/server actions, commit or push."
+  ],
+  "review": "pending"
+}

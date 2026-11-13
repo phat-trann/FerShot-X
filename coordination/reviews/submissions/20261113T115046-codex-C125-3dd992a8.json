@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "id": "20261113T115046-codex-C125-3dd992a8",
+  "created_at": "2026-11-13T11:50:46.411797+07:00",
+  "agent": "codex",
+  "request": "C125-full-editor-workspace",
+  "task": "C125",
+  "completion": "done",
+  "summary": "Fill Edit workspace beneath chrome without inset padding or fixed-aspect frame; remove obsolete crop fit allowances.",
+  "files": [
+    "AGENTS.md",
+    "coordination/build-tasks.json",
+    "docs/design/MACOS.md",
+    "docs/design/INTERFACE.md",
+    "src/Workspace.tsx",
+    "src/Workspace.css",
+    "src/Workspace.direct-tools.tsx",
+    "tests/e2e/codex-v1-editor.spec.ts",
+    "tests/e2e/codex-c125.spec.ts",
+    "docs/agents/codex/C125-full-editor-workspace.md",
+    "docs/releases/1.1.11.md"
+  ],
+  "file_sha256": {
+    "AGENTS.md": "2202d1a8f3e59a5fbdfaad497f5f2274fadac98bc48f7426ccf98d5f3277c313",
+    "coordination/build-tasks.json": "99142d9353e442f4cd173a2277d4365093c60b384ded3e1fc32d5e4515febafe",
+    "docs/design/MACOS.md": "ef4fa25a08833c13647c3b6b564c9c15c3d365d845e0dcb5fcc06fdd9011681e",
+    "docs/design/INTERFACE.md": "13df49f8d64c9ff9b74aa3da0d611e4217f911045f7e9fd41e0eefe24a3429fd",
+    "src/Workspace.tsx": "2b36c0e8798da46f65b3730f8b24fa960c95e82057f9f3eb6643bfaaada09261",
+    "src/Workspace.css": "839238ef5613ce9dd923ffcd1f2f8c1b4cc78473116a7fdf263fe72ceb740049",
+    "src/Workspace.direct-tools.tsx": "cd92a481d3a1cc66c72e6766b0b316be2e0e5d5e907d8a8e13f51bc4d71e6150",
+    "tests/e2e/codex-v1-editor.spec.ts": "ff5f5891f44c28cf474ea0770d1f3448f70bf485de499e63e5f7b02f135cbd1e",
+    "tests/e2e/codex-c125.spec.ts": "586b426e59ddbd590581abdd378b115ef760e644dc976260b7df437839a16302",
+    "docs/agents/codex/C125-full-editor-workspace.md": "6a25aae1fd6933d786076e64edf38261db9ea3095121907844216b6bc1be2daa",
+    "docs/releases/1.1.11.md": "5664e79368ee23572c661c282b1c83f551a788a04d20c47284aec0e792ea2b1b"
+  },
+  "checks": [
+    "TypeScript and seven focused injected browser regressions pass; wide/tall screenshots inspected."
+  ],
+  "risks": [
+    "Native window sizing and small-image opening policy unchanged. Installed visual acceptance pending; no build, real OS/server operations, commit or push."
+  ],
+  "review": "pending"
+}

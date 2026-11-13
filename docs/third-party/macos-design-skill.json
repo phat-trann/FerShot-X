@@ -1,0 +1,14 @@
+{
+  "repository": "https://github.com/ceorkm/macos-design-skill",
+  "commit": "8f528a2364f996cd42f02a10b1b27198a74ca2a3",
+  "installed_path": ".agents/skills/macos-design",
+  "license_declared_by_upstream": "MIT (README; no separate LICENSE file provided)",
+  "files_sha256": {
+    ".gitignore": "21472abd4a73fa99e9f3f01092892df80842abaf3c23de1486472fb8be553045",
+    "README.md": "8cb18d68e8135d5fb99c15328ecd9fee751f99b90c504863015611a9c9ff9b6a",
+    "SKILL.md": "ff42e22937dca347f097102d00b87a565b81233bfa22387ec148178211fde008",
+    "references/interaction-patterns.md": "850d4162fcc0e5c90a1353fd1cae21ac8bf40cb933134dd85c0458807efcba97",
+    "references/layout-and-composition.md": "c7d56f6b43d31b13cb7b2680c0482173d8e91034567a1a3f2ac6d51f1b768605",
+    "references/visual-design.md": "07d2a69ed5b53fcc261e7c25f2a958b7c84b4df3ed6f50ebe29d77e38cfa5a2b"
+  }
+}

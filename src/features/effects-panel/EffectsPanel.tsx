@@ -1,3 +1,5 @@
+import { Sparkles } from "lucide-react";
+import { Button } from "../../components/ui/button";
 import React, { useState } from "react";
 import "./EffectsPanel.css";
 import { NativeSelect } from "../../components/ui/select";
@@ -131,8 +133,8 @@ export function EffectsPanel({
           <option value="transparentErase">Transparent erase</option>
         </NativeSelect>
       </label>
-      <fieldset disabled={busy}>
-        <legend>Image-pixel region</legend>
+      <fieldset aria-label="Image-pixel region" disabled={busy}>
+
         {(["x", "y", "width", "height"] as const).map((key) => (
           <label key={key}>
             {key}
@@ -170,9 +172,9 @@ export function EffectsPanel({
           </label>
         </>
       ) : null}
-      <button type="button" disabled={busy} onClick={apply}>
+      <Button icon={Sparkles} variant="secondary" type="button" disabled={busy} onClick={apply}>
         Apply effect
-      </button>
+      </Button>
       {error ? <p role="alert">{error}</p> : null}
     </section>
   );

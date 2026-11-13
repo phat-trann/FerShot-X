@@ -1,3 +1,5 @@
+import { Ruler, Eraser } from "lucide-react";
+import { Button } from "../../components/ui/button";
 import React from "react";
 import type { Point, Rect } from "../../contracts/editor";
 import {
@@ -185,7 +187,7 @@ export const MeasurementOverlay: React.FC<MeasurementOverlayProps> = ({
         aria-label="Measurement units"
       >
         {(["px", "pt", "both"] as const).map((mode) => (
-          <button
+          <Button icon={Ruler} variant="secondary"
             key={mode}
             type="button"
             disabled={busy}
@@ -193,12 +195,12 @@ export const MeasurementOverlay: React.FC<MeasurementOverlayProps> = ({
             onClick={() => onUnitModeChange?.(mode)}
           >
             {mode.toUpperCase()}
-          </button>
+          </Button>
         ))}
       </div>
 
       <div className="fershot-measurement-overlay__actions">
-        <button
+        <Button icon={Ruler} variant="secondary"
           type="button"
           disabled={!canImprint}
           onClick={() => {
@@ -212,11 +214,11 @@ export const MeasurementOverlay: React.FC<MeasurementOverlayProps> = ({
           }}
         >
           Imprint Dimensions
-        </button>
+        </Button>
         {onClear && (
-          <button type="button" disabled={busy} onClick={() => onClear()}>
+          <Button icon={Eraser} variant="secondary" type="button" disabled={busy} onClick={() => onClear()}>
             Clear Measurement
-          </button>
+          </Button>
         )}
       </div>
     </section>

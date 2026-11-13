@@ -1,3 +1,5 @@
+import { Copy, Save } from "lucide-react";
+import { Button } from "../../components/ui/button";
 import React, { useState } from "react";
 import type { ImageDocument } from "../../contracts/media";
 import "./LocalOutputWorkspace.css";
@@ -55,12 +57,12 @@ export function LocalOutputWorkspace({
       aria-label="Local output workspace"
     >
       <div className="fershot-local-output-workspace__actions">
-        <button type="button" disabled={busy} onClick={onCopy}>
+        <Button icon={Copy} variant="secondary" type="button" disabled={busy} onClick={onCopy}>
           Copy Image
-        </button>
-        <button type="button" disabled={busy} onClick={onSave}>
+        </Button>
+        <Button icon={Save} variant="secondary" type="button" disabled={busy} onClick={onSave}>
           Save Image
-        </button>
+        </Button>
       </div>
       <label>
         Print scale

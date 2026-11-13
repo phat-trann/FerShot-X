@@ -1,5 +1,93 @@
 # Agent instructions
 
+## C139 user-authorized 1.2.0 publication (2026-11-13)
+
+The user explicitly requests updating and pushing the accumulated candidate as 1.2.0. This authorizes version synchronization, final renderer/native compilation and safe automated checks, commit and normal origin/main push for this release; earlier no-publication/no-native-compile gates do not block this requested release work. Do not run live capture/input/server/notification/install tests, read signing secrets, alter permissions or create local private identities. Preserve updater public key/certificate continuity and existing main-triggered release workflow. Review/stage only completed source, tests, pinned skill/provenance and documentation; exclude credentials, captures/build outputs and ignored archives. Native runtime/user acceptance remains distinct from automated compilation. No force push or manual tag creation; CI creates the release tag.
+
+## C134 consistent background colors (2026-11-13)
+
+Window bodies, headers, navigation and Library sidebar share opaque #232427. Surface aliases/material tokens reuse the common base, superseding earlier independently translucent region tints. Raised popovers/property panels consistently use #303136; inputs and selection retain #0F1216. Preserve semantic accents, authentic image colors/checkerboards, layout and interaction. No build, real OS/server actions or commit/push before user acceptance.
+
+## C131 centered opening for every window (2026-11-13)
+
+Edit, Library and Settings open/reopen centered in the work area of the display under the pointer, including retained windows previously moved. Use one native active-monitor/physical-center helper for startup, Edit sizing and foreground presentation. Re-read physical outer size after cross-display moves; preserve dimensions, focus, close/hide, renderer geometry and permissions. Add pure geometry cases without live OS input/window tests. No native compile/build or publication until authorized; source/API review is not installed multi-display acceptance.
+
+## C130 matched Library preview footers (2026-11-13)
+
+Local/FTP preview metadata footers share a fixed compact 56px height. FTP status/path/error stay on one row; truncate long text visually and retain full titles/accessibility text. Preserve Retry and all history/delete behavior. No build, real OS/server actions or commit/push before user acceptance.
+
+## C129 icon update status and explicit one-click installation (2026-11-13)
+
+Updates replaces visible up-to-date text with a green check on the check action; checking uses a spinner, with accessible state descriptions. Available versions show New version plus an inline install icon. Only an explicit user Apply action may chain official signed download, draft preparation, native busy/FTP guard, installation and restart. Background launch/daily checks never apply. Keep one controller lock across the entire chain, progress/errors and retryable busy/restart failures; never restart after failed download/install. Native action bridge accepts Apply only from existing main/preferences callers. Existing legacy separate actions remain compatible. No build, real updater installation/OS/server operations, signing changes or commit/push before user acceptance; native bridge compile and real signed-update validation remain pending.
+
+## C128 compact Resize, utility actions and display placement (2026-11-13)
+
+Resize follows the supplied compact reference: text-only segmented presets, proportional width/height and one Resize action; remove Crop Region and Cancel/close actions. Escape/outside click cancels. Specialized controls are 24px; allow this panel's text-only buttons explicitly in the source guard. Startup retry follows checkbox text; Check for Updates follows current version; Open Logs Folder is a bare icon after its row label. Library header reserves one fixed metadata line before/after decode and ellipsizes long names without moving preview geometry. Edit resolves the display under the pointer at document opening, centers within its work area using physical pixels/target scale and does not recenter on the hidden window's old display at presentation. Preserve all native permissions/credentials; no OS actions in tests. Native placement code and pure geometry cases await an authorized native compile/manual multi-display retest; no build or publication this pass.
+
+## C127 compact Updates and control-first Settings checkboxes (2026-11-13)
+
+Remove Test Notification from Settings and its renderer-only test/status subscription; preserve background native update notifications. Updates uses the existing product icon, Current version with an adjacent icon-only Check for Updates action, and actual current/new-version status below. Keep busy/error/progress feedback and explicit download/install/restart. Settings has no Done button/footer; move save/load errors into content and retain blur/unmount autosave flushing. Active Settings toggles use shared CheckboxField with checkbox-before-label DOM order and linked labels; retry actions stay outside labels. This supersedes earlier label-first switch and Done requirements only for active Settings. Preserve IPC/native gating and other app controls. No backend changes, build, real OS/server/credential actions or commit/push before user acceptance.
+
+## C126 Settings divider headings and inline icons (2026-11-13)
+
+Settings groups use left-aligned headings followed by a thin divider line; remove standalone duplicate separators. Hide routine save/clear notices and remove static explanatory messages; preserve actionable failures and essential updater/notification progress, version and install feedback. Choose Folder/Reset are labelled icon-only controls beside the read-only folder field, preserving dialogs/reset callbacks. Unsupported-startup retry becomes an icon next to its switch; keep short tooltips and accessible disabled-state context. Retain centered 420px columns, compact typography, autosave, native gating and updater behavior. No backend changes, build, real OS/server/credential actions or commit/push before user acceptance.
+
+## C125 full Edit workspace (2026-11-13)
+
+Edit's image workspace fills all available space below chrome, removing outer/stage padding and the fixed 16:9 viewport frame. Retire its dedicated ResizeObserver/width state. Keep source aspect ratio, small-image 100% opening policy, Fit, pointer-centered zoom/pan, crop confirmation, floating properties and bounded Konva rendering. Crop fits the available viewport without obsolete inline-header allowances. Native outer-window sizing is unchanged. This supersedes earlier fixed-viewport requirements only. No build, real OS/server actions or commit/push before user acceptance.
+
+## C123 flat Edit tools, crop rhythm and square color (2026-11-13)
+
+Edit tool buttons, overflow/add-image tools and crop/resize actions have transparent borders/backgrounds at rest, including selected tools; accent ink communicates selection. Hover adds a fine border and elevated surface without changing geometry; disabled controls stay quiet. Shared Settings/Library buttons remain framed. Size popover groups presets, dimensions and actions with consistent 12px vertical/8px field gaps. Editable color inputs are full-bleed 32×32px squares without padding/rounding; preserve the separate circular pointer-color readout. Keep callbacks, crop/resize keyboard confirmation, palettes, canvas geometry and accessibility. No build, real OS/server actions or commit/push before user acceptance.
+
+## C122 centered compact Settings content (2026-11-13)
+
+Save destination and FTP publishing are always-visible sections, without details/summary toggles. All Settings tabs share Hotkeys' centered 420px maximum content width, right-aligned labels and minmax(0,1fr) 50% control columns. Use local 12px UI/labels and 11px supporting text in content/footer; retain header icon/label sizing, 32px controls, current palette and contained scrolling. Shorten descriptions and folder button text while preserving accessible names, callbacks and autosave. No backend changes, build, real OS/server/credential actions or commit/push before user acceptance.
+
+## C120 immediate Settings persistence and navigation scale (2026-11-13)
+
+Remove Settings Save buttons: General/Advanced, FTP/HTTP, export basename, scroll speed and log retention persist on edits through existing IPC. Coalesce typing for 300ms; serialize writes across sections because native preference commands share an operation guard. No writes on load. Keep newer inputs/passwords intact on stale acknowledgements; clear entered passwords only after their current snapshot succeeds. Invalid input cancels queued snapshots, remains editable and blocks Done; failures stay retryable. Done flushes all sections before closing; blur/unmount flush pending work. Keep native toggles/folder dialogs serialized and updater install/restart explicit. Settings navigation icons become 28.8px (double 14.4px), labels 80% of caption size; other window titles stay unchanged. No backend changes, build, real OS/server/credential actions or commit/push before user acceptance.
+
+## C119 Local Blur presentation recovery (2026-11-13)
+
+User reports Blur disappears in Edit after reopening Local history. Foreground recovery rebuilds offscreen Blur rasters from the decoded original, alongside visible canvas recovery. Invalidate sampled caches once per presentation/focus recovery, not every zoom/pan or bounded recovery paint. Keep editable geometry/strength, manipulation hiding/resampling, original pixels and draft/export semantics. Browser evidence covers actual blurred pixels after reopen and injected offscreen backing-store loss; it does not establish the installed WKWebView failure's cause. No backend changes, build, real OS/server actions or commit/push before user acceptance.
+
+## C118 Library bulk history and action deduplication (2026-11-13)
+
+FTP selection actions include Remove history for multiple selected jobs, using ftp_remove only; never delete remote files or Local originals for this operation. Preserve remote Delete's explicit confirmation and active-upload guards. Remove duplicated preview Copy URL/Delete from FTP/Remove history and Local Remove cached copy controls; selection toolbar owns those actions in both tabs. Keep unique Edit, Refresh and Retry upload actions. Preserve partial-failure selections so successful removals are not repeated. Use the macOS adapter and retain compact controls at the 800px Library minimum. No backend changes, build, real server actions or commit/push before user acceptance.
+
+## C117 icon-only loading (2026-11-13)
+
+Shared loading placeholders show a Lucide spinner without visible Loading/Preparing text. Retain role=status and visually hidden descriptive text for accessibility. Reuse LoadingState for window, Library collection/preview and edited-preview preparation. Preserve reduced-motion behavior and all operation/status logic. Keep the local candidate/manual acceptance gate; no build or publication.
+
+## C116 active-window title icon (2026-11-13)
+
+Show the white app glyph in shared title chrome only while that window is active. Inactive/uninitialized windows hide the glyph with visibility, retaining its layout box so text/version spacing stays stable. All three routes use the existing shared appearance hook. This does not affect the menu-bar app icon, native traffic lights or packaged icon. Keep the local candidate/manual acceptance gate; no build, commit/push or real OS actions.
+
+## C115 macOS design skill (2026-11-13)
+
+Apply the project-installed [macos-design skill](.agents/skills/macos-design/SKILL.md), pinned to ceorkm/macos-design-skill commit 8f528a2364f996cd42f02a10b1b27198a74ca2a3. Read [the project adapter](docs/design/MACOS.md) before its references; explicit user decisions override generic skill defaults. Preserve exact system font, fixed dark palette, framed rounded controls, compact Settings, immediate Hotkeys, 25% Library list, native title chrome and stable 16:9 Edit canvas. Do not restore Search, auto light mode, onboarding, fake optimistic success or upload banners. Use renderer materials only on chrome/sidebar/popovers, layered shadows, inactive-window feedback, accessible loading/empty states and reduced-motion/transparency fallbacks. Do not claim desktop-native vibrancy or new cross-app dragging from CSS/injected tests. Keep original skill files byte-pinned with provenance. 1.1.11 remains local; no native/backend changes, build, commit/push or real OS/server/credential actions in this pass.
+
+## C114 immediate hotkey rows (2026-11-13)
+
+Settings Hotkeys follows the supplied seven-row reference: right-aligned labels, compact shortcut capsules, native modifier glyphs, inline clear and no ordinary Install/Remove footer. A valid recorded chord or row clear immediately invokes the existing transactional configure_shortcuts path, preserving other assignments. Only commit UI values after native acknowledgement; serialize writes and retain confirmed values on failure. Validate duplicate/reserved chords, normalize physical Key/Digit codes under Shift/Option, cancel recording on Escape/Tab/focus loss and ignore repeat/composition. Preserve conditional explicit Reset Shortcuts recovery for faulted registries only. Recorder capsules are specialized 28px controls. Native registration/persistence and startup restoration protocols stay unchanged. Keep 1.1.11 local until user acceptance; no build, commit/push or real OS shortcut/capture/server/credential actions in automated checks.
+
+## C113 compact Settings and framed actions (2026-11-13)
+
+Follow the supplied Settings screenshot for compact navigation and thin group separators without restoring fieldset frames/legends. Settings header glyphs are 14.4px (40% smaller than 24px); row gaps are 6px and section gaps 12px (half of C112). Keep 32px control targets, shared typography and window sizing. Buttons require a fine border and actual background, superseding C112 borderless actions: primary uses blue/white; neutral gray, completion green, restart amber and destructive red use framed surfaces. Match Edit icon-button surfaces while preserving selected #0F1216. No feature/backend changes. Candidate 1.1.11 remains uncommitted until user acceptance; no build, commit/push or live OS/server/credential actions.
+
+## C112 borderless groups and icon actions (2026-11-13)
+
+Remove visible fieldset frames and legend nodes; preserve native disabled-fieldset behavior and accessible group names through aria-label. Borderless groups use 24px separation without card padding; content keeps its top inset. Shared Button and dialog actions use compact borderless Edit styling with a leading Lucide icon. Define icons explicitly at call sites through the icon prop or an existing leading glyph; never infer them from runtime text. Primary actions use accent, completion success, destructive red and restart warning colors; neutral actions stay white. Keep canvas handles, Library rows and numeric status cells specialized. Update UI standards and source guards. 1.1.11 remains a local candidate awaiting user acceptance; no build, commit/push or live OS/server/credential actions.
+
+## C111 manual publication gate and form layout follow-up (2026-11-13)
+
+User now requires personal acceptance BEFORE every commit and push; this supersedes previous automatic verification-release publication authorization. Keep 1.1.11 as an uncommitted candidate until explicitly accepted. Use SwitchField for settings switches: label first, switch last in both DOM and visual order; never use row-reverse to repair inconsistent markup. Settings owns one consolidated layout stylesheet with shared token spacing, top insets, consistent field rows and rounded controls/panels. Preserve specialized canvas geometry and existing settings callbacks/IPC. Test with injected browser/native fakes only. No native build, real OS/server/credential actions, commit or push for this follow-up.
+
+## C110 unified interface system (2026-11-12)
+
+Use shared `components/ui` primitives for all controls; native button/input/select/textarea/progress tags belong only inside that library. Keep semantic HTML layout and existing native form/ref/event/IPC behavior. Interface typography uses exactly `system-ui, -apple-system, BlinkMacSystemFont, sans-serif`; annotation/export fonts remain independent. Configure font/weight/spacing/control dimensions/radii in `src/styles/tokens.css`, apply them through `src/styles/design-system.css` and follow `docs/design/INTERFACE.md`. Form controls are 32px high with 12px rounding; panels use 20px rounding. Keep circular/pill controls, canvas handles and fixed editor status geometry appropriate to their function. Preserve white/silver, #232427, #257EFE and #0F1216 with a fine selected border. No dependency upgrades or native/credential/server actions. Patch 1.1.11; existing features stay 100% USER_REPORTED, new visual changes and native update notices require user verification.
+
 ## C109 native notification delivery, cursor zoom and arrows (2026-11-12)
 
 User confirms installed 1.1.8 detects available 1.1.9 but shows no system notification. Legacy pinned notification backend returns before actual macOS submission and reports permission Granted unconditionally; its runtime failure cause remains unproven. Use modern UserNotifications on macOS through the already-locked objc2-user-notifications 0.3.2, with real authorization/submission callbacks, bounded waits off the UI thread, retained delegate and foreground Banner/List presentation. Only matching default update/test clicks open Updates. Keep the Tauri plugin for existing capture/non-macOS paths; no dependency upgrades or Swift. Add user-triggered Test Notification and enum-only status/error logs; no fake update or automatic install/restart. Preserve normal launch/daily checks and successful-version deduplication. Wheel/pinch zoom anchors document coordinates under the pointer, keeps frame batching and pan, and Fit/new documents reset camera offsets. Arrow shafts end at bounded filled head bases, without tip-protruding caps or duplicate outline strokes, consistently in preview/export. Patch 1.1.10. Existing features stay 100% USER_REPORTED accepted; these fixes/native notification delivery require retest. No live OS notification/capture/input, credential, server or permission actions in automated checks.

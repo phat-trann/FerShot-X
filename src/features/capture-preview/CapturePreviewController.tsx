@@ -1,3 +1,5 @@
+import { Pencil, Copy, Save, ScanText, Pin, Eye, X } from "lucide-react";
+import { Button } from "../../components/ui/button";
 import React, { useEffect, useRef, useState } from "react";
 import type { ImageDocument } from "../../contracts/media";
 import { clampPinScale } from "../pin/PinPreviewCard";
@@ -136,54 +138,54 @@ export function CapturePreviewController({
         role="group"
         aria-label="Post-capture actions"
       >
-        <button
+        <Button icon={Pencil} variant="default"
           type="button"
           className="fershot-capture-preview__btn fershot-capture-preview__btn--primary"
           onClick={() => runOnce(() => onEdit(document.id))}
         >
           Edit
-        </button>
-        <button
+        </Button>
+        <Button icon={Copy} variant="secondary"
           type="button"
           className="fershot-capture-preview__btn"
           onClick={() => runOnce(() => onCopy(document.id))}
         >
           Copy
-        </button>
-        <button
+        </Button>
+        <Button icon={Save} variant="secondary"
           type="button"
           className="fershot-capture-preview__btn"
           onClick={() => runOnce(() => onSave(document.id))}
         >
           Save
-        </button>
-        {onOcr && <button type="button" className="fershot-capture-preview__btn" onClick={() => runOnce(() => onOcr(document.id))}>OCR</button>}
-        <button
+        </Button>
+        {onOcr && <Button icon={ScanText} variant="secondary" type="button" className="fershot-capture-preview__btn" onClick={() => runOnce(() => onOcr(document.id))}>OCR</Button>}
+        <Button icon={Pin} variant="secondary"
           type="button"
           className="fershot-capture-preview__btn"
           onClick={() => runOnce(() => onPin(document.id))}
         >
           Pin
-        </button>
+        </Button>
         {!timerCancelled &&
           autoDismissMs !== null &&
           autoDismissMs > 0 &&
           !paused && (
-            <button
+            <Button icon={Eye} variant="secondary"
               type="button"
               className="fershot-capture-preview__btn"
               onClick={handleCancelTimer}
             >
               Keep Open
-            </button>
+            </Button>
           )}
-        <button
+        <Button icon={X} variant="secondary"
           type="button"
           className="fershot-capture-preview__btn"
           onClick={() => runOnce(() => onClose(document.id, "manual"))}
         >
           Close Preview
-        </button>
+        </Button>
       </footer>
     </section>
   );

@@ -1,3 +1,5 @@
+import { RefreshCw } from "lucide-react";
+import { Input } from "./components/ui/input";
 import {StatusMessage} from "./components/ui/status";
 import {saveLocalDraft} from "./platform/local-cache";
 import { readCaptureUploadMode } from "./platform/native";
@@ -15,7 +17,7 @@ import { Button } from "./components/ui/button";
 import { FtpFailurePanel } from "./features/ftp-failure/FtpFailurePanel";
 import { useLocalHistory } from "./Workspace.local-cache";
 import { recordDiagnostic } from "./platform/diagnostics";
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { DEFAULT_SETTINGS, type AppSettings } from "./contracts/settings";
 import { listenPreferencesChanged } from "./platform/preferences-window";
 import { DEFAULT_APP_PREFERENCES, type FerShotAppPreferences } from "./features/app-preferences";
@@ -85,9 +87,6 @@ export default function Workspace() {
   const [displayZoom,setDisplayZoom]=useState(1);
   const fitZoom=useRef(1);
   const [imageToInsert,setImageToInsert]=useState<{id:string;src:string;width:number;height:number;target:string}|undefined>();
-  const viewportHost=useRef<HTMLDivElement>(null);
-  const [viewportWidth,setViewportWidth]=useState<number>();
-  useLayoutEffect(()=>{const node=viewportHost.current;if(!node)return;const measure=()=>{const w=node.clientWidth-24,h=node.clientHeight-24;if(w>20&&h>20)setViewportWidth(Math.max(100,Math.min(w,h*16/9)));};const observer=new ResizeObserver(measure);observer.observe(node);measure();return()=>observer.disconnect();},[]);
   const picker = useRef<HTMLInputElement>(null);
   const liveImages = useRef<ImageDocument[]>([]);
   const busyRef = useRef(false);
@@ -452,22 +451,22 @@ export default function Workspace() {
              <div id="editor-annotation-tools"/>
              {originalId&&<EditorTool order={41} label="Return To Source Image"><Button variant="ghost" size="icon" disabled={busy||!originalImage} aria-label="Return to source image" title="Return To Source Image" onClick={restoreOriginal}><Undo2/></Button></EditorTool>}
             </EditorToolStrip>
-            <EditorImageStatus image={image} colorSource={pointerColor} zoom={displayZoom} busy={busy} onFit={()=>{window.dispatchEvent(new Event("fershot-editor-fit"));setZoom(fitZoom.current);}} onCrop={()=>{setTransformMode("crop");setEffectsOpen(false);}} onResize={(width,height)=>transform({resize:{width,height}})}/>
+            <EditorImageStatus image={image} colorSource={pointerColor} zoom={displayZoom} busy={busy} onFit={()=>{window.dispatchEvent(new Event("fershot-editor-fit"));setZoom(fitZoom.current);}} onResize={(width,height)=>transform({resize:{width,height}})}/>
             <span className="document-title sr-only">{image?.name}</span>
           </div>
           <div id="editor-element-options"/><div id="editor-tool-options"/>
           {(transformMode||effectsOpen)&&<p className="editor-draft-hint">Enter to apply · Esc to cancel</p>}
           <p className="sr-only" role="status">{notice||preferenceNotice}</p>
         </header>
-        {ftpQueue.error && <div className="error-banner" role="alert">{ftpQueue.error}<Button variant="ghost" size="sm" onClick={() => { void ftpQueue.refresh(); }}>Refresh FTP</Button></div>}
-        {lastUpload && lastUpload.status !== "success" && <section className="ftp-upload-banner" data-tone={lastUpload.status==="failed"?"error":"warning"} aria-label="FTP upload status"><strong>{lastUpload.status === "failed" ? "Upload failed" : "Predicted URL"}</strong><output>{lastUpload.url}</output><span>File may not be available yet</span><Button variant="ghost" size="sm" disabled={busy} onClick={() => { void ftpQueue.copy(lastUpload.url); }}>Copy URL</Button></section>}
+        {ftpQueue.error && <div className="error-banner" role="alert">{ftpQueue.error}<Button icon={RefreshCw} variant="ghost" size="sm" onClick={() => { void ftpQueue.refresh(); }}>Refresh FTP</Button></div>}
+        {lastUpload && lastUpload.status !== "success" && <section className="ftp-upload-banner" data-tone={lastUpload.status==="failed"?"error":"warning"} aria-label="FTP upload status"><strong>{lastUpload.status === "failed" ? "Upload failed" : "Predicted URL"}</strong><output>{lastUpload.url}</output><span>File may not be available yet</span><Button icon={Copy} variant="ghost" size="sm" disabled={busy} onClick={() => { void ftpQueue.copy(lastUpload.url); }}>Copy URL</Button></section>}
         {lastUpload?.status === "failed" && <FtpFailurePanel code={lastUpload.errorCode ?? null} message={lastUpload.error ?? ""} busy={busy || ftpQueue.pending}
           onRetry={() => { void ftpQueue.retry(lastUpload.id); }} />}
         {localHistory.error&&<div className="error-banner" role="alert">{localHistory.error}</div>}
         {error && <div className="error-banner" role="alert">{error}<Button variant="ghost" size="sm" onClick={() => setError("")} aria-label="Dismiss error"><X/></Button></div>}
         {partialScroll&&partialScroll.id===image?.id&&<div className="scroll-capture-notice"><StatusMessage tone="warning">{partialScroll.message}</StatusMessage><Button variant="ghost" size="icon" aria-label="Dismiss partial capture notice" onClick={()=>setPartialScroll(null)}><X size={14}/></Button></div>}
-        <div className="workspace-body" ref={viewportHost}>
-        <section className={`stage ${dragging ? "dragging" : ""} ${image ? "has-image" : ""}`} aria-label="Image workspace" aria-busy={busy} style={{width:viewportWidth,aspectRatio:"16 / 9"}}
+        <div className="workspace-body">
+        <section className={`stage ${dragging ? "dragging" : ""} ${image ? "has-image" : ""}`} aria-label="Image workspace" aria-busy={busy}
           onDragOver={(event) => { event.preventDefault(); setDragging(true); }} onDragLeave={() => setDragging(false)}
           onDrop={(event) => { event.preventDefault(); setDragging(false); void openFiles(Array.from(event.dataTransfer.files)); }}>
           {image&&<div className="image-stage">
@@ -479,7 +478,7 @@ export default function Workspace() {
         </section>
         </div>
       </main>
-      <input ref={picker} type="file" accept="image/png,image/jpeg,image/webp,image/gif" multiple hidden onChange={(event) => { void openFiles(Array.from(event.target.files ?? [])); }} />
+      <Input ref={picker} type="file" accept="image/png,image/jpeg,image/webp,image/gif" multiple hidden onChange={(event) => { void openFiles(Array.from(event.target.files ?? [])); }} />
     </div></EditorToolbarProvider>
   );
 }

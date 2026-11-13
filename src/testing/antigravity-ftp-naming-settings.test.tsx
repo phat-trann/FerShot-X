@@ -60,16 +60,12 @@ describe("WorkspaceFtpSettings namingMode & save regressions (A213)", () => {
 
     // Old profile without namingMode defaults to "random"
     expect(select.value).toBe("random");
-    expect(
-      screen.getByText(/Unique random filename\./),
-    ).toBeTruthy();
+    expect(screen.queryByText(/Unique random filename\./)).toBeNull();
 
     // Switch to "timestamp" and save with blank password
     fireEvent.change(select, { target: { value: "timestamp" } });
     expect(select.value).toBe("timestamp");
-    expect(
-      screen.getByText(/Local timestamp: DDHHmmssN\./),
-    ).toBeTruthy();
+    expect(screen.queryByText(/Local timestamp: DDHHmmssN\./)).toBeNull();
 
     const form = select.closest("form")!;
     fireEvent.submit(form);
@@ -90,9 +86,7 @@ describe("WorkspaceFtpSettings namingMode & save regressions (A213)", () => {
       });
     });
 
-    expect(screen.getByRole("status",{name:"FTP settings status"}).textContent).toContain(
-      "FTP settings saved.",
-    );
+    expect(screen.queryByText("FTP settings saved.")).toBeNull();
 
     // Switch back to "random" and save again; blank password still remains null
     fireEvent.change(select, { target: { value: "random" } });
@@ -115,7 +109,7 @@ describe("WorkspaceFtpSettings namingMode & save regressions (A213)", () => {
     });
   });
 
-  it("disables fieldset changes while save is pending and prevents duplicate submissions", async () => {
+  it("keeps fields editable while writes are pending and prevents duplicate submissions", async () => {
     const initialSettings: FtpSettings = {
       host: "ftp.example.invalid",
       port: 21,
@@ -154,10 +148,8 @@ describe("WorkspaceFtpSettings namingMode & save regressions (A213)", () => {
     fireEvent.change(select, { target: { value: "timestamp" } });
     fireEvent.submit(form);
 
-    await waitFor(() => {
-      expect(fieldset.disabled).toBe(true);
-    });
-    expect(screen.getByRole("button", { name: "Saving…" })).toBeTruthy();
+    await waitFor(() => expect(ipcMocks.invoke.mock.calls.filter(([cmd])=>cmd==="ftp_save_settings")).toHaveLength(1));
+    expect(fieldset.disabled).toBe(false);
 
     // Attempting a second submit while pending must be ignored
     fireEvent.submit(form);
@@ -173,7 +165,7 @@ describe("WorkspaceFtpSettings namingMode & save regressions (A213)", () => {
     await waitFor(() => {
       expect(fieldset.disabled).toBe(false);
     });
-    expect(screen.getByRole("button", { name: "Save FTP settings" })).toBeTruthy();
+    expect(screen.queryByRole("button", { name: "Save FTP settings" })).toBeNull();
     expect(select.value).toBe("timestamp");
   });
 
@@ -231,9 +223,8 @@ describe("WorkspaceFtpSettings namingMode & save regressions (A213)", () => {
     fireEvent.submit(form);
 
     await waitFor(() => {
-      expect(screen.getByRole("status",{name:"FTP settings status"}).textContent).toContain(
-        "FTP settings saved.",
-      );
+      expect(ipcMocks.invoke.mock.calls.filter(([cmd])=>cmd==="ftp_save_settings")).toHaveLength(2);
+      expect(screen.queryByRole("alert",{name:"FTP settings status"})).toBeNull();
     });
     expect(select.value).toBe("timestamp");
 

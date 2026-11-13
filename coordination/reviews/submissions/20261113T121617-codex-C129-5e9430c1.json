@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "id": "20261113T121617-codex-C129-5e9430c1",
+  "created_at": "2026-11-13T12:16:17.073404+07:00",
+  "agent": "codex",
+  "request": "C129-update-one-click",
+  "task": "C129",
+  "completion": "done",
+  "summary": "Icon-based update check status and explicit one-click signed download/install/restart with shared busy guard.",
+  "files": [
+    "AGENTS.md",
+    "coordination/build-tasks.json",
+    "docs/design/MACOS.md",
+    "docs/design/INTERFACE.md",
+    "src/features/updater/Updater.tsx",
+    "src/features/updater/updater.css",
+    "src/features/updater/controller.ts",
+    "src/features/updater/controller.test.ts",
+    "src-tauri/src/updates.rs",
+    "tests/e2e/codex-c127.spec.ts",
+    "tests/e2e/codex-c129.spec.ts",
+    "tests/e2e/codex-updater.spec.ts",
+    "docs/agents/codex/C129-one-click-updates.md",
+    "docs/releases/1.1.11.md"
+  ],
+  "file_sha256": {
+    "AGENTS.md": "5973a6b3a6b6b8f8107474a44c02fce380e71be75fffb446752beb00787886bf",
+    "coordination/build-tasks.json": "7ea2388066cac1addd5a3aa8726582752a8f1e2c5dfb616316e2579fdf911114",
+    "docs/design/MACOS.md": "db35f4df6e9d789deeb3c90485c680d2d80c4e21796e217cb8f3f1c06ed196f8",
+    "docs/design/INTERFACE.md": "f44d41be1389efda212d0572f11d90cfe8c8b241978d38dafec4f506b34dc7d8",
+    "src/features/updater/Updater.tsx": "ad3d50f021241df886245073e0e4be548d3a3e99092bf1d706ae6b24600fc40d",
+    "src/features/updater/updater.css": "3e3a897d01e5fdb15bcf38fe90532a9ff74c6677fd792b71dbf11ae7fdd1659d",
+    "src/features/updater/controller.ts": "4a27b70d4fcf6f15162ad517a12f8ecade8ce20d81710cc5bc9fd953a5cc91e9",
+    "src/features/updater/controller.test.ts": "6a4c4b3012c78f87d52be1b49787027111d1bdac8607569b4e7ad2adec3fa772",
+    "src-tauri/src/updates.rs": "0f287245b7fbc0c7f3218e0f512fa665b77d3bac8ab9fb3e7cc5102aa5b8ba76",
+    "tests/e2e/codex-c127.spec.ts": "ca72e733cd232479605c76779291407f40cfd9083853504a5f368c3852e7d55e",
+    "tests/e2e/codex-c129.spec.ts": "50a2e03431ca53a517df27375b30b3f78f3c20ab214b10532ac52febe516202c",
+    "tests/e2e/codex-updater.spec.ts": "2ddb3a6c7a7688622efd8addc2cc1d1a3cb8648817b2486e28f6d34ae1eb0cc9",
+    "docs/agents/codex/C129-one-click-updates.md": "47f82247bdaf712c6d7007df851913fa58f6c7d13ee1440cb3a982b1712da96d",
+    "docs/releases/1.1.11.md": "73fe3046b93ee463156de3646219d7173b6039e5db85994978e45e23cb9f928a"
+  },
+  "checks": [
+    "TypeScript, 11 controller unit tests and five final injected browser cases pass; screenshots inspected."
+  ],
+  "risks": [
+    "Native action enum not compiled and real signed update/relaunch not performed under no-build instruction. No build, actual OS/server/update install, commit or push."
+  ],
+  "review": "pending"
+}

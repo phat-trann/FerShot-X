@@ -1,3 +1,5 @@
+import { Check, LoaderCircle, PackageCheck, RotateCw } from "lucide-react";
+import { Progress } from "../../components/ui/progress";
 import {StatusMessage,type StatusTone} from "../../components/ui/status";
 import {useEffect,useState} from "react";
 import {invoke,isTauri} from "@tauri-apps/api/core";
@@ -8,6 +10,7 @@ import {CloudSync} from "lucide-react";
 import {recordDiagnostic} from "../../platform/diagnostics";
 import {APP_VERSION} from "../../app-info";
 import {Button} from "../../components/ui/button";
+import {ToolHint} from "../../components/ui/tool-hint";
 import {INITIAL_UPDATE,UpdateController,type UpdateState,type Action} from "./controller";
 import "./updater.css";
 let controller:UpdateController|undefined;
@@ -28,17 +31,22 @@ function useUpdateState(){const [state,setState]=useState<UpdateState>(INITIAL_U
 const messages:Record<UpdateState["phase"],string>={idle:"Checks at launch and daily while running.",unconfigured:"Updates are not configured in this build.",checking:"Checking for updates…",current:"You're up to date.",available:"An update is available.",downloading:"Downloading update…",downloaded:"Download verified. Ready to install.",installing:"Installing update…",installed:"Update installed. Restart to finish.",restarting:"Restarting…",error:"Update failed. Please retry."};
 const phaseTone=(phase:UpdateState["phase"]):StatusTone=>["current","downloaded","installed"].includes(phase)?"success":phase==="error"?"error":phase==="unconfigured"?"warning":"info";
 const errors={check:"Could not check GitHub Releases. Check your connection and try again.",download:"Download or signature verification failed. Check again and retry.",install:"Installation failed. Check app permissions and check again.",restart:"Restart failed. Quit and reopen FerShot X.",busy:"Finish image operations and FTP transfers before installing.",storage:"Update schedule could not be saved. Check storage and retry."};
-const noticeMessages:Record<string,string>={sending:"Waiting for macOS notification permission…",scheduled:"Notification submitted to macOS.",denied:"Enable FerShot X in System Settings → Notifications.",timeout:"Notification request timed out. Answer the macOS prompt, then retry.",unavailable:"Notifications require the installed FerShot X.app.",failed:"macOS rejected the notification. Check Notifications settings."};
-export function UpdateSettings(){const [notice,setNotice]=useState("idle"),[testing,setTesting]=useState(false);useEffect(()=>{if(!isTauri())return;let live=true,off:(()=>void)|undefined;void listen<string>("fershot-update-notification-state",e=>{if(live)setNotice(e.payload);}).then(async dispose=>{if(!live){dispose();return;}off=dispose;const value=await invoke<string>("read_update_notification_status");if(live&&typeof value==="string")setNotice(value);}).catch(()=>{});return()=>{live=false;off?.();};},[]);const state=useUpdateState();const busy=["checking","downloading","installing","restarting"].includes(state.phase);const request=(action:Action)=>{void invoke("request_update",{action}).catch(()=>setRequestError("Update request failed. Reopen Settings and retry."));};const [requestError,setRequestError]=useState("");return <fieldset className="update-settings"><legend><CloudSync size={15} aria-hidden="true"/> App updates</legend>
- <div className="preference-row"><span>Current version</span><strong>{APP_VERSION}</strong></div>
- {state.availableVersion&&<div className="preference-row"><span>Available version</span><strong>{state.availableVersion}</strong></div>}
- <StatusMessage tone={requestError?"error":phaseTone(state.phase)} className="preference-help">{requestError||messages[state.phase]}</StatusMessage>
- {state.error&&<StatusMessage tone="error" className="preference-help">{errors[state.error]}</StatusMessage>}
- {state.phase==="downloading"&&<div className="update-download"><progress aria-label="Update download progress" max={state.total||undefined} value={state.total?Math.min(state.downloaded,state.total):undefined}/><span>{(state.downloaded/1048576).toFixed(1)} MB{state.total?` / ${(state.total/1048576).toFixed(1)} MB`:""}</span></div>}
- <div className="update-actions"><Button variant="outline" size="sm" disabled={busy||state.phase==="installed"||!isTauri()} onClick={()=>{setRequestError("");request("check");}}><CloudSync size={15} aria-hidden="true"/>Check for Updates</Button>
- <Button variant="outline" size="sm" disabled={busy||testing||notice==="sending"||!isTauri()} onClick={()=>{if(testing)return;setTesting(true);setNotice("sending");void invoke("test_update_notification").then(()=>setNotice("scheduled")).catch(error=>{const code=error&&typeof error==="object"&&"code"in error?String(error.code):"";setNotice(code==="notification_denied"?"denied":code==="notification_timeout"?"timeout":code==="notification_unavailable"?"unavailable":"failed");}).finally(()=>setTesting(false));}}>Test Notification</Button>
- {state.phase==="available"&&<Button size="sm" onClick={()=>request("download")}>Download Update</Button>}
- {(state.phase==="downloaded"||state.phase==="error"&&state.error==="busy")&&<Button size="sm" onClick={()=>request("install")}>Install Update</Button>}
- {state.phase==="installed"&&<Button size="sm" onClick={()=>request("restart")}>Restart App</Button>}</div>
- {notice!=="idle"&&<StatusMessage aria-label="Notification status" tone={notice==="scheduled"?"success":notice==="sending"?"info":"warning"}>{noticeMessages[notice]??noticeMessages.failed}</StatusMessage>}
- </fieldset>;}
+export function UpdateSettings(){
+ const state=useUpdateState(),busy=["checking","downloading","installing","restarting"].includes(state.phase);
+ const [requestError,setRequestError]=useState("");
+ const request=(action:Action)=>{setRequestError("");void invoke("request_update",{action}).catch(()=>setRequestError("Update request failed. Reopen Settings and retry."));};
+ const operation=!["idle","checking","current","available"].includes(state.phase);
+ const checkIcon=state.phase==="checking"?LoaderCircle:state.phase==="current"?Check:CloudSync;
+ const applyIcon=busy?LoaderCircle:state.phase==="installed"?RotateCw:PackageCheck;
+ const applyLabel=state.phase==="installed"?"Restart App":"Install Update";
+ return <fieldset aria-label="App updates" className="update-settings">
+  <h3 className="preference-section-title">Updates</h3>
+  <img className="update-app-icon" src="/fershot-icon.png" alt="FerShot X"/>
+  <div className="preference-row"><span>Current version</span><div className="update-current-version"><strong>{APP_VERSION}</strong><ToolHint label="Check for Updates"><Button className={`settings-inline-icon update-check-icon ${state.phase==="checking"?"is-loading":""}`} data-current={state.phase==="current"?true:undefined} icon={checkIcon} aria-label="Check for Updates" aria-description={state.phase==="checking"?"Checking for updates":state.phase==="current"?"Up to date":undefined} variant="plain" size="icon" disabled={busy||state.phase==="installed"||!isTauri()} onClick={()=>request("check")}/></ToolHint></div></div>
+  {state.availableVersion&&<div className="update-version-status" role="status" aria-label="Update version status"><span>New version <strong>{state.availableVersion}</strong></span><ToolHint label={applyLabel}><Button className={`settings-inline-icon ${busy?"is-loading":""}`} icon={applyIcon} aria-label={applyLabel} variant="plain" size="icon" disabled={busy||!isTauri()||state.phase==="error"&&state.error!=="busy"} onClick={()=>request("apply")}/></ToolHint></div>}
+  {operation&&<StatusMessage tone={phaseTone(state.phase)} className="preference-help update-operation-status">{messages[state.phase]}</StatusMessage>}
+  {requestError&&<StatusMessage tone="error">{requestError}</StatusMessage>}
+  {state.error&&<StatusMessage tone="error" className="preference-help">{errors[state.error]}</StatusMessage>}
+  {state.phase==="downloading"&&<div className="update-download"><Progress aria-label="Update download progress" max={state.total||undefined} value={state.total?Math.min(state.downloaded,state.total):undefined}/><span>{(state.downloaded/1048576).toFixed(1)} MB{state.total?` / ${(state.total/1048576).toFixed(1)} MB`:""}</span></div>}
+ </fieldset>;
+}

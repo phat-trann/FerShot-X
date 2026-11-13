@@ -1,3 +1,5 @@
+import { Save, RefreshCw, Trash2 } from "lucide-react";
+import { Button } from "../../components/ui/button";
 import React, { useEffect, useRef, useState } from "react";
 import type { ImageDocument } from "../../contracts/media";
 import type { AppSettings } from "../../contracts/settings";
@@ -455,7 +457,7 @@ export const PreferencesWorkspace: React.FC<PreferencesWorkspaceProps> = ({
             External preferences changed on disk while you have unsaved edits.
           </span>
           <div className="fershot-preferences-workspace__actions">
-            <button
+            <Button icon={Save} variant="secondary"
               type="button"
               onClick={() => {
                 setBaseline(conflictSnapshot);
@@ -463,8 +465,8 @@ export const PreferencesWorkspace: React.FC<PreferencesWorkspaceProps> = ({
               }}
             >
               Keep Local Edits
-            </button>
-            <button
+            </Button>
+            <Button icon={RefreshCw} variant="secondary"
               type="button"
               onClick={() => {
                 setBaseline(conflictSnapshot);
@@ -474,7 +476,7 @@ export const PreferencesWorkspace: React.FC<PreferencesWorkspaceProps> = ({
               }}
             >
               Accept External Reload
-            </button>
+            </Button>
           </div>
         </div>
       )}
@@ -485,7 +487,7 @@ export const PreferencesWorkspace: React.FC<PreferencesWorkspaceProps> = ({
           className="fershot-preferences-workspace__banner fershot-preferences-workspace__banner--error"
         >
           <span>Save failed: {saveError}</span>
-          <button
+          <Button icon={RefreshCw} variant="secondary"
             type="button"
             disabled={saving}
             onClick={() => {
@@ -493,7 +495,7 @@ export const PreferencesWorkspace: React.FC<PreferencesWorkspaceProps> = ({
             }}
           >
             Retry Save
-          </button>
+          </Button>
         </div>
       )}
 
@@ -527,7 +529,7 @@ export const PreferencesWorkspace: React.FC<PreferencesWorkspaceProps> = ({
       />
 
       <footer className="fershot-preferences-workspace__actions">
-        <button
+        <Button icon={Save} variant="secondary"
           type="button"
           disabled={!isDirty || saving}
           onClick={() => {
@@ -535,8 +537,8 @@ export const PreferencesWorkspace: React.FC<PreferencesWorkspaceProps> = ({
           }}
         >
           {saving ? "Saving Preferences..." : "Save Preferences"}
-        </button>
-        <button
+        </Button>
+        <Button icon={Trash2} variant="secondary"
           type="button"
           disabled={!isDirty || saving}
           onClick={() => {
@@ -545,7 +547,7 @@ export const PreferencesWorkspace: React.FC<PreferencesWorkspaceProps> = ({
           }}
         >
           Discard Unsaved Changes
-        </button>
+        </Button>
       </footer>
     </div>
   );

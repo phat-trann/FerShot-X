@@ -1,0 +1,34 @@
+/* Public interface contract. Annotation geometry and canvas typography are separate. */
+body { font-family: var(--font-ui); font-size: var(--font-size-ui); line-height: var(--line-height-ui); }
+:is(.workspace,.library-window,.preferences-window) :is(button,input,select,textarea) { font-family: var(--font-ui); }
+:is(.workspace,.library-window,.preferences-window) fieldset { border: 0 !important; }
+:is(.workspace,.library-window,.preferences-window) :is([data-slot="button"]:not([data-variant="plain"]),[data-slot="input"]:not([type="file"]):not([type="color"]),[data-slot="select"]) {
+  box-sizing: border-box;
+  height: var(--control-height);
+  min-height: var(--control-height);
+  border-radius: var(--control-radius);
+  font-size: var(--font-size-ui);
+  font-weight: var(--font-weight-control);
+  line-height: 1.25;
+}
+:is(.workspace,.library-window,.preferences-window) :is([data-slot="input"]:not([type="file"]):not([type="color"]),[data-slot="select"]) {
+  padding-inline: var(--control-padding);
+  background: var(--selection);
+  border: .5px solid var(--selection-border);
+  color: var(--text);
+}
+:is(.workspace,.library-window,.preferences-window) :is([data-slot="toggle"],[role="tab"]) { border-radius: var(--control-radius); font-weight: var(--font-weight-control); }
+.library-window .library-row { border-radius: var(--radius-lg); }
+.library-window :is(.library-thumbnail,.library-preview>img) { border-radius: var(--radius-md); }
+.library-window .library-tabs { border-radius: var(--radius-lg); }
+:is(.editor-size-popover,.editor-add-menu,.editor-overflow-menu,.preference-popover,.transform-popover) { border-radius: var(--radius-lg); }
+.workspace .editor-tool-slot :is(button,[data-slot="toggle"]) { border-radius: var(--control-radius) !important; }
+.workspace .editor-overflow-row button { border-radius: var(--control-radius) !important; }
+.workspace .editor-tool-overflow > summary { border-radius: var(--control-radius); }
+.workspace .konva-element-properties { border-radius: var(--radius-lg); }
+[data-slot="alert-dialog-content"] { border-radius: var(--panel-radius); padding: var(--space-6); }
+[data-slot="input"][type="color"] { box-sizing: border-box; width: 32px; height: 32px; min-height: 32px; padding: 3px; border: .5px solid var(--selection-border); border-radius: var(--radius-sm); background: var(--selection); cursor: pointer; }
+[data-slot="input"][type="color"]::-webkit-color-swatch-wrapper { padding: 0; }
+[data-slot="input"][type="color"]::-webkit-color-swatch { border: 0; border-radius: 6px; }
+[data-slot="input"][type="color"]::-moz-color-swatch { border: 0; border-radius: 6px; }
+@media(prefers-reduced-motion:reduce) { [data-slot] { transition: none !important; } }

@@ -7,11 +7,41 @@ import { Switch } from "./switch";
 import { Checkbox } from "./checkbox";
 import { Input } from "./input";
 import { NativeSelect } from "./select";
+import { SwitchField } from "./field";
+import { Button } from "./button";
+import { Save } from "lucide-react";
+import { createRef } from "react";
 
 beforeEach(()=>vi.stubGlobal("ResizeObserver",class {observe(){}unobserve(){}disconnect(){}}));
 afterEach(()=>vi.unstubAllGlobals());
 
 describe("shared control behavior",()=>{
+  it("keeps icon actions accessible and preserves submit/disabled behavior",()=>{
+    const submit=vi.fn(event=>event.preventDefault());
+    const {rerender}=render(<form onSubmit={submit}><Button icon={Save} type="submit">Save preferences</Button></form>);
+    const action=screen.getByRole("button",{name:"Save preferences"});
+    expect(action.firstElementChild?.tagName.toLowerCase()).toBe("svg");
+    expect(action.firstElementChild).toHaveAttribute("aria-hidden","true");
+    fireEvent.click(action);expect(submit).toHaveBeenCalledOnce();
+    rerender(<form onSubmit={submit}><Button icon={Save} type="submit" disabled>Save preferences</Button></form>);
+    fireEvent.click(screen.getByRole("button",{name:"Save preferences"}));expect(submit).toHaveBeenCalledOnce();
+  });
+  it("adds icons through Slot without losing refs or duplicating child/parent handlers",()=>{
+    const parent=vi.fn(),child=vi.fn(),ref=createRef<HTMLButtonElement>();
+    render(<Button asChild icon={Save} onClick={parent} ref={ref}><button type="button" onClick={child}>Save draft</button></Button>);
+    const action=screen.getByRole("button",{name:"Save draft"});
+    expect(ref.current).toBe(action);fireEvent.click(action);
+    expect(parent).toHaveBeenCalledOnce();expect(child).toHaveBeenCalledOnce();
+    expect(action.querySelectorAll("svg")).toHaveLength(1);
+  });
+  it("places every SwitchField label before its switch and keeps label activation and disabled state",()=>{
+    const change=vi.fn();const {rerender}=render(<SwitchField label="Require FTPS" onCheckedChange={change}/>);
+    const control=screen.getByRole("switch",{name:"Require FTPS"});
+    expect(control.parentElement?.firstElementChild).toHaveTextContent("Require FTPS");
+    fireEvent.click(screen.getByText("Require FTPS"));expect(change).toHaveBeenCalledExactlyOnceWith(true);
+    rerender(<SwitchField label="Require FTPS" disabled onCheckedChange={change}/>);
+    fireEvent.click(screen.getByText("Require FTPS"));expect(change).toHaveBeenCalledOnce();expect(screen.getByRole("switch")).toBeDisabled();
+  });
   it("keeps radio grouping, checked state and callbacks",()=>{const change=vi.fn();render(<><Radio aria-label="PNG" name="format" defaultChecked/><Radio aria-label="JPEG" name="format" onChange={change}/></>);fireEvent.click(screen.getByRole("radio",{name:"JPEG"}));expect(screen.getByRole("radio",{name:"JPEG"})).toBeChecked();expect(screen.getByRole("radio",{name:"PNG"})).not.toBeChecked();expect(change).toHaveBeenCalledOnce();});
   it("keeps scalar slider callbacks and fill synchronized with controlled values",()=>{
     const change=vi.fn(),native=vi.fn();

@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "id": "20261113T123404-codex-C138-a19e028e",
+  "created_at": "2026-11-13T12:34:04.081483+07:00",
+  "agent": "codex",
+  "request": "C138-filename-select-rounding",
+  "task": "C138",
+  "completion": "done",
+  "summary": "Match Upload filename select to input 12px rounding using controlled appearance and Lucide chevron, preserving borderless style.",
+  "files": [
+    "src/Workspace.ftp.tsx",
+    "src/PreferencesWindow.css",
+    "tests/e2e/codex-c138.spec.ts",
+    "coordination/build-tasks.json"
+  ],
+  "file_sha256": {
+    "src/Workspace.ftp.tsx": "5fa3d59edceee9ddc9ff6e313c6313e230e339e409590c1d39d1b92a9b76e1e2",
+    "src/PreferencesWindow.css": "04954e82ed2383ece5d2a3aca943c1947d3218b2d8e680ba3f4c19adc81cbdad",
+    "tests/e2e/codex-c138.spec.ts": "eba317155884eddd90feb8365b124665745572b6276798b64492092577148250",
+    "coordination/build-tasks.json": "a5959478a38bad0a5a1e0190bef9122627e16bd733047ed468fe37fe8452a41f"
+  },
+  "checks": [
+    "Focused rounding/appearance/autosave browser regression passed; monthly FTP persistence regression passed; screenshot inspected."
+  ],
+  "risks": [
+    "Installed WKWebView visual acceptance pending; no build, commit or push."
+  ],
+  "review": "pending"
+}

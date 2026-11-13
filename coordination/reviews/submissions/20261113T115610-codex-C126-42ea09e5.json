@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "id": "20261113T115610-codex-C126-42ea09e5",
+  "created_at": "2026-11-13T11:56:10.918946+07:00",
+  "agent": "codex",
+  "request": "C126-settings-section-lines-icons",
+  "task": "C126",
+  "completion": "done",
+  "summary": "Add left-leading Settings section lines, quiet routine messages and inline icon-only folder/startup actions.",
+  "files": [
+    "AGENTS.md",
+    "coordination/build-tasks.json",
+    "docs/design/MACOS.md",
+    "docs/design/INTERFACE.md",
+    "src/PreferencesWindow.tsx",
+    "src/PreferencesWindow.css",
+    "src/Workspace.destination.tsx",
+    "src/Workspace.ftp.tsx",
+    "src/Workspace.logs.tsx",
+    "src/Workspace.shortcuts.tsx",
+    "src/features/capture/ScrollCaptureSettings.tsx",
+    "src/features/export-destination-panel/ExportDestinationPanel.tsx",
+    "src/features/updater/Updater.tsx",
+    "src/testing/antigravity-ftp-naming-settings.test.tsx",
+    "tests/e2e/codex-c110.spec.ts",
+    "tests/e2e/codex-c114.spec.ts",
+    "tests/e2e/codex-feedback-111.spec.ts",
+    "tests/e2e/codex-v1-settings.spec.ts",
+    "tests/e2e/codex-c126.spec.ts",
+    "docs/agents/codex/C126-settings-lines-icons.md",
+    "docs/releases/1.1.11.md"
+  ],
+  "file_sha256": {
+    "AGENTS.md": "c0816485f43f53ade4e6e7ccffb65a5177dd382ebc42d9e139cd710e48992596",
+    "coordination/build-tasks.json": "7278082948bc38c5aa3c5bdc93656b82d0bc01169988051a6e6d0904fb640bfb",
+    "docs/design/MACOS.md": "8c17b3e97624760832d9d2c45fc9d555ca2441b6dff4a72a14ba137433efa5fc",
+    "docs/design/INTERFACE.md": "21ce2cc6a35ab2c67c9438fef5cf012d204c9489462cb35b665497da16f8eafd",
+    "src/PreferencesWindow.tsx": "840913a8aa766523501737da13c4afc636270fa09f13eb2b8ad5d03720047966",
+    "src/PreferencesWindow.css": "89b9ba26cb976e4d0d6fafacd9de150204a042774fce74df14284858c236b2d1",
+    "src/Workspace.destination.tsx": "51abbc189e0b8731406171727ae4ede7353af8a498bcd74609092573d456b5f2",
+    "src/Workspace.ftp.tsx": "14a04065458688f6b3f6da295d36b99c3d9a76e1846048ceda181980ee9a1c95",
+    "src/Workspace.logs.tsx": "612199ae7e151dcaa6042e7bc878e50090dd062e6c25d784fe6197c51a86cf3f",
+    "src/Workspace.shortcuts.tsx": "8b30d7f7bfcb29c2a37033cf73f8567ff133e6fc65b66c9a4122bc7ae3e3a919",
+    "src/features/capture/ScrollCaptureSettings.tsx": "3c1c6927afdf3dc056c1b39f1f50c39a05b75a4f8ee4148fee99e74171b8a647",
+    "src/features/export-destination-panel/ExportDestinationPanel.tsx": "5294355cdff3880ce869fcad00331f3cc3b7b6d4cf89e12607135a0d599a949b",
+    "src/features/updater/Updater.tsx": "9515ff6f616edb755d0b1b9a541ae27f1ace0124506b478885414d1a650a51a6",
+    "src/testing/antigravity-ftp-naming-settings.test.tsx": "60c94baf99349acfa30bf7f0b9b5761ebf9d39cb5bfd79cea2a401b51772390b",
+    "tests/e2e/codex-c110.spec.ts": "40b82bf638e4e6db16d5e68355860af1999ab7d117011ca62fecdd7ea7ed6295",
+    "tests/e2e/codex-c114.spec.ts": "260b333b9c03bfde0ca8ae541dccdb94107a0488e9591f38da66fd700a1c67ef",
+    "tests/e2e/codex-feedback-111.spec.ts": "8677da715465e6adde656fd5f4a60c2f8b247ade1c0c4269e328ab2416e70385",
+    "tests/e2e/codex-v1-settings.spec.ts": "7de92b17fbfe0de62c9659bd1661fa76a66dd865fa9a26496ccdf61da2895649",
+    "tests/e2e/codex-c126.spec.ts": "cafa911df89303354611ba0be4cc506ba9c28519c32bd52c492b2a90d39a21eb",
+    "docs/agents/codex/C126-settings-lines-icons.md": "de431017723b0e8ad40a0bc6158c3c7459c0b036d9090cdebe4ab8c337b839be",
+    "docs/releases/1.1.11.md": "457e98ac31b2f8622ac7ee3229be3dc143f1f87959a15151d3e5059971c926fe"
+  },
+  "checks": [
+    "TypeScript and nine targeted unit tests passed; 23 browser cases passed across initial and final reruns, including updater behavior; screenshots inspected."
+  ],
+  "risks": [
+    "Installed appearance awaits user acceptance. No backend changes, build, real OS/server/credential operations, commit or push."
+  ],
+  "review": "pending"
+}

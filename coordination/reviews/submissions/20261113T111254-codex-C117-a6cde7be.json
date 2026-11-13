@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "id": "20261113T111254-codex-C117-a6cde7be",
+  "created_at": "2026-11-13T11:12:54.448247+07:00",
+  "agent": "codex",
+  "request": "C117-icon-only-loading",
+  "task": "C117",
+  "completion": "done",
+  "summary": "Replace visible loading/preparing placeholder text with shared Lucide spinner; preserve hidden accessible status descriptions and reduced-motion behavior.",
+  "files": [
+    "AGENTS.md",
+    "coordination/build-tasks.json",
+    "docs/design/MACOS.md",
+    "docs/releases/1.1.11.md",
+    "docs/agents/codex/C117-icon-only-loading.md",
+    "src/components/ui/content-state.tsx",
+    "src/Workspace.direct-tools.tsx",
+    "tests/e2e/codex-c115.spec.ts"
+  ],
+  "file_sha256": {
+    "AGENTS.md": "e63748727e07d7d3a0037f4a70551ad8cb373315f72abf631df3ace501679ee6",
+    "coordination/build-tasks.json": "7e99e60b91c417d5a278ac0ae6eb11684e431c32a41b21d0b33a771616ed3780",
+    "docs/design/MACOS.md": "3e3f2b3a5ea4ec8275cb70f880c709653dcc2457821b6ef7e4a5c0820721811a",
+    "docs/releases/1.1.11.md": "a443ae708d74926f6ac6915826a9cc4329847201b1f92efe3caf5c0c447bb413",
+    "docs/agents/codex/C117-icon-only-loading.md": "8b7ddef23914e8623c8d7f197d565715f04e10377ea247660a5c1e4817c8bf63",
+    "src/components/ui/content-state.tsx": "3fd0396a2fe1bbb5d017fc2131269d943f5267570a5f96807c1f154ec3c1892d",
+    "src/Workspace.direct-tools.tsx": "725ad5802fac0363720830c2a500823ee5389f5e9d02b608d77a7fda66c13c10",
+    "tests/e2e/codex-c115.spec.ts": "018a6b8deaffee1752032d5cde7772fb1c931f16497c8a78ff50c903bbac6f99"
+  },
+  "checks": [
+    "TypeScript PASS; two focused injected loading/material/crop browser regressions PASS."
+  ],
+  "risks": [
+    "Local 1.1.11 awaits user acceptance; no build, real OS/server action, commit or push."
+  ],
+  "review": "pending"
+}

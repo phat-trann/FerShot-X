@@ -1,3 +1,5 @@
+import { Type, ListOrdered, X } from "lucide-react";
+import { Button } from "../../components/ui/button";
 import React, { useId } from "react";
 import type {
   Annotation,
@@ -177,22 +179,22 @@ export function TextCounterControls({
     >
       <div className="fershot-text-counter__toolbar">
         <div role="group" aria-label="Annotation mode">
-          <button
+          <Button icon={Type} variant="secondary"
             type="button"
             className="fershot-text-counter__btn"
             aria-pressed={mode === "text"}
             onClick={() => onModeChange("text")}
           >
             Text Tool
-          </button>
-          <button
+          </Button>
+          <Button icon={ListOrdered} variant="secondary"
             type="button"
             className="fershot-text-counter__btn"
             aria-pressed={mode === "counter"}
             onClick={() => onModeChange("counter")}
           >
             Counter Tool
-          </button>
+          </Button>
         </div>
 
         <div className="fershot-text-counter__field">
@@ -247,21 +249,21 @@ export function TextCounterControls({
       )}
 
       <div className="fershot-text-counter__actions">
-        <button
+        <Button icon={Type} variant="default"
           type="button"
           className="fershot-text-counter__btn fershot-text-counter__btn--primary"
           disabled={!canCommit}
           onClick={handleCommit}
         >
           {mode === "text" ? "Place Text" : "Place Counter"}
-        </button>
-        <button
+        </Button>
+        <Button icon={X} variant="secondary"
           type="button"
           className="fershot-text-counter__btn"
           onClick={onCancel}
         >
           Cancel
-        </button>
+        </Button>
       </div>
 
       <ul

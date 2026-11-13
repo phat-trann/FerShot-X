@@ -1,3 +1,5 @@
+import { Camera, X, RefreshCw } from "lucide-react";
+import { Button } from "../../components/ui/button";
 import React, { useEffect, useId, useRef, useState } from "react";
 import type { CaptureMode, ImageDocument } from "../../contracts/media";
 import {
@@ -461,19 +463,19 @@ export const CaptureWorkflowController: React.FC<
         aria-label="Start capture"
       >
         {(["area", "window", "fullscreen"] as const).map((mode) => (
-          <button
+          <Button icon={Camera} variant="secondary"
             key={mode}
             type="button"
             onClick={() => void handleStartCapture(mode)}
           >
             Capture {mode}
-          </button>
+          </Button>
         ))}
         {(state.phase === "capturing" ||
           state.phase === "running-post-actions") && (
-          <button type="button" onClick={handleCancelActive}>
+          <Button icon={X} variant="secondary" type="button" onClick={handleCancelActive}>
             Cancel Workflow
-          </button>
+          </Button>
         )}
       </div>
 
@@ -493,9 +495,9 @@ export const CaptureWorkflowController: React.FC<
             {state.errorMessage}
           </span>
           {state.phase === "failed" && state.activeDocument && (
-            <button type="button" onClick={() => void handleRetryFailed()}>
+            <Button icon={RefreshCw} variant="secondary" type="button" onClick={() => void handleRetryFailed()}>
               Retry Remaining Steps
-            </button>
+            </Button>
           )}
         </div>
       )}

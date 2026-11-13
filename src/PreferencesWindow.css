@@ -1,89 +1,114 @@
-.preferences-window { --pref-bg: var(--surface); --pref-card: var(--surface-card); --pref-text: var(--text); --pref-muted: var(--muted); --pref-line: var(--border); --pref-accent: var(--accent); height: 100dvh; min-height: 490px; display: grid; grid-template-rows: auto auto minmax(0, 1fr) auto; color: var(--pref-text); background: var(--pref-bg); }
+/* Window layout; control geometry and palette come from the shared UI system. */
+.preferences-window {
+  --panel-padding: 16px;
+  --settings-row-gap: 6px;
+  --settings-section-gap: 12px;
+  --pref-bg: var(--surface);
+  --pref-card: var(--surface-card);
+  --pref-text: var(--text);
+  --pref-muted: var(--muted);
+  --pref-line: var(--border);
+  --pref-accent: var(--accent);
+  height: 100dvh;
+  min-height: 490px;
+  display: grid;
+  grid-template-rows: auto auto minmax(0,1fr);
+  overflow: hidden;
+  color: var(--text);
+  background: var(--surface);
+}
 body.preferences-page { overflow: hidden; }
-.preferences-heading { display: flex; align-items: center; justify-content: space-between; padding: 22px 30px 12px; }
-.preferences-heading h1 { margin: 0; font-size: 22px; letter-spacing: -.5px; font-weight: 650; }
-.preferences-heading p { margin: 3px 0 0; color: var(--pref-muted); font-size: 12px; }
-.preferences-heading > span { font-size: 11px; color: var(--pref-muted); }
-.preferences-tabs { display: flex; justify-content: center; gap: 8px; padding: 0 24px 15px; border-bottom: 1px solid var(--pref-line); }
-.preferences-window button { min-height: 30px; border: 1px solid var(--pref-line); border-radius: 7px; padding: 6px 13px; color: inherit; background: var(--pref-card); }
-.preferences-tabs button { flex-direction: column; gap: 4px; min-width: 82px; padding: 9px 15px; font-size: 12px; border-color: transparent; background: transparent; color: var(--pref-muted); }
-.preferences-tabs button[aria-selected="true"] { color: var(--pref-accent); background: var(--accent-subtle); background: color-mix(in srgb, var(--pref-accent) 9%, transparent); }
-.preferences-content { overflow-y: auto; padding: 22px 30px 28px; }
-.preferences-content [role="tabpanel"] { max-width: 660px; margin: 0 auto; }
-.preferences-window fieldset { min-width: 0; margin: 0 0 20px; padding: 17px 20px; background: var(--pref-card); border: 1px solid var(--pref-line); border-radius: 12px; }
-.preferences-window legend { padding: 0 6px; font-weight: 600; font-size: 12px; }
-.preferences-window label { font-size: 13px; }
-.preference-row { display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 38px; }
-.preference-row > span { flex-shrink: 0; }
-.preference-range { display: flex; align-items: center; gap: 10px; width: 260px; }
-.preference-range input { flex: 1; min-width: 70px; }
-.preference-range output { min-width: 40px; text-align: right; color: var(--pref-muted); font-variant-numeric: tabular-nums; font-size: 11px; }
-.preferences-window input[type="checkbox"], .preferences-window input[type="radio"], .preferences-window input[type="range"] { accent-color: var(--pref-accent); }
-.preferences-window input[type="checkbox"], .preferences-window input[type="radio"] { width: 15px; height: 15px; margin: 0; flex-shrink: 0; }
-.preference-check { display: flex; align-items: center; gap: 9px; min-height: 34px; }
-.preference-segment { display: flex; gap: 20px; }
-.preference-segment label { display: flex; align-items: center; gap: 7px; }
-.preference-help, .preference-info p { color: var(--pref-muted); font-size: 12px; line-height: 1.5; margin: 9px 0 0; }
-.preferences-window .preference-controls { background: var(--pref-card); border: 1px solid var(--pref-line); border-radius: 12px; padding: 15px 20px; margin-bottom: 22px; }
-.preferences-window summary { font-weight: 600; font-size: 12px; }
-.preferences-window .preference-popover .fershot-export-destination-panel { background: transparent; color: var(--pref-text); padding: 0; }
-.preferences-window .fershot-export-destination-panel__label { color: var(--pref-muted); }
-.preferences-window .fershot-export-destination-panel__folder-row { background: var(--pref-bg); border-color: var(--pref-line); }
-.preferences-window .preference-popover { position: static; width: auto; padding: 14px 0 0; box-shadow: none; background: transparent; border: 0; }
-.preferences-window .preference-popover p { color: var(--pref-muted); font-size: 11px; }
-.preferences-window section[aria-label="FTP publishing settings"] > details > summary { font-size: 17px; margin-bottom: 15px; }
-.preferences-window section[aria-label="FTP publishing settings"] p { color: var(--pref-muted); font-size: 11px; line-height: 1.6; }
-.preferences-window section[aria-label="FTP publishing settings"] form label { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 12px; }
-.preferences-window section[aria-label="FTP publishing settings"] :is(input:not([type="checkbox"]), select) { width: 310px; }
-.preference-info { border-top: 1px solid var(--pref-line); padding: 20px 5px; margin-top: 24px; font-size: 12px; }
-.preferences-footer { display: flex; align-items: center; justify-content: space-between; gap: 15px; padding: 13px 24px; border-top: 1px solid var(--pref-line); background: var(--pref-bg); }
-.preferences-footer p { margin: 0; color: var(--pref-muted); font-size: 11px; }
-.preferences-footer > div { display: flex; gap: 8px; flex-shrink: 0; }
-.preferences-window .preferences-save { color: #fff; background: var(--pref-accent); border-color: var(--pref-accent); }
-.preferences-window [role="tab"]:focus-visible, .preferences-window :is(input, select, button, summary):focus-visible { outline: 2px solid var(--pref-accent); outline-offset: 3px; }
-
-.preferences-tabs { height:auto; display:flex; border-radius:0; background:transparent; }
-.preferences-tabs button { display:flex; flex-direction:column; gap:8px; }
-.preferences-tabs button[data-state=active] { background:var(--accent-subtle); color:var(--accent); box-shadow:none; }
-.preferences-window .preference-check { display:flex; flex-direction:row-reverse; justify-content:space-between; }
-.preferences-window legend svg { display:inline-block; vertical-align:middle; margin-right:5px; }
-@media (prefers-reduced-motion: reduce) { .preferences-window * { transition-duration:0s!important; animation-duration:0s!important; } }
-@supports (background:color-mix(in srgb, black 80%, transparent)) {
- .preferences-window { background:color-mix(in srgb,var(--pref-bg) 92%,transparent); }
+.preferences-window .preferences-tabs {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: var(--control-gap);
+  height: auto;
+  min-height: 68px;
+  box-sizing: border-box;
+  padding: var(--space-4) var(--panel-padding);
+  border-bottom: .5px solid var(--border);
+  border-radius: 0;
+  background: transparent;
 }
-
-
-.preferences-window .preferences-tabs { height:auto; min-height:90px; padding:0 24px 15px; background:transparent; border-radius:0; align-items:stretch; gap:8px; }
-.preferences-window .preferences-tabs [role=tab] { min-height:72px; flex-direction:column; gap:6px; align-self:stretch; }
-
-.preferences-content { padding: var(--panel-padding); }
-.preferences-window fieldset { padding: 16px; margin-bottom: 16px; border-radius: 8px; }
-.preference-row { gap: 16px; min-height: 40px; }
-.preferences-window button:not([role="switch"]):not([role="tab"]):not([data-slot="button"]) { min-height: var(--control-height); padding: 0 12px; border-radius: var(--control-radius); font-size: 12px; }
-.preferences-footer { padding: 12px var(--panel-padding); gap: 12px; }
-.preferences-footer>div { gap: var(--control-gap); }
-
-.preferences-window { --panel-padding: 16px; }
-.preferences-window legend, .preferences-window h3, .preferences-tabs [data-state=active] { color: var(--text); }
-.preferences-window .startup-help { margin-bottom: 8px; }
-.preferences-window .startup-help button { margin-top: 4px; }
+.preferences-window .preferences-tabs [role=tab] {
+  display: flex;
+  flex: 0 1 72px;
+  min-width: 0;
+  min-height: 44px;
+  align-self: stretch;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-1);
+  border: .5px solid transparent;
+  border-radius: var(--radius-lg);
+  color: var(--muted);
+  background: transparent;
+  font-size: calc(var(--font-size-caption) * .88);
+  line-height: 1.2;
+  box-shadow: none;
+}
+.preferences-window .preferences-tabs [data-state=active] { background: var(--selection); border-color: var(--selection-border); color: var(--accent); }
+.preferences-content { --font-size-ui: 12px; --font-size-label: 12px; --font-size-caption: 11px; --font-size-heading: 12px; min-height: 0; min-width: 0; overflow-y: auto; padding: var(--space-6) var(--panel-padding); font-size: var(--font-size-ui); }
+.preferences-content [role=tabpanel] { width: 100%; max-width: 420px; margin: 0 auto; }
+.preferences-content [role=tabpanel]:not([hidden]) { display: flex; flex-direction: column; gap: var(--settings-section-gap); }
+.preferences-window fieldset,
+.preferences-window .preference-controls {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--panel-radius);
+  background: transparent;
+}
+.preferences-window fieldset { display: flex; flex-direction: column; gap: var(--settings-row-gap); }
+.preferences-window .preference-section-title { display: flex; align-items: center; gap: var(--space-2); margin: 0 0 var(--space-1); text-align: left; font-size: var(--font-size-heading); font-weight: var(--font-weight-heading); color: var(--text); }
+.preferences-window .preference-section-title::after { content: ""; flex: 1; min-width: 12px; border-top: .5px solid var(--border); }
+.preferences-window label { position: relative; font-size: var(--font-size-label); font-weight: var(--font-weight-control); }
+.preference-row { display: grid; grid-template-columns: minmax(0,1fr) 50%; align-items: center; gap: var(--form-gap); min-height: var(--control-height); }
+.preference-row > span { min-width: 0; text-align: right; }
+.preference-row > :last-child { min-width: 0; justify-self: start; }
+.preference-range { display: flex; align-items: center; gap: var(--field-gap); width: 100%; }
+.preference-range input { flex: 1; min-width: 60px; }
+.preference-range output { min-width: 48px; text-align: right; color: var(--muted); font-variant-numeric: tabular-nums; font-size: var(--font-size-caption); }
+.preference-segment { display: flex; gap: var(--form-gap); }
+.preference-segment label { display: flex; align-items: center; gap: var(--field-gap); }
+.preferences-content .ui-checkbox-field { display: grid; grid-template-columns: minmax(0,1fr) 50%; gap: var(--form-gap); min-height: var(--control-height); align-items: center; }
+.preferences-content .ui-checkbox-field-control { display: inline-flex; justify-self: end; align-items: center; gap: var(--space-2); min-height: var(--control-height); }
+.preferences-content .ui-checkbox-field-label { display: inline-flex; align-items: center; gap: var(--space-2); min-height: var(--control-height); }
+.preferences-content .ui-checkbox-field-label > label { min-width: 0; text-align: left; cursor: pointer; }
+.preferences-window .settings-inline-icon { display: inline-flex; align-items: center; justify-content: center; flex: 0 0 24px; width: 24px; min-width: 24px; height: 24px; min-height: 24px; margin: 0; padding: 4px; border: 0; border-radius: 6px; background: transparent; color: var(--text-secondary); cursor: pointer; }
+.preferences-window .settings-inline-icon:hover:not(:disabled) { color: var(--text); filter: brightness(1.15); }
+.preferences-content > .preferences-error { max-width: 420px; margin: 0 auto var(--space-3); }
+.preferences-window :is(.preference-help,.preference-info p) { margin: 0; color: var(--muted); font-size: var(--font-size-caption); line-height: var(--line-height-ui); }
+.preferences-window .preference-controls > .preference-popover { position: static; width: auto; max-width: none; margin-top: var(--space-2); padding: 0; border: 0; border-radius: 0; background: transparent; box-shadow: none; display: flex; flex-direction: column; gap: var(--settings-row-gap); }
+.preferences-window .preference-popover .fershot-export-destination-panel { background: transparent; color: var(--text); padding: 0; }
+.preferences-window .fershot-export-destination-panel__label { color: var(--text); text-align: right; font-size: var(--font-size-label); font-weight: var(--font-weight-control); }
+.preferences-window .fershot-export-destination-panel__folder-row { min-width: 0; flex-direction: row; align-items: center; padding: 0; border: 0; background: transparent; gap: var(--space-1); }
+.preferences-window .fershot-export-destination-panel__folder-display { flex: 1; width: 100%; min-width: 0; min-height: var(--control-height); box-sizing: border-box; padding: 8px 10px; background: var(--selection); border: .5px solid var(--selection-border); border-radius: var(--control-radius); font-size: var(--font-size-ui); }
+.preferences-window .fershot-export-destination-panel__folder-actions { flex-wrap: nowrap; gap: var(--space-1); }
+.preferences-window .fershot-export-destination-panel__error { grid-column: 2; }
+.preferences-window .preference-popover p { margin: 0; font-size: var(--font-size-caption); color: var(--muted); line-height: var(--line-height-ui); }
+.preferences-window .preference-popover > [data-slot="button"] { align-self: flex-end; }
+.preferences-window section[aria-label="FTP publishing settings"] form label { margin: 0; }
+.preferences-window section[aria-label="FTP publishing settings"] .ui-field-label { display: grid; grid-template-columns: minmax(0,1fr) 50%; gap: var(--form-gap); align-items: center; }
+.preferences-window section[aria-label="FTP publishing settings"] .ui-field-label > span { text-align: right; }
+.preferences-window section[aria-label="FTP publishing settings"] :is(input,select) { width: 100%; }
+.preferences-window .upload-filename-select { position: relative; display: block; min-width: 0; width: 100%; }
+.preferences-window .upload-filename-select > select.ui-select[data-slot=select][aria-label="Upload filename"] { appearance: none; -webkit-appearance: none; border: 0; border-radius: var(--control-radius); padding-right: 36px; text-align: left; }
+.preferences-window .upload-filename-select > svg { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); color: var(--text-secondary); pointer-events: none; }
+.preferences-window section[aria-label="FTP publishing settings"] p { margin: 0; overflow-wrap: anywhere; }
+.preferences-window section[aria-label="FTP publishing settings"] p { color: var(--muted); font-size: var(--font-size-caption); line-height: var(--line-height-ui); }
+.preferences-window section[aria-label="HTTPS preview authentication"] { display: flex; flex-direction: column; gap: var(--settings-row-gap); margin-top: var(--settings-section-gap); }
+.preferences-window .fershot-export-destination-panel { gap: var(--space-2); }
+.preferences-window .fershot-export-destination-panel__field { display: grid; grid-template-columns: minmax(0,1fr) 50%; align-items: start; gap: var(--form-gap); }
+.preferences-window .fershot-export-destination-panel__field > :first-child { padding-top: 8px; }
+.preferences-window .shortcut-recorder > button.shortcut-recorder__record { font-size: var(--font-size-ui); }
+.preferences-window .ui-status { margin-block: var(--space-1); }
+.preferences-window .update-download { margin-block: var(--settings-row-gap); }
+.preferences-window .update-settings { margin-top: 0; }
 @media(max-width:600px) {
- .preferences-window .preferences-tabs { padding: 0 16px 12px; gap: 4px; min-height: 76px; }
- .preferences-window .preferences-tabs [role=tab] { min-width: 0; flex: 1; min-height: 64px; padding: 6px 8px; }
- .preferences-window .preference-range { width: 200px; }
- .preferences-window .preference-row { gap: 12px; }
- .preferences-window fieldset { padding: 12px; }
- .preferences-footer { align-items: center; gap: 8px; }
- .preferences-footer p { font-size: 10px; }
- .preferences-window section[aria-label="FTP publishing settings"] :is(input:not([type="checkbox"]),select) { width: 260px; }
+  .preferences-window .preferences-tabs { gap: var(--space-1); }
+  .preferences-window .preferences-tabs [role=tab] { padding: var(--space-1); }
 }
-
-.preferences-window label { position: relative; }
-.preferences-window { overflow: hidden; }
-.preferences-content { min-height: 0; min-width: 0; }
-
-.preferences-window .preferences-tabs button[data-state=active] {
- background: var(--selection);
- border: .5px solid var(--selection-border);
- color: var(--text);
-}
+@media(prefers-reduced-motion:reduce) { .preferences-window * { transition-duration: 0s !important; animation-duration: 0s !important; } }

@@ -1,3 +1,5 @@
+import { RotateCcw } from "lucide-react";
+import { Button } from "../../components/ui/button";
 import React from "react";
 import "./SourceRestoreControls.css";
 
@@ -86,7 +88,7 @@ export function SourceRestoreControls({
       </div>
 
       <div className="fershot-source-restore-controls__actions">
-        <button
+        <Button icon={RotateCcw} variant="secondary"
           type="button"
           className="fershot-source-restore-controls__button"
           disabled={isButtonDisabled}
@@ -94,7 +96,7 @@ export function SourceRestoreControls({
           onClick={handleRestore}
         >
           Restore Original Source
-        </button>
+        </Button>
       </div>
     </section>
   );

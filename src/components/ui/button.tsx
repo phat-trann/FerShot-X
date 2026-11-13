@@ -2,6 +2,8 @@
 import * as React from "react"
 import { Slot } from "@radix-ui/react-slot"
 import { cva, type VariantProps } from "class-variance-authority"
+import type { LucideIcon } from "lucide-react"
+import "./button.css"
 
 import { cn } from "../../lib/utils"
 
@@ -10,6 +12,9 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
+        plain: "",
+        success: "text-current",
+        warning: "text-current",
         default: "bg-primary text-primary-foreground hover:bg-primary/90",
         destructive:
           "bg-destructive text-destructive-foreground hover:bg-destructive/90",
@@ -38,20 +43,25 @@ export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   asChild?: boolean
+  icon?: LucideIcon
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
+  ({ className, variant, size, asChild = false, icon: Icon, children, ...props }, ref) => {
     const Comp = asChild ? Slot : "button"
+    const glyph = Icon ? <Icon className="ui-button-icon" size={16} strokeWidth={1.75} aria-hidden="true" focusable="false" /> : null
+    const content = asChild && Icon && React.isValidElement<{ children?: React.ReactNode }>(children)
+      ? React.cloneElement(children, {}, glyph, children.props.children)
+      : asChild ? children : <>{glyph}{children}</>
     return (
       <Comp
-        className={cn(buttonVariants({ variant, size, className }))}
+        className={cn(variant === "plain" ? "ui-button-plain" : buttonVariants({ variant, size }), className)}
         ref={ref}
         data-slot="button"
         data-variant={variant ?? "default"}
         data-size={size ?? "default"}
         {...props}
-      />
+      >{content}</Comp>
     )
   }
 )

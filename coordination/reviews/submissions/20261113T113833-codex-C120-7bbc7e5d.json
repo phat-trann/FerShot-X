@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "id": "20261113T113833-codex-C120-7bbc7e5d",
+  "created_at": "2026-11-13T11:38:33.789145+07:00",
+  "agent": "codex",
+  "request": "C120-settings-autosave-header",
+  "task": "C120",
+  "completion": "done",
+  "summary": "Automatically persist Settings edits and resize navigation icons/labels.",
+  "files": [
+    "AGENTS.md",
+    "coordination/build-tasks.json",
+    "docs/design/MACOS.md",
+    "docs/design/INTERFACE.md",
+    "src/use-settings-autosave.ts",
+    "src/PreferencesWindow.tsx",
+    "src/PreferencesWindow.css",
+    "src/Workspace.ftp.tsx",
+    "src/Workspace.destination.tsx",
+    "src/Workspace.logs.tsx",
+    "src/features/capture/ScrollCaptureSettings.tsx",
+    "src/testing/codex-settings-autosave.test.tsx",
+    "src/testing/antigravity-ftp-naming-settings.test.tsx",
+    "tests/e2e/codex-c120.spec.ts",
+    "tests/e2e/codex-c110.spec.ts",
+    "tests/e2e/codex-c112.spec.ts",
+    "tests/e2e/codex-c113.spec.ts",
+    "tests/e2e/codex-v1-settings.spec.ts",
+    "tests/e2e/codex-feedback-111.spec.ts",
+    "docs/agents/codex/C120-settings-autosave.md",
+    "docs/releases/1.1.11.md"
+  ],
+  "file_sha256": {
+    "AGENTS.md": "3a3aaa98f542fd77edd89854c3baef3615978eb63cf0ebba46d1e6d518e123f5",
+    "coordination/build-tasks.json": "9d6a24292f5be71954828956c613a86f9889eb7dcd61fb81344626b73863f0ef",
+    "docs/design/MACOS.md": "22e5886d94778875689be80e38ca1a18e7a570fa2ee83f8d8f1ce27edc80d11f",
+    "docs/design/INTERFACE.md": "23341093b5294964071c403859599480997629d2abf096455abb422f94e71022",
+    "src/use-settings-autosave.ts": "eb5ae66126921f0ebaeec538ef203d0684a7e1f223b57264749fab1a9fea8837",
+    "src/PreferencesWindow.tsx": "4c7f34e53bc3a74b7cea168a1bc7285c90657bb8f5012265a4e6c063f76d9bb7",
+    "src/PreferencesWindow.css": "003ef2dbf560b5dc64615e26b7721e2a005779a133df4d68694bb1f69522c1a9",
+    "src/Workspace.ftp.tsx": "512f95b5695e2a44dc23ab98fd867207c0c464a0ef2481d6fd2ba726721f97b5",
+    "src/Workspace.destination.tsx": "d0e287dc500e3eb48b9be0e3a62159b1172ff6a09e367d9fa19286ce9fde3cea",
+    "src/Workspace.logs.tsx": "b554259bf538e925fceeb92a758dd98c9f6d3af64ff8af5c27787bec21cc3f0e",
+    "src/features/capture/ScrollCaptureSettings.tsx": "c2f15c14e8208d07616dbc93614b833440e5276252c7cf690cb95742d3741694",
+    "src/testing/codex-settings-autosave.test.tsx": "3858888cd90e8d615b6621682fd0890f47ac0b985c2898e16124403de3669027",
+    "src/testing/antigravity-ftp-naming-settings.test.tsx": "dfb9fb6642c4316c90f1adcdca680d309218bf59b9c43f5a1206944e6c8ee7da",
+    "tests/e2e/codex-c120.spec.ts": "0e6e16e71f965fbee6a607c1fa484350ef94f7f5ec21e83563c5365031003c95",
+    "tests/e2e/codex-c110.spec.ts": "c199b871540dfb2f7b644185c3c07cba5aeaa685c665ec6e06b89ae6513af25e",
+    "tests/e2e/codex-c112.spec.ts": "2e2bb8253910a48484c6ceb03d323d29442bc6c5c3d70a078391a47317518319",
+    "tests/e2e/codex-c113.spec.ts": "a02140ecf50d4f7867accfba57f0b22ed37902beb40ab6c2ec98b80a0df747a2",
+    "tests/e2e/codex-v1-settings.spec.ts": "94cd6ace7df2bdccdf6b4b59034440f45a0259067046bdfc21defd3ca9c2934e",
+    "tests/e2e/codex-feedback-111.spec.ts": "0b4fda8943226fefa95b328e0400b78dcca1e419432c852e350042b99513c40d",
+    "docs/agents/codex/C120-settings-autosave.md": "de799a3a6f012db8edc8ca6cc1e83e988f365323070b08a458a911c8e77a1824",
+    "docs/releases/1.1.11.md": "dd89fb9dfd204ce803cc9848ec97398dce001e7e2241b0c518fccbb0b05165ac"
+  },
+  "checks": [
+    "TypeScript and 17 final injected browser regressions pass; 446 unit suite passed before shared queue refinement, with nine final targeted unit checks passed; screenshots inspected."
+  ],
+  "risks": [
+    "Installed Settings appearance and persistence require user acceptance. No backend changes, build, real OS/server/credential operations, commit or push."
+  ],
+  "review": "pending"
+}

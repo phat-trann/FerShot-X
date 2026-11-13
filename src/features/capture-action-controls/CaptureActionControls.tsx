@@ -1,3 +1,5 @@
+import { Camera } from "lucide-react";
+import { Button } from "../../components/ui/button";
 import React from "react";
 import "./CaptureActionControls.css";
 
@@ -102,7 +104,7 @@ export function CaptureActionControls(
           const isButtonDisabled = disabled || !supported;
 
           return (
-            <button
+            <Button icon={Camera} variant="secondary"
               key={action.id}
               type="button"
               className="fershot-capture-action-controls__button"
@@ -122,7 +124,7 @@ export function CaptureActionControls(
               <span className="fershot-capture-action-controls__desc">
                 {action.description}
               </span>
-            </button>
+            </Button>
           );
         })}
       </div>

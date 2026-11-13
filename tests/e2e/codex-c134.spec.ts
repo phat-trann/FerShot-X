@@ -1,0 +1,7 @@
+import {expect,test} from "@playwright/test";
+import {mock} from "./helpers/v1-ipc";
+test("all windows share solid base/chrome colors and consistent raised/input surfaces",async({page})=>{
+ await mock(page);await page.goto("/");for(const selector of ['.library-window','.library-sidebar','.library-preview','.window-titlebar'])await expect(page.locator(selector)).toHaveCSS("background-color","rgb(35, 36, 39)");
+ await page.goto("/?preferences");for(const selector of ['.preferences-window','.preferences-tabs','.window-titlebar'])await expect(page.locator(selector)).toHaveCSS("background-color","rgb(35, 36, 39)");await page.getByRole("tab",{name:"Uploading",exact:true}).click();await expect(page.getByLabel("FTP host",{exact:true})).toHaveCSS("background-color","rgb(15, 18, 22)");
+ await page.goto("/?editor");const png=await page.evaluate(()=>{const c=document.createElement("canvas");c.width=400;c.height=240;return c.toDataURL().split(",")[1];});await page.locator('input[type="file"]').setInputFiles({name:"Palette.png",mimeType:"image/png",buffer:Buffer.from(png,"base64")});for(const selector of ['.workspace','.editor-chrome','.window-titlebar','.stage'])await expect(page.locator(selector)).toHaveCSS("background-color","rgb(35, 36, 39)");await page.getByRole("button",{name:"Image size",exact:true}).click();await expect(page.getByRole("region",{name:"Resize image",exact:true})).toHaveCSS("background-color","rgb(48, 49, 54)");await page.mouse.move(0,0);await page.screenshot({path:"artifacts/qa/C134-backgrounds.png",animations:"disabled"});
+});

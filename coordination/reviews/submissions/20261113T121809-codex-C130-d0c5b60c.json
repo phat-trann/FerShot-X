@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "id": "20261113T121809-codex-C130-d0c5b60c",
+  "created_at": "2026-11-13T12:18:09.939035+07:00",
+  "agent": "codex",
+  "request": "C130-library-footer-height",
+  "task": "C130",
+  "completion": "done",
+  "summary": "Match FTP and Local Library preview footer heights at 56px with inline metadata.",
+  "files": [
+    "AGENTS.md",
+    "coordination/build-tasks.json",
+    "src/LibraryWindow.css",
+    "src/LibraryWindow.tsx",
+    "tests/e2e/codex-c130.spec.ts",
+    "docs/agents/codex/C130-library-footer.md",
+    "docs/releases/1.1.11.md"
+  ],
+  "file_sha256": {
+    "AGENTS.md": "be9c992edcc2832815b5704e043ca0fc2c401b19bcea58ccd329344b3ba83f96",
+    "coordination/build-tasks.json": "80f427d1a587bd093ad6c70f4c1944f57265ab146081a8774b3f2bb62e365b5d",
+    "src/LibraryWindow.css": "c5ece5316afd40bca40fff86512948f11a71e0b9c313d2d460163cc019dfa80c",
+    "src/LibraryWindow.tsx": "36fdcf83fbabeb493cbeccb58975290f6e3c2168a666f3cac617469db8777747",
+    "tests/e2e/codex-c130.spec.ts": "efb3dbdb1b0848f5ac74a3a01a8f23a5c40fdf4b745a95938a08ddf3b916353b",
+    "docs/agents/codex/C130-library-footer.md": "528543e408717a7c2a13c76321895bea33b1c593d6368f7cd4a267944b761baa",
+    "docs/releases/1.1.11.md": "6f9ba0e6b04abb03a13a2cb0a6e01a3ac7b3387ef7d37c97ba111eaaaddea534"
+  },
+  "checks": [
+    "Injected minimum-window layout regression passed for Local/success FTP/failed FTP with long paths and Retry; screenshot inspected."
+  ],
+  "risks": [
+    "Installed appearance awaits user acceptance; no build, real server action, commit or push."
+  ],
+  "review": "pending"
+}

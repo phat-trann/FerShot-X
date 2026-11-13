@@ -1184,7 +1184,7 @@ dependencies = [
 
 [[package]]
 name = "fershot-x"
-version = "1.1.10"
+version = "1.2.0"
 dependencies = [
  "arboard",
  "base64 0.22.1",

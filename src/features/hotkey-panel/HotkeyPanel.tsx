@@ -1,3 +1,5 @@
+import { Keyboard, X, Eraser } from "lucide-react";
+import { Button } from "../../components/ui/button";
 import React, { useState } from "react";
 import { editorToolShortcuts } from "../shortcuts/editor-shortcuts";
 import "./HotkeyPanel.css";
@@ -252,7 +254,7 @@ export function HotkeyPanel({
                 {formatShortcutBinding(item.binding)}
               </kbd>
               <div className="fershot-hotkey-panel__actions">
-                <button
+                <Button icon={Keyboard} variant="secondary"
                   type="button"
                   className="fershot-hotkey-panel__btn"
                   aria-pressed={isRecording}
@@ -270,9 +272,9 @@ export function HotkeyPanel({
                   }
                 >
                   {isRecording ? "Press keys (Esc to cancel)..." : "Record"}
-                </button>
+                </Button>
                 {isRecording && (
-                  <button
+                  <Button icon={X} variant="secondary"
                     type="button"
                     className="fershot-hotkey-panel__btn"
                     aria-label={`Cancel recording for ${item.label}`}
@@ -282,9 +284,9 @@ export function HotkeyPanel({
                     }}
                   >
                     Cancel
-                  </button>
+                  </Button>
                 )}
-                <button
+                <Button icon={Eraser} variant="secondary"
                   type="button"
                   className="fershot-hotkey-panel__btn"
                   aria-label={`Clear shortcut for ${item.label}`}
@@ -297,7 +299,7 @@ export function HotkeyPanel({
                   }}
                 >
                   Clear
-                </button>
+                </Button>
               </div>
             </li>
           );

@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "id": "20261113T112131-codex-C118-ea6b3353",
+  "created_at": "2026-11-13T11:21:31.038269+07:00",
+  "agent": "codex",
+  "request": "C118-library-bulk-history",
+  "task": "C118",
+  "completion": "done",
+  "summary": "Add FTP multi-selection history removal and remove duplicated Library preview actions.",
+  "files": [
+    "AGENTS.md",
+    "coordination/build-tasks.json",
+    "docs/design/MACOS.md",
+    "src/LibraryWindow.tsx",
+    "src/styles/macos.css",
+    "tests/e2e/codex-c112.spec.ts",
+    "tests/e2e/codex-v1-editor.spec.ts",
+    "tests/e2e/codex-c118.spec.ts",
+    "docs/agents/codex/C118-library-bulk-history.md",
+    "docs/releases/1.1.11.md"
+  ],
+  "file_sha256": {
+    "AGENTS.md": "a545439fdc750bdf276906e24d2e43aac95349aa59abbcf91916940307f54423",
+    "coordination/build-tasks.json": "7d8bacc92edb14cf07c52ee9a79a3400741bed2738e844f2184bd45bdd340d9a",
+    "docs/design/MACOS.md": "5daccc4dd23ccbbe082a2a09e86b1a137c65ec4faaf4c0b6444cb3dc672336df",
+    "src/LibraryWindow.tsx": "6ad7e178189f2e183894a231c0f3300a6ae011e21a205091825e0ebf9f79adbf",
+    "src/styles/macos.css": "ac1d29e8a0bdd93e6f641c1784433c66e661a9e7e21a79846cf78dc1e250738a",
+    "tests/e2e/codex-c112.spec.ts": "fb0675547d5691dddc4325981bf9d6d32eeedaa7bd964fe293dd8f6213dbb7fa",
+    "tests/e2e/codex-v1-editor.spec.ts": "b5715147c7ac746bc35b3f3445c981ff5a9ae0e002c0759366c5bf2cc14dbfe2",
+    "tests/e2e/codex-c118.spec.ts": "21c617dab35c2f622f361d9a101f41e9bb4fbe613656de30ba15ad505aebcab9",
+    "docs/agents/codex/C118-library-bulk-history.md": "653d9a457d2252a9a92559f25065a28847338f0feed66a6068a7b9fbbe7958f5",
+    "docs/releases/1.1.11.md": "4ad7dbe3def702dae13ed3f076d831b33151194216cfa4b85c244f529a908f26"
+  },
+  "checks": [
+    "No-emit TypeScript passed; 10 focused injected browser regressions passed; compact Library screenshot inspected."
+  ],
+  "risks": [
+    "Installed-app acceptance pending. No build, real FTP operations, commit or push."
+  ],
+  "review": "pending"
+}

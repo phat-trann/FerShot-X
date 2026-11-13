@@ -1,198 +1,87 @@
-import {Button} from "../../components/ui/button";
-import React, { useState, useEffect } from "react";
+import { CircleX, LoaderCircle } from "lucide-react";
+import { Button } from "../../components/ui/button";
+import { useEffect, useState } from "react";
 import type { ShortcutBinding } from "../hotkey-panel/HotkeyPanel";
-import { formatShortcutBinding } from "../hotkey-panel/HotkeyPanel";
-import {
-  GLOBAL_ACTIONS_V2,
-  ACTION_LABELS_V2,
-  type GlobalActionIdV2,
-  type GlobalBindingsV2,
-} from "./types";
-import {
-  toNativeGlobalBindingsV2,
-} from "./codec";
+import { type GlobalActionIdV2, type GlobalBindingsV2 } from "./types";
+import { toNativeGlobalBindingsV2 } from "./codec";
 import "./GlobalShortcutsV2Panel.css";
+
+export const SHORTCUT_ROWS = [
+  ["capture-fullscreen", "Fullscreen screenshot"],
+  ["capture-area", "Area screenshot"],
+  ["capture-repeat-region", "Repeat area screenshot"],
+  ["capture-window", "Any window screenshot"],
+  ["capture-active-window", "Active window screenshot"],
+  ["capture-scrolling", "Scrolling screenshot"],
+  ["show-workspace", "Show FerShot X"],
+] as const;
 
 export interface GlobalShortcutsV2PanelProps {
   readonly value: GlobalBindingsV2;
   readonly disabled: boolean;
-  readonly onChange: (next: GlobalBindingsV2) => void;
-  readonly onApply: () => void;
-  readonly onClear: () => void;
-  readonly onSave?: () => void;
-  readonly onForget?: () => void;
+  readonly savingAction?: GlobalActionIdV2 | null;
+  readonly onChange: (next: GlobalBindingsV2, action: GlobalActionIdV2) => void;
 }
 
-const MODIFIER_ONLY_KEYS = new Set([
-  "meta",
-  "shift",
-  "alt",
-  "control",
-  "capslock",
-]);
+const MODIFIER_KEYS = new Set(["meta", "shift", "alt", "control", "capslock"]);
+const KEY_GLYPHS: Readonly<Record<string, string>> = {" ": "Space", space: "Space", arrowup: "↑", arrowdown: "↓", arrowleft: "←", arrowright: "→", enter: "↩", tab: "⇥", backspace: "⌫", delete: "⌦", home: "↖", end: "↘", pageup: "⇞", pagedown: "⇟"};
+export function formatGlobalShortcut(binding: ShortcutBinding | null): string {
+  if (!binding) return "Record Shortcut";
+  const key = KEY_GLYPHS[binding.key.toLowerCase()] ?? binding.key.toUpperCase();
+  return `${binding.ctrlKey ? "⌃" : ""}${binding.altKey ? "⌥" : ""}${binding.shiftKey ? "⇧" : ""}${binding.metaKey ? "⌘" : ""}${key}`;
+}
+function physicalKey(event: KeyboardEvent): string {
+  if (/^Key[A-Z]$/.test(event.code)) return event.code.slice(3).toLowerCase();
+  if (/^Digit[0-9]$/.test(event.code)) return event.code.slice(5);
+  return event.code === "Space" ? " " : event.key.toLowerCase();
+}
 
-export function GlobalShortcutsV2Panel({
-  value,
-  disabled,
-  onChange,
-  onApply,
-  onClear,
-}: GlobalShortcutsV2PanelProps): React.JSX.Element {
-  const [recordingAction, setRecordingAction] =
-    useState<GlobalActionIdV2 | null>(null);
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
-
-  // Keyboard capture for active recording action
+export function GlobalShortcutsV2Panel({value, disabled, savingAction, onChange}: GlobalShortcutsV2PanelProps) {
+  const [recording, setRecording] = useState<GlobalActionIdV2 | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  useEffect(() => { if (disabled) setRecording(null); }, [disabled]);
   useEffect(() => {
-    if (!recordingAction || disabled) return;
-
-    const handleKeyDown = (event: KeyboardEvent) => {
-      event.preventDefault();
-      event.stopPropagation();
-
-      // Escape key cancels recording without changing binding
-      if (event.key === "Escape") {
-        setRecordingAction(null);
-        setErrorMessage(null);
+    if (!recording || disabled) return;
+    const cancel = () => { setRecording(null); setError(null); };
+    const visibility = () => { if (document.hidden) cancel(); };
+    const keydown = (event: KeyboardEvent) => {
+      if (event.key === "Tab" && !event.metaKey && !event.ctrlKey && !event.altKey) { cancel(); return; }
+      event.preventDefault(); event.stopImmediatePropagation();
+      if (event.isComposing || event.repeat) return;
+      if (event.key === "Escape") { cancel(); return; }
+      if (MODIFIER_KEYS.has(event.key.toLowerCase())) return;
+      if (!event.metaKey && !event.ctrlKey && !event.altKey) { setError("Include Command, Control or Option."); return; }
+      const candidate: ShortcutBinding = {key: physicalKey(event), metaKey: event.metaKey, ctrlKey: event.ctrlKey, altKey: event.altKey, shiftKey: event.shiftKey};
+      const next = Object.freeze({...value, [recording]: candidate});
+      try { toNativeGlobalBindingsV2(next); }
+      catch (reason) {
+        const message = reason instanceof Error ? reason.message.toLowerCase() : "";
+        setError(/duplicate|conflict/.test(message) ? "Shortcut already assigned. Choose another." : /reserved|collides/.test(message) ? "This shortcut is reserved by macOS." : "Use a letter, number, function key or navigation key.");
         return;
       }
-
-      const lowerKey = event.key.toLowerCase();
-      if (MODIFIER_ONLY_KEYS.has(lowerKey)) {
-        return; // Don't assign modifier-only keys
-      }
-
-      const metaKey = event.metaKey;
-      const ctrlKey = event.ctrlKey;
-      const altKey = event.altKey;
-      const shiftKey = event.shiftKey;
-
-      if (!metaKey && !ctrlKey && !altKey) {
-        setErrorMessage(
-          "Shortcut must include at least one modifier key (Cmd, Ctrl, or Alt).",
-        );
-        return;
-      }
-
-      const candidateKey = event.key === " " ? " " : event.key.toLowerCase();
-      const candidate: ShortcutBinding = {
-        key: candidateKey,
-        metaKey,
-        ctrlKey,
-        altKey,
-        shiftKey,
-      };
-
-      // Test candidate against current bindings
-      const nextBindings: Record<GlobalActionIdV2, ShortcutBinding | null> = {
-        ...value,
-        [recordingAction]: candidate,
-      };
-
-      try {
-        toNativeGlobalBindingsV2(nextBindings as GlobalBindingsV2);
-        setErrorMessage(null);
-        setRecordingAction(null);
-        onChange(Object.freeze(nextBindings as GlobalBindingsV2));
-      } catch (err) {
-        const msg = err instanceof Error ? err.message : String(err);
-        setErrorMessage(msg);
-      }
+      setRecording(null); setError(null); onChange(next, recording);
     };
-
-    window.addEventListener("keydown", handleKeyDown, { capture: true });
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown, { capture: true });
-    };
-  }, [recordingAction, disabled, value, onChange]);
-
-  const handleClearAction = (actionId: GlobalActionIdV2) => {
-    if (disabled) return;
-    const nextBindings = {
-      ...value,
-      [actionId]: null,
-    };
-    setErrorMessage(null);
-    onChange(Object.freeze(nextBindings as GlobalBindingsV2));
-  };
-
-  return (
-    <section
-      className="fershot-shortcuts-v2-panel"
-      aria-label="Global keyboard shortcuts (7 actions)"
-      data-testid="global-shortcuts-v2-panel"
-    >
-      <header className="fershot-shortcuts-v2-panel__header">
-        <h3 className="fershot-shortcuts-v2-panel__title">Global Shortcuts</h3>
-      </header>
-
-      {errorMessage && (
-        <div role="alert" className="fershot-shortcuts-v2-panel__error">
-          {errorMessage}
-        </div>
-      )}
-
-      <div className="fershot-shortcuts-v2-panel__list">
-        {GLOBAL_ACTIONS_V2.filter(action => action !== "ocr-capture").map((actionId) => {
-          const binding = value[actionId];
-          const isRecording = recordingAction === actionId;
-
-          return (
-            <div key={actionId} className="fershot-shortcuts-v2-panel__row">
-              <span className="fershot-shortcuts-v2-panel__label">
-                {ACTION_LABELS_V2[actionId]}
-              </span>
-              <div className="fershot-shortcuts-v2-panel__binding-controls">
-                <Button variant="outline" size="sm"
-                  type="button"
-                  disabled={disabled}
-                  aria-label={
-                    isRecording
-                      ? `Press keys for ${ACTION_LABELS_V2[actionId]}`
-                      : `Record shortcut for ${
-                          actionId === "capture-area"
-                            ? "Capture area"
-                            : ACTION_LABELS_V2[actionId]
-                        }`
-                  }
-                  className={`fershot-shortcuts-v2-panel__btn ${
-                    isRecording
-                      ? "fershot-shortcuts-v2-panel__btn--recording"
-                      : ""
-                  }`}
-                  onClick={() => {
-                    if (isRecording) {
-                      setRecordingAction(null);
-                    } else {
-                      setRecordingAction(actionId);
-                      setErrorMessage(null);
-                    }
-                  }}
-                >
-                  {isRecording
-                    ? "Press Keys (Esc to cancel)..."
-                    : formatShortcutBinding(binding)}
-                </Button>
-                {binding && (
-                  <Button variant="outline" size="sm"
-                    type="button"
-                    disabled={disabled}
-                    className="fershot-shortcuts-v2-panel__btn"
-                    onClick={() => handleClearAction(actionId)}
-                  >
-                    Clear
-                  </Button>
-                )}
-              </div>
-            </div>
-          );
-        })}
-      </div>
-
-      <footer className="fershot-shortcuts-v2-panel__footer">
-        <Button disabled={disabled} onClick={onApply}>Install Shortcuts</Button>
-        <Button variant="outline" disabled={disabled} onClick={onClear}>Remove Shortcuts</Button>
-      </footer>
-    </section>
-  );
+    window.addEventListener("keydown", keydown, {capture: true});
+    window.addEventListener("blur", cancel);
+    document.addEventListener("visibilitychange", visibility);
+    return () => { window.removeEventListener("keydown", keydown, {capture: true}); window.removeEventListener("blur", cancel); document.removeEventListener("visibilitychange", visibility); };
+  }, [recording, disabled, value, onChange]);
+  return <section className="fershot-shortcuts-v2-panel" aria-label="Global keyboard shortcuts (7 actions)" data-testid="global-shortcuts-v2-panel">
+    <div className="fershot-shortcuts-v2-panel__list">
+      {SHORTCUT_ROWS.map(([action, label]) => {
+        const binding = value[action], active = recording === action, saving = savingAction === action;
+        return <div key={action} className="fershot-shortcuts-v2-panel__row" data-action={action}>
+          <span className="fershot-shortcuts-v2-panel__label" id={`shortcut-label-${action}`}>{label}</span>
+          <div className="shortcut-recorder" data-recording={active || undefined} data-bound={!!binding} aria-busy={saving}>
+            <Button variant="plain" type="button" className="shortcut-recorder__record" disabled={disabled} aria-label={`${active ? "Press keys" : "Record shortcut"} for ${label}`} aria-pressed={active} onClick={() => {setRecording(active ? null : action); setError(null);}}>
+              {saving ? <LoaderCircle className="shortcut-recorder__spinner" size={14} aria-hidden="true"/> : null}
+              <span>{saving ? "Saving…" : active ? "Press Shortcut…" : formatGlobalShortcut(binding)}</span>
+            </Button>
+            {binding && !active && !saving && <Button icon={CircleX} variant="plain" size="icon" type="button" className="shortcut-recorder__clear" aria-label={`Clear shortcut for ${label}`} disabled={disabled} onClick={() => {setRecording(null); setError(null); onChange(Object.freeze({...value, [action]: null}), action);}}/>}
+          </div>
+        </div>;
+      })}
+    </div>
+    {error && <p role="alert" className="fershot-shortcuts-v2-panel__error">{error}</p>}
+  </section>;
 }

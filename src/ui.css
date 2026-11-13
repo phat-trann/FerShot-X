@@ -13,39 +13,12 @@ button { border: 0 solid transparent; background-color: transparent; }
   --ui-muted-foreground: 240.00000 2.24719% 65.09804%;
 }
 
-:root { --control-height: 32px; --control-radius: 6px; --control-gap: 8px; --panel-padding: 20px; }
-:is(.workspace, .library-window, .preferences-window) button[data-slot="button"] {
-  box-sizing: border-box;
-  min-height: var(--control-height);
-  height: var(--control-height);
-  padding: 0 12px;
-  gap: var(--control-gap);
-  border-radius: var(--control-radius);
-  font-size: var(--font-size-ui);
-  font-weight: 500;
-  line-height: 16px;
-  border: 1px solid transparent;
-}
-:is(.workspace, .library-window, .preferences-window) button[data-slot="button"][data-size="sm"] { height: 32px; min-height: 32px; padding-inline: 10px; }
-:is(.workspace, .library-window, .preferences-window) button[data-slot="button"][data-size="icon"] { width: 32px; min-width: 32px; padding: 6px; }
-:is(.workspace, .library-window, .preferences-window) button[data-slot="button"][data-variant="default"] { background: var(--accent); color: white; }
-:is(.workspace, .library-window, .preferences-window) button[data-slot="button"][data-variant="outline"] { background: transparent; border-color: var(--border-strong); color: var(--text); }
-:is(.workspace, .library-window, .preferences-window) button[data-slot="button"][data-variant="ghost"] { background: transparent; color: var(--text); }
-:is(.workspace, .library-window, .preferences-window) button[data-slot="button"][data-variant="secondary"] { background: var(--surface-elevated); color: var(--text); }
-:is(.workspace, .library-window, .preferences-window) button[data-slot="button"][data-variant="destructive"] { background: var(--danger-bg); border-color: var(--danger-border); color: var(--danger); }
-:is(.workspace, .library-window, .preferences-window) button[data-slot="button"]:hover:not(:disabled) { filter: brightness(1.12); }
-:is(.workspace, .library-window, .preferences-window) button[data-slot="button"][data-variant="ghost"]:hover:not(:disabled),
-:is(.workspace, .library-window, .preferences-window) button[data-slot="button"][data-variant="outline"]:hover:not(:disabled) { background: var(--surface-elevated); }
-:is(.workspace, .library-window, .preferences-window) button[data-slot="button"]:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-:is(.workspace, .library-window, .preferences-window) button[data-slot="button"]:disabled { opacity: .45; cursor: default; }
-
 /* No browser outlines/rings; keyboard focus is indicated by a surface change instead. */
 *:focus,
 *:focus-visible {
   outline: none !important;
   --tw-ring-shadow: 0 0 #0000 !important;
   --tw-ring-offset-shadow: 0 0 #0000 !important;
-  box-shadow: none !important;
 }
 :where(button, a, summary, input, select, textarea, [role="tab"], [role="switch"]):focus-visible { filter: brightness(1.15) !important; }
 :where(input, textarea, select):focus-visible { border-color: var(--border-strong); }
@@ -56,12 +29,6 @@ button { border: 0 solid transparent; background-color: transparent; }
 [data-slot="alert-dialog-content"]{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:101;box-sizing:border-box;width:min(480px,calc(100vw - 40px));max-height:calc(100dvh - 40px);overflow:auto;margin:0;padding:24px;border:.5px solid var(--selection-border);border-radius:12px;background:var(--surface-elevated);color:var(--text);font:var(--font-size-ui)/1.4 var(--font-ui);animation:none}
 [data-slot="alert-dialog-content"] h2{margin:0;font-size:15px;font-weight:600}
 [data-slot="alert-dialog-content"] p{margin:8px 0 16px;font-size:13px;color:var(--text-secondary);overflow-wrap:anywhere}
-[data-slot="alert-dialog-content"] button[data-slot="button"]{height:var(--control-height);padding:0 12px;border:.5px solid var(--border);border-radius:var(--control-radius);font:inherit;color:var(--text);cursor:pointer}
-[data-slot="alert-dialog-content"] button[data-variant="default"]{background:var(--accent);border-color:transparent}
-[data-slot="alert-dialog-content"] button[data-variant="outline"]{background:transparent}
-
-[data-slot="alert-dialog-content"] button[data-variant="destructive"]{background:var(--danger-bg);border-color:var(--danger-border);color:var(--danger)}
-
 body{-webkit-user-select:none;user-select:none}
 input,textarea,[contenteditable="true"]{-webkit-user-select:text;user-select:text}
 :is(.workspace,.library-window,.preferences-window) :is(label,summary){font-size:14px}

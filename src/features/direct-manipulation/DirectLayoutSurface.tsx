@@ -1,3 +1,5 @@
+import { PanelsTopLeft, ImageDown, X, Blend } from "lucide-react";
+import { Button } from "../../components/ui/button";
 import { KonvaComposition } from "../editor/konva/KonvaComposition";
 import { EditorChrome } from "../../components/EditorChrome";
 import React, { useEffect, useRef, useState } from "react";
@@ -617,29 +619,29 @@ export function DirectLayoutSurface({
             : ""}{" "}
           ({layers.length} {layers.length === 1 ? "layer" : "layers"})
         </span>
-        <button
+        <Button icon={PanelsTopLeft} variant="secondary"
           type="button"
           disabled={busy || layers.length === 0 || gesture !== null}
           onClick={stackVertically}
         >
           Stack selected images vertically
-        </button>
-        <button
+        </Button>
+        <Button icon={ImageDown} variant="secondary"
           type="button"
           disabled={busy || layers.length === 0 || gesture !== null}
           onClick={handleCompose}
         >
           Create composed image
-        </button>
-        {onCancel && <button type="button" disabled={busy} onClick={onCancel}>Cancel</button>}
+        </Button>
+        {onCancel && <Button icon={X} variant="secondary" type="button" disabled={busy} onClick={onCancel}>Cancel</Button>}
       </header></EditorChrome>
 
-      <EditorChrome><fieldset disabled={busy}>
-        <legend>Source images (up to 32)</legend>
+      <EditorChrome><fieldset aria-label="Source images (up to 32)" disabled={busy}>
+
         {images.map((image) => (
           <label key={image.id}>
             <Checkbox
-              
+
               checked={layers.some((layer) => layer.id === image.id)}
               onChange={(event) => {
                 if (!event.target.checked) {
@@ -680,7 +682,7 @@ export function DirectLayoutSurface({
 
         <label>
           <Switch
-            
+
             checked={backdrop}
             onCheckedChange={checked => setBackdrop(checked)}
           />
@@ -692,7 +694,7 @@ export function DirectLayoutSurface({
             <span data-testid="direct-layout-inset-readout">
               Backdrop inset: {displayInset} px
             </span>
-            <button
+            <Button icon={Blend} variant="secondary"
               type="button"
               aria-label="Drag backdrop inset handle"
               onPointerDown={(e) =>
@@ -700,7 +702,7 @@ export function DirectLayoutSurface({
               }
             >
               Adjust backdrop inset
-            </button>
+            </Button>
             <label>
               Corner radius
               <Input
@@ -788,7 +790,7 @@ export function DirectLayoutSurface({
             )}
             <label>
               <Switch
-                
+
                 checked={shadow}
                 onCheckedChange={checked => setShadow(checked)}
               />
@@ -918,7 +920,7 @@ export function DirectLayoutSurface({
               />
               {isSelectedLayer &&
                 ALL_RESIZE_CORNER_HANDLES.map((handle) => (
-                  <button
+                  <Button variant="plain"
                     key={handle}
                     type="button"
                     disabled={busy}
@@ -943,7 +945,7 @@ export function DirectLayoutSurface({
         })}
 
         </>}
-        <button
+        <Button variant="plain"
           type="button"
           disabled={busy}
           aria-label="Resize composition canvas"

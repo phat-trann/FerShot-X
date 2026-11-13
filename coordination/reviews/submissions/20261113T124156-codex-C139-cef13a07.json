@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "id": "20261113T124156-codex-C139-cef13a07",
+  "created_at": "2026-11-13T12:41:56.251414+07:00",
+  "agent": "codex",
+  "request": "C139-release-1-2-0",
+  "task": "C139",
+  "completion": "done",
+  "summary": "Consolidate accepted interface changes and publish synchronized version 1.2.0",
+  "files": [
+    "package.json",
+    "package-lock.json",
+    "src-tauri/Cargo.toml",
+    "src-tauri/Cargo.lock",
+    "src-tauri/tauri.conf.json",
+    "README.md",
+    "docs/releases/1.2.0.md",
+    "docs/agents/codex/C139-release-1-2-0.md",
+    "tests/e2e/codex-updater.spec.ts"
+  ],
+  "file_sha256": {
+    "package.json": "7fb3484d110221105b55796e0014a170618dc52b383e5db8767bd2405d574227",
+    "package-lock.json": "a3a983597834af94e52b9be77ebe1f7cf35041d4b0516ae3d7b2c696dbfd8438",
+    "src-tauri/Cargo.toml": "91575a499b2341d097312384f3ab09d309ba08f93138e37e0bdf1b0e27fd45f4",
+    "src-tauri/Cargo.lock": "f85712fa2bfd8159d050272406e8d65c322c4804fb10d4c254d3ecbe841f0bfa",
+    "src-tauri/tauri.conf.json": "9e232eb9df6ecdfaebc0ff7afd51d860a744889421472da88eef9e311bede83b",
+    "README.md": "34d42734e89d97c93cb896b91cc0a7dba8636449f5509c094f4798dea85e3f52",
+    "docs/releases/1.2.0.md": "e7dc95dc650f266e1103323ce07b1f627b77ca46a33fe091787dc9043bc18bfe",
+    "docs/agents/codex/C139-release-1-2-0.md": "c2dcd3db6ffee12a638670e91fb5ae01980aedc8443301a473ee059a630f7b98",
+    "tests/e2e/codex-updater.spec.ts": "887f76163fc4b8e3dff3e19052a87842d537f20cd2c5c84a7e03a782416c30fd"
+  },
+  "checks": [
+    "TypeScript; 453 unit tests; 114 browser cases including corrected updater rerun; 6 native geometry/lifecycle tests; warnings-denied native compilation; version/release checks"
+  ],
+  "risks": [
+    "Real multi-display, WKWebView retention and native update-notification acceptance remain manual; CI publication reported separately"
+  ],
+  "review": "pending"
+}

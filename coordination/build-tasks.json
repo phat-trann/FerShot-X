@@ -5296,6 +5296,266 @@
       "shared_claim": "root-wiring",
       "owned_paths": "Native notification permission/submission/delegate/logging and updater settings/status; cursor zoom camera and arrow preview/export geometry; version 1.1.10 docs and regressions",
       "inputs": "Installed 1.1.8 and published 1.1.9 confirmed; user sees available update but no OS notification; request zoom around cursor and arrow defect screenshot; Apple UserNotifications documentation and pinned legacy plugin source"
+    },
+    {
+      "id": "C110",
+      "agent": "codex",
+      "title": "Unify shared interface controls, rounded surfaces and reusable system-font design tokens",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "Shared UI primitives, interface consumers and CSS tokens; design-system documentation and renderer regressions",
+      "inputs": "User requests library controls, more rounded unified UI and exact system font stack"
+    },
+    {
+      "id": "C111",
+      "agent": "codex",
+      "title": "Normalize form order, rounded controls and Settings top/row spacing; require user acceptance before publication",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "Shared SwitchField and interface geometry; Settings/FTP form styles and markup; design documentation and layout regressions",
+      "inputs": "User reports inconsistent rounding, spacing, missing top insets and opposite FTP switch order; forbids commit/push before manual acceptance"
+    },
+    {
+      "id": "C112",
+      "agent": "codex",
+      "title": "Remove visible fieldset frames/legends and unify Edit-style leading-icon actions across the app",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "Shared Button and dialog actions, form group semantics/styles, icon consumers and renderer regressions; pending 1.1.11 candidate documentation",
+      "inputs": "User requests no fieldset border/legend, all app actions styled like Edit with leading icons and flexible semantic colors; acceptance before commit/push remains mandatory"
+    },
+    {
+      "id": "C113",
+      "agent": "codex",
+      "title": "Compact Settings header and vertical spacing; restore framed button surfaces following supplied screenshot",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "Settings tab geometry and density, shared action surfaces/borders and editor button states; design docs and browser regressions",
+      "inputs": "User screenshot reference; header icons 40% smaller, Settings vertical gaps 50% smaller; buttons must have borders and backgrounds; preserve manual acceptance gate"
+    },
+    {
+      "id": "C114",
+      "agent": "codex",
+      "title": "Screenshot-style hotkey recorder rows with immediate persistent per-row save/clear",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "Hotkey panel presentation/recording, Settings shortcut autosave controller and native error wording; source and injected browser regressions, candidate docs",
+      "inputs": "User screenshot: seven compact labelled shortcut capsules with inline clear; record each shortcut and persist/apply immediately without Install/Remove actions"
+    },
+    {
+      "id": "C115",
+      "agent": "codex",
+      "title": "Install pinned macOS design skill and apply project-adapted native-style interface materials, states and hierarchy",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "Project-local upstream skill/provenance and adapter; shared chrome/material/focus/loading states, Library progressive disclosure, source/browser regressions and candidate docs",
+      "inputs": "User explicitly requests ceorkm/macos-design-skill; preserve previously chosen palette/font/radii, compact Settings, immediate Hotkeys and manual publication gate"
+    },
+    {
+      "id": "C116",
+      "agent": "codex",
+      "title": "Show shared title glyph only on the active window without layout shift",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "Shared macOS appearance CSS and focus regression, design/release docs",
+      "inputs": "User requests app icon only on active window; preserve local candidate/manual publication gate"
+    },
+    {
+      "id": "C117",
+      "agent": "codex",
+      "title": "Use icon-only loading placeholders with accessible hidden status labels",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "Shared LoadingState, edited-preview placeholder, focused browser checks and standards docs",
+      "inputs": "User requests a loading icon instead of visible Loading text; preserve manual acceptance/publication gate"
+    },
+    {
+      "id": "C118",
+      "agent": "codex",
+      "title": "Add bulk FTP history removal and remove duplicate Library preview actions in both tabs",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "Library selection toolbar/preview actions, compact layout and browser regressions; candidate standards/docs",
+      "inputs": "User requests FTP Remove history outside preview for multi-selection and no duplicate inside buttons in Local/FTP"
+    },
+    {
+      "id": "C119",
+      "agent": "codex",
+      "title": "Recover editable Blur artwork when reopening Local drafts",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "src/features/editor/konva/KonvaWorkbench.tsx; tests/e2e/codex-c119.spec.ts; scoped candidate documentation",
+      "inputs": "User reports Blur disappears in Edit after opening Local history"
+    },
+    {
+      "id": "C120",
+      "agent": "codex",
+      "title": "Autosave Settings and resize navigation icons and labels",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "Settings autosave hook, Preferences/FTP/HTTP/destination/log/scroll settings and scoped tests/docs",
+      "inputs": "User requests no Save buttons, automatic persistence after edits, doubled Settings header icons and 20 percent smaller labels"
+    },
+    {
+      "id": "C122",
+      "agent": "codex",
+      "title": "Center and compact Settings content and remove collapsible section wrappers",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "Settings content layout, destination/FTP wrappers and compact descriptions, export folder buttons and scoped checks/docs",
+      "inputs": "User requests always-open Save destination/FTP publishing and centered compact Settings matching Hotkeys"
+    },
+    {
+      "id": "C123",
+      "agent": "codex",
+      "title": "Flatten idle Edit tool controls, refine crop spacing and restore square color picker",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "Edit toolbar/status/popover styles, size popover action grouping and scoped tests/docs",
+      "inputs": "User requests borderless transparent idle Edit/Crop tools, better Crop spacing and full square color picker"
+    },
+    {
+      "id": "C125",
+      "agent": "codex",
+      "title": "Use the full Edit workspace without an inset fixed-aspect frame",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "Workspace stage sizing, direct-tool fit, focused editor geometry tests and candidate docs",
+      "inputs": "User requests image area fill Edit space instead of empty surrounding borders"
+    },
+    {
+      "id": "C126",
+      "agent": "codex",
+      "title": "Add leading Settings section dividers and inline icon actions; quiet routine messages",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "Settings section headers/status visibility, folder action layout, startup retry and scoped tests/docs",
+      "inputs": "User requests left-leading divider headings, no routine messages, icon-only inline folder/reset and startup retry"
+    },
+    {
+      "id": "C127",
+      "agent": "codex",
+      "title": "Compact Updates view, remove Settings footer and switch to control-first checkboxes",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "Settings checkbox primitive/layout, updater view, footer removal, injected lifecycle/functional regressions and candidate docs",
+      "inputs": "User requests no Test Notification/Done footer, icon-only inline update check, logo/status below current version and checkbox-before-text settings"
+    },
+    {
+      "id": "C128",
+      "agent": "codex",
+      "title": "Reference Resize panel, active-display Edit placement and stable Library metadata",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "EditorImageStatus resize panel/styles, Settings utility icons, Library header metrics, library_window/lifecycle placement, scoped tests/docs",
+      "inputs": "User requests compact iconless Resize without crop/close, Edit on active display, stable Library layout and inline utility icons"
+    },
+    {
+      "id": "C129",
+      "agent": "codex",
+      "title": "Icon-based update check status and explicit one-click update/install/restart",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "Updater renderer/controller and native action bridge; focused regression tests and candidate docs",
+      "inputs": "User requests spinner/green tick instead of current-version text and inline one-click install for new versions"
+    },
+    {
+      "id": "C130",
+      "agent": "codex",
+      "title": "Match FTP and Local Library preview footer heights",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "Library metadata/footer CSS and text titles; focused layout regression/docs",
+      "inputs": "User requests FTP preview bottom height match Local"
+    },
+    {
+      "id": "C131",
+      "agent": "codex",
+      "title": "Center all product windows on the active display at opening",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "Native lifecycle center/display helpers and Edit placement reuse; scoped docs",
+      "inputs": "User requests every screen open centered"
+    },
+    {
+      "id": "C132",
+      "agent": "codex",
+      "title": "Remove Upload filename dropdown border in Settings",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "PreferencesWindow.css filename-select styling",
+      "inputs": "User specifies Upload filename dropdown without border"
+    },
+    {
+      "id": "C134",
+      "agent": "codex",
+      "title": "Unify window/chrome/sidebar background palette",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "Shared surface/material tokens, macOS surface styles and palette regression/docs",
+      "inputs": "User requests consistent background colors"
+    },
+    {
+      "id": "C135",
+      "agent": "codex",
+      "title": "Align Local/FTP preview footer height with sidebar bottom",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "Library footer shared height token and existing footer regression",
+      "inputs": "User requests preview footer match sidebar bottom height"
+    },
+    {
+      "id": "C137",
+      "agent": "codex",
+      "title": "Align Edit tool names and shortcuts in hints and overflow",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "ToolHint text wrapper and Edit hint/overflow CSS; focused browser regression",
+      "inputs": "User reports Edit labels and shortcuts are misaligned"
+    },
+    {
+      "id": "C138",
+      "agent": "codex",
+      "title": "Match Upload filename dropdown rounding to inputs",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "FTP naming select wrapper/Lucide arrow, scoped CSS and regression",
+      "inputs": "User reports Upload filename dropdown does not share input border radius"
+    },
+    {
+      "id": "C139",
+      "agent": "codex",
+      "title": "Publish accepted interface update as version 1.2.0",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "Product versions, release notes, final verification and publication",
+      "inputs": "User explicitly requests version 1.2.0 commit and push"
     }
   ],
   "allocation": "Codex sole active client; external Antigravity and Copilot inactive; preserve historical authorship.",
@@ -5416,7 +5676,33 @@
       "C106",
       "C107",
       "C108",
-      "C109"
+      "C109",
+      "C110",
+      "C111",
+      "C112",
+      "C113",
+      "C114",
+      "C115",
+      "C116",
+      "C117",
+      "C118",
+      "C119",
+      "C120",
+      "C122",
+      "C123",
+      "C125",
+      "C126",
+      "C127",
+      "C128",
+      "C129",
+      "C130",
+      "C131",
+      "C132",
+      "C134",
+      "C135",
+      "C137",
+      "C138",
+      "C139"
     ],
     "copilot": []
   },
@@ -5436,7 +5722,7 @@
     "progress": "Anti may mark its actual feature source/wiring row with current source evidence under both claims; acceptance ledger remains Codex-owned and unchanged"
   },
   "release_policy": {
-    "authorization": "User permits commit/push after accepted version",
+    "authorization": "Explicit user acceptance required before every commit/push; automatic verification-release publication superseded on 2026-11-13",
     "version_source": "package.json",
     "guard": "npm run version:check",
     "acceptance_required": true,

@@ -1,4 +1,6 @@
-# Current checkpoint — 2026-11-12
+# Current checkpoint — 2026-11-13
+
+The user explicitly authorized publishing the accumulated interface changes as 1.2.0 on 2026-11-13. C139 owns version sync, final validation and normal main commit/push; do not touch signing secrets or force-push. Earlier 1.1.11 local-candidate notes remain historical. Follow the current UI adapter and latest user decisions. Native multi-display/update acceptance remains separate from automated evidence.
 
 Codex is the sole active client. Existing features are 100% USER_REPORTED accepted by explicit user confirmation. Native update notification remains a separate pending version-to-version check. Follow AGENTS.md, docs/releases/ACCEPTANCE.md and the current task queue. Earlier percentages/allocation notes below are historical.
 

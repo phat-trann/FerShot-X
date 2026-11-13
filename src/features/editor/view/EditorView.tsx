@@ -1,3 +1,5 @@
+import { Type } from "lucide-react";
+import { Button } from "../../../components/ui/button";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import type {
   Annotation,
@@ -877,7 +879,7 @@ export function EditorView({
                 }
               }}
             />
-            <button
+            <Button icon={Type} variant="secondary"
               type="button"
               disabled={isBlocked || !inlineTextDraft.text.trim()}
               onClick={() =>
@@ -885,7 +887,7 @@ export function EditorView({
               }
             >
               Apply Text
-            </button>
+            </Button>
           </div>
         )}
 

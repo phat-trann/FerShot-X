@@ -1,3 +1,5 @@
+import { Camera, Square, X } from "lucide-react";
+import { Button } from "../../components/ui/button";
 import React, { useId } from "react";
 import {
   clampScrollMaxHeight,
@@ -96,18 +98,18 @@ export function ScrollWorkspace({
         Reverse direction
       </label>
       <div>
-        <button type="button" onClick={onStart} disabled={!canStart}>
+        <Button icon={Camera} variant="secondary" type="button" onClick={onStart} disabled={!canStart}>
           Start frame collection
-        </button>
-        <button type="button" onClick={onCaptureFrame} disabled={!canCapture}>
+        </Button>
+        <Button icon={Camera} variant="secondary" type="button" onClick={onCaptureFrame} disabled={!canCapture}>
           Capture next frame
-        </button>
-        <button type="button" onClick={onStop} disabled={!canStop}>
+        </Button>
+        <Button icon={Square} variant="secondary" type="button" onClick={onStop} disabled={!canStop}>
           Stop and stitch
-        </button>
-        <button type="button" onClick={onCancel} disabled={!isRunning}>
+        </Button>
+        <Button icon={X} variant="secondary" type="button" onClick={onCancel} disabled={!isRunning}>
           Cancel
-        </button>
+        </Button>
       </div>
       <p>Frames: {frameCount}</p>
       {error ? <p role="alert">{error}</p> : null}

@@ -5,7 +5,8 @@ import * as React from "react"
 import * as AlertDialogPrimitive from "@radix-ui/react-alert-dialog"
 
 import { cn } from "../../lib/utils"
-import { buttonVariants } from "./button"
+import { Button } from "./button"
+import { Check, Trash2, X } from "lucide-react"
 
 const AlertDialog = AlertDialogPrimitive.Root
 
@@ -104,30 +105,21 @@ AlertDialogDescription.displayName =
 const AlertDialogAction = React.forwardRef<
   React.ElementRef<typeof AlertDialogPrimitive.Action>,
   React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Action>
->(({ className, ...props }, ref) => (
-  <AlertDialogPrimitive.Action
-    data-slot="button" data-variant="default"
-    ref={ref}
-    className={cn(buttonVariants(), className)}
-    {...props}
-  />
-))
+>(({ className, children, ...props }, ref) => {
+  const destructive = (props as { "data-variant"?: string })["data-variant"] === "destructive"
+  return <Button asChild icon={destructive ? Trash2 : Check} variant={destructive ? "destructive" : "default"} className={className}>
+    <AlertDialogPrimitive.Action ref={ref} {...props}>{children}</AlertDialogPrimitive.Action>
+  </Button>
+})
 AlertDialogAction.displayName = AlertDialogPrimitive.Action.displayName
 
 const AlertDialogCancel = React.forwardRef<
   React.ElementRef<typeof AlertDialogPrimitive.Cancel>,
   React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Cancel>
->(({ className, ...props }, ref) => (
-  <AlertDialogPrimitive.Cancel
-    data-slot="button" data-variant="outline"
-    ref={ref}
-    className={cn(
-      buttonVariants({ variant: "outline" }),
-      "mt-2 sm:mt-0",
-      className
-    )}
-    {...props}
-  />
+>(({ className, children, ...props }, ref) => (
+  <Button asChild icon={X} variant="secondary" className={className}>
+    <AlertDialogPrimitive.Cancel ref={ref} {...props}>{children}</AlertDialogPrimitive.Cancel>
+  </Button>
 ))
 AlertDialogCancel.displayName = AlertDialogPrimitive.Cancel.displayName
 

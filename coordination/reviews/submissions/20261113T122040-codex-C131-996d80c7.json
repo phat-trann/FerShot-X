@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "id": "20261113T122040-codex-C131-996d80c7",
+  "created_at": "2026-11-13T12:20:40.865429+07:00",
+  "agent": "codex",
+  "request": "C131-all-windows-centered",
+  "task": "C131",
+  "completion": "done",
+  "summary": "Center Edit, Library and Settings on active display whenever opened, sharing startup/Edit geometry helpers.",
+  "files": [
+    "AGENTS.md",
+    "coordination/build-tasks.json",
+    "src-tauri/src/lifecycle.rs",
+    "src-tauri/src/library_window.rs",
+    "docs/design/MACOS.md",
+    "docs/agents/codex/C131-centered-windows.md",
+    "docs/releases/1.1.11.md"
+  ],
+  "file_sha256": {
+    "AGENTS.md": "aace70e99fd201c746ba6d0bb6ccad7649266833368bf80405301c9450dc065a",
+    "coordination/build-tasks.json": "c6371a78169fc7360b7e785d5a2716839c8fa52976b2000fccd2eeaaae1cfc3e",
+    "src-tauri/src/lifecycle.rs": "5fd8b907a305362982d9c1cf688749c282a52f8fa23de04cfcfaa944a245770d",
+    "src-tauri/src/library_window.rs": "84deacb082caf363982b48392a87465e76fd437177d365a9c487595b2fb9501d",
+    "docs/design/MACOS.md": "cc92313b0aebf53ce93551d2946e8a37bc87ee5182ba64c8ae7ef63286565447",
+    "docs/agents/codex/C131-centered-windows.md": "3fec2a3039009d8a2a56e30682a661c1976c181bcb8882e5afebb87166d76cc2",
+    "docs/releases/1.1.11.md": "b3a4f6c1bac6203e7e30d42de7117fff86a1b27592a8a23e5618659e561176e5"
+  },
+  "checks": [
+    "Reviewed all product presentation paths and locked Tauri API signatures. Added native pure geometry cases; not compiled/executed under no-build restriction."
+  ],
+  "risks": [
+    "Native compilation and real multi-display verification pending. No OS actions, build, commit or push."
+  ],
+  "review": "pending"
+}

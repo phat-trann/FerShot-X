@@ -1,3 +1,6 @@
+import { FolderOpen, RotateCcw } from "lucide-react";
+import { ToolHint } from "../../components/ui/tool-hint";
+import { Button } from "../../components/ui/button";
 import React from "react";
 import "./ExportDestinationPanel.css";
 import { Input } from "../../components/ui/input";
@@ -107,29 +110,22 @@ export function ExportDestinationPanel({
           Destination Folder
         </span>
         <div className="fershot-export-destination-panel__folder-row">
-          <span
-            className="fershot-export-destination-panel__folder-display"
-            title={folderLabel ?? "Ask for a destination on save"}
-          >
-            {hasCustomFolder ? folderLabel : "Ask for a destination on save"}
-          </span>
+          <Input className="fershot-export-destination-panel__folder-display" aria-label="Screenshots folder" readOnly title={folderLabel??"Ask for a destination on save"} value={hasCustomFolder?folderLabel!:"Ask each time"}/>
           <div className="fershot-export-destination-panel__folder-actions">
-            <button
+            <ToolHint label="Choose Folder"><Button icon={FolderOpen} variant="secondary" size="icon"
               type="button"
               className="fershot-export-destination-panel__button"
               disabled={busy}
               onClick={handleChoose}
-            >
-              Choose Folder…
-            </button>
-            <button
+              aria-label="Choose Folder…"
+            /></ToolHint>
+            <ToolHint label="Reset Folder"><Button icon={RotateCcw} variant="secondary" size="icon"
               type="button"
               className="fershot-export-destination-panel__button fershot-export-destination-panel__button--secondary"
               disabled={busy || !hasCustomFolder}
               onClick={handleClear}
-            >
-              Reset Folder
-            </button>
+              aria-label="Reset Folder"
+            /></ToolHint>
           </div>
         </div>
       </div>

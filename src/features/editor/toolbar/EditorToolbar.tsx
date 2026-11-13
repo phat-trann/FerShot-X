@@ -1,3 +1,5 @@
+import { Undo2, Redo2, Trash2, MousePointer2, Square, ArrowUpRight, Pencil, Circle, Type, ListOrdered, Blend } from "lucide-react";
+import { Button } from "../../../components/ui/button";
 import React, { useMemo, useRef } from "react";
 import type { AnnotationTool } from "../../../contracts/editor";
 import {
@@ -27,6 +29,7 @@ const TOOL_LABELS: Readonly<Record<AnnotationTool, string>> = {
   counter: "Counter",
   blur: "Blur",
 };
+const TOOL_ICONS = {select:MousePointer2,rectangle:Square,arrow:ArrowUpRight,pen:Pencil,ellipse:Circle,text:Type,counter:ListOrdered,blur:Blend};
 
 const SHORTCUT_BY_TOOL: Readonly<Partial<Record<AnnotationTool, string>>> =
   Object.freeze(
@@ -140,7 +143,7 @@ export function EditorToolbar({
           const label = TOOL_LABELS[tool];
           const shortcut = SHORTCUT_BY_TOOL[tool];
           return (
-            <button
+            <Button variant="ghost" icon={TOOL_ICONS[tool]}
               key={tool}
               ref={(el) => {
                 toolButtonRefs.current[index] = el;
@@ -161,7 +164,7 @@ export function EditorToolbar({
                   {shortcut}
                 </kbd>
               )}
-            </button>
+            </Button>
           );
         })}
       </div>
@@ -171,7 +174,7 @@ export function EditorToolbar({
         role="group"
         aria-label="History and selection actions"
       >
-        <button
+        <Button icon={Undo2} variant="ghost"
           type="button"
           className="fershot-editor-toolbar__btn"
           disabled={!canUndo}
@@ -182,8 +185,8 @@ export function EditorToolbar({
           }}
         >
           Undo
-        </button>
-        <button
+        </Button>
+        <Button icon={Redo2} variant="ghost"
           type="button"
           className="fershot-editor-toolbar__btn"
           disabled={!canRedo}
@@ -194,8 +197,8 @@ export function EditorToolbar({
           }}
         >
           Redo
-        </button>
-        <button
+        </Button>
+        <Button icon={Trash2} variant="destructive"
           type="button"
           className="fershot-editor-toolbar__btn fershot-editor-toolbar__btn--danger"
           disabled={!canDeleteSelected}
@@ -206,7 +209,7 @@ export function EditorToolbar({
           }}
         >
           Delete Selected
-        </button>
+        </Button>
       </div>
     </div>
   );

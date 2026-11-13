@@ -1,3 +1,5 @@
+import { Copy } from "lucide-react";
+import { Button } from "../../components/ui/button";
 import React from "react";
 import { rgbToHex } from "../color/color";
 import "./ColorFormatControls.css";
@@ -107,14 +109,14 @@ export function ColorFormatControls({
             <code className="fershot-color-format-controls__value">
               {formatted?.hex}
             </code>
-            <button
+            <Button icon={Copy} variant="secondary"
               type="button"
               className="fershot-color-format-controls__button"
               disabled={busy}
               onClick={() => formatted && handleCopy(formatted.hex)}
             >
               Copy
-            </button>
+            </Button>
           </div>
 
           <div className="fershot-color-format-controls__row">
@@ -122,14 +124,14 @@ export function ColorFormatControls({
             <code className="fershot-color-format-controls__value">
               {formatted?.rgb}
             </code>
-            <button
+            <Button icon={Copy} variant="secondary"
               type="button"
               className="fershot-color-format-controls__button"
               disabled={busy}
               onClick={() => formatted && handleCopy(formatted.rgb)}
             >
               Copy
-            </button>
+            </Button>
           </div>
 
           <div className="fershot-color-format-controls__row">
@@ -137,14 +139,14 @@ export function ColorFormatControls({
             <code className="fershot-color-format-controls__value">
               {formatted?.rgba}
             </code>
-            <button
+            <Button icon={Copy} variant="secondary"
               type="button"
               className="fershot-color-format-controls__button"
               disabled={busy}
               onClick={() => formatted && handleCopy(formatted.rgba)}
             >
               Copy
-            </button>
+            </Button>
           </div>
         </div>
       )}

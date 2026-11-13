@@ -1,3 +1,4 @@
+import { Button } from "../../components/ui/button";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import type { Annotation, Point, Rect } from "../../contracts/editor";
 import "./SelectionHandlesOverlay.css";
@@ -702,7 +703,7 @@ export const SelectionHandlesOverlay: React.FC<SelectionHandlesOverlayProps> = (
       />
 
       {ALL_RESIZE_HANDLES.map((handle) => (
-        <button
+        <Button variant="plain"
           key={handle}
           type="button"
           disabled={isBlocked}

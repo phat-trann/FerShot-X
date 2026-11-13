@@ -1,3 +1,5 @@
+import { Scaling, Blend, Pencil, Copy, X } from "lucide-react";
+import { Button } from "../../components/ui/button";
 import React from "react";
 import type { ImageDocument } from "../../contracts/media";
 import "./PinPreviewCard.css";
@@ -95,7 +97,7 @@ export function PinPreviewCard({
             const pct = Math.round(preset * 100);
             const active = Math.abs(safeScale - preset) < 0.01;
             return (
-              <button
+              <Button icon={Scaling} variant="secondary"
                 key={preset}
                 type="button"
                 className="fershot-pin-preview__btn"
@@ -103,7 +105,7 @@ export function PinPreviewCard({
                 onClick={() => onScaleChange(clampPinScale(preset))}
               >
                 {pct}%
-              </button>
+              </Button>
             );
           })}
         </div>
@@ -146,7 +148,7 @@ export function PinPreviewCard({
             value={Math.round(safeOpacity * 100)}
             onChange={handleOpacityPercentChange}
           />
-          <button
+          <Button icon={Blend} variant="secondary"
             type="button"
             className="fershot-pin-preview__btn"
             aria-pressed={isSemiTransparent}
@@ -155,7 +157,7 @@ export function PinPreviewCard({
             }
           >
             Semi-transparent
-          </button>
+          </Button>
         </div>
       </div>
 
@@ -175,27 +177,27 @@ export function PinPreviewCard({
         role="group"
         aria-label="Pinned image actions"
       >
-        <button
+        <Button icon={Pencil} variant="secondary"
           type="button"
           className="fershot-pin-preview__btn"
           onClick={() => onEdit(document.id)}
         >
           Edit Image
-        </button>
-        <button
+        </Button>
+        <Button icon={Copy} variant="secondary"
           type="button"
           className="fershot-pin-preview__btn"
           onClick={() => onCopy(document.id)}
         >
           Copy Image
-        </button>
-        <button
+        </Button>
+        <Button icon={X} variant="secondary"
           type="button"
           className="fershot-pin-preview__btn"
           onClick={() => onClose(document.id)}
         >
           Close Pin
-        </button>
+        </Button>
       </footer>
     </section>
   );

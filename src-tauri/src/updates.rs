@@ -12,7 +12,7 @@ pub enum Phase{#[default]Idle,Unconfigured,Checking,Current,Available,Downloadin
 #[derive(Clone,Copy,Serialize,Deserialize)]#[serde(rename_all="kebab-case")]
 pub enum ErrorCode{Check,Download,Install,Restart,Busy,Storage}
 #[derive(Clone,Copy,Serialize,Deserialize)]#[serde(rename_all="lowercase")]
-pub enum Action{Check,Download,Install,Restart}
+pub enum Action{Check,Download,Install,Restart,Apply}
 #[derive(Default)]pub struct UpdateStore{snapshot:Mutex<Snapshot>,guard:Mutex<Option<JobGuard>>,installing:AtomicBool,notified:Mutex<Option<String>>,notification_busy:AtomicBool,notification_status:Mutex<NoticeStatus>}
 fn fail()->NativeError{NativeError::new("update_failed","Update service is unavailable. Please retry.")}
 fn reader(label:&str)->Result<(),NativeError>{if matches!(label,"main"|"preferences"|"library"){Ok(())}else{Err(fail())}}

@@ -1,3 +1,5 @@
+import { Camera, Square, X } from "lucide-react";
+import { Button } from "../../components/ui/button";
 import React, { useId } from "react";
 import "./ScrollCapturePanel.css";
 import { Input } from "../../components/ui/input";
@@ -160,7 +162,7 @@ export function ScrollCapturePanel({
       </div>
 
       <div className="fershot-scroll-panel__actions">
-        <button
+        <Button icon={Camera} variant="default"
           type="button"
           className="fershot-scroll-panel__btn fershot-scroll-panel__btn--primary"
           disabled={!canStart}
@@ -178,8 +180,8 @@ export function ScrollCapturePanel({
           }}
         >
           Start Scrolling Capture
-        </button>
-        <button
+        </Button>
+        <Button icon={Square} variant="secondary"
           type="button"
           className="fershot-scroll-panel__btn"
           disabled={!canStop}
@@ -190,8 +192,8 @@ export function ScrollCapturePanel({
           }}
         >
           Stop &amp; Stitch
-        </button>
-        <button
+        </Button>
+        <Button icon={X} variant="secondary"
           type="button"
           className="fershot-scroll-panel__btn"
           disabled={!canCancel}
@@ -202,7 +204,7 @@ export function ScrollCapturePanel({
           }}
         >
           Cancel Capture
-        </button>
+        </Button>
       </div>
 
       <p className="fershot-scroll-panel__status" role="status" aria-live="polite">

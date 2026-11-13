@@ -27,7 +27,18 @@ pub fn editor_size(image:(u32,u32),available:(f64,f64))->(f64,f64){
 }
 #[tauri::command]pub fn fit_editor_window(width:u32,height:u32,window:tauri::WebviewWindow)->Result<(),NativeError>{
  crate::imaging::validate_window_label(window.label())?;if width==0||height==0||width>16384||height>16384{return Err(NativeError::new("invalid_input","Invalid image dimensions."))}
- if let Some(monitor)=window.current_monitor().ok().flatten().or(window.primary_monitor().ok().flatten()){let area=monitor.work_area();let scale=monitor.scale_factor();let(w,h)=editor_size((width,height),(area.size.width as f64/scale,area.size.height as f64/scale));window.set_size(tauri::LogicalSize::new(w,h)).map_err(|_|NativeError::new("window_failed","Edit could not be sized."))?;let _=window.center();}
+ // Resolve the user's active display, not the hidden editor's stale monitor.
+ let monitor=crate::lifecycle::active_monitor(&window).map_err(|_|NativeError::new("window_failed","Move the pointer onto the display where Edit should open."))?;
+ let area=monitor.work_area();let scale=monitor.scale_factor();
+ let(w,h)=editor_size((width,height),(area.size.width as f64/scale,area.size.height as f64/scale));
+ let size=((w*scale).round()as u32,(h*scale).round()as u32);
+ // Move onto the target display before sizing, so mixed-DPI constraints use it.
+ let(x,y)=crate::lifecycle::center_in_work_area((area.position.x,area.position.y),(area.size.width,area.size.height),size);
+ window.set_position(tauri::PhysicalPosition::new(x,y)).map_err(|_|NativeError::new("window_failed","Edit could not be moved to the active display."))?;
+ window.set_size(tauri::PhysicalSize::new(size.0,size.1)).map_err(|_|NativeError::new("window_failed","Edit could not be sized."))?;
+ let actual=window.outer_size().map_err(|_|NativeError::new("window_failed","Edit size could not be read."))?;
+ let(x,y)=crate::lifecycle::center_in_work_area((area.position.x,area.position.y),(area.size.width,area.size.height),(actual.width,actual.height));
+ window.set_position(tauri::PhysicalPosition::new(x,y)).map_err(|_|NativeError::new("window_failed","Edit could not be positioned on the active display."))?;
  Ok(())
 }
 

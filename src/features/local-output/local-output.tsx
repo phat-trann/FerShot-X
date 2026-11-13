@@ -1,3 +1,5 @@
+import { Printer } from "lucide-react";
+import { Button } from "../../components/ui/button";
 import React from "react";
 import type { ImageDocument } from "../../contracts/media";
 import "./LocalOutputPanel.css";
@@ -399,7 +401,7 @@ export const LocalOutputPanel: React.FC<LocalOutputPanelProps> = ({
       )}
 
       <div className="fershot-local-output-panel__actions">
-        <button
+        <Button icon={Printer} variant="secondary"
           type="button"
           disabled={busy || !layout || !onRequestNativePrint}
           onClick={() => {
@@ -408,7 +410,7 @@ export const LocalOutputPanel: React.FC<LocalOutputPanelProps> = ({
           }}
         >
           Print Image…
-        </button>
+        </Button>
 
         <div
           role="button"

@@ -1,3 +1,6 @@
+import { ArrowLeft } from "lucide-react";
+import { Button } from "./components/ui/button";
+import { LoadingState } from "./components/ui/content-state";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import type { Annotation } from "./contracts/editor";
 import type { ImageDocument } from "./contracts/media";
@@ -32,17 +35,16 @@ export function WorkspaceDirectTools({ image, annotations, advanced, busy, zoom,
     if (!node || !stage) return;
     const measure = () => {
       const box = stage.getBoundingClientRect(); const padding = getComputedStyle(stage);
-      const header = node.querySelector(".fershot-direct-transform__header")?.getBoundingClientRect().height ?? 80;
       setFit(Math.max(0.001, Math.min(1,
-        Math.max(1, box.width - parseFloat(padding.paddingLeft) - parseFloat(padding.paddingRight) - 32) / image.width,
-        Math.max(1, box.height - parseFloat(padding.paddingTop) - parseFloat(padding.paddingBottom) - header - 48) / image.height)));
+        Math.max(1, box.width - parseFloat(padding.paddingLeft) - parseFloat(padding.paddingRight)) / image.width,
+        Math.max(1, box.height - parseFloat(padding.paddingTop) - parseFloat(padding.paddingBottom)) / image.height)));
     };
     const observer = new ResizeObserver(measure); observer.observe(stage); measure();
     return () => observer.disconnect();
   }, [image.width, image.height, mode]);
   const ready = !needsPreview || (preview?.image.id === image.id && preview.basic === annotations && preview.advanced === advanced);
   return <div ref={host} className="workspace-direct-tools">
-    {error ? <div role="alert">{error}<button onClick={onCancel}>Return to image</button></div> : !ready ? <p role="status">Preparing edited preview…</p> :
+    {error ? <div role="alert">{error}<Button icon={ArrowLeft} variant="secondary" onClick={onCancel}>Return to image</Button></div> : !ready ? <LoadingState>Preparing edited preview…</LoadingState> :
       <KonvaRegionTools key={mode} image={needsPreview ? preview!.image : image} busy={busy} zoom={zoom ?? fit} mode={mode} onTransform={onTransform} onEffect={onEffect} onCancel={onCancel}/>}
   </div>;
 }

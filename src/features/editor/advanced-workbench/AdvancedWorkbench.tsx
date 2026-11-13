@@ -1,3 +1,5 @@
+import { Sparkles, ImageDown } from "lucide-react";
+import { Button } from "../../../components/ui/button";
 import { validateEmbeddedPng } from "../konva/image-source";
 import { traceCounterBadge } from "../konva/counter";
 import { itemBounds } from "../konva/model";
@@ -1148,27 +1150,27 @@ export const AdvancedWorkbench: React.FC<AdvancedWorkbenchProps> = ({
           ))}
         </div>
 
-        {compact&&<label className="annotation-style"><input type="color" aria-label="Annotation color" value={style.color} disabled={isBlocked} onChange={e=>setStyle({...style,color:e.target.value})}/><Slider  aria-label="Stroke width" min={1} max={12} value={style.strokeWidth} disabled={isBlocked} onValueChange={sliderValue => setStyle({...style,strokeWidth:Number(sliderValue)})}/></label>}
+        {compact&&<label className="annotation-style"><Input type="color" aria-label="Annotation color" value={style.color} disabled={isBlocked} onChange={e=>setStyle({...style,color:e.target.value})}/><Slider  aria-label="Stroke width" min={1} max={12} value={style.strokeWidth} disabled={isBlocked} onValueChange={sliderValue => setStyle({...style,strokeWidth:Number(sliderValue)})}/></label>}
         <div className="fershot-advanced-workbench__history">
-          <button
+          <Button variant="secondary"
             type="button"
             disabled={isBlocked || history.past.length === 0}
             onClick={handleUndo}
           >
             <Undo2 size={16}/><span className="sr-only">Undo</span>
-          </button>
-          <button
+          </Button>
+          <Button variant="secondary"
             type="button"
             disabled={isBlocked || history.future.length === 0}
             onClick={handleRedo}
           >
             <Redo2 size={16}/><span className="sr-only">Redo</span>
-          </button>
+          </Button>
           {!compact && <label>Selected item<NativeSelect aria-label="Advanced selection" disabled={isBlocked} value={history.present.selectedId ?? ""}
             onChange={event => { if (isBlocked) return; const next = Object.freeze({ ...history.present, selectedId: event.target.value || null }); setHistory(previous => ({ ...previous, present: next })); }}>
             <option value="">None</option>{history.present.items.map(item => <option key={item.id} value={item.id}>{item.itemKind}: {item.id}</option>)}
           </NativeSelect></label>}
-          <button type="button" disabled={isBlocked || !history.present.selectedId} onClick={() => commitPresent({ items: history.present.items.filter(item => item.id !== history.present.selectedId), selectedId: null })} aria-label="Delete selected annotation" title="Delete selected annotation"><Trash2 size={16}/></button>
+          <Button variant="secondary" type="button" disabled={isBlocked || !history.present.selectedId} onClick={() => commitPresent({ items: history.present.items.filter(item => item.id !== history.present.selectedId), selectedId: null })} aria-label="Delete selected annotation" title="Delete selected annotation"><Trash2 size={16}/></Button>
           <span aria-label="Advanced item count">
             {history.present.items.length} items
           </span>
@@ -1188,7 +1190,7 @@ export const AdvancedWorkbench: React.FC<AdvancedWorkbenchProps> = ({
           className="fershot-advanced-workbench__emphasis-bar"
           aria-label="Emphasis effect controls"
         >
-          <button
+          <Button icon={Sparkles} variant="secondary"
             type="button"
             disabled={isBlocked}
             onClick={() => {
@@ -1238,7 +1240,7 @@ export const AdvancedWorkbench: React.FC<AdvancedWorkbenchProps> = ({
             }}
           >
             Add {tool} effect
-          </button>
+          </Button>
         </div>
       )}
 
@@ -1387,7 +1389,7 @@ export const AdvancedWorkbench: React.FC<AdvancedWorkbenchProps> = ({
                 }
               }}
             />
-            <button
+            <Button icon={Type} variant="secondary"
               type="button"
               disabled={isBlocked || !inlineTextOverlay.text.trim()}
               onClick={() =>
@@ -1398,7 +1400,7 @@ export const AdvancedWorkbench: React.FC<AdvancedWorkbenchProps> = ({
               }
             >
               Apply inline text
-            </button>
+            </Button>
           </div>
         )}
 
@@ -1437,7 +1439,7 @@ export const AdvancedWorkbench: React.FC<AdvancedWorkbenchProps> = ({
       )}
 
       {onExportRaster && imageSourceElement && (
-        <button
+        <Button icon={ImageDown} variant="secondary"
           type="button"
           disabled={isBlocked}
           onClick={async () => {
@@ -1458,7 +1460,7 @@ export const AdvancedWorkbench: React.FC<AdvancedWorkbenchProps> = ({
           }}
         >
           Export Advanced Raster
-        </button>
+        </Button>
       )}
     </section>
   );

@@ -1,3 +1,5 @@
+import { ImageDown } from "lucide-react";
+import { Button } from "../../../components/ui/button";
 import React, { useState } from "react";
 import type { Annotation, AnnotationTool } from "../../../contracts/editor";
 import {
@@ -173,14 +175,14 @@ export function EditorWorkbench({
             {present.annotations.length === 1 ? "annotation" : "annotations"}
           </span>
           {onExportAnnotations && (
-            <button
+            <Button icon={ImageDown} variant="default"
               type="button"
               disabled={isBlocked}
               className="fershot-editor-workbench__export-btn"
               onClick={handleExport}
             >
               Export Annotations
-            </button>
+            </Button>
           )}
         </div>
       </div>

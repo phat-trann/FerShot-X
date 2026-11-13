@@ -33,7 +33,7 @@
   margin: 0;
   padding: 0 12px !important;
   border: 0 !important;
-  border-radius: 0 !important;
+  border-radius: var(--control-radius) !important;
   background: transparent !important;
   box-shadow: none !important;
   color: inherit;
@@ -71,8 +71,7 @@
   cursor: pointer;
 }
 .editor-status-strip .editor-zoom-status { width: 72px; min-width: 72px; }
-.editor-status-strip .editor-status-button:hover:not(:disabled),
-.editor-status-strip .editor-status-button[aria-expanded="true"] {
+.editor-status-strip .editor-status-button:hover:not(:disabled) {
   background: var(--surface-elevated) !important;
 }
 .editor-status-strip .editor-status-button:focus-visible {
@@ -80,3 +79,32 @@
   outline-offset: -2px;
 }
 .editor-status-strip .editor-status-button:disabled { opacity: .5; cursor: default; }
+
+/* Compact resize panel follows the supplied native reference. */
+.workspace.editor-window .editor-size-popover { display: flex; flex-direction: column; gap: 10px; width: 300px; padding: 14px 16px; box-sizing: border-box; }
+.workspace.editor-window .editor-size-popover > strong { font-size: 12px; }
+.workspace.editor-window .editor-size-popover > strong > span { color: var(--muted); font-weight: 500; margin-left: 4px; }
+.workspace.editor-window .editor-size-presets { display: grid; grid-template-columns: repeat(6,minmax(0,1fr)); gap: 0; margin: 0; padding: 0; background: #ffffff12; border-radius: 6px; overflow: hidden; }
+.workspace.editor-window .editor-size-presets > button[data-slot=button] { height: 24px; min-height: 24px; border: 0; border-radius: 4px; background: transparent; padding: 0 4px !important; font-size: 12px; color: var(--text); }
+.workspace.editor-window .editor-size-presets > button + button::before { content: ""; height: 12px; width: .5px; position: absolute; left: 0; background: var(--border); }
+.workspace.editor-window .editor-size-presets > button { position: relative; }
+.workspace.editor-window .editor-size-presets > button[data-slot=button][aria-pressed=true] { color: #fff; background: var(--accent); }
+.workspace.editor-window .editor-size-presets > button[aria-pressed=true]::before,
+.workspace.editor-window .editor-size-presets > button[aria-pressed=true] + button::before { content: none; }
+.workspace.editor-window .editor-size-fields { display: grid; grid-template-columns: 54px auto 54px auto minmax(0,1fr); align-items: center; gap: 6px; }
+.workspace.editor-window .editor-size-popover .editor-size-fields input[data-slot=input] { width: 100%; min-width: 0; height: 24px; min-height: 24px; padding: 0 5px; border: 0; border-radius: 5px; text-align: center; font-size: 12px; appearance: textfield; -moz-appearance: textfield; }
+.workspace.editor-window .editor-size-fields > span { color: var(--muted); font-size: 12px; }
+.workspace.editor-window .editor-size-fields > button.editor-resize-apply { justify-self: end; height: 24px; min-height: 24px; margin: 0; padding: 0 12px !important; border: 0; border-radius: 5px; color: #fff; background: var(--accent); font-size: 12px; }
+.workspace.editor-window .editor-size-popover [data-slot=button]:hover:not(:disabled) { filter: brightness(1.15); }
+
+.workspace.editor-window .editor-size-popover input::-webkit-inner-spin-button,
+.workspace.editor-window .editor-size-popover input::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+/* A full-bleed square swatch, without the shared text-input padding. */
+.workspace input.ui-input[data-slot=input][type=color] { appearance: none; -webkit-appearance: none; width: 32px; min-width: 32px; max-width: 32px; height: 32px; min-height: 32px; padding: 0; border: 0; border-radius: 0; background: transparent; box-shadow: none; }
+.workspace input.ui-input[data-slot=input][type=color]::-webkit-color-swatch-wrapper { padding: 0; }
+.workspace input.ui-input[data-slot=input][type=color]::-webkit-color-swatch { border: 0; border-radius: 0; }
+.workspace input.ui-input[data-slot=input][type=color]::-moz-color-swatch { border: 0; border-radius: 0; }
+
+.workspace .editor-chrome :is(.editor-overflow-row,.editor-add-menu,#editor-tool-options) :is([data-slot=button],[data-slot=toggle]) { border-color: transparent; background: transparent; box-shadow: none; }
+.workspace .editor-chrome :is(.editor-overflow-row,.editor-add-menu,#editor-tool-options) :is([aria-pressed=true],[data-state=on]) { color: var(--accent); }
+.workspace .editor-chrome :is(.editor-overflow-row,.editor-add-menu,#editor-tool-options) :is([data-slot=button],[data-slot=toggle]):hover:not(:disabled) { border-color: var(--selection-border); background: var(--surface-elevated); }

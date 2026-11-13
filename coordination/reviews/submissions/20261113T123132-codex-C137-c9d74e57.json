@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "id": "20261113T123132-codex-C137-c9d74e57",
+  "created_at": "2026-11-13T12:31:32.706033+07:00",
+  "agent": "codex",
+  "request": "C137-editor-shortcut-alignment",
+  "task": "C137",
+  "completion": "done",
+  "summary": "Align Edit tool labels and shortcuts in hints and overflow rows with shared text metrics and columns.",
+  "files": [
+    "src/components/ui/tool-hint.tsx",
+    "src/Workspace.css",
+    "tests/e2e/codex-c137.spec.ts",
+    "coordination/build-tasks.json",
+    "docs/agents/codex/C137-shortcut-alignment.md",
+    "docs/releases/1.1.11.md"
+  ],
+  "file_sha256": {
+    "src/components/ui/tool-hint.tsx": "a90dc1fd35b3131df418be4bbf79fa99a0a342898178708f88df1718e3a2c3ca",
+    "src/Workspace.css": "c19fe4bd6e0ef187f72cc97862f1d41d9d1ae385fb6f5ade91729fc2c7f399fc",
+    "tests/e2e/codex-c137.spec.ts": "fc355fc0c54acadec387a479fa8f08d6fda7b77a4cfca8282c4b06249daf0462",
+    "coordination/build-tasks.json": "c3a8212cc5cad9b36dbb823068928f9029e67a51465a67c6894463471c62be2f",
+    "docs/agents/codex/C137-shortcut-alignment.md": "080dee5db8ef47730333496a6dd67f4cd8ca4e4366ce737f28abd172847a740b",
+    "docs/releases/1.1.11.md": "c5ca2338575e7f5a99c549c46074ea87c50b44fc834581530f2f7b3c4530d2ff"
+  },
+  "checks": [
+    "Two focused injected browser cases pass across final/initial runs; text geometry/right edges checked; screenshot inspected."
+  ],
+  "risks": [
+    "Visual acceptance pending; no build, real OS/server actions, commit or push."
+  ],
+  "review": "pending"
+}

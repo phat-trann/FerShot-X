@@ -1,3 +1,5 @@
+import { PanelsTopLeft, ImageDown } from "lucide-react";
+import { Button } from "../../components/ui/button";
 import React, { useState } from "react";
 import type { Point } from "../../contracts/editor";
 import {
@@ -332,12 +334,12 @@ export const LayoutWorkspace: React.FC<LayoutWorkspaceProps> = ({
 
       <div className="fershot-layout-workspace__actions">
         {onSnapLayer && layers.length > 0 && (
-          <button type="button" onClick={handleSnapFirstLayer}>
+          <Button icon={PanelsTopLeft} variant="secondary" type="button" onClick={handleSnapFirstLayer}>
             Snap Primary Layer to Edges
-          </button>
+          </Button>
         )}
 
-        <button
+        <Button icon={ImageDown} variant="secondary"
           type="button"
           disabled={!summary}
           onClick={async () => {
@@ -361,7 +363,7 @@ export const LayoutWorkspace: React.FC<LayoutWorkspaceProps> = ({
           }}
         >
           Export Layout PNG
-        </button>
+        </Button>
       </div>
 
       {summary && (

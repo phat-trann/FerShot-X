@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "id": "20261113T114837-codex-C120-748333d6",
+  "created_at": "2026-11-13T11:48:37.950749+07:00",
+  "agent": "codex",
+  "request": "C124-settings-header-scale",
+  "task": "C120",
+  "completion": "done",
+  "summary": "Reduce Settings header icons by 10 percent to 25.92px and increase tab labels by 10 percent to 10.56px.",
+  "files": [
+    "src/PreferencesWindow.tsx",
+    "src/PreferencesWindow.css",
+    "tests/e2e/codex-c113.spec.ts",
+    "docs/design/INTERFACE.md",
+    "docs/design/MACOS.md",
+    "docs/releases/1.1.11.md"
+  ],
+  "file_sha256": {
+    "src/PreferencesWindow.tsx": "8aeb124e58118b26d55e72ad757192762431ef79bb2908a58cfcf728b74a44e0",
+    "src/PreferencesWindow.css": "5df5040f060d5cd1d76253414de0dd81409c5496cc548ef13b8d4254ff1b76f6",
+    "tests/e2e/codex-c113.spec.ts": "767fb8ddf42d3f8dbb6771c12b3804a26bdd2ee1f93a5d8c685d23b33a90f4e7",
+    "docs/design/INTERFACE.md": "ecff74ca51f0b075c19d82a2ece0c8fdce1d3ecdf5e8ef53ba3af5e731bfb9aa",
+    "docs/design/MACOS.md": "7aad444741babcd82c3f01e040da1354f06c3b2e77a92178e73ff1d7fad2517d",
+    "docs/releases/1.1.11.md": "f13df0a8ed13d37d22dff589d711279473a8b688321dfa0ee61619585dca4348"
+  },
+  "checks": [
+    "Focused Settings header/browser layout regression passed."
+  ],
+  "risks": [
+    "No build, commit or push; user acceptance pending."
+  ],
+  "review": "pending"
+}

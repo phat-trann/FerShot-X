@@ -1,3 +1,5 @@
+import { ImageDown } from "lucide-react";
+import { Button } from "../../components/ui/button";
 import React, { useEffect, useState } from "react";
 import type { ImageDocument } from "../../contracts/media";
 import {
@@ -206,7 +208,7 @@ export function ExportPanel({
         </label>
       </div>
 
-      <button
+      <Button icon={ImageDown} variant="default"
         type="button"
         className="fershot-export-panel__submit-btn"
         disabled={busy || !document}
@@ -215,7 +217,7 @@ export function ExportPanel({
         {busy
           ? "Exporting…"
           : `Export ${settings.saveFormat.toUpperCase()}`}
-      </button>
+      </Button>
 
       {busy && (
         <p

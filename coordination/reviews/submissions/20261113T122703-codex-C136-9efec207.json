@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "id": "20261113T122703-codex-C136-9efec207",
+  "created_at": "2026-11-13T12:27:03.069120+07:00",
+  "agent": "codex",
+  "request": "C136-library-edit-icon",
+  "task": "C136",
+  "completion": "done",
+  "summary": "Make Library Edit image an icon-only button with tooltip and accessible name.",
+  "files": [
+    "src/LibraryWindow.tsx"
+  ],
+  "file_sha256": {
+    "src/LibraryWindow.tsx": "7fa77ebf5dfff22244f19b6d0eb41358a26683ce2c7bacece39c2ea434f46428"
+  },
+  "checks": [
+    "Reviewed retained click callback, disabled conditions and accessible name; no behavioral change."
+  ],
+  "risks": [
+    "Visual acceptance pending; no build, commit or push."
+  ],
+  "review": "pending"
+}

@@ -1,3 +1,5 @@
+import { Button } from "../../components/ui/button";
+import { Monitor, ScanSquare, AppWindowMac } from "lucide-react";
 import React, { useRef } from "react";
 import type { CaptureMode, CapturePanelProps } from "../../contracts/media";
 import "./CapturePanel.css";
@@ -64,7 +66,7 @@ export function CapturePanel({ onCapture, busy, error }: CapturePanelProps): Rea
 
       <div className="fershot-capture-panel__actions" role="group" aria-label="Capture Modes">
         {CAPTURE_OPTIONS.map((option, index) => (
-          <button
+          <Button variant="secondary" icon={option.mode === "fullscreen" ? Monitor : option.mode === "area" ? ScanSquare : AppWindowMac}
             key={option.mode}
             ref={(el) => {
               buttonRefs.current[index] = el;
@@ -77,7 +79,7 @@ export function CapturePanel({ onCapture, busy, error }: CapturePanelProps): Rea
           >
             <span>{option.label}</span>
             <span className="fershot-capture-panel__button-desc">{option.description}</span>
-          </button>
+          </Button>
         ))}
       </div>
 

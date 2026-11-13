@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "id": "20261113T122611-codex-C135-df4acef9",
+  "created_at": "2026-11-13T12:26:11.963091+07:00",
+  "agent": "codex",
+  "request": "C135-footer-sidebar-alignment",
+  "task": "C135",
+  "completion": "done",
+  "summary": "Align Local and FTP preview footer height/divider with sidebar footer using one shared height token.",
+  "files": [
+    "src/LibraryWindow.css",
+    "tests/e2e/codex-c130.spec.ts",
+    "coordination/build-tasks.json",
+    "docs/releases/1.1.11.md"
+  ],
+  "file_sha256": {
+    "src/LibraryWindow.css": "fa7fd99b6b3e659d79f979aeb601f8b950b05bfadd6a1c7ac96381d0c9fec840",
+    "tests/e2e/codex-c130.spec.ts": "a9e9e4617b053ed493426b6c3f50c9870edfb7d83f036d5cdeb8b2c102935c02",
+    "coordination/build-tasks.json": "c5d4ab800a12df54f88a65d0055c2249ed2621a1c6af17fa5603060e335222c6",
+    "docs/releases/1.1.11.md": "2d83063ed4562c2d9bc4a14af0f8d1d0840ac282ed18ae2b671b0e5a03e14410"
+  },
+  "checks": [
+    "Injected layout regression passed at minimum window size for Local, successful FTP and failed FTP/Retry; exact sidebar height and y alignment asserted."
+  ],
+  "risks": [
+    "Visual acceptance pending; no build, commit or push."
+  ],
+  "review": "pending"
+}

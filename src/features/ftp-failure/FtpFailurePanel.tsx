@@ -1,3 +1,5 @@
+import { RefreshCw, Settings2 } from "lucide-react";
+import { Button } from "../../components/ui/button";
 import type { JSX } from "react";
 
 import "./FtpFailurePanel.css";
@@ -140,7 +142,7 @@ export function FtpFailurePanel({
       {hasActions ? (
         <div className="fsx-ftp-failure__actions">
           {onRetry ? (
-            <button
+            <Button icon={RefreshCw} variant="default"
               type="button"
               className="fsx-ftp-failure__btn fsx-ftp-failure__btn--primary"
               disabled={busy}
@@ -153,10 +155,10 @@ export function FtpFailurePanel({
               data-testid="ftp-failure-retry"
             >
               {busy ? "Retrying…" : "Retry upload"}
-            </button>
+            </Button>
           ) : null}
           {onOpenSettings ? (
-            <button
+            <Button icon={Settings2} variant="secondary"
               type="button"
               className="fsx-ftp-failure__btn"
               disabled={busy}
@@ -169,7 +171,7 @@ export function FtpFailurePanel({
               data-testid="ftp-failure-open-settings"
             >
               Open FTP settings
-            </button>
+            </Button>
           ) : null}
         </div>
       ) : null}

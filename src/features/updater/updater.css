@@ -1,1 +1,11 @@
 .update-settings{margin-top:16px}.update-settings legend{display:flex;align-items:center;gap:6px}.update-actions{display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap}.update-download{display:flex;align-items:center;gap:8px;margin:12px 0;font-variant-numeric:tabular-nums}.update-download progress{flex:1;height:5px;accent-color:#257EFE}
+.update-app-icon { display: block; width: 72px; height: 72px; object-fit: contain; align-self: center; margin: 8px 0 12px; }
+.update-current-version { display: inline-flex; align-items: center; gap: 8px; }
+.preferences-window .update-version-status { margin: 0 0 0 50%; padding: 0; }
+.update-actions:empty { display: none; }
+.preferences-window .update-version-status { display: flex; align-items: center; gap: 8px; min-height: 24px; color: var(--accent); font-size: var(--font-size-ui); }
+.preferences-window .settings-inline-icon.update-check-icon[data-current=true],
+.preferences-window .settings-inline-icon.update-check-icon[data-current=true]:hover:not(:disabled) { color: var(--status-success); }
+.settings-inline-icon.is-loading svg { animation: update-spinner 1s linear infinite; }
+@keyframes update-spinner { to { transform: rotate(360deg); } }
+@media(prefers-reduced-motion:reduce) { .settings-inline-icon.is-loading svg { animation: none; } }

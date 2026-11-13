@@ -1,3 +1,4 @@
+import { Button } from "../../components/ui/button";
 import { Toggle } from "../../components/ui/toggle";
 import {Blend,Grid2x2,Square,Eraser} from "lucide-react";
 import { EditorChrome } from "../../components/EditorChrome";
@@ -496,7 +497,7 @@ export function DirectEffectsSurface({
             }
           />
           {ALL_CROP_HANDLES.map((handle) => (
-            <button
+            <Button variant="plain"
               key={handle}
               type="button"
               disabled={busy}

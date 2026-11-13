@@ -1,3 +1,6 @@
+import { Sparkles } from "lucide-react";
+import { Button } from "../../components/ui/button";
+import { Radio } from "../../components/ui/radio";
 import React, { useState } from "react";
 import type {
   ShadowTrimInsets,
@@ -140,8 +143,7 @@ export function WindowAppearanceControls({
           aria-label="Background Type"
         >
           <label className="fershot-window-appearance-controls__radio-label">
-            <input
-              type="radio"
+            <Radio
               name="window-appearance-bg"
               value="transparent"
               checked={backgroundKind === "transparent"}
@@ -151,8 +153,7 @@ export function WindowAppearanceControls({
             <span>Transparent</span>
           </label>
           <label className="fershot-window-appearance-controls__radio-label">
-            <input
-              type="radio"
+            <Radio
               name="window-appearance-bg"
               value="solid"
               checked={backgroundKind === "solid"}
@@ -165,7 +166,7 @@ export function WindowAppearanceControls({
 
         {backgroundKind === "solid" && (
           <div className="fershot-window-appearance-controls__color-picker">
-            <input
+            <Input
               type="color"
               aria-label="Pick Solid Background Color"
               value={HEX_COLOR_RE.test(solidColor) ? solidColor : "#ffffff"}
@@ -253,14 +254,14 @@ export function WindowAppearanceControls({
       )}
 
       <div className="fershot-window-appearance-controls__actions">
-        <button
+        <Button icon={Sparkles} variant="default"
           type="button"
           className="fershot-window-appearance-controls__apply-button"
           disabled={busy || Boolean(validationError)}
           onClick={handleApply}
         >
           Apply Appearance
-        </button>
+        </Button>
       </div>
     </section>
   );

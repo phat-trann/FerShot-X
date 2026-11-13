@@ -1,3 +1,5 @@
+import { ZoomOut, ZoomIn, Scaling } from "lucide-react";
+import { Button } from "../../components/ui/button";
 import React from "react";
 import "./NavigationControls.css";
 
@@ -51,7 +53,7 @@ export function NavigationControls({
       aria-busy={busy}
     >
       <div className="fershot-navigation-controls__group">
-        <button
+        <Button icon={ZoomOut} variant="secondary"
           type="button"
           className="fershot-navigation-controls__button"
           disabled={!canZoomOut}
@@ -60,7 +62,7 @@ export function NavigationControls({
           onClick={onZoomOut}
         >
           −
-        </button>
+        </Button>
         <span
           className="fershot-navigation-controls__zoom-display"
           title={`Current Zoom: ${clampedZoom}%`}
@@ -68,7 +70,7 @@ export function NavigationControls({
         >
           {clampedZoom}%
         </span>
-        <button
+        <Button icon={ZoomIn} variant="secondary"
           type="button"
           className="fershot-navigation-controls__button"
           disabled={!canZoomIn}
@@ -77,13 +79,13 @@ export function NavigationControls({
           onClick={onZoomIn}
         >
           +
-        </button>
+        </Button>
       </div>
 
       <div className="fershot-navigation-controls__divider" aria-hidden="true" />
 
       <div className="fershot-navigation-controls__group">
-        <button
+        <Button icon={Scaling} variant="secondary"
           type="button"
           className="fershot-navigation-controls__button fershot-navigation-controls__button--preset"
           disabled={busy || clampedZoom === 100}
@@ -91,8 +93,8 @@ export function NavigationControls({
           onClick={onZoomReset}
         >
           1:1
-        </button>
-        <button
+        </Button>
+        <Button icon={Scaling} variant="secondary"
           type="button"
           className="fershot-navigation-controls__button fershot-navigation-controls__button--preset"
           disabled={busy}
@@ -100,7 +102,7 @@ export function NavigationControls({
           onClick={onFitToWindow}
         >
           Fit
-        </button>
+        </Button>
       </div>
     </nav>
   );

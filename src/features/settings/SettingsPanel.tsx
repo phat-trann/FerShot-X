@@ -1,3 +1,5 @@
+import { RotateCcw } from "lucide-react";
+import { Button } from "../../components/ui/button";
 import React from "react";
 import {
   DEFAULT_SETTINGS,
@@ -51,13 +53,13 @@ export function SettingsPanel({
     <section className="fershot-settings-panel" aria-label="FerShot Settings">
       <div className="fershot-settings-panel__header">
         <h2 className="fershot-settings-panel__title">FerShot Settings</h2>
-        <button
+        <Button icon={RotateCcw} variant="secondary"
           type="button"
           className="fershot-settings-panel__reset-btn"
           onClick={() => onChange({ ...DEFAULT_SETTINGS })}
         >
           Reset to Defaults
-        </button>
+        </Button>
       </div>
 
       <div className="fershot-settings-panel__field">

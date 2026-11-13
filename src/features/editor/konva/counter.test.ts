@@ -3,9 +3,11 @@ import { counterBounds,counterCorner,counterTip,traceCounterBadge } from "./coun
 import { parseLocalDraft } from "../../../contracts/local-draft";
 
 describe("counter badge corner",()=>{
- it("snaps its tail to each corner while preserving the numbered center",()=>{
+ it("points its tail continuously in any direction while preserving the numbered center",()=>{
   const center={x:100,y:100};
-  for(const [pointer,angle]of [[{x:80,y:120},135],[{x:80,y:80},225],[{x:120,y:80},315],[{x:120,y:120},45]]as const){expect(counterCorner(center,pointer)).toBe(angle);const p=counterTip(center,12,angle);expect(Math.hypot(p.x-center.x,p.y-center.y)).toBeCloseTo(16.2);const b=counterBounds(center,12,angle);expect(p.x).toBeGreaterThanOrEqual(b.x);expect(p.y).toBeLessThanOrEqual(b.y+b.height);}
+  expect(counterCorner(center,{x:140,y:115})).toBeCloseTo(20.556,2);
+  expect(counterCorner(center,{x:140,y:100})).toBe(0);
+  for(const [pointer,angle]of [[{x:80,y:120},135],[{x:80,y:80},225],[{x:120,y:80},315],[{x:120,y:120},45]]as const){expect(counterCorner(center,pointer)).toBeCloseTo(angle);const p=counterTip(center,12,angle);expect(Math.hypot(p.x-center.x,p.y-center.y)).toBeCloseTo(16.2);const b=counterBounds(center,12,angle);expect(p.x).toBeGreaterThanOrEqual(b.x);expect(p.y).toBeLessThanOrEqual(b.y+b.height);}
  });
  it("uses the same rounded body and pointed path for canvas export",()=>{
   const ctx={beginPath:vi.fn(),moveTo:vi.fn(),arc:vi.fn(),quadraticCurveTo:vi.fn(),closePath:vi.fn()};

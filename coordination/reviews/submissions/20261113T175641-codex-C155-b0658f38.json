@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "id": "20261113T175641-codex-C155-b0658f38",
+  "created_at": "2026-11-13T17:56:41.318597+07:00",
+  "agent": "codex",
+  "request": "C155-library-edit-handoff",
+  "task": "C155",
+  "completion": "done",
+  "summary": "Close Library inbox subscription race and preserve Edit handoff diagnostic metadata",
+  "files": [
+    "src/Workspace.tsx",
+    "src/platform/library.ts",
+    "src/platform/diagnostics.ts",
+    "src/platform/diagnostics.test.ts",
+    "src-tauri/src/diagnostics.rs",
+    "tests/e2e/codex-c155.spec.ts",
+    "docs/agents/codex/C155-library-edit-handoff.md"
+  ],
+  "file_sha256": {
+    "src/Workspace.tsx": "d92f2f59ea2c4603aa2054135dee69644be79e964354135f77cabc85fc0bd03a",
+    "src/platform/library.ts": "dfc123c60979a86a9cb5b255192d1ca3edb16c9c8583204bf9ff0850f84a7515",
+    "src/platform/diagnostics.ts": "471cba6af5f125972469e863c2ac41ae4a14f37f5f364d71247840e90c4675fa",
+    "src/platform/diagnostics.test.ts": "1fe2ca80d7a05c0952fb5364dc4aa1e3d399d98ab1a8d2307eb351d9a4256850",
+    "src-tauri/src/diagnostics.rs": "4ef6f0606c6d8b175ee708370989954f04747a6a81f86b1f5e903aadb07a49e2",
+    "tests/e2e/codex-c155.spec.ts": "ff200c21ce27a8c0226b2cdfff280714627e1aedada808ed22599b1f6e5e573a",
+    "docs/agents/codex/C155-library-edit-handoff.md": "d2204b243d2dae801267a9c8c5eff6d8d6a0c88e545b2cf3d83cc7d4510477bd"
+  },
+  "checks": [
+    "TypeScript; 4 diagnostics unit cases; 3 injected browser cases; diagnostic allowlist alignment; whitespace"
+  ],
+  "risks": [
+    "Existing logs do not establish installed intermittent root cause; native allowlist source-reviewed only; no build/server/OS actions or publication"
+  ],
+  "review": "pending"
+}

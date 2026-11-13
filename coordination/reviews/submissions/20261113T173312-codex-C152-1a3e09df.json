@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "20261113T173312-codex-C152-1a3e09df",
+  "created_at": "2026-11-13T17:33:12.676972+07:00",
+  "agent": "codex",
+  "request": "C152-inline-text-visible-lens-drag-followup",
+  "task": "C152",
+  "completion": "done",
+  "summary": "Correct C152 final validation: reopen browser test now waits for new document ID/presentation before double-click; final three cases pass",
+  "files": [
+    "tests/e2e/codex-c152.spec.ts",
+    "docs/agents/codex/C152-inline-text-visible-lens-drag.md"
+  ],
+  "file_sha256": {
+    "tests/e2e/codex-c152.spec.ts": "49c61009caa3902340072eaef3f123c8f9501dd5db564aad8ffa525fa5c39860",
+    "docs/agents/codex/C152-inline-text-visible-lens-drag.md": "62c3ccca992e6b56325439d941953a28f3fcec9592372d49ec6b78c85ba0e207"
+  },
+  "checks": [
+    "3 final browser cases pass; prior TypeScript/424 unit cases remain applicable; whitespace check"
+  ],
+  "risks": [
+    "Supersedes premature final-rerun pass wording in 20261113T173215-codex-C152-d48b8a82; test race corrected with no additional production changes; no build/publication"
+  ],
+  "review": "pending"
+}

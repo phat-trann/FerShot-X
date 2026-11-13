@@ -1,4 +1,4 @@
-# FerShot X 1.2.2
+# FerShot X 1.3.0
 
 Capture, annotate and share screenshots from your Mac’s menu bar. Keep editable Local drafts or upload to your own FTP server and copy a ready-to-share link.
 
@@ -23,9 +23,13 @@ A captured image opens in Edit. Draw arrows, rectangles, ellipses or freehand st
 - **Select** moves and resizes existing elements. Lines and arrows use endpoint handles; text and counters use their size controls.
 - Hold **Shift** while drawing to constrain squares, circles and straight lines.
 - Drawing tools stay active for repeated drawing. Freehand draws continuously; switch to Select to move or resize a stroke.
+- **Magnifier:** draw an ellipse to mark the source. The source ellipse owns the move/resize handles. A connected lens displays the source at its Magnification size; drag the lens to reposition it, or move/resize the source to adjust the sampling region. New lenses start with a 32px edge gap on the roomiest fitting side. Dragging/resizing the source hides the lens and connector until release or cancellation; moving the detached lens keeps both visible. Hold Shift while drawing for a circle.
+- **Spotlight:** the dimmed background hides while you move/resize its region and returns on release.
+- **Text:** click the image to place a blank caret and type directly. Enter or an outside click commits; Escape cancels. Double-click existing text to edit it in place.
+- **Counter:** drag its corner handle to any angle; arrow keys adjust by 15°, or 1° with Shift.
 - Color and size controls follow the selected element. New elements reuse the last style.
 - Click the **image size** to resize proportionally. Press Resize to apply; Escape or an outside click cancels.
-- Scroll with two fingers to pan; pinch to zoom. Mouse-wheel zoom and Command-wheel zoom are also supported. Zoom follows the pointer; click the zoom percentage to Fit.
+- Scroll with two fingers to pan; pinch to zoom. Mouse-wheel zoom and Command-wheel zoom are also supported. Zoom follows the pointer; click the zoom percentage for a zoom slider (1–800%) with a clickable Fit marker above the matching percentage.
 - Hover a tool to see its name and shortcut. Tools that do not fit appear under **…**.
 
 Use **Copy**, **Save** or **Upload** from the toolbar. Successful capture output hides Edit; Library keeps a resumable Local draft unless the image has been uploaded. A predicted FTP link becomes usable only after the transfer succeeds.

@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "id": "20261113T171730-codex-C149-0d5650ec",
+  "created_at": "2026-11-13T17:17:30.981573+07:00",
+  "agent": "codex",
+  "request": "C149-magnifier-source-counter-bounds",
+  "task": "C149",
+  "completion": "done",
+  "summary": "Place linked Magnifier handles on source, derive lens size from magnification and keep Counter selection/angle controls aligned during drag",
+  "files": [
+    "src/features/editor/konva/KonvaWorkbench.tsx",
+    "src/features/editor/konva/model.ts",
+    "src/features/editor/advanced-workbench/AdvancedWorkbench.tsx",
+    "src/features/emphasis/magnifier.ts",
+    "src/features/emphasis/magnifier.test.ts",
+    "tests/e2e/codex-c149.spec.ts",
+    "docs/agents/codex/C149-magnifier-source-counter-bounds.md"
+  ],
+  "file_sha256": {
+    "src/features/editor/konva/KonvaWorkbench.tsx": "771cd634036f01e9ef85e94bcfc35193e03d7e79aa671500776d6d58bc638edf",
+    "src/features/editor/konva/model.ts": "58a7dafe0c6ab9a326d7a4a07e10d9d7871850812bcee2d1802788e7486c3af2",
+    "src/features/editor/advanced-workbench/AdvancedWorkbench.tsx": "fff846b5d067f5abe432db4fde443f8dc3d853476112373b59f725715070dbea",
+    "src/features/emphasis/magnifier.ts": "d697c4141f85943b952be2e351d1b8f3bf1cd87dd10d477cf98801dae0bc4207",
+    "src/features/emphasis/magnifier.test.ts": "d44a44202fd5f0f1d005f839d7decd930829d1c554cffa75caece3ea9d7a2542",
+    "tests/e2e/codex-c149.spec.ts": "32d80c13ca136e1a49d6f2548147c45ebe732f528b9a09fb9d7e83ee573a56cd",
+    "docs/agents/codex/C149-magnifier-source-counter-bounds.md": "42c83578cd465cae3144724ab184527e7682bcfecb8521cea4f707695362b698"
+  },
+  "checks": [
+    "TypeScript; 422 unit cases plus four focused geometry cases; four final browser cases plus prior export/reopen coverage; whitespace check"
+  ],
+  "risks": [
+    "New interaction appearance awaits user acceptance; no build, real OS/server operations or publication"
+  ],
+  "review": "pending"
+}

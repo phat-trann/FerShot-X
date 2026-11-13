@@ -108,3 +108,14 @@
 .workspace .editor-chrome :is(.editor-overflow-row,.editor-add-menu,#editor-tool-options) :is([data-slot=button],[data-slot=toggle]) { border-color: transparent; background: transparent; box-shadow: none; }
 .workspace .editor-chrome :is(.editor-overflow-row,.editor-add-menu,#editor-tool-options) :is([aria-pressed=true],[data-state=on]) { color: var(--accent); }
 .workspace .editor-chrome :is(.editor-overflow-row,.editor-add-menu,#editor-tool-options) :is([data-slot=button],[data-slot=toggle]):hover:not(:disabled) { border-color: var(--selection-border); background: var(--surface-elevated); }
+
+.workspace.editor-window .editor-zoom-popover { width: min(280px,calc(100vw - 24px)); gap: var(--space-3); }
+.editor-zoom-slider { display: flex; align-items: center; gap: var(--space-3); }
+.editor-zoom-track { position: relative; flex: 1; min-width: 0; padding-top: 20px; }
+.editor-zoom-track .ui-slider { width: 100%; }
+.editor-zoom-slider output { flex: 0 0 42px; align-self: flex-end; height: 32px; display: grid; place-content: center end; text-align: right; }
+.workspace.editor-window .editor-zoom-popover > button { align-self: flex-end; }
+
+.workspace.editor-window .editor-fit-marker[data-slot=button] { position: absolute; top: 4px; transform: translateX(-50%); width: 32px; min-width: 32px; height: 24px; min-height: 24px; padding: 0; border: .5px solid var(--selection-border); border-radius: 12px 12px 7px 7px; background: var(--accent); color: white; font: 600 11px/1 var(--font-ui); cursor: pointer; }
+.editor-fit-marker::after { content: ""; position: absolute; left: 50%; bottom: -4px; width: 7px; height: 7px; transform: translateX(-50%) rotate(45deg); border-right: .5px solid var(--selection-border); border-bottom: .5px solid var(--selection-border); background: inherit; border-radius: 0 0 2px 0; pointer-events: none; }
+.workspace.editor-window .editor-fit-marker:hover:not(:disabled) { background: var(--accent-hover); }

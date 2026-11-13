@@ -1,5 +1,49 @@
 # Agent instructions
 
+## C158 user-authorized 1.3.0 publication (2026-11-13)
+
+User explicitly requests a new release of completed C148-C157. Synchronize 1.3.0, summarize changes, validate renderer/native compilation and safe injected regression checks, then commit/push normally to main to trigger existing ARM-only signed release CI. This request authorizes the necessary release verification and publication despite prior local-candidate gates. Preserve historical releases, existing updater key/signing identity and all real credentials/permissions. No live capture/input/server/notification/update-install actions, private-key reads, local Keychain changes, force push or manual tags. Report actual CI/publication status separately from installed acceptance.
+
+## C157 visible Library/Edit loading (2026-11-13)
+
+Opening Edit from Local double-click or the Edit action immediately shows an icon-only spinner on the originating row/action and a preview overlay. Keep single-click selection and FTP double-click browser behavior. Block duplicate actions until handoff completion, rather than treating enqueue success as presentation success. Carry an optional bounded transient request ID through Library inbox/document/pending presentation; native show_editor emits a Library result only after the window show attempt, with matching ID and boolean status. Never persist tokens in Local drafts or log image metadata. Failures clear loading and permit retry; a 30-second missing-result fallback prevents permanently busy Library without claiming cancellation. Edit may open before preview decoding finishes. Respect reduced motion. No build/native compile/OS/server action or publication; native handoff requires installed verification.
+
+## C156 Library first-click activation (2026-11-13)
+
+User clarifies Local list row needs three clicks. Preserve single-click selection, modifier multiselection, Local double-click Edit and FTP double-click browser. Enable acceptFirstMouse only for the Library native window: the pinned Tauri schema defaults to false, allowing an inactive-window activation click to be consumed before the row receives a double-click. Do not change all rows to single-click opening or alter destructive/Settings/Edit controls. This is a plausible source-level correction, not proof of the installed cause. No build/OS action/publication; installed inactive-Library double-click verification requires a later authorized native build.
+
+## C155 Library/Edit handoff diagnostics (2026-11-13)
+
+Local logs show library_image/FTP failures but do not prove the intermittent Local/FTP Edit failure. Close the startup handoff gap by re-draining the native inbox after event subscription succeeds; retain queued requests while renderer operations are busy and do not clear the pending flag before the live operation guard. Report listener registration failures and preserve bounded operation/duration metadata for inbox read, Edit sizing/show and image decode in both diagnostic allowlists. Never log names, IDs, paths, payloads or credentials. Keep original drafts and presentation gates. Automated cases use injected IPC only; no build/native compile, OS/server action or publication. Installed intermittent failure still requires user retest.
+
+## C154 ellipse resize and padded multiline Text (2026-11-13)
+
+Magnifier uses eight independent resize anchors at its source; persist separate horizontal/vertical radii for linked and legacy effects, keep detached lens center fixed and derive output radii from magnification. Freehand/images retain uniform resizing. Inline Text uses the shared Textarea with 4px padding offset around its original document anchor; Shift+Enter inserts a newline, Enter commits and Escape cancels. Match multiline line height across Konva, selection bounds and PNG export; preserve text transactions, zoom, drafts and empty-input behavior. This supersedes C153 zero-padding metrics. No build, OS/server actions or publication before user acceptance.
+
+## C153 Fit marker and compact text line box (2026-11-13)
+
+Fit is a small downward teardrop marker above the zoom slider, positioned using real Fit percent and the slider thumb travel (8px endpoint inset), not the full input width. Keep the fit value reactive to viewport/image changes and preserve explicit Fit/camera reset, keyboard access and popover dismissal. Inline annotation Input uses one font-size-high line box with zero padding rather than 1.2em; preserve descenders, caret, zoom, draft/output typography and transaction behavior. No build, OS/server actions or publication before acceptance.
+
+## C152 Inline text and visible detached-lens movement (2026-11-13)
+
+Text starts as a blank focused shared Input overlay at document coordinates, without placeholder annotation or toolbar text field. Keep live valid text in editable snapshots, one undo transaction per edit, Enter/blur commit, Escape rollback, IME-safe confirmation, repeat placement and double-click editing. Empty new text creates no saved item; clearing existing text removes it only on commit. Match annotation color/font/zoom geometry and preserve clipboard/shortcut handling inside the editor. Detached Magnifier lens drag keeps pixels/border/connector visible; only source drag/resize hides the output. No build, real OS/server actions or publication before user acceptance.
+
+## C151 Zoom slider and explicit Fit (2026-11-13)
+
+Clicking Edit zoom percentage opens a compact shared Slider (1–800%) with live percentage and explicit Fit action. Retain existing wheel/pinch gestures and Fit camera reset. Zoom/Resize popovers are mutually exclusive, close on outside click/document change, and Escape closes Zoom without copying/hiding the editor. Use shared controls/materials and preserve status-cell geometry. No build, OS/server actions or publication before acceptance.
+
+## C150 Magnifier placement and manipulation visibility (2026-11-13)
+
+Hide the active linked lens artwork/border and connector while dragging its source, dragging the lens or resizing; retain transparent hit geometry so captured drags finish normally. Restore on release/cancel without hiding other lenses or source controls. Legacy unlinked lens artwork also hides during manipulation. New lenses use a 32-document-pixel edge gap and choose the greatest-clearance cardinal side among full-lens fits; if none fit, use the roomiest side and bound the center, allowing clipped oversized output. Preserve magnification-derived size, source-owned handles, export geometry, undo/cancel and Counter tracking. No build/publication before acceptance.
+
+## C149 Magnifier source controls and Counter drag feedback (2026-11-13)
+
+Linked Magnifier move/resize selection belongs to its source ellipse. Lens has drag-only positioning; rendered/export radii equal source radii times magnification, while source bounds remain unchanged by zoom factor. Source movement carries its attached lens; source resize updates its derived output size. Preserve legacy unlinked lens behavior, connector clipping, draft/export, undo and cancellation. Counter selection bounds and direction handle follow live element drag, including geometryScale, and cancel restores offsets. No build/native/server actions or publication before acceptance.
+
+## C148 Spotlight and linked elliptical Magnifier (2026-11-13)
+
+Spotlight hides its sampled dimming during manipulation and restores on release/cancel. New magnifiers draw a bounding ellipse (Shift constrains a circle), preserve a fixed sourceCenter and optional radiusY, and show a same-size offset lens with an edge-clipped connector. Dragging the lens leaves its source fixed; source handle retargets sampling. Preserve elliptical geometry, magnification, draft/export, undo and cancellation; document transforms map both centers. Legacy circular magnifiers without new fields remain valid. Counter corner pointer angles are continuous; keyboard steps 15 degrees or Shift 1 degree. No build, native OS/server actions or publication before acceptance.
+
 ## C147 user-authorized 1.2.2 publication (2026-11-13)
 
 User explicitly requests pushing completed C144–C146 updates and declines adding a first-launch permission flow. Synchronize 1.2.2, preserve historical assets, validate safe automated checks and commit/push normally to main to trigger ARM-only release CI. Preserve signing identity/updater key and all real permission/credential state. No OS/server/capture/update-install actions, private-key reads or manual tags; report CI publication separately from installed Settings/updater validation.

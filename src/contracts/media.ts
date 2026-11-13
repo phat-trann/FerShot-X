@@ -8,6 +8,8 @@ export interface ImageDocument {
   byteSize: number;
   /** Stable Local identity, shared by all raster derivatives of the same edit. */
   localId?: string;
+  /** Transient Library handoff token; never persisted in drafts. */
+  libraryRequestId?: string;
   draft?: import("./local-draft").LocalDraft;
 }
 export type CaptureMode = "fullscreen" | "area" | "window";

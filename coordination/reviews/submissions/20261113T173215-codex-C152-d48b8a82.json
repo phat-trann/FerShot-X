@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "id": "20261113T173215-codex-C152-d48b8a82",
+  "created_at": "2026-11-13T17:32:15.083085+07:00",
+  "agent": "codex",
+  "request": "C152-inline-text-visible-lens-drag",
+  "task": "C152",
+  "completion": "done",
+  "summary": "Inline blank-caret text editing with live drafts/output and edit transactions; keep detached lens content and connector visible while repositioning",
+  "files": [
+    "src/features/editor/konva/KonvaWorkbench.tsx",
+    "src/features/editor/advanced-workbench/AdvancedWorkbench.css",
+    "tests/e2e/codex-c152.spec.ts",
+    "tests/e2e/codex-c150.spec.ts",
+    "docs/agents/codex/C152-inline-text-visible-lens-drag.md"
+  ],
+  "file_sha256": {
+    "src/features/editor/konva/KonvaWorkbench.tsx": "2aeac3abb9034859ddf1cf9480e358adb58f784483d62ae41a45d5c614748da2",
+    "src/features/editor/advanced-workbench/AdvancedWorkbench.css": "bad3abe9cc6f4f85e98da283f40fc0e3f62854febba6afac7232bcf9420890b6",
+    "tests/e2e/codex-c152.spec.ts": "cd576dad35713451851a106d9c1621d1a0c3cbdfbfa20af79719237e1839c064",
+    "tests/e2e/codex-c150.spec.ts": "3e2092fdf83d8b4665cba30a0e7ade6f59c5e1b3f9e6dc8a527f11f7fad747cf",
+    "docs/agents/codex/C152-inline-text-visible-lens-drag.md": "7acd1972563e503b41b1acc0c8af55c206b707fc14f97ed932334fb72c94ea6c"
+  },
+  "checks": [
+    "TypeScript; full 424 unit cases; four initial browser cases and three final text/lens cases after cleanup; version/whitespace checks"
+  ],
+  "risks": [
+    "User visual acceptance pending; no build, OS/server operations or publication"
+  ],
+  "review": "pending"
+}

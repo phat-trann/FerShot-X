@@ -10,7 +10,7 @@ export function manipulationPolicy(item:AdvancedEditorItem){
  const kind=item.itemKind==="contract"?item.annotation.tool:item.itemKind==="shape"?item.shape.kind:item.effect.kind;
  if(kind==="line"||kind==="arrow")return {kind:"endpoints" as const,anchors:[],keepRatio:false};
  if(kind==="text"||kind==="counter")return {kind:"move" as const,anchors:[],keepRatio:false};
- if(kind==="magnifier"||kind==="pen")return {kind:"uniform" as const,anchors:CORNER_ANCHORS,keepRatio:true};
+ if(kind==="pen")return {kind:"uniform" as const,anchors:CORNER_ANCHORS,keepRatio:true};
  return {kind:"box" as const,anchors:BOX_ANCHORS,keepRatio:false};
 }
 /** Endpoint editing bakes legacy line rotation into coordinates without moving the other end. */

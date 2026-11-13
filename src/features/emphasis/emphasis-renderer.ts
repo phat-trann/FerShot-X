@@ -1,3 +1,4 @@
+import {drawMagnifier} from "./magnifier";
 import type { Point, Rect } from "../../contracts/editor";
 
 export const MAX_EMPHASIS_DIMENSION = 16_384;
@@ -24,6 +25,8 @@ export interface MagnifierEffect {
   readonly kind: "magnifier";
   readonly center: Point;
   readonly radius: number;
+  readonly radiusY?: number;
+  readonly sourceCenter?: Point;
   readonly zoom: number;
   readonly borderColor: string;
   readonly borderWidth: number;
@@ -123,6 +126,8 @@ export function validateEmphasisOptions(options: RenderEmphasisOptions): void {
         throw new Error("Spotlight dimOpacity must be between 0.1 and 0.95.");
       }
     } else if (effect.kind === "magnifier") {
+      if(effect.radiusY!==undefined&&(!Number.isFinite(effect.radiusY)||effect.radiusY<4||effect.radiusY>512))throw new Error("Invalid magnifier vertical radius.");
+      if(effect.sourceCenter&&(!Number.isFinite(effect.sourceCenter.x)||!Number.isFinite(effect.sourceCenter.y)||effect.sourceCenter.x<0||effect.sourceCenter.y<0||effect.sourceCenter.x>width||effect.sourceCenter.y>height))throw new Error("Magnifier source must be within image bounds.");
       if (
         !Number.isFinite(effect.center.x) ||
         !Number.isFinite(effect.center.y) ||
@@ -224,38 +229,7 @@ export async function renderEmphasisToPngBlob(
       }
       ctx.restore();
     } else if (effect.kind === "magnifier") {
-      const { center, radius, zoom, borderColor, borderWidth } = effect;
-      const sampleRadius = radius / zoom;
-      const sx = center.x - sampleRadius;
-      const sy = center.y - sampleRadius;
-      const sw = sampleRadius * 2;
-      const sh = sampleRadius * 2;
-
-      ctx.save();
-      ctx.beginPath();
-      ctx.arc(center.x, center.y, radius, 0, Math.PI * 2);
-      ctx.clip();
-      ctx.imageSmoothingEnabled = false;
-      ctx.drawImage(
-        baseCanvas,
-        sx,
-        sy,
-        sw,
-        sh,
-        center.x - radius,
-        center.y - radius,
-        radius * 2,
-        radius * 2,
-      );
-      ctx.restore();
-
-      ctx.save();
-      ctx.beginPath();
-      ctx.arc(center.x, center.y, radius, 0, Math.PI * 2);
-      ctx.strokeStyle = borderColor;
-      ctx.lineWidth = borderWidth;
-      ctx.stroke();
-      ctx.restore();
+      drawMagnifier(ctx,baseCanvas,effect);
     }
   }
 

@@ -54,3 +54,7 @@
 }
 
 
+
+/* The native text caret overlays document coordinates; form geometry must not resize it. */
+.workspace.editor-window textarea.inline-annotation-text[data-slot=textarea] { position: absolute; z-index: 5; box-sizing: border-box; min-height: 0; padding: 4px; margin: 0; border: 0; resize: none; overflow: hidden; white-space: pre; border-radius: 0; background: transparent; box-shadow: none; font-family: sans-serif; font-weight: bold; line-height: 1; caret-color: currentColor; filter: none; }
+.workspace.editor-window textarea.inline-annotation-text[data-slot=textarea]:focus-visible { filter: none !important; }

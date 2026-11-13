@@ -5636,6 +5636,116 @@
       "shared_claim": "root-wiring",
       "owned_paths": "Release metadata, notes and publication of C144\u2013C146",
       "inputs": "User requests push and leaves permission flow unchanged"
+    },
+    {
+      "id": "C148",
+      "agent": "codex",
+      "title": "Spotlight manipulation hiding, linked elliptical magnifier and continuous counter angles",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "Konva interactions/model, emphasis validation/render/export, draft-compatible tests and docs",
+      "inputs": "User requests Spotlight mask hidden during drag, freely positioned linked magnifier and arbitrary counter corner angles"
+    },
+    {
+      "id": "C149",
+      "agent": "codex",
+      "title": "Move magnifier resize controls to source and track Counter live drag bounds",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "Magnifier geometry/export/selection, Counter live drag bounds, regressions/docs",
+      "inputs": "User requests source-owned magnifier handles, magnification-derived output size and Counter bounds tracking during drag"
+    },
+    {
+      "id": "C150",
+      "agent": "codex",
+      "title": "Hide Magnifier output during manipulation and place new lens with fixed gap toward free space",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "Magnifier default placement/visibility, geometry and interaction regressions, docs",
+      "inputs": "User requests hiding zoom/connector until release and fixed-gap roomiest-side default placement"
+    },
+    {
+      "id": "C151",
+      "agent": "codex",
+      "title": "Open zoom slider and explicit Fit from Edit zoom percentage",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "Editor status zoom popover, Workspace zoom callback, focused regressions/docs",
+      "inputs": "User requests clicking zoom percentage to show a slider and Fit button"
+    },
+    {
+      "id": "C152",
+      "agent": "codex",
+      "title": "Edit text directly on image and retain detached Magnifier during lens drag",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "Konva inline text/transactions, overlay style, magnifier visibility and focused regressions/docs",
+      "inputs": "User requests blank caret text editing on-image and visible Magnifier content/link during lens movement"
+    },
+    {
+      "id": "C153",
+      "agent": "codex",
+      "title": "Position Fit as a slider marker and remove excess inline Text height",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "Editor status Fit geometry/state, text line-box metrics, browser regressions/docs",
+      "inputs": "User requests Fit above slider as a downward droplet at the fitting percentage and asks to remove whitespace under inline text"
+    },
+    {
+      "id": "C154",
+      "agent": "codex",
+      "title": "Independent Magnifier ellipse resizing and padded multiline inline Text",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "Konva manipulation/text, shared Textarea, multiline export/bounds, focused tests/docs",
+      "inputs": "User requests Magnifier ellipse resize and small text padding with Shift+Enter newlines"
+    },
+    {
+      "id": "C155",
+      "agent": "codex",
+      "title": "Review intermittent Library to Edit handoff and diagnostic gaps",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "Workspace inbox subscription, Library diagnostics allowlist and targeted regressions/docs",
+      "inputs": "User reports intermittent Library images not opening in Edit; inspect existing local errors only"
+    },
+    {
+      "id": "C156",
+      "agent": "codex",
+      "title": "Accept Library first mouse click on inactive macOS window",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "Library Tauri window config and row click regressions/docs",
+      "inputs": "User needs three clicks on Local row; preserve single-click selection and double-click Edit"
+    },
+    {
+      "id": "C157",
+      "agent": "codex",
+      "title": "Show pending Library Edit handoff feedback",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "Library opening state/spinner, correlated editor handoff completion and focused regressions/docs",
+      "inputs": "User asks for immediate loading after opening Local/Edit so slow requests are visible"
+    },
+    {
+      "id": "C158",
+      "agent": "codex",
+      "title": "Publish accepted editor and Library updates as 1.3.0",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "Version metadata, release notes, final verification and normal main publication",
+      "inputs": "User explicitly requests a new release of completed C148-C157"
     }
   ],
   "allocation": "Codex sole active client; external Antigravity and Copilot inactive; preserve historical authorship.",
@@ -5790,7 +5900,18 @@
       "C144",
       "C145",
       "C146",
-      "C147"
+      "C147",
+      "C148",
+      "C149",
+      "C150",
+      "C151",
+      "C152",
+      "C153",
+      "C154",
+      "C155",
+      "C156",
+      "C157",
+      "C158"
     ],
     "copilot": []
   },

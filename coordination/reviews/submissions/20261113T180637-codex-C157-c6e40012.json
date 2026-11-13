@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "id": "20261113T180637-codex-C157-c6e40012",
+  "created_at": "2026-11-13T18:06:37.651502+07:00",
+  "agent": "codex",
+  "request": "C157-library-edit-loading",
+  "task": "C157",
+  "completion": "done",
+  "summary": "Show immediate correlated Library/Edit loading until presentation, with duplicate guard and retryable errors",
+  "files": [
+    "src/LibraryWindow.tsx",
+    "src/LibraryWindow.css",
+    "src/contracts/media.ts",
+    "src/platform/library.ts",
+    "src/Workspace.tsx",
+    "src-tauri/src/library_window.rs",
+    "tests/e2e/helpers/v1-ipc.ts",
+    "tests/e2e/codex-c157.spec.ts",
+    "tests/e2e/codex-v1-editor.spec.ts",
+    "docs/agents/codex/C157-library-edit-loading.md"
+  ],
+  "file_sha256": {
+    "src/LibraryWindow.tsx": "07dbf77911fa775e0ea6fa237a2972de68bfcd2331dfe247620884e77f6886fb",
+    "src/LibraryWindow.css": "a3ca0c59183a5d2c463ebc0b09cfd2e3a8bac97970c50951554cd2e64dfced52",
+    "src/contracts/media.ts": "dd3ede691ee57ba3287cbb151de013e99d1ace96ccce46b576c3d93a8a3bbe87",
+    "src/platform/library.ts": "1cafd032fc6b09e11c505b7996232aa3a205b0c14e447300148e7c4da508e2ef",
+    "src/Workspace.tsx": "a150dbe14aa930b0d50e58b8fcf213b5bc2ebc28e8e7f376ceefec2782b67d3d",
+    "src-tauri/src/library_window.rs": "f0c4a1290c524689642054146af7f60a2ef566028374d75403b4376df647fd1d",
+    "tests/e2e/helpers/v1-ipc.ts": "d828483e2315cf74f4d6606b28908c4a1f39fbe008c2c249b162a49365aa8d36",
+    "tests/e2e/codex-c157.spec.ts": "b2e9e17e4663bbfda559c4cb647c781b020b5239c146bef1a5cf3d482ab340f5",
+    "tests/e2e/codex-v1-editor.spec.ts": "cc981efab2c1dcceef6a06f99017756b113dafa69435f235db64c6804dac41a6",
+    "docs/agents/codex/C157-library-edit-loading.md": "eb22bb28993097638b115493a8ecd6e84c89f0c1ff1f6103e1596baa2ec7268f"
+  },
+  "checks": [
+    "TypeScript; 2 UI guards; 10 injected browser cases including popup handoff, slow/error/timeout and selection; whitespace"
+  ],
+  "risks": [
+    "Native handoff source-reviewed only; installed acceptance pending; no build/OS/server action/publication"
+  ],
+  "review": "pending"
+}

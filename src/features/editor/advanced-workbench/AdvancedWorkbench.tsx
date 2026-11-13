@@ -1,3 +1,4 @@
+import {drawMagnifier} from "../../emphasis/magnifier";
 import { Sparkles, ImageDown } from "lucide-react";
 import { Button } from "../../../components/ui/button";
 import { validateEmbeddedPng } from "../konva/image-source";
@@ -318,16 +319,17 @@ function itemToSelectionProxyAnnotation(
       });
     }
     if (item.effect.kind === "magnifier") {
-      const { center, radius } = item.effect;
+      const { radius, radiusY=radius } = item.effect;
+      const center=item.effect.sourceCenter??item.effect.center;
       return Object.freeze({
         id: item.id,
         tool: "rectangle",
         points: Object.freeze([
           Object.freeze({
             x: Math.max(0, center.x - radius),
-            y: Math.max(0, center.y - radius),
+            y: Math.max(0, center.y - radiusY),
           }),
-          Object.freeze({ x: center.x + radius, y: center.y + radius }),
+          Object.freeze({ x: center.x + radius, y: center.y + radiusY }),
         ]),
         style: DEFAULT_SHAPE_STYLE,
       });
@@ -395,17 +397,15 @@ function applyMovedPointsToItem(
     if (item.effect.kind === "magnifier") {
       const radius = Math.min(
         512,
-        Math.max(4, Math.round(Math.max(safeRect.width, safeRect.height) / 2)),
+        Math.max(4, Math.round((item.effect.radiusY!==undefined?safeRect.width:Math.max(safeRect.width, safeRect.height)) / 2)),
       );
       return Object.freeze({
         ...item,
         effect: Object.freeze({
           ...item.effect,
-          center: Object.freeze({
-            x: Math.round((safeRect.x + safeRect.width / 2) * 100) / 100,
-            y: Math.round((safeRect.y + safeRect.height / 2) * 100) / 100,
-          }),
+          ...(item.effect.sourceCenter?{sourceCenter:Object.freeze({x:safeRect.x+safeRect.width/2,y:safeRect.y+safeRect.height/2})}:{center:Object.freeze({x:safeRect.x+safeRect.width/2,y:safeRect.y+safeRect.height/2})}),
           radius,
+          ...(item.effect.radiusY!==undefined?{radiusY:Math.max(4,Math.min(512,safeRect.height/2))}:{}),
         }),
       });
     }
@@ -509,7 +509,7 @@ export async function renderAdvancedWorkbenchToPngBlob(options: {
     if (item.itemKind === "emphasis") {
       if(item.rotation){const effect=item.effect,b=itemBounds(item),cx=b.x+b.width/2,cy=b.y+b.height/2;ctx.save();
         if(effect.kind==="spotlight"){const hole=new Path2D();hole.rect(b.x,b.y,b.width,b.height);const mask=new Path2D();mask.rect(0,0,width,height);mask.addPath(hole,new DOMMatrix().translate(cx,cy).rotate(item.rotation).translate(-cx,-cy));ctx.fillStyle=`rgba(0,0,0,${effect.dimOpacity})`;ctx.fill(mask,"evenodd");}
-        else {ctx.translate(cx,cy);ctx.rotate(item.rotation*Math.PI/180);ctx.translate(-cx,-cy);if(effect.kind==="highlight"){ctx.globalAlpha=effect.opacity;ctx.fillStyle=effect.color;ctx.fillRect(b.x,b.y,b.width,b.height);}else{ctx.beginPath();ctx.arc(effect.center.x,effect.center.y,effect.radius,0,Math.PI*2);ctx.clip();const r=effect.radius/effect.zoom;ctx.drawImage(source,effect.center.x-r,effect.center.y-r,2*r,2*r,b.x,b.y,b.width,b.height);ctx.strokeStyle=effect.borderColor;ctx.lineWidth=effect.borderWidth;ctx.stroke();}}
+        else {ctx.translate(cx,cy);ctx.rotate(item.rotation*Math.PI/180);ctx.translate(-cx,-cy);if(effect.kind==="highlight"){ctx.globalAlpha=effect.opacity;ctx.fillStyle=effect.color;ctx.fillRect(b.x,b.y,b.width,b.height);}else{drawMagnifier(ctx,source,effect);}}
         ctx.restore();}
       continue;
     }
@@ -595,7 +595,7 @@ export async function renderAdvancedWorkbenchToPngBlob(options: {
       const fontPx = Math.max(14, ann.style.strokeWidth * 6);
       ctx.font = `bold ${fontPx}px sans-serif`;
       ctx.textBaseline = "top";
-      ctx.fillText(ann.text ?? "", pt.x, pt.y);
+      (ann.text ?? "").split("\n").forEach((line,index)=>ctx.fillText(line,pt.x,pt.y+index*Math.max(14,ann.style.strokeWidth*6)));
     } else if (ann.tool === "counter" && ann.points.length >= 1) {
       const pt = ann.points[0];
       const radius = Math.max(12, ann.style.strokeWidth * 4);

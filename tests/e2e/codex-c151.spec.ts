@@ -1,0 +1,11 @@
+import {test,expect} from "@playwright/test";
+import {mock} from "./helpers/v1-ipc";
+test("Zoom percentage opens a shared slider and explicit Fit without changing document pixels",async({page})=>{
+ await mock(page);await page.goto("/?editor");const png=await page.evaluate(()=>{const c=document.createElement("canvas");c.width=400;c.height=240;c.getContext("2d")!.fillRect(0,0,400,240);return c.toDataURL().split(",")[1];});await page.locator('input[type="file"]').setInputFiles({name:"Zoom.png",mimeType:"image/png",buffer:Buffer.from(png,"base64")});
+ const trigger=page.getByRole("button",{name:"Zoom controls",exact:true}),stage=page.getByTestId("advanced-workbench-stage");const before=(await stage.boundingBox())!.width;
+ await trigger.click();const panel=page.getByRole("region",{name:"Zoom controls",exact:true}),slider=panel.getByRole("slider",{name:"Image zoom",exact:true});await expect(panel).toBeVisible();await expect(trigger).toHaveAttribute("aria-expanded","true");expect((await stage.boundingBox())!.width).toBe(before);
+ await slider.fill("200");await expect(page.getByLabel("Zoom percentage",{exact:true})).toHaveText("200%");await expect.poll(async()=> (await stage.boundingBox())!.width).toBe(800);await slider.focus();await slider.press("ArrowRight");await expect(page.getByLabel("Zoom percentage",{exact:true})).toHaveText("201%");await slider.press("Escape");await expect(panel).toHaveCount(0);await expect(trigger).toBeFocused();expect(await page.evaluate(()=>(window as any).__CALLS__.some((c:any)=>c.command==="copy_image"))).toBe(false);
+ await trigger.click();await panel.getByRole("button",{name:"Fit",exact:true}).click();await expect(panel).toHaveCount(0);await expect.poll(async()=> (await stage.boundingBox())!.width).toBe(before);
+ await trigger.click();await page.getByRole("button",{name:"Image size",exact:true}).click();await expect(panel).toHaveCount(0);await expect(page.getByRole("region",{name:"Resize image",exact:true})).toBeVisible();await trigger.click();await expect(page.getByRole("region",{name:"Resize image",exact:true})).toHaveCount(0);await page.mouse.click(10,200);await expect(panel).toHaveCount(0);
+ expect(await page.evaluate(()=>(window as any).__CALLS__.some((c:any)=>c.command==="process_image"))).toBe(false);
+});

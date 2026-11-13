@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "id": "20261113T164750-codex-C148-d2138363",
+  "created_at": "2026-11-13T16:47:50.718840+07:00",
+  "agent": "codex",
+  "request": "C148-linked-magnifier-spotlight-counter",
+  "task": "C148",
+  "completion": "done",
+  "summary": "Hide Spotlight mask during manipulation, add linked elliptical magnifier source/lens and continuous counter direction with persistent export geometry",
+  "files": [
+    "src/features/editor/konva/KonvaWorkbench.tsx",
+    "src/features/editor/konva/model.ts",
+    "src/features/editor/konva/counter.ts",
+    "src/features/editor/konva/constrain.ts",
+    "src/features/emphasis/magnifier.ts",
+    "src/features/emphasis/emphasis-renderer.ts",
+    "src/features/editor/advanced-workbench/AdvancedWorkbench.tsx",
+    "src/features/emphasis/magnifier.test.ts",
+    "tests/e2e/codex-c148.spec.ts",
+    "docs/agents/codex/C148-linked-magnifier-spotlight-counter.md"
+  ],
+  "file_sha256": {
+    "src/features/editor/konva/KonvaWorkbench.tsx": "ca89133e8b34f2fa7ef0de63d2af14f2b257d8836faf0901127a3e7c9d67e6cf",
+    "src/features/editor/konva/model.ts": "624b6943c8df3710ce453a41b67264fff34cd721f22b330af080388ae2bf64ba",
+    "src/features/editor/konva/counter.ts": "b069685b21272e420ca357ed1facac0519213810dd4b8ef8678d068f098b28ae",
+    "src/features/editor/konva/constrain.ts": "0cca9cef4225a09554e661fbd4f8a9e73904082b6229cfa456ff1ca407c47327",
+    "src/features/emphasis/magnifier.ts": "aaab5add70b853c0c338ac2d986412e5b8d9b1f705dac6ac4493abcc9660e9ec",
+    "src/features/emphasis/emphasis-renderer.ts": "7642008dbb6b6d1c71019ba0aaaa20f8ede15fb7af4dd25a4f85f55848ed522d",
+    "src/features/editor/advanced-workbench/AdvancedWorkbench.tsx": "48e312d91b4285eff2a1c8398acaeb94614f9c7b912d798e91ebd3e1d2db061e",
+    "src/features/emphasis/magnifier.test.ts": "4f40f3f615d1174da9270e624e3b83c7f18589bcefa0d39e7bf9bdf601aa4952",
+    "tests/e2e/codex-c148.spec.ts": "d4f1142e085524d0cdfba64ec81cbe70336befd3077e5448f2600f657a1f185c",
+    "docs/agents/codex/C148-linked-magnifier-spotlight-counter.md": "012308826d01175172e5a40bdd8501ec5a26f1d00dbebbe54a62e666b6de13c2"
+  },
+  "checks": [
+    "TypeScript; 422 unit cases plus focused refinement rerun; 7 browser cases plus final 2-case export/reopen/Escape rerun; screenshot, version and whitespace checks"
+  ],
+  "risks": [
+    "New interactions need user visual acceptance; no build, OS/server actions or publication; legacy circular drafts stay compatible"
+  ],
+  "review": "pending"
+}

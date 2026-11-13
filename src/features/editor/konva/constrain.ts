@@ -3,7 +3,7 @@ import type { Point } from "../../../contracts/editor";
 export function constrainGesture(start:Point,end:Point,tool:string,shift:boolean,width:number,height:number):Point{
  if(!shift)return end;
  const dx=end.x-start.x,dy=end.y-start.y;
- if(["rectangle","ellipse","highlight","spotlight","blur"].includes(tool)){
+ if(["rectangle","ellipse","highlight","spotlight","blur","magnifier"].includes(tool)){
   const sx=dx<0?-1:1,sy=dy<0?-1:1;
   const size=Math.min(Math.max(Math.abs(dx),Math.abs(dy)),sx<0?start.x:width-start.x,sy<0?start.y:height-start.y);
   return {x:start.x+sx*size,y:start.y+sy*size};

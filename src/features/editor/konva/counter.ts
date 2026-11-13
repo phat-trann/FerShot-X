@@ -11,7 +11,7 @@ export function counterBounds(center:Point,radius:number,angle=DEFAULT_COUNTER_A
 }
 export function counterCorner(center:Point,pointer:Point):number {
   const angle=Math.atan2(pointer.y-center.y,pointer.x-center.x)*180/Math.PI;
-  return ((Math.round((angle-45)/90)*90+45)%360+360)%360;
+  return (angle%360+360)%360;
 }
 type PathContext=Pick<CanvasRenderingContext2D,"beginPath"|"moveTo"|"arc"|"quadraticCurveTo"|"closePath">;
 /** Shared path for the live badge and exported pixels; the number never rotates. */

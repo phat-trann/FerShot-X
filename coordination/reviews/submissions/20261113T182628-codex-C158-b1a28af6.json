@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "id": "20261113T182628-codex-C158-b1a28af6",
+  "created_at": "2026-11-13T18:26:28.361442+07:00",
+  "agent": "codex",
+  "request": "C158-publish-1-3-0",
+  "task": "C158",
+  "completion": "done",
+  "summary": "Prepare user-authorized 1.3.0 release with completed C148-C157 editor and Library updates",
+  "files": [
+    "package.json",
+    "package-lock.json",
+    "src-tauri/Cargo.toml",
+    "src-tauri/Cargo.lock",
+    "src-tauri/tauri.conf.json",
+    "README.md",
+    "AGENTS.md",
+    "tests/e2e/codex-c148.spec.ts",
+    "tests/e2e/codex-v1-editor.spec.ts",
+    "docs/releases/1.3.0.md",
+    "docs/agents/codex/C158-publish-1.3.0.md"
+  ],
+  "file_sha256": {
+    "package.json": "9ee50313703abed8a2d81651c4593fe70210c4e2a2aa3f0a54541a7e3e908f68",
+    "package-lock.json": "85f6366cfc947e70d98d9be7c943fa4adab443736dc04726da06ad33d850e363",
+    "src-tauri/Cargo.toml": "d15f2584bd24bddedd0bc9ce71029c7eefc3f9d554ce62c33189b444a7660e16",
+    "src-tauri/Cargo.lock": "1ad92bf07ceb3b502e22a7f96cbfb4309afb180edb559aa8e5056f68a7e4be9b",
+    "src-tauri/tauri.conf.json": "4b3210f64f040156a0819d31ea6697e502a5e32b3cc7e0d45fb7363d286bce0c",
+    "README.md": "0830752cdf3bfd5193aee7dc83f2dc87ddc1784a25e4a450ce6ae2514904e907",
+    "AGENTS.md": "f097b408d4ff8fbfda8cbb4aedeae4f7e6de3093b3cfcb0202814473c75df20a",
+    "tests/e2e/codex-c148.spec.ts": "04d8868ce0cd9ff6c0fd003cda173ca6ac098b4302e9990ee5940476fe72b55f",
+    "tests/e2e/codex-v1-editor.spec.ts": "893b829cee7aaf3c6b9529d8f3ef657f543b329523bef40e8683dcad585b5efa",
+    "docs/releases/1.3.0.md": "666394d7e416014651030a8eaa7bc5667fb0d5973f0dab5aa96206abce65eed9",
+    "docs/agents/codex/C158-publish-1.3.0.md": "f07567685ef95d2756facdc9446f6f0df23311e5ce30a67c5d7365bfb0353b82"
+  },
+  "checks": [
+    "426 unit tests; 73 browser cases; production renderer build; Rust root check --locked --tests; version/signing/manifest/release regressions; whitespace"
+  ],
+  "risks": [
+    "Publication status follows normal push/CI; installed update/window acceptance remains separate"
+  ],
+  "review": "pending"
+}

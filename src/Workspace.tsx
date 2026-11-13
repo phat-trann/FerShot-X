@@ -85,7 +85,7 @@ export default function Workspace() {
   const [advancedById, setAdvancedById] = useState<ReadonlyMap<string, readonly AdvancedEditorItem[]>>(() => new Map());
   const [pointerColor]=useState(createPointerColor);
   const [displayZoom,setDisplayZoom]=useState(1);
-  const fitZoom=useRef(1);
+  const [fitZoom,setFitZoom]=useState(1);
   const [imageToInsert,setImageToInsert]=useState<{id:string;src:string;width:number;height:number;target:string}|undefined>();
   const picker = useRef<HTMLInputElement>(null);
   const liveImages = useRef<ImageDocument[]>([]);
@@ -112,19 +112,19 @@ export default function Workspace() {
     for (const item of ftpQueue.items) if (item.status === "success") void localHistory.forget(item.sourceId);
   }, [ftpQueue.items, localHistory.forget]);
 
-  const pendingPresentation=useRef<{id:string;sized:boolean;painted:boolean}|null>(null);
+  const pendingPresentation=useRef<{id:string;requestId?:string;sized:boolean;painted:boolean}|null>(null);
   useEffect(()=>{const start=()=>{pendingPresentation.current=null;};window.addEventListener("fershot-capture-starting",start);return()=>window.removeEventListener("fershot-capture-starting",start);},[]);
   function presentDocument(id:string,part:"sized"|"painted"){
     const pending=pendingPresentation.current;if(!mounted.current||pending?.id!==id)return;
     pending[part]=true;
-    if(pending.sized&&pending.painted){pendingPresentation.current=null;void showEditor().catch(()=>setError("Edit could not be brought forward. Open the image again from Library."));}
+    if(pending.sized&&pending.painted){pendingPresentation.current=null;void showEditor(pending.requestId).catch(()=>setError("Edit could not be brought forward. Open the image again from Library."));}
   }
   function addDocument(next: ImageDocument, select = true) {
     if (!mounted.current) { captureScales.current.delete(next.id); URL.revokeObjectURL(next.src); return; }
     if (liveImages.current.length >= 512) { captureScales.current.delete(next.id); URL.revokeObjectURL(next.src); throw new RangeError("Session library is limited to 512 images."); }
     sessionRevision.current++;
-    pendingPresentation.current={id:next.id,sized:false,painted:false};
-    void fitEditorWindow(next.width,next.height).then(()=>presentDocument(next.id,"sized")).catch(()=>{if(pendingPresentation.current?.id===next.id){pendingPresentation.current=null;setError("Edit could not be sized. Open the image again from Library.");void showEditor();}});
+    pendingPresentation.current={id:next.id,requestId:next.libraryRequestId,sized:false,painted:false};
+    void fitEditorWindow(next.width,next.height).then(()=>presentDocument(next.id,"sized")).catch(()=>{if(pendingPresentation.current?.id===next.id){pendingPresentation.current=null;setError("Edit could not be sized. Open the image again from Library.");void showEditor(next.libraryRequestId);}});
     setEditing(true);
     liveImages.current = [...liveImages.current, next];
     setImages([...liveImages.current]);
@@ -303,8 +303,8 @@ export default function Workspace() {
 
   const incomingPending = useRef(true);
   const [incomingRevision,setIncomingRevision] = useState(0);
-  useEffect(()=>{let live=true;let off:(()=>void)|undefined;void listenLibrary("fershot-editor-image",()=>{incomingPending.current=true;setIncomingRevision(n=>n+1);}).then(fn=>{if(live)off=fn;else fn();});return()=>{live=false;off?.();};},[]);
-  useEffect(()=>{if(busy||!preferencesReady||!incomingPending.current)return;incomingPending.current=false;void operate(async()=>{for(let count=0;count<4;count++){const incoming=await takeEditorImage();if(!incoming)break;capturedPreviewIds.current.add(incoming.id);addDocument(incoming);setNotice("Library image ready to edit. Original preserved.");}});},[busy,preferencesReady,incomingRevision]);
+  useEffect(()=>{let live=true;let off:(()=>void)|undefined;const request=()=>{if(live){incomingPending.current=true;setIncomingRevision(n=>n+1);}};void listenLibrary("fershot-editor-image",request).then(fn=>{if(live){off=fn;request();}else fn();}).catch(()=>{if(live){recordDiagnostic("image","failed","other",{operation:"listen_editor_image"});setError("Library events are unavailable. Restart the app and retry.");}});return()=>{live=false;off?.();};},[]);
+  useEffect(()=>{if(busy||busyRef.current||!preferencesReady||!incomingPending.current)return;incomingPending.current=false;void operate(async()=>{for(let count=0;count<4;count++){const incoming=await takeEditorImage();if(!incoming)break;capturedPreviewIds.current.add(incoming.id);addDocument(incoming);setNotice("Library image ready to edit. Original preserved.");}});},[busy,preferencesReady,incomingRevision]);
 
   async function hideCompletedCapture(id: string) {
     if (capturedPreviewIds.current.has(id)) await hideWorkspace();
@@ -451,7 +451,7 @@ export default function Workspace() {
              <div id="editor-annotation-tools"/>
              {originalId&&<EditorTool order={41} label="Return To Source Image"><Button variant="ghost" size="icon" disabled={busy||!originalImage} aria-label="Return to source image" title="Return To Source Image" onClick={restoreOriginal}><Undo2/></Button></EditorTool>}
             </EditorToolStrip>
-            <EditorImageStatus image={image} colorSource={pointerColor} zoom={displayZoom} busy={busy} onFit={()=>{window.dispatchEvent(new Event("fershot-editor-fit"));setZoom(fitZoom.current);}} onResize={(width,height)=>transform({resize:{width,height}})}/>
+            <EditorImageStatus image={image} colorSource={pointerColor} zoom={displayZoom} fitZoom={fitZoom} busy={busy} onZoom={setZoom} onFit={()=>{window.dispatchEvent(new Event("fershot-editor-fit"));setZoom(fitZoom);}} onResize={(width,height)=>transform({resize:{width,height}})}/>
             <span className="document-title sr-only">{image?.name}</span>
           </div>
           <div id="editor-element-options"/><div id="editor-tool-options"/>
@@ -472,7 +472,7 @@ export default function Workspace() {
           {image&&<div className="image-stage">
             {(transformMode||effectsOpen)&&<WorkspaceDirectTools key={image.id} image={image} annotations={annotations} advanced={advancedItems} mode={transformMode??"effects"} busy={busy} zoom={zoom} onTransform={transform} onEffect={applyEffect} onCancel={()=>{setTransformMode(null);setEffectsOpen(false);}}/>}
             <div hidden={!!transformMode||effectsOpen}>
-              <WorkspaceEditor onReady={id=>presentDocument(id,"painted")} onLoadError={()=>{setError("Image preview could not be loaded. Reopen the image from Library; the original is retained.");void showEditor();}} imageToInsert={imageToInsert?.target===image.id?imageToInsert:undefined} onImageInserted={()=>setImageToInsert(undefined)} onFitChange={value=>{fitZoom.current=value;}} image={image} annotations={annotations} advancedItems={advancedItems} active={editing} busy={busy} zoom={zoom} onPixelSample={pointerColor.set} onZoomReport={setDisplayZoom} onZoomChange={setZoom} onAdvancedChange={updateAdvanced} onSelectDrawing={()=>{setTransformMode(null);setEffectsOpen(false);setEditing(true);}}/>
+              <WorkspaceEditor onReady={id=>presentDocument(id,"painted")} onLoadError={()=>{recordDiagnostic("image","failed","invalid_input",{operation:"editor_image_decode"});setError("Image preview could not be loaded. Reopen the image from Library; the original is retained.");void showEditor(image.libraryRequestId);}} imageToInsert={imageToInsert?.target===image.id?imageToInsert:undefined} onImageInserted={()=>setImageToInsert(undefined)} onFitChange={setFitZoom} image={image} annotations={annotations} advancedItems={advancedItems} active={editing} busy={busy} zoom={zoom} onPixelSample={pointerColor.set} onZoomReport={setDisplayZoom} onZoomChange={setZoom} onAdvancedChange={updateAdvanced} onSelectDrawing={()=>{setTransformMode(null);setEffectsOpen(false);setEditing(true);}}/>
             </div>
           </div>}
         </section>

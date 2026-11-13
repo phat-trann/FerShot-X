@@ -37,7 +37,7 @@ test("Library and Edit retain shared typography, rounded selection and fixed can
   await expect(page.getByTestId("advanced-workbench-stage")).toBeVisible();
   await expect(page.getByRole("button",{name:"Copy image",exact:true})).toHaveCSS("border-top-color","rgba(0, 0, 0, 0)");
   await expect(page.getByRole("button",{name:"Copy image",exact:true})).toHaveCSS("background-color","rgba(0, 0, 0, 0)");
-  await expect(page.getByRole("button", { name: "Fit image", exact: true })).toHaveCSS("width", "72px");
+  await expect(page.getByRole("button", { name: "Zoom controls", exact: true })).toHaveCSS("width", "72px");
   await page.getByRole("button", { name: "Image size", exact: true }).click();
   await expect(page.getByLabel("Resize width")).toHaveCSS("height", "24px");
   await expect(page.getByLabel("Resize width")).toHaveCSS("border-radius", "5px");

@@ -33,3 +33,13 @@
 .library-metadata output { flex: 1; }
 .library-metadata .status-badge,.library-metadata .library-detail-actions { flex-shrink: 0; }
 .library-metadata .library-detail-actions { flex-wrap: nowrap; }
+
+.library-row-thumbnail { position: relative; flex-shrink: 0; }
+.library-row-opening { position: absolute; inset: 0; display: grid; place-items: center; background: #232427cc; border-radius: 5px; }
+.library-row-opening .ui-loading-state { padding: 0; min-height: 0; }
+.library-row[aria-busy=true] { cursor: progress; }
+.library-preview { position: relative; }
+.library-opening-overlay { position: absolute; inset: 0; z-index: 1; display: grid; place-items: center; background: #23242780; cursor: progress; }
+.library-edit-opening > svg { animation: library-opening-spin 1s linear infinite; }
+@keyframes library-opening-spin { to { transform: rotate(360deg); } }
+@media(prefers-reduced-motion:reduce) { .library-edit-opening > svg { animation: none; } }

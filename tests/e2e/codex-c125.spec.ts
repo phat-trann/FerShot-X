@@ -6,7 +6,7 @@ test("Edit and Resize use the entire space below the toolbar with no inset frame
  for(const size of [{width:1800,height:600},{width:600,height:1800}]){
   const png=await page.evaluate(size=>{const c=document.createElement("canvas");c.width=size.width;c.height=size.height;const ctx=c.getContext("2d")!;ctx.fillStyle="#257efe";ctx.fillRect(0,0,c.width,c.height);return c.toDataURL().split(",")[1];},size);
   await page.locator('input[type="file"]').setInputFiles({name:"Full-area.png",mimeType:"image/png",buffer:Buffer.from(png,"base64")});
-  await page.getByRole("button",{name:"Fit image",exact:true}).click();const region=page.getByRole("region",{name:"Image workspace",exact:true});
+  await page.getByRole("button",{name:"Zoom controls",exact:true}).click();await page.getByRole("button",{name:"Fit",exact:true}).click();const region=page.getByRole("region",{name:"Image workspace",exact:true});
   const body=(await page.locator('.workspace-body').boundingBox())!,clip=(await region.boundingBox())!,toolbar=(await page.locator('.editor-chrome').boundingBox())!;
   expect(clip).toEqual(body);expect(clip.x).toBe(0);expect(clip.width).toBe(1180);expect(clip.y).toBeCloseTo(toolbar.y+toolbar.height,0);expect(clip.y+clip.height).toBe(780);
   await expect(region).toHaveCSS("padding","0px");await expect(region).toHaveCSS("border-top-width","0px");await expect(region).toHaveCSS("border-radius","0px");

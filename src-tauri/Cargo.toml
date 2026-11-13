@@ -1,6 +1,6 @@
 [package]
 name = "fershot-x"
-version = "1.2.0"
+version = "1.2.1"
 description = "FerShot X screenshot editor and FTP publishing workspace"
 authors = ["FerShot contributors"]
 edition = "2024"

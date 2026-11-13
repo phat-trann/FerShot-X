@@ -41,7 +41,8 @@ class FakeCommands:
             prefix = next(a.split("=", 1)[1] for a in args if a.startswith("--extract-certificates="))
             Path(prefix + "0").write_bytes(b"wrong public certificate" if self.wrong_certificate else PUBLIC_DER)
         if tool == "lipo":
-            return b"x86_64 arm64\n"
+            data = Path(args[-1]).read_bytes()
+            return data if data in (b"arm64", b"x86_64") else b"x86_64 arm64\n"
         return b""
 
 
@@ -130,6 +131,45 @@ class MacSigningTests(unittest.TestCase):
         verify_archives(self.env, path, assets, FakeCommands())
         with self.assertRaises(SigningFailure):
             verify_archives(self.env, path, assets, FakeCommands(wrong_certificate=True))
+
+    def test_thin_app_must_match_requested_architecture_and_certificate(self):
+        path = prepare(self.env, FakeCommands())
+        app = self.app()
+        binary = app / "Contents/MacOS/FerShot X"
+        for arch in ("arm64", "x86_64"):
+            binary.write_bytes(arch.encode())
+            verify_app(self.env, path, app, FakeCommands(), {arch})
+            for wrong in [{"x86_64" if arch == "arm64" else "arm64"}, {"arm64", "x86_64"}]:
+                with self.assertRaises(SigningFailure):
+                    verify_app(self.env, path, app, FakeCommands(), wrong)
+            with self.assertRaises(SigningFailure):
+                verify_app(self.env, path, app, FakeCommands(wrong_certificate=True), {arch})
+
+    def test_split_archives_verify_manifest_mapping_and_reject_swapped_binaries(self):
+        path = prepare(self.env, FakeCommands())
+        app = self.app()
+        assets = self.root / "assets"
+        assets.mkdir()
+        manifest = self.root / "latest.json"
+        platforms = {}
+        for target, arch in [("darwin-aarch64", "arm64"), ("darwin-x86_64", "x86_64")]:
+            name = target + ".app.tar.gz"
+            platforms[target] = {"url": "https://github.com/owner/repo/releases/download/v1.2.1/" + name}
+            (app / "Contents/MacOS/FerShot X").write_bytes(arch.encode())
+            with tarfile.open(assets / name, "w:gz") as stream:
+                stream.add(app, arcname=app.name)
+        manifest.write_text(json.dumps({"platforms": platforms}))
+        verify_archives(self.env, path, assets, FakeCommands(), manifest)
+        # Swapping URLs keeps each signature valid but would deliver the wrong CPU binary.
+        a, b = platforms.values()
+        a["url"], b["url"] = b["url"], a["url"]
+        manifest.write_text(json.dumps({"platforms": platforms}))
+        with self.assertRaises(SigningFailure):
+            verify_archives(self.env, path, assets, FakeCommands(), manifest)
+        b["url"] = a["url"]
+        manifest.write_text(json.dumps({"platforms": platforms}))
+        with self.assertRaises(SigningFailure):
+            verify_archives(self.env, path, assets, FakeCommands(), manifest)
 
     def test_cleanup_rejects_foreign_state_without_modifying_keychains(self):
         path = self.root / "foreign" / "state.json"

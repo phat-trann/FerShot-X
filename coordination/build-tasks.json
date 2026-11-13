@@ -5556,6 +5556,46 @@
       "shared_claim": "root-wiring",
       "owned_paths": "Product versions, release notes, final verification and publication",
       "inputs": "User explicitly requests version 1.2.0 commit and push"
+    },
+    {
+      "id": "C140",
+      "agent": "codex",
+      "title": "Audit retired source, coalesce Library refreshes and write user-facing documentation",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "Library refresh helper/regressions, reference-verified retired modules, README and development/audit docs",
+      "inputs": "User requests source-wide optimization, unused-code cleanup and accurate user README with screenshot requests"
+    },
+    {
+      "id": "C141",
+      "agent": "codex",
+      "title": "Cache recently viewed FTP previews within Library",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "Library preview cache/ownership, focused tests and user documentation",
+      "inputs": "User reports FTP preview reloads when returning to an already viewed image"
+    },
+    {
+      "id": "C142",
+      "agent": "codex",
+      "title": "Split macOS releases into Apple Silicon and Intel with verified updater mapping",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "Release workflow, manifest/signature architecture checks, regression tests and release setup docs",
+      "inputs": "User requests separate architecture downloads to reduce installed app size"
+    },
+    {
+      "id": "C143",
+      "agent": "codex",
+      "title": "Publish version 1.2.1 with FTP preview caching and split macOS downloads",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "Version metadata, release notes, Blob CSP compatibility, final verification and commit/push",
+      "inputs": "User explicitly requests pushing accumulated C140\u2013C142 changes"
     }
   ],
   "allocation": "Codex sole active client; external Antigravity and Copilot inactive; preserve historical authorship.",
@@ -5702,7 +5742,11 @@
       "C135",
       "C137",
       "C138",
-      "C139"
+      "C139",
+      "C140",
+      "C141",
+      "C142",
+      "C143"
     ],
     "copilot": []
   },

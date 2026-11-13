@@ -14,6 +14,7 @@ import shutil
 import subprocess
 import tarfile
 import tempfile
+from urllib.parse import unquote, urlparse
 
 
 class SigningFailure(RuntimeError):
@@ -164,7 +165,7 @@ def prepare(env, run=command):
         raise
 
 
-def verify_app(env, path, app, run=command):
+def verify_app(env, path, app, run=command, expected_architectures=None):
     ci_only(env)
     folder, state = state_at(env, path)
     app = Path(app)
@@ -175,17 +176,28 @@ def verify_app(env, path, app, run=command):
         raise SigningFailure("Unexpected signed app identity.")
     binary = app / "Contents/MacOS/FerShot X"
     architectures = set(run(["/usr/bin/lipo", "-archs", str(binary)]).decode().split())
-    if architectures != {"arm64", "x86_64"}:
-        raise SigningFailure("The release app must contain both Mac architectures.")
+    expected = {"arm64", "x86_64"} if expected_architectures is None else set(expected_architectures)
+    if not expected or not expected <= {"arm64", "x86_64"} or architectures != expected:
+        raise SigningFailure("The release app does not match its expected Mac architecture.")
     for architecture in sorted(architectures):
         verify_binary(app, folder, state, run, architecture)
 
 
-def verify_archives(env, path, assets, run=command):
+def verify_archives(env, path, assets, run=command, manifest=None):
     ci_only(env)
     archives = list(Path(assets).glob("*.app.tar.gz"))
     if not archives:
         raise SigningFailure("No updater app archive was downloaded.")
+    expected = {}
+    if manifest is not None:
+        value = json.loads(Path(manifest).read_text())
+        for target, arch in [("darwin-aarch64", "arm64"), ("darwin-x86_64", "x86_64")]:
+            name = unquote(urlparse(value["platforms"][target]["url"]).path.rsplit("/", 1)[-1])
+            if not name or Path(name).name != name or "/" in name or "\\" in name or name in expected:
+                raise SigningFailure("Split updater archives must have distinct safe asset names.")
+            expected[name] = {arch}
+        if {archive.name for archive in archives} != set(expected):
+            raise SigningFailure("Downloaded updater archives do not match both manifest targets.")
     for archive in archives:
         with tempfile.TemporaryDirectory(prefix="fershot-verify-", dir=env["RUNNER_TEMP"]) as folder:
             with tarfile.open(archive) as stream:
@@ -193,7 +205,7 @@ def verify_archives(env, path, assets, run=command):
             apps = list(Path(folder).glob("*.app"))
             if len(apps) != 1:
                 raise SigningFailure("Updater archive must contain exactly one app.")
-            verify_app(env, path, apps[0], run)
+            verify_app(env, path, apps[0], run, expected.get(archive.name))
 
 
 def main():
@@ -201,6 +213,8 @@ def main():
     parser.add_argument("action", choices=["prepare", "verify", "verify-archives", "cleanup"])
     parser.add_argument("--app", type=Path)
     parser.add_argument("--assets", type=Path)
+    parser.add_argument("--manifest", type=Path)
+    parser.add_argument("--architecture", choices=["arm64", "x86_64"])
     args = parser.parse_args()
     env = dict(os.environ)
     try:
@@ -213,9 +227,9 @@ def main():
             if args.action == "cleanup":
                 cleanup(env, state)
             elif args.action == "verify" and args.app:
-                verify_app(env, state, args.app)
+                verify_app(env, state, args.app, expected_architectures={args.architecture} if args.architecture else None)
             elif args.action == "verify-archives" and args.assets:
-                verify_archives(env, state, args.assets)
+                verify_archives(env, state, args.assets, manifest=args.manifest)
             else:
                 raise SigningFailure("Missing app/assets argument.")
         print("macOS signing step completed: " + args.action)

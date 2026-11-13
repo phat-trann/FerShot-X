@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "id": "20261113T130723-codex-C142-cb362e27",
+  "created_at": "2026-11-13T13:07:23.260341+07:00",
+  "agent": "codex",
+  "request": "C142-split-macos-architectures",
+  "task": "C142",
+  "completion": "done",
+  "summary": "Build separate Apple Silicon and Intel releases with architecture-matched signed updater manifest and certificate gates",
+  "files": [
+    ".github/workflows/release.yml",
+    "scripts/macos_signing.py",
+    "scripts/verify_update_manifest.py",
+    "scripts/test_macos_signing.py",
+    "scripts/test_verify_update_manifest.py",
+    "README.md",
+    "docs/releases/UPDATES.md",
+    "docs/agents/codex/C142-split-macos-releases.md"
+  ],
+  "file_sha256": {
+    ".github/workflows/release.yml": "48d79be18f09b90b7011fdc71c741fb1be5ead278111f2dad90d14c2d1bcb1fc",
+    "scripts/macos_signing.py": "9c061c7695fd8d5c5da75406242edf156943d2f83a416f03ca03971f41ae3507",
+    "scripts/verify_update_manifest.py": "f5e974b305e28fd6ccd252fe357bb1b0fb027122dca00844eaf9df2d8cec0c24",
+    "scripts/test_macos_signing.py": "dc0ba085de37b1300569a9dae9b27e63044bac0bd9b22d4cad288d0ebfb2994b",
+    "scripts/test_verify_update_manifest.py": "d706c0c2a76396c3086f1904b678aa6b4cc82db1e3d4681d870e2c83049735f1",
+    "README.md": "7896e16e3ddbd9ae5d6e27fcd2a85149ab7f18d0a1e78bc31935cfc11f7161cb",
+    "docs/releases/UPDATES.md": "2402e9afecaa9f9554646496cb5d317b339dde562061d503f81b432d5a7469ad",
+    "docs/agents/codex/C142-split-macos-releases.md": "9b741810fd8c66399085bedbab650ddb4264b81bb602d647adf4c424d6e277ec"
+  },
+  "checks": [
+    "34 Python signing/manifest/overlay/version cases; workflow YAML parse and split/draft assertions; version and whitespace checks"
+  ],
+  "risks": [
+    "No native build/signing/CI publication; Universal-to-thin update transition awaits installed acceptance on next approved version; existing releases remain immutable"
+  ],
+  "review": "pending"
+}

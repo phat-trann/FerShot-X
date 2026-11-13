@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "id": "20261113T125943-codex-C141-901fe9ef",
+  "created_at": "2026-11-13T12:59:43.760445+07:00",
+  "agent": "codex",
+  "request": "C141-ftp-preview-cache",
+  "task": "C141",
+  "completion": "done",
+  "summary": "Cache successful FTP previews with bounded LRU/TTL, shared reads and independent Blob URL ownership",
+  "files": [
+    "src/LibraryWindow.tsx",
+    "src/lib/preview-cache.ts",
+    "src/lib/preview-cache.test.ts",
+    "tests/e2e/codex-c141.spec.ts",
+    "README.md",
+    "docs/agents/codex/C141-ftp-preview-cache.md"
+  ],
+  "file_sha256": {
+    "src/LibraryWindow.tsx": "ddc9572644fc55eec214f7cd6fe9365e5c7a2a92a4b186c9a0ebff9e13089b5c",
+    "src/lib/preview-cache.ts": "b8e331b72178846db47e487302ec85b1780c1b0b0a3e0bf000302b1b617e0a6d",
+    "src/lib/preview-cache.test.ts": "14a8d9aa063cbe51e70549dd68b2adb176b627b1add49a3dfde301054550f7bc",
+    "tests/e2e/codex-c141.spec.ts": "c9934b30d11db2a2299736223ae76940df5a9ca18a797c173bb8b8f1adc0194d",
+    "README.md": "30677cc1884d9ddea80586932fc745fa833b2250bb3436a4dd1a36c9b5546af9",
+    "docs/agents/codex/C141-ftp-preview-cache.md": "ac828504cf596cffbadf337e6492c9b5eba2c3552de6fe55edef83b2f9fb7fba"
+  },
+  "checks": [
+    "TypeScript; 5 cache unit cases; 5 injected browser cases including A-B-A, tabs, refresh, history removal and deletion guards; whitespace check"
+  ],
+  "risks": [
+    "Window-local cache only; no build, real server actions or publication; version 1.2.0 retained for user acceptance"
+  ],
+  "review": "pending"
+}

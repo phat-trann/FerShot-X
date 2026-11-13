@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "id": "20261113T131430-codex-C143-72593fb4",
+  "created_at": "2026-11-13T13:14:30.310619+07:00",
+  "agent": "codex",
+  "request": "C143-release-1-2-1",
+  "task": "C143",
+  "completion": "done",
+  "summary": "Publish version 1.2.1 with Library caching/cleanup and split architecture release workflow; permit local Blob cache reads under desktop CSP",
+  "files": [
+    "package.json",
+    "package-lock.json",
+    "src-tauri/Cargo.toml",
+    "src-tauri/Cargo.lock",
+    "src-tauri/tauri.conf.json",
+    "README.md",
+    "tests/e2e/codex-c141.spec.ts",
+    "docs/releases/1.2.1.md",
+    "docs/agents/codex/C143-release-1-2-1.md"
+  ],
+  "file_sha256": {
+    "package.json": "3ac1a91b296002cb6712c772c3dbfd1bcbc144de7fd01dee34a2a4dd53f338ea",
+    "package-lock.json": "81497d31a16de3d5c26544a53a228ab595654c2b4447a6f42c7eca62da5d3acf",
+    "src-tauri/Cargo.toml": "cd31680db89823daf4e53be4204ea5ef82ffa2b81b9997af8ae020785889314d",
+    "src-tauri/Cargo.lock": "8cb8d5514009ecb03505c31f84d39b9f144fc1c190c94f9b92d52be3123fd449",
+    "src-tauri/tauri.conf.json": "a5f9e8b59a5c3b59e848fc61cbd47833af25c58907c729b3ef852914a8a6f03b",
+    "README.md": "4f98565b6f6ce2b17eccac104c248609783959e529b458071e99c98ae36a646c",
+    "tests/e2e/codex-c141.spec.ts": "e3c91c4d970aa2dc09f3db11ab07608fea986f580e6ae67df0ba5b8d49f96dc2",
+    "docs/releases/1.2.1.md": "329999d72752df928366ebdf406b2018c260f108661dcc93ba219631a6af06a3",
+    "docs/agents/codex/C143-release-1-2-1.md": "880a632145353be15c08311f10ce5f91f40109ece0a80ef24fa7d827b1413770"
+  },
+  "checks": [
+    "TypeScript; 416 unit tests; 19 signing/manifest Python cases; 2 FTP cache CSP/updater browser cases; version and whitespace checks"
+  ],
+  "risks": [
+    "No installed Universal-to-thin acceptance or measured split package sizes yet; CI publication reported separately; no local signing/server/capture actions"
+  ],
+  "review": "pending"
+}

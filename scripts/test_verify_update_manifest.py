@@ -34,4 +34,17 @@ class ManifestTests(unittest.TestCase):
    if field=="version":value[field]=bad
    else:value["platforms"]["darwin-aarch64"][field]=bad
    with self.assertRaises(ValueError):verify(value,TAG,REPO)
+ def test_split_release_requires_two_distinct_archives_and_consistent_aliases(self):
+  value,meta=self.fixture();normalize_asset_urls(value,meta,TAG,REPO)
+  with self.assertRaises(ValueError):verify(value,TAG,REPO,True)
+  value["platforms"].pop("darwin-universal")
+  with self.assertRaises(ValueError):verify(value,TAG,REPO,True)
+  value["platforms"]["darwin-x86_64"]["url"]=PUBLIC.replace("FerShot.X", "FerShot.X.Intel")
+  for target in ["darwin-aarch64","darwin-x86_64"]:value["platforms"][target+"-app"]=copy.deepcopy(value["platforms"][target])
+  self.assertTrue(verify(value,TAG,REPO,True))
+  value["platforms"]["darwin-aarch64-app"]["url"]=value["platforms"]["darwin-x86_64"]["url"]
+  with self.assertRaises(ValueError):verify(value,TAG,REPO,True)
+ def test_missing_split_target_is_rejected(self):
+  value,meta=self.fixture();normalize_asset_urls(value,meta,TAG,REPO);value["platforms"].pop("darwin-x86_64")
+  with self.assertRaises(ValueError):verify(value,TAG,REPO,True)
 if __name__=="__main__":unittest.main()

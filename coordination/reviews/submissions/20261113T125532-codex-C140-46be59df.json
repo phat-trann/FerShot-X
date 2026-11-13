@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "id": "20261113T125532-codex-C140-46be59df",
+  "created_at": "2026-11-13T12:55:32.832193+07:00",
+  "agent": "codex",
+  "request": "C140-performance-cleanup-user-readme",
+  "task": "C140",
+  "completion": "done",
+  "summary": "Remove verified disconnected legacy UI, reduce duplicate Library reads/renders, and replace README with user guide and screenshot requests",
+  "files": [
+    "src/LibraryWindow.tsx",
+    "src/lib/coalesce-refresh.ts",
+    "src/lib/coalesce-refresh.test.ts",
+    "tests/e2e/codex-c140.spec.ts",
+    "README.md",
+    "docs/DEVELOPMENT.md",
+    "docs/agents/codex/C140-performance-cleanup.md",
+    "docs/agents/codex/C140-retired-files.json"
+  ],
+  "file_sha256": {
+    "src/LibraryWindow.tsx": "ab2ae208f9a3661e1c6fe1f6b59aed58e527c301fa8d7cabc0ab0cab74f945d2",
+    "src/lib/coalesce-refresh.ts": "32fee9ad90fa8056400652792471b0932f400437ef2de6d3358181f77f8044c5",
+    "src/lib/coalesce-refresh.test.ts": "23f31e0e7f327232ed4922c9b057871d65f3617aef9f6f20a1593cdb10076245",
+    "tests/e2e/codex-c140.spec.ts": "af90ac1ba1c0d8e00d0c961fe5f858df6d644a45dd29ea72d2c0e2c3a90f3392",
+    "README.md": "827d4963150deb6c933a63b97a9bc55af7db519f7e43edca0dc7efcabc48be68",
+    "docs/DEVELOPMENT.md": "7fb5c640d758bc5b571b29e712341d9590e7b800ece279f4de18f538abb54168",
+    "docs/agents/codex/C140-performance-cleanup.md": "7d832924cc5ac4054342f1055967b99cf4ee91a1cd01c6bd2f815ae1bb1d43ef",
+    "docs/agents/codex/C140-retired-files.json": "92fabf63f08a97e8231efecac6dd2c27c84d8f0d096f18d7bdc93c212fbb0bdd"
+  },
+  "checks": [
+    "TypeScript; 410 existing unit cases plus two refresh cases; 11 injected browser cases; version/readme-link/whitespace checks; byte-verified 51-file archive"
+  ],
+  "risks": [
+    "No installed-app performance benchmark; no native build or OS/server actions; local follow-up awaits user acceptance before commit/push"
+  ],
+  "review": "pending"
+}

@@ -1,5 +1,21 @@
 # Agent instructions
 
+## C143 user-authorized 1.2.1 publication (2026-11-13)
+
+User authorizes publishing accumulated C140–C142 changes. Sync 1.2.1, retain published 1.2.0 assets, run safe checks and commit/push normally to main to trigger the split-architecture release. Permit Blob reads in renderer connect-src for the local preview cache while preserving other CSP restrictions; exercise this under an injected browser CSP. No real OS/capture/server/update installation, private-key reads, local keychain changes or manual tags. Report push/CI status separately from installed updater acceptance.
+
+## C142 architecture-specific releases (2026-11-13)
+
+Future accepted releases build separate aarch64-apple-darwin and x86_64-apple-darwin apps sequentially in the existing release job/environment, merging updater entries into one draft. Preserve main version detection, certificate identity, updater key/endpoint, no notarization and manual publication gate. Verify exact CPU architecture/certificate in both built apps and each downloaded archive matched to its manifest target; require distinct signed archives and consistent installer aliases before publishing. Existing Universal releases remain immutable. No new secrets, local signing/keychain actions, build or commit/push in this follow-up; first split release and Universal-to-thin updates need CI/manual validation.
+
+## C141 bounded FTP preview cache (2026-11-13)
+
+Library caches successful FTP previews only in window-local memory: eight LRU entries, five-minute TTL, 64 MiB budget counting encoded bytes plus estimated decoded RGBA. Cache Blob data, with a separate owned object URL for each consumer; revoke adapter URLs after reading and consumer URLs on stale completion/selection cleanup. Share in-flight reads. Queue identity/status/update/URL changes and removed rows invalidate entries; invalidated pending reads must not refill them. Explicit Refresh clears previews and reloads the selection. Preserve Local drafts, thumbnail-only disk retention, HTTP credentials, retry/delete behavior and stale-read isolation. No build, OS/server actions or publication before user acceptance.
+
+## C140 source cleanup and user documentation (2026-11-13)
+
+Audit imports before retiring source; archive byte-verified copies under ignored artifacts and retain a tracked hash manifest. Preserve active functionality, native commands, credentials, user data, historical evidence and immutable packets. Library refresh requests share in-flight IO with a trailing fresh read; hidden windows skip periodic polling and refresh on visibility. Keep thumbnail memoization keyed to displayed data. README is user-facing; technical setup lives in docs/DEVELOPMENT.md. Keep version 1.2.0 until acceptance, with no build, OS/server actions or commit/push in this follow-up.
+
 ## C139 user-authorized 1.2.0 publication (2026-11-13)
 
 The user explicitly requests updating and pushing the accumulated candidate as 1.2.0. This authorizes version synchronization, final renderer/native compilation and safe automated checks, commit and normal origin/main push for this release; earlier no-publication/no-native-compile gates do not block this requested release work. Do not run live capture/input/server/notification/install tests, read signing secrets, alter permissions or create local private identities. Preserve updater public key/certificate continuity and existing main-triggered release workflow. Review/stage only completed source, tests, pinned skill/provenance and documentation; exclude credentials, captures/build outputs and ignored archives. Native runtime/user acceptance remains distinct from automated compilation. No force push or manual tag creation; CI creates the release tag.

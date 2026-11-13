@@ -11,6 +11,7 @@ pub fn open(app: &tauri::AppHandle) -> Result<(), NativeError> {
     open_tab(app, None)
 }
 pub(crate) fn open_tab(app: &tauri::AppHandle, tab: Option<&str>) -> Result<(), NativeError> {
+    crate::lifecycle::preserve_settings_activation();
     let tab=tab.filter(|tab|matches!(*tab,"general"|"hotkeys"|"uploading"|"advanced"|"updates"));
     let failure = |e: tauri::Error| NativeError::new("preferences_window_failed", e.to_string());
     let on_top=app.get_webview_window("main").is_some_and(|window|window.is_always_on_top().unwrap_or(false));

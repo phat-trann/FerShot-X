@@ -1,7 +1,16 @@
 use crate::imaging::{NativeError, NativeJobs, validate_window_label};
 use tauri::{Manager,Emitter};
 
+#[cfg(target_os="macos")]
+static REOPEN_POLICY:std::sync::Mutex<crate::reopen_policy::ReopenPolicy>=std::sync::Mutex::new(crate::reopen_policy::ReopenPolicy::new());
+/// Mark the Settings destination before native notification activation queues work.
+pub fn preserve_settings_activation(){
+ #[cfg(target_os="macos")]
+ if let Ok(mut policy)=REOPEN_POLICY.lock(){policy.prefer_settings(std::time::Instant::now());}
+}
 pub fn on_window_event(window: &tauri::Window, event: &tauri::WindowEvent) {
+    #[cfg(target_os="macos")]
+    if window.label()=="preferences"&&matches!(event,tauri::WindowEvent::CloseRequested{..}|tauri::WindowEvent::Destroyed){if let Ok(mut policy)=REOPEN_POLICY.lock(){policy.clear_settings();}}
     if matches!(window.label(), "main" | "library") {
         if matches!(event, tauri::WindowEvent::Destroyed) { crate::active_window::stop(); }
         if let tauri::WindowEvent::CloseRequested { api, .. } = event {
@@ -109,9 +118,15 @@ pub fn quit_application(window: tauri::WebviewWindow, jobs: tauri::State<'_, Nat
  #[test]fn initial_window_is_eighty_percent_in_physical_pixels(){assert_eq!(super::initial_geometry(1440,900),(1152,720));assert_eq!(super::initial_geometry(2880,1800),(2304,1440));}
 }
 
-/// Dock reopen restores the existing editor instead of creating a second workspace.
+/// A generic reopen must not override an explicit Settings/notification destination.
 pub fn on_app_event(app:&tauri::AppHandle,event:&tauri::RunEvent){
  #[cfg(target_os="macos")]
- if let tauri::RunEvent::Reopen{..}=event { let _=crate::library_window::show(app,"library"); }
+ if let tauri::RunEvent::Reopen{has_visible_windows,..}=event {
+  // AppKit's visibility flag may precede a queued notification callback; also
+  // inspect retained product views and honor its bounded explicit destination.
+  let visible=*has_visible_windows||["preferences","main","library"].into_iter().any(|label|app.get_webview_window(label).is_some_and(|window|window.is_visible().unwrap_or(false)));
+  let reopen=REOPEN_POLICY.lock().is_ok_and(|mut policy|policy.should_open_library(std::time::Instant::now(),visible));
+  if reopen{let _=crate::library_window::show(app,"library");}
+ }
  #[cfg(not(target_os="macos"))]let _=(app,event);
 }

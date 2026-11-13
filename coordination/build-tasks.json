@@ -5746,6 +5746,16 @@
       "shared_claim": "root-wiring",
       "owned_paths": "Version metadata, release notes, final verification and normal main publication",
       "inputs": "User explicitly requests a new release of completed C148-C157"
+    },
+    {
+      "id": "C159",
+      "agent": "codex",
+      "title": "Prevent Library reopening over update-notification Settings and publish 1.3.1",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "Native notification activation/lifecycle policy, release metadata and regressions/docs",
+      "inputs": "User requests priority fix and push before video; do not wait for CI build"
     }
   ],
   "allocation": "Codex sole active client; external Antigravity and Copilot inactive; preserve historical authorship.",
@@ -5911,7 +5921,8 @@
       "C155",
       "C156",
       "C157",
-      "C158"
+      "C158",
+      "C159"
     ],
     "copilot": []
   },

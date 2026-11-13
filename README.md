@@ -1,4 +1,4 @@
-# FerShot X 1.3.0
+# FerShot X 1.3.1
 
 Capture, annotate and share screenshots from your Mac’s menu bar. Keep editable Local drafts or upload to your own FTP server and copy a ready-to-share link.
 

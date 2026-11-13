@@ -1,5 +1,9 @@
 # Agent instructions
 
+## C159 notification activation hotfix and authorized 1.3.1 push (2026-11-13)
+
+User prioritizes fixing update-notification Settings being covered by Library, then pushing immediately without waiting for CI before resuming video work. Native Reopen must not open Library while a product view is visible or while an explicit Settings activation is pending. Set a bounded five-second intent before notification work is queued and when opening Settings; clear it on Settings close/destroy, and let normal all-hidden Reopen resume after expiry. Preserve update-tab routing, native notifications and other window semantics. Publish only this hotfix as 1.3.1 via normal main push. Installed notification/window ordering remains a manual retest; no live notifications, OS permissions, credentials or updater installation in checks.
+
 ## C158 user-authorized 1.3.0 publication (2026-11-13)
 
 User explicitly requests a new release of completed C148-C157. Synchronize 1.3.0, summarize changes, validate renderer/native compilation and safe injected regression checks, then commit/push normally to main to trigger existing ARM-only signed release CI. This request authorizes the necessary release verification and publication despite prior local-candidate gates. Preserve historical releases, existing updater key/signing identity and all real credentials/permissions. No live capture/input/server/notification/update-install actions, private-key reads, local Keychain changes, force push or manual tags. Report actual CI/publication status separately from installed acceptance.

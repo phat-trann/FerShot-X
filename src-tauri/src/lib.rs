@@ -17,6 +17,8 @@ mod scrolling;
 mod automatic_capture;
 mod scroll_preferences;
 mod effects;
+#[cfg(any(target_os="macos",test))]
+mod reopen_policy;
 mod lifecycle;
 mod library_window;
 mod shortcuts;

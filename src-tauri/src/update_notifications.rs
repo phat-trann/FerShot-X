@@ -20,6 +20,7 @@ mod mac{
    fn response(&self,_center:&UNUserNotificationCenter,response:&UNNotificationResponse,complete:&DynBlock<dyn Fn()>){
     let identifier=response.notification().request().identifier().to_string();
     if super::opens_updates(&identifier,&response.actionIdentifier().to_string()){
+     crate::lifecycle::preserve_settings_activation();
      let app=self.ivars().clone();let handle=app.clone();let _=handle.run_on_main_thread(move||{let _=crate::preferences_window::open_tab(&app,Some("updates"));});
     }complete.call(());
    }

@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "id": "20261116T111053-codex-C161-6619f404",
+  "created_at": "2026-11-16T11:10:53.317041+07:00",
+  "agent": "codex",
+  "request": "recording-finalize-20261116",
+  "task": "C161",
+  "completion": "done",
+  "summary": "Finalize recorded MP4 safely, present Edit before decode, dim outside recording area and support immediate video upload with unchanged-media fast path.",
+  "files": [
+    "src-tauri/src/recording/mod.rs",
+    "src-tauri/src/recording/capture.rs",
+    "src-tauri/src/recording/mask.rs",
+    "src-tauri/src/recording/model.rs",
+    "src-tauri/src/recording/render.rs",
+    "src-tauri/src/diagnostics.rs",
+    "src/Workspace.tsx",
+    "src/features/recording/VideoWorkspace.tsx",
+    "src/platform/recording.ts",
+    "tests/e2e/codex-c160.spec.ts",
+    "docs/agents/codex/C161-recording-delivery.md",
+    "docs/design/VIDEO.md",
+    "docs/releases/video-manual-acceptance.md",
+    "README.md",
+    "AGENTS.md",
+    "coordination/build-tasks.json"
+  ],
+  "file_sha256": {
+    "src-tauri/src/recording/mod.rs": "9d11254fdd31e6dd459c18b85c62dc567c49e907f6336ead235f95ce3c471c4d",
+    "src-tauri/src/recording/capture.rs": "bb4a5f14a58adebbae046cafb1d62cfdf9159a579f2d8ad112ad9b6fb2396efd",
+    "src-tauri/src/recording/mask.rs": "d59dd7c0f6125cad9cb46efbfd4da65fa6891f7831c229d95a357664cef79f1a",
+    "src-tauri/src/recording/model.rs": "8c9315956250acb8e4cccaafa9170d458b827605dbd2c518bc113c22a7f32fa6",
+    "src-tauri/src/recording/render.rs": "8de2d7c5adfd687f4249201e5d3b443d485427c2ed653e2d739f68293f94daf6",
+    "src-tauri/src/diagnostics.rs": "165e03d2017df2e4f4c05868901b2420942132ccad57893b7cf9de6429889c47",
+    "src/Workspace.tsx": "f6a5005bd7dfdeca0a0e502389c7b6dfcd5df0de1af7f1a25f3f2bc18e8f0da0",
+    "src/features/recording/VideoWorkspace.tsx": "6e9d610074e011e97c625d4d152070ef69cd631c9aa20fe92a4eafb8a649ca35",
+    "src/platform/recording.ts": "5312d1a058eb5a7b00e3d090ed23a3ab5bb0a80635194c8b49ef677cff0855d6",
+    "tests/e2e/codex-c160.spec.ts": "88b652b05be40a3a98b42ce570a59920664b06b7366839a4de1f6552cf97a3b1",
+    "docs/agents/codex/C161-recording-delivery.md": "dc73d15f0ed4f5ba87122f9a5b24ea3eed19b148eccc90d15f262d0e7a6baa61",
+    "docs/design/VIDEO.md": "7a3e7655dab4f371a3a99429a19329cccbae9167f740e4e7b910af41cf439ede",
+    "docs/releases/video-manual-acceptance.md": "db5e21c31fad0dcd545eade5f41aade3299caf72ca341f58cc2b10f209e7af17",
+    "README.md": "449ca6017e1593b8215d5f924af16e1b6e7ea8af330676cfc8f81274766b6603",
+    "AGENTS.md": "431980f905ff215384ab87c04c15c360cabfc185017191bc5ad42d150aff678e",
+    "coordination/build-tasks.json": "45a6ee1944a191a0c1bad3f2890977518e09c64994b8da06e056555589aeb9f4"
+  },
+  "checks": [
+    "TypeScript noEmit passed",
+    "8 native synthetic recording tests passed",
+    "2 recording timeline unit tests passed",
+    "9 injected browser recording/Edit/Library/FTP cases passed"
+  ],
+  "risks": [
+    "Installed capture stop latency, area mask and real FTP remain pending; no build or publication. USER_WAIVED_REVIEW only."
+  ],
+  "review": "pending"
+}

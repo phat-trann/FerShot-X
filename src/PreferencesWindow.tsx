@@ -1,3 +1,4 @@
+import {RecordingSettings} from "./features/recording/RecordingSettings";
 import {serializeSettingsWrite,useSettingsAutosave} from "./use-settings-autosave";
 import { RefreshCw } from "lucide-react";
 import {ScrollCaptureSettings} from "./features/capture/ScrollCaptureSettings";
@@ -104,6 +105,7 @@ export default function PreferencesWindow() {
           <CheckboxField checked={value.baseSettings.downscaleRetina} onCheckedChange={enabled => setBase("downscaleRetina", enabled)} aria-label="Downscale Retina captures to 1× when copying or saving" label="Downscale Retina to 1×"/>
           
         </fieldset>
+        <RecordingSettings/>
         <ScrollCaptureSettings/>
         <WorkspaceDestination busy={busy} run={run}/>
         <fieldset aria-label="Application" disabled={!ready || busy}><h3 className="preference-section-title">Application</h3>

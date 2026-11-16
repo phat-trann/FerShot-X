@@ -14,6 +14,9 @@ export const SHORTCUT_ROWS = [
   ["capture-active-window", "Active window screenshot"],
   ["capture-scrolling", "Scrolling screenshot"],
   ["show-workspace", "Show FerShot X"],
+  ["record-screen", "Fullscreen recording"],
+  ["record-area", "Area recording"],
+  ["record-stop", "Stop recording"],
 ] as const;
 
 export interface GlobalShortcutsV2PanelProps {
@@ -66,7 +69,7 @@ export function GlobalShortcutsV2Panel({value, disabled, savingAction, onChange}
     document.addEventListener("visibilitychange", visibility);
     return () => { window.removeEventListener("keydown", keydown, {capture: true}); window.removeEventListener("blur", cancel); document.removeEventListener("visibilitychange", visibility); };
   }, [recording, disabled, value, onChange]);
-  return <section className="fershot-shortcuts-v2-panel" aria-label="Global keyboard shortcuts (7 actions)" data-testid="global-shortcuts-v2-panel">
+  return <section className="fershot-shortcuts-v2-panel" aria-label={`Global keyboard shortcuts (${SHORTCUT_ROWS.length} actions)`} data-testid="global-shortcuts-v2-panel">
     <div className="fershot-shortcuts-v2-panel__list">
       {SHORTCUT_ROWS.map(([action, label]) => {
         const binding = value[action], active = recording === action, saving = savingAction === action;

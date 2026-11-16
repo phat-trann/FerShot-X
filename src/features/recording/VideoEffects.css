@@ -1,0 +1,7 @@
+.video-effects-overlay { position:absolute;inset:0;pointer-events:none;overflow:hidden; }
+.video-preview-highlight { position:absolute; }
+.video-pointer { position:absolute;pointer-events:none;transform:translate(-16.6667%,-16.6667%); }
+.video-click { position:absolute;transform:translate(-50%,-50%);border:2px solid var(--accent);border-radius:50%;background:#257efe59;pointer-events:none; }
+.video-system-pointer{position:absolute;pointer-events:none;max-width:none;object-fit:contain}
+
+.video-preview-text{position:absolute;white-space:pre-wrap;overflow:hidden;box-sizing:border-box;line-height:1.2;font-family:system-ui,-apple-system,BlinkMacSystemFont,sans-serif}.video-preview-arrow{position:absolute;overflow:visible}

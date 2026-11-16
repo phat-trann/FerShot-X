@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "id": "20261116T150553-codex-C171-422f0326",
+  "created_at": "2026-11-16T15:05:53.541861+07:00",
+  "agent": "codex",
+  "request": "recording-stop-hotkey-20261116",
+  "task": "C171",
+  "completion": "done",
+  "summary": "Dedicated immediate persistent Stop recording hotkey; revert colored app tray/direct click stop per user",
+  "files": [
+    "src-tauri/src/menu_bar.rs",
+    "src-tauri/src/shortcuts.rs",
+    "src/features/global-shortcuts-v2/types.ts",
+    "src/features/global-shortcuts-v2/codec.ts",
+    "src/features/global-shortcuts-v2/GlobalShortcutsV2Panel.tsx",
+    "src/features/global-shortcuts-v2/GlobalShortcutsV2Panel.test.tsx",
+    "src/platform/shortcuts-v2.ts",
+    "src/platform/shortcuts-v2.test.ts",
+    "tests/e2e/codex-c160.spec.ts",
+    "docs/agents/codex/C171-recording-stop-hotkey.md",
+    "docs/releases/video-manual-acceptance.md",
+    "README.md",
+    "AGENTS.md",
+    "coordination/build-tasks.json"
+  ],
+  "file_sha256": {
+    "src-tauri/src/menu_bar.rs": "b2ecaf07669b46bf507875b9b19437b9d15043aa2baec0c0b5d406885a8e7ed7",
+    "src-tauri/src/shortcuts.rs": "7306dc3ba91679b38fa9bdf1d7c16cdb1d6131d5377a725d147b749bae19fe04",
+    "src/features/global-shortcuts-v2/types.ts": "4d2bd14e5f390f9f8dc69f0782486fbd3529527bf6806a5fe7913ea2745c378b",
+    "src/features/global-shortcuts-v2/codec.ts": "4483665aa9c4219cf1658c7f1d7a6d83216505c9d1babbd6b2fda3f4537b6492",
+    "src/features/global-shortcuts-v2/GlobalShortcutsV2Panel.tsx": "97c3b2473d584336537cd9f11ea969bf08a10f212eb2a8fe01d74af1a8771e7c",
+    "src/features/global-shortcuts-v2/GlobalShortcutsV2Panel.test.tsx": "e2dd37f2e53bb0426768a83dbafe795731aaf030108a82be0ba23ef22a9e8f8e",
+    "src/platform/shortcuts-v2.ts": "102d4ae96d15372bdfc7c261a21a14914793a24e6bdf115b56a8b76e1a56af1a",
+    "src/platform/shortcuts-v2.test.ts": "4b0e9d8f4931c918aeaeb10c7956027318e79e1380d60cdbf14c399999911c6c",
+    "tests/e2e/codex-c160.spec.ts": "21f101f8387597ab660aa5d8b7be2ae01ffe094be05f1dfbadbffaa2bbb5a122",
+    "docs/agents/codex/C171-recording-stop-hotkey.md": "3cb5ffc26ae448448fccf266a363e444b66c1dfde5aa982cd0cfdd646441e864",
+    "docs/releases/video-manual-acceptance.md": "9ede294dd83c513a98d4b09fc3dcfd93cd38f85198a5ac52189232d7aabd6339",
+    "README.md": "c733682ea4a9a74553ed5f842e87f50a9952832b25eeaaede851bd16dc7e3cde",
+    "AGENTS.md": "207ce3b1c55d59a28b43b47c9f90b6e6ca05bf9d0923e63459561c1e22f2405f",
+    "coordination/build-tasks.json": "01db82cb9ddddfd1d26162660725fbf17d12d546216de1859ef39fae086dcddf"
+  },
+  "checks": [
+    "TypeScript noEmit passed",
+    "11 focused renderer unit tests passed including eight/ten-action migrations",
+    "Injected browser hotkey assignment/clear regression passed",
+    "9 native fake-registry shortcut tests passed including legacy migrations"
+  ],
+  "risks": [
+    "USER_WAIVED_REVIEW; installed hidden-app hotkey acceptance pending; no real capture/global registration/server/permission actions or app bundle/publication"
+  ],
+  "review": "pending"
+}

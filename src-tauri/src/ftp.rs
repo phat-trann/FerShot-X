@@ -103,11 +103,12 @@ static SEQUENCE:AtomicU64=AtomicU64::new(0);
 fn fresh_id()->String { format!("{}-{}-{}",SystemTime::now().duration_since(UNIX_EPOCH).unwrap_or_default().as_nanos(),std::process::id(),SEQUENCE.fetch_add(1,Ordering::Relaxed)) }
 fn valid_id(id:&str)->Result<(),NativeError> { if id.is_empty() || id.len()>100 || !id.bytes().all(|c|c.is_ascii_digit() || c==b'-') { Err(fail("Invalid FTP item ID.")) } else {Ok(())} }
 fn frozen_remote_name(job: &Job) -> Result<String, NativeError> {
-    let random = format!("screenshot-{}.png", job.item.id);
+    let video=job.item.remote_path.ends_with(".mp4");
+    let random = if video{format!("recording-{}.mp4",job.item.id)}else{format!("screenshot-{}.png",job.item.id)};
     let name = job.remote_name.as_deref().unwrap_or(&random);
     let valid = match job.settings.naming_mode {
         NamingMode::Random => name == random,
-        NamingMode::Timestamp => name.len() == 13 && name.ends_with(".png") && name.as_bytes()[..9].iter().all(u8::is_ascii_digit),
+        NamingMode::Timestamp => name.len() == 13 && name.ends_with(if video{".mp4"}else{".png"}) && name.as_bytes()[..9].iter().all(u8::is_ascii_digit),
     };
     if !valid { return Err(fail("FTP queue filename is inconsistent; original file preserved.")); }
     Ok(name.to_owned())
@@ -130,7 +131,8 @@ fn next_timestamp_slot(previous: Option<TimestampSlot>, second: i64) -> Result<T
 fn timestamp_filename<T: chrono::TimeZone>(date: &chrono::DateTime<T>, sequence: u8) -> String {
     format!("{:02}{:02}{:02}{:02}{}.png",date.day(),date.hour(),date.minute(),date.second(),sequence.min(9))
 }
-fn reserve_timestamp_name(dir: &Path, jobs: &[Job], second: i64) -> Result<String, NativeError> {
+fn reserve_timestamp_name(dir: &Path, jobs: &[Job], second: i64) -> Result<String, NativeError> {reserve_timestamp_name_for(dir,jobs,second,"png")}
+fn reserve_timestamp_name_for(dir: &Path, jobs: &[Job], second: i64, extension:&str) -> Result<String, NativeError> {
     let path = dir.join("timestamp-names.json");
     let mut previous = match fs::symlink_metadata(&path) {
         Ok(m) if !m.is_file() || m.file_type().is_symlink() || m.len() > 1024 => return Err(fail("Timestamp naming state is invalid; its file has been preserved.")),
@@ -142,7 +144,7 @@ fn reserve_timestamp_name(dir: &Path, jobs: &[Job], second: i64) -> Result<Strin
     for _ in 0..=jobs.len() {
         let slot = next_timestamp_slot(previous, second)?;
         let date = chrono::DateTime::from_timestamp(slot.second, 0).ok_or_else(|| fail("Timestamp naming time is out of range."))?.with_timezone(&chrono::Local);
-        let name = timestamp_filename(&date, slot.sequence);
+        let name = timestamp_filename(&date, slot.sequence).replace(".png",&format!(".{extension}"));
         previous = Some(slot);
         if jobs.iter().any(|job| job.item.remote_path.rsplit('/').next() == Some(name.as_str())) { continue; }
         let temp = dir.join(format!("timestamp-{}.tmp", fresh_id()));
@@ -212,7 +214,7 @@ fn transport_command(job:&Job,image:&Path,mode:PassiveMode)->Command{
     let url=format!("ftp://{}:{}/%2F{}",job.settings.host,job.settings.port,encode_path(job.item.remote_path.trim_start_matches('/')));
     // Disable curlrc and proxies, restrict protocols, keep the password off argv/disk/logs.
     let mut command=Command::new("/usr/bin/curl");
-    command.args(["--disable","--config","-","--silent","--fail","--globoff","--proto","=ftp","--noproxy","*","--connect-timeout","15","--max-time","180","--ftp-create-dirs","--upload-file"]).arg(image).arg("--url").arg(url);
+    command.args(["--disable","--config","-","--silent","--fail","--globoff","--proto","=ftp","--noproxy","*","--connect-timeout","15","--max-time",if job.item.remote_path.ends_with(".mp4"){"1800"}else{"180"},"--ftp-create-dirs","--upload-file"]).arg(image).arg("--url").arg(url);
     // Some IPv4 servers accept EPSV but expose an unreachable data port. Curl only
     // falls back on protocol rejection, not this timeout. Prefer the working PASV
     // strategy and pin its data host to the authenticated control peer (basic-ftp's default).
@@ -261,7 +263,7 @@ pub async fn ftp_start(id:String,window:tauri::WebviewWindow,app:tauri::AppHandl
     diagnostics::record(&app,LogArea::Ftp,LogEvent::Started,LogCode::None);
     let _=app.emit("fershot-ftp-updated",());
     tauri::async_runtime::spawn_blocking(move || {
-        let result=root(&app).and_then(|dir|{let image=dir.join(format!("{}.png",job.item.id));
+        let result=root(&app).and_then(|dir|{let image=dir.join(format!("{}.{}",job.item.id,if job.item.remote_path.ends_with(".mp4"){"mp4"}else{"png"}));
             if fs::symlink_metadata(&image).map_err(|_|fail("Retry image is missing."))?.file_type().is_symlink(){return Err(fail("Retry image must not be a symbolic link."))}
             let password=password_for(&app,&job.settings)?; transfer(&job,&image,&password)});
         let failure = result.as_ref().err().map(|e|e.code);
@@ -272,7 +274,7 @@ pub async fn ftp_start(id:String,window:tauri::WebviewWindow,app:tauri::AppHandl
             let j=jobs.iter_mut().find(|j|j.item.id==job.item.id).ok_or_else(||fail("FTP queue item disappeared."))?;
             j.item.error_code=result.as_ref().err().map(|e|e.code.to_owned());
             j.item.status=if result.is_ok(){"success"}else{"failed"}.into();j.item.error=result.err().map(|e|e.message);j.item.updated_at=now();
-            persist(&dir,&jobs)?;if jobs.iter().any(|j|j.item.id==job.item.id&&j.item.status=="success"){let _=finalize_success(&dir,&job.item.id);}Ok(())
+            persist(&dir,&jobs)?;if jobs.iter().any(|j|j.item.id==job.item.id&&j.item.status=="success"){let _=finalize_success(&dir,&job.item.id);if job.item.remote_path.ends_with(".mp4"){crate::recording::forget_uploaded(&app,&job.item.source_id);}}Ok(())
         })();
         if saved.is_err() { let _=app.emit_to("main","fershot-ftp-error","Transfer ended but its result could not be saved. Do not assume success; check the server and restart to recover the queue."); }
         let _=app.emit("fershot-ftp-updated",());
@@ -282,7 +284,7 @@ pub async fn ftp_start(id:String,window:tauri::WebviewWindow,app:tauri::AppHandl
 pub async fn ftp_remove(id:String,window:tauri::WebviewWindow,app:tauri::AppHandle,store:tauri::State<'_,FtpStore>)->Result<(),NativeError>{
     crate::library_window::validate_reader(window.label())?;valid_id(&id)?;let _lock=store.0.lock().map_err(|_|fail("FTP store unavailable."))?;let dir=root(&app)?;let mut jobs=load(&dir)?;
     if jobs.iter().any(|j|j.item.id==id && j.item.status=="uploading"){return Err(fail("Wait for the active transfer before removing its history."))}
-    jobs.retain(|j|j.item.id!=id);persist(&dir,&jobs)?;let _=fs::remove_file(dir.join(format!("{id}.png")));let _=fs::remove_file(dir.join(format!("{id}.thumb.png")));let _=app.emit("fershot-ftp-updated",());Ok(())
+    jobs.retain(|j|j.item.id!=id);persist(&dir,&jobs)?;let _=fs::remove_file(dir.join(format!("{id}.png")));let _=fs::remove_file(dir.join(format!("{id}.mp4")));let _=fs::remove_file(dir.join(format!("{id}.thumb.png")));let _=app.emit("fershot-ftp-updated",());Ok(())
 }
 pub fn recover(app:&tauri::AppHandle)->Result<(),NativeError>{
     let store=app.state::<FtpStore>();let _lock=store.0.lock().map_err(|_|fail("FTP store unavailable."))?;let dir=root(app)?;let mut jobs=load(&dir)?;let mut changed=false;
@@ -461,7 +463,7 @@ fn ensure_thumbnail(dir:&Path,id:&str)->Result<(),NativeError>{
  valid_id(id)?;let thumb=dir.join(format!("{id}.thumb.png"));if thumb.exists(){let meta=fs::symlink_metadata(&thumb).map_err(|_|fail("Thumbnail unavailable."))?;if !meta.is_file()||meta.file_type().is_symlink()||meta.len()>128*1024{return Err(fail("Thumbnail is invalid."))}let bytes=fs::read(&thumb).map_err(|_|fail("Thumbnail unavailable."))?;let raster=fershot_image_core::Raster::decode(&bytes).map_err(|_|fail("Thumbnail is invalid."))?;let(w,h)=raster.dimensions();if w>128||h>96{return Err(fail("Thumbnail dimensions are invalid."))}return Ok(())}
  let path=dir.join(format!("{id}.png"));let meta=fs::symlink_metadata(&path).map_err(|_|fail("Retry pixels unavailable."))?;if !meta.is_file()||meta.file_type().is_symlink()||meta.len()>32*1024*1024{return Err(fail("Retry pixels invalid."))}let bytes=fs::read(path).map_err(|_|fail("Retry pixels unavailable."))?;let image=fershot_image_core::Raster::decode(&bytes).map_err(|_|fail("Retry image invalid."))?.resize(128,96).map_err(|_|fail("Thumbnail could not be resized."))?;write_private(&thumb,&image.encode(ExportFormat::Png).map_err(|_|fail("Thumbnail could not be encoded."))?)
 }
-fn finalize_success(dir:&Path,id:&str)->Result<(),NativeError>{ensure_thumbnail(dir,id)?;let _=fs::remove_file(dir.join(format!("{id}.png")));Ok(())}
+fn finalize_success(dir:&Path,id:&str)->Result<(),NativeError>{ensure_thumbnail(dir,id)?;let _=fs::remove_file(dir.join(format!("{id}.png")));let _=fs::remove_file(dir.join(format!("{id}.mp4")));Ok(())}
 pub fn thumbnail(app:&tauri::AppHandle,id:&str)->Result<crate::imaging::ImagePayload,NativeError>{valid_id(id)?;let store=app.state::<FtpStore>();let _lock=store.0.lock().map_err(|_|fail("FTP state unavailable."))?;let dir=root(app)?;if !load(&dir)?.iter().any(|j|j.item.id==id){return Err(fail("Upload history is unavailable."))}ensure_thumbnail(&dir,id)?;let path=dir.join(format!("{id}.thumb.png"));let bytes=fs::read(path).map_err(|_|fail("Thumbnail unavailable."))?;let raster=fershot_image_core::Raster::decode(&bytes).map_err(|_|fail("Thumbnail is invalid."))?;let(w,h)=raster.dimensions();if w>128||h>96{return Err(fail("Thumbnail dimensions are invalid."))}crate::imaging::payload(raster)}
 type PreviewCache=Vec<(String,std::time::Instant,Vec<u8>)>;
 static PREVIEWS:std::sync::OnceLock<Mutex<PreviewCache>>=std::sync::OnceLock::new();
@@ -481,7 +483,7 @@ fn delete_command(job:&Job)->Command{let mut command=Command::new("/usr/bin/curl
  tauri::async_runtime::spawn_blocking(move||{
   let job={let store=app.state::<FtpStore>();let _lock=store.0.lock().map_err(|_|fail("FTP state unavailable."))?;if crate::updates::is_installing(&app){return Err(NativeError::new("busy","Restart after the update before deleting images."))}let jobs=load(&root(&app)?)?;let job=jobs.into_iter().find(|j|j.item.id==id).ok_or_else(||fail("Upload history not found."))?;if job.item.status=="uploading"{return Err(fail("Wait for this upload to finish before deleting it."))}let mut deleting=store.1.lock().map_err(|_|fail("FTP state unavailable."))?;if !deleting.insert(id.clone()){return Err(fail("This image is already being deleted."))}job};
   let result=(||{let password=password_for(&app,&job.settings)?;if password.is_empty()||password.chars().any(char::is_control){return Err(fail("FTP credentials are invalid."))}let mut child=delete_command(&job).stdin(Stdio::piped()).stdout(Stdio::null()).stderr(Stdio::null()).spawn().map_err(|_|fail("FTP delete transport unavailable."))?;let sent=child.stdin.take().ok_or_else(||fail("FTP delete input unavailable."))?.write_all(format!("user = {}\n",quoted(&format!("{}:{}",job.settings.username,password))).as_bytes());if sent.is_err(){let _=child.kill();let _=child.wait();return Err(fail("FTP delete setup failed."))}if !child.wait().map_err(|_|fail("FTP delete stopped."))?.success(){return Err(fail("FTP deletion could not be confirmed. Check the server before retrying."))}
-   let store=app.state::<FtpStore>();let _lock=store.0.lock().map_err(|_|fail("FTP state unavailable."))?;let dir=root(&app)?;let mut jobs=load(&dir)?;jobs.retain(|j|j.item.id!=id);persist(&dir,&jobs).map_err(|_|fail("Remote image deleted, but local history could not be updated. Remove its history after refreshing."))?;let _=fs::remove_file(dir.join(format!("{id}.png")));let _=fs::remove_file(dir.join(format!("{id}.thumb.png")));if let Some(cache)=PREVIEWS.get(){if let Ok(mut rows)=cache.lock(){rows.retain(|(key,_,_)|key!=&id)}}Ok(())})();
+   let store=app.state::<FtpStore>();let _lock=store.0.lock().map_err(|_|fail("FTP state unavailable."))?;let dir=root(&app)?;let mut jobs=load(&dir)?;jobs.retain(|j|j.item.id!=id);persist(&dir,&jobs).map_err(|_|fail("Remote image deleted, but local history could not be updated. Remove its history after refreshing."))?;let _=fs::remove_file(dir.join(format!("{id}.png")));let _=fs::remove_file(dir.join(format!("{id}.mp4")));let _=fs::remove_file(dir.join(format!("{id}.thumb.png")));if let Some(cache)=PREVIEWS.get(){if let Ok(mut rows)=cache.lock(){rows.retain(|(key,_,_)|key!=&id)}}Ok(())})();
   if let Ok(mut state)=app.state::<FtpStore>().1.lock(){state.remove(&id);}if result.is_err(){diagnostics::record(&app,LogArea::Ftp,LogEvent::Failed,LogCode::FtpFailed);}let _=app.emit("fershot-ftp-updated",());result
  }).await.map_err(|_|fail("FTP deletion stopped unexpectedly."))?
 }
@@ -503,3 +505,60 @@ fn preview_settings(app:&tauri::AppHandle)->Result<PreviewAuth,NativeError>{
 
 /// Hold the FTP lock while checking so installing cannot race a new transfer.
 pub fn ensure_update_idle(app:&tauri::AppHandle)->Result<(),NativeError>{let store=app.state::<FtpStore>();let _lock=store.0.lock().map_err(|_|fail("FTP state unavailable."))?;if !store.1.lock().map_err(|_|fail("FTP state unavailable."))?.is_empty()||load(&root(app)?)?.iter().any(|j|j.item.status=="uploading"){return Err(NativeError::new("busy","Wait for FTP transfers or deletion to finish before updating."))}Ok(())}
+
+#[tauri::command]pub async fn ftp_enqueue_video(request:crate::recording::ExportRequest,window:tauri::WebviewWindow,app:tauri::AppHandle,jobs:tauri::State<'_,crate::imaging::NativeJobs>)->Result<QueueItem,NativeError>{
+ require_main(&window)?;let guard=jobs.acquire()?;
+ tauri::async_runtime::spawn_blocking(move||{let _guard=guard;let prepared=crate::recording::prepare_upload(&app,request)?;let size=fs::metadata(&prepared.path).map_err(|_|fail("Video export is unavailable."))?.len();
+  let store=app.state::<FtpStore>();let _lock=store.0.lock().map_err(|_|fail("FTP store unavailable."))?;let dir=root(&app)?;let settings=settings_load(&dir)?.ok_or_else(||fail("Configure FTP in Settings before uploading."))?;let mut queue=load(&dir)?;if queue.len()>=256{return Err(fail("FTP queue is full."))}
+  let used:u64=fs::read_dir(&dir).map_err(|_|fail("Cannot inspect FTP retry cache."))?.filter_map(Result::ok).filter_map(|e|e.metadata().ok()).map(|m|m.len()).sum();if used.saturating_add(size)>2*1024*1024*1024{return Err(fail("Video retry cache reached 2 GiB. Remove old pending entries first."))}
+  let id=fresh_id();let time=now();let name=match settings.naming_mode{NamingMode::Random=>format!("recording-{id}.mp4"),NamingMode::Timestamp=>reserve_timestamp_name_for(&dir,&queue,(time/1000)as i64,"mp4")?};let date=chrono::DateTime::from_timestamp_millis(time as i64).ok_or_else(||fail("System time unavailable."))?.with_timezone(&chrono::Local);let settings=freeze_destination(settings,&date);let(remote_path,url)=target(&settings,&name);
+  let item=QueueItem{id:id.clone(),source_id:prepared.doc.clip.id,name:prepared.doc.clip.name,remote_path,url,status:"pending".into(),created_at:time,updated_at:time,error:None,error_code:None};
+  let video_path=dir.join(format!("{id}.mp4"));let mut options=fs::OpenOptions::new();options.write(true).create_new(true);#[cfg(unix)]{use std::os::unix::fs::OpenOptionsExt;options.mode(0o600);}let mut output=options.open(&video_path).map_err(|_|fail("Cannot freeze upload video."))?;let mut input=fs::File::open(prepared.path).map_err(|_|fail("Cannot read exported video."))?;if std::io::copy(&mut input,&mut output).and_then(|_|output.sync_all()).is_err(){let _=fs::remove_file(&video_path);return Err(fail("Cannot freeze upload video."))}
+  let poster=prepared.poster.strip_prefix("data:image/png;base64,").ok_or_else(||fail("Video thumbnail is unavailable."))?;let thumb=decode_input(poster)?.encode(ExportFormat::Png).map_err(|_|fail("Cannot freeze video thumbnail."))?;let thumb_path=dir.join(format!("{id}.thumb.png"));if let Err(error)=write_private(&thumb_path,&thumb){let _=fs::remove_file(&video_path);return Err(error)}queue.insert(0,Job{item:item.clone(),settings,remote_name:Some(name)});if let Err(error)=persist(&dir,&queue){let _=fs::remove_file(video_path);let _=fs::remove_file(thumb_path);return Err(error)}let _=app.emit("fershot-ftp-updated",());Ok(item)
+ }).await.map_err(|_|fail("Video enqueue stopped."))?
+}
+
+static VIDEO_PREVIEW_REVISION:AtomicU64=AtomicU64::new(0);
+static VIDEO_PREVIEW_ACTIVE:std::sync::atomic::AtomicUsize=std::sync::atomic::AtomicUsize::new(0);
+struct VideoPreviewPermit;
+impl Drop for VideoPreviewPermit{fn drop(&mut self){VIDEO_PREVIEW_ACTIVE.fetch_sub(1,Ordering::AcqRel);}}
+fn preview_cancelled(revision:Option<u64>)->bool{revision.is_some_and(|revision|VIDEO_PREVIEW_REVISION.load(Ordering::Acquire)!=revision)}
+fn video_preview(app:&tauri::AppHandle,id:&str,revision:Option<u64>,force:bool)->Result<crate::recording::model::Clip,NativeError>{
+ valid_id(id)?;
+ static LOCKS:std::sync::OnceLock<Mutex<std::collections::HashMap<String,std::sync::Weak<Mutex<()>>>>>=std::sync::OnceLock::new();
+ let lock={let mut locks=LOCKS.get_or_init(||Mutex::new(std::collections::HashMap::new())).lock().map_err(|_|fail("Preview state unavailable."))?;locks.retain(|_,lock|lock.strong_count()>0);if let Some(lock)=locks.get(id).and_then(std::sync::Weak::upgrade){lock}else{let lock=std::sync::Arc::new(Mutex::new(()));locks.insert(id.into(),std::sync::Arc::downgrade(&lock));lock}};
+ let _read=lock.lock().map_err(|_|fail("Preview state unavailable."))?;if preview_cancelled(revision){return Err(NativeError::new("cancelled","Preview selection changed."))}
+ let job={let store=app.state::<FtpStore>();let _lock=store.0.lock().map_err(|_|fail("FTP store unavailable."))?;load(&root(app)?)?.into_iter().find(|job|job.item.id==id&&job.item.remote_path.ends_with(".mp4")).ok_or_else(||fail("Video upload is unavailable."))?};
+ let cache=crate::recording::media_root(app)?.join("ftp-previews");private_dir(&cache)?;let path=cache.join(format!("{id}-{}.mp4",job.item.updated_at));
+ let fresh=!force&&fs::symlink_metadata(&path).is_ok_and(|m|m.is_file()&&!m.file_type().is_symlink()&&m.len()<=crate::recording::model::MAX_VIDEO_BYTES&&m.modified().is_ok_and(|time|time.elapsed().is_ok_and(|age|age.as_secs()<300)));
+ if !fresh{
+  let mut acquired=false;for _ in 0..80{if preview_cancelled(revision){return Err(NativeError::new("cancelled","Preview selection changed."))}if {let count=VIDEO_PREVIEW_ACTIVE.load(Ordering::Acquire);count<2&&VIDEO_PREVIEW_ACTIVE.compare_exchange(count,count+1,Ordering::AcqRel,Ordering::Acquire).is_ok()}{acquired=true;break}std::thread::sleep(std::time::Duration::from_millis(25));}if !acquired{return Err(NativeError::new("busy","Two video previews are being prepared. Retry shortly."))}let _permit=VideoPreviewPermit;
+  // Downloads stream straight into a private bounded temporary file, never IPC/base64.
+  let mut files=fs::read_dir(&cache).map_err(|_|fail("Video preview cache unavailable."))?.flatten().filter(|entry|entry.path().extension().is_some_and(|ext|ext=="mp4")).filter_map(|entry|entry.metadata().ok().map(|m|(entry.path(),m.modified().ok()))).collect::<Vec<_>>();files.sort_by_key(|(_,time)|*time);while files.len()>=2{let(old,_)=files.remove(0);let _=fs::remove_file(old);}if path.exists(){let _=fs::remove_file(&path);}
+  let mut temp=tempfile::NamedTempFile::new_in(&cache).map_err(|_|fail("Video preview cache unavailable."))?;
+  if job.item.status!="success"{let source=root(app)?.join(format!("{id}.mp4"));let m=fs::symlink_metadata(&source).map_err(|_|fail("Retry video is unavailable."))?;if !m.is_file()||m.file_type().is_symlink()||m.len()>crate::recording::model::MAX_VIDEO_BYTES{return Err(fail("Retry video is invalid."))}let mut input=fs::File::open(source).map_err(|_|fail("Retry video is unavailable."))?;std::io::copy(&mut input,&mut temp).map_err(|_|fail("Video preview could not be prepared."))?;}
+  else{
+   let url=tauri::Url::parse(&job.item.url).map_err(|_|fail("Video URL is invalid."))?;if url.scheme()!="https"||!url.username().is_empty()||url.password().is_some(){return Err(fail("Video preview requires an HTTPS URL."))}
+   let auth=preview_settings(app)?;let mut command=Command::new("/usr/bin/curl");command.args(["--disable","--config","-","--silent","--fail","--globoff","--proto","=https","--connect-timeout","10","--max-time","600","--max-filesize","1073741824","--write-out","%{http_code}","--output"]).arg(temp.path()).arg("--url").arg(&job.item.url);
+   let config=if auth.enabled&&auth.origin==url.origin().ascii_serialization(){let secret=crate::ftp_credentials::get(app,&preview_account(&auth)).map_err(|_|fail("Save the HTTPS preview password in Settings."))?;if secret.is_empty()||secret.chars().any(char::is_control){return Err(fail("Save the HTTPS preview password in Settings."))}format!("user = {}\nbasic\n",quoted(&format!("{}:{}",auth.username,secret)))}else{command.args(["--location","--max-redirs","3","--proto-redir","=https"]);String::new()};
+   let mut child=command.stdin(Stdio::piped()).stdout(Stdio::piped()).stderr(Stdio::null()).spawn().map_err(|_|fail("HTTPS video transport unavailable."))?;if child.stdin.take().ok_or_else(||fail("Video transport input unavailable."))?.write_all(config.as_bytes()).is_err(){let _=child.kill();let _=child.wait();return Err(fail("Video preview setup failed."))}let status=loop{if preview_cancelled(revision){let _=child.kill();let _=child.wait();return Err(NativeError::new("cancelled","Preview selection changed."))}match child.try_wait(){Ok(Some(status))=>break status,Ok(None)=>std::thread::sleep(std::time::Duration::from_millis(100)),Err(_)=>{let _=child.kill();let _=child.wait();return Err(fail("Video preview stopped."))}}};use std::io::Read;let mut code=String::new();if let Some(stdout)=child.stdout.take(){let _=stdout.take(16).read_to_string(&mut code);}if code=="401"||code=="403"{return Err(fail("HTTPS preview authentication was rejected. Check HTTP credentials in Settings."))}if !status.success()||!code.starts_with('2'){return Err(fail("Video preview could not be loaded. Refresh and retry."))}
+  }
+  let size=temp.as_file().metadata().map_err(|_|fail("Video preview is unavailable."))?.len();if !(16..=crate::recording::model::MAX_VIDEO_BYTES).contains(&size){return Err(fail("Video preview exceeds its size limit."))}
+  {use std::io::{Read,Seek};let mut prefix=[0u8;12];temp.as_file_mut().rewind().map_err(|_|fail("Invalid video."))?;temp.as_file_mut().read_exact(&mut prefix).map_err(|_|fail("Invalid video."))?;if &prefix[4..8]!=b"ftyp"{return Err(fail("The server did not return an MP4 video."))}}
+  if preview_cancelled(revision){return Err(NativeError::new("cancelled","Preview selection changed."))}
+  temp.persist_noclobber(&path).map_err(|_|fail("Video preview could not be retained."))?;
+ }
+ let(width,height,duration_ms)=crate::recording::inspect_video(&path)?;let poster=thumbnail(app,id).map(|value|format!("data:image/png;base64,{}",value.png_base64)).unwrap_or_default();
+ Ok(crate::recording::model::Clip{id:format!("ftp-{id}"),name:job.item.name,width,height,duration_ms,byte_size:fs::metadata(&path).map_err(|_|fail("Video preview unavailable."))?.len(),created_at:job.item.created_at,media_path:path.to_string_lossy().into_owned(),poster,has_audio:crate::recording::inspect_audio(&path).ok()})
+}
+#[tauri::command]pub async fn ftp_video_preview(id:String,force:Option<bool>,window:tauri::WebviewWindow,app:tauri::AppHandle)->Result<crate::recording::model::Clip,NativeError>{crate::library_window::require_library(window.label())?;let revision=VIDEO_PREVIEW_REVISION.fetch_add(1,Ordering::AcqRel)+1;tauri::async_runtime::spawn_blocking(move||video_preview(&app,&id,Some(revision),force.unwrap_or(false))).await.map_err(|_|fail("Video preview worker stopped."))?}
+#[tauri::command]pub async fn ftp_edit_video(id:String,request_id:Option<String>,window:tauri::WebviewWindow,app:tauri::AppHandle)->Result<(),NativeError>{crate::library_window::require_library(window.label())?;if request_id.as_deref().is_some_and(|id|!crate::recording::model::valid_id(id)){return Err(fail("Invalid Edit request."))}tauri::async_runtime::spawn_blocking(move||{let clip=video_preview(&app,&id,None,false)?;crate::recording::import_remote(&app,clip,request_id)}).await.map_err(|_|fail("Video opening stopped."))?}
+
+#[cfg(test)]mod video_queue_tests{
+ use super::*;
+ #[test]fn video_queue_target_roundtrips_and_cleanup_keeps_only_thumbnail(){
+  let dir=tempfile::tempdir().unwrap();let settings=Settings{host:"ftp.example.invalid".into(),port:21,username:"synthetic".into(),remote_dir:"/s".into(),monthly_folders:false,public_base_url:"https://cdn.example.invalid".into(),secure:true,naming_mode:NamingMode::Random,_retired_shared_flag:false};let name="recording-123-1.mp4";let(remote_path,url)=target(&settings,name);let item=QueueItem{id:"123-1".into(),source_id:"video-1".into(),name:"Movie.mp4".into(),remote_path,url,status:"pending".into(),created_at:1,updated_at:1,error:None,error_code:None};let job=Job{item,settings,remote_name:Some(name.into())};persist(dir.path(),&[job]).unwrap();let read=load(dir.path()).unwrap();assert_eq!(read[0].item.url,"https://cdn.example.invalid/s/recording-123-1.mp4");
+  fs::write(dir.path().join("123-1.mp4"),b"synthetic MP4 payload").unwrap();let image=image::DynamicImage::ImageRgba8(image::RgbaImage::from_pixel(2,2,image::Rgba([0,0,0,255])));let mut png=std::io::Cursor::new(Vec::new());image.write_to(&mut png,image::ImageFormat::Png).unwrap();fs::write(dir.path().join("123-1.thumb.png"),png.into_inner()).unwrap();finalize_success(dir.path(),"123-1").unwrap();assert!(!dir.path().join("123-1.mp4").exists());assert!(dir.path().join("123-1.thumb.png").exists());
+ }
+ #[test]fn timestamp_names_reserve_video_extension_without_modifying_image_names(){let dir=tempfile::tempdir().unwrap();let movie=reserve_timestamp_name_for(dir.path(),&[],1794556800,"mp4").unwrap();let image=reserve_timestamp_name(dir.path(),&[],1794556800).unwrap();assert!(movie.ends_with(".mp4"));assert!(image.ends_with(".png"));assert_ne!(&movie[..9],&image[..9]);}
+}

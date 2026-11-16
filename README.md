@@ -1,6 +1,6 @@
-# FerShot X 1.3.1
+# FerShot X 1.4.0
 
-Capture, annotate and share screenshots from your Mac’s menu bar. Keep editable Local drafts or upload to your own FTP server and copy a ready-to-share link.
+Capture, annotate and share screenshots or screen recordings from your Mac’s menu bar. Keep editable Local drafts or upload to your own FTP server and copy a ready-to-share link.
 
 **Requires macOS 12 or later and Apple Silicon (M-series).** Older releases include Intel builds; new releases target Apple Silicon only.
 
@@ -25,7 +25,7 @@ A captured image opens in Edit. Draw arrows, rectangles, ellipses or freehand st
 - Drawing tools stay active for repeated drawing. Freehand draws continuously; switch to Select to move or resize a stroke.
 - **Magnifier:** draw an ellipse to mark the source. The source ellipse owns the move/resize handles. A connected lens displays the source at its Magnification size; drag the lens to reposition it, or move/resize the source to adjust the sampling region. New lenses start with a 32px edge gap on the roomiest fitting side. Dragging/resizing the source hides the lens and connector until release or cancellation; moving the detached lens keeps both visible. Hold Shift while drawing for a circle.
 - **Spotlight:** the dimmed background hides while you move/resize its region and returns on release.
-- **Text:** click the image to place a blank caret and type directly. Enter or an outside click commits; Escape cancels. Double-click existing text to edit it in place.
+- **Text:** click the image to place a blank caret and type directly. Shift+Enter adds a line; Enter or an outside click commits; Escape cancels. Double-click existing text to edit it in place.
 - **Counter:** drag its corner handle to any angle; arrow keys adjust by 15°, or 1° with Shift.
 - Color and size controls follow the selected element. New elements reuse the last style.
 - Click the **image size** to resize proportionally. Press Resize to apply; Escape or an outside click cancels.
@@ -33,6 +33,18 @@ A captured image opens in Edit. Draw arrows, rectangles, ellipses or freehand st
 - Hover a tool to see its name and shortcut. Tools that do not fit appear under **…**.
 
 Use **Copy**, **Save** or **Upload** from the toolbar. Successful capture output hides Edit; Library keeps a resumable Local draft unless the image has been uploaded. A predicted FTP link becomes usable only after the transfer succeeds.
+
+## Screen recording
+
+Screen recording requires **macOS 15 or later**. Screenshot support keeps its existing macOS requirement. Choose **Record Screen** or **Record Area** in the menu bar. Fullscreen uses the display under the pointer; area recording uses a native selection within one display. Press Escape during selection to cancel. Configure Screen, Area and a separate **Stop recording** shortcut in **Settings → Hotkeys**. Use the stop shortcut or choose **Stop Recording** in the menu bar to finish. Edit opens once the MP4 is ready; with Upload Captures Immediately enabled, the recording goes directly to FTP. Record Area dims the surroundings without blocking clicks.
+
+In **Settings → General → Screen recording**, enable system audio and/or microphone, and choose whether to keep mouse metadata. Microphone permission is requested only when enabled. Mouse positions/click states are collected only during recording; no keyboard contents are recorded.
+
+Video Edit uses a layered timeline for video, audio, cursor, clicks, highlights, text, arrows, solid covers and image layers. Drag clips or their edges, split at the playhead (⌘B), duplicate (⌘D), hide/lock layers or ripple-delete a video section across unlocked tracks. Cursor and click layers can be duplicated or removed when mouse metadata exists. Silent recordings have no Audio layer. Drag the dark edge regions in the timeline to trim the exported start/end; nearby clip boundaries snap with a guide. Hold Option to bypass snapping. The gutter Select Layer icon selects a layer independently of Hide and Lock. Select a Cursor layer to choose macOS Arrow artwork or Custom Arrow; cursors already embedded in video pixels cannot be removed. Drafts retain these edits in Local history. Copy shares an edited video file; Save writes an MP4 without overwriting existing files; Upload (⌘S) exports edits, copies the predicted URL and starts the existing FTP queue. Exporting can take time; the spinner stays visible until the operation finishes. Unchanged videos without visible effects reuse the original MP4 rather than encoding again.
+
+Local history retains the original recording and editable draft for 30 days (up to 200 recordings and a 5 GiB original-video budget). Recording is bounded to 30 minutes, 1080p/30fps and approximately 1 GiB. Completed FTP jobs retain a thumbnail; HTTPS video previews use a bounded temporary disk cache and existing HTTP credentials. Remote video edits start from the published MP4: local cursor metadata and separate effect layers are not uploaded.
+
+This candidate is not yet published. Real screen/audio capture and installed permissions require the [video acceptance checklist](docs/releases/video-manual-acceptance.md).
 
 ## FTP uploading
 
@@ -79,7 +91,7 @@ When a new version is available, click its **install icon** to download, install
 
 ## Privacy and troubleshooting
 
-Images stay on your Mac unless you explicitly upload them or enable immediate uploads. FTP/HTTP passwords are stored locally in a private plaintext file readable by your macOS account; they are not stored in Keychain or included in logs.
+Images and recordings stay on your Mac unless you explicitly upload them or enable immediate uploads. FTP/HTTP passwords are stored locally in a private plaintext file readable by your macOS account; they are not stored in Keychain or included in logs.
 
 For a failure, open **Settings → Advanced → Open Logs Folder**. Error logs have configurable retention. When reporting an issue, include the app version, steps, expected/actual behavior and relevant error log; remove private URLs or image content before sharing.
 
@@ -98,4 +110,4 @@ No placeholder screenshots are displayed until these files are supplied.
 
 ## Development and release notes
 
-See [development instructions](docs/DEVELOPMENT.md), [1.2.2 release notes](docs/releases/1.2.2.md) and [updater configuration](docs/releases/UPDATES.md). UI conventions are documented in the [interface system](docs/design/INTERFACE.md). Third-party notices are in [docs/third-party](docs/third-party).
+See [development instructions](docs/DEVELOPMENT.md), [1.4.0 release notes](docs/releases/1.4.0.md) and [updater configuration](docs/releases/UPDATES.md). UI conventions are documented in the [interface system](docs/design/INTERFACE.md). Third-party notices are in [docs/third-party](docs/third-party).

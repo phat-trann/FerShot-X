@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "id": "20261116T145814-codex-C170-c3dfc369",
+  "created_at": "2026-11-16T14:58:14.409035+07:00",
+  "agent": "codex",
+  "request": "recording-tray-direct-stop-20261116",
+  "task": "C170",
+  "completion": "done",
+  "summary": "Recording tray logo state and direct one-click native stop with duplicate suppression",
+  "files": [
+    "src-tauri/src/menu_bar.rs",
+    "AGENTS.md",
+    "coordination/build-tasks.json",
+    "docs/agents/codex/C170-recording-tray-stop.md",
+    "docs/releases/video-manual-acceptance.md"
+  ],
+  "file_sha256": {
+    "src-tauri/src/menu_bar.rs": "731c83b1c10bb03f692bc457ac03b05e46386db01931ac1087ff79fa13565a2b",
+    "AGENTS.md": "2cdcfb9f45a51b64c7092b14eba0a32a871297b6c86d34cdd9ff4fce0cc4c936",
+    "coordination/build-tasks.json": "2980b78c682e187ba5127cf24d1d2eced5fc21fb47de4109038d9aec46d63052",
+    "docs/agents/codex/C170-recording-tray-stop.md": "9de8054fa75517d3f169827ef70efadfd105edc70db1bbffcb778f0acc986862",
+    "docs/releases/video-manual-acceptance.md": "6a510fa6c8ea28ea7c2d2446a7891d071bfd1cf3fa4cdd7faa0d4764adf422c1"
+  },
+  "checks": [
+    "4 focused native menu tests passed; native test compilation passed",
+    "Pinned Tauri and tray-icon macOS click/template APIs inspected locally"
+  ],
+  "risks": [
+    "USER_WAIVED_REVIEW; installed recording tray appearance and stop-to-Edit pending; no live capture or app bundle/publication"
+  ],
+  "review": "pending"
+}

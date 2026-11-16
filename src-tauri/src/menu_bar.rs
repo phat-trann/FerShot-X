@@ -5,7 +5,7 @@ use tauri::{Manager, menu::{Menu, IconMenuItem, PredefinedMenuItem, Submenu}, tr
 
 const ID: &str = "fershot-menu-bar";
 #[derive(Default)]
-pub struct MenuBarState { shortcuts:Mutex<BTreeMap<String,(String,IconMenuItem<tauri::Wry>)>>, startup: Mutex<Option<IconMenuItem<tauri::Wry>>>, capture_upload:Mutex<Option<IconMenuItem<tauri::Wry>>>, repeat: Mutex<Option<IconMenuItem<tauri::Wry>>>, repeat_available: AtomicBool }
+pub struct MenuBarState { recording:Mutex<Option<IconMenuItem<tauri::Wry>>>,recording_area:Mutex<Option<IconMenuItem<tauri::Wry>>>,shortcuts:Mutex<BTreeMap<String,(String,IconMenuItem<tauri::Wry>)>>, startup: Mutex<Option<IconMenuItem<tauri::Wry>>>, capture_upload:Mutex<Option<IconMenuItem<tauri::Wry>>>, repeat: Mutex<Option<IconMenuItem<tauri::Wry>>>, repeat_available: AtomicBool }
 pub const CAPTURE_ITEMS: &[(&str, &str)] = &[
     ("capture-fullscreen", "Capture Screen"), ("capture-area", "Capture Area"), ("capture-scrolling", "Scrolling Capture"),
 ];
@@ -27,8 +27,10 @@ pub fn update_repeat_availability(app: &tauri::AppHandle, available: bool) {
     }
 }
 fn lucide_icon(name:&str)->tauri::image::Image<'static>{let bytes:&[u8]=match name{
+ "monitor-play"=>include_bytes!("../icons/menu/monitor-play.png"),"monitor-stop"=>include_bytes!("../icons/menu/monitor-stop.png"),
  "cloud-sync"=>include_bytes!("../icons/menu/cloud-sync.png"),"monitor-cog"=>include_bytes!("../icons/menu/monitor-cog.png"),"square-library"=>include_bytes!("../icons/menu/square-library.png"),"monitor"=>include_bytes!("../icons/menu/monitor.png"),"scan-square"=>include_bytes!("../icons/menu/scan-square.png"),"gallery-vertical"=>include_bytes!("../icons/menu/gallery-vertical.png"),"app-window-mac"=>include_bytes!("../icons/menu/app-window-mac.png"),"folder-open"=>include_bytes!("../icons/menu/folder-open.png"),"clipboard-list"=>include_bytes!("../icons/menu/clipboard-list.png"),"cog"=>include_bytes!("../icons/menu/cog.png"),"circle-power"=>include_bytes!("../icons/menu/circle-power.png"),"cloud-upload"=>include_bytes!("../icons/menu/cloud-upload.png"),_=>include_bytes!("../icons/menu/ellipsis.png")};let image=image::load_from_memory(bytes).expect("Bundled Lucide icon").to_rgba8();let(w,h)=image.dimensions();tauri::image::Image::new_owned(image.into_raw(),w,h)}
-fn icon_for(id:&str)->&str{match id{"check-updates"=>"cloud-sync","launch-startup"=>"monitor-cog","show-workspace"=>"square-library","capture-fullscreen"=>"monitor","capture-area"|"capture-repeat-region"=>"scan-square","capture-scrolling"=>"gallery-vertical","capture-active-window"|"capture-window"=>"app-window-mac","open-file"=>"folder-open","open-clipboard"=>"clipboard-list","capture-instant-upload"=>"cloud-upload",_=>"ellipsis"}}
+fn icon_for(id:&str)->&str{match id{"check-updates"=>"cloud-sync","launch-startup"=>"monitor-cog","show-workspace"=>"square-library","record-screen"=>"monitor-play","record-area"=>"monitor-stop","capture-fullscreen"=>"monitor","capture-area"|"capture-repeat-region"=>"scan-square","capture-scrolling"=>"gallery-vertical","capture-active-window"|"capture-window"=>"app-window-mac","open-file"=>"folder-open","open-clipboard"=>"clipboard-list","capture-instant-upload"=>"cloud-upload",_=>"ellipsis"}}
+pub fn update_recording(app:&tauri::AppHandle,phase:&str,elapsed_ms:u64){if let Some(state)=app.try_state::<MenuBarState>(){if let Ok(item)=state.recording_area.lock(){if let Some(item)=item.as_ref(){let _=item.set_enabled(!matches!(phase,"starting"|"recording"|"stopping"));}}}if let Some(state)=app.try_state::<MenuBarState>(){if let Ok(item)=state.recording.lock(){if let Some(item)=item.as_ref(){let seconds=elapsed_ms/1000;let active=matches!(phase,"starting"|"recording"|"stopping");let title=if phase=="starting"{"Starting Recording…".into()}else if phase=="stopping"{"Finishing Recording…".into()}else if active{format!("Stop Recording ({:02}:{:02})",seconds/60,seconds%60)}else{"Record Screen".into()};let _=item.set_text(title);let _=item.set_enabled(!matches!(phase,"starting"|"stopping"));}}}}
 pub fn update_shortcuts(app:&tauri::AppHandle){
  let bindings=crate::shortcuts::menu_bindings(app);
  if let Some(state)=app.try_state::<MenuBarState>(){if let Ok(items)=state.shortcuts.lock(){for(id,(title,item))in items.iter(){let _=item.set_text(title);let _=item.set_accelerator(bindings.get(id).and_then(|value|value.as_deref()));}}}
@@ -37,10 +39,12 @@ pub fn build(app: &tauri::AppHandle) -> tauri::Result<Menu<tauri::Wry>> {
     let menu = Menu::new(app)?;
     let bindings=crate::shortcuts::menu_bindings(app);
     let item = |id:&str,title:&str| -> tauri::Result<IconMenuItem<tauri::Wry>> {let entry=IconMenuItem::with_id(app,id,title,true,Some(lucide_icon(icon_for(id))),bindings.get(id).and_then(|v|v.as_deref()))?;
-      if id=="show-workspace"||id.starts_with("capture-"){if let Ok(mut items)=app.state::<MenuBarState>().shortcuts.lock(){items.insert(id.into(),(title.into(),entry.clone()));}}Ok(entry)};
+      if id=="show-workspace"||id.starts_with("capture-")||id.starts_with("record-"){if let Ok(mut items)=app.state::<MenuBarState>().shortcuts.lock(){items.insert(id.into(),(title.into(),entry.clone()));}}Ok(entry)};
     menu.append(&item("show-workspace", "Library")?)?;
     menu.append(&PredefinedMenuItem::separator(app)?)?;
     for (id,title) in CAPTURE_ITEMS { menu.append(&item(*id,*title)?)?; }
+    let recording=item("record-screen","Record Screen")?;menu.append(&recording)?;if let Ok(mut saved)=app.state::<MenuBarState>().recording.lock(){*saved=Some(recording);}
+    let area_recording=item("record-area","Record Area")?;menu.append(&area_recording)?;if let Ok(mut saved)=app.state::<MenuBarState>().recording_area.lock(){*saved=Some(area_recording);}
     let more=Submenu::new(app,"More",true)?;more.set_icon(Some(lucide_icon("ellipsis")))?;
     for (id,title) in MORE_ITEMS {
         let entry=item(*id,*title)?;
@@ -92,7 +96,7 @@ mod tests {
         for (id,_) in super::CAPTURE_ITEMS.iter().chain(super::MORE_ITEMS.iter()) { assert!(!id.contains("ocr") && !id.contains("license")); }
     }
     #[test] fn capture_upload_menu_item_has_cloud_upload_icon_and_toggled_titles() {
-        assert_eq!(super::icon_for("capture-instant-upload"), "cloud-upload");
+        assert_eq!(super::icon_for("record-screen"),"monitor-play");assert_eq!(super::icon_for("record-area"),"monitor-stop");assert_eq!(super::icon_for("capture-instant-upload"), "cloud-upload");
         assert_eq!(super::icon_for("check-updates"), "cloud-sync");
         assert_eq!(super::icon_for("launch-startup"), "monitor-cog");
         assert_eq!(super::startup_title(true), "Launch at Startup  ✓");

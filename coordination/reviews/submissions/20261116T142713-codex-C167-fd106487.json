@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "id": "20261116T142713-codex-C167-fd106487",
+  "created_at": "2026-11-16T14:27:13.111537+07:00",
+  "agent": "codex",
+  "request": "compact-layer-viewport-20261116",
+  "task": "C167",
+  "completion": "done",
+  "summary": "Place video annotations after Select/Highlight using integer toolbar order and limit synchronized timeline scrolling to 3.5 visible rows.",
+  "files": [
+    "src/features/recording/VideoWorkspace.tsx",
+    "src/features/recording/VideoTimeline.tsx",
+    "src/features/recording/VideoTimeline.css",
+    "tests/e2e/codex-c160.spec.ts",
+    "docs/design/VIDEO.md",
+    "docs/agents/codex/C167-compact-timeline.md",
+    "AGENTS.md",
+    "coordination/build-tasks.json"
+  ],
+  "file_sha256": {
+    "src/features/recording/VideoWorkspace.tsx": "200325cfb6a98d5b85a1e728ec8e42d52fffebdcb5ffc32348eb903da103a473",
+    "src/features/recording/VideoTimeline.tsx": "0a026388bba0109d0b634815a8b7a5577f2b91f4e5b1f4675b14a52a7a3929f5",
+    "src/features/recording/VideoTimeline.css": "a8f9abfa0ce3a2c78670ad191aa1b0f221af98ff2f50a4295d5ecb02e8346f79",
+    "tests/e2e/codex-c160.spec.ts": "3242d2e2ae0cd811cfa26f5c05461607f14105a1a7e9be977a53298a9d345f61",
+    "docs/design/VIDEO.md": "5df8db7447461d78b8d12d0292ffa60cfd6525962d91dbfa2cf56cb84d441c20",
+    "docs/agents/codex/C167-compact-timeline.md": "8364a35939f1038f5a803ccddcb0e33f2dd5af1014630cd4f170dda51d6def5e",
+    "AGENTS.md": "9fd6320aa4831f29a8ddd8b31c7751ab0be61e9584aadf40d32da95256288565",
+    "coordination/build-tasks.json": "5a2275967f7b0f46fcf95bae251142ffd4b7f5d0f0dd78dddc75c17f13aeb235"
+  },
+  "checks": [
+    "TypeScript noEmit passed",
+    "3 focused injected browser cases passed, including actual toolbar coordinates and synchronized gutter/editor scroll",
+    "Inspected artifacts/qa/C167-compact-video-timeline.png; git diff check passed"
+  ],
+  "risks": [
+    "Installed visual acceptance pending. No native build/bundle, OS/server actions, version bump or publication. USER_WAIVED_REVIEW only."
+  ],
+  "review": "pending"
+}

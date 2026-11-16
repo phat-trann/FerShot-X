@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "id": "20261116T143033-codex-C168-e5d4e2c9",
+  "created_at": "2026-11-16T14:30:33.933915+07:00",
+  "agent": "codex",
+  "request": "arrow-draft-ipc-20261116",
+  "task": "C168",
+  "completion": "done",
+  "summary": "Fix fractional video annotation timestamps rejected by native draft IPC; canonicalize temporal fields and add playback-to-Arrow autosave regression.",
+  "files": [
+    "src/features/recording/model.ts",
+    "src/features/recording/model.test.ts",
+    "src/features/recording/VideoWorkspace.tsx",
+    "src/platform/recording.ts",
+    "src-tauri/src/recording/model.rs",
+    "tests/e2e/codex-c160.spec.ts",
+    "docs/agents/codex/C168-arrow-draft-timestamps.md",
+    "docs/design/VIDEO.md",
+    "AGENTS.md",
+    "coordination/build-tasks.json"
+  ],
+  "file_sha256": {
+    "src/features/recording/model.ts": "556ee39479eb2c4d19260dcdf9c68eb3f292a64c0748cf193aea94b506689135",
+    "src/features/recording/model.test.ts": "ff8aa53e202c9d0931de7c90770a12463a97ff78688b40f8489487f42c462d2b",
+    "src/features/recording/VideoWorkspace.tsx": "3471c20a1e5448533a19b144c2c84fb34de188a25c75727c97fd79b1bb0c1667",
+    "src/platform/recording.ts": "2cb41770a20ed989490007289423e3caff515aa91a5552df3deba4d08f217994",
+    "src-tauri/src/recording/model.rs": "d3a20a4a797a1f23ca71ad18c6ae50bda755d148cb4afee1fb872cd424570daf",
+    "tests/e2e/codex-c160.spec.ts": "43ba0d7949ef8ba09ec2edeab879efb76d91e9af3705bd5d744b2e288b804114",
+    "docs/agents/codex/C168-arrow-draft-timestamps.md": "b622cfbc612af33da53bbe26a7c3f62214ba8a1ed82ba231b681a8492989080f",
+    "docs/design/VIDEO.md": "2340423996efab1684f30b795cdfd9ebe1046590e0030e6ef6929c66936bbf33",
+    "AGENTS.md": "98d4623a1d29871d9d410bbc39d4cb67baa46204d8ca92617fa6cdae5f9d6d4a",
+    "coordination/build-tasks.json": "e4d68ee7fd057c364a8ad93198d166b7cff2409add37930ddbd52016a0383604"
+  },
+  "checks": [
+    "TypeScript noEmit passed",
+    "9 focused recording unit cases passed",
+    "7 native model/schema cases passed including integer Arrow/fraction rejection",
+    "2 injected browser regressions passed including play-pause-Arrow-autosave/upload with strict integer IPC rejection"
+  ],
+  "risks": [
+    "Installed Arrow retest pending; diagnostics identify IPC operation but not raw deserialization reason. No real capture/server/permission actions, bundle/version bump or publication. USER_WAIVED_REVIEW only."
+  ],
+  "review": "pending"
+}

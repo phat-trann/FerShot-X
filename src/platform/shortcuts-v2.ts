@@ -7,7 +7,7 @@ export const HOTKEY_ACTIONS = GLOBAL_ACTIONS_V2;
 export const emptyHotkeys = emptyGlobalBindingsV2;
 const LEGACY_ACTIONS = ["capture-fullscreen", "capture-area", "capture-window", "capture-scrolling", "ocr-capture"];
 
-/** Read the actual eight-action native map; accept an exact v1 map only for migration. */
+/** Read the current native action map; accept an exact v1 map only for migration. */
 export function shortcutStatus(value: unknown): { draft: HotkeyDraft; faulted: boolean; restorationFailed?: boolean } {
   if (!value || typeof value !== "object") throw new TypeError("Invalid native shortcut status.");
   const status = value as { bindings?: unknown; faulted?: unknown; restorationFailed?:unknown };
@@ -15,10 +15,11 @@ export function shortcutStatus(value: unknown): { draft: HotkeyDraft; faulted: b
   const wire = status.bindings as Record<string, unknown>;
   const keys = Object.keys(wire);
   const legacy = keys.length === LEGACY_ACTIONS.length && LEGACY_ACTIONS.every(action => Object.prototype.hasOwnProperty.call(wire, action));
-  if (!legacy && (keys.length !== HOTKEY_ACTIONS.length || keys.some(action => !HOTKEY_ACTIONS.includes(action as typeof HOTKEY_ACTIONS[number])))) throw new TypeError("Invalid shortcut action map.");
+  const oldV2=[8,10].includes(keys.length)&&HOTKEY_ACTIONS.filter(a=>!a.startsWith("record-")).every(a=>keys.includes(a))&&keys.every(a=>HOTKEY_ACTIONS.includes(a as typeof HOTKEY_ACTIONS[number]));
+  if (!legacy && !oldV2 && (keys.length !== HOTKEY_ACTIONS.length || keys.some(action => !HOTKEY_ACTIONS.includes(action as typeof HOTKEY_ACTIONS[number])))) throw new TypeError("Invalid shortcut action map.");
   const draft: Record<string, unknown> = { ...emptyHotkeys() };
   for (const action of HOTKEY_ACTIONS) {
-    if (legacy && !LEGACY_ACTIONS.includes(action)) continue;
+    if (legacy && !LEGACY_ACTIONS.includes(action)||oldV2&&!keys.includes(action)) continue;
     const raw = wire[action]; if (raw === null) continue;
     if (typeof raw !== "string" || !raw || raw.length > 128) throw new TypeError("Invalid shortcut accelerator.");
     const parts = raw.split("+"); const code = parts.pop()!;

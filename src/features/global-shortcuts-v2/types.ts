@@ -8,7 +8,10 @@ export type GlobalActionIdV2 =
   | "capture-repeat-region"
   | "capture-scrolling"
   | "ocr-capture"
-  | "show-workspace";
+  | "show-workspace"
+  | "record-screen"
+  | "record-area"
+  | "record-stop";
 
 export const GLOBAL_ACTIONS_V2: readonly GlobalActionIdV2[] = Object.freeze([
   "capture-fullscreen",
@@ -19,6 +22,9 @@ export const GLOBAL_ACTIONS_V2: readonly GlobalActionIdV2[] = Object.freeze([
   "capture-scrolling",
   "ocr-capture",
   "show-workspace",
+  "record-screen",
+  "record-area",
+  "record-stop",
 ]);
 
 export const ACTION_LABELS_V2: Readonly<Record<GlobalActionIdV2, string>> =
@@ -31,6 +37,9 @@ export const ACTION_LABELS_V2: Readonly<Record<GlobalActionIdV2, string>> =
     "capture-scrolling": "Capture Scrolling Area",
     "ocr-capture": "OCR / Text Recognition",
     "show-workspace": "Show Workspace / Main Window",
+    "record-screen": "Record Screen",
+    "record-area": "Record Area",
+    "record-stop": "Stop Recording",
   });
 
 export type GlobalBindingsV2 = Readonly<
@@ -47,6 +56,9 @@ export function emptyGlobalBindingsV2(): GlobalBindingsV2 {
     "capture-scrolling": null,
     "ocr-capture": null,
     "show-workspace": null,
+    "record-screen": null,
+    "record-area": null,
+    "record-stop": null,
   });
 }
 

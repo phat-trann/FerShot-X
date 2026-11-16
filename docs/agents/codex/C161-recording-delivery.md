@@ -1,0 +1,5 @@
+# C161 — Recording delivery
+
+Recorded files in local logs/cache existed without document metadata; logs did not identify the precise failed native stage. Explicitly detach the recording writer, stop the stream and validate finalized asset duration instead of post-stop writer duration. Add finish/inspect error stages. Move thumbnails after delivery under a document lock, present Video Edit before metadata and provide bounded playback retry. Native click-through guides dim outside Record Area and clean up on stop/failure. Freeze immediate-upload mode at capture start; retain queued jobs on failed start. Unchanged media bypasses encoding only without trim/mute/visible effects.
+
+Validation: TypeScript passed; 8 native generated-media/geometry cases, 2 timeline unit cases and 9 injected browser cases passed. No real capture, audio, server, clipboard, permission, bundle or publication actions. Installed latency, overlay placement/exclusion and immediate video FTP require user verification. Version remains 1.3.1. Review marked USER_WAIVED_REVIEW, not independent approval.

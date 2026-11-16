@@ -22,8 +22,8 @@ pub(crate) fn open_tab(app: &tauri::AppHandle, tab: Option<&str>) -> Result<(), 
     }
     let url=format!("index.html?preferences{}",tab.map(|t|format!("&tab={t}")).unwrap_or_default());
     let builder=tauri::WebviewWindowBuilder::new(app, LABEL, tauri::WebviewUrl::App(url.into()))
-        .title("FerShot X — Settings").inner_size(532.0, 637.0).min_inner_size(532.0, 490.0)
-        .resizable(true).minimizable(false).always_on_top(on_top);
+        .title("FerShot X — Settings").inner_size(532.0, 637.0)
+        .resizable(false).maximizable(false).minimizable(false).always_on_top(on_top);
     #[cfg(target_os="macos")]
     let builder=builder.title_bar_style(tauri::TitleBarStyle::Overlay).hidden_title(true);
     let window=builder.build().map_err(failure)?;

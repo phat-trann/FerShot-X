@@ -9,6 +9,17 @@ export async function mock(page:Page){await page.context().addInitScript(({png})
  owner.__FTP__??=[{id:"123-1",sourceId:"uploaded-source",name:"Shared.png",remotePath:"/images/frozen.png",url:"https://example.invalid/images/frozen.png",status:"failed",createdAt:now,updatedAt:now,error:"Connection failed",errorCode:"ftp_connection"}];
  host.__TAURI_INTERNALS__={transformCallback:(fn:any)=>{const id=++seq;callbacks.set(id,fn);return id;},unregisterCallback:(id:number)=>callbacks.delete(id),invoke:async(command:string,args:any={})=>{
  owner.__CALLS__.push({command,args});
+ if(command==="read_recording_settings")return owner.__RECORDING_SETTINGS__??{systemAudio:false,microphone:false,recordPointer:true};
+ if(command==="save_recording_settings"){owner.__RECORDING_SETTINGS__=args.value;return args.value;}
+ if(command==="read_recording_status")return owner.__RECORDING_STATUS__??{phase:"idle",elapsedMs:0};
+ if(command==="recording_list")return owner.__VIDEOS__??[];
+ if(command==="recording_take")return owner.__VIDEO_INBOX__?.shift()??null;
+ if(command==="recording_document")return owner.__VIDEO_DOCS__?.[args.id];
+ if(command==="recording_save_draft"){owner.__VIDEO_DOCS__[args.id].draft=structuredClone(args.draft);return;}
+ if(command==="recording_remove"){owner.__VIDEOS__=(owner.__VIDEOS__??[]).filter((x:any)=>x.id!==args.id);delete owner.__VIDEO_DOCS__?.[args.id];return;}
+ if(command==="recording_edit"){owner.__VIDEO_INBOX__??=[];owner.__VIDEO_INBOX__.push(args);const edit=window.open("?editor","fershot-editor","popup,width=1180,height=780");owner.__EDITOR__=edit;if(edit)setTimeout(()=>edit.__EMIT__?.("fershot-video-open"),200);return;}
+ if(command==="recording_copy")return;
+ if(command==="recording_save")return !host.__CANCEL_SAVE__;
  if(command==="read_scroll_preferences")return {speed:Number(localStorage.getItem("synthetic-scroll-speed")??3)};
  if(command==="save_scroll_preferences"){localStorage.setItem("synthetic-scroll-speed",String(args.speed));return {speed:args.speed};}
  if(command==="local_cache_save_draft"){const r=args.request;owner.__DRAFTS__??={};owner.__DRAFTS__[r.id]={name:r.name,draft:r.draft,image:{...image,pngBase64:r.pngBase64??owner.__DRAFTS__[r.id]?.image.pngBase64??png,width:r.draft.width,height:r.draft.height,byteSize:atob(r.pngBase64??owner.__DRAFTS__[r.id]?.image.pngBase64??png).length}};const entry={id:r.id,name:r.name,width:r.draft.width,height:r.draft.height,byteSize:90,createdAt:now,expiresAt:now+30*86400000};owner.__LOCAL__=[entry,...owner.__LOCAL__.filter((x:any)=>x.id!==r.id)];return entry;}

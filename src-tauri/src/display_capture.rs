@@ -36,3 +36,8 @@ pub fn confirm(target:DisplayTarget)->Result<(),NativeError>{
  #[test]fn pointer_selects_secondary_negative_origin_and_its_retina_scale(){let main=DisplayTarget{id:1,rect:ScreenRect{x:0,y:0,width:1440,height:900},scale:2.};let left=DisplayTarget{id:2,rect:ScreenRect{x:-1920,y:-200,width:1920,height:1080},scale:1.};assert_eq!(choose(&[main,left],-400.,100.).unwrap(),left);assert_eq!(choose(&[main,left],100.,100.).unwrap(),main);assert_eq!(choose(&[main,left],0.,100.).unwrap(),main);}
  #[test]fn missing_or_invalid_pointer_never_falls_back_to_primary(){let d=DisplayTarget{id:1,rect:ScreenRect{x:0,y:0,width:100,height:100},scale:2.};for(x,y)in[(100.,0.),(-1.,0.),(f64::NAN,0.)]{assert!(choose(&[d],x,y).is_err())}assert!(choose(&[],1.,1.).is_err());}
 }
+
+pub fn for_region(rect:ScreenRect)->Result<DisplayTarget,NativeError>{
+ #[cfg(target_os="macos")]{for id in core_graphics::display::CGDisplay::active_displays().map_err(|_|unavailable())?.into_iter().take(32){if let Ok(target)=snapshot(id){if crate::recording::model::region_on_display(target.rect,rect).is_ok(){return Ok(target)}}}Err(NativeError::new("invalid_bounds","Select the recording area within a single display."))}
+ #[cfg(not(target_os="macos"))]{let _=rect;Err(unavailable())}
+}

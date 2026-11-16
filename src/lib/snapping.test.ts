@@ -1,0 +1,8 @@
+import {describe,it,expect} from "vitest";
+import {magneticSnap,alignmentSession,alignRectangle,rotatedBounds} from "./snapping";
+describe("magnetic alignment",()=>{
+ it("captures, holds and releases without a clock or accumulating drift",()=>{const target={key:"cut",value:100,label:"Clip end"};const a=magneticSnap(96,[target],6,11);expect(a.value).toBe(100);expect(magneticSnap(109,[target],6,11,a.target).value).toBe(100);expect(magneticSnap(112,[target],6,11,a.target)).toEqual({value:112,target:null});});
+ it("snaps touching edges and shared centers with named guides",()=>{const session=alignmentSession({id:"moving",x:0,y:0,width:20,height:20,label:"Rectangle"},[{id:"other",x:100,y:50,width:40,height:40,label:"Ellipse"}]);const aligned=alignRectangle(session,78,61,1);expect(aligned.x).toBe(80);expect(aligned.y).toBe(60);expect(aligned.guides.map(g=>g.label)).toContain("Right ↔ Left · Ellipse");expect(aligned.guides.map(g=>g.label)).toContain("Center ↔ Center · Ellipse");});
+ it("uses screen-pixel tolerance at any zoom and Option bypass releases guides",()=>{const create=()=>alignmentSession({id:"m",x:0,y:0,width:20,height:20,label:"Box"},[{id:"o",x:100,y:100,width:20,height:20,label:"Box"}]);expect(alignRectangle(create(),96,40,2).x).toBe(96);const s=create();expect(alignRectangle(s,97,40,1).x).toBe(100);expect(alignRectangle(s,99,40,1,true)).toMatchObject({x:99,guides:[]});});
+ it("canvas edges do not pull the opposite object edge outside the image",()=>{const s=alignmentSession({id:"m",x:10,y:10,width:20,height:20,label:"Box"},[{id:"canvas",x:0,y:0,width:100,height:100,label:"Image",canvas:true}]);expect(alignRectangle(s,-19,10,1).x).toBe(-19);expect(rotatedBounds({x:0,y:0,width:40,height:20},90).width).toBeCloseTo(20);});
+});

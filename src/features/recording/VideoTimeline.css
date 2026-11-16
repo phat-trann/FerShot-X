@@ -1,0 +1,25 @@
+.video-layer-timeline{flex:0 0 auto;background:var(--surface);border-top:.5px solid var(--border);min-width:0}
+.video-timeline-actions{display:flex;align-items:center;gap:4px;padding:4px 12px;height:36px}.video-timeline-actions strong{font-size:12px;margin-right:12px}.video-timeline-spacer{flex:1}
+.video-timeline-grid{display:grid;grid-template-columns:84px minmax(0,1fr)}.video-track-labels{min-height:0;overflow:hidden;border-right:.5px solid var(--border)}.video-track-label-ruler{height:42px;padding:0}.video-track-label-viewport{max-height:98px;overflow-x:hidden;overflow-y:auto;scrollbar-width:none;overscroll-behavior:contain}.video-track-label-viewport::-webkit-scrollbar{display:none}
+.video-track-label{--editor-icon-control-size:22px;--editor-icon-glyph-size:11px;display:flex;align-items:center;justify-content:center;height:28px;padding:0 4px;gap:2px;border-bottom:.5px solid var(--border)}.video-track-label[data-active=true]{background:var(--selection)}
+
+.video-layer-timeline .timeline-editor{font-family:var(--font-ui);background:var(--surface);font-size:11px}.video-layer-timeline .timeline-editor-edit-row{background-image:linear-gradient(var(--surface),var(--surface)),linear-gradient(90deg,#ffffff0c 1px,transparent 0)}.video-layer-timeline .timeline-editor-action{border-radius:7px;overflow:hidden;top:3px!important;height:22px!important;box-shadow:inset 0 0 0 .5px #ffffff30;background:#26456b}.video-layer-timeline .video-track-audio .timeline-editor-action{background:#245249}.video-layer-timeline .video-track-cursor .timeline-editor-action{background:#544476}.video-layer-timeline .video-track-clicks .timeline-editor-action{background:#63502f}.video-layer-timeline .video-track-highlight .timeline-editor-action{background:#645b2d}.video-layer-timeline .video-track-disabled .timeline-editor-action{opacity:.35}
+.video-layer-timeline .video-timeline-clip{width:100%;height:100%;padding:0 12px;border-radius:7px;justify-content:flex-start;background:transparent;border:.5px solid transparent;font-size:11px;color:#fff;overflow:hidden}.video-layer-timeline .video-timeline-clip[aria-pressed=true]{border-color:var(--accent);background:#257efe22}.video-timeline-clip span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.video-layer-timeline .timeline-editor-cursor{border-color:var(--accent)}.video-layer-timeline .timeline-editor-cursor-top svg{fill:var(--accent)}
+@media(prefers-reduced-motion:reduce){.video-layer-timeline .timeline-editor-edit-row{transition:none}}
+.video-layer-timeline .timeline-editor-cursor{z-index:3}.video-layer-timeline .timeline-editor-action:has(.video-timeline-clip[aria-pressed=true]){z-index:4}.video-layer-timeline .timeline-editor-action-left-stretch,.video-layer-timeline .timeline-editor-action-right-stretch{z-index:5;cursor:ew-resize}
+
+
+
+.video-timeline-editor-host{position:relative;min-width:0;overflow:hidden}
+.video-trim-shades{position:absolute;inset:42px 0 0;pointer-events:none;overflow:hidden;z-index:8}
+.video-trim-shade{position:absolute;top:0;bottom:0;background:#0009;pointer-events:none}.video-trim-shade-start{left:0;border-right:.5px solid #ffffff50}.video-trim-shade-end{right:0;border-left:.5px solid #ffffff50}
+.video-trim-handle{position:absolute!important;top:0;bottom:0;width:12px!important;min-width:0!important;height:100%!important;transform:translateX(-50%);border-radius:4px!important;background:transparent!important;border:0!important;padding:0!important;pointer-events:auto;touch-action:none;cursor:ew-resize;z-index:9}
+.video-trim-handle span{display:block;width:3px;height:20px;border-radius:3px;background:#fff;box-shadow:0 0 0 1px #0008}.video-trim-handle:hover span,.video-trim-handle:focus-visible span{background:var(--accent)}
+
+.video-trim-snap-guide{position:absolute;top:28px;bottom:0;width:1px;background:var(--accent);z-index:12;pointer-events:none}.video-trim-snap-guide span{position:absolute;top:0;left:5px;padding:3px 6px;border-radius:var(--radius-sm);background:var(--selection);border:.5px solid var(--accent);color:var(--text);font-size:10px;white-space:nowrap}
+
+.video-layer-timeline .video-track-arrow .timeline-editor-action{background:#375774}.video-layer-timeline .video-track-text .timeline-editor-action{background:#574273}.video-layer-timeline .video-track-cover .timeline-editor-action{background:#393a3d}
+
+.video-trim-snap-guide[data-side=left] span{left:auto;right:5px}
+
+.video-layer-timeline .video-track-image .timeline-editor-action{background:#315c52}

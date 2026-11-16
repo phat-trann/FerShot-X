@@ -31,11 +31,13 @@ mod update_notifications;
 mod active_window;
 mod display_capture;
 mod document_open;
+mod recording;
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     let builder = tauri::Builder::default()
         .manage(imaging::NativeJobs::default())
+        .manage(recording::RecordingStore::default())
         .manage(updates::UpdateStore::default())
         .manage(automatic_capture::StopState::default())
         .manage(library_window::EditorInbox::default())
@@ -86,6 +88,8 @@ pub fn run() {
             library_window::fit_editor_window,
             library_window::show_library,
             library_window::show_editor,
+            recording::cursor::read_recording_cursor,
+            recording::read_recording_settings,recording::save_recording_settings,recording::read_recording_status,recording::start_recording,recording::stop_recording,recording::recording_list,recording::recording_document,recording::recording_save_draft,recording::recording_remove,recording::recording_save,recording::recording_copy,recording::recording_edit,recording::recording_take,recording::recording_open_failed,recording::recording_copy_library,ftp::ftp_enqueue_video,ftp::ftp_video_preview,ftp::ftp_edit_video,
             library_window::library_image,
             library_window::copy_library_images,
             library_window::library_thumbnail,

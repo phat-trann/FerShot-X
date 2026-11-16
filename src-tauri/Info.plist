@@ -25,5 +25,7 @@
 	</array>
 	<key>NSScreenCaptureUsageDescription</key>
 	<string>FerShot X requires screen recording permission to capture your screen, windows, and selected regions.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Include your microphone in a screen recording when you enable microphone audio.</string>
 </dict>
 </plist>

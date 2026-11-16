@@ -26,12 +26,13 @@ fn read(app:&tauri::AppHandle,kind:Kind,id:&str)->Result<LibraryImage,NativeErro
 pub fn editor_size(image:(u32,u32),available:(f64,f64))->(f64,f64){
  let chrome=110.;let max_w=(available.0*0.8).min(((available.1*0.8-chrome).max(1.))*16./9.);let wanted=(image.0 as f64+48.).max(image.1 as f64*16./9.+48.).max(480.);let width=wanted.min(max_w).max(1.);(width,width*9./16.+chrome)
 }
-#[tauri::command]pub fn fit_editor_window(width:u32,height:u32,window:tauri::WebviewWindow)->Result<(),NativeError>{
+#[tauri::command]pub fn fit_editor_window(width:u32,height:u32,video:Option<bool>,window:tauri::WebviewWindow)->Result<(),NativeError>{
  crate::imaging::validate_window_label(window.label())?;if width==0||height==0||width>16384||height>16384{return Err(NativeError::new("invalid_input","Invalid image dimensions."))}
  // Resolve the user's active display, not the hidden editor's stale monitor.
  let monitor=crate::lifecycle::active_monitor(&window).map_err(|_|NativeError::new("window_failed","Move the pointer onto the display where Edit should open."))?;
  let area=monitor.work_area();let scale=monitor.scale_factor();
- let(w,h)=editor_size((width,height),(area.size.width as f64/scale,area.size.height as f64/scale));
+ if window.is_maximized().unwrap_or(false){window.unmaximize().map_err(|_|NativeError::new("window_failed","Edit could not restore its window size."))?;}
+ let(w,h)=if video.unwrap_or(false){(area.size.width as f64/scale*0.8,area.size.height as f64/scale*0.8)}else{editor_size((width,height),(area.size.width as f64/scale,area.size.height as f64/scale))};
  let size=((w*scale).round()as u32,(h*scale).round()as u32);
  // Move onto the target display before sizing, so mixed-DPI constraints use it.
  let(x,y)=crate::lifecycle::center_in_work_area((area.position.x,area.position.y),(area.size.width,area.size.height),size);

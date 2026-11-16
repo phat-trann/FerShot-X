@@ -37,3 +37,17 @@
 /* Legacy feature styles must not dim enabled shared actions or diverge disabled ink. */
 :is(.workspace,.library-window,.preferences-window,[data-slot="alert-dialog-content"]) [data-slot="button"]:not([data-variant="plain"]):not(:disabled) { opacity: 1; }
 :is(.workspace,.library-window,.preferences-window,[data-slot="alert-dialog-content"]) [data-slot="button"]:not([data-variant="plain"]):disabled { opacity: .45; }
+
+/* Flat Edit actions: shared by the compact video transport and timeline. */
+.workspace [data-slot="button"].ui-editor-icon-button {
+  display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;
+  width:var(--editor-icon-control-size,28px)!important;min-width:var(--editor-icon-control-size,28px)!important;
+  height:var(--editor-icon-control-size,28px)!important;min-height:var(--editor-icon-control-size,28px)!important;
+  padding:var(--space-1)!important;border:.5px solid transparent!important;border-radius:var(--control-radius)!important;
+  background:transparent!important;color:var(--text-secondary)!important;box-shadow:none!important;outline:none!important;transition:none!important;
+}
+.workspace [data-slot="button"].ui-editor-icon-button[aria-pressed="true"] { color:var(--accent)!important; }
+.workspace [data-slot="button"].ui-editor-icon-button:hover:not(:disabled) { background:var(--surface-elevated)!important;border-color:var(--selection-border)!important;color:var(--text)!important;filter:none; }
+.workspace [data-slot="button"].ui-editor-icon-button[aria-pressed="true"]:hover:not(:disabled) {color:var(--accent)!important;}
+.workspace [data-slot="button"].ui-editor-icon-button:focus-visible {filter:brightness(1.15);}
+.workspace [data-slot="button"].ui-editor-icon-button svg {width:var(--editor-icon-glyph-size,16px);height:var(--editor-icon-glyph-size,16px);stroke-width:1.75;}

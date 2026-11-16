@@ -39,3 +39,7 @@ it("clears only the requested row and prevents edits while disabled",()=>{
   rerender(<GlobalShortcutsV2Panel value={value} disabled onChange={change}/>);
   fireEvent.click(screen.getByRole("button",{name:"Clear shortcut for Area screenshot"}));expect(change).toHaveBeenCalledOnce();
 });
+
+it("records and clears recording shortcuts through the existing immediate workflow",()=>{const change=vi.fn();render(<GlobalShortcutsV2Panel value={emptyGlobalBindingsV2()} disabled={false} onChange={change}/>);fireEvent.click(screen.getByRole("button",{name:"Record shortcut for Fullscreen recording"}));fireEvent.keyDown(window,{key:"r",code:"KeyR",metaKey:true,shiftKey:true});expect(change.mock.calls[0][0]["record-screen"]).toMatchObject({key:"r",metaKey:true,shiftKey:true});expect(screen.getByRole("button",{name:"Record shortcut for Area recording"})).toBeVisible();});
+
+it("records a dedicated Stop recording shortcut immediately",()=>{const change=vi.fn();render(<GlobalShortcutsV2Panel value={emptyGlobalBindingsV2()} disabled={false} onChange={change}/>);fireEvent.click(screen.getByRole("button",{name:"Record shortcut for Stop recording"}));fireEvent.keyDown(window,{key:"x",code:"KeyX",metaKey:true,shiftKey:true});expect(change.mock.calls[0][0]["record-stop"]).toMatchObject({key:"x",metaKey:true,shiftKey:true});});

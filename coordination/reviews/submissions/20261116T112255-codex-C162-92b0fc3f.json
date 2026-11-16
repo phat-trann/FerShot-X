@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "id": "20261116T112255-codex-C162-92b0fc3f",
+  "created_at": "2026-11-16T11:22:55.337535+07:00",
+  "agent": "codex",
+  "request": "recording-stop-recovery-20261116",
+  "task": "C162",
+  "completion": "done",
+  "summary": "Correct stop-to-Edit failure, preserve recording terminal callbacks and recover finalized MP4s missing Local history metadata.",
+  "files": [
+    "src-tauri/src/recording/capture.rs",
+    "src-tauri/src/recording/mod.rs",
+    "src-tauri/src/recording/storage.rs",
+    "src-tauri/src/recording/render.rs",
+    "src-tauri/src/recording/finalized.rs",
+    "src-tauri/src/lifecycle.rs",
+    "src-tauri/src/diagnostics.rs",
+    "src/LibraryWindow.tsx",
+    "tests/e2e/codex-c160.spec.ts",
+    "docs/agents/codex/C162-recording-stop-recovery.md",
+    "docs/design/VIDEO.md",
+    "docs/releases/video-manual-acceptance.md",
+    "AGENTS.md",
+    "coordination/build-tasks.json"
+  ],
+  "file_sha256": {
+    "src-tauri/src/recording/capture.rs": "41649b0487fcfb9bfc592548fbedce0dd95ad44694acaa8dc3d16f2c26d04a17",
+    "src-tauri/src/recording/mod.rs": "171c5ae7dec0020fca5941a919087cb16d3e8d343cf9765a8335989039d07ec2",
+    "src-tauri/src/recording/storage.rs": "cfe9b9f741aab3ed4292aa945df04630ab27eedc889de1960d235f3a18936f21",
+    "src-tauri/src/recording/render.rs": "1529bf96b8f9ec424cd5c536d5549d1280aac0f1939889d513443775aa2ddbf7",
+    "src-tauri/src/recording/finalized.rs": "db387086d866f4589348fe39f198d02d648c1f060af2ca03bcc1ceaec768c6f7",
+    "src-tauri/src/lifecycle.rs": "3da1b396c4b23648ae6b7d8307c4f7a9f8b60c82f5e92cc04af2a791e2ea9956",
+    "src-tauri/src/diagnostics.rs": "175ae6288581c8eefddf5697c53b0d7bb4c1aff82f325685ac1d33356bb1955c",
+    "src/LibraryWindow.tsx": "2179d1ae0fe70bfb486c203b724f0d28538bafc9fe64cd7e209b6fbc931a764a",
+    "tests/e2e/codex-c160.spec.ts": "b8d4faf1734a57fe0be3aa4f64cd2b5ec6862c0dd4b2bd2b33e54f1471a13104",
+    "docs/agents/codex/C162-recording-stop-recovery.md": "5bcd9d33057ec747ade751edb3189bc72d273f788a5c6e01b8a5b5675ac93eef",
+    "docs/design/VIDEO.md": "5dfd046688f6627c21a9f4dcbf4cb0d5a30f54ebcfbd3e417687cdb7c0e4b867",
+    "docs/releases/video-manual-acceptance.md": "ee193bd12f511f0a448422e0b981b9d1107c918367f1f2079d64dd8326a959c4",
+    "AGENTS.md": "32957d01eda5dfadf89f164f207a2d4d305930350c323d85825bd3aedf4fb857",
+    "coordination/build-tasks.json": "d18dc183c65ada329ae7870fe3cfb8f0237c7655c3fb5888a7957cca006f898e"
+  },
+  "checks": [
+    "14 native synthetic callback/container/generated-media tests passed",
+    "10 injected browser video/library cases passed; final Local error-selection case rerun passed",
+    "TypeScript noEmit and cargo check locked tests passed"
+  ],
+  "risks": [
+    "Installed Screen/Area recording stop and recovery require retest. No bundle, version bump or publication. USER_WAIVED_REVIEW only."
+  ],
+  "review": "pending"
+}

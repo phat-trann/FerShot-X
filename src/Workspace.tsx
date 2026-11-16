@@ -1,3 +1,9 @@
+import {lazy,Suspense} from "react";
+import type {VideoDocument} from "./features/recording/model";
+import type {VideoActions} from "./features/recording/VideoWorkspace";
+import {takeVideoOpen,readRecording,startRecording,failVideoOpen,listenRecording,enqueueVideo} from "./platform/recording";
+import {LoadingState} from "./components/ui/content-state";
+const VideoWorkspace=lazy(()=>import("./features/recording/VideoWorkspace"));
 import { RefreshCw } from "lucide-react";
 import { Input } from "./components/ui/input";
 import {StatusMessage} from "./components/ui/status";
@@ -49,6 +55,12 @@ const EMPTY_ADVANCED_ITEMS: readonly AdvancedEditorItem[] = Object.freeze([]);
 const EMPTY_ANNOTATIONS: readonly Annotation[] = Object.freeze([]);
 
 export default function Workspace() {
+  const [videoDocument,setVideoDocument]=useState<{document:VideoDocument;requestId?:string;presentation:string;queuedUpload?:{id:string;url:string};initialError?:string}|null>(null);
+  const videoActions=useRef<VideoActions|null>(null);
+  useEffect(()=>{let live=true;let off:(()=>void)|undefined;void listenRecording(value=>{if(live&&(value.phase==="failed"||value.phase==="idle"))window.dispatchEvent(new Event("fershot-editor-presented"));}).then(dispose=>{if(live)off=dispose;else dispose();}).catch(()=>{});return()=>{live=false;off?.();};},[]);
+
+
+
   const automaticUploads=useRef(new Map<string,ImageDocument>());
   const capturedPreviewIds = useRef(new Set<string>());
   const [images, setImages] = useState<ImageDocument[]>([]);
@@ -120,6 +132,7 @@ export default function Workspace() {
     if(pending.sized&&pending.painted){pendingPresentation.current=null;void showEditor(pending.requestId).catch(()=>setError("Edit could not be brought forward. Open the image again from Library."));}
   }
   function addDocument(next: ImageDocument, select = true) {
+    setVideoDocument(null);
     if (!mounted.current) { captureScales.current.delete(next.id); URL.revokeObjectURL(next.src); return; }
     if (liveImages.current.length >= 512) { captureScales.current.delete(next.id); URL.revokeObjectURL(next.src); throw new RangeError("Session library is limited to 512 images."); }
     sessionRevision.current++;
@@ -222,6 +235,9 @@ export default function Workspace() {
   }
 
   globalAction.current = (action, fromMenu = false) => {
+    if(action==="record-screen"||action==="record-area"){if(busyRef.current||scrollActive)return;window.dispatchEvent(new Event("fershot-capture-starting"));void operate(async()=>{try{await startRecording(action==="record-area"?"area":"fullscreen");}catch(error){window.dispatchEvent(new Event("fershot-editor-presented"));throw error;}});return;}
+    if(videoDocument&&videoActions.current&&typeof action==="string"&&["image-copy","image-save","image-upload"].includes(action)){if(action==="image-copy")videoActions.current.copy();else if(action==="image-save")videoActions.current.save();else videoActions.current.upload();return;}
+
     if(action==="capture-upload-setting-failed"){setError("Automatic upload mode could not be saved. Please retry from the tray menu.");return;}
     if (action === "startup-failed") { setError("Launch at Startup could not be changed. Check Settings and retry."); return; }
     const focused = document.activeElement;
@@ -303,8 +319,10 @@ export default function Workspace() {
 
   const incomingPending = useRef(true);
   const [incomingRevision,setIncomingRevision] = useState(0);
-  useEffect(()=>{let live=true;let off:(()=>void)|undefined;const request=()=>{if(live){incomingPending.current=true;setIncomingRevision(n=>n+1);}};void listenLibrary("fershot-editor-image",request).then(fn=>{if(live){off=fn;request();}else fn();}).catch(()=>{if(live){recordDiagnostic("image","failed","other",{operation:"listen_editor_image"});setError("Library events are unavailable. Restart the app and retry.");}});return()=>{live=false;off?.();};},[]);
-  useEffect(()=>{if(busy||busyRef.current||!preferencesReady||!incomingPending.current)return;incomingPending.current=false;void operate(async()=>{for(let count=0;count<4;count++){const incoming=await takeEditorImage();if(!incoming)break;capturedPreviewIds.current.add(incoming.id);addDocument(incoming);setNotice("Library image ready to edit. Original preserved.");}});},[busy,preferencesReady,incomingRevision]);
+  useEffect(()=>{let live=true;let off:(()=>void)|undefined;const request=()=>{if(live){incomingPending.current=true;setIncomingRevision(n=>n+1);}};Promise.all([listenLibrary("fershot-editor-image",request),listenLibrary("fershot-video-open",request)]).then(disposers=>{const fn=()=>disposers.forEach(dispose=>dispose());if(live){off=fn;request();}else fn();}).catch(()=>{if(live){recordDiagnostic("image","failed","other",{operation:"listen_editor_image"});setError("Library events are unavailable. Restart the app and retry.");}});return()=>{live=false;off?.();};},[]);
+  useEffect(()=>{if(busy||busyRef.current||!preferencesReady||!incomingPending.current)return;incomingPending.current=false;void operate(async()=>{for(let count=0;count<4;count++){const incoming=await takeEditorImage();if(incoming){capturedPreviewIds.current.add(incoming.id);addDocument(incoming);setNotice("Library image ready to edit. Original preserved.");}const movie=await takeVideoOpen();if(movie){try{const document=await readRecording(movie.id);let queuedUpload:{id:string;url:string}|undefined;let initialError:string|undefined;
+        if(movie.uploadImmediately){try{queuedUpload=await enqueueVideo(movie.id,document.draft);await startFtpUpload(queuedUpload.id);try{await copyText(queuedUpload.url);}catch{setError("Video upload started. Copy its link from Library.");}continue;}catch(error){initialError=error instanceof Error?error.message:"Video upload failed. Retry from Edit.";}}
+        pendingPresentation.current=null;setVideoDocument({document,requestId:movie.requestId,presentation:crypto.randomUUID(),queuedUpload,initialError});}catch(error){if(movie.requestId)await failVideoOpen(movie.requestId);throw error;}}if(!incoming&&!movie)break;}});},[busy,preferencesReady,incomingRevision]);
 
   async function hideCompletedCapture(id: string) {
     if (capturedPreviewIds.current.has(id)) await hideWorkspace();
@@ -347,10 +365,10 @@ export default function Workspace() {
   useEffect(() => {
     const keydown = (event: KeyboardEvent) => {
       if (!(event.metaKey || event.ctrlKey) || event.key.toLowerCase() !== "s" || event.shiftKey || event.altKey || event.isComposing) return;
-      event.preventDefault(); if (!event.repeat) uploadAction.current();
+      event.preventDefault(); if (!event.repeat) {if(videoActions.current)videoActions.current.upload();else uploadAction.current();}
     };
     window.addEventListener("keydown", keydown);
-    return () => window.removeEventListener("keydown", keydown);
+  return () => window.removeEventListener("keydown", keydown);
   }, []);
 
   useEffect(() => {
@@ -430,9 +448,10 @@ export default function Workspace() {
   }
 
 
-  const closeDocument=useRef(()=>{});closeDocument.current=()=>{if(image)void localHistory.remember(image,{schemaVersion:1,width:image.width,height:image.height,annotations,advanced:advancedItems});setSelectedId(null);};
+  const closeDocument=useRef(()=>{});closeDocument.current=()=>{setVideoDocument(null);if(image)void localHistory.remember(image,{schemaVersion:1,width:image.width,height:image.height,annotations,advanced:advancedItems});setSelectedId(null);};
   useEffect(()=>{let live=true;let off:(()=>void)|undefined;void listenLibrary("fershot-editor-closed",()=>closeDocument.current()).then(dispose=>{if(live)off=dispose;else dispose();});return()=>{live=false;off?.();};},[]);
 
+  if(videoDocument)return <Suspense fallback={<LoadingState>Opening video editor</LoadingState>}><VideoWorkspace key={videoDocument.presentation} document={videoDocument.document} requestId={videoDocument.requestId} initialUpload={videoDocument.queuedUpload} initialError={videoDocument.initialError} onActions={actions=>{videoActions.current=actions;}}/></Suspense>;
   return (
     <EditorToolbarProvider><div className="workspace editor-window">
       <main className="main-panel" inert={false}>

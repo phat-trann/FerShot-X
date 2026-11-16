@@ -5756,6 +5756,136 @@
       "shared_claim": "root-wiring",
       "owned_paths": "Native notification activation/lifecycle policy, release metadata and regressions/docs",
       "inputs": "User requests priority fix and push before video; do not wait for CI build"
+    },
+    {
+      "id": "C160",
+      "agent": "codex",
+      "title": "Native screen recording, video editing/export and FTP integration",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "Recording native module/contracts, video Edit/Library/Settings, FTP media queue and safe regressions/docs",
+      "inputs": "User requests record/edit/upload like images; configurable audio, trim/basic highlight and pointer metadata"
+    },
+    {
+      "id": "C161",
+      "agent": "codex",
+      "title": "Recording finalization, area dimming and immediate video delivery",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "src-tauri/src/recording/**; native diagnostic stages; Workspace video inbox; VideoWorkspace; recording IPC; safe tests and docs",
+      "inputs": "User reports long stop wait/no Edit and requests dimming outside recording region and fast Edit/upload"
+    },
+    {
+      "id": "C162",
+      "agent": "codex",
+      "title": "Correct recording stop failure and recover finalized orphan MP4s",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "Recording native capture/container/storage; Library recording error state; native Reopen guard; safe regression tests and docs",
+      "inputs": "Installed finish_recording errors at 0\u20133ms; user sees Library without video after Stop"
+    },
+    {
+      "id": "C163",
+      "agent": "codex",
+      "title": "Layered video timeline and system/custom cursor editing",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "Recording timeline schema/export/cursor command; shared media playback; Video Edit/preview/timeline; pinned package; safe regressions/docs",
+      "inputs": "User requests professional layered timeline with independent cursor, trim/split/toggle/duplicate and native/custom cursor options"
+    },
+    {
+      "id": "C164",
+      "agent": "codex",
+      "title": "Recording hotkeys, silent-track detection and compact edge-mask trimming",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "Recording audio/cursor model/native commands; shortcuts Settings/transport/native dispatch; record tray icons; compact VideoTimeline/Workspace; safe checks and docs",
+      "inputs": "User requests recording shortcuts/icons, no silent Audio layer, cursor error fix, complete row deletion, edge-mask trim and removed mouse footer/add controls"
+    },
+    {
+      "id": "C165",
+      "agent": "codex",
+      "title": "Match recording glyphs and standardize compact timeline icon controls",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "Two record tray PNGs; shared flat icon-button CSS; VideoTimeline/transport controls; injected browser check; design/report/coordination docs",
+      "inputs": "User requests existing icon size/stroke, no repeated left layer labels, smaller visibility/lock and standardized timeline icon styling"
+    },
+    {
+      "id": "C166",
+      "agent": "codex",
+      "title": "Magnetic trim/image alignment, video annotations and layer selection",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "Shared snapping helper; Konva drag feedback; Video timeline selection/snap; Text/Arrow/Cover preview/model/native export; safe regression/docs",
+      "inputs": "User requests magnetic timeline/image alignment, extra video tools and independent layer selection beside visibility/lock icons"
+    },
+    {
+      "id": "C167",
+      "agent": "codex",
+      "title": "Group video drawing tools and cap timeline at three-and-a-half rows",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "VideoWorkspace tool order; VideoTimeline viewport/scroll CSS; focused browser case and docs",
+      "inputs": "User requests Arrow/Text/Cover in drawing group and 3.5 visible layers with scrolling for remaining rows"
+    },
+    {
+      "id": "C168",
+      "agent": "codex",
+      "title": "Fix fractional Arrow draft timestamps at native IPC boundary",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "Recording model cue-time helpers, VideoWorkspace creation, platform recording IPC, native schema/unit/browser regressions and docs",
+      "inputs": "User reports Arrow Video operation failed; installed diagnostics show repeated recording_save_draft failures"
+    },
+    {
+      "id": "C169",
+      "agent": "codex",
+      "title": "Predictable centered windows and video image layers",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "Window lifecycle/preferences/Library sizing and capability; video image layer model/import/preview/timeline/native export and focused checks/docs",
+      "inputs": "User requests centered views, Library 75%, video 80%, fixed Settings, titlebar maximize, bottom timeline on open and Add Image layers in video"
+    },
+    {
+      "id": "C170",
+      "agent": "codex",
+      "title": "Recording app tray status and direct click-to-stop",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "src-tauri/src/menu_bar.rs; focused native menu tests and task documentation",
+      "inputs": "User wants app tray logo to indicate recording and stop immediately when clicked"
+    },
+    {
+      "id": "C171",
+      "agent": "codex",
+      "title": "Dedicated persistent Stop recording hotkey and ordinary tray behavior",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "Native/menu shortcut integration, UI codec/types/panel, platform migration, focused tests and docs",
+      "inputs": "User supersedes colored click-to-stop tray; retain native stop and add configurable Stop recording hotkey"
+    },
+    {
+      "id": "C172",
+      "agent": "codex",
+      "title": "Review cleanup and user-authorized 1.4.0 release",
+      "state": "READY",
+      "work_kind": "integration",
+      "shared_claim": "root-wiring",
+      "owned_paths": "Completed C160-C171 source/tests/assets/docs, product version metadata and release report",
+      "inputs": "User accepts current candidate and requests unused-code cleanup, version increase and normal main push"
     }
   ],
   "allocation": "Codex sole active client; external Antigravity and Copilot inactive; preserve historical authorship.",
@@ -5922,7 +6052,20 @@
       "C156",
       "C157",
       "C158",
-      "C159"
+      "C159",
+      "C160",
+      "C161",
+      "C162",
+      "C163",
+      "C164",
+      "C165",
+      "C166",
+      "C167",
+      "C168",
+      "C169",
+      "C170",
+      "C171",
+      "C172"
     ],
     "copilot": []
   },

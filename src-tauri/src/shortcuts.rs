@@ -4,7 +4,7 @@ use std::{collections::{BTreeMap, BTreeSet}, str::FromStr, sync::{Mutex,atomic::
 use tauri::{Emitter, Manager};
 use tauri_plugin_global_shortcut::{Code, GlobalShortcutExt, Modifiers, Shortcut, ShortcutEvent, ShortcutState};
 
-const ACTIONS: [&str; 8] = [
+const ACTIONS: [&str; 11] = [
     "capture-fullscreen",
     "capture-area",
     "capture-window",
@@ -13,6 +13,9 @@ const ACTIONS: [&str; 8] = [
     "capture-scrolling",
     "ocr-capture",
     "show-workspace",
+    "record-screen",
+    "record-area",
+    "record-stop",
 ];
 type Bindings = BTreeMap<String, Option<String>>;
 #[derive(Serialize, Deserialize)]
@@ -52,7 +55,7 @@ pub fn save_at(path: &std::path::Path, bindings: Bindings) -> Result<ShortcutSta
 fn empty() -> Bindings { ACTIONS.into_iter().map(|action| (action.into(), None)).collect() }
 fn parse(input: &Bindings) -> Result<Vec<(String, Shortcut)>, NativeError> {
     if input.len() != ACTIONS.len() || input.keys().any(|action| !ACTIONS.contains(&action.as_str())) {
-        return Err(NativeError::new("invalid_shortcut", "Expected the eight supported capture actions."));
+        return Err(NativeError::new("invalid_shortcut", "Expected the supported capture and recording actions."));
     }
     let mut ids = BTreeSet::new(); let mut parsed = Vec::new();
     for (action, raw) in input {
@@ -140,7 +143,7 @@ fn apply_registered(store:&ShortcutStore,bindings:Bindings,registry:&mut impl Re
 }
 
 fn dispatch_once(last:&mut Option<(String,std::time::Instant)>,action:&str,now:std::time::Instant)->bool{if last.as_ref().is_some_and(|(old,time)|old==action&&now.saturating_duration_since(*time)<std::time::Duration::from_millis(250)){return false}*last=Some((action.into(),now));true}
-pub fn dispatch_action(app:&tauri::AppHandle,action:&str,from_menu:bool){let store=app.state::<ShortcutStore>();if let Ok(mut last)=store.last_dispatch.lock(){if !dispatch_once(&mut last,action,std::time::Instant::now()){return;}}if action=="show-workspace"{let _=crate::library_window::show(app,"library");}else{let _=app.emit_to("main",if from_menu{"fershot-menu-action"}else{"fershot-global-action"},action);}}
+pub fn dispatch_action(app:&tauri::AppHandle,action:&str,from_menu:bool){let store=app.state::<ShortcutStore>();if let Ok(mut last)=store.last_dispatch.lock(){if !dispatch_once(&mut last,action,std::time::Instant::now()){return;}}if action=="record-stop"{if crate::recording::active(app){crate::recording::stop_from_menu(app);}return;}if matches!(action,"record-screen"|"record-area")&&crate::recording::active(app){crate::recording::stop_from_menu(app);return;}if action=="show-workspace"{let _=crate::library_window::show(app,"library");}else{let _=app.emit_to("main",if from_menu{"fershot-menu-action"}else{"fershot-global-action"},action);}}
 pub fn on_shortcut(app: &tauri::AppHandle, shortcut: &Shortcut, event: ShortcutEvent) {
     let store = app.state::<ShortcutStore>();
     {
@@ -203,6 +206,7 @@ mod tests {
         }
     }
     #[test]fn native_and_global_accelerators_dispatch_once_per_key_action(){let now=std::time::Instant::now();let mut last=None;assert!(dispatch_once(&mut last,"capture-area",now));assert!(!dispatch_once(&mut last,"capture-area",now+std::time::Duration::from_millis(30)));assert!(dispatch_once(&mut last,"capture-area",now+std::time::Duration::from_millis(300)));assert!(dispatch_once(&mut last,"capture-fullscreen",now+std::time::Duration::from_millis(310)));}
+    #[test]fn recording_bindings_restore_and_preserve_legacy_saved_maps(){let dir=tempfile::tempdir().unwrap();let mut map=empty();map.insert("record-screen".into(),Some("Super+Shift+KeyR".into()));map.insert("record-area".into(),Some("Super+Alt+KeyR".into()));map.insert("record-stop".into(),Some("Super+Shift+KeyX".into()));let mut registry=Fake::default();let state=ShortcutStore::default();configure_at(dir.path(),&state,map.clone(),&mut registry).unwrap();let restored=ShortcutStore::default();restore_at(dir.path(),&restored,&mut Fake::default()).unwrap();assert_eq!(status(&restored).unwrap().bindings,map);let mut ten=map.clone();ten.remove("record-stop");crate::application_preferences::write_document(dir.path(),crate::application_preferences::Document::Shortcuts,&serde_json::to_vec(&SavedBindings{version:2,bindings:ten}).unwrap()).unwrap();let ten=load_saved_at(dir.path()).unwrap();assert_eq!(ten.bindings["record-stop"],None);assert_eq!(ten.bindings["record-area"],map["record-area"]);let mut legacy=empty();legacy.remove("record-screen");legacy.remove("record-area");legacy.remove("record-stop");crate::application_preferences::write_document(dir.path(),crate::application_preferences::Document::Shortcuts,&serde_json::to_vec(&SavedBindings{version:2,bindings:legacy}).unwrap()).unwrap();let upgraded=load_saved_at(dir.path()).unwrap();assert_eq!(upgraded.bindings.len(),11);assert_eq!(upgraded.bindings["record-stop"],None);assert_eq!(upgraded.bindings["record-screen"],None);}
     #[test]fn installs_persists_restores_and_removes_as_one_configuration(){
         let dir=tempfile::tempdir().unwrap();let mut bindings=empty();bindings.insert("capture-area".into(),Some("Super+Shift+KeyA".into()));let store=ShortcutStore::default();let mut registry=Fake::default();
         configure_at(dir.path(),&store,bindings.clone(),&mut registry).unwrap();assert_eq!(registry.keys.len(),1);assert_eq!(load_saved_at(dir.path()).unwrap().bindings,bindings);

@@ -170,7 +170,7 @@ function validateAndAssembleBindings(
       const val = rawBindings[action];
       result[action] = val === null ? null : parseBinding(val, `bindings.${action}`);
     } else {
-      if (!isV1) {
+      if (!isV1 && action!=="record-screen" && action!=="record-area" && action!=="record-stop") {
         reject(`bindings.${action} is required`);
       }
       // If v1, missing action defaults to null

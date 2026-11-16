@@ -13,7 +13,7 @@ export async function showEditor(requestId?:string){if(isTauri())await call<void
 export async function showLibrary(){if(isTauri())await call<void>("show_library");else window.open("?library","fershot-library");}
 export async function listenLibrary(event:string,handler:()=>void){if(!isTauri())return()=>{};const {listen}=await import("@tauri-apps/api/event");return listen(event,handler);}
 
-export async function fitEditorWindow(width:number,height:number){if(isTauri())await call<void>("fit_editor_window",{width,height});}
+export async function fitEditorWindow(width:number,height:number,video=false){if(isTauri())await call<void>("fit_editor_window",{width,height,...(video?{video:true}:{})});}
 
 /** Copy rendered draft snapshots as one native file-list clipboard operation. */
 export async function copyLibraryImages(ids:readonly string[]){

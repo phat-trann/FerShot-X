@@ -1,5 +1,13 @@
 # Agent instructions
 
+## C174 user-authorized 1.4.1 publication (2026-11-17)
+
+User explicitly requests pushing C173. Synchronize 1.4.1, add release notes, validate renderer compilation and the focused injected capture regressions, then commit and normally push main to trigger existing ARM-only release CI. Preserve signing/updater identity, credentials, permissions and historical releases. No live capture/input/server/permission actions, local signing/keychain changes, force push or manual tags. Do not wait for CI completion; report push separately from publication.
+
+## C173 hidden image presentation liveness (2026-11-17)
+
+User reports Capture Area sometimes waits for another shortcut before Edit appears. Remove the decode/paint-to-foreground circular wait: require the new document's committed canvas plus sizing; prefer normal ready pixels, but present a fresh loading canvas immediately when hidden or after a bounded 250ms decode grace when visible. Keep old pixels excluded. Shared icon-only loading clears on decode/error. Clear pending timers on replacement, capture start, close, video handoff and unmount; stale callbacks cannot reopen an old document. Preserve immediate-upload behavior, native capture/privacy and window geometry. TypeScript and injected browser cases only; no real capture/input/permissions/server operations, native build/bundle, version bump or commit/push until requested. Installed intermittent behavior still requires user retest.
+
 ## C172 user-authorized 1.4.0 publication (2026-11-16)
 
 User accepts the candidate and requests review, removal of unused code, version bump and push. Publish completed C160–C171 as 1.4.0 through normal main push and the existing ARM-only signing/updater workflow. Synchronize all product versions, retain original signing identity/updater keys and historical releases. Retire only proven unused code/styles/declarations; keep active IPC compatibility, data and immutable evidence. Validate renderer build, TypeScript unused checks, focused native release compilation/generated-media and injected image/video regressions; no live capture/input/audio/server/permission operations or local signing/keychain changes. No force push/manual tags. Report push and CI publication separately; do not wait for CI completion.

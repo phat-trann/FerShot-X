@@ -1,4 +1,4 @@
-# FerShot X 1.4.0
+# FerShot X 1.4.1
 
 Capture, annotate and share screenshots or screen recordings from your Mac’s menu bar. Keep editable Local drafts or upload to your own FTP server and copy a ready-to-share link.
 
@@ -110,4 +110,4 @@ No placeholder screenshots are displayed until these files are supplied.
 
 ## Development and release notes
 
-See [development instructions](docs/DEVELOPMENT.md), [1.4.0 release notes](docs/releases/1.4.0.md) and [updater configuration](docs/releases/UPDATES.md). UI conventions are documented in the [interface system](docs/design/INTERFACE.md). Third-party notices are in [docs/third-party](docs/third-party).
+See [development instructions](docs/DEVELOPMENT.md), [1.4.1 release notes](docs/releases/1.4.1.md) and [updater configuration](docs/releases/UPDATES.md). UI conventions are documented in the [interface system](docs/design/INTERFACE.md). Third-party notices are in [docs/third-party](docs/third-party).

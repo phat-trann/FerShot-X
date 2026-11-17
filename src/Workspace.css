@@ -354,3 +354,6 @@ input[type=color] {cursor:pointer}
 
 .ui-slider:not(:disabled) {cursor:ew-resize}
 [role=button]:not([aria-disabled=true]),a[href] {cursor:pointer}
+
+.editor-surface{position:relative}
+.editor-source-loading{position:absolute;inset:0;z-index:8;display:grid;place-items:center;background:var(--surface);cursor:progress}

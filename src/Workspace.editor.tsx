@@ -1,3 +1,4 @@
+import { LoadingState } from "./components/ui/content-state";
 import { openingEditorScale } from "./features/editor/konva/zoom";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import type { Annotation } from "./contracts/editor";
@@ -6,8 +7,8 @@ import { KonvaWorkbench } from "./features/editor/konva/KonvaWorkbench";
 import { type AdvancedEditorItem } from "./features/editor/advanced-workbench";
 import { renderAnnotatedDocument } from "./platform/annotations";
 
-export function WorkspaceEditor({ onReady,onLoadError,image, annotations, advancedItems, active, busy, zoom, onPixelSample,onZoomReport,onZoomChange, onAdvancedChange, onSelectDrawing,onFitChange,imageToInsert,onImageInserted }: {
-  onReady?:(id:string)=>void;onLoadError?:()=>void;
+export function WorkspaceEditor({ onPrepared,onReady,onLoadError,image, annotations, advancedItems, active, busy, zoom, onPixelSample,onZoomReport,onZoomChange, onAdvancedChange, onSelectDrawing,onFitChange,imageToInsert,onImageInserted }: {
+  onPrepared?:(id:string)=>void;onReady?:(id:string)=>void;onLoadError?:()=>void;
   imageToInsert?:{id:string;src:string;width:number;height:number};onImageInserted:()=>void;onFitChange:(zoom:number)=>void;
   image: ImageDocument; annotations: readonly Annotation[]; active: boolean; busy: boolean; zoom: number | null;
   advancedItems: readonly AdvancedEditorItem[];
@@ -19,6 +20,9 @@ export function WorkspaceEditor({ onReady,onLoadError,image, annotations, advanc
   onAdvancedChange: (id: string, items: readonly AdvancedEditorItem[]) => void;
 }) {
   const host = useRef<HTMLDivElement>(null);
+  const [readyId,setReadyId]=useState<string|null>(null),[failedId,setFailedId]=useState<string|null>(null);
+  const preparedCallback=useRef(onPrepared);preparedCallback.current=onPrepared;
+  useLayoutEffect(()=>{preparedCallback.current?.(image.id);},[image.id]);
   const [fit, setFit] = useState(1);
   const [basePreview, setBasePreview] = useState<{ id: string; src: string } | null>(null);
   useEffect(() => {
@@ -83,9 +87,10 @@ export function WorkspaceEditor({ onReady,onLoadError,image, annotations, advanc
     return()=>{cancelAnimationFrame(frame);node.removeEventListener("mousemove",move);node.removeEventListener("wheel",wheel);node.removeEventListener("gesturestart",start);node.removeEventListener("gesturechange",change);node.removeEventListener("gestureend",end);};
   },[image.id]);
   useEffect(()=>onZoomReport(zoom??fit),[zoom,fit,onZoomReport]);
-  return <div ref={host} className="editor-surface" aria-busy={busy}>
-    <KonvaWorkbench onSourceReady={()=>onReady?.(image.id)} onSourceError={onLoadError} imageToInsert={imageToInsert} onImageInserted={onImageInserted} onPixelSample={onPixelSample} key={image.id} compact imageId={image.id} imageSrc={basePreview?.id===image.id?basePreview.src:image.src}
+  return <div ref={host} className="editor-surface" aria-busy={busy||readyId!==image.id&&failedId!==image.id}>
+    <KonvaWorkbench onSourceReady={()=>{setReadyId(image.id);onReady?.(image.id);}} onSourceError={()=>{setFailedId(image.id);onLoadError?.();}} imageToInsert={imageToInsert} onImageInserted={onImageInserted} onPixelSample={onPixelSample} key={image.id} compact imageId={image.id} imageSrc={basePreview?.id===image.id?basePreview.src:image.src}
       imageWidth={image.width} imageHeight={image.height} zoom={zoom??fit} initialItems={advancedItems} busy={busy} disabled={!active}
       onToolChange={onSelectDrawing} onSnapshotChange={snapshot=>onAdvancedChange(image.id,snapshot.items)}/>
+    {readyId!==image.id&&failedId!==image.id&&<div className="editor-source-loading"><LoadingState>Opening captured image</LoadingState></div>}
   </div>;
 }

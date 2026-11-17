@@ -5886,6 +5886,26 @@
       "shared_claim": "root-wiring",
       "owned_paths": "Completed C160-C171 source/tests/assets/docs, product version metadata and release report",
       "inputs": "User accepts current candidate and requests unused-code cleanup, version increase and normal main push"
+    },
+    {
+      "id": "C173",
+      "agent": "codex",
+      "title": "Unblock hidden Capture Area image presentation",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "src/Workspace.tsx; src/Workspace.editor.tsx; src/Workspace.css; focused browser regression and report",
+      "inputs": "User reports area capture not opening Edit until shortcut is invoked again"
+    },
+    {
+      "id": "C174",
+      "agent": "codex",
+      "title": "User-authorized Capture Area presentation hotfix 1.4.1",
+      "state": "READY",
+      "work_kind": "integration",
+      "shared_claim": "root-wiring",
+      "owned_paths": "C173 source/tests, release/version metadata and report",
+      "inputs": "User explicitly requests push of completed Capture Area presentation fix"
     }
   ],
   "allocation": "Codex sole active client; external Antigravity and Copilot inactive; preserve historical authorship.",
@@ -6065,7 +6085,9 @@
       "C169",
       "C170",
       "C171",
-      "C172"
+      "C172",
+      "C173",
+      "C174"
     ],
     "copilot": []
   },

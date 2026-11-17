@@ -257,3 +257,36 @@ test("new capture is painted before Edit is shown and discarded backing pixels r
 test("dragging image elements magnetizes touching edges and centers with transient guides",async({page})=>{
  await openImage(page);const stage=page.getByTestId("advanced-workbench-stage"),box=(await stage.boundingBox())!;for(const [x,y,ex,ey] of [[30,30,130,100],[220,130,320,210]]){await page.mouse.move(box.x+x,box.y+y);await page.mouse.down();await page.mouse.move(box.x+ex,box.y+ey,{steps:4});await page.mouse.up();}await page.getByRole("button",{name:"select tool",exact:true}).click();await page.mouse.move(box.x+30,box.y+60);await page.mouse.down();await page.mouse.move(box.x+118,box.y+163,{steps:10});await expect(page.locator(".editor-alignment-status")).toContainText("Right ↔ Left · Rectangle");await expect(page.locator(".editor-alignment-status")).toContainText("Center ↔ Center · Rectangle");await page.screenshot({path:"artifacts/qa/C166-image-alignment.png"});await page.mouse.up();await expect(page.locator(".editor-alignment-status")).toHaveText("");await expect.poll(async()=>{const rows=await calls(page,"local_cache_save_draft");return rows.at(-1)?.args.request.draft.advanced[0]?.annotation.points[0];}).toEqual({x:120,y:135});
 });
+
+async function deferCaptureDecode(page:Page,hidden:boolean){
+ await page.evaluate(hidden=>{
+  const w=window as any,invoke=w.__TAURI_INTERNALS__.invoke,NativeImage=w.Image,descriptor=Object.getOwnPropertyDescriptor(HTMLImageElement.prototype,"src")!;
+  w.__HOLD_IMAGE__=true;w.__DEFERRED_IMAGES__=[];w.__PRESENTED_LOADING__=[];w.__HIDDEN_CAPTURE__=hidden;
+  Object.defineProperty(document,"hidden",{configurable:true,get:()=>w.__HIDDEN_CAPTURE__});
+  w.Image=function(...args:any[]){const image=new NativeImage(...args);if(w.__HOLD_IMAGE__){Object.defineProperty(image,"src",{configurable:true,get:()=>descriptor.get!.call(image),set:(src:string)=>{w.__DEFERRED_IMAGES__.push(()=>descriptor.set!.call(image,src));}});image.decode=()=>new Promise(()=>{});}return image;};
+  const c=document.createElement("canvas");c.width=80;c.height=60;c.getContext("2d")!.fillStyle="#12b834";c.getContext("2d")!.fillRect(0,0,80,60);const pngBase64=c.toDataURL("image/png").split(",")[1];
+  w.__TAURI_INTERNALS__.invoke=async(command:string,args:any)=>{
+   if(command==="capture_image"){w.__CALLS__.push({command,args});return {width:80,height:60,pngBase64,byteSize:atob(pngBase64).length};}
+   if(command==="show_editor"){const canvas=document.querySelector(".konvajs-content canvas")as HTMLCanvasElement;w.__PRESENTED_LOADING__.push({pixel:Array.from(canvas.getContext("2d")!.getImageData(4,4,1,1).data),loading:!!document.querySelector(".editor-source-loading")});w.__HIDDEN_CAPTURE__=false;}
+   return invoke(command,args);
+  };w.__EMIT__("fershot-menu-action","capture-area");
+ },hidden);
+}
+for(const hidden of [false,true])test(`area capture presents a new loading canvas without a second shortcut when decoding is deferred (hidden=${hidden})`,async({page})=>{
+ await openImage(page,false);await expect.poll(()=>calls(page,"show_editor")).toHaveLength(1);
+ await deferCaptureDecode(page,hidden);
+ await expect.poll(()=>calls(page,"show_editor")).toHaveLength(2);expect(await calls(page,"capture_image")).toHaveLength(1);
+ expect(await page.evaluate(()=>(window as any).__PRESENTED_LOADING__)).toEqual([{pixel:[0,0,0,0],loading:true}]);await expect(page.locator(".editor-source-loading")).toBeVisible();
+ await page.evaluate(()=>{const w=window as any;w.__HOLD_IMAGE__=false;w.__DEFERRED_IMAGES__.splice(0).forEach((release:()=>void)=>release());});
+ await expect(page.locator(".editor-source-loading")).toHaveCount(0);await expect.poll(()=>page.locator(".konvajs-content canvas").first().evaluate((canvas:HTMLCanvasElement)=>Array.from(canvas.getContext("2d")!.getImageData(4,4,1,1).data))).toEqual([18,184,52,255]);expect(await calls(page,"show_editor")).toHaveLength(2);
+});
+
+for(const cancel of ["next capture","close"])test(`deferred capture presentation cannot reopen after ${cancel}`,async({page})=>{
+ await openImage(page,false);await expect.poll(()=>calls(page,"show_editor")).toHaveLength(1);await deferCaptureDecode(page,false);
+ await expect(page.locator(".editor-source-loading")).toBeVisible();
+ await page.evaluate(cancel=>{const w=window as any;if(cancel==="close")w.__EMIT__("fershot-editor-closed");else window.dispatchEvent(new Event("fershot-capture-starting"));},cancel);
+ await page.waitForTimeout(400);expect(await calls(page,"show_editor")).toHaveLength(1);
+ await page.evaluate(()=>{const w=window as any;w.__HOLD_IMAGE__=false;w.__DEFERRED_IMAGES__.splice(0).forEach((release:()=>void)=>release());});
+ if(cancel==="close")await expect(page.getByTestId("advanced-workbench-stage")).toHaveCount(0);
+ await page.waitForTimeout(100);expect(await calls(page,"show_editor")).toHaveLength(1);
+});

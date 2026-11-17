@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "id": "20261117T134353-codex-C173-38aaa42a",
+  "created_at": "2026-11-17T13:43:53.709807+07:00",
+  "agent": "codex",
+  "request": "capture-area-presentation-20261117",
+  "task": "C173",
+  "completion": "done",
+  "summary": "Unblock Capture Area Edit presentation when hidden image decode is deferred; preserve fresh canvas and cancel stale requests",
+  "files": [
+    "src/Workspace.tsx",
+    "src/Workspace.editor.tsx",
+    "src/Workspace.css",
+    "tests/e2e/codex-v1-editor.spec.ts",
+    "docs/agents/codex/C173-capture-presentation.md",
+    "AGENTS.md",
+    "coordination/build-tasks.json"
+  ],
+  "file_sha256": {
+    "src/Workspace.tsx": "bc1283c331eb0e15352a987c8ef6b1fa6968fdc7186ac8543081c3c9b66fe030",
+    "src/Workspace.editor.tsx": "a8f22b8d3f6d73926649a24800131402cf243d74e6e323bce5bf8f10122e7ce6",
+    "src/Workspace.css": "2a2ef9fb4f33a4bfcc735f86266e0a8f908f60e05e42ad32e1b24600cbfee47c",
+    "tests/e2e/codex-v1-editor.spec.ts": "9cd33fe8ff346975c9b9043f0a78a5c1e3f5c4f2ca941a121c8eb347ff1845ec",
+    "docs/agents/codex/C173-capture-presentation.md": "da1f64d0b3979a2274c0a1d36d13fe72bd43c3e6510704eb19c8d55ec39cf318",
+    "AGENTS.md": "086b5e2f77b29c9a3e4c523e73064be09a34ca40962f0ab25b0f11311c4f8de2",
+    "coordination/build-tasks.json": "8f178d425a310fa0009ab2d4417521b55f417fdae64cf313649f528bb5cd38a4"
+  },
+  "checks": [
+    "TypeScript noEmit passed",
+    "8 injected browser regressions passed: deferred hidden/visible decoding, normal pixels, stale close/capture cancellation, Escape and immediate upload"
+  ],
+  "risks": [
+    "USER_WAIVED_REVIEW; installed intermittent failure needs user retest; no native bundle/version bump/publication or real capture/server/permission actions"
+  ],
+  "review": "pending"
+}

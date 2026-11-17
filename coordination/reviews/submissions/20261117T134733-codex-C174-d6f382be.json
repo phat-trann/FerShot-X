@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "id": "20261117T134733-codex-C174-d6f382be",
+  "created_at": "2026-11-17T13:47:33.981380+07:00",
+  "agent": "codex",
+  "request": "release-1.4.1-20261117",
+  "task": "C174",
+  "completion": "done",
+  "summary": "User-authorized 1.4.1 Capture Area presentation hotfix release",
+  "files": [
+    "AGENTS.md",
+    "README.md",
+    "coordination/build-tasks.json",
+    "package-lock.json",
+    "package.json",
+    "src-tauri/Cargo.lock",
+    "src-tauri/Cargo.toml",
+    "src-tauri/tauri.conf.json",
+    "src/Workspace.css",
+    "src/Workspace.editor.tsx",
+    "src/Workspace.tsx",
+    "tests/e2e/codex-v1-editor.spec.ts",
+    "docs/agents/codex/C173-capture-presentation.md",
+    "docs/agents/codex/C174-release-1.4.1.md",
+    "docs/releases/1.4.1.md"
+  ],
+  "file_sha256": {
+    "AGENTS.md": "8b1672e45209cfb0f0497ed470b231534cb1fd6bce98f2217e2eadea08521acb",
+    "README.md": "302fd4740dce7242694d8aac2635259fb026b166f92cc2afe8e4eec552645530",
+    "coordination/build-tasks.json": "24c9a7b1464c070009c9080a28e4fb4c23d818557f66a0c3a54176deeb99c2fc",
+    "package-lock.json": "c59617fd8cb7c4c48a027d03ff95e80f2c2e93b35cbe7e5ace1287a483b06040",
+    "package.json": "88c3c430cfac8e772c344601235ae779cfe2baf428eeb7355d6eeba19821c656",
+    "src-tauri/Cargo.lock": "8f57c33258023ddada8237685b9a1bbd56b38eec7ae611e9f5c0fc909959e851",
+    "src-tauri/Cargo.toml": "7b9f7f816d45b017798ee96c324bd903a270f6c60822fb8b9bb4673e9e80142e",
+    "src-tauri/tauri.conf.json": "36550bbbb7339b6965d5d973e8f1656527dc1178fe4d6038869319c638bdbbdc",
+    "src/Workspace.css": "2a2ef9fb4f33a4bfcc735f86266e0a8f908f60e05e42ad32e1b24600cbfee47c",
+    "src/Workspace.editor.tsx": "a8f22b8d3f6d73926649a24800131402cf243d74e6e323bce5bf8f10122e7ce6",
+    "src/Workspace.tsx": "bc1283c331eb0e15352a987c8ef6b1fa6968fdc7186ac8543081c3c9b66fe030",
+    "tests/e2e/codex-v1-editor.spec.ts": "9cd33fe8ff346975c9b9043f0a78a5c1e3f5c4f2ca941a121c8eb347ff1845ec",
+    "docs/agents/codex/C173-capture-presentation.md": "da1f64d0b3979a2274c0a1d36d13fe72bd43c3e6510704eb19c8d55ec39cf318",
+    "docs/agents/codex/C174-release-1.4.1.md": "9693567218805ff0f8201d901e713b168ae2df8c11cf43bfffa96af36e4ed918",
+    "docs/releases/1.4.1.md": "0dff552c0304d16b2953632678efbd0e48430b33ba20e063c08268332d7718a5"
+  },
+  "checks": [
+    "Renderer production build and TypeScript passed",
+    "8 injected capture/output browser regressions passed",
+    "Product version 1.4.1 consistent"
+  ],
+  "risks": [
+    "USER_WAIVED_REVIEW; installed intermittent capture still requires retest; CI publication separate; no real capture/server/permission actions"
+  ],
+  "review": "pending"
+}

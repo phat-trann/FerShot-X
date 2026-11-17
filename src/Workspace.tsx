@@ -124,20 +124,25 @@ export default function Workspace() {
     for (const item of ftpQueue.items) if (item.status === "success") void localHistory.forget(item.sourceId);
   }, [ftpQueue.items, localHistory.forget]);
 
-  const pendingPresentation=useRef<{id:string;requestId?:string;sized:boolean;painted:boolean}|null>(null);
-  useEffect(()=>{const start=()=>{pendingPresentation.current=null;};window.addEventListener("fershot-capture-starting",start);return()=>window.removeEventListener("fershot-capture-starting",start);},[]);
-  function presentDocument(id:string,part:"sized"|"painted"){
+  const pendingPresentation=useRef<{id:string;requestId?:string;sized:boolean;prepared:boolean;painted:boolean;fallback:boolean;timer?:ReturnType<typeof setTimeout>}|null>(null);
+  function clearPresentation(){const pending=pendingPresentation.current;if(pending?.timer!==undefined)clearTimeout(pending.timer);pendingPresentation.current=null;}
+  useEffect(()=>{const start=()=>clearPresentation();window.addEventListener("fershot-capture-starting",start);return()=>{window.removeEventListener("fershot-capture-starting",start);clearPresentation();};},[]);
+  function presentDocument(id:string,part:"sized"|"prepared"|"painted"|"fallback"){
     const pending=pendingPresentation.current;if(!mounted.current||pending?.id!==id)return;
     pending[part]=true;
-    if(pending.sized&&pending.painted){pendingPresentation.current=null;void showEditor(pending.requestId).catch(()=>setError("Edit could not be brought forward. Open the image again from Library."));}
+    if(!pending.sized||!pending.prepared)return;
+    // A hidden WKWebView can defer image decoding/painting until it is shown.
+    // Its newly committed, empty canvas is safe to present with a loading overlay.
+    if(pending.painted||pending.fallback||document.hidden){clearPresentation();void showEditor(pending.requestId).catch(()=>{if(mounted.current)setError("Edit could not be brought forward. Open the image again from Library.");});}
+    else if(pending.timer===undefined)pending.timer=setTimeout(()=>presentDocument(id,"fallback"),250);
   }
   function addDocument(next: ImageDocument, select = true) {
     setVideoDocument(null);
     if (!mounted.current) { captureScales.current.delete(next.id); URL.revokeObjectURL(next.src); return; }
     if (liveImages.current.length >= 512) { captureScales.current.delete(next.id); URL.revokeObjectURL(next.src); throw new RangeError("Session library is limited to 512 images."); }
     sessionRevision.current++;
-    pendingPresentation.current={id:next.id,requestId:next.libraryRequestId,sized:false,painted:false};
-    void fitEditorWindow(next.width,next.height).then(()=>presentDocument(next.id,"sized")).catch(()=>{if(pendingPresentation.current?.id===next.id){pendingPresentation.current=null;setError("Edit could not be sized. Open the image again from Library.");void showEditor(next.libraryRequestId);}});
+    clearPresentation();pendingPresentation.current={id:next.id,requestId:next.libraryRequestId,sized:false,prepared:false,painted:false,fallback:false};
+    void fitEditorWindow(next.width,next.height).then(()=>presentDocument(next.id,"sized")).catch(()=>{if(pendingPresentation.current?.id===next.id){clearPresentation();setError("Edit could not be sized. Open the image again from Library.");void showEditor(next.libraryRequestId);}});
     setEditing(true);
     liveImages.current = [...liveImages.current, next];
     setImages([...liveImages.current]);
@@ -322,7 +327,7 @@ export default function Workspace() {
   useEffect(()=>{let live=true;let off:(()=>void)|undefined;const request=()=>{if(live){incomingPending.current=true;setIncomingRevision(n=>n+1);}};Promise.all([listenLibrary("fershot-editor-image",request),listenLibrary("fershot-video-open",request)]).then(disposers=>{const fn=()=>disposers.forEach(dispose=>dispose());if(live){off=fn;request();}else fn();}).catch(()=>{if(live){recordDiagnostic("image","failed","other",{operation:"listen_editor_image"});setError("Library events are unavailable. Restart the app and retry.");}});return()=>{live=false;off?.();};},[]);
   useEffect(()=>{if(busy||busyRef.current||!preferencesReady||!incomingPending.current)return;incomingPending.current=false;void operate(async()=>{for(let count=0;count<4;count++){const incoming=await takeEditorImage();if(incoming){capturedPreviewIds.current.add(incoming.id);addDocument(incoming);setNotice("Library image ready to edit. Original preserved.");}const movie=await takeVideoOpen();if(movie){try{const document=await readRecording(movie.id);let queuedUpload:{id:string;url:string}|undefined;let initialError:string|undefined;
         if(movie.uploadImmediately){try{queuedUpload=await enqueueVideo(movie.id,document.draft);await startFtpUpload(queuedUpload.id);try{await copyText(queuedUpload.url);}catch{setError("Video upload started. Copy its link from Library.");}continue;}catch(error){initialError=error instanceof Error?error.message:"Video upload failed. Retry from Edit.";}}
-        pendingPresentation.current=null;setVideoDocument({document,requestId:movie.requestId,presentation:crypto.randomUUID(),queuedUpload,initialError});}catch(error){if(movie.requestId)await failVideoOpen(movie.requestId);throw error;}}if(!incoming&&!movie)break;}});},[busy,preferencesReady,incomingRevision]);
+        clearPresentation();setVideoDocument({document,requestId:movie.requestId,presentation:crypto.randomUUID(),queuedUpload,initialError});}catch(error){if(movie.requestId)await failVideoOpen(movie.requestId);throw error;}}if(!incoming&&!movie)break;}});},[busy,preferencesReady,incomingRevision]);
 
   async function hideCompletedCapture(id: string) {
     if (capturedPreviewIds.current.has(id)) await hideWorkspace();
@@ -448,7 +453,7 @@ export default function Workspace() {
   }
 
 
-  const closeDocument=useRef(()=>{});closeDocument.current=()=>{setVideoDocument(null);if(image)void localHistory.remember(image,{schemaVersion:1,width:image.width,height:image.height,annotations,advanced:advancedItems});setSelectedId(null);};
+  const closeDocument=useRef(()=>{});closeDocument.current=()=>{clearPresentation();setVideoDocument(null);if(image)void localHistory.remember(image,{schemaVersion:1,width:image.width,height:image.height,annotations,advanced:advancedItems});setSelectedId(null);};
   useEffect(()=>{let live=true;let off:(()=>void)|undefined;void listenLibrary("fershot-editor-closed",()=>closeDocument.current()).then(dispose=>{if(live)off=dispose;else dispose();});return()=>{live=false;off?.();};},[]);
 
   if(videoDocument)return <Suspense fallback={<LoadingState>Opening video editor</LoadingState>}><VideoWorkspace key={videoDocument.presentation} document={videoDocument.document} requestId={videoDocument.requestId} initialUpload={videoDocument.queuedUpload} initialError={videoDocument.initialError} onActions={actions=>{videoActions.current=actions;}}/></Suspense>;
@@ -491,7 +496,7 @@ export default function Workspace() {
           {image&&<div className="image-stage">
             {(transformMode||effectsOpen)&&<WorkspaceDirectTools key={image.id} image={image} annotations={annotations} advanced={advancedItems} mode={transformMode??"effects"} busy={busy} zoom={zoom} onTransform={transform} onEffect={applyEffect} onCancel={()=>{setTransformMode(null);setEffectsOpen(false);}}/>}
             <div hidden={!!transformMode||effectsOpen}>
-              <WorkspaceEditor onReady={id=>presentDocument(id,"painted")} onLoadError={()=>{recordDiagnostic("image","failed","invalid_input",{operation:"editor_image_decode"});setError("Image preview could not be loaded. Reopen the image from Library; the original is retained.");void showEditor(image.libraryRequestId);}} imageToInsert={imageToInsert?.target===image.id?imageToInsert:undefined} onImageInserted={()=>setImageToInsert(undefined)} onFitChange={setFitZoom} image={image} annotations={annotations} advancedItems={advancedItems} active={editing} busy={busy} zoom={zoom} onPixelSample={pointerColor.set} onZoomReport={setDisplayZoom} onZoomChange={setZoom} onAdvancedChange={updateAdvanced} onSelectDrawing={()=>{setTransformMode(null);setEffectsOpen(false);setEditing(true);}}/>
+              <WorkspaceEditor onPrepared={id=>presentDocument(id,"prepared")} onReady={id=>presentDocument(id,"painted")} onLoadError={()=>{if(pendingPresentation.current?.id===image.id)clearPresentation();recordDiagnostic("image","failed","invalid_input",{operation:"editor_image_decode"});setError("Image preview could not be loaded. Reopen the image from Library; the original is retained.");void showEditor(image.libraryRequestId);}} imageToInsert={imageToInsert?.target===image.id?imageToInsert:undefined} onImageInserted={()=>setImageToInsert(undefined)} onFitChange={setFitZoom} image={image} annotations={annotations} advancedItems={advancedItems} active={editing} busy={busy} zoom={zoom} onPixelSample={pointerColor.set} onZoomReport={setDisplayZoom} onZoomChange={setZoom} onAdvancedChange={updateAdvanced} onSelectDrawing={()=>{setTransformMode(null);setEffectsOpen(false);setEditing(true);}}/>
             </div>
           </div>}
         </section>

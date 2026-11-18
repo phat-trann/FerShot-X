@@ -1,5 +1,13 @@
 # Agent instructions
 
+## C176 Library preview camera and authorized 1.4.2 release (2026-11-18)
+
+User requests pushing C175, then adds pointer-centered image preview zoom to the same release before pushing. Keep the already acquired C176/root-wiring claims for this continuation. Local/FTP image previews use a window-local DOM camera: notched/Cmd-wheel and pinch zoom around the pointer; continuous two-finger wheel movement pans as in Edit. Bound scale, coalesce transforms per animation frame, retain the existing cached source and reset Fit on image/viewport changes. Preserve selection shortcuts, video previews, cache ownership, source/drafts and native credentials/permissions. Publish C175 plus this preview change as synchronized 1.4.2 through normal main push after renderer/unit/injected browser checks. No real clipboard/capture/OS/server actions, local signing/keychain changes, force push or manual tags. Report push separately; do not wait for CI completion.
+
+## C175 Library window copy/delete shortcuts (2026-11-18)
+
+User reports hinted Copy/Delete shortcuts fail in Library and authorizes transfer of stopped C175/root-wiring claims. Preserve the unfinished LibraryWindow changes and record prior claim ownership in the handoff. Bind Cmd/Ctrl+C, select-all and Delete/Backspace across the visible Library window, including preview/toolbar focus, using the existing icon action callbacks. Handle native WKWebView DOM copy events as well as keydown. Preserve normal text editing, modal confirmation, oldest-first FTP links, active-upload deletion guards, partial failures and Local/video behavior. Copy events and keydown share the existing synchronous operation guard; never duplicate requests. TypeScript and injected browser checks only; no live clipboard/FTP/OS actions, native bundle, version bump or publication until requested. Installed native Copy dispatch remains manual acceptance.
+
 ## C174 user-authorized 1.4.1 publication (2026-11-17)
 
 User explicitly requests pushing C173. Synchronize 1.4.1, add release notes, validate renderer compilation and the focused injected capture regressions, then commit and normally push main to trigger existing ARM-only release CI. Preserve signing/updater identity, credentials, permissions and historical releases. No live capture/input/server/permission actions, local signing/keychain changes, force push or manual tags. Do not wait for CI completion; report push separately from publication.

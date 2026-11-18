@@ -1,0 +1,5 @@
+# C176 — Library preview camera and release 1.4.2
+
+User authorizes publishing C175 and adds hover zoom to the same version. Local/FTP image previews now have a DOM camera: wheel/Cmd-wheel/pinch preserve the pointer anchor, two-finger movement pans, keyboard +/− zoom and 0 restores Fit. The camera resets on image/viewport changes, bounds scale to 800%, batches transforms per animation frame and never mutates images/drafts or reloads cached media. Image/video selection, shortcuts and existing FTP confirmation remain intact.
+
+Validation: renderer production build, TypeScript unused checks, all 442 unit tests and 11 injected browser regressions passed, including exact anchors, Safari-style pinch, pan, reset, cache and C175 selection actions. Versions synchronized to 1.4.2. No native source/signing/permission changes or live clipboard/server/capture operations. Normal main push triggers ARM-only release CI; installed native Copy/trackpad acceptance remains separate. Live Text was discussed only and is not included. USER_WAIVED_REVIEW only.

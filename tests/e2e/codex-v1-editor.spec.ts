@@ -290,3 +290,32 @@ for(const cancel of ["next capture","close"])test(`deferred capture presentation
  if(cancel==="close")await expect(page.getByTestId("advanced-workbench-stage")).toHaveCount(0);
  await page.waitForTimeout(100);expect(await calls(page,"show_editor")).toHaveLength(1);
 });
+
+ test("Library shortcuts work from the Local preview and match bulk icon actions",async({page})=>{
+  await mock(page);await page.goto("/");await page.getByRole("tab",{name:/Local/}).click();await expect(page.getByRole("option",{selected:true})).toHaveCount(1);
+  await page.locator(".library-preview").click();await page.keyboard.press("Meta+a");await expect(page.getByRole("option",{selected:true})).toHaveCount(2);
+  await page.keyboard.press("Meta+c");await expect.poll(()=>calls(page,"copy_library_images")).toHaveLength(1);expect((await calls(page,"copy_library_images"))[0].args.images).toHaveLength(2);
+  await expect(page.getByRole("button",{name:"Copy images",exact:true})).toBeEnabled();await page.locator(".library-preview").click();await page.keyboard.press("Backspace");await expect(page.getByRole("option")).toHaveCount(0);expect((await calls(page,"local_cache_remove")).map((c:any)=>c.args.id)).toEqual(["local-1","local-2"]);
+ });
+ test("Library FTP native copy event preserves oldest-first order and Delete requires confirmation",async({page})=>{
+  await mock(page);await page.addInitScript(()=>{const w=window as any,now=Date.now();w.__FTP__=[0,1,2].map(i=>({id:`ftp-${i}`,sourceId:`s-${i}`,name:`Image${i}.png`,remotePath:`/s/image${i}.png`,url:`https://example.invalid/s/image${i}.png`,status:"success",createdAt:now-i*1000,updatedAt:now}));});await page.goto("/");await expect(page.getByRole("option")).toHaveCount(3);
+  await page.locator(".library-preview").click();await page.keyboard.press("Meta+a");await expect(page.getByRole("option",{selected:true})).toHaveCount(3);
+  const handled=await page.locator(".library-preview").evaluate(el=>!el.dispatchEvent(new ClipboardEvent("copy",{bubbles:true,cancelable:true})));expect(handled).toBe(true);
+  await expect.poll(()=>calls(page,"copy_text")).toHaveLength(1);expect((await calls(page,"copy_text"))[0].args.request.text).toBe("https://example.invalid/s/image2.png\nhttps://example.invalid/s/image1.png\nhttps://example.invalid/s/image0.png");
+  await expect(page.getByRole("button",{name:"Copy links",exact:true})).toBeEnabled();await page.keyboard.press("Delete");await expect(page.getByRole("alertdialog")).toBeVisible();expect(await calls(page,"ftp_delete_remote")).toHaveLength(0);
+  await page.keyboard.press("Meta+c");await page.keyboard.press("Backspace");expect(await calls(page,"copy_text")).toHaveLength(1);expect(await calls(page,"ftp_delete_remote")).toHaveLength(0);
+  await page.getByRole("button",{name:"Cancel",exact:true}).click();await page.locator(".library-preview").click();await page.keyboard.press("Backspace");await page.getByRole("button",{name:"Delete permanently",exact:true}).click();await expect.poll(()=>calls(page,"ftp_delete_remote")).toHaveLength(3);
+ });
+ test("Library shortcuts preserve text editing and ignore repeats and modified Copy",async({page})=>{
+  await mock(page);await page.goto("/");await expect(page.getByRole("option",{selected:true})).toHaveCount(1);
+  await page.evaluate(()=>{const input=document.createElement("input");input.id="shortcut-text-fixture";input.value="Text to copy";document.querySelector(".library-detail")!.append(input);input.focus();input.select();});
+  await page.locator("#shortcut-text-fixture").evaluate(el=>el.dispatchEvent(new KeyboardEvent("keydown",{key:"c",metaKey:true,bubbles:true,cancelable:true})));await page.keyboard.press("Backspace");await page.locator("#shortcut-text-fixture").evaluate(el=>el.dispatchEvent(new ClipboardEvent("copy",{bubbles:true,cancelable:true})));expect(await calls(page,"copy_text")).toHaveLength(0);expect(await calls(page,"ftp_delete_remote")).toHaveLength(0);await expect(page.getByRole("alertdialog")).toHaveCount(0);
+  await page.locator("#shortcut-text-fixture").evaluate(el=>el.remove());await page.locator(".library-preview").click();await page.keyboard.press("Meta+Shift+c");await page.evaluate(()=>window.dispatchEvent(new KeyboardEvent("keydown",{key:"Backspace",repeat:true,bubbles:true,cancelable:true})));await expect(page.getByRole("alertdialog")).toHaveCount(0);expect(await calls(page,"copy_text")).toHaveLength(0);
+ });
+
+ test("Library native and keyboard Copy share one busy guard",async({page})=>{
+  await mock(page);await page.goto("/");await expect(page.getByRole("option",{selected:true})).toHaveCount(1);await page.locator(".library-preview").click();
+  await page.evaluate(()=>{const w=window as any,invoke=w.__TAURI_INTERNALS__.invoke;w.__TAURI_INTERNALS__.invoke=async(command:string,args:any)=>{const result=await invoke(command,args);if(command==="copy_text")await new Promise<void>(resolve=>{w.__RELEASE_LIBRARY_COPY__=resolve;});return result;};const target=document.querySelector(".library-preview")!;target.dispatchEvent(new ClipboardEvent("copy",{bubbles:true,cancelable:true}));target.dispatchEvent(new ClipboardEvent("copy",{bubbles:true,cancelable:true}));});
+  await page.keyboard.press("Meta+c");await page.keyboard.press("Delete");expect(await calls(page,"copy_text")).toHaveLength(1);await expect(page.getByRole("alertdialog")).toHaveCount(0);
+  await page.evaluate(()=>(window as any).__RELEASE_LIBRARY_COPY__());await expect(page.getByRole("button",{name:"Copy links",exact:true})).toBeEnabled();await page.keyboard.press("Delete");await expect(page.getByRole("alertdialog")).toBeVisible();expect(await calls(page,"ftp_delete_remote")).toHaveLength(0);
+ });

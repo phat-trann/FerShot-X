@@ -1,0 +1,20 @@
+{
+  "authorization": "User confirmed previous session stopped and authorized transfer of C175/root-wiring to this session.",
+  "previous_claims": {
+    "C175": {
+      "agent": "codex",
+      "task": "C175",
+      "request": "library-window-shortcuts-20261118",
+      "started_at": "2026-11-18T16:56:00.566968+07:00"
+    },
+    "root-wiring": {
+      "agent": "codex",
+      "task": "root-wiring",
+      "request": "library-window-shortcuts-20261118",
+      "started_at": "2026-11-18T16:56:00.724231+07:00"
+    }
+  },
+  "new_request": "library-copy-delete-shortcuts-20261118",
+  "preserved_file": "src/LibraryWindow.tsx",
+  "preserved_sha256": "c35247a7bfad6159fd3153a071df037da76a977f091e11beb332f34f990fb825"
+}

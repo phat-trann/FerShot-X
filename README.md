@@ -1,4 +1,4 @@
-# FerShot X 1.4.1
+# FerShot X 1.4.2
 
 Capture, annotate and share screenshots or screen recordings from your Mac’s menu bar. Keep editable Local drafts or upload to your own FTP server and copy a ready-to-share link.
 
@@ -58,7 +58,7 @@ Enable **Upload Captures Immediately** in the menu-bar menu to skip Edit and upl
 
 ## Library
 
-**FTP** is the default tab. Select an image to preview it; double-click to open its HTTPS URL in your browser. Completed uploads keep a thumbnail on disk and load the full preview over HTTPS. Recently viewed FTP previews are cached temporarily in memory; Refresh clears that preview cache. Pending and failed uploads retain their image for retry.
+**FTP** is the default tab. Select an image to preview it; double-click to open its HTTPS URL in your browser. Completed uploads keep a thumbnail on disk and load the full preview over HTTPS. Recently viewed FTP previews are cached temporarily in memory; Refresh clears that preview cache. Hover an image preview to zoom with the mouse wheel or pinch at the pointer. Swipe with two fingers to pan; press 0 while the preview is focused to return to Fit. Pending and failed uploads retain their image for retry.
 
 **Local** retains editable images for **30 days**. Double-click an entry, or use its Edit icon, to continue editing with its elements intact. Copied and saved images remain available here; successfully uploaded images appear in FTP.
 
@@ -110,4 +110,4 @@ No placeholder screenshots are displayed until these files are supplied.
 
 ## Development and release notes
 
-See [development instructions](docs/DEVELOPMENT.md), [1.4.1 release notes](docs/releases/1.4.1.md) and [updater configuration](docs/releases/UPDATES.md). UI conventions are documented in the [interface system](docs/design/INTERFACE.md). Third-party notices are in [docs/third-party](docs/third-party).
+See [development instructions](docs/DEVELOPMENT.md), [1.4.2 release notes](docs/releases/1.4.2.md) and [updater configuration](docs/releases/UPDATES.md). UI conventions are documented in the [interface system](docs/design/INTERFACE.md). Third-party notices are in [docs/third-party](docs/third-party).

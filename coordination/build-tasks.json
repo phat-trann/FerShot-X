@@ -5906,6 +5906,26 @@
       "shared_claim": "root-wiring",
       "owned_paths": "C173 source/tests, release/version metadata and report",
       "inputs": "User explicitly requests push of completed Capture Area presentation fix"
+    },
+    {
+      "id": "C175",
+      "agent": "codex",
+      "title": "Library window-wide Copy/Delete shortcuts and native Copy event",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "src/LibraryWindow.tsx; tests/e2e/codex-v1-editor.spec.ts; C175 report/handoff and coordination records",
+      "inputs": "User reports hinted Copy/Delete do not work; authorized transfer of stopped C175/root-wiring session"
+    },
+    {
+      "id": "C176",
+      "agent": "codex",
+      "title": "Pointer-centered Library preview zoom and authorized 1.4.2 release",
+      "state": "READY",
+      "work_kind": "integration",
+      "shared_claim": "root-wiring",
+      "owned_paths": "LibraryImagePreview component, Library integration/CSS, focused gesture/cache/shortcut tests, release/version metadata and docs",
+      "inputs": "User authorizes push of C175 and adds pointer-centered wheel/pinch preview zoom to the same release"
     }
   ],
   "allocation": "Codex sole active client; external Antigravity and Copilot inactive; preserve historical authorship.",
@@ -6087,7 +6107,9 @@
       "C171",
       "C172",
       "C173",
-      "C174"
+      "C174",
+      "C175",
+      "C176"
     ],
     "copilot": []
   },

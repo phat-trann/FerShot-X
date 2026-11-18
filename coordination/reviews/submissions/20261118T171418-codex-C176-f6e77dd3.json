@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "id": "20261118T171418-codex-C176-f6e77dd3",
+  "created_at": "2026-11-18T17:14:18.271831+07:00",
+  "agent": "codex",
+  "request": "release-1.4.2-20261118",
+  "task": "C176",
+  "completion": "done",
+  "summary": "Library pointer-centered preview camera and C175 shortcut fixes; user-authorized 1.4.2 release",
+  "files": [
+    "AGENTS.md",
+    "README.md",
+    "coordination/build-tasks.json",
+    "package-lock.json",
+    "package.json",
+    "src-tauri/Cargo.lock",
+    "src-tauri/Cargo.toml",
+    "src-tauri/tauri.conf.json",
+    "src/LibraryWindow.css",
+    "src/LibraryWindow.tsx",
+    "tests/e2e/codex-v1-editor.spec.ts",
+    "coordination/handoffs/codex/C175-claim-transfer.json",
+    "docs/agents/codex/C175-library-shortcuts.md",
+    "docs/agents/codex/C176-library-preview-release.md",
+    "docs/releases/1.4.2.md",
+    "src/components/LibraryImagePreview.tsx",
+    "tests/e2e/codex-c176.spec.ts"
+  ],
+  "file_sha256": {
+    "AGENTS.md": "8d67275eb6537fdb2b99b16717170b2237ea446eb2bb75f78579aecd00e0f8fe",
+    "README.md": "e8ba3868f5d151a95ec87e89ebcd7b99e377a56df6dcde98d7278e61ffd48746",
+    "coordination/build-tasks.json": "6efac301be0baba6cd9d81a523f4bd20c97e3745a8e8b2d85fc8c5f6b9077d06",
+    "package-lock.json": "4d5f24fcb7704a4c225a1637de0549de8753008c45fa05e7ae1102713e3e148a",
+    "package.json": "7d6d747c7b62a8af0e8b2b41e789795bd4cb498d4803e96f7715206723dddbc2",
+    "src-tauri/Cargo.lock": "8c9f4214a046275513a8e62cd269edb31de704fc61fd751542881388842b1ce4",
+    "src-tauri/Cargo.toml": "6513505b856d2c594fd97d4b8490ad5ce60df205dffa061a6ab907e4b0eed01f",
+    "src-tauri/tauri.conf.json": "a26bab7e4ca97650a8de44197ac5ebf3c5533445252fc510f35a8c3f77c01cef",
+    "src/LibraryWindow.css": "f029b0aed0b80ed87578c966bd2acf18b5f8f2841a797bfb49459c199ab6d60d",
+    "src/LibraryWindow.tsx": "a5ae892f60b254e6b1c1e182c019d446d1bf1e6a26474f867f2d4ba17f716733",
+    "tests/e2e/codex-v1-editor.spec.ts": "00bdfd2eed78125b08e02f53e7fed06c0c904057d7f9a7b4412fc8f13dfafff3",
+    "coordination/handoffs/codex/C175-claim-transfer.json": "00ef05f7f1ba8f181bba4a6b1ef2b32c81ad4af9f14e1e0b650006f98819965c",
+    "docs/agents/codex/C175-library-shortcuts.md": "545c037bca382db90acca11dfbb0fd6eb5283b034540c5cffd3175c7e51436cf",
+    "docs/agents/codex/C176-library-preview-release.md": "93d209efa25ac7f9e3b9bfd7d87765f9f3b56eed486f76931e3ff550877f67af",
+    "docs/releases/1.4.2.md": "690dc60d5173df2e9c003e9cf3cdf324cd828c343129d83d1c189fc4d2cc54c6",
+    "src/components/LibraryImagePreview.tsx": "7639a629811720cc68ec7cff3e6c05d78f051c6b922d712f9cc3b46d6668ee19",
+    "tests/e2e/codex-c176.spec.ts": "7edff78165c21061fb4e7d97d59b65b90f44000d83e91013107496101da68991"
+  },
+  "checks": [
+    "Renderer production build and TypeScript with unused checks passed",
+    "442 unit tests passed",
+    "11 injected browser gesture/cache/Library shortcut regressions passed",
+    "Product version 1.4.2 synchronized; git diff check passed"
+  ],
+  "risks": [
+    "USER_WAIVED_REVIEW; installed trackpad/native Copy acceptance separate; Live Text discussed only, not implemented; no live clipboard/server/capture/permission or signing actions; CI publication separate"
+  ],
+  "review": "pending"
+}

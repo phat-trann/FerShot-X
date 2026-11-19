@@ -32,6 +32,7 @@ mod active_window;
 mod display_capture;
 mod document_open;
 mod recording;
+mod live_text;
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
@@ -88,6 +89,7 @@ pub fn run() {
             library_window::fit_editor_window,
             library_window::show_library,
             library_window::show_editor,
+            live_text::live_text_supported,live_text::live_text_open,live_text::live_text_layout,live_text::live_text_close,
             recording::cursor::read_recording_cursor,
             recording::read_recording_settings,recording::save_recording_settings,recording::read_recording_status,recording::start_recording,recording::stop_recording,recording::recording_list,recording::recording_document,recording::recording_save_draft,recording::recording_remove,recording::recording_save,recording::recording_copy,recording::recording_edit,recording::recording_take,recording::recording_open_failed,recording::recording_copy_library,ftp::ftp_enqueue_video,ftp::ftp_video_preview,ftp::ftp_edit_video,
             library_window::library_image,

@@ -42,8 +42,9 @@ pub struct Capture{
 }
 fn alloc(name:&std::ffi::CStr)->Result<Allocated<AnyObject>,NativeError>{let class=AnyClass::get(name).ok_or_else(fail)?;Ok(unsafe{msg_send![class,alloc]})}
 fn object(name:&std::ffi::CStr)->Result<Retained<AnyObject>,NativeError>{Ok(unsafe{msg_send![alloc(name)?,init]})}
-pub fn start(path:&Path,display:DisplayTarget,settings:&RecordingSettings,region:CaptureRegion)->Result<Capture,NativeError>{objc2::exception::catch(||start_inner(path,display,settings,region)).unwrap_or_else(|_|Err(fail()))}
-fn start_inner(path:&Path,display:DisplayTarget,settings:&RecordingSettings,region:CaptureRegion)->Result<Capture,NativeError>{
+fn validate_guide_exclusion(guide_visible:bool,own_application_found:bool)->Result<(),NativeError>{if guide_visible&&!own_application_found{Err(NativeError::new("recording_failed","The recording guide could not be excluded. Retry recording."))}else{Ok(())}}
+pub fn start(path:&Path,display:DisplayTarget,settings:&RecordingSettings,region:CaptureRegion,guide_visible:bool)->Result<Capture,NativeError>{objc2::exception::catch(||start_inner(path,display,settings,region,guide_visible)).unwrap_or_else(|_|Err(fail()))}
+fn start_inner(path:&Path,display:DisplayTarget,settings:&RecordingSettings,region:CaptureRegion,guide_visible:bool)->Result<Capture,NativeError>{
  if !available(){return Err(NativeError::new("unsupported_recording","Screen recording requires macOS 15 or later."))}
  unsafe{
   if settings.microphone{
@@ -55,12 +56,21 @@ fn start_inner(path:&Path,display:DisplayTarget,settings:&RecordingSettings,regi
   let(tx,rx)=mpsc::sync_channel(1);
   let block=RcBlock::new(move|content:*mut AnyObject,error:*mut NSError|{let value=if error.is_null(){Retained::retain(content).map(Content).ok_or(())}else{Err(())};let _=tx.send(value);});
   let class=AnyClass::get(c"SCShareableContent").ok_or_else(fail)?;
-  let _:()=msg_send![class,getShareableContentExcludingDesktopWindows:Bool::NO,onScreenWindowsOnly:Bool::YES,completionHandler:&*block];
+  let _:()=msg_send![class,getShareableContentExcludingDesktopWindows:Bool::NO,onScreenWindowsOnly:Bool::NO,completionHandler:&*block];
   let content=rx.recv_timeout(Duration::from_secs(30)).map_err(|_|fail())?.map_err(|_|fail())?;
   let displays:Retained<NSArray<AnyObject>>=msg_send![&*content.0,displays];
   let target=displays.iter().find(|d|{let id:u32=msg_send![&**d,displayID];id==display.id}).ok_or_else(fail)?;
   let empty=NSArray::<AnyObject>::new();
-  let applications:Retained<NSArray<AnyObject>>=msg_send![&*content.0,applications];let own=applications.iter().filter(|app|{let pid:i32=msg_send![&**app,processID];pid==std::process::id()as i32}).collect::<Vec<_>>();let own=NSArray::from_slice(&own.iter().map(|app|&**app).collect::<Vec<_>>());let filter:Retained<AnyObject>=msg_send![alloc(c"SCContentFilter")?,initWithDisplay:&*target,excludingApplications:&*own,exceptingWindows:&*empty];
+  let applications:Retained<NSArray<AnyObject>>=msg_send![&*content.0,applications];
+  let mut own=applications.iter().find(|app|{let pid:i32=msg_send![&**app,processID];pid==std::process::id()as i32});
+  if own.is_none()&&guide_visible{
+   // Resolve window ownership too if the application list omits our process.
+   let windows:Retained<NSArray<AnyObject>>=msg_send![&*content.0,windows];
+   own=windows.iter().find_map(|window|{let owner:Option<Retained<AnyObject>>=msg_send![&*window,owningApplication];owner.filter(|app|{let pid:i32=msg_send![&**app,processID];pid==std::process::id()as i32})});
+  }
+  validate_guide_exclusion(guide_visible,own.is_some())?;
+  let own=NSArray::from_slice(&own.iter().map(|app|&**app).collect::<Vec<_>>());
+  let filter:Retained<AnyObject>=msg_send![alloc(c"SCContentFilter")?,initWithDisplay:&*target,excludingApplications:&*own,exceptingWindows:&*empty];
   let(width,height)=output_size(region,display.scale);
   let config=object(c"SCStreamConfiguration")?;
   let _:()=msg_send![&*config,setSourceRect:objc2_foundation::NSRect::new(objc2_foundation::NSPoint::new(region.x,region.y),objc2_foundation::NSSize::new(region.width,region.height))];
@@ -144,4 +154,8 @@ impl Drop for Capture{fn drop(&mut self){if !self.stopped{unsafe{let _:()=msg_se
  #[test]fn already_stopped_is_accepted_only_for_screencapturekit(){assert!(synthetic(1).stop().is_ok());assert!(synthetic(2).stop().is_err());}
  #[test]fn failed_writer_is_never_published(){assert!(synthetic(3).stop().is_err());}
  #[test]fn consumed_finish_notification_remains_available_to_stop(){let mut capture=synthetic(1);capture.terminal=Some(true);assert!(capture.interrupted());assert!(capture.stop().is_ok());}
+}
+
+#[cfg(test)]mod exclusion_tests{
+ #[test]fn visible_guides_require_a_resolved_application_exclusion(){assert!(super::validate_guide_exclusion(true,true).is_ok());assert!(super::validate_guide_exclusion(true,false).is_err());assert!(super::validate_guide_exclusion(false,false).is_ok());assert!(super::validate_guide_exclusion(false,true).is_ok());}
 }

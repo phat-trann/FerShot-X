@@ -5926,6 +5926,36 @@
       "shared_claim": "root-wiring",
       "owned_paths": "LibraryImagePreview component, Library integration/CSS, focused gesture/cache/shortcut tests, release/version metadata and docs",
       "inputs": "User authorizes push of C175 and adds pointer-centered wheel/pinch preview zoom to the same release"
+    },
+    {
+      "id": "C177",
+      "agent": "codex",
+      "title": "Prevent Record Area guides from shifting into or being recorded in the crop",
+      "state": "READY",
+      "work_kind": "implementation",
+      "shared_claim": "root-wiring",
+      "owned_paths": "src-tauri/src/recording/mask.rs; capture.rs; mod.rs; focused native regressions/report/manual checklist",
+      "inputs": "User reports top dimming guide overlaps selected area and appears in recorded output"
+    },
+    {
+      "id": "C178",
+      "agent": "codex",
+      "title": "Inline native VisionKit Live Text for Library previews",
+      "state": "READY",
+      "work_kind": "integration",
+      "shared_claim": "root-wiring",
+      "owned_paths": "Native Live Text Swift package/Rust bridge/build wiring, Library toggle/hooks/platform adapter, focused checks and docs",
+      "inputs": "User requests native Live Text after explanation of the narrowly required Swift bridge"
+    },
+    {
+      "id": "C179",
+      "agent": "codex",
+      "title": "User-authorized Live Text and Record Area guide 1.5.0 release",
+      "state": "READY",
+      "work_kind": "integration",
+      "shared_claim": "root-wiring",
+      "owned_paths": "Completed C177/C178 source/tests/docs, synchronized version metadata and release report",
+      "inputs": "User explicitly requests deployment of the native Live Text addition and pending recording guide fix"
     }
   ],
   "allocation": "Codex sole active client; external Antigravity and Copilot inactive; preserve historical authorship.",
@@ -5952,7 +5982,7 @@
     "helper": "scripts/next_task.py",
     "no_automatic_clients": true
   },
-  "implementation_language_policy": "Tauri + Rust native code and React/TypeScript frontend. No Swift implementation/build/runtime helper; historical native/vision-core prototype is reference-only.",
+  "implementation_language_policy": "Tauri + Rust native code and React/TypeScript frontend. C178 alone permits the minimal public VisionKit Swift bridge in src-tauri/live-text; other feature implementations remain Rust. Historical native/vision-core is reference-only.",
   "review_policy": {
     "independent": true,
     "codex_producer_reviewer": "antigravity",
@@ -6109,7 +6139,10 @@
       "C173",
       "C174",
       "C175",
-      "C176"
+      "C176",
+      "C177",
+      "C178",
+      "C179"
     ],
     "copilot": []
   },

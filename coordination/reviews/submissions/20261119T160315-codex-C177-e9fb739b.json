@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "id": "20261119T160315-codex-C177-e9fb739b",
+  "created_at": "2026-11-19T16:03:15.617282+07:00",
+  "agent": "codex",
+  "request": "recording-area-mask-20261119",
+  "task": "C177",
+  "completion": "done",
+  "summary": "Show area guides before capture filtering, require app exclusion and verify exact guide frames without altering crop coordinates",
+  "files": [
+    "src-tauri/src/recording/mask.rs",
+    "src-tauri/src/recording/capture.rs",
+    "src-tauri/src/recording/mod.rs",
+    "docs/agents/codex/C177-recording-area-guides.md",
+    "docs/releases/video-manual-acceptance.md",
+    "AGENTS.md",
+    "coordination/build-tasks.json"
+  ],
+  "file_sha256": {
+    "src-tauri/src/recording/mask.rs": "b9b0baf36f7081c6ed8583cf4ab0553d84a45d077331a3f87f4f57117b79039c",
+    "src-tauri/src/recording/capture.rs": "765fda9b9135ecfd96a658b613413b25437bb753ce4f6a89fc9b423b5ccc716d",
+    "src-tauri/src/recording/mod.rs": "a51b4e6ab06ffd14908305ec10d3fba6273d5306ab7602053d708be9e652808e",
+    "docs/agents/codex/C177-recording-area-guides.md": "79444c82d8c0e9425595b427bcf951952d0a60d90e7c1b0e5d08870739f9a373",
+    "docs/releases/video-manual-acceptance.md": "073035b125d23188a21b41537e778802bfda32cac73b4fe7d60bb14172ea55d7",
+    "AGENTS.md": "f07f91d59e86e00aacb253d3034d0d0d846c0173f7a1b55c35859e7207255ee9",
+    "coordination/build-tasks.json": "f25bd1b22acbdf3540da0fcad64837de5827b419d5f1e2f538ea5e975629261c"
+  },
+  "checks": [
+    "Native cargo check passed",
+    "25 native recording tests passed including per-pixel mask geometry, exclusion policy and generated-media output"
+  ],
+  "risks": [
+    "USER_WAIVED_REVIEW; installed guide placement/filtering remains manual acceptance; no real capture/input/audio/server/permissions or bundle/version/publication"
+  ],
+  "review": "pending"
+}

@@ -1,4 +1,4 @@
-# FerShot X 1.4.2
+# FerShot X 1.5.0
 
 Capture, annotate and share screenshots or screen recordings from your Mac’s menu bar. Keep editable Local drafts or upload to your own FTP server and copy a ready-to-share link.
 
@@ -60,6 +60,8 @@ Enable **Upload Captures Immediately** in the menu-bar menu to skip Edit and upl
 
 **FTP** is the default tab. Select an image to preview it; double-click to open its HTTPS URL in your browser. Completed uploads keep a thumbnail on disk and load the full preview over HTTPS. Recently viewed FTP previews are cached temporarily in memory; Refresh clears that preview cache. Hover an image preview to zoom with the mouse wheel or pinch at the pointer. Swipe with two fingers to pan; press 0 while the preview is focused to return to Fit. Pending and failed uploads retain their image for retry.
 
+**Live Text:** on supported Macs with macOS 13+, select an image and enable **Live Text** in the Library header. Select words directly in the native image view, then use ⌘C or the native context menu to copy text. Wheel/pinch zoom and two-finger pan remain available. Disable Live Text to return to ordinary image selection/copy. Analysis is started only on request; changing images closes the previous text view.
+
 **Local** retains editable images for **30 days**. Double-click an entry, or use its Edit icon, to continue editing with its elements intact. Copied and saved images remain available here; successfully uploaded images appear in FTP.
 
 Use **⌘-click** to select individual rows, **Shift-click** to select a range or **⌘A** to select all. The selection toolbar supports copying and deletion. Copying multiple FTP links lists them from oldest to newest.
@@ -110,4 +112,4 @@ No placeholder screenshots are displayed until these files are supplied.
 
 ## Development and release notes
 
-See [development instructions](docs/DEVELOPMENT.md), [1.4.2 release notes](docs/releases/1.4.2.md) and [updater configuration](docs/releases/UPDATES.md). UI conventions are documented in the [interface system](docs/design/INTERFACE.md). Third-party notices are in [docs/third-party](docs/third-party).
+See [development instructions](docs/DEVELOPMENT.md), [1.5.0 release notes](docs/releases/1.5.0.md) and [updater configuration](docs/releases/UPDATES.md). UI conventions are documented in the [interface system](docs/design/INTERFACE.md). Third-party notices are in [docs/third-party](docs/third-party).

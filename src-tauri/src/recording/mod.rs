@@ -72,8 +72,9 @@ fn run(app:&tauri::AppHandle,display:crate::display_capture::DisplayTarget,mode:
  }else{let region=CaptureRegion{x:0.,y:0.,width:display.rect.width as f64,height:display.rect.height as f64};Ok((display,region))}})();
  let(display,region)=match selection{Ok(value)=>value,Err(error)=>{let cancelled=error.code=="cancelled";let _=ready.send(Err(error));let _=std::fs::remove_dir_all(&folder);return Err(NativeError::new(if cancelled{"cancelled"}else{"recording_failed"},"Recording selection stopped."))}};
  if stop.try_recv().is_ok(){let _=ready.send(Err(NativeError::new("cancelled","Recording cancelled.")));let _=std::fs::remove_dir_all(&folder);return Err(NativeError::new("cancelled","Recording cancelled."))}
- let capture=capture::start(&path,display,&settings,region);let mut capture=match capture{Ok(value)=>value,Err(error)=>{let _=ready.send(Err(error));let _=std::fs::remove_dir_all(&folder);return Err(failed())}};
+ // Guides must be visible before the shareable-content snapshot/filter is built.
  let mask=if mode==RecordingMode::Area{Some(mask::Mask::show(app,display,region)?)}else{None};
+ let capture=capture::start(&path,display,&settings,region,mask.as_ref().is_some_and(mask::Mask::requires_exclusion));let mut capture=match capture{Ok(value)=>value,Err(error)=>{let _=ready.send(Err(error));let _=std::fs::remove_dir_all(&folder);return Err(failed())}};
  let _=ready.send(Ok(()));status(app,RecordingStatus{phase:"recording",..Default::default()});
  let mut pointer=Vec::new();let mut last_report=Instant::now();let mut interrupted=false;
  loop{

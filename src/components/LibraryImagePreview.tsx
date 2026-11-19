@@ -1,9 +1,12 @@
+import {useLibraryLiveText} from "./useLibraryLiveText";
+import type {LiveTextState} from "../platform/live-text";
 import {useLayoutEffect,useRef} from "react";
 import type {ImageDocument} from "../contracts/media";
 
 /** A window-local camera; it never changes the cached image or its editable draft. */
-export function LibraryImagePreview({image,name}:{image:ImageDocument;name:string}){
+export function LibraryImagePreview({image,name,liveText=false,onLiveTextState=()=>{},onLiveTextError=()=>{}}:{image:ImageDocument;name:string;liveText?:boolean;onLiveTextState?:(state:LiveTextState)=>void;onLiveTextError?:(message:string)=>void}){
  const viewport=useRef<HTMLDivElement>(null),artwork=useRef<HTMLImageElement>(null);
+ useLibraryLiveText(viewport,image,liveText,onLiveTextState,onLiveTextError);
  useLayoutEffect(()=>{
   const host=viewport.current,node=artwork.current;if(!host||!node)return;
   let camera={x:0,y:0,scale:1},fit=1,frame=0,lastPanAt=-Infinity,pinch:{scale:number;x:number;y:number}|null=null;

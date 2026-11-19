@@ -73,3 +73,9 @@ No build/publication or real capture/server acceptance is claimed by automated c
 - Settings → Hotkeys → Stop recording: assign a combination, verify immediate persistence, clear/reassign, restart and verify restoration. Existing screenshot/Screen/Area assignments remain intact.
 - Start Screen/Area recording, then press Stop recording with the app hidden: it finalizes and follows Edit/immediate-upload settings. Press while idle: no recording starts and no window opens.
 - App logo keeps its ordinary icon and left-click menu while recording. Use either the stop shortcut, menu Stop Recording or the native macOS recording control.
+
+## C177 Record Area guide placement/output
+
+- Select Record Area near the top/menu bar and in the middle: dimming stays entirely outside the selection. Repeat on a Retina display and a secondary display above/left of the main display.
+- Record a test pattern extending across the selection boundary, stop, then compare Edit and saved MP4: the selected top edge is unchanged and no dim bands appear in the video.
+- Repeat with all app windows hidden before starting. Fullscreen and full-display area selections must remain valid. Cancel, stop and startup failures remove every guide. No real capture is run by automated checks.

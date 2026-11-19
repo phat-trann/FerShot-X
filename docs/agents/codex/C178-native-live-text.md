@@ -1,0 +1,5 @@
+# C178 — Native Live Text
+
+Added an explicit Library Live Text toggle using public VisionKit ImageAnalyzer/ImageAnalysisOverlayView inside a clipped native scroll/image view. Swift is confined to this authorized bridge; Rust enforces caller, PNG/geometry/request bounds. Native selection/context-menu/Copy remains in the macOS responder chain. Wheel/pinch/pan, status, cancellation, concurrency limits, modal visibility and responder cleanup are implemented; renderer receives enum status only. Weak VisionKit linkage and a system Swift runtime path retain availability gating.
+
+Validation: TypeScript unused checks, shared-control tests, eight injected browser cases, native Rust validation/link checks, three standalone Swift geometry/zoom/cancellation checks and 25 recording regressions passed. No real recognition/private images/clipboard/capture/permissions/server actions, app bundle, version bump or publication. Installed native text selection/Copy, trackpad and older-system launch require manual acceptance. C177 remains preserved. USER_WAIVED_REVIEW only.

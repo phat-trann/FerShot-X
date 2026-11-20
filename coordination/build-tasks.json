@@ -6016,6 +6016,16 @@
       "shared_claim": "root-wiring",
       "owned_paths": "Native Library placement, Record Area startup and guide removal, synchronized 1.5.2 metadata",
       "inputs": "User reports consecutive Library opens misplace a moved/resized window and recurring recording startup failures"
+    },
+    {
+      "id": "C187",
+      "agent": "codex",
+      "title": "Restore Record Area dimming with safe capture exclusion",
+      "state": "READY",
+      "work_kind": "integration",
+      "shared_claim": "root-wiring",
+      "owned_paths": "AppKit guide geometry and ownership, ScreenCaptureKit filter, diagnostics, 1.5.3 metadata and acceptance notes",
+      "inputs": "User asks to fix the area dimming bug instead of removing the visual guide"
     }
   ],
   "allocation": "Codex sole active client; external Antigravity and Copilot inactive; preserve historical authorship.",

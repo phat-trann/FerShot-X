@@ -1,5 +1,9 @@
 # Agent instructions
 
+## C187 restore reliable Record Area dimming (2026-11-20)
+
+Restore the dimming guide using one transparent AppKit display window with four dim bands. Resolve its display by ID, keep the cutout in content coordinates, and reveal only after exact display alignment and ScreenCaptureKit exclusion are known. Guide failures log a separate stage and leave recording running. Clear the same guide on stop or unwind. Validate using generated or injected checks. Publish the fix as 1.5.3 through main and finish at confirmed push.
+
 ## C186 Library placement and Record Area startup hotfix (2026-11-20)
 
 Set the Library frame in one AppKit operation at 75% of the pointer display's usable area. Coalesce reopen requests while native fullscreen exits. Installed 1.5.1 logs locate recurring Record Area failures in guide preparation. Remove the dimming windows and their capture-start gate while keeping native region selection and recording delivery. Never delete existing media. Publish the accumulated C184–C186 fixes as 1.5.2 by normal main push and finish after push confirmation. Installed window placement and capture behavior remain manual acceptance.

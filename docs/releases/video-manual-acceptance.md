@@ -1,6 +1,6 @@
 # Screen recording acceptance
 
-Run native capture and audio checks on the installed macOS build. Direct MP4 recording requires macOS 15 or later. For 1.5.2, use the C186 follow-up for Library placement and Record Area startup.
+Run native capture and audio checks on the installed macOS build. Direct MP4 recording requires macOS 15 or later. Use C186 for Library placement and C187 for the restored Record Area guide.
 
 1. **Record Screen:** put the pointer on each display, start from tray, move the pointer/click, stop from tray. Edit must open with the intended full screen, correct dimensions and playable video.
 2. **Record Area:** select a small region on each display, including Retina/negative-origin monitors. Only that region is recorded; cursor/click effects stay aligned. A cross-display region is rejected. Escape cancels selection and restores the previous view.
@@ -90,3 +90,9 @@ No build/publication or real capture/server acceptance is claimed by automated c
 
 - Move and resize Library, then use its menu item twice in a row. Both opens should center it at 75% of the work area on the display under the pointer. Repeat on a different-scale display and from native fullscreen.
 - Record a small area near the top of a screen and stop using the native control or the Stop shortcut. The area records without a dimming overlay. Verify Edit plays the selected region. Repeat with a second area and then Record Screen. Existing Local videos should remain available.
+
+## C187 restored Record Area guide
+
+- Select a region near the top edge, then repeat on a secondary display with a different scale. The outside darkens after recording begins. The selected area stays clear and controls outside it remain clickable.
+- Stop with the native control or shortcut. The guide disappears, Edit opens and the saved video contains no dimming. Repeat on the same display, then cancel a selection and start another recording.
+- Record Screen and a selection covering an entire display. There should be no dim bands. If Record Area works with a missing guide, report the `recording_guide` stage from Settings → Open Logs Folder.

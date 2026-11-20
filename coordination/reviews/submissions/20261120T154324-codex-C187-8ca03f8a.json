@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "id": "20261120T154324-codex-C187-8ca03f8a",
+  "created_at": "2026-11-20T15:43:24.215082+07:00",
+  "agent": "codex",
+  "request": "recording-guide-20261120",
+  "task": "C187",
+  "completion": "done",
+  "summary": "Restore Record Area dimming using one display-aligned AppKit window, verified ScreenCaptureKit exclusion and nonfatal guide diagnostics.",
+  "files": [
+    "AGENTS.md",
+    "README.md",
+    "coordination/build-tasks.json",
+    "docs/releases/1.5.3.md",
+    "docs/releases/video-manual-acceptance.md",
+    "package-lock.json",
+    "package.json",
+    "src-tauri/Cargo.lock",
+    "src-tauri/Cargo.toml",
+    "src-tauri/src/diagnostics.rs",
+    "src-tauri/src/recording/capture.rs",
+    "src-tauri/src/recording/guide.rs",
+    "src-tauri/src/recording/mod.rs",
+    "src-tauri/tauri.conf.json"
+  ],
+  "file_sha256": {
+    "AGENTS.md": "546adb03567fa47f670ee8f5ffe70607b73e39ec134a3422584d9f10fb2ec188",
+    "README.md": "b40eda7597da8a7f4b0dfdb9f146dfcd74935a0e5ca00f9f89f483b12ed4f879",
+    "coordination/build-tasks.json": "4c5dad9cf685b7b4538c99fec81c5a5887279d8aeafd81adf865f8cfbfb741d8",
+    "docs/releases/1.5.3.md": "5c66a2250455134228a998df69c9c3c26c903a9aae923c93d4556f68150751f7",
+    "docs/releases/video-manual-acceptance.md": "cab57bb7327a4b7449d3fb2a39c076a96366471a81304ad5e0cf77476a7b7a82",
+    "package-lock.json": "3171ade69e477ab03a4ef3cffe507991ddf469df38cc03876eeebebcc2ceb884",
+    "package.json": "cbe745ac09684aef3e63eb1db588e290716d25ddfe1c09d80c0c66e48a4c8bb3",
+    "src-tauri/Cargo.lock": "f04e51986283218d45e77b3e4dd3e29feb36b072ac9beec0ff03903f7bd29b5f",
+    "src-tauri/Cargo.toml": "f29e6b79a4db3400696c8d6f24dd4dc50649e9b519ef997482630418a7c338cb",
+    "src-tauri/src/diagnostics.rs": "ffb24b26c40a09c96f81827eec89d5416ce4aaacb5b724a1e664b7af33b280b4",
+    "src-tauri/src/recording/capture.rs": "b1f46d89417e8db122396ec3dba5b1ff04666cef11a3bf015f54adbfc7bebd05",
+    "src-tauri/src/recording/guide.rs": "912624eba05b2b16c90eacd6145e49345373e6435a0660e9e69444bdff157a94",
+    "src-tauri/src/recording/mod.rs": "a396d172f755b61db337769cc8fabb0e365300116a078c15ac6a0ace2ef9b81f",
+    "src-tauri/tauri.conf.json": "a68aa204b283f52003da661e37bf4127a2bc2174b2f9b8095d991b8266613c4c"
+  },
+  "checks": [
+    "Locked macOS Rust release check passed. 123 native tests passed, including guide geometry. Two FTP loopback wire tests excluded.",
+    "27 injected recording and Live Text browser tests passed.",
+    "Product 1.5.3 synchronization and 10 release/version tests passed. Formatting/lint delegated to Copilot H01."
+  ],
+  "risks": [
+    "Native guide visibility, placement and guide-free recording on physical displays remain installed acceptance."
+  ],
+  "review": "pending"
+}

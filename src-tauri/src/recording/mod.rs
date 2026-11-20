@@ -4,6 +4,7 @@ pub mod timeline;
 mod storage;
 mod finalized;
 #[cfg(target_os="macos")]mod capture;
+#[cfg(target_os="macos")]mod guide;
 #[cfg(target_os="macos")]mod render;
 #[cfg(target_os="macos")]pub mod cursor;
 use model::*;
@@ -137,8 +138,18 @@ fn run(app:&tauri::AppHandle,display:crate::display_capture::DisplayTarget,mode:
  let folder=storage::folder(app,&id)?;
  std::fs::create_dir(&folder).map_err(|_|failed())?;
  let path=folder.join("original.mp4");
+ let guide_start=Instant::now();
+ let mut guide=if mode==RecordingMode::Area{
+  match guide::Guide::prepare(app,display,region){
+   Ok(guide)=>guide,
+   Err(())=>{
+    crate::diagnostics::technical(app,"start_recording",crate::diagnostics::Stage::RecordingGuide,guide_start.elapsed().as_millis()as u64);
+    None
+   }
+  }
+ }else{None};
  let starting=Instant::now();
- let mut capture=match capture::start(&path,display,&settings,region){
+ let mut capture=match capture::start(&path,display,&settings,region,guide.as_ref().map(|guide|guide.window_id)){
   Ok(value)=>value,
   Err(error)=>{
    crate::diagnostics::technical(app,"start_recording",crate::diagnostics::Stage::StartRecording,starting.elapsed().as_millis()as u64);
@@ -148,6 +159,12 @@ fn run(app:&tauri::AppHandle,display:crate::display_capture::DisplayTarget,mode:
    return Err(failed());
   }
  };
+ if let Some(prepared)=guide.as_ref(){
+  if !capture.guide_excluded||prepared.reveal(display).is_err(){
+   crate::diagnostics::technical(app,"start_recording",crate::diagnostics::Stage::RecordingGuide,guide_start.elapsed().as_millis()as u64);
+   guide=None;
+  }
+ }
  let _=ready.send(Ok(()));status(app,RecordingStatus{phase:"recording",..Default::default()});
  let mut pointer=Vec::new();let mut last_report=Instant::now();let mut interrupted=false;
  loop{
@@ -160,6 +177,7 @@ fn run(app:&tauri::AppHandle,display:crate::display_capture::DisplayTarget,mode:
   }
   if last_report.elapsed()>=Duration::from_secs(1){if crate::display_capture::confirm(capture.display).is_err(){interrupted=true;break}status(app,RecordingStatus{phase:"recording",elapsed_ms:elapsed,..Default::default()});last_report=Instant::now();}
  }
+ drop(guide);
  status(app,RecordingStatus{phase:"stopping",elapsed_ms:capture.started.elapsed().as_millis()as u64,..Default::default()});let finalize=Instant::now();capture.stop().map_err(|error|{crate::diagnostics::record_recording_error(app,if error.code=="recording_stop_failed"{crate::diagnostics::Stage::StopStream}else{crate::diagnostics::Stage::FinishRecording},finalize.elapsed().as_millis()as u64);error})?;let inspect=Instant::now();while !finalized::complete(&path)&&inspect.elapsed()<Duration::from_secs(3){std::thread::sleep(Duration::from_millis(25));}if !finalized::complete(&path){crate::diagnostics::record_recording_error(app,crate::diagnostics::Stage::InspectRecording,inspect.elapsed().as_millis()as u64);return Err(failed())}let(_,_,duration)=render::describe(&path).map_err(|error|{crate::diagnostics::record_recording_error(app,crate::diagnostics::Stage::InspectRecording,inspect.elapsed().as_millis()as u64);error})?;if interrupted||duration<100||duration>MAX_DURATION_MS+2000{return Err(failed())}let duration=duration.min(MAX_DURATION_MS);pointer.retain(|p|p.time_ms<=duration);
  let size=std::fs::metadata(&path).map_err(|_|failed())?.len();if !(16..=MAX_VIDEO_BYTES).contains(&size){return Err(failed())}
  let clip=Clip{id:id.clone(),name:format!("Recording-{}.mp4",chrono::Local::now().format("%Y-%m-%d-%H%M%S")),width:capture.width,height:capture.height,duration_ms:duration,byte_size:size,created_at:storage::now(),media_path:path.to_string_lossy().into_owned(),poster:String::new(),has_audio:Some(settings.system_audio||settings.microphone)};

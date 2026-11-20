@@ -1,6 +1,6 @@
 [package]
 name = "fershot-x"
-version = "1.5.2"
+version = "1.5.3"
 description = "FerShot X screenshot and screen recording editor with FTP publishing"
 authors = ["FerShot contributors"]
 edition = "2024"
@@ -56,7 +56,7 @@ foreign-types = "=0.5.0"
 core-foundation = "=0.10.1"
 core-graphics = { version = "=0.24.0", features = ["elcapitan"] }
 objc2 = { version = "=0.6.5", features = ["exception"] }
-objc2-app-kit = { version = "=0.3.2", default-features = false, features = ["NSWorkspace", "NSRunningApplication", "NSWindow", "NSScreen", "NSEvent", "block2"] }
+objc2-app-kit = { version = "=0.3.2", default-features = false, features = ["NSWorkspace", "NSRunningApplication", "NSWindow", "NSScreen", "NSEvent", "NSGraphics", "NSView", "NSColor", "objc2-core-graphics", "block2"] }
 objc2-foundation = { version = "=0.3.2", default-features = false, features = ["NSNotification", "NSOperation", "NSString", "NSProcessInfo", "NSGeometry", "NSArray", "NSDictionary", "NSValue", "NSURL", "NSError", "block2"] }
 drag = "=2.1.1"
 arboard = { version = "3.7", default-features = false, features = ["image-data"] }

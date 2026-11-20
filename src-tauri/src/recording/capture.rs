@@ -39,11 +39,19 @@ unsafe impl Send for Content{}
 pub struct Capture{
  stream:Retained<AnyObject>,output:Retained<AnyObject>,_delegate:Retained<FerShotRecordingDelegate>,events:mpsc::Receiver<Event>,
  pub started:Instant,pub width:u32,pub height:u32,pub display:DisplayTarget,stopped:bool,terminal:Option<bool>,
+ pub(super) guide_excluded:bool,
 }
 fn alloc(name:&std::ffi::CStr)->Result<Allocated<AnyObject>,NativeError>{let class=AnyClass::get(name).ok_or_else(fail)?;Ok(unsafe{msg_send![class,alloc]})}
 fn object(name:&std::ffi::CStr)->Result<Retained<AnyObject>,NativeError>{Ok(unsafe{msg_send![alloc(name)?,init]})}
-pub fn start(path:&Path,display:DisplayTarget,settings:&RecordingSettings,region:CaptureRegion)->Result<Capture,NativeError>{objc2::exception::catch(||start_inner(path,display,settings,region)).unwrap_or_else(|_|Err(fail()))}
-fn start_inner(path:&Path,display:DisplayTarget,settings:&RecordingSettings,region:CaptureRegion)->Result<Capture,NativeError>{
+fn excluding_guide(display:&AnyObject,window:&AnyObject)->Option<Retained<AnyObject>>{
+ objc2::exception::catch(std::panic::AssertUnwindSafe(||unsafe{
+  let filter=alloc(c"SCContentFilter").ok()?;
+  let excluded=NSArray::from_slice(&[window]);
+  msg_send![filter,initWithDisplay:display,excludingWindows:&*excluded]
+ })).ok().flatten()
+}
+pub fn start(path:&Path,display:DisplayTarget,settings:&RecordingSettings,region:CaptureRegion,guide_id:Option<u32>)->Result<Capture,NativeError>{objc2::exception::catch(||start_inner(path,display,settings,region,guide_id)).unwrap_or_else(|_|Err(fail()))}
+fn start_inner(path:&Path,display:DisplayTarget,settings:&RecordingSettings,region:CaptureRegion,guide_id:Option<u32>)->Result<Capture,NativeError>{
  if !available(){return Err(NativeError::new("unsupported_recording","Screen recording requires macOS 15 or later."))}
  unsafe{
   if settings.microphone{
@@ -62,13 +70,21 @@ fn start_inner(path:&Path,display:DisplayTarget,settings:&RecordingSettings,regi
   let empty=NSArray::<AnyObject>::new();
   let applications:Retained<NSArray<AnyObject>>=msg_send![&*content.0,applications];
   let mut own=applications.iter().find(|app|{let pid:i32=msg_send![&**app,processID];pid==std::process::id()as i32});
+  let mut guide_window=None;
   if own.is_none(){
    // Resolve window ownership too if the application list omits our process.
    let windows:Retained<NSArray<AnyObject>>=msg_send![&*content.0,windows];
    own=windows.iter().find_map(|window|{let owner:Option<Retained<AnyObject>>=msg_send![&*window,owningApplication];owner.filter(|app|{let pid:i32=msg_send![&**app,processID];pid==std::process::id()as i32})});
+   if own.is_none(){if let Some(guide_id)=guide_id{guide_window=windows.iter().find(|window|{let id:u32=msg_send![&**window,windowID];id==guide_id});}}
   }
-  let own=NSArray::from_slice(&own.iter().map(|app|&**app).collect::<Vec<_>>());
-  let filter:Retained<AnyObject>=msg_send![alloc(c"SCContentFilter")?,initWithDisplay:&*target,excludingApplications:&*own,exceptingWindows:&*empty];
+  let guide_filter=guide_window.and_then(|window|excluding_guide(&target,&window));
+  let guide_excluded=guide_id.is_some()&&(own.is_some()||guide_filter.is_some());
+  let filter:Retained<AnyObject>=if let Some(filter)=guide_filter{
+   filter
+  }else{
+   let own=NSArray::from_slice(&own.iter().map(|app|&**app).collect::<Vec<_>>());
+   msg_send![alloc(c"SCContentFilter")?,initWithDisplay:&*target,excludingApplications:&*own,exceptingWindows:&*empty]
+  };
   let(width,height)=output_size(region,display.scale);
   let config=object(c"SCStreamConfiguration")?;
   let _:()=msg_send![&*config,setSourceRect:objc2_foundation::NSRect::new(objc2_foundation::NSPoint::new(region.x,region.y),objc2_foundation::NSSize::new(region.width,region.height))];
@@ -89,7 +105,7 @@ fn start_inner(path:&Path,display:DisplayTarget,settings:&RecordingSettings,regi
   let delegate:Retained<FerShotRecordingDelegate>=msg_send![super(this),init];
   let output:Retained<AnyObject>=msg_send![alloc(c"SCRecordingOutput")?,initWithConfiguration:&*output_config,delegate:ProtocolObject::<dyn SCRecordingOutputDelegate>::from_ref(&*delegate)];
   let mut error=std::ptr::null_mut::<NSError>();let added:Bool=msg_send![&*stream,addRecordingOutput:&*output,error:&mut error];if !added.as_bool(){return Err(fail())}
-  let mut capture=Capture{stream,output,_delegate:delegate,events,started:Instant::now(),width,height,display,stopped:false,terminal:None};
+  let mut capture=Capture{stream,output,_delegate:delegate,events,started:Instant::now(),width,height,display,stopped:false,terminal:None,guide_excluded};
   let(tx,rx)=mpsc::sync_channel(1);let block=RcBlock::new(move|error:*mut NSError|{let _=tx.send(error.is_null());});
   let _:()=msg_send![&*capture.stream,startCaptureWithCompletionHandler:&*block];
   if !rx.recv_timeout(Duration::from_secs(15)).map_err(|_|fail())?{return Err(fail())}
@@ -146,7 +162,7 @@ impl Drop for Capture{fn drop(&mut self){if !self.stopped{unsafe{let _:()=msg_se
  fn synthetic(mode:u8)->Capture{unsafe{
   let(tx,events)=mpsc::channel();let stream:Retained<SyntheticRecordingStream>=msg_send![super(SyntheticRecordingStream::alloc().set_ivars((tx.clone(),mode))),init];
   let delegate:Retained<FerShotRecordingDelegate>=msg_send![super(FerShotRecordingDelegate::alloc().set_ivars(tx)),init];
-  Capture{stream:Retained::cast_unchecked(stream),output:Retained::cast_unchecked(NSObject::new()),_delegate:delegate,events,started:Instant::now(),width:160,height:100,display:DisplayTarget{id:1,rect:fershot_capture_core::ScreenRect{x:0,y:0,width:160,height:100},scale:1.},stopped:false,terminal:None}
+  Capture{stream:Retained::cast_unchecked(stream),output:Retained::cast_unchecked(NSObject::new()),_delegate:delegate,events,started:Instant::now(),width:160,height:100,display:DisplayTarget{id:1,rect:fershot_capture_core::ScreenRect{x:0,y:0,width:160,height:100},scale:1.},stopped:false,terminal:None,guide_excluded:false}
  }}
  #[test]fn stop_finalizes_attached_writer_without_removing_it(){let mut capture=synthetic(0);assert!(capture.stop().is_ok());assert!(capture.stopped);}
  #[test]fn already_stopped_is_accepted_only_for_screencapturekit(){assert!(synthetic(1).stop().is_ok());assert!(synthetic(2).stop().is_err());}
@@ -154,5 +170,3 @@ impl Drop for Capture{fn drop(&mut self){if !self.stopped{unsafe{let _:()=msg_se
  #[test]fn consumed_finish_notification_remains_available_to_stop(){let mut capture=synthetic(1);capture.terminal=Some(true);assert!(capture.interrupted());assert!(capture.stop().is_ok());}
 }
 
-#[cfg(test)]mod exclusion_tests{
-}

@@ -1,4 +1,4 @@
-import {invoke} from "@tauri-apps/api/core";
+import {invoke} from "./ipc";
 import { GLOBAL_ACTIONS_V2, emptyGlobalBindingsV2, parseGlobalShortcutsV2Json, serializeGlobalShortcutsV2Json, toNativeGlobalBindingsV2, type GlobalBindingsV2 } from "../features/global-shortcuts-v2";
 import { applyNativeShortcuts, readNativeShortcuts, readSavedNativeShortcuts, saveNativeShortcuts } from "./native";
 

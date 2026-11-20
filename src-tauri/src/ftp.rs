@@ -251,15 +251,19 @@ fn transfer_with(job:&Job,image:&Path,password:&str,mut run:impl FnMut(&Job,&Pat
 fn transfer(job:&Job,image:&Path,password:&str)->Result<(),NativeError>{
     transfer_with(job,image,password,run_transport)
 }
+fn reserve_upload(jobs:&mut[Job],deleting:&std::collections::HashSet<String>,id:&str,time:u64)->Result<Job,NativeError>{
+ if deleting.contains(id){return Err(fail("This image is being deleted."))}
+ if jobs.iter().filter(|job|job.item.status=="uploading").count()>=4{return Err(fail("Four uploads are already running. Retry this pending entry shortly."))}
+ let job=jobs.iter_mut().find(|job|job.item.id==id).ok_or_else(||fail("FTP item not found."))?;if !matches!(job.item.status.as_str(),"pending"|"failed"){return Err(fail("Only pending or failed uploads can start."))}
+ job.item.status="uploading".into();job.item.updated_at=time;job.item.error=None;job.item.error_code=None;Ok(job.clone())
+}
+fn reserve_delete(job:&Job,deleting:&mut std::collections::HashSet<String>)->Result<(),NativeError>{if job.item.status=="uploading"{return Err(fail("Wait for this upload to finish before deleting it."))}if !deleting.insert(job.item.id.clone()){return Err(fail("This image is already being deleted."))}Ok(())}
 #[tauri::command]
 pub async fn ftp_start(id:String,window:tauri::WebviewWindow,app:tauri::AppHandle,store:tauri::State<'_,FtpStore>)->Result<(),NativeError>{
-    crate::library_window::validate_reader(window.label())?;valid_id(&id)?;if store.1.lock().map_err(|_|fail("FTP state unavailable."))?.contains(&id){return Err(fail("This image is being deleted."))}
-    let job={let _lock=store.0.lock().map_err(|_|fail("FTP store unavailable."))?;let dir=root(&app)?;let mut jobs=load(&dir)?;
+    crate::library_window::validate_reader(window.label())?;valid_id(&id)?;
+    let job={let _lock=store.0.lock().map_err(|_|fail("FTP store unavailable."))?;let deleting=store.1.lock().map_err(|_|fail("FTP state unavailable."))?;let dir=root(&app)?;let mut jobs=load(&dir)?;
         if crate::updates::is_installing(&app){return Err(NativeError::new("busy","Restart after the update before uploading."))}
-        if jobs.iter().filter(|j|j.item.status=="uploading").count()>=4{return Err(fail("Four uploads are already running. Retry this pending entry shortly."))}
-        let j=jobs.iter_mut().find(|j|j.item.id==id).ok_or_else(||fail("FTP item not found."))?;
-        if !matches!(j.item.status.as_str(),"pending"|"failed"){return Err(fail("Only pending or failed uploads can start."))}
-        j.item.status="uploading".into();j.item.updated_at=now();j.item.error=None;j.item.error_code=None;let job=j.clone();persist(&dir,&jobs)?;job};
+        let job=reserve_upload(&mut jobs,&deleting,&id,now())?;persist(&dir,&jobs)?;job};
     diagnostics::record(&app,LogArea::Ftp,LogEvent::Started,LogCode::None);
     let _=app.emit("fershot-ftp-updated",());
     tauri::async_runtime::spawn_blocking(move || {
@@ -282,13 +286,13 @@ pub async fn ftp_start(id:String,window:tauri::WebviewWindow,app:tauri::AppHandl
 }
 #[tauri::command]
 pub async fn ftp_remove(id:String,window:tauri::WebviewWindow,app:tauri::AppHandle,store:tauri::State<'_,FtpStore>)->Result<(),NativeError>{
-    crate::library_window::validate_reader(window.label())?;valid_id(&id)?;let _lock=store.0.lock().map_err(|_|fail("FTP store unavailable."))?;let dir=root(&app)?;let mut jobs=load(&dir)?;
+    crate::library_window::validate_reader(window.label())?;valid_id(&id)?;let _lock=store.0.lock().map_err(|_|fail("FTP store unavailable."))?;if store.1.lock().map_err(|_|fail("FTP state unavailable."))?.contains(&id){return Err(fail("Wait for remote deletion before removing history."))}let dir=root(&app)?;let mut jobs=load(&dir)?;
     if jobs.iter().any(|j|j.item.id==id && j.item.status=="uploading"){return Err(fail("Wait for the active transfer before removing its history."))}
     jobs.retain(|j|j.item.id!=id);persist(&dir,&jobs)?;let _=fs::remove_file(dir.join(format!("{id}.png")));let _=fs::remove_file(dir.join(format!("{id}.mp4")));let _=fs::remove_file(dir.join(format!("{id}.thumb.png")));let _=app.emit("fershot-ftp-updated",());Ok(())
 }
 pub fn recover(app:&tauri::AppHandle)->Result<(),NativeError>{
     let store=app.state::<FtpStore>();let _lock=store.0.lock().map_err(|_|fail("FTP store unavailable."))?;let dir=root(app)?;let mut jobs=load(&dir)?;let mut changed=false;
-    for j in &mut jobs{if j.item.status=="success"{let _=finalize_success(&dir,&j.item.id);}if j.item.status=="uploading"{j.item.status="failed".into();j.item.error=Some("Transfer interrupted by app exit. Retry uses the original URL.".into());j.item.error_code=Some("ftp_interrupted".into());j.item.updated_at=now();changed=true;}}
+    for j in &mut jobs{if j.item.status=="success"{let _=finalize_success(&dir,&j.item.id);if j.item.remote_path.ends_with(".mp4"){crate::recording::forget_uploaded(app,&j.item.source_id);}}if j.item.status=="uploading"{j.item.status="failed".into();j.item.error=Some("Transfer interrupted by app exit. Retry uses the original URL.".into());j.item.error_code=Some("ftp_interrupted".into());j.item.updated_at=now();changed=true;}}
     if changed{persist(&dir,&jobs)?;diagnostics::record(app,LogArea::Ftp,LogEvent::Recovered,LogCode::None);}Ok(())
 }
 #[cfg(test)]
@@ -312,6 +316,10 @@ mod tests {
         let bytes=serde_json::to_vec(&value).unwrap();let file=dir.path().join("settings.json");fs::write(&file,&bytes).unwrap();
         let loaded=settings_load(dir.path()).unwrap().unwrap();assert_eq!(loaded.remote_dir,"/s");assert!(loaded.monthly_folders);assert_eq!(fs::read(file).unwrap(),bytes);
         let mut fixed=sample();fixed.remote_dir="/s/2613".into();migrate_profile_folder(&mut fixed);assert_eq!(fixed.remote_dir,"/s/2613");assert!(!fixed.monthly_folders);
+    }
+    #[test]fn upload_and_delete_reservations_are_mutually_exclusive_in_either_order(){
+        let settings=sample();let(remote_path,url)=target(&settings,"screenshot-123-1.png");let job=Job{settings,remote_name:None,item:QueueItem{id:"123-1".into(),source_id:"source".into(),name:"Test".into(),remote_path,url,status:"failed".into(),created_at:1,updated_at:1,error:None,error_code:None}};
+        let mut jobs=vec![job];let mut deleting=std::collections::HashSet::new();reserve_delete(&jobs[0],&mut deleting).unwrap();assert!(reserve_upload(&mut jobs,&deleting,"123-1",2).is_err());assert_eq!(jobs[0].item.status,"failed");deleting.clear();reserve_upload(&mut jobs,&deleting,"123-1",2).unwrap();assert!(reserve_delete(&jobs[0],&mut deleting).is_err());assert!(deleting.is_empty());
     }
     fn sample()->Settings{Settings{host:"ftp.example.com".into(),port:21,username:"user".into(),remote_dir:"/images/a b".into(),monthly_folders:false,public_base_url:"https://cdn.example.com".into(),secure:true,naming_mode:NamingMode::Random,_retired_shared_flag:false}}
     #[test]fn library_reads_retained_success_pixels_without_network_and_rejects_symlinks(){
@@ -481,7 +489,7 @@ fn delete_command(job:&Job)->Command{let mut command=Command::new("/usr/bin/curl
 #[tauri::command]pub async fn ftp_delete_remote(id:String,confirmed:bool,window:tauri::WebviewWindow,app:tauri::AppHandle)->Result<(),NativeError>{
  crate::library_window::require_library(window.label())?;valid_id(&id)?;if !confirmed{return Err(fail("Confirm permanent deletion from FTP first."))}
  tauri::async_runtime::spawn_blocking(move||{
-  let job={let store=app.state::<FtpStore>();let _lock=store.0.lock().map_err(|_|fail("FTP state unavailable."))?;if crate::updates::is_installing(&app){return Err(NativeError::new("busy","Restart after the update before deleting images."))}let jobs=load(&root(&app)?)?;let job=jobs.into_iter().find(|j|j.item.id==id).ok_or_else(||fail("Upload history not found."))?;if job.item.status=="uploading"{return Err(fail("Wait for this upload to finish before deleting it."))}let mut deleting=store.1.lock().map_err(|_|fail("FTP state unavailable."))?;if !deleting.insert(id.clone()){return Err(fail("This image is already being deleted."))}job};
+  let job={let store=app.state::<FtpStore>();let _lock=store.0.lock().map_err(|_|fail("FTP state unavailable."))?;if crate::updates::is_installing(&app){return Err(NativeError::new("busy","Restart after the update before deleting images."))}let jobs=load(&root(&app)?)?;let job=jobs.into_iter().find(|j|j.item.id==id).ok_or_else(||fail("Upload history not found."))?;let mut deleting=store.1.lock().map_err(|_|fail("FTP state unavailable."))?;reserve_delete(&job,&mut deleting)?;job};
   let result=(||{let password=password_for(&app,&job.settings)?;if password.is_empty()||password.chars().any(char::is_control){return Err(fail("FTP credentials are invalid."))}let mut child=delete_command(&job).stdin(Stdio::piped()).stdout(Stdio::null()).stderr(Stdio::null()).spawn().map_err(|_|fail("FTP delete transport unavailable."))?;let sent=child.stdin.take().ok_or_else(||fail("FTP delete input unavailable."))?.write_all(format!("user = {}\n",quoted(&format!("{}:{}",job.settings.username,password))).as_bytes());if sent.is_err(){let _=child.kill();let _=child.wait();return Err(fail("FTP delete setup failed."))}if !child.wait().map_err(|_|fail("FTP delete stopped."))?.success(){return Err(fail("FTP deletion could not be confirmed. Check the server before retrying."))}
    let store=app.state::<FtpStore>();let _lock=store.0.lock().map_err(|_|fail("FTP state unavailable."))?;let dir=root(&app)?;let mut jobs=load(&dir)?;jobs.retain(|j|j.item.id!=id);persist(&dir,&jobs).map_err(|_|fail("Remote image deleted, but local history could not be updated. Remove its history after refreshing."))?;let _=fs::remove_file(dir.join(format!("{id}.png")));let _=fs::remove_file(dir.join(format!("{id}.mp4")));let _=fs::remove_file(dir.join(format!("{id}.thumb.png")));if let Some(cache)=PREVIEWS.get(){if let Ok(mut rows)=cache.lock(){rows.retain(|(key,_,_)|key!=&id)}}Ok(())})();
   if let Ok(mut state)=app.state::<FtpStore>().1.lock(){state.remove(&id);}if result.is_err(){diagnostics::record(&app,LogArea::Ftp,LogEvent::Failed,LogCode::FtpFailed);}let _=app.emit("fershot-ftp-updated",());result

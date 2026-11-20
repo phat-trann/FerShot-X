@@ -143,7 +143,7 @@ fn apply_registered(store:&ShortcutStore,bindings:Bindings,registry:&mut impl Re
 }
 
 fn dispatch_once(last:&mut Option<(String,std::time::Instant)>,action:&str,now:std::time::Instant)->bool{if last.as_ref().is_some_and(|(old,time)|old==action&&now.saturating_duration_since(*time)<std::time::Duration::from_millis(250)){return false}*last=Some((action.into(),now));true}
-pub fn dispatch_action(app:&tauri::AppHandle,action:&str,from_menu:bool){let store=app.state::<ShortcutStore>();if let Ok(mut last)=store.last_dispatch.lock(){if !dispatch_once(&mut last,action,std::time::Instant::now()){return;}}if action=="record-stop"{if crate::recording::active(app){crate::recording::stop_from_menu(app);}return;}if matches!(action,"record-screen"|"record-area")&&crate::recording::active(app){crate::recording::stop_from_menu(app);return;}if action=="show-workspace"{let _=crate::library_window::show(app,"library");}else{let _=app.emit_to("main",if from_menu{"fershot-menu-action"}else{"fershot-global-action"},action);}}
+pub fn dispatch_action(app:&tauri::AppHandle,action:&str,from_menu:bool){let store=app.state::<ShortcutStore>();if let Ok(mut last)=store.last_dispatch.lock(){if !dispatch_once(&mut last,action,std::time::Instant::now()){return;}}if action=="record-stop"{if crate::recording::active(app){crate::recording::stop_from_menu(app);}return;}if crate::recording::capture_action(action)&&crate::recording::active(app){return;}if action=="show-workspace"{let _=crate::library_window::show(app,"library");}else{let _=app.emit_to("main",if from_menu{"fershot-menu-action"}else{"fershot-global-action"},action);}}
 pub fn on_shortcut(app: &tauri::AppHandle, shortcut: &Shortcut, event: ShortcutEvent) {
     let store = app.state::<ShortcutStore>();
     {

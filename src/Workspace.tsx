@@ -1,7 +1,7 @@
 import {lazy,Suspense} from "react";
 import type {VideoDocument} from "./features/recording/model";
 import type {VideoActions} from "./features/recording/VideoWorkspace";
-import {takeVideoOpen,readRecording,startRecording,failVideoOpen,listenRecording,enqueueVideo} from "./platform/recording";
+import {takeVideoOpen,releaseRecordingEditor,readRecording,startRecording,failVideoOpen,listenRecording,readRecordingStatus,enqueueVideo} from "./platform/recording";
 import {LoadingState} from "./components/ui/content-state";
 const VideoWorkspace=lazy(()=>import("./features/recording/VideoWorkspace"));
 import { RefreshCw } from "lucide-react";
@@ -55,9 +55,12 @@ const EMPTY_ADVANCED_ITEMS: readonly AdvancedEditorItem[] = Object.freeze([]);
 const EMPTY_ANNOTATIONS: readonly Annotation[] = Object.freeze([]);
 
 export default function Workspace() {
-  const [videoDocument,setVideoDocument]=useState<{document:VideoDocument;requestId?:string;presentation:string;queuedUpload?:{id:string;url:string};initialError?:string}|null>(null);
+  const [videoDocument,setVideoDocument]=useState<{document:VideoDocument;requestId?:string;presentation:string;lease:string;queuedUpload?:{id:string;url:string};initialError?:string}|null>(null);
+  const videoLease=useRef<string|null>(null);
+  function releaseVideo(){const lease=videoLease.current;videoLease.current=null;if(lease)void releaseRecordingEditor(lease).catch(()=>{});}
   const videoActions=useRef<VideoActions|null>(null);
-  useEffect(()=>{let live=true;let off:(()=>void)|undefined;void listenRecording(value=>{if(live&&(value.phase==="failed"||value.phase==="idle"))window.dispatchEvent(new Event("fershot-editor-presented"));}).then(dispose=>{if(live)off=dispose;else dispose();}).catch(()=>{});return()=>{live=false;off?.();};},[]);
+  const recordingBusy=useRef(false);
+  useEffect(()=>{let live=true,changed=false;let off:(()=>void)|undefined;const receive=(value:Awaited<ReturnType<typeof readRecordingStatus>>)=>{if(!live)return;recordingBusy.current=["starting","recording","stopping"].includes(value.phase);if(value.phase==="failed"||value.phase==="idle")window.dispatchEvent(new Event("fershot-editor-presented"));};void listenRecording(value=>{changed=true;receive(value);}).then(dispose=>{if(live){off=dispose;void readRecordingStatus().then(value=>{if(!changed)receive(value);}).catch(()=>{});}else dispose();}).catch(()=>{});return()=>{live=false;off?.();};},[]);
 
 
 
@@ -101,16 +104,15 @@ export default function Workspace() {
   const [imageToInsert,setImageToInsert]=useState<{id:string;src:string;width:number;height:number;target:string}|undefined>();
   const picker = useRef<HTMLInputElement>(null);
   const liveImages = useRef<ImageDocument[]>([]);
+  const durableImages=useRef(new Set<string>()),retainedImages=useRef(new Set<string>()),closeAfterOperation=useRef(false);
   const busyRef = useRef(false);
   const preferenceRefreshPending = useRef(false);
   const reloadPreferences = useRef<() => void>(() => {});
   const mounted = useRef(true);
-  const hadImage=useRef(false);
-  useEffect(()=>{if(images.length)hadImage.current=true;else if(hadImage.current){hadImage.current=false;void hideWorkspace();}},[images.length]);
   const image = images.find((item) => item.id === selectedId);
   const annotations = image ? annotationsById.get(image.id) ?? EMPTY_ANNOTATIONS : EMPTY_ANNOTATIONS;
   const advancedItems = image ? advancedById.get(image.id) ?? EMPTY_ADVANCED_ITEMS : EMPTY_ADVANCED_ITEMS;
-  useEffect(()=>{if(!image)return;const timer=window.setTimeout(()=>{void localHistory.remember(image,{schemaVersion:1,width:image.width,height:image.height,annotations,advanced:advancedItems});},300);return()=>window.clearTimeout(timer);},[image,annotations,advancedItems,localHistory.remember]);
+  useEffect(()=>{if(!image)return;const timer=window.setTimeout(()=>{void localHistory.remember(image,{schemaVersion:1,width:image.width,height:image.height,annotations,advanced:advancedItems}).catch(()=>{});},300);return()=>window.clearTimeout(timer);},[image,annotations,advancedItems,localHistory.remember]);
   useEffect(()=>{const prepare=(event:Event)=>{const promises=(event as CustomEvent<Promise<unknown>[]>).detail;if(busyRef.current||automaticUploads.current.size){promises.push(Promise.reject(new Error("Finish the active operation before updating.")));return;}if(image&&!ftpQueue.items.some(job=>job.sourceId===(image.localId??image.id)&&job.status==="success"))promises.push(localHistory.pending(image.localId??image.id).then(()=>saveLocalDraft(image,{schemaVersion:1,width:image.width,height:image.height,annotations,advanced:advancedItems},true)));};window.addEventListener("fershot-before-update",prepare);return()=>window.removeEventListener("fershot-before-update",prepare);},[image,annotations,advancedItems,ftpQueue.items]);
   const originalId = image ? originalById.current.get(image.id) : undefined;
   const originalImage = originalId ? images.find(item => item.id === originalId) : undefined;
@@ -121,14 +123,14 @@ export default function Workspace() {
   useEffect(()=>{if(lastUpload?.status==="success")setNotice(value=>value.startsWith("Upload queued")?"":value);},[lastUpload?.status]);
 
   useEffect(() => {
-    for (const item of ftpQueue.items) if (item.status === "success") void localHistory.forget(item.sourceId);
+    for (const item of ftpQueue.items) if (item.status === "success") void localHistory.forget(item.sourceId).catch(()=>{});
   }, [ftpQueue.items, localHistory.forget]);
 
   const pendingPresentation=useRef<{id:string;requestId?:string;sized:boolean;prepared:boolean;painted:boolean;fallback:boolean;timer?:ReturnType<typeof setTimeout>}|null>(null);
   function clearPresentation(){const pending=pendingPresentation.current;if(pending?.timer!==undefined)clearTimeout(pending.timer);pendingPresentation.current=null;}
   useEffect(()=>{const start=()=>clearPresentation();window.addEventListener("fershot-capture-starting",start);return()=>{window.removeEventListener("fershot-capture-starting",start);clearPresentation();};},[]);
   function presentDocument(id:string,part:"sized"|"prepared"|"painted"|"fallback"){
-    const pending=pendingPresentation.current;if(!mounted.current||pending?.id!==id)return;
+    const pending=pendingPresentation.current;if(!mounted.current||closeAfterOperation.current||pending?.id!==id)return;
     pending[part]=true;
     if(!pending.sized||!pending.prepared)return;
     // A hidden WKWebView can defer image decoding/painting until it is shown.
@@ -136,23 +138,68 @@ export default function Workspace() {
     if(pending.painted||pending.fallback||document.hidden){clearPresentation();void showEditor(pending.requestId).catch(()=>{if(mounted.current)setError("Edit could not be brought forward. Open the image again from Library.");});}
     else if(pending.timer===undefined)pending.timer=setTimeout(()=>presentDocument(id,"fallback"),250);
   }
+  function retireUnusedImages(){
+    const retired=liveImages.current.filter(document=>!retainedImages.current.has(document.id)&&durableImages.current.has(document.id));
+    if(!retired.length)return;const ids=new Set(retired.map(document=>document.id));
+    for(const document of retired){URL.revokeObjectURL(document.src);durableImages.current.delete(document.id);localHistory.release(document);captureScales.current.delete(document.id);capturedPreviewIds.current.delete(document.id);sourceRevisions.current.delete(document.id);originalById.current.delete(document.id);}
+    liveImages.current=liveImages.current.filter(document=>!ids.has(document.id));setImages([...liveImages.current]);
+    setAnnotationsById(previous=>new Map([...previous].filter(([id])=>!ids.has(id))));setAdvancedById(previous=>new Map([...previous].filter(([id])=>!ids.has(id))));
+  }
   function addDocument(next: ImageDocument, select = true) {
-    setVideoDocument(null);
     if (!mounted.current) { captureScales.current.delete(next.id); URL.revokeObjectURL(next.src); return; }
-    if (liveImages.current.length >= 512) { captureScales.current.delete(next.id); URL.revokeObjectURL(next.src); throw new RangeError("Session library is limited to 512 images."); }
+    const original=liveImages.current.find(document=>(document.localId??document.id)===(next.localId??next.id));
+    const wanted=new Set([next.id,...(original?[originalById.current.get(original.id)??original.id]:[])]);
+    const retained=liveImages.current.filter(document=>wanted.has(document.id)||!durableImages.current.has(document.id));
+    const weight=(document:ImageDocument)=>{
+      const embedded=(advancedById.get(document.id)??document.draft?.advanced??[]).reduce((sum,item)=>sum+(item.itemKind==="image"?item.src.length*2:0),0);
+      return document.byteSize+document.width*document.height*4+embedded;
+    };
+    const residentBytes=retained.reduce((sum,document)=>sum+weight(document),0);
+    if(retained.length>=32||residentBytes+weight(next)>256*1024*1024){URL.revokeObjectURL(next.src);throw new RangeError("Finish saving the current documents before opening another image.");}
+    retainedImages.current=wanted;retireUnusedImages();releaseVideo();setVideoDocument(null);
     sessionRevision.current++;
     clearPresentation();pendingPresentation.current={id:next.id,requestId:next.libraryRequestId,sized:false,prepared:false,painted:false,fallback:false};
-    void fitEditorWindow(next.width,next.height).then(()=>presentDocument(next.id,"sized")).catch(()=>{if(pendingPresentation.current?.id===next.id){clearPresentation();setError("Edit could not be sized. Open the image again from Library.");void showEditor(next.libraryRequestId);}});
+    void fitEditorWindow(next.width,next.height).then(()=>presentDocument(next.id,"sized")).catch(()=>{if(!closeAfterOperation.current&&pendingPresentation.current?.id===next.id){clearPresentation();setError("Edit could not be sized. Open the image again from Library.");void showEditor(next.libraryRequestId);}});
     setEditing(true);
     liveImages.current = [...liveImages.current, next];
     setImages([...liveImages.current]);
     localHistory.activate(next);
     if(next.draft){setAnnotationsById(previous=>new Map(previous).set(next.id,next.draft!.annotations));setAdvancedById(previous=>new Map(previous).set(next.id,next.draft!.advanced));}
-    void localHistory.remember(next);
+    const initialRevision=sourceRevisions.current.get(next.id);
+    void localHistory.remember(next).then(()=>{if(sourceRevisions.current.get(next.id)===initialRevision)durableImages.current.add(next.id);retireUnusedImages();}).catch(()=>{});
     if (select) { setSelectedId(next.id); setZoom(null); }
   }
 
-  useEffect(()=>{for(const [id,captured]of automaticUploads.current){const job=ftpQueue.items.find(item=>item.id===id);if(job?.status==="success"){automaticUploads.current.delete(id);capturedPreviewIds.current.delete(captured.id);captureScales.current.delete(captured.id);URL.revokeObjectURL(captured.src);}else if(job?.status==="failed"){automaticUploads.current.delete(id);addDocument(captured,true);setError("Automatic FTP upload failed. Your image is open in Edit; retry the queued upload from Library.");}}},[ftpQueue.items]);
+  useEffect(() => {
+    for (const job of ftpQueue.items) {
+      const captured = automaticUploads.current.get(job.id);
+      if (!captured) continue;
+      const discard = () => {
+        capturedPreviewIds.current.delete(captured.id);
+        captureScales.current.delete(captured.id);
+        localHistory.release(captured);
+        URL.revokeObjectURL(captured.src);
+      };
+      if (job.status === "success") {
+        automaticUploads.current.delete(job.id);
+        discard();
+      } else if (job.status === "failed" && !busyRef.current) {
+        automaticUploads.current.delete(job.id);
+        void operate(async () => {
+          const message = "Automatic FTP upload failed. Retry the queued upload from Library.";
+          try {
+            await preserveCurrentDraft();
+            addDocument(captured);
+            setError(message);
+          } catch {
+            // The original capture was saved to Local before it entered the FTP queue.
+            discard();
+            setError(`${message} The current edit was kept open.`);
+          }
+        });
+      }
+    }
+  }, [ftpQueue.items, busy]);
 
   function addDerivedDocument(next: ImageDocument, parentId: string, preserveScale = true) {
     const originalId = originalById.current.get(parentId) ?? parentId;
@@ -180,11 +227,19 @@ export default function Workspace() {
     return () => { window.removeEventListener("error", unexpected); window.removeEventListener("unhandledrejection", unexpected); };
   }, []);
 
-  async function operate(operation: () => Promise<void>) {
+  async function preserveCurrentDraft(){
+    await videoActions.current?.flush();
+    if(!image)return;
+    const revision=sourceRevisions.current.get(image.id);
+    await localHistory.remember(image,{schemaVersion:1,width:image.width,height:image.height,annotations,advanced:advancedItems});
+    if(sourceRevisions.current.get(image.id)===revision)durableImages.current.add(image.id);
+  }
+
+  async function operate(operation: () => Promise<void>,replace=false) {
     if (busyRef.current) return;
     busyRef.current = true;
     setBusy(true); setError(""); setNotice("");
-    try { await operation(); }
+    try { if(replace)await preserveCurrentDraft();await operation(); }
     catch (reason) {
       if (!(reason instanceof NativeOperationError)) recordDiagnostic("image", "failed", "other");
       if (reason instanceof NativeOperationError && reason.code === "cancelled") setNotice("Capture cancelled.");
@@ -193,7 +248,7 @@ export default function Workspace() {
   }
 
   function openClipboard() {
-    void operate(async () => { addDocument(await importClipboardImage()); setNotice("Clipboard image opened."); });
+    void operate(async () => { addDocument(await importClipboardImage()); setNotice("Clipboard image opened."); },true);
   }
 
   async function finishCapture(capture: { image: ImageDocument; displayScale: number | null },instant=false) {
@@ -236,11 +291,12 @@ export default function Workspace() {
       } finally {
         if (mounted.current) setCapturing(false);
       }
-    });
+    },true);
   }
 
   globalAction.current = (action, fromMenu = false) => {
-    if(action==="record-screen"||action==="record-area"){if(busyRef.current||scrollActive)return;window.dispatchEvent(new Event("fershot-capture-starting"));void operate(async()=>{try{await startRecording(action==="record-area"?"area":"fullscreen");}catch(error){window.dispatchEvent(new Event("fershot-editor-presented"));throw error;}});return;}
+    if(recordingBusy.current&&typeof action==="string"&&(action.startsWith("capture-")||action==="record-screen"||action==="record-area"))return;
+    if(action==="record-screen"||action==="record-area"){if(busyRef.current||scrollActive)return;void operate(async()=>{recordingBusy.current=true;window.dispatchEvent(new Event("fershot-capture-starting"));try{await startRecording(action==="record-area"?"area":"fullscreen");}catch(error){recordingBusy.current=false;window.dispatchEvent(new Event("fershot-editor-presented"));throw error;}},true);return;}
     if(videoDocument&&videoActions.current&&typeof action==="string"&&["image-copy","image-save","image-upload"].includes(action)){if(action==="image-copy")videoActions.current.copy();else if(action==="image-save")videoActions.current.save();else videoActions.current.upload();return;}
 
     if(action==="capture-upload-setting-failed"){setError("Automatic upload mode could not be saved. Please retry from the tray menu.");return;}
@@ -255,14 +311,14 @@ export default function Workspace() {
     else if (action === "capture-scrolling") scrollCapture();
     else if (action === "show-workspace") { window.focus(); setNotice("Workspace focused."); }
 
-    else if (fromMenu && action === "open-file") { void operate(async () => { const opened = await openImageDialog(); if (opened) addDocument(opened); }); }
+    else if (fromMenu && action === "open-file") { void operate(async () => { const opened = await openImageDialog(); if (opened) addDocument(opened); },true); }
     else if (fromMenu && action === "open-clipboard") openClipboard();
     else if (fromMenu && action === "image-copy") copy();
     else if (fromMenu && action === "image-save") save();
     else if (fromMenu && action === "image-upload") upload();
   };
 
-  function scrollCapture(){void operate(async()=>{try{const instant=await captureUploadMode();const result=await captureScrollResult(instant);await finishCapture({image:result.image,displayScale:null},instant&&!result.partial);if(result.partial)setPartialScroll({id:result.image.id,message:`Partial scroll capture: kept ${result.acceptedFrames} of ${result.capturedFrames} frames. Try a smaller region or slower speed.`});}catch(error){if(!(error instanceof NativeOperationError&&error.code==="cancelled"))await showEditor();throw error;}});}
+  function scrollCapture(){void operate(async()=>{try{const instant=await captureUploadMode();const result=await captureScrollResult(instant);await finishCapture({image:result.image,displayScale:null},instant&&!result.partial);if(result.partial)setPartialScroll({id:result.image.id,message:`Partial scroll capture: kept ${result.acceptedFrames} of ${result.capturedFrames} frames. Try a smaller region or slower speed.`});}catch(error){if(!(error instanceof NativeOperationError&&error.code==="cancelled"))await showEditor();throw error;}},true);}
 
   function repeatArea() {
     if (busyRef.current || scrollActive || !hasRepeatArea) return;
@@ -271,7 +327,7 @@ export default function Workspace() {
       try { const instant=await captureUploadMode();await finishCapture(await captureRepeatArea(instant),instant); }
       catch (reason) { if (reason instanceof NativeOperationError && ["display_changed", "repeat_unavailable"].includes(reason.code)) setHasRepeatArea(false); void readRepeatAreaAvailable().catch(() => {}); throw reason; }
       finally { if (mounted.current) setCapturing(false); }
-    });
+    },true);
   }
 
   function captureActive() {
@@ -279,7 +335,7 @@ export default function Workspace() {
       setCapturing(true);
       try { const instant=await captureUploadMode();await finishCapture(await captureActiveWindow(instant),instant); }
       finally { if (mounted.current) setCapturing(false); }
-    });
+    },true);
   }
 
 
@@ -310,6 +366,7 @@ export default function Workspace() {
     if (!liveImages.current.some(document => document.id === id)) return;
     const current=liveImages.current.find(document=>document.id===id);if(current)localHistory.activate(current);
     sessionRevision.current++;
+    durableImages.current.delete(id);
     sourceRevisions.current.set(id, (sourceRevisions.current.get(id) ?? 0) + 1);
     setAdvancedById(previous => new Map(previous).set(id, items));
   }
@@ -325,9 +382,9 @@ export default function Workspace() {
   const incomingPending = useRef(true);
   const [incomingRevision,setIncomingRevision] = useState(0);
   useEffect(()=>{let live=true;let off:(()=>void)|undefined;const request=()=>{if(live){incomingPending.current=true;setIncomingRevision(n=>n+1);}};Promise.all([listenLibrary("fershot-editor-image",request),listenLibrary("fershot-video-open",request)]).then(disposers=>{const fn=()=>disposers.forEach(dispose=>dispose());if(live){off=fn;request();}else fn();}).catch(()=>{if(live){recordDiagnostic("image","failed","other",{operation:"listen_editor_image"});setError("Library events are unavailable. Restart the app and retry.");}});return()=>{live=false;off?.();};},[]);
-  useEffect(()=>{if(busy||busyRef.current||!preferencesReady||!incomingPending.current)return;incomingPending.current=false;void operate(async()=>{for(let count=0;count<4;count++){const incoming=await takeEditorImage();if(incoming){capturedPreviewIds.current.add(incoming.id);addDocument(incoming);setNotice("Library image ready to edit. Original preserved.");}const movie=await takeVideoOpen();if(movie){try{const document=await readRecording(movie.id);let queuedUpload:{id:string;url:string}|undefined;let initialError:string|undefined;
+  useEffect(()=>{if(busy||busyRef.current||!preferencesReady||!incomingPending.current)return;incomingPending.current=false;void operate(async()=>{for(let count=0;count<4;count++){const incoming=await takeEditorImage();if(incoming){capturedPreviewIds.current.add(incoming.id);addDocument(incoming);setNotice("Library image ready to edit. Original preserved.");}const lease=crypto.randomUUID();const movie=await takeVideoOpen(lease);if(movie){let presented=false;try{const document=await readRecording(movie.id);let queuedUpload:{id:string;url:string}|undefined;let initialError:string|undefined;
         if(movie.uploadImmediately){try{queuedUpload=await enqueueVideo(movie.id,document.draft);await startFtpUpload(queuedUpload.id);try{await copyText(queuedUpload.url);}catch{setError("Video upload started. Copy its link from Library.");}continue;}catch(error){initialError=error instanceof Error?error.message:"Video upload failed. Retry from Edit.";}}
-        clearPresentation();setVideoDocument({document,requestId:movie.requestId,presentation:crypto.randomUUID(),queuedUpload,initialError});}catch(error){if(movie.requestId)await failVideoOpen(movie.requestId);throw error;}}if(!incoming&&!movie)break;}});},[busy,preferencesReady,incomingRevision]);
+        clearPresentation();setSelectedId(null);retainedImages.current.clear();retireUnusedImages();releaseVideo();videoLease.current=lease;presented=true;setVideoDocument({document,lease,requestId:movie.requestId,presentation:crypto.randomUUID(),queuedUpload,initialError});}catch(error){if(movie.requestId)await failVideoOpen(movie.requestId);throw error;}finally{if(!presented)void releaseRecordingEditor(lease).catch(()=>{});}}if(!incoming&&!movie)break;}},true);},[busy,preferencesReady,incomingRevision]);
 
   async function hideCompletedCapture(id: string) {
     if (capturedPreviewIds.current.has(id)) await hideWorkspace();
@@ -337,7 +394,7 @@ export default function Workspace() {
     if (!image) return;
     void operate(async () => { await withEdits(image, annotations, async rendered => {
       await withOutputPreferences(rendered, settings, captureScales.current.get(image.id), copyImage);
-      await localHistory.remember(image,{schemaVersion:1,width:image.width,height:image.height,annotations,advanced:advancedItems});
+      await preserveCurrentDraft();
     }); setNotice("Image copied to clipboard."); await hideWorkspace(); });
   }
 
@@ -345,7 +402,7 @@ export default function Workspace() {
     if (!image) return;
     void operate(async () => { const saved = await withEdits(image, annotations, async rendered => {
       const saved = await withOutputPreferences(rendered, settings, captureScales.current.get(image.id), output => saveImage(output, settings.saveFormat, settings.jpegQuality));
-      if (saved) await localHistory.remember(image,{schemaVersion:1,width:image.width,height:image.height,annotations,advanced:advancedItems});
+      if (saved) await preserveCurrentDraft();
       return saved;
     }); setNotice(saved ? "Image saved." : "Save cancelled."); if (saved) await hideCompletedCapture(image.id); });
   }
@@ -438,6 +495,7 @@ export default function Workspace() {
     setBusy(true);
     setError(""); setNotice("");
     try {
+      await preserveCurrentDraft();
       for (const file of files) {
         if (!mounted.current) break;
         const next = await importImage(file);
@@ -453,15 +511,22 @@ export default function Workspace() {
   }
 
 
-  const closeDocument=useRef(()=>{});closeDocument.current=()=>{clearPresentation();setVideoDocument(null);if(image)void localHistory.remember(image,{schemaVersion:1,width:image.width,height:image.height,annotations,advanced:advancedItems});setSelectedId(null);};
+  const closeDocument=useRef(()=>{});closeDocument.current=()=>{
+    clearPresentation();
+    if(busyRef.current){closeAfterOperation.current=true;return;}
+    closeAfterOperation.current=false;
+    const revision=sessionRevision.current;busyRef.current=true;setBusy(true);
+    void (async()=>{try{await preserveCurrentDraft();if(!mounted.current||sessionRevision.current!==revision)return;releaseVideo();setVideoDocument(null);setSelectedId(null);retainedImages.current.clear();retireUnusedImages();}catch{if(mounted.current&&sessionRevision.current===revision){setError("Draft could not be saved. Edit remains open; retry saving before closing.");await showEditor().catch(()=>{});}}finally{busyRef.current=false;closeAfterOperation.current=false;if(mounted.current)setBusy(false);}})();
+  };
+  useEffect(()=>{if(!busy&&closeAfterOperation.current)closeDocument.current();},[busy]);
   useEffect(()=>{let live=true;let off:(()=>void)|undefined;void listenLibrary("fershot-editor-closed",()=>closeDocument.current()).then(dispose=>{if(live)off=dispose;else dispose();});return()=>{live=false;off?.();};},[]);
 
-  if(videoDocument)return <Suspense fallback={<LoadingState>Opening video editor</LoadingState>}><VideoWorkspace key={videoDocument.presentation} document={videoDocument.document} requestId={videoDocument.requestId} initialUpload={videoDocument.queuedUpload} initialError={videoDocument.initialError} onActions={actions=>{videoActions.current=actions;}}/></Suspense>;
+  if(videoDocument)return <Suspense fallback={<LoadingState>Opening video editor</LoadingState>}><VideoWorkspace key={videoDocument.presentation} document={videoDocument.document} requestId={videoDocument.requestId} initialUpload={videoDocument.queuedUpload} initialError={videoDocument.initialError} onComplete={()=>{if(videoLease.current===videoDocument.lease){releaseVideo();setVideoDocument(null);}}} onActions={actions=>{videoActions.current=actions;}}/></Suspense>;
   return (
     <EditorToolbarProvider><div className="workspace editor-window">
       <main className="main-panel" inert={false}>
         <WorkspaceDocumentOpen busy={busy || scrollActive || !preferencesReady} run={operate} onOpen={async id => {
-          addDocument(await openRequestedDocument(id)); setNotice("Image opened from the desktop.");
+          await preserveCurrentDraft();addDocument(await openRequestedDocument(id)); setNotice("Image opened from the desktop.");
         }} />
 
         <WindowTitleBar section="Edit"/>
@@ -496,7 +561,7 @@ export default function Workspace() {
           {image&&<div className="image-stage">
             {(transformMode||effectsOpen)&&<WorkspaceDirectTools key={image.id} image={image} annotations={annotations} advanced={advancedItems} mode={transformMode??"effects"} busy={busy} zoom={zoom} onTransform={transform} onEffect={applyEffect} onCancel={()=>{setTransformMode(null);setEffectsOpen(false);}}/>}
             <div hidden={!!transformMode||effectsOpen}>
-              <WorkspaceEditor onPrepared={id=>presentDocument(id,"prepared")} onReady={id=>presentDocument(id,"painted")} onLoadError={()=>{if(pendingPresentation.current?.id===image.id)clearPresentation();recordDiagnostic("image","failed","invalid_input",{operation:"editor_image_decode"});setError("Image preview could not be loaded. Reopen the image from Library; the original is retained.");void showEditor(image.libraryRequestId);}} imageToInsert={imageToInsert?.target===image.id?imageToInsert:undefined} onImageInserted={()=>setImageToInsert(undefined)} onFitChange={setFitZoom} image={image} annotations={annotations} advancedItems={advancedItems} active={editing} busy={busy} zoom={zoom} onPixelSample={pointerColor.set} onZoomReport={setDisplayZoom} onZoomChange={setZoom} onAdvancedChange={updateAdvanced} onSelectDrawing={()=>{setTransformMode(null);setEffectsOpen(false);setEditing(true);}}/>
+              <WorkspaceEditor onPrepared={id=>presentDocument(id,"prepared")} onReady={id=>presentDocument(id,"painted")} onLoadError={()=>{if(!closeAfterOperation.current&&pendingPresentation.current?.id===image.id){clearPresentation();void showEditor(image.libraryRequestId);}recordDiagnostic("image","failed","invalid_input",{operation:"editor_image_decode"});setError("Image preview could not be loaded. Reopen the image from Library; the original is retained.");}} imageToInsert={imageToInsert?.target===image.id?imageToInsert:undefined} onImageInserted={()=>setImageToInsert(undefined)} onFitChange={setFitZoom} image={image} annotations={annotations} advancedItems={advancedItems} active={editing} busy={busy} zoom={zoom} onPixelSample={pointerColor.set} onZoomReport={setDisplayZoom} onZoomChange={setZoom} onAdvancedChange={updateAdvanced} onSelectDrawing={()=>{setTransformMode(null);setEffectsOpen(false);setEditing(true);}}/>
             </div>
           </div>}
         </section>

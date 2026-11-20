@@ -14,7 +14,8 @@ pub fn build(app: &tauri::AppHandle) -> tauri::Result<Menu<tauri::Wry>> {
     let scrolling = item("capture-scrolling", "Scrolling Capture")?;
     let recording=item("record-screen","Record Screen")?;
     let record_area=item("record-area","Record Area")?;
-    let capture = Submenu::with_items(app, "Capture", true, &[&fullscreen, &area, &window, &active, &scrolling,&recording,&record_area])?;
+    let stop=item("record-stop","Stop Recording")?;
+    let capture = Submenu::with_items(app, "Capture", true, &[&fullscreen, &area, &window, &active, &scrolling,&recording,&record_area,&stop])?;
     let clipboard = item("open-clipboard", "Open clipboard image")?;
     let copy = item("image-copy", "Copy edited image")?;
     let save = item("image-save", "Save edited image…")?;
@@ -33,7 +34,7 @@ pub fn build(app: &tauri::AppHandle) -> tauri::Result<Menu<tauri::Wry>> {
 
 pub fn on_event(app: &tauri::AppHandle, event: tauri::menu::MenuEvent) {
     let action = event.id().as_ref();
-    if action=="record-screen"||action=="record-area"{crate::shortcuts::dispatch_action(app,action,true);return;}
+    if matches!(action,"record-screen"|"record-area"|"record-stop"){crate::shortcuts::dispatch_action(app,action,true);return;}
     if action == "check-updates" { let _=crate::preferences_window::open_tab(app,Some("updates"));let _=crate::updates::request(app,crate::updates::Action::Check);return; }
     if action == "open-preferences" { let _ = crate::preferences_window::open(app); return; }
     if action=="capture-instant-upload"{let app=app.clone();tauri::async_runtime::spawn_blocking(move||{if crate::capture_upload::toggle(&app).is_err(){crate::menu_bar::update_capture_upload(&app,crate::capture_upload::read(&app).unwrap_or(false));crate::diagnostics::record(&app,crate::diagnostics::Area::Settings,crate::diagnostics::Event::Failed,crate::diagnostics::Code::SettingsFailed);let _=crate::library_window::show(&app,"main");let _=app.emit_to("main","fershot-menu-action","capture-upload-setting-failed");}});return;}

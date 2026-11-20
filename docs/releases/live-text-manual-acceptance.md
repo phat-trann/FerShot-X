@@ -11,3 +11,10 @@ Run on the next authorized installed build. Automated tests use generated pixels
 7. Analysis is opt-in and in-memory; app logs must contain no extracted text/image payloads. No user image/draft is modified. Native Copy intentionally writes only the selected text through macOS.
 
 Current scope: Library image previews only; video and the annotation editor retain their existing interactions.
+
+## C180 follow-up (installed retest required)
+
+- Keep Live Text visible while preview loads, when switching Local/FTP and with no image; it disables without a usable image.
+- Enable Live Text: exactly one image appears. Wheel/pinch zoom and native text selection/Copy operate on that same image. Disable it and verify ordinary preview zoom returns.
+- Zoom repeatedly, change images while pinching, toggle Live Text and close/reopen Library. Verify no crash, stale image or native overlay above confirmations.
+- On an error, use Settings → Open Logs Folder. Report the build, operation, stage and timestamp in errors.log. After a native crash, reopen once so the sanitized macOS crash classification can be recorded; the original report stays in macOS DiagnosticReports.

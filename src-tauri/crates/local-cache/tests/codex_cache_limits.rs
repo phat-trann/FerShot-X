@@ -16,8 +16,11 @@ fn oversized_actual_image_and_metadata_disagreement_are_rejected_before_read() {
 fn a_preexisting_cache_cannot_bypass_tighter_count_or_disk_limits() {
     let dir = tempdir().unwrap(); let cache = LocalCache::open(dir.path(), limits()).unwrap();
     cache.store("one", "one.png", &png(), 10).unwrap(); cache.store("two", "two.png", &png(), 10).unwrap();
+    drop(cache);
     let strict = LocalCache::open(dir.path(), CacheLimits { max_entries: 1, ..limits() }).unwrap();
     assert!(matches!(strict.list(), Err(CacheError::EntryCountLimit)));
+    drop(strict);
+    let cache=LocalCache::open(dir.path(),limits()).unwrap();
     fs::write(dir.path().join("orphan.png"), vec![0; 129]).unwrap();
     assert!(matches!(cache.list(), Err(CacheError::TotalBytesLimit)));
 }

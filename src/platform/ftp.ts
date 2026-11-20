@@ -1,5 +1,6 @@
 import { recordDiagnostic } from "./diagnostics";
-import { invoke, isTauri } from "@tauri-apps/api/core";
+import {isTauri} from "@tauri-apps/api/core";
+import {invoke} from "./ipc";
 import type { FtpQueueItem, FtpSettings } from "../contracts/phase2";
 import type { ImageDocument } from "../contracts/media";
 import { rasterizeDocument } from "./native";

@@ -79,3 +79,9 @@ No build/publication or real capture/server acceptance is claimed by automated c
 - Select Record Area near the top/menu bar and in the middle: dimming stays entirely outside the selection. Repeat on a Retina display and a secondary display above/left of the main display.
 - Record a test pattern extending across the selection boundary, stop, then compare Edit and saved MP4: the selected top edge is unchanged and no dim bands appear in the video.
 - Repeat with all app windows hidden before starting. Fullscreen and full-display area selections must remain valid. Cancel, stop and startup failures remove every guide. No real capture is run by automated checks.
+
+## C180 capture exclusion
+
+- While starting, recording and finalizing, try all screenshot and Record Screen/Area shortcuts/menu entries. They must neither capture nor stop/restart the current recording.
+- Stop using the dedicated Stop Recording shortcut/menu or native macOS control. Verify delivery to Edit/FTP, then start another recording.
+- Cancel area selection; verify recording and screenshots can be started again. After a failure, verify retry is possible and report operation/stage/duration from errors.log.

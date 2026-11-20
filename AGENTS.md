@@ -1,5 +1,17 @@
 # Agent instructions
 
+## C183 user-authorized 1.5.1 publication (2026-11-20)
+
+Publish C180 and C182 with synchronized product version 1.5.1 through a normal push to main. Keep the existing Apple Silicon signing and updater workflow, historical releases and user data intact. Validate using TypeScript, release compilation and generated or injected cases. Installed macOS acceptance is recorded separately. No live capture, recognition, clipboard, server, signing identity or permission changes from local tests.
+
+## C182 implement C181 source review (2026-11-20)
+
+Keep the flat Local formats compatible. Use an exclusive cache lock and durable journal for pixel/metadata/draft writes and deletion. Isolate damaged legacy rows and preserve their files. Use exact FTP job reservations and recording leases for pending opens, Edit and preview. Retention runs outside list operations. Release Rust panic strategy is unwind for recording worker recovery. Propagate required draft-save errors and release saved image resources while retaining the active source or unsaved edits. Refresh Library sources independently and key preview content by document revision. Enforce video layer locks and decouple FTP from clipboard success. Import sanitized crash origin metadata. Generated/injected checks only. Keep installed acceptance distinct and defer commit/push to user approval.
+
+## C180 recording exclusion, Live Text lifetime and failure diagnostics (2026-11-20)
+
+Block capture and new Screen/Area recording actions while starting, recording or finalizing; only dedicated Stop/native recording controls stop the worker. Preserve the existing queue/media/credentials. An owned recording lease releases job and stop sender on errors/unwind; never self-report installed recording recovery. Keep Library Live Text's action visible and disable it without a usable image/support. Display exactly one image: native Live Text replaces the web artwork, with independent native zoom and selection. Place VisionKit outside WebKit's gesture tree, defer teardown outside event tracking and retain the host through gesture timer cleanup. Crash evidence shows SIGSEGV during AppKit gesture cancellation; lifetime correction remains an inferred fix until installed retest. Extend bounded enum-only error diagnostics across registered IPC, native panic, Live Text timeouts and sanitized macOS crash classification on next launch; never copy raw crash reports, image/text, payloads, credentials or paths. Generated/injected tests and native test compilation only; no real recording/OCR/clipboard/server/permissions, bundle, version bump or commit/push before user acceptance.
+
 ## C179 user-authorized 1.5.0 deployment (2026-11-19)
 
 User explicitly requests deployment of completed C177/C178. Synchronize 1.5.0 and release notes, verify renderer/native bridge compilation/linking and focused generated/injected regressions, then normally commit/push main to trigger the existing signed ARM-only release workflow. Preserve updater/signing identities, credentials/permissions and historical releases; no private-key reads, local signing/keychain changes, live recognition/capture/clipboard/server/permission actions, force push or manual tags. Keep installed acceptance distinct from automated checks. Do not wait for CI completion; report push separately from publication.

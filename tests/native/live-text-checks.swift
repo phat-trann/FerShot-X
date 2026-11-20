@@ -1,6 +1,11 @@
 import AppKit
 @main struct LiveTextChecks {
-    static func main() { testViewportCoordinatesAndClipping(); testWheelDirectionAndBounds(); testCancellationDoesNotDiscardOtherPendingRequests(); print("3 Live Text native geometry/zoom/cancellation checks passed") }
+    static func main() { testFitDoesNotDependOnPreviousMagnification(); testViewportCoordinatesAndClipping(); testWheelDirectionAndBounds(); testCancellationDoesNotDiscardOtherPendingRequests(); print("4 Live Text native geometry/zoom/cancellation checks passed") }
+    static func testFitDoesNotDependOnPreviousMagnification() {
+        let image = NSSize(width: 2000, height: 1000), viewport = NSSize(width: 800, height: 600)
+        for _ in 0..<20 { checkEqual(liveTextFitScale(image: image, viewport: viewport), 0.4) }
+        checkEqual(liveTextFitScale(image: NSSize(width: 100, height: 100), viewport: viewport), 1)
+    }
     static func testViewportCoordinatesAndClipping() {
         let bounds = NSRect(x: 0, y: 0, width: 900, height: 700), rect = NSRect(x: 350, y: 130, width: 500, height: 400)
         checkEqual(liveTextFrame(rect, in: bounds, flipped: false), NSRect(x: 350, y: 170, width: 500, height: 400))

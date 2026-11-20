@@ -55,3 +55,6 @@
 .library-image-preview>img{position:absolute;left:0;top:0;display:block;max-width:none;max-height:none;transform-origin:0 0;border-radius:8px;box-shadow:var(--shadow-md);user-select:none;pointer-events:none}
 
 .library-live-text{flex-shrink:0;width:var(--control-height);height:var(--control-height);padding:0;border-radius:var(--control-radius)}
+
+.library-image-preview[data-live-text=true]>img{visibility:hidden}
+.library-image-preview[data-live-text=true]{cursor:text}

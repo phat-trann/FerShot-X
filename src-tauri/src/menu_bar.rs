@@ -23,14 +23,18 @@ pub fn update_capture_upload(app:&tauri::AppHandle,enabled:bool){if let Some(sta
 pub fn update_repeat_availability(app: &tauri::AppHandle, available: bool) {
     if let Some(state)=app.try_state::<MenuBarState>() {
         state.repeat_available.store(available,Ordering::Relaxed);
-        if let Ok(item)=state.repeat.lock(){if let Some(item)=item.as_ref(){let _=item.set_enabled(available);}}
+        if let Ok(item)=state.repeat.lock(){if let Some(item)=item.as_ref(){let _=item.set_enabled(available&&!crate::recording::active(app));}}
     }
 }
 fn lucide_icon(name:&str)->tauri::image::Image<'static>{let bytes:&[u8]=match name{
  "monitor-play"=>include_bytes!("../icons/menu/monitor-play.png"),"monitor-stop"=>include_bytes!("../icons/menu/monitor-stop.png"),
  "cloud-sync"=>include_bytes!("../icons/menu/cloud-sync.png"),"monitor-cog"=>include_bytes!("../icons/menu/monitor-cog.png"),"square-library"=>include_bytes!("../icons/menu/square-library.png"),"monitor"=>include_bytes!("../icons/menu/monitor.png"),"scan-square"=>include_bytes!("../icons/menu/scan-square.png"),"gallery-vertical"=>include_bytes!("../icons/menu/gallery-vertical.png"),"app-window-mac"=>include_bytes!("../icons/menu/app-window-mac.png"),"folder-open"=>include_bytes!("../icons/menu/folder-open.png"),"clipboard-list"=>include_bytes!("../icons/menu/clipboard-list.png"),"cog"=>include_bytes!("../icons/menu/cog.png"),"circle-power"=>include_bytes!("../icons/menu/circle-power.png"),"cloud-upload"=>include_bytes!("../icons/menu/cloud-upload.png"),_=>include_bytes!("../icons/menu/ellipsis.png")};let image=image::load_from_memory(bytes).expect("Bundled Lucide icon").to_rgba8();let(w,h)=image.dimensions();tauri::image::Image::new_owned(image.into_raw(),w,h)}
-fn icon_for(id:&str)->&str{match id{"check-updates"=>"cloud-sync","launch-startup"=>"monitor-cog","show-workspace"=>"square-library","record-screen"=>"monitor-play","record-area"=>"monitor-stop","capture-fullscreen"=>"monitor","capture-area"|"capture-repeat-region"=>"scan-square","capture-scrolling"=>"gallery-vertical","capture-active-window"|"capture-window"=>"app-window-mac","open-file"=>"folder-open","open-clipboard"=>"clipboard-list","capture-instant-upload"=>"cloud-upload",_=>"ellipsis"}}
-pub fn update_recording(app:&tauri::AppHandle,phase:&str,elapsed_ms:u64){if let Some(state)=app.try_state::<MenuBarState>(){if let Ok(item)=state.recording_area.lock(){if let Some(item)=item.as_ref(){let _=item.set_enabled(!matches!(phase,"starting"|"recording"|"stopping"));}}}if let Some(state)=app.try_state::<MenuBarState>(){if let Ok(item)=state.recording.lock(){if let Some(item)=item.as_ref(){let seconds=elapsed_ms/1000;let active=matches!(phase,"starting"|"recording"|"stopping");let title=if phase=="starting"{"Starting Recording…".into()}else if phase=="stopping"{"Finishing Recording…".into()}else if active{format!("Stop Recording ({:02}:{:02})",seconds/60,seconds%60)}else{"Record Screen".into()};let _=item.set_text(title);let _=item.set_enabled(!matches!(phase,"starting"|"stopping"));}}}}
+fn icon_for(id:&str)->&str{match id{"check-updates"=>"cloud-sync","launch-startup"=>"monitor-cog","show-workspace"=>"square-library","record-screen"=>"monitor-play","record-area"|"record-stop"=>"monitor-stop","capture-fullscreen"=>"monitor","capture-area"|"capture-repeat-region"=>"scan-square","capture-scrolling"=>"gallery-vertical","capture-active-window"|"capture-window"=>"app-window-mac","open-file"=>"folder-open","open-clipboard"=>"clipboard-list","capture-instant-upload"=>"cloud-upload",_=>"ellipsis"}}
+fn recording_item_enabled(id:&str,active:bool,repeat_available:bool)->bool{if id=="record-stop"{active}else if id=="capture-repeat-region"{!active&&repeat_available}else{!active}}
+pub fn update_recording(app:&tauri::AppHandle,phase:&str,_elapsed_ms:u64){
+ let active=matches!(phase,"starting"|"recording"|"stopping");
+ if let Some(state)=app.try_state::<MenuBarState>(){let items=state.shortcuts.lock().map(|items|items.iter().map(|(id,(_,item))|(id.clone(),item.clone())).collect::<Vec<_>>()).unwrap_or_default();let repeat=state.repeat_available.load(Ordering::Relaxed);for(id,item)in items{if crate::recording::capture_action(&id)||id=="record-stop"{let _=item.set_enabled(recording_item_enabled(&id,active,repeat));}}}
+}
 pub fn update_shortcuts(app:&tauri::AppHandle){
  let bindings=crate::shortcuts::menu_bindings(app);
  if let Some(state)=app.try_state::<MenuBarState>(){if let Ok(items)=state.shortcuts.lock(){for(id,(title,item))in items.iter(){let _=item.set_text(title);let _=item.set_accelerator(bindings.get(id).and_then(|value|value.as_deref()));}}}
@@ -45,6 +49,7 @@ pub fn build(app: &tauri::AppHandle) -> tauri::Result<Menu<tauri::Wry>> {
     for (id,title) in CAPTURE_ITEMS { menu.append(&item(*id,*title)?)?; }
     let recording=item("record-screen","Record Screen")?;menu.append(&recording)?;if let Ok(mut saved)=app.state::<MenuBarState>().recording.lock(){*saved=Some(recording);}
     let area_recording=item("record-area","Record Area")?;menu.append(&area_recording)?;if let Ok(mut saved)=app.state::<MenuBarState>().recording_area.lock(){*saved=Some(area_recording);}
+    menu.append(&item("record-stop","Stop Recording")?)?;
     let more=Submenu::new(app,"More",true)?;more.set_icon(Some(lucide_icon("ellipsis")))?;
     for (id,title) in MORE_ITEMS {
         let entry=item(*id,*title)?;
@@ -72,6 +77,7 @@ pub fn build(app: &tauri::AppHandle) -> tauri::Result<Menu<tauri::Wry>> {
     menu.append(&item("check-updates","Check for Updates…")?)?;
     menu.append(&IconMenuItem::with_id(app,"open-preferences","Settings…",true,Some(lucide_icon("cog")),Some("CmdOrCtrl+,"))?)?;
     menu.append(&IconMenuItem::with_id(app,"quit-app","Quit",true,Some(lucide_icon("circle-power")),Some("CmdOrCtrl+Q"))?)?;
+    let phase=if crate::recording::active(app){"recording"}else{"idle"};update_recording(app,phase,0);
     Ok(menu)
 }
 #[tauri::command]
@@ -104,4 +110,8 @@ mod tests {
         assert_eq!(super::capture_upload_title(true), "Upload Captures Immediately  ✓");
         assert_eq!(super::capture_upload_title(false), "Upload Captures Immediately");
     }
+}
+
+#[cfg(test)]mod recording_guard_tests{
+ #[test]fn recording_disables_all_capture_entries_and_restores_repeat_availability(){for id in ["capture-fullscreen","capture-area","capture-scrolling","capture-active-window","capture-window","capture-repeat-region","record-screen","record-area"]{assert!(!super::recording_item_enabled(id,true,true));assert!(super::recording_item_enabled(id,false,true));}assert!(!super::recording_item_enabled("capture-repeat-region",false,false));assert!(super::recording_item_enabled("record-stop",true,false));assert!(!super::recording_item_enabled("record-stop",false,true));}
 }

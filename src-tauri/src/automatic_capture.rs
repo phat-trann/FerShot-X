@@ -76,7 +76,7 @@ fn finish_frames(frames:&[ScrollFrame],stopped:bool)->Result<(fershot_image_core
 }
 #[derive(serde::Serialize)]#[serde(rename_all="camelCase")]pub struct ScrollCapturePayload{#[serde(flatten)]image:ImagePayload,captured_frames:u32,accepted_frames:u32,partial:bool}
 #[tauri::command]pub async fn capture_scroll_image(background:Option<bool>,window:tauri::WebviewWindow,app:tauri::AppHandle,jobs:tauri::State<'_,NativeJobs>)->Result<ScrollCapturePayload,NativeError>{
- let _=background;crate::imaging::validate_window_label(window.label())?;let guard=jobs.acquire()?;
+ let _=background;crate::imaging::validate_window_label(window.label())?;let guard=jobs.acquire()?;crate::recording::ensure_idle(&app)?;
  tauri::async_runtime::spawn_blocking(move||{
   let _guard=guard;let dir=app.path().app_config_dir().map_err(|_|fail("Scroll settings unavailable."))?;let speed=crate::scroll_preferences::load(&dir)?.speed;let started=std::time::Instant::now();let mut stage=crate::diagnostics::Stage::SelectRegion;let mut captured_frames=0u32;let result=(||{let windows=["main","library","preferences"].into_iter().filter_map(|label|app.get_webview_window(label)).filter(|w|w.is_visible().unwrap_or(false)).collect::<Vec<_>>();
   let mut restore=Restore{app:app.clone(),windows,success:false,escape:false};for w in &restore.windows{w.hide().map_err(|_|fail("The app could not be hidden for capture."))?;}std::thread::sleep(std::time::Duration::from_millis(150));

@@ -1,6 +1,7 @@
 import {useSettingsAutosave} from "../../use-settings-autosave";
 import {useEffect,useRef,useState} from "react";
-import {invoke,isTauri} from "@tauri-apps/api/core";
+import {isTauri} from "@tauri-apps/api/core";
+import {invoke} from "../../platform/ipc";
 import {Slider} from "../../components/ui/slider";
 import {StatusMessage,type StatusTone} from "../../components/ui/status";
 function valid(value:unknown):number{const speed=(value as {speed?:unknown})?.speed;if(typeof speed!=="number"||!Number.isInteger(speed)||speed<1||speed>5)throw Error("Invalid scroll speed.");return speed;}

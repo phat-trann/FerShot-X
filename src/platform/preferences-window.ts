@@ -1,4 +1,5 @@
-import { invoke, isTauri } from "@tauri-apps/api/core";
+import {isTauri} from "@tauri-apps/api/core";
+import {invoke} from "./ipc";
 
 export async function openPreferencesWindow(tab?: "general" | "hotkeys" | "uploading" | "advanced" | "updates"): Promise<void> {
   if (isTauri()) { await invoke("open_preferences_window", tab ? { tab } : {}); return; }

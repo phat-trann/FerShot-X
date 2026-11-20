@@ -3,6 +3,7 @@
 //! The caller supplies the application-owned directory. This crate never scans
 //! outside it, follows symlinks, or removes user originals.
 
+mod transaction;
 use serde::{Deserialize, Serialize};
 use std::fs::{self, File, OpenOptions};
 use std::io::{Read, Write};
@@ -47,6 +48,7 @@ pub struct CacheEntry {
     pub created_at: u64,
     pub expires_at: u64,
     pub byte_size: u64,
+    #[serde(default)] pub revision:u64,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -252,6 +254,7 @@ fn read_bounded(path: &Path, max_bytes: u64) -> Result<Vec<u8>, CacheError> {
 pub struct LocalCache {
     root: PathBuf,
     limits: CacheLimits,
+    _lock: File,
 }
 
 impl LocalCache {
@@ -267,7 +270,14 @@ impl LocalCache {
         let root = root.into();
         ensure_root(&root, true)?;
         set_private_dir(&root)?;
-        Ok(Self { root, limits })
+        let lock_path=root.join(".lock");
+        let mut options=OpenOptions::new();options.read(true).write(true).create(true).truncate(false);
+        #[cfg(unix)] {use std::os::unix::fs::OpenOptionsExt;options.mode(0o600);}
+        if fs::symlink_metadata(&lock_path).is_ok_and(|metadata|!metadata.is_file()){return Err(CacheError::SymlinkRejected(lock_path))}
+        let lock=options.open(&lock_path).map_err(|source|CacheError::Io{path:lock_path.clone(),source})?;
+        lock.lock().map_err(|source|CacheError::Io{path:lock_path,source})?;
+        transaction::recover(&root);
+        Ok(Self { root, limits, _lock:lock })
     }
 
     pub fn store(
@@ -277,7 +287,12 @@ impl LocalCache {
         png_bytes: &[u8],
         created_at: u64,
     ) -> Result<CacheEntry, CacheError> {
+        self.store_document(id,name,png_bytes,None,created_at)
+    }
+
+    pub fn store_document(&self,id:&str,name:&str,png_bytes:&[u8],draft:Option<&[u8]>,created_at:u64)->Result<CacheEntry,CacheError>{
         validate_id(id)?;
+        if draft.is_some_and(|bytes|bytes.len()>MAX_DRAFT_BYTES){return Err(CacheError::EntryTooLarge{size:draft.unwrap().len(),max:MAX_DRAFT_BYTES})}
         if name.is_empty() || name.len() > 480 || name.chars().any(char::is_control) {
             return Err(CacheError::MalformedMetadata(file_path(&self.root, id, META_SUFFIX)));
         }
@@ -297,13 +312,13 @@ impl LocalCache {
                 max: self.limits.max_entry_bytes,
             });
         }
-        let entries = self.list()?;
+        let entries = self.list_valid()?;
         let existing_size = entries.iter().find(|entry| entry.id == id).map_or(0, |entry| entry.byte_size);
         if entries.len() - usize::from(existing_size > 0) >= self.limits.max_entries {
             return Err(CacheError::EntryCountLimit);
         }
         let total = self.storage_bytes(&entries)?;
-        let new_total = total.saturating_sub(existing_size).saturating_add(png_bytes.len() as u64);
+        let new_total = total.saturating_sub(existing_size).saturating_sub(self.draft_size(id)?).saturating_add(png_bytes.len() as u64).saturating_add(draft.map_or(0,|bytes|bytes.len()as u64));
         if new_total > self.limits.max_total_bytes {
             return Err(CacheError::TotalBytesLimit);
         }
@@ -314,16 +329,30 @@ impl LocalCache {
             created_at,
             expires_at,
             byte_size: png_bytes.len() as u64,
+            revision:entries.iter().find(|entry|entry.id==id).map_or(1,|entry|entry.revision.saturating_add(1)),
         };
         let metadata_bytes = serde_json::to_vec(&metadata).map_err(|source| CacheError::Io {
             path: file_path(&self.root, id, META_SUFFIX),
             source: io::Error::new(io::ErrorKind::InvalidData, source),
         })?;
-        atomic_write(&file_path(&self.root, id, PNG_SUFFIX), png_bytes)?;
-        atomic_write(&file_path(&self.root, id, META_SUFFIX), &metadata_bytes)?;
+        transaction::commit(&self.root,id,[transaction::Change::Write(png_bytes),transaction::Change::Write(&metadata_bytes),draft.map_or(transaction::Change::Remove,transaction::Change::Write)])?;
         Ok(metadata)
     }
 
+    fn metadata(&self,id:&str)->Result<CacheEntry,CacheError>{
+        validate_id(id)?;if transaction::pending(&self.root,id){return Err(CacheError::MalformedMetadata(file_path(&self.root,id,META_SUFFIX)))}
+        let path=file_path(&self.root,id,META_SUFFIX);let entry:CacheEntry=serde_json::from_slice(&read_bounded(&path,MAX_METADATA_BYTES)?).map_err(|_|CacheError::MalformedMetadata(path.clone()))?;
+        if entry.id!=id||entry.name.is_empty()||entry.name.len()>480||entry.name.chars().any(char::is_control)||entry.expires_at!=entry.created_at.saturating_add(self.limits.retention.as_secs()){return Err(CacheError::MalformedMetadata(path))}
+        let image=file_path(&self.root,id,PNG_SUFFIX);let meta=fs::symlink_metadata(&image).map_err(|source|CacheError::Io{path:image.clone(),source})?;
+        if meta.len()>self.limits.max_entry_bytes as u64{return Err(CacheError::EntryTooLarge{size:meta.len()as usize,max:self.limits.max_entry_bytes})}
+        if !meta.is_file()||meta.file_type().is_symlink()||meta.len()!=entry.byte_size{return Err(CacheError::MalformedMetadata(path))}Ok(entry)
+    }
+    /// Preserve damaged entries for recovery, but do not let one hide healthy rows.
+    pub fn list_valid(&self) -> Result<Vec<CacheEntry>, CacheError> {
+        ensure_root(&self.root,false)?;let mut entries=Vec::new();
+        for item in fs::read_dir(&self.root).map_err(|source|CacheError::Io{path:self.root.clone(),source})?.flatten(){let path=item.path();if path.extension().and_then(|extension|extension.to_str())!=Some("json"){continue}let Some(id)=path.file_stem().and_then(|value|value.to_str())else{continue};if let Ok(entry)=self.metadata(id){entries.push(entry);}}
+        entries.sort_by_key(|entry|entry.created_at);Ok(entries)
+    }
     pub fn list(&self) -> Result<Vec<CacheEntry>, CacheError> {
         ensure_root(&self.root, false)?;
         let mut result = Vec::new();
@@ -380,11 +409,7 @@ impl LocalCache {
 
     pub fn read(&self, id: &str) -> Result<CachedImage, CacheError> {
         validate_id(id)?;
-        let metadata = self
-            .list()?
-            .into_iter()
-            .find(|entry| entry.id == id)
-            .ok_or_else(|| CacheError::NotFound(id.to_owned()))?;
+        let metadata = self.metadata(id)?;
         let path = file_path(&self.root, id, PNG_SUFFIX);
         let file_metadata = fs::symlink_metadata(&path).map_err(|source| CacheError::Io {
             path: path.clone(),
@@ -402,35 +427,19 @@ impl LocalCache {
 
     pub fn remove(&self, id: &str) -> Result<bool, CacheError> {
         validate_id(id)?;
-        let metadata_path = file_path(&self.root, id, META_SUFFIX);
-        let png_path = file_path(&self.root, id, PNG_SUFFIX);
-        let existed = metadata_path.exists() || png_path.exists();
-        if !existed {
-            return Ok(false);
-        }
-        for path in [metadata_path, png_path, file_path(&self.root,id,".draft")] {
-            match fs::symlink_metadata(&path) {
-                Ok(metadata) if metadata.file_type().is_symlink() => return Err(CacheError::SymlinkRejected(path)),
-                Ok(metadata) if metadata.is_file() => fs::remove_file(&path).map_err(|source| CacheError::Io { path: path.clone(), source })?,
-                Ok(_) => return Err(CacheError::NotDirectory(path)),
-                Err(error) if error.kind() == io::ErrorKind::NotFound => {}
-                Err(source) => return Err(CacheError::Io { path, source }),
-            }
-        }
-        Ok(true)
+        let existed=[META_SUFFIX,PNG_SUFFIX,".draft"].iter().any(|suffix|fs::symlink_metadata(file_path(&self.root,id,suffix)).is_ok());
+        if existed{transaction::commit(&self.root,id,[transaction::Change::Remove,transaction::Change::Remove,transaction::Change::Remove])?;}
+        Ok(existed)
     }
 
     pub fn prune(&self, now_seconds: u64) -> Result<Vec<String>, CacheError> {
         let expired: Vec<String> = self
-            .list()?
+            .list_valid()?
             .into_iter()
             .filter(|entry| entry.expires_at <= now_seconds)
             .map(|entry| entry.id)
             .collect();
-        for id in &expired {
-            self.remove(id)?;
-        }
-        Ok(expired)
+        Ok(expired.into_iter().filter(|id|self.remove(id).is_ok()).collect())
     }
 
     pub fn prune_expired(&self) -> Result<Vec<String>, CacheError> {
@@ -445,15 +454,18 @@ impl LocalCache {
         let path=file_path(&self.root,id,".draft");
         match fs::symlink_metadata(&path){Ok(meta)=>{if meta.file_type().is_symlink(){return Err(CacheError::SymlinkRejected(path))}if !meta.is_file(){return Err(CacheError::NotDirectory(path))}Ok(meta.len())},Err(e)if e.kind()==io::ErrorKind::NotFound=>Ok(0),Err(source)=>Err(CacheError::Io{path,source})}
     }
-    fn storage_bytes(&self,entries:&[CacheEntry])->Result<u64,CacheError>{entries.iter().try_fold(0u64,|sum,entry|Ok(sum.saturating_add(entry.byte_size).saturating_add(self.draft_size(&entry.id)?)))}
+    fn storage_bytes(&self,_entries:&[CacheEntry])->Result<u64,CacheError>{
+        let mut bytes=0u64;for entry in fs::read_dir(&self.root).map_err(|source|CacheError::Io{path:self.root.clone(),source})?.flatten(){if matches!(entry.path().extension().and_then(|value|value.to_str()),Some("png"|"draft")){let meta=fs::symlink_metadata(entry.path()).map_err(|source|CacheError::Io{path:entry.path(),source})?;bytes=bytes.saturating_add(meta.len());}}Ok(bytes)
+    }
     /// Bounded, private companion document; never scans or removes user files.
     pub fn write_draft(&self,id:&str,bytes:&[u8])->Result<(),CacheError>{
         validate_id(id)?;
         if bytes.len()>MAX_DRAFT_BYTES{return Err(CacheError::EntryTooLarge{size:bytes.len(),max:MAX_DRAFT_BYTES})}
-        self.read(id)?;
-        let total=self.storage_bytes(&self.list()?)?.saturating_sub(self.draft_size(id)?).saturating_add(bytes.len()as u64);
+        let mut metadata=self.metadata(id)?;
+        let total=self.storage_bytes(&self.list_valid()?)?.saturating_sub(self.draft_size(id)?).saturating_add(bytes.len()as u64);
         if total>self.limits.max_total_bytes{return Err(CacheError::TotalBytesLimit)}
-        atomic_write(&file_path(&self.root,id,".draft"),bytes)
+        metadata.revision=metadata.revision.saturating_add(1);let json=serde_json::to_vec(&metadata).map_err(|_|CacheError::MalformedMetadata(file_path(&self.root,id,META_SUFFIX)))?;
+        transaction::commit(&self.root,id,[transaction::Change::Keep,transaction::Change::Write(&json),transaction::Change::Write(bytes)])
     }
     pub fn read_draft(&self,id:&str)->Result<Option<Vec<u8>>,CacheError>{
         validate_id(id)?;let path=file_path(&self.root,id,".draft");
@@ -521,4 +533,10 @@ mod tests {
         assert!(matches!(cache.write_draft("one",&vec![0;64]),Err(CacheError::TotalBytesLimit)));
         assert_eq!(cache.read_draft("one").unwrap().unwrap(),b"small");
     }
+}
+
+#[cfg(test)]mod recovery_regressions{
+ use super::*;
+ #[test]fn bad_legacy_pair_is_isolated_without_deleting_any_files(){let root=tempfile::tempdir().unwrap();let cache=LocalCache::open(root.path(),CacheLimits::default()).unwrap();let png=b"\x89PNG\r\n\x1a\n";cache.store("good","Good.png",png,100).unwrap();cache.store("bad","Bad.png",png,100).unwrap();fs::write(root.path().join("bad.png"),[png.as_slice(),b"interrupted"].concat()).unwrap();assert!(cache.list().is_err());assert_eq!(cache.list_valid().unwrap().len(),1);assert_eq!(cache.read("good").unwrap().png_bytes,png);assert!(cache.prune(101).unwrap().is_empty());assert!(root.path().join("bad.png").exists());}
+ #[test]fn draft_budget_failure_preserves_the_complete_prior_document(){let root=tempfile::tempdir().unwrap();let cache=LocalCache::open(root.path(),CacheLimits{max_entry_bytes:100,max_total_bytes:100,..CacheLimits::default()}).unwrap();let png=b"\x89PNG\r\n\x1a\n";cache.store_document("one","One.png",png,Some(b"old draft"),100).unwrap();let revision=cache.read("one").unwrap().metadata.revision;assert!(cache.store_document("one","Changed.png",png,Some(&[0;100]),100).is_err());assert_eq!(cache.read_draft("one").unwrap().unwrap(),b"old draft");assert_eq!(cache.read("one").unwrap().metadata.revision,revision);cache.write_draft("one",b"new draft").unwrap();assert!(cache.read("one").unwrap().metadata.revision>revision);}
 }

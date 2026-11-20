@@ -4,7 +4,7 @@ export interface PointerSample {timeMs:number;x:number;y:number;visible:boolean;
 export type VideoAnnotationKind="highlight"|"arrow"|"text"|"cover"|"image";
 export interface VideoHighlight {imagePng?:string;kind?:VideoAnnotationKind;text?:string;fontSize?:number;strokeWidth?:number;reverseX?:boolean;reverseY?:boolean;id:string;startMs:number;endMs:number;x:number;y:number;width:number;height:number;color:string;opacity:number}
 export interface VideoDraft {schemaVersion:1;startMs:number;endMs:number;muted:boolean;cursorVisible:boolean;cursorSize:number;clickHighlight:boolean;highlights:VideoHighlight[];timeline?:VideoTimeline;cursorStyle?:"system"|"custom";cursorColor?:string;cursorAsset?:CursorAsset}
-export interface VideoClip {id:string;name:string;width:number;height:number;durationMs:number;byteSize:number;createdAt:number;mediaPath:string;poster:string;hasAudio?:boolean}
+export interface VideoClip {revision?:string;id:string;name:string;width:number;height:number;durationMs:number;byteSize:number;createdAt:number;mediaPath:string;poster:string;hasAudio?:boolean}
 export interface VideoDocument {clip:VideoClip;draft:VideoDraft;pointer:PointerSample[]}
 export interface RecordingStatus {phase:"idle"|"starting"|"recording"|"stopping"|"ready"|"failed";elapsedMs:number;clipId?:string|null;error?:string|null}
 export const DEFAULT_RECORDING_SETTINGS:RecordingSettings={systemAudio:false,microphone:false,recordPointer:true};

@@ -1,4 +1,5 @@
-import {invoke,isTauri,convertFileSrc} from "@tauri-apps/api/core";
+import {isTauri,convertFileSrc} from "@tauri-apps/api/core";
+import {invoke} from "./ipc";
 import {listen} from "@tauri-apps/api/event";
 import {nativeVideoDraft} from "../features/recording/model";
 import type {RecordingSettings,RecordingStatus,VideoClip,VideoDocument,VideoDraft} from "../features/recording/model";
@@ -14,7 +15,7 @@ export const readRecording=(id:string)=>call<VideoDocument>("recording_document"
 export const saveVideoDraft=(id:string,draft:VideoDraft)=>call<void>("recording_save_draft",{id,draft:nativeVideoDraft(draft)});
 export const removeRecording=(id:string)=>call<void>("recording_remove",{id});
 export const openRecording=(id:string,requestId?:string)=>call<void>("recording_edit",{id,requestId});
-export const takeVideoOpen=()=>call<{id:string;requestId?:string;uploadImmediately?:boolean}|null>("recording_take");
+export const takeVideoOpen=(lease:string)=>call<{id:string;requestId?:string;uploadImmediately?:boolean}|null>("recording_take",{lease});
 export const failVideoOpen=(requestId:string)=>call<void>("recording_open_failed",{requestId});
 export const saveVideo=(id:string,draft:VideoDraft)=>call<boolean>("recording_save",{request:{id,draft:nativeVideoDraft(draft)}});
 export const copyVideo=(id:string,draft:VideoDraft)=>call<void>("recording_copy",{request:{id,draft:nativeVideoDraft(draft)}});
@@ -25,3 +26,7 @@ export const videoSource=(clip:VideoClip)=>clip.mediaPath.startsWith("data:video
 export async function listenRecording(handler:(value:RecordingStatus)=>void){if(!isTauri())return()=>{};return listen<RecordingStatus>("fershot-recording-state",event=>handler(event.payload));}
 
 export const readSystemCursor=()=>call<import("../features/recording/timeline").CursorAsset>("read_recording_cursor");
+
+export const releaseRecordingEditor=(lease:string)=>call<void>("release_recording_editor",{lease});
+
+export const releaseRecordingPreview=(id:string)=>call<void>("release_recording_preview",{id});

@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "id": "20261120T110628-codex-C183-7374eba4",
+  "created_at": "2026-11-20T11:06:28.920283+07:00",
+  "agent": "codex",
+  "request": "publish-1.5.1-20261120",
+  "task": "C183",
+  "completion": "done",
+  "summary": "Prepare synchronized FerShot X 1.5.1 for the signed Apple Silicon auto-release with C180 and C182 reliability fixes.",
+  "files": [
+    "AGENTS.md",
+    "coordination/build-tasks.json",
+    "README.md",
+    "package.json",
+    "package-lock.json",
+    "src-tauri/Cargo.toml",
+    "src-tauri/Cargo.lock",
+    "src-tauri/tauri.conf.json",
+    "docs/releases/1.5.1.md"
+  ],
+  "file_sha256": {
+    "AGENTS.md": "f14306b586660bd538858d9d8db5de04da2dbe447a8fcf655c36c0c094d89e28",
+    "coordination/build-tasks.json": "def6cedc13293b4fd73cefb61a986a4ef2030dfbaa6ff11e33d5d9e6fed97a81",
+    "README.md": "145bd92cae0689ebe7eb107ff31f1c19221f6eab357d496f3a1b42dad1775000",
+    "package.json": "ab5339abb61babcf637fabefd6f93e78a16786f4b72d93047129dea4a82ac012",
+    "package-lock.json": "3b5303b1f1d5a65fa77b935b3e3049d6101ee607a2ae51238007fb2a03d95c54",
+    "src-tauri/Cargo.toml": "536fc9fdab01bc99494912ee4775eaf44f5d79358f5e6a852cbc6cefaf26dd35",
+    "src-tauri/Cargo.lock": "f12baa6055d223b13abe838d560ffea8abe18a7835ed1e89a5de9f35eef39aff",
+    "src-tauri/tauri.conf.json": "59d0f4a733285900b50c630a6e84bd18c8c702655d083f31c1f34ab56ba02a82",
+    "docs/releases/1.5.1.md": "0dd4e4c9e7c8b78fc960ba1520158b45ed638f19ab78f0df6a1da3d82e1d5626"
+  },
+  "checks": [
+    "Version sync and 10 release/version tests passed. Push detection confirmed for 1.5.0 to 1.5.1.",
+    "TypeScript, 442 unit tests, 9 injected release regressions and 4 native Live Text harness checks passed on 1.5.1.",
+    "macOS cargo check --release --locked passed. C182 also passed 103 injected browser cases, 125 native tests and 19 cache crate tests before the version bump."
+  ],
+  "risks": [
+    "GitHub signing and publication occur in CI. Installed capture, recording, FTP and Live Text gesture checks remain pending."
+  ],
+  "review": "pending"
+}

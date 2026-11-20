@@ -15,10 +15,13 @@ export function useLocalHistory() {
   const savedPixels = useRef(new Map<string,string>());
   const pending = useRef(new Map<string, Promise<void>>());
   const run = useCallback((operation: () => Promise<void>) => {
-    const next = chain.current.then(operation).catch(() => {
+    const next = chain.current.then(operation).catch(error => {
       if (alive.current) setError("Local history could not be updated. Your original files are unchanged. Retry history to check stored copies.");
+      if(error instanceof Error)throw error;
+      const message=error&&typeof error==="object"&&"message"in error&&typeof error.message==="string"?error.message:"Local draft could not be saved.";
+      throw new Error(message);
     });
-    chain.current = next;
+    chain.current = next.catch(()=>{});
     return next;
   }, []);
   useEffect(()=>{alive.current=true;return()=>{alive.current=false;};},[]);
@@ -40,7 +43,7 @@ export function useLocalHistory() {
       if(alive.current)setError("");
     });
     pending.current.set(id, next);
-    void next.finally(() => { if (pending.current.get(id) === next) pending.current.delete(id); });
+    void next.then(() => { if (pending.current.get(id) === next) pending.current.delete(id); },()=>{if(pending.current.get(id)===next)pending.current.delete(id);});
     return (async()=>{let waiting=next;for(;;){await waiting;const latest=pending.current.get(id);if(!latest||latest===waiting)return;waiting=latest;}})();
   }, [run]);
   const forget = useCallback((id: string) => {
@@ -51,8 +54,9 @@ export function useLocalHistory() {
       if (localCacheAvailable()) {await removeLocalCache(id);removed.current.add(id);}
     });
     removals.current.set(id,next);
-    void next.finally(()=>{if(removals.current.get(id)===next)removals.current.delete(id);});
+    void next.then(()=>{if(removals.current.get(id)===next)removals.current.delete(id);},()=>{if(removals.current.get(id)===next)removals.current.delete(id);});
     return next;
   }, [run]);
-  return {error,remember,activate,forget,pending:(id:string)=>pending.current.get(id)??Promise.resolve()};
+  const release=useCallback((image:ImageDocument)=>{const id=image.localId??image.id;if(pending.current.has(id)||activeVersions.current.get(id)!==image.id)return;activeVersions.current.delete(id);savedPixels.current.delete(id);snapshots.current.delete(id);revisions.current.delete(id);},[]);
+  return {error,remember,activate,forget,release,pending:(id:string)=>pending.current.get(id)??Promise.resolve()};
 }

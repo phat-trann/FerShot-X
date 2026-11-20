@@ -1,4 +1,5 @@
-import {invoke,isTauri} from "@tauri-apps/api/core";
+import {isTauri} from "@tauri-apps/api/core";
+import {invoke} from "./ipc";
 export type LiveTextState="idle"|"analyzing"|"ready"|"empty";
 export type LiveTextFrame={x:number;y:number;width:number;height:number};
 type NativeStatus={state:"inactive"|"analyzing"|"ready"|"empty"};

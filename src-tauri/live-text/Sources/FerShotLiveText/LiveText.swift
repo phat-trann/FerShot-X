@@ -15,6 +15,10 @@ func liveTextFrame(_ rect: NSRect, in bounds: NSRect, flipped: Bool) -> NSRect {
 func liveTextWheelScale(_ scale: Double, delta: Double, minimum: Double, maximum: Double) -> Double {
     max(minimum, min(maximum, scale * exp(max(-240, min(240, delta)) * 0.002)))
 }
+func liveTextFitScale(image: NSSize, viewport: NSSize) -> Double {
+    guard image.width > 0, image.height > 0, viewport.width > 0, viewport.height > 0 else { return 1 }
+    return min(1, viewport.width / image.width, viewport.height / image.height)
+}
 @MainActor private var cancelledRequests = ClosedLiveTextRequests()
 
 private final class CenteredClip: NSClipView {
@@ -58,8 +62,10 @@ private final class CenteredClip: NSClipView {
     var task: Task<Void, Never>?
     var status: Int32 = 1 // analyzing, ready=2, no text=3, error=-2
     var fitted = false
+    var closing = false
+    let imageSize: NSSize
     init(id: String, webview: NSView, image: NSImage) {
-        self.id = id; self.webview = webview
+        self.id = id; self.webview = webview; self.imageSize = image.size
         super.init()
         imageView.frame = NSRect(origin: .zero, size: image.size)
         imageView.image = image; imageView.imageScaling = .scaleNone
@@ -72,18 +78,20 @@ private final class CenteredClip: NSClipView {
         overlay.trackingImageView = imageView; overlay.preferredInteractionTypes = .textSelection
         overlay.isSupplementaryInterfaceHidden = true
         imageView.addSubview(overlay)
-        webview.addSubview(scroll)
+        // A sibling avoids mixing VisionKit gestures into WebKit's gesture tree.
+        if let container = webview.superview { container.addSubview(scroll, positioned: .above, relativeTo: webview) } else { webview.addSubview(scroll) }
     }
     func layout(_ rect: NSRect, visible: Bool) {
-        guard let webview else { return }
+        guard !closing, let webview else { return }
         let bounded = liveTextFrame(rect, in: webview.bounds, flipped: webview.isFlipped)
         scroll.isHidden = !visible || bounded.isNull || bounded.width < 1 || bounded.height < 1
         if scroll.isHidden { restoreResponder() }
         guard !scroll.isHidden else { return }
-        let changed = scroll.frame.size != bounded.size
-        scroll.frame = bounded
+        let frame = webview.convert(bounded, to: scroll.superview)
+        let changed = scroll.frame.size != frame.size
+        scroll.frame = frame
         if changed || !fitted {
-            let fit = min(1, bounded.width / imageView.frame.width, bounded.height / imageView.frame.height)
+            let fit = liveTextFitScale(image: imageSize, viewport: bounded.size)
             scroll.minMagnification = min(0.05, fit); scroll.fitScale = fit
             scroll.setMagnification(fit, centeredAt: NSPoint(x: imageView.bounds.midX, y: imageView.bounds.midY))
             fitted = true
@@ -107,7 +115,19 @@ private final class CenteredClip: NSClipView {
     private func restoreResponder() {
         if let responder = scroll.window?.firstResponder as? NSView, responder === scroll || responder.isDescendant(of: scroll) { scroll.window?.makeFirstResponder(webview) }
     }
-    func close() { restoreResponder(); task?.cancel(); task = nil; overlay.analysis = nil; scroll.removeFromSuperview() }
+    func close() {
+        guard !closing else { return }; closing = true
+        restoreResponder(); task?.cancel(); task = nil
+        // AppKit/VisionKit may still be cancelling a gesture on this run loop.
+        // Hide now; detach outside event tracking and retain through timer cleanup.
+        scroll.isHidden = true
+        RunLoop.main.perform(inModes: [.default]) { [self] in
+            MainActor.assumeIsolated {
+                overlay.analysis = nil; scroll.removeFromSuperview()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [self] in _ = scroll }
+            }
+        }
+    }
 }
 
 @_cdecl("fershot_live_text_supported")

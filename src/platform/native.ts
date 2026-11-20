@@ -1,5 +1,6 @@
 import { logNativeOperation } from "./diagnostics";
-import { invoke, isTauri } from "@tauri-apps/api/core";
+import {isTauri} from "@tauri-apps/api/core";
+import {invoke} from "./ipc";
 import { DEFAULT_SETTINGS, type AppSettings } from "../contracts/settings";
 import { DEFAULT_APP_PREFERENCES, type FerShotAppPreferences } from "../features/app-preferences";
 import { parseAppPreferencesJson, serializeAppPreferencesJson } from "../features/app-preferences-codec";
@@ -143,6 +144,8 @@ async function nativeCall<T>(command: string, args: Record<string, unknown>): Pr
     throw new NativeOperationError("native_failed", typeof error === "string" ? error : "The image operation failed.");
   }
 }
+const nativePngs = new WeakMap<ImageDocument, Blob>();
+
 export function documentFromPayload(payload: ImagePayload, name: string): ImageDocument {
   if (typeof payload !== "object" || payload === null) throw new NativeOperationError("invalid_payload", "The desktop app returned no image metadata.");
   assertImageDimensions(payload.width, payload.height);
@@ -160,8 +163,23 @@ export function documentFromPayload(payload: ImagePayload, name: string): ImageD
       view.getUint32(16) !== payload.width || view.getUint32(20) !== payload.height) {
     throw new NativeOperationError("invalid_payload", "The desktop image metadata does not match its contents.");
   }
-  return { id: crypto.randomUUID(), name, width: payload.width, height: payload.height,
-    mimeType: "image/png", byteSize: bytes.length, src: URL.createObjectURL(new Blob([bytes], { type: "image/png" })) };
+  const png = new Blob([bytes], { type: "image/png" });
+  const document = { id: crypto.randomUUID(), name, width: payload.width, height: payload.height,
+    mimeType: "image/png", byteSize: bytes.length, src: URL.createObjectURL(png) };
+  nativePngs.set(document, png);
+  return document;
+}
+
+export function originalPngForHistory(document: ImageDocument): Promise<string> {
+  const png = nativePngs.get(document);
+  if (!png) return rasterizeDocument(document);
+  // Local History can persist native PNGs even while a hidden editor delays decoding.
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve((reader.result as string).slice("data:image/png;base64,".length));
+    reader.onerror = reader.onabort = () => reject(new NativeOperationError("invalid_image", "The original PNG could not be read."));
+    reader.readAsDataURL(png);
+  });
 }
 
 export async function rasterizeDocument(document: ImageDocument): Promise<string> {

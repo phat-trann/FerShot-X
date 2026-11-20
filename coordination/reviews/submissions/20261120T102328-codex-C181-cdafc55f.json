@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "id": "20261120T102328-codex-C181-cdafc55f",
+  "created_at": "2026-11-20T10:23:28.766753+07:00",
+  "agent": "codex",
+  "request": "source-review-20261120",
+  "task": "C181",
+  "completion": "done",
+  "summary": "Fresh source review: 12 functional/concurrency/lifecycle/diagnostic findings, five synthetic reproductions, no production fixes",
+  "files": [
+    "docs/agents/codex/C181-source-review.md"
+  ],
+  "file_sha256": {
+    "docs/agents/codex/C181-source-review.md": "d2714a72287524648677dcba5d5865efe1a605e3cba950736c64d2e6c8bf266d"
+  },
+  "checks": [
+    "PASS five fresh defect reproductions: interrupted cache pair, swallowed draft rejection, broken-source Library coupling, stale Local preview and locked video annotation deletion",
+    "PASS Rust harness linked existing LocalCache crate; synthetic temporary cache only",
+    "PASS injected browser reproductions 3/3; no live OS/capture/OCR/clipboard/FTP/server actions",
+    "PASS hook reproduction; configured Vitest run also executed existing suite, 443/443 including reproduction. These assertions demonstrate current defects, not fixed behavior",
+    "Static analysis: release panic policy, FTP start/delete interleaving, recording GC, retained image memory, video remount/output and crash attribution. No production edits, version bump, commit or push"
+  ],
+  "risks": [
+    "Analysis only; not peer approval or native acceptance. P1 findings should be resolved before accepting the current candidate. Full native crash/recording reproduction was not performed. Reproduction harnesses are ignored artifacts/reviewer-c181. Formatting/lint delegated to H01; MVP ledger unchanged."
+  ],
+  "review": "pending"
+}

@@ -1,6 +1,7 @@
 import { parseLocalDraft,type LocalDraft } from "../contracts/local-draft";
 import { recordDiagnostic } from "./diagnostics";
-import { invoke,isTauri } from "@tauri-apps/api/core";
+import {isTauri} from "@tauri-apps/api/core";
+import {invoke} from "./ipc";
 import { rasterizeDocument, documentFromPayload, type ImagePayload } from "./native";
 export type LibraryKind="local"|"ftp";
 async function call<T>(command:string,args?:Record<string,unknown>):Promise<T>{if(!isTauri())throw new Error("Library images are available in the desktop app.");const started=performance.now();try{return await invoke<T>(command,args);}catch(error){recordDiagnostic(args?.kind==="ftp"?"ftp":"image","failed",error&&typeof error==="object"&&"code"in error?error.code:"other",{operation:command,durationMs:performance.now()-started});throw new Error(error&&typeof error==="object"&&"message"in error?String(error.message):"Library operation failed. Refresh and retry.");}}

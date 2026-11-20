@@ -203,6 +203,7 @@ pub async fn capture_region(request: CaptureRegionRequest, window: tauri::Webvie
 #[tauri::command]
 pub async fn capture_active_window(background:Option<bool>,window: tauri::WebviewWindow, jobs: tauri::State<'_, NativeJobs>) -> Result<ImagePayload, NativeError> {
     validate_window_label(window.label())?;
+    crate::recording::ensure_idle(window.app_handle())?;
     let target = crate::active_window::target()?;
     capture_with_region(Mode::Window, None, Some(target), None, background.unwrap_or(false), window, jobs).await
 }
@@ -210,6 +211,7 @@ pub async fn capture_active_window(background:Option<bool>,window: tauri::Webvie
 #[tauri::command]
 pub async fn capture_repeat_area(background:Option<bool>,window: tauri::WebviewWindow, jobs: tauri::State<'_, NativeJobs>) -> Result<ImagePayload, NativeError> {
     validate_window_label(window.label())?;
+    crate::recording::ensure_idle(window.app_handle())?;
     let rect = crate::area_capture::previous(&window.state::<crate::area_capture::AreaStore>(), &crate::area_capture::topology(&window)?)?;
     capture_with_region(Mode::Area, None, None, Some(rect), background.unwrap_or(false), window, jobs).await
 }
@@ -225,6 +227,7 @@ async fn capture_with_region(mode: Mode, region: Option<CaptureRegionRequest>,
         ));
     }
     let guard = jobs.acquire()?;
+    crate::recording::ensure_idle(window.app_handle())?;
     let area_topology = if matches!(mode, Mode::Area) { Some(crate::area_capture::topology(&window)?) } else { None };
     if let Some(request) = &region {
         let current = crate::scrolling::current_display(&window)?;

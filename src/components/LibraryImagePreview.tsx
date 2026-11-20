@@ -8,7 +8,7 @@ export function LibraryImagePreview({image,name,liveText=false,onLiveTextState=(
  const viewport=useRef<HTMLDivElement>(null),artwork=useRef<HTMLImageElement>(null);
  useLibraryLiveText(viewport,image,liveText,onLiveTextState,onLiveTextError);
  useLayoutEffect(()=>{
-  const host=viewport.current,node=artwork.current;if(!host||!node)return;
+  const host=viewport.current,node=artwork.current;if(!host||!node||liveText)return;
   let camera={x:0,y:0,scale:1},fit=1,frame=0,lastPanAt=-Infinity,pinch:{scale:number;x:number;y:number}|null=null;
   let pointer:{x:number;y:number}|null=null;
   const draw=()=>{frame=0;node.style.transform=`translate(${camera.x}px,${camera.y}px) scale(${camera.scale})`;};
@@ -38,6 +38,6 @@ export function LibraryImagePreview({image,name,liveText=false,onLiveTextState=(
   const observer=new ResizeObserver(reset);observer.observe(host);reset();
   host.addEventListener("mousemove",move);host.addEventListener("wheel",wheel,{passive:false});host.addEventListener("gesturestart",gestureStart,{passive:false});host.addEventListener("gesturechange",gestureChange,{passive:false});host.addEventListener("gestureend",gestureEnd);host.addEventListener("keydown",keydown);
   return()=>{cancelAnimationFrame(frame);observer.disconnect();host.removeEventListener("mousemove",move);host.removeEventListener("wheel",wheel);host.removeEventListener("gesturestart",gestureStart);host.removeEventListener("gesturechange",gestureChange);host.removeEventListener("gestureend",gestureEnd);host.removeEventListener("keydown",keydown);};
- },[image.src,image.width,image.height]);
- return <div ref={viewport} className="library-image-preview" role="region" aria-label="Image preview zoom" aria-keyshortcuts="+ - 0" tabIndex={0}><img ref={artwork} src={image.src} alt={name} width={image.width} height={image.height} draggable={false}/></div>;
+ },[image.src,image.width,image.height,liveText]);
+ return <div ref={viewport} className="library-image-preview" data-live-text={liveText} role="region" aria-label="Image preview zoom" aria-keyshortcuts="+ - 0" tabIndex={0}><img ref={artwork} src={image.src} alt={name} width={image.width} height={image.height} draggable={false}/></div>;
 }

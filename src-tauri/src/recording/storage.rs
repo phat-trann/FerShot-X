@@ -18,10 +18,16 @@ pub fn read_light(app:&tauri::AppHandle,id:&str)->Result<VideoDocument,NativeErr
  doc.clip.media_path=video.to_string_lossy().into_owned();doc.clip.byte_size=m.len();Ok(doc)
 }
 pub fn remove(app:&tauri::AppHandle,id:&str)->Result<(),NativeError>{let p=folder(app,id)?;if p.exists(){fs::remove_dir_all(p).map_err(|_|fail())?;}Ok(())}
-pub fn list(app:&tauri::AppHandle)->Result<Vec<Clip>,NativeError>{
- let root=root(app)?;let now=now();let mut docs=Vec::new();
- for entry in fs::read_dir(root).map_err(|_|fail())?.flatten(){if !entry.file_type().is_ok_and(|kind|kind.is_dir()&&!kind.is_symlink()){continue}let Some(id)=entry.file_name().to_str().map(str::to_owned)else{continue};if let Ok(doc)=read_light(app,&id){if now.saturating_sub(doc.clip.created_at)>30*86400000{let _=remove(app,&id);}else{docs.push(doc.clip)}}}
- docs.sort_by(|a,b|b.created_at.cmp(&a.created_at));let mut used=0u64;let mut retained=Vec::new();for clip in docs{if retained.len()>=200||used.saturating_add(clip.byte_size)>5*1024*1024*1024{let _=remove(app,&clip.id);}else{used+=clip.byte_size;retained.push(clip);}}Ok(retained)
+#[derive(serde::Serialize)]pub struct LibraryClip{#[serde(flatten)]pub clip:Clip,pub revision:String}
+fn revision(doc:&VideoDocument)->String{let mut hash=14695981039346656037u64;for byte in serde_json::to_vec(&doc.draft).unwrap_or_default(){hash^=u64::from(byte);hash=hash.wrapping_mul(1099511628211);}format!("{hash:016x}")}
+/// Listing never mutates media. Cleanup is serialized by the recording owner.
+pub fn list(app:&tauri::AppHandle)->Result<Vec<LibraryClip>,NativeError>{
+ let root=root(app)?;let mut docs=Vec::new();for entry in fs::read_dir(root).map_err(|_|fail())?.flatten(){if !entry.file_type().is_ok_and(|kind|kind.is_dir()&&!kind.is_symlink()){continue}let Some(id)=entry.file_name().to_str().map(str::to_owned)else{continue};if let Ok(doc)=read_light(app,&id){docs.push(LibraryClip{revision:revision(&doc),clip:doc.clip});}}
+ docs.sort_by(|a,b|b.clip.created_at.cmp(&a.clip.created_at));Ok(docs)
+}
+fn expired(clip:&Clip,time:u64,retained:usize,used:u64)->bool{time.saturating_sub(clip.created_at)>30*86400000||retained>=200||used.saturating_add(clip.byte_size)>5*1024*1024*1024}
+pub fn prune(app:&tauri::AppHandle,pinned:&std::collections::HashSet<String>)->Result<usize,NativeError>{
+ let mut removed=0;let mut used=0u64;let mut retained=0;let time=now();for row in list(app)?{let clip=row.clip;if !pinned.contains(&clip.id)&&expired(&clip,time,retained,used){remove(app,&clip.id)?;removed+=1;}else{used=used.saturating_add(clip.byte_size);retained+=1;}}Ok(removed)
 }
 pub fn now()->u64{std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH).unwrap_or_default().as_millis()as u64}
 
@@ -45,4 +51,8 @@ pub fn recover(app:&tauri::AppHandle)->Result<usize,NativeError>{
   save(app,&VideoDocument{clip,draft,pointer:vec![]})?;restored+=1;if restored>=4{break}
  }
  Ok(restored)
+}
+
+#[cfg(test)]mod collection_tests{use super::*;
+ #[test]fn poster_generation_does_not_change_the_edit_revision(){let clip=Clip{id:"video-1".into(),name:"Test".into(),width:100,height:100,duration_ms:1000,byte_size:100,created_at:1,media_path:String::new(),poster:String::new(),has_audio:Some(false)};let mut doc=VideoDocument{clip,draft:VideoDraft::new(1000),pointer:vec![]};let first=revision(&doc);doc.clip.poster="new poster".into();assert_eq!(revision(&doc),first);doc.draft.muted=true;assert_ne!(revision(&doc),first);}
 }

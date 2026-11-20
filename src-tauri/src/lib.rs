@@ -54,12 +54,14 @@ pub fn run() {
         .on_window_event(lifecycle::on_window_event)
         .setup(|_app| {
             if updates::install_notifications(_app.handle()).is_err(){diagnostics::record(_app.handle(),diagnostics::Area::App,diagnostics::Event::Failed,diagnostics::Code::Other);}
+            diagnostics::install_failure_diagnostics(_app.handle());
             active_window::install();
             if shortcuts::restore(_app.handle()).is_err(){diagnostics::record(_app.handle(),diagnostics::Area::Settings,diagnostics::Event::Failed,diagnostics::Code::SettingsFailed);}
             lifecycle::setup_main(_app.handle())?;
             diagnostics::start_cleanup(_app.handle());
             diagnostics::record(_app.handle(),diagnostics::Area::App,diagnostics::Event::Started,diagnostics::Code::None);
             if let Err(error) = ftp::recover(_app.handle()) { let _ = tauri::Emitter::emit_to(_app.handle(), "main", "fershot-ftp-error", error.message); }
+            recording::recover_history(_app.handle());
             #[cfg(feature = "native-acceptance")] acceptance::setup(_app)?;
             Ok(())
         })
@@ -91,7 +93,7 @@ pub fn run() {
             library_window::show_editor,
             live_text::live_text_supported,live_text::live_text_open,live_text::live_text_layout,live_text::live_text_close,
             recording::cursor::read_recording_cursor,
-            recording::read_recording_settings,recording::save_recording_settings,recording::read_recording_status,recording::start_recording,recording::stop_recording,recording::recording_list,recording::recording_document,recording::recording_save_draft,recording::recording_remove,recording::recording_save,recording::recording_copy,recording::recording_edit,recording::recording_take,recording::recording_open_failed,recording::recording_copy_library,ftp::ftp_enqueue_video,ftp::ftp_video_preview,ftp::ftp_edit_video,
+            recording::release_recording_preview,recording::release_recording_editor,recording::read_recording_settings,recording::save_recording_settings,recording::read_recording_status,recording::start_recording,recording::stop_recording,recording::recording_list,recording::recording_document,recording::recording_save_draft,recording::recording_remove,recording::recording_save,recording::recording_copy,recording::recording_edit,recording::recording_take,recording::recording_open_failed,recording::recording_copy_library,ftp::ftp_enqueue_video,ftp::ftp_video_preview,ftp::ftp_edit_video,
             library_window::library_image,
             library_window::copy_library_images,
             library_window::library_thumbnail,

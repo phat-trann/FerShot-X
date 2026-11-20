@@ -14,7 +14,7 @@ pub struct LocalStore(pub Mutex<()>);
 #[serde(rename_all = "camelCase")]
 pub struct Entry {
     id: String, name: String, width: u32, height: u32,
-    created_at: u64, expires_at: u64, byte_size: u64,
+    created_at: u64, expires_at: u64, byte_size: u64, revision:u64,
 }
 #[derive(Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
@@ -38,15 +38,15 @@ fn dimensions(bytes: &[u8]) -> Result<(u32, u32), NativeError> {
 }
 fn entry(metadata: CacheEntry, width: u32, height: u32) -> Entry {
     Entry { id: metadata.id, name: metadata.name, width, height,
-        created_at: metadata.created_at * 1000, expires_at: metadata.expires_at * 1000, byte_size: metadata.byte_size }
+        created_at: metadata.created_at * 1000, expires_at: metadata.expires_at * 1000, byte_size: metadata.byte_size,revision:metadata.revision }
 }
 fn list_at(cache: &LocalCache) -> Result<Vec<Entry>, NativeError> {
     let mut result = Vec::new();
-    for metadata in cache.list().map_err(|_| fail())? {
+    for metadata in cache.list_valid().map_err(|_| fail())? {
         // Only headers enter the list IPC; opening a row decodes its full PNG separately.
         let mut header = [0u8; 24];
-        File::open(cache.root().join(format!("{}.png", metadata.id))).and_then(|mut f| f.read_exact(&mut header)).map_err(|_| fail())?;
-        let (width, height) = dimensions(&header)?;
+        if File::open(cache.root().join(format!("{}.png", metadata.id))).and_then(|mut f| f.read_exact(&mut header)).is_err(){continue}
+        let Ok((width,height))=dimensions(&header)else{continue};
         result.push(entry(metadata, width, height));
     }
     result.reverse();
@@ -154,13 +154,20 @@ fn validate_draft(value:&serde_json::Value,width:u32,height:u32)->Result<(),Nati
 #[tauri::command]pub async fn local_cache_save_draft(request:DraftRequest,window:tauri::WebviewWindow,app:tauri::AppHandle)->Result<Entry,NativeError>{
  validate_window_label(window.label())?;tauri::async_runtime::spawn_blocking(move||{
  let store=app.state::<LocalStore>();let _lock=store.0.lock().map_err(|_|fail())?;let cache=open(&root(&app)?)?;
- let existing=cache.list().map_err(|_|fail())?.into_iter().find(|row|row.id==request.id);
+ let existing=cache.list_valid().map_err(|_|fail())?.into_iter().find(|row|row.id==request.id);
  let created=existing.as_ref().map(|row|row.created_at).unwrap_or(SystemTime::now().duration_since(UNIX_EPOCH).map_err(|_|fail())?.as_secs());
- // Validate against the decoded replacement before touching a saved image.
- if let Some(ref png)=request.png_base64{let raster=decode_input(png)?;let(w,h)=raster.dimensions();validate_draft(&request.draft,w,h)?;store_at(&cache,StoreRequest{id:request.id.clone(),name:request.name,png_base64:png.clone()},created)?;}
- let image=cache.read(&request.id).map_err(|_|fail())?;let(w,h)=dimensions(&image.png_bytes)?;validate_draft(&request.draft,w,h)?;
- let bytes=serde_json::to_vec(&serde_json::json!({"imageChecksum":checksum(&image.png_bytes),"draft":request.draft})).map_err(|_|fail())?;cache.write_draft(&request.id,&bytes).map_err(|_|fail())?;
- let result=entry(image.metadata,w,h);let _=app.emit_to("library","fershot-library-updated",());Ok(result)
+ // Validate and stage one PNG/metadata/draft transaction before replacing any live file.
+ let result=if let Some(ref png)=request.png_base64{
+  let raster=decode_input(png)?;let(w,h)=raster.dimensions();validate_draft(&request.draft,w,h)?;
+  let png=raster.encode(ExportFormat::Png).map_err(|_|fail())?;
+  let bytes=serde_json::to_vec(&serde_json::json!({"imageChecksum":checksum(&png),"draft":request.draft})).map_err(|_|fail())?;
+  let metadata=cache.store_document(&request.id,&request.name,&png,Some(&bytes),created).map_err(|_|fail())?;entry(metadata,w,h)
+ }else{
+  let image=cache.read(&request.id).map_err(|_|fail())?;let(w,h)=dimensions(&image.png_bytes)?;validate_draft(&request.draft,w,h)?;
+  let bytes=serde_json::to_vec(&serde_json::json!({"imageChecksum":checksum(&image.png_bytes),"draft":request.draft})).map_err(|_|fail())?;cache.write_draft(&request.id,&bytes).map_err(|_|fail())?;
+  let mut metadata=image.metadata;metadata.revision=metadata.revision.saturating_add(1);entry(metadata,w,h)
+ };
+ let _=app.emit_to("library","fershot-library-updated",());Ok(result)
  }).await.map_err(|_|fail())?
 }
 fn draft_at(cache:&LocalCache,id:&str,png:&[u8])->Result<Option<serde_json::Value>,NativeError>{

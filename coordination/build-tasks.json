@@ -5956,6 +5956,36 @@
       "shared_claim": "root-wiring",
       "owned_paths": "Completed C177/C178 source/tests/docs, synchronized version metadata and release report",
       "inputs": "User explicitly requests deployment of the native Live Text addition and pending recording guide fix"
+    },
+    {
+      "id": "C180",
+      "agent": "codex",
+      "title": "Recording exclusion, stable single Live Text preview and cross-app failure diagnostics",
+      "state": "READY",
+      "work_kind": "integration",
+      "shared_claim": "root-wiring",
+      "owned_paths": "Recording lifecycle/menu/shortcut capture guards; Library/native Live Text; shared diagnostics/IPC instrumentation; focused generated and injected regressions",
+      "inputs": "User reports concurrent capture/record failures, duplicate Live Text previews and crash during native zoom; asks for broad actionable logging"
+    },
+    {
+      "id": "C182",
+      "agent": "codex",
+      "title": "Resolve FerShot X source review findings",
+      "state": "READY",
+      "work_kind": "integration",
+      "shared_claim": "root-wiring",
+      "owned_paths": "Local cache transactions, recording retention and handoff, FTP reservations, editor and Library lifecycle, crash diagnostics and focused regressions",
+      "inputs": "C181 source review and user request to implement the findings"
+    },
+    {
+      "id": "C183",
+      "agent": "codex",
+      "title": "Publish recording, Live Text and persistence fixes as 1.5.1",
+      "state": "READY",
+      "work_kind": "integration",
+      "shared_claim": "root-wiring",
+      "owned_paths": "C180 and C182 source and tests, synchronized version metadata and release notes",
+      "inputs": "User authorizes pushing and publishing the completed fixes as a new version"
     }
   ],
   "allocation": "Codex sole active client; external Antigravity and Copilot inactive; preserve historical authorship.",
@@ -6142,7 +6172,9 @@
       "C176",
       "C177",
       "C178",
-      "C179"
+      "C179",
+      "C180",
+      "C182"
     ],
     "copilot": []
   },

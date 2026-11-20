@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "id": "20261120T112319-codex-C185-74f71f9a",
+  "created_at": "2026-11-20T11:23:19.182710+07:00",
+  "agent": "codex",
+  "request": "live-text-pointer-zoom-20261120",
+  "task": "C185",
+  "completion": "done",
+  "summary": "Anchor native Live Text wheel and pinch zoom in clip coordinates, preserve pointer positioning through Fit scale, and center only when fitting.",
+  "files": [
+    "AGENTS.md",
+    "coordination/build-tasks.json",
+    "docs/releases/live-text-manual-acceptance.md",
+    "src-tauri/live-text/Sources/FerShotLiveText/LiveText.swift",
+    "tests/native/live-text-checks.swift"
+  ],
+  "file_sha256": {
+    "AGENTS.md": "2393a67a32f7eddb9b73623302fccbfd08c176c6d67ea632d2df791657fe5aa3",
+    "coordination/build-tasks.json": "3c000c2a1d908c39a418602ef7eeca79e8d7da0de044d1f84c36033748da5a39",
+    "docs/releases/live-text-manual-acceptance.md": "44c0e64d62f26b9a48bf7b028fdc8c9420273a4710c15aea7ebdc788cdb07e85",
+    "src-tauri/live-text/Sources/FerShotLiveText/LiveText.swift": "54a9f1773bf9bb5274c757e2de3d62b885801f465de740ca59641a786533e7b0",
+    "tests/native/live-text-checks.swift": "10e77c0495ebb4cd3007a783c82816e87544cece3502f856bdb4fd55bec8569b"
+  },
+  "checks": [
+    "Six offscreen AppKit geometry, zoom and cancellation checks passed, including small and large image anchors and Fit reset.",
+    "macOS cargo check --release --locked and 12 injected preview and Live Text cases passed.",
+    "Formatting/lint delegated to Copilot H01."
+  ],
+  "risks": [
+    "Physical wheel/trackpad gestures and native VisionKit text selection on an installed build remain manual acceptance."
+  ],
+  "review": "pending"
+}

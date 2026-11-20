@@ -1,5 +1,9 @@
 # Agent instructions
 
+## C185 pointer-anchored native Live Text zoom (2026-11-20)
+
+Use the AppKit clip-view anchor for wheel, modified wheel and pinch. Permit pointer-relative placement below Fit while leaving a reachable part of the image. Center only during explicit Fit or viewport sizing. Preserve native text selection, Copy, two-finger panning and deferred teardown. Verify with an offscreen AppKit hierarchy and injected browser cases. Push source through main and finish after push confirmation.
+
 ## C184 Library review, preview performance and push handoff (2026-11-20)
 
 Refresh Local images, recordings and FTP history independently when their source changes. Keep preview pixels and failures keyed to the selected media revision. Explicit video retry bypasses the FTP cache once. Apply shared control and status styles to Library. Run generated or injected local checks. From this request onward, finish publication work once the requested push is confirmed. GitHub Actions builds run asynchronously.

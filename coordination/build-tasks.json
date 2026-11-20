@@ -5996,6 +5996,16 @@
       "shared_claim": "root-wiring",
       "owned_paths": "Library preview and refresh, cache invalidation, native Library events, Library control styles and scoped regressions",
       "inputs": "User requests continued review, performance fixes, interface consistency and push without waiting for CI"
+    },
+    {
+      "id": "C185",
+      "agent": "codex",
+      "title": "Anchor native Live Text zoom at the pointer",
+      "state": "READY",
+      "work_kind": "integration",
+      "shared_claim": "root-wiring",
+      "owned_paths": "Native Live Text zoom and clip geometry, offscreen AppKit regressions and manual acceptance",
+      "inputs": "User reports the Live Text image jumps into a corner during zoom and asks for regular preview pointer behavior"
     }
   ],
   "allocation": "Codex sole active client; external Antigravity and Copilot inactive; preserve historical authorship.",

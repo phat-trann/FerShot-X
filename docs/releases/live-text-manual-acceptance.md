@@ -18,3 +18,8 @@ Current scope: Library image previews only; video and the annotation editor reta
 - Enable Live Text: exactly one image appears. Wheel/pinch zoom and native text selection/Copy operate on that same image. Disable it and verify ordinary preview zoom returns.
 - Zoom repeatedly, change images while pinching, toggle Live Text and close/reopen Library. Verify no crash, stale image or native overlay above confirmations.
 - On an error, use Settings → Open Logs Folder. Report the build, operation, stage and timestamp in errors.log. After a native crash, reopen once so the sanitized macOS crash classification can be recorded; the original report stays in macOS DiagnosticReports.
+
+## C185 pointer anchor
+
+- On a small image, move the cursor over a word away from the center. Zoom out and back in with a mouse wheel, then repeat with a trackpad pinch. The word should stay under the cursor as the image crosses Fit size.
+- Repeat near different edges of a large image. Pan with two fingers, then zoom over another word. Check native text selection follows the image and focused `0` centers Fit again.

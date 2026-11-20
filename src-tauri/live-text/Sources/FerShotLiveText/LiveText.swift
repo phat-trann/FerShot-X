@@ -21,34 +21,74 @@ func liveTextFitScale(image: NSSize, viewport: NSSize) -> Double {
 }
 @MainActor private var cancelledRequests = ClosedLiveTextRequests()
 
-private final class CenteredClip: NSClipView {
+private final class LiveTextClip: NSClipView {
     override func constrainBoundsRect(_ proposedBounds: NSRect) -> NSRect {
-        var rect = super.constrainBoundsRect(proposedBounds)
-        let size = documentRect.size
-        if rect.width > size.width { rect.origin.x = (size.width - rect.width) / 2 }
-        if rect.height > size.height { rect.origin.y = (size.height - rect.height) / 2 }
+        guard let image = documentView?.frame, !image.isEmpty, !proposedBounds.isEmpty,
+              frame.width > 0, frame.height > 0 else { return super.constrainBoundsRect(proposedBounds) }
+        // Leave part of the image reachable when panning. Centering the image on
+        // every bounds change would override pointer anchoring below Fit.
+        var rect = proposedBounds
+        let visibleX = min(image.width, rect.width, 32 * rect.width / frame.width)
+        let visibleY = min(image.height, rect.height, 32 * rect.height / frame.height)
+        rect.origin.x = max(image.minX + visibleX - rect.width, min(image.maxX - visibleX, rect.minX))
+        rect.origin.y = max(image.minY + visibleY - rect.height, min(image.maxY - visibleY, rect.minY))
         return rect
     }
 }
 
 @available(macOS 13.0, *)
-@MainActor private final class LiveTextScroll: NSScrollView {
+@MainActor final class LiveTextScroll: NSScrollView {
     private var lastPan = -Double.infinity
-    var fitScale: Double = 1
-    override func keyDown(with event: NSEvent) {
-        guard event.modifierFlags.intersection([.command, .control, .option]).isEmpty, let key = event.charactersIgnoringModifiers, ["+", "=", "-", "0"].contains(key), let documentView else { super.keyDown(with: event); return }
-        let center = documentView.convert(NSPoint(x: contentView.bounds.midX, y: contentView.bounds.midY), from: contentView)
-        let scale = key == "0" ? fitScale : max(minMagnification, min(maxMagnification, magnification * (key == "-" ? 1 / 1.2 : 1.2)))
-        setMagnification(scale, centeredAt: center)
+    override init(frame: NSRect) {
+        super.init(frame: frame)
+        contentView = LiveTextClip()
+        drawsBackground = false
+        hasVerticalScroller = true
+        hasHorizontalScroller = true
+        scrollerStyle = .overlay
+        allowsMagnification = true
+        minMagnification = 0.01
+        maxMagnification = 8
     }
+
+    required init?(coder: NSCoder) { nil }
+
+    func fitImage() {
+        guard let image = documentView?.frame else { return }
+        let fitScale = liveTextFitScale(image: image.size, viewport: contentView.frame.size)
+        minMagnification = min(0.05, fitScale)
+        let center = NSPoint(x: image.midX, y: image.midY)
+        setMagnification(fitScale, centeredAt: center)
+        let bounds = contentView.bounds
+        contentView.scroll(to: NSPoint(x: center.x - bounds.width / 2, y: center.y - bounds.height / 2))
+        reflectScrolledClipView(contentView)
+    }
+
+    func zoom(to scale: Double, atWindowPoint location: NSPoint) {
+        guard scale.isFinite, scale > 0 else { return }
+        let next = max(minMagnification, min(maxMagnification, scale))
+        guard next != magnification else { return }
+        let point = contentView.convert(location, from: nil)
+        setMagnification(next, centeredAt: point)
+    }
+
+    override func keyDown(with event: NSEvent) {
+        guard event.modifierFlags.intersection([.command, .control, .option]).isEmpty, let key = event.charactersIgnoringModifiers, ["+", "=", "-", "0"].contains(key) else { super.keyDown(with: event); return }
+        if key == "0" { fitImage(); return }
+        let center = NSPoint(x: contentView.bounds.midX, y: contentView.bounds.midY)
+        zoom(to: magnification * (key == "-" ? 1 / 1.2 : 1.2), atWindowPoint: contentView.convert(center, to: nil))
+    }
+
     override func scrollWheel(with event: NSEvent) {
         let modified = !event.modifierFlags.intersection([.command, .control]).isEmpty
         if event.hasPreciseScrollingDeltas && !modified { lastPan = event.timestamp; super.scrollWheel(with: event); return }
         if !modified && event.timestamp - lastPan < 0.3 { super.scrollWheel(with: event); return }
-        guard let documentView else { return }
-        let point = documentView.convert(event.locationInWindow, from: nil)
         let delta = event.scrollingDeltaY * (event.hasPreciseScrollingDeltas ? 1 : 16)
-        setMagnification(liveTextWheelScale(magnification, delta: delta, minimum: minMagnification, maximum: maxMagnification), centeredAt: point)
+        zoom(to: liveTextWheelScale(magnification, delta: delta, minimum: minMagnification, maximum: maxMagnification), atWindowPoint: event.locationInWindow)
+    }
+
+    override func magnify(with event: NSEvent) {
+        zoom(to: magnification * (1 + event.magnification), atWindowPoint: event.locationInWindow)
     }
 }
 
@@ -63,17 +103,13 @@ private final class CenteredClip: NSClipView {
     var status: Int32 = 1 // analyzing, ready=2, no text=3, error=-2
     var fitted = false
     var closing = false
-    let imageSize: NSSize
     init(id: String, webview: NSView, image: NSImage) {
-        self.id = id; self.webview = webview; self.imageSize = image.size
+        self.id = id; self.webview = webview
         super.init()
         imageView.frame = NSRect(origin: .zero, size: image.size)
         imageView.image = image; imageView.imageScaling = .scaleNone
         imageView.setAccessibilityLabel("Live Text image"); scroll.setAccessibilityLabel("Live Text preview")
-        scroll.contentView = CenteredClip(); scroll.documentView = imageView; scroll.drawsBackground = false
-        scroll.hasVerticalScroller = true; scroll.hasHorizontalScroller = true
-        scroll.scrollerStyle = .overlay; scroll.allowsMagnification = true
-        scroll.minMagnification = 0.01; scroll.maxMagnification = 8
+        scroll.documentView = imageView
         overlay.frame = imageView.bounds; overlay.autoresizingMask = [.width, .height]
         overlay.trackingImageView = imageView; overlay.preferredInteractionTypes = .textSelection
         overlay.isSupplementaryInterfaceHidden = true
@@ -89,11 +125,9 @@ private final class CenteredClip: NSClipView {
         guard !scroll.isHidden else { return }
         let frame = webview.convert(bounded, to: scroll.superview)
         let changed = scroll.frame.size != frame.size
-        scroll.frame = frame
+        if scroll.frame != frame { scroll.frame = frame }
         if changed || !fitted {
-            let fit = liveTextFitScale(image: imageSize, viewport: bounded.size)
-            scroll.minMagnification = min(0.05, fit); scroll.fitScale = fit
-            scroll.setMagnification(fit, centeredAt: NSPoint(x: imageView.bounds.midX, y: imageView.bounds.midY))
+            scroll.fitImage()
             fitted = true
         }
     }

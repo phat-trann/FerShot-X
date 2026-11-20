@@ -6006,6 +6006,16 @@
       "shared_claim": "root-wiring",
       "owned_paths": "Native Live Text zoom and clip geometry, offscreen AppKit regressions and manual acceptance",
       "inputs": "User reports the Live Text image jumps into a corner during zoom and asks for regular preview pointer behavior"
+    },
+    {
+      "id": "C186",
+      "agent": "codex",
+      "title": "Fix Library reopens and remove failing recording guides",
+      "state": "READY",
+      "work_kind": "integration",
+      "shared_claim": "root-wiring",
+      "owned_paths": "Native Library placement, Record Area startup and guide removal, synchronized 1.5.2 metadata",
+      "inputs": "User reports consecutive Library opens misplace a moved/resized window and recurring recording startup failures"
     }
   ],
   "allocation": "Codex sole active client; external Antigravity and Copilot inactive; preserve historical authorship.",

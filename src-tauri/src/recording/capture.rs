@@ -42,9 +42,8 @@ pub struct Capture{
 }
 fn alloc(name:&std::ffi::CStr)->Result<Allocated<AnyObject>,NativeError>{let class=AnyClass::get(name).ok_or_else(fail)?;Ok(unsafe{msg_send![class,alloc]})}
 fn object(name:&std::ffi::CStr)->Result<Retained<AnyObject>,NativeError>{Ok(unsafe{msg_send![alloc(name)?,init]})}
-fn validate_guide_exclusion(guide_visible:bool,own_application_found:bool)->Result<(),NativeError>{if guide_visible&&!own_application_found{Err(NativeError::new("recording_failed","The recording guide could not be excluded. Retry recording."))}else{Ok(())}}
-pub fn start(path:&Path,display:DisplayTarget,settings:&RecordingSettings,region:CaptureRegion,guide_visible:bool)->Result<Capture,NativeError>{objc2::exception::catch(||start_inner(path,display,settings,region,guide_visible)).unwrap_or_else(|_|Err(fail()))}
-fn start_inner(path:&Path,display:DisplayTarget,settings:&RecordingSettings,region:CaptureRegion,guide_visible:bool)->Result<Capture,NativeError>{
+pub fn start(path:&Path,display:DisplayTarget,settings:&RecordingSettings,region:CaptureRegion)->Result<Capture,NativeError>{objc2::exception::catch(||start_inner(path,display,settings,region)).unwrap_or_else(|_|Err(fail()))}
+fn start_inner(path:&Path,display:DisplayTarget,settings:&RecordingSettings,region:CaptureRegion)->Result<Capture,NativeError>{
  if !available(){return Err(NativeError::new("unsupported_recording","Screen recording requires macOS 15 or later."))}
  unsafe{
   if settings.microphone{
@@ -63,12 +62,11 @@ fn start_inner(path:&Path,display:DisplayTarget,settings:&RecordingSettings,regi
   let empty=NSArray::<AnyObject>::new();
   let applications:Retained<NSArray<AnyObject>>=msg_send![&*content.0,applications];
   let mut own=applications.iter().find(|app|{let pid:i32=msg_send![&**app,processID];pid==std::process::id()as i32});
-  if own.is_none()&&guide_visible{
+  if own.is_none(){
    // Resolve window ownership too if the application list omits our process.
    let windows:Retained<NSArray<AnyObject>>=msg_send![&*content.0,windows];
    own=windows.iter().find_map(|window|{let owner:Option<Retained<AnyObject>>=msg_send![&*window,owningApplication];owner.filter(|app|{let pid:i32=msg_send![&**app,processID];pid==std::process::id()as i32})});
   }
-  validate_guide_exclusion(guide_visible,own.is_some())?;
   let own=NSArray::from_slice(&own.iter().map(|app|&**app).collect::<Vec<_>>());
   let filter:Retained<AnyObject>=msg_send![alloc(c"SCContentFilter")?,initWithDisplay:&*target,excludingApplications:&*own,exceptingWindows:&*empty];
   let(width,height)=output_size(region,display.scale);
@@ -157,5 +155,4 @@ impl Drop for Capture{fn drop(&mut self){if !self.stopped{unsafe{let _:()=msg_se
 }
 
 #[cfg(test)]mod exclusion_tests{
- #[test]fn visible_guides_require_a_resolved_application_exclusion(){assert!(super::validate_guide_exclusion(true,true).is_ok());assert!(super::validate_guide_exclusion(true,false).is_err());assert!(super::validate_guide_exclusion(false,false).is_ok());assert!(super::validate_guide_exclusion(false,true).is_ok());}
 }

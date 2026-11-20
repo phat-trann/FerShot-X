@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "id": "20261120T113021-codex-C186-48d98840",
+  "created_at": "2026-11-20T11:30:21.896136+07:00",
+  "agent": "codex",
+  "request": "library-frame-recording-20261120",
+  "task": "C186",
+  "completion": "done",
+  "summary": "Reset Library geometry atomically, remove failing Record Area dimming windows, and publish accumulated 1.5.2 fixes through main.",
+  "files": [
+    "AGENTS.md",
+    "README.md",
+    "coordination/build-tasks.json",
+    "docs/releases/1.5.2.md",
+    "docs/releases/video-manual-acceptance.md",
+    "package-lock.json",
+    "package.json",
+    "src-tauri/Cargo.lock",
+    "src-tauri/Cargo.toml",
+    "src-tauri/src/lifecycle.rs",
+    "src-tauri/src/recording/capture.rs",
+    "src-tauri/src/recording/mask.rs",
+    "src-tauri/src/recording/mod.rs",
+    "src-tauri/tauri.conf.json"
+  ],
+  "file_sha256": {
+    "AGENTS.md": "d6daf1229453f55c110eae8ab071157aed1372b2b922dcfbfad350ee30548a4c",
+    "README.md": "ac193ecc8a13c2b79923a1c32e698b30fa11954e02f3dec2b0e042b53a41dbea",
+    "coordination/build-tasks.json": "44603f2c057c5822f40ec1564241f58eb8c32cd8b29adf67b4bebbf0d6bfa81c",
+    "docs/releases/1.5.2.md": "723dae12fef1279cde6ab0ed980f42f9c43faaa8b5bbac1ce5a105aed37c70c7",
+    "docs/releases/video-manual-acceptance.md": "f88c74ec4fcca598683c33f70b3c94d132b1788579e7b3be530924e466b31814",
+    "package-lock.json": "a56b3b62d6b278cf4d78aee611927f1f773ee642cade2b2fea99a7d7d6df293f",
+    "package.json": "125cd8383bc799dede3fc5600a8cbfa7e08d1c73aba19722071c6b3bb7948b39",
+    "src-tauri/Cargo.lock": "a23fc35aa92db9cfd948b7208fa0ef3c606993d18248e8b585f6ecb317165391",
+    "src-tauri/Cargo.toml": "a92b08c150f711046e69221f728a3e99af93fabcadc7b241c764d99aa0e728ef",
+    "src-tauri/src/lifecycle.rs": "0947cc522c9fd7941ac9e392a26cc3fe053d047f95fae45d0a1f5974e1692afe",
+    "src-tauri/src/recording/capture.rs": "1c29bebb942562084ac6d50ea5d95865f6afbe5dff6a1ab7346a0802cb1205e1",
+    "src-tauri/src/recording/mask.rs": null,
+    "src-tauri/src/recording/mod.rs": "355466c953bb65ea72baf10b1f7fdeb393a343f95b3e02df1a47a55a564c86e3",
+    "src-tauri/tauri.conf.json": "abe32d77affc48f5801185d61d2d632d564e656c847a46589a626dff7631109d"
+  },
+  "checks": [
+    "Installed sanitized 1.5.1 diagnostics located repeated recording startup failures in guide preparation.",
+    "121 native Rust tests passed, including placement geometry. Two FTP loopback tests excluded.",
+    "31 injected recording, Library and settings browser cases passed. Version synchronization and 10 release/version tests passed.",
+    "Formatting/lint delegated to Copilot H01."
+  ],
+  "risks": [
+    "Installed consecutive Library opens, fullscreen transition and real recording remain manual acceptance. Push triggers CI asynchronously."
+  ],
+  "review": "pending"
+}

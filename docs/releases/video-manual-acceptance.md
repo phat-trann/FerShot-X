@@ -1,6 +1,6 @@
 # Screen recording acceptance
 
-Candidate only; do not mark native capture/audio accepted from injected tests. macOS 15+ is required for direct MP4 recording. No app build/publication is included in this implementation pass.
+Run native capture and audio checks on the installed macOS build. Direct MP4 recording requires macOS 15 or later. For 1.5.2, use the C186 follow-up for Library placement and Record Area startup.
 
 1. **Record Screen:** put the pointer on each display, start from tray, move the pointer/click, stop from tray. Edit must open with the intended full screen, correct dimensions and playable video.
 2. **Record Area:** select a small region on each display, including Retina/negative-origin monitors. Only that region is recorded; cursor/click effects stay aligned. A cross-display region is rejected. Escape cancels selection and restores the previous view.
@@ -74,7 +74,7 @@ No build/publication or real capture/server acceptance is claimed by automated c
 - Start Screen/Area recording, then press Stop recording with the app hidden: it finalizes and follows Edit/immediate-upload settings. Press while idle: no recording starts and no window opens.
 - App logo keeps its ordinary icon and left-click menu while recording. Use either the stop shortcut, menu Stop Recording or the native macOS recording control.
 
-## C177 Record Area guide placement/output
+## C177 Record Area guide placement/output (historical, superseded by C186)
 
 - Select Record Area near the top/menu bar and in the middle: dimming stays entirely outside the selection. Repeat on a Retina display and a secondary display above/left of the main display.
 - Record a test pattern extending across the selection boundary, stop, then compare Edit and saved MP4: the selected top edge is unchanged and no dim bands appear in the video.
@@ -85,3 +85,8 @@ No build/publication or real capture/server acceptance is claimed by automated c
 - While starting, recording and finalizing, try all screenshot and Record Screen/Area shortcuts/menu entries. They must neither capture nor stop/restart the current recording.
 - Stop using the dedicated Stop Recording shortcut/menu or native macOS control. Verify delivery to Edit/FTP, then start another recording.
 - Cancel area selection; verify recording and screenshots can be started again. After a failure, verify retry is possible and report operation/stage/duration from errors.log.
+
+## C186 Record Area startup and Library reopen
+
+- Move and resize Library, then use its menu item twice in a row. Both opens should center it at 75% of the work area on the display under the pointer. Repeat on a different-scale display and from native fullscreen.
+- Record a small area near the top of a screen and stop using the native control or the Stop shortcut. The area records without a dimming overlay. Verify Edit plays the selected region. Repeat with a second area and then Record Screen. Existing Local videos should remain available.

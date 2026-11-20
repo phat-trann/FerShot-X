@@ -1,5 +1,9 @@
 # Agent instructions
 
+## C186 Library placement and Record Area startup hotfix (2026-11-20)
+
+Set the Library frame in one AppKit operation at 75% of the pointer display's usable area. Coalesce reopen requests while native fullscreen exits. Installed 1.5.1 logs locate recurring Record Area failures in guide preparation. Remove the dimming windows and their capture-start gate while keeping native region selection and recording delivery. Never delete existing media. Publish the accumulated C184–C186 fixes as 1.5.2 by normal main push and finish after push confirmation. Installed window placement and capture behavior remain manual acceptance.
+
 ## C185 pointer-anchored native Live Text zoom (2026-11-20)
 
 Use the AppKit clip-view anchor for wheel, modified wheel and pinch. Permit pointer-relative placement below Fit while leaving a reachable part of the image. Center only during explicit Fit or viewport sizing. Preserve native text selection, Copy, two-finger panning and deferred teardown. Verify with an offscreen AppKit hierarchy and injected browser cases. Push source through main and finish after push confirmation.

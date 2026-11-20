@@ -6,7 +6,6 @@ mod finalized;
 #[cfg(target_os="macos")]mod capture;
 #[cfg(target_os="macos")]mod render;
 #[cfg(target_os="macos")]pub mod cursor;
-#[cfg(target_os="macos")]mod mask;
 use model::*;
 use crate::imaging::{NativeError,NativeJobs};
 use std::sync::{Mutex,mpsc};
@@ -115,7 +114,7 @@ pub fn stop_from_menu(app:&tauri::AppHandle){if let Ok(active)=app.state::<Recor
 fn run(app:&tauri::AppHandle,display:crate::display_capture::DisplayTarget,mode:RecordingMode,settings:RecordingSettings,stop:mpsc::Receiver<bool>,ready:mpsc::SyncSender<Result<(),NativeError>>)->Result<String,NativeError>{
  use std::time::{Duration,Instant};use core_graphics::{event::CGEvent,event_source::{CGEventSource,CGEventSourceStateID}};
  unsafe extern "C"{fn CGEventSourceButtonState(state:i32,button:u32)->bool;}
- let id=format!("video-{}-{}",storage::now(),std::process::id());let folder=storage::folder(app,&id)?;std::fs::create_dir(&folder).map_err(|_|failed())?;let path=folder.join("original.mp4");
+ let selecting=Instant::now();
  let selection=(||{if mode==RecordingMode::Area{
   let before=crate::area_capture::topology(&app.get_webview_window("main").ok_or_else(failed)?)?;
   let selected=fershot_capture_core::capture(fershot_capture_core::CaptureMode::Area).map_err(|error|match error{fershot_capture_core::CaptureError::Cancelled=>NativeError::new("cancelled","Recording selection cancelled."),_=>failed()})?;
@@ -124,11 +123,31 @@ fn run(app:&tauri::AppHandle,display:crate::display_capture::DisplayTarget,mode:
   if before!=crate::area_capture::topology(&app.get_webview_window("main").ok_or_else(failed)?)?{return Err(NativeError::new("display_changed","Displays changed during selection."))}
   let target=crate::display_capture::for_region(rect)?;let region=region_on_display(target.rect,rect)?;Ok((target,region))
  }else{let region=CaptureRegion{x:0.,y:0.,width:display.rect.width as f64,height:display.rect.height as f64};Ok((display,region))}})();
- let(display,region)=match selection{Ok(value)=>value,Err(error)=>{let cancelled=error.code=="cancelled";let _=ready.send(Err(error));let _=std::fs::remove_dir_all(&folder);return Err(NativeError::new(if cancelled{"cancelled"}else{"recording_failed"},"Recording selection stopped."))}};
- if stop.try_recv().is_ok(){let _=ready.send(Err(NativeError::new("cancelled","Recording cancelled.")));let _=std::fs::remove_dir_all(&folder);return Err(NativeError::new("cancelled","Recording cancelled."))}
- // Guides must be visible before the shareable-content snapshot/filter is built.
- let mask=if mode==RecordingMode::Area{Some(mask::Mask::show(app,display,region).map_err(|error|{crate::diagnostics::technical(app,"start_recording",crate::diagnostics::Stage::ResolveRegion,0);error})?)}else{None};
- let starting=Instant::now();let capture=capture::start(&path,display,&settings,region,mask.as_ref().is_some_and(mask::Mask::requires_exclusion)).map_err(|error|{crate::diagnostics::technical(app,"start_recording",crate::diagnostics::Stage::StartRecording,starting.elapsed().as_millis()as u64);error});let mut capture=match capture{Ok(value)=>value,Err(error)=>{let _=ready.send(Err(error));let _=std::fs::remove_dir_all(&folder);return Err(failed())}};
+ let(display,region)=match selection {
+  Ok(value)=>value,
+  Err(error)=>{
+   let cancelled=error.code=="cancelled";
+   if !cancelled{crate::diagnostics::technical(app,"start_recording",crate::diagnostics::Stage::ResolveRegion,selecting.elapsed().as_millis()as u64);}
+   let _=ready.send(Err(error));
+   return Err(NativeError::new(if cancelled{"cancelled"}else{"recording_failed"},"Recording selection stopped."));
+  }
+ };
+ if stop.try_recv().is_ok(){let _=ready.send(Err(NativeError::new("cancelled","Recording cancelled.")));return Err(NativeError::new("cancelled","Recording cancelled."))}
+ let id=format!("video-{}-{}",storage::now(),std::process::id());
+ let folder=storage::folder(app,&id)?;
+ std::fs::create_dir(&folder).map_err(|_|failed())?;
+ let path=folder.join("original.mp4");
+ let starting=Instant::now();
+ let mut capture=match capture::start(&path,display,&settings,region){
+  Ok(value)=>value,
+  Err(error)=>{
+   crate::diagnostics::technical(app,"start_recording",crate::diagnostics::Stage::StartRecording,starting.elapsed().as_millis()as u64);
+   let _=ready.send(Err(error));
+   // Remove only an empty directory created by this attempt. A partial file may be recoverable.
+   let _=std::fs::remove_dir(&folder);
+   return Err(failed());
+  }
+ };
  let _=ready.send(Ok(()));status(app,RecordingStatus{phase:"recording",..Default::default()});
  let mut pointer=Vec::new();let mut last_report=Instant::now();let mut interrupted=false;
  loop{
@@ -141,7 +160,7 @@ fn run(app:&tauri::AppHandle,display:crate::display_capture::DisplayTarget,mode:
   }
   if last_report.elapsed()>=Duration::from_secs(1){if crate::display_capture::confirm(capture.display).is_err(){interrupted=true;break}status(app,RecordingStatus{phase:"recording",elapsed_ms:elapsed,..Default::default()});last_report=Instant::now();}
  }
- status(app,RecordingStatus{phase:"stopping",elapsed_ms:capture.started.elapsed().as_millis()as u64,..Default::default()});drop(mask);let finalize=Instant::now();capture.stop().map_err(|error|{crate::diagnostics::record_recording_error(app,if error.code=="recording_stop_failed"{crate::diagnostics::Stage::StopStream}else{crate::diagnostics::Stage::FinishRecording},finalize.elapsed().as_millis()as u64);error})?;let inspect=Instant::now();while !finalized::complete(&path)&&inspect.elapsed()<Duration::from_secs(3){std::thread::sleep(Duration::from_millis(25));}if !finalized::complete(&path){crate::diagnostics::record_recording_error(app,crate::diagnostics::Stage::InspectRecording,inspect.elapsed().as_millis()as u64);return Err(failed())}let(_,_,duration)=render::describe(&path).map_err(|error|{crate::diagnostics::record_recording_error(app,crate::diagnostics::Stage::InspectRecording,inspect.elapsed().as_millis()as u64);error})?;if interrupted||duration<100||duration>MAX_DURATION_MS+2000{return Err(failed())}let duration=duration.min(MAX_DURATION_MS);pointer.retain(|p|p.time_ms<=duration);
+ status(app,RecordingStatus{phase:"stopping",elapsed_ms:capture.started.elapsed().as_millis()as u64,..Default::default()});let finalize=Instant::now();capture.stop().map_err(|error|{crate::diagnostics::record_recording_error(app,if error.code=="recording_stop_failed"{crate::diagnostics::Stage::StopStream}else{crate::diagnostics::Stage::FinishRecording},finalize.elapsed().as_millis()as u64);error})?;let inspect=Instant::now();while !finalized::complete(&path)&&inspect.elapsed()<Duration::from_secs(3){std::thread::sleep(Duration::from_millis(25));}if !finalized::complete(&path){crate::diagnostics::record_recording_error(app,crate::diagnostics::Stage::InspectRecording,inspect.elapsed().as_millis()as u64);return Err(failed())}let(_,_,duration)=render::describe(&path).map_err(|error|{crate::diagnostics::record_recording_error(app,crate::diagnostics::Stage::InspectRecording,inspect.elapsed().as_millis()as u64);error})?;if interrupted||duration<100||duration>MAX_DURATION_MS+2000{return Err(failed())}let duration=duration.min(MAX_DURATION_MS);pointer.retain(|p|p.time_ms<=duration);
  let size=std::fs::metadata(&path).map_err(|_|failed())?.len();if !(16..=MAX_VIDEO_BYTES).contains(&size){return Err(failed())}
  let clip=Clip{id:id.clone(),name:format!("Recording-{}.mp4",chrono::Local::now().format("%Y-%m-%d-%H%M%S")),width:capture.width,height:capture.height,duration_ms:duration,byte_size:size,created_at:storage::now(),media_path:path.to_string_lossy().into_owned(),poster:String::new(),has_audio:Some(settings.system_audio||settings.microphone)};
  let mut draft=VideoDraft::new(duration);draft.cursor_visible=settings.record_pointer;draft.click_highlight=settings.record_pointer;storage::save(app,&VideoDocument{clip,draft,pointer})?;Ok(id)

@@ -33,7 +33,7 @@ body{-webkit-user-select:none;user-select:none}
 input,textarea,[contenteditable="true"]{-webkit-user-select:text;user-select:text}
 :is(.workspace,.library-window,.preferences-window) :is(label,summary){font-size:14px}
 .library-row-info strong{font-size:14px;font-weight:600}
-.library-row-info :is(span,time),.library-detail>header span,.library-metadata,.library-sidebar>footer,.preferences-window .preference-help,.preferences-footer p{font-size:12px;font-weight:500}
+.library-row-info > :is(span,time),.library-detail>header span,.library-metadata,.library-sidebar>footer,.preferences-window .preference-help,.preferences-footer p{font-size:12px;font-weight:500}
 .preferences-window :is(legend,summary),.preferences-window section[aria-label="FTP publishing settings"] p{font-size:13px;font-weight:500}
 
 /* Shared semantic status colors; document/annotation colors are unaffected. */

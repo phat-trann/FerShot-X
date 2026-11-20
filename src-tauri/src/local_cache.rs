@@ -84,7 +84,7 @@ pub async fn local_cache_store(request: StoreRequest, window: tauri::WebviewWind
         let state = app.state::<LocalStore>(); let _guard = state.0.lock().map_err(|_| fail())?;
         let now = SystemTime::now().duration_since(UNIX_EPOCH).map_err(|_| fail())?.as_secs();
         let result=store_at(&open(&root(&app)?)?, request, now);
-        if result.is_ok(){let _=app.emit_to("library","fershot-library-updated",());}result
+        if result.is_ok(){let _=app.emit_to("library","fershot-library-updated","local");}result
     }).await.map_err(|_| fail())?
 }
 #[tauri::command]
@@ -100,7 +100,9 @@ pub async fn local_cache_remove(id: String, window: tauri::WebviewWindow, app: t
     crate::library_window::validate_reader(window.label())?;
     tauri::async_runtime::spawn_blocking(move || {
         let state = app.state::<LocalStore>(); let _guard = state.0.lock().map_err(|_| fail())?;
-        open(&root(&app)?)?.remove(&id).map_err(|_| fail())
+        let removed = open(&root(&app)?)?.remove(&id).map_err(|_| fail())?;
+        if removed { let _ = app.emit_to("library", "fershot-library-updated", "local"); }
+        Ok(removed)
     }).await.map_err(|_| fail())?
 }
 
@@ -167,7 +169,7 @@ fn validate_draft(value:&serde_json::Value,width:u32,height:u32)->Result<(),Nati
   let bytes=serde_json::to_vec(&serde_json::json!({"imageChecksum":checksum(&image.png_bytes),"draft":request.draft})).map_err(|_|fail())?;cache.write_draft(&request.id,&bytes).map_err(|_|fail())?;
   let mut metadata=image.metadata;metadata.revision=metadata.revision.saturating_add(1);entry(metadata,w,h)
  };
- let _=app.emit_to("library","fershot-library-updated",());Ok(result)
+ let _=app.emit_to("library","fershot-library-updated","local");Ok(result)
  }).await.map_err(|_|fail())?
 }
 fn draft_at(cache:&LocalCache,id:&str,png:&[u8])->Result<Option<serde_json::Value>,NativeError>{

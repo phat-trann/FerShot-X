@@ -8,7 +8,7 @@ import {listRecordings,readRecording,releaseRecordingPreview,removeRecording,ope
 import {invoke} from "./platform/ipc";
 import { createPreviewCache } from "./lib/preview-cache";
 import { coalesceRefresh } from "./lib/coalesce-refresh";
-import {uploadTone} from "./components/ui/status";
+import {StatusMessage,uploadTone} from "./components/ui/status";
 import { WindowTitleBar } from "./components/WindowTitleBar";
 import {AlertDialog,AlertDialogContent,AlertDialogHeader,AlertDialogTitle,AlertDialogDescription,AlertDialogFooter,AlertDialogCancel,AlertDialogAction} from "./components/ui/alert-dialog";
 import { useEffect,useRef,useState,useMemo,memo } from "react";
@@ -26,6 +26,11 @@ import type { ImageDocument } from "./contracts/media";
 import "./Workspace.css";
 import "./LibraryWindow.css";
 type Row={revision?:string;kind:LibraryKind;id:string;name:string;time:number;size?:number;width?:number;height?:number;upload?:FtpQueueItem;video?:VideoClip;isVideo?:boolean};
+type LibrarySource = "local" | "video" | "ftp";
+type PreviewResult =
+ | {key:string;image:ImageDocument}
+ | {key:string;clip:VideoClip;document:VideoDocument|null}
+ | {key:string;error:string};
 const previewKey=(item:FtpQueueItem)=>JSON.stringify([item.id,item.url,item.status,item.updatedAt]);
 const key=(row:Row)=>`${row.kind}:${row.id}`;
 const bytes=(n:number)=>n<1024?`${n} B`:n<1048576?`${(n/1024).toFixed(1)} KB`:`${(n/1048576).toFixed(1)} MB`;
@@ -40,7 +45,8 @@ const Thumbnail=memo(function Thumbnail({row}:{row:Row}){
  return <span className="library-thumbnail" ref={element}>{src?<img src={src} alt="" loading="lazy"/>:<Images size={22} aria-hidden="true"/>}</span>;
 },(a,b)=>a.row.kind===b.row.kind&&a.row.id===b.row.id&&a.row.size===b.row.size&&a.row.time===b.row.time&&a.row.revision===b.row.revision);
 export default function LibraryWindow(){
- const [tab,setTab]=useState<LibraryKind>("ftp"),[local,setLocal]=useState<readonly LocalCacheEntry[]>([]),[ftp,setFtp]=useState<readonly FtpQueueItem[]>([]),[selected,setSelected]=useState<string|null>(null),[preview,setPreview]=useState<ImageDocument|null>(null),[loading,setLoading]=useState(false),[operationBusy,setBusy]=useState(false),[error,setError]=useState("");
+ const [tab,setTab]=useState<LibraryKind>("ftp"),[local,setLocal]=useState<readonly LocalCacheEntry[]>([]),[ftp,setFtp]=useState<readonly FtpQueueItem[]>([]),[selected,setSelected]=useState<string|null>(null),[operationBusy,setBusy]=useState(false),[error,setError]=useState("");
+ const activeTab=useRef<LibraryKind>("ftp");
  const [opening,setOpening]=useState<{key:string;requestId:string}|null>(null);
  const openingRef=useRef<typeof opening>(null),openListener=useRef<Promise<()=>void>|null>(null);
  const busy=operationBusy||opening!==null;
@@ -54,35 +60,93 @@ export default function LibraryWindow(){
  useEffect(()=>{if(!opening)return;const timer=setTimeout(()=>{if(openingRef.current?.requestId===opening.requestId){finishOpening(opening.requestId,true);setError("Edit is taking too long. Retry opening the image.");}},30000);return()=>clearTimeout(timer);},[opening]);
  const [recordingError,setRecordingError]=useState("");
 
- const [videos,setVideos]=useState<readonly VideoClip[]>([]),[videoPreview,setVideoPreview]=useState<VideoClip|null>(null),[videoPreviewDocument,setVideoPreviewDocument]=useState<VideoDocument|null>(null);
- const [previewError,setPreviewError]=useState("");
+ const [videos,setVideos]=useState<readonly VideoClip[]>([]);
+ const [previewResult,setPreviewResult]=useState<PreviewResult|null>(null);
  const [initialReads,setInitialReads]=useState({local:true,ftp:true,video:true});
  const listing=tab==="ftp"?initialReads.ftp:initialReads.local&&initialReads.video;
  const [sourceErrors,setSourceErrors]=useState({local:"",ftp:"",video:""});
  const collectionError=tab==="ftp"?sourceErrors.ftp:[sourceErrors.local,sourceErrors.video].filter(Boolean).join(" ");
  const listError=!!collectionError;
- useEffect(()=>{let live=true;let off:(()=>void)|undefined;const receive=(status:Awaited<ReturnType<typeof readRecordingStatus>>)=>{if(!live)return;if(status.phase==="failed"){setTab("local");setRecordingError(status.error==="unsupported_recording"?"Recording requires macOS 15 or later.":"Recording could not finish. Check Local for a recovered video.");}else if(status.phase==="starting"||status.phase==="ready")setRecordingError("");};void listenRecording(receive).then(dispose=>{if(live){off=dispose;void readRecordingStatus().then(receive).catch(()=>{});}else dispose();});return()=>{live=false;off?.();};},[]);
+ useEffect(()=>{
+  let live=true,receivedEvent=false;
+  let off:(()=>void)|undefined;
+  const receive=(status:Awaited<ReturnType<typeof readRecordingStatus>>)=>{
+   if(!live)return;
+   if(status.phase==="failed"){
+    selectTab("local",true);
+    setRecordingError(status.error==="unsupported_recording"?"Recording requires macOS 15 or later.":"Recording could not finish. Check Local for a recovered video.");
+   } else if(status.phase==="starting"||status.phase==="ready")setRecordingError("");
+  };
+  void listenRecording(status=>{receivedEvent=true;receive(status);}).then(dispose=>{
+   if(!live){dispose();return;}
+   off=dispose;
+   return readRecordingStatus().then(status=>{if(!receivedEvent)receive(status);});
+  }).catch(()=>{});
+  return()=>{live=false;off?.();};
+ },[]);
 
  const previewCache=useMemo(()=>createPreviewCache(),[]);
  useEffect(()=>()=>previewCache.clear(),[previewCache]);
  useEffect(()=>{previewCache.retain(new Set(ftp.filter(item=>item.status==="success").map(previewKey)));},[ftp,previewCache]);
- const forceVideoPreview=useRef<string|null>(null);
+ const forceVideoPreview=useRef<{key:string;revision:number}|null>(null);
  const [previewRevision,setPreviewRevision]=useState(0);
  const [pendingDelete,setPendingDelete]=useState<Row[]>([]);
  const [selection,setSelection]=useState<Set<string>>(new Set());const anchor=useRef<string|null>(null);
  const autoPick=useRef(true);
- const alive=useRef(false),readToken=useRef(0),actionPending=useRef(false),refreshToken=useRef(0);
- async function refreshSnapshot(){
-  const token=++refreshToken.current;
-  async function readSource<T>(source:"local"|"ftp"|"video",read:()=>Promise<readonly T[]>,publish:(rows:readonly T[])=>void){
-   try{const rows=await read();if(!Array.isArray(rows))throw new Error("Invalid library metadata.");if(alive.current&&token===refreshToken.current){publish(rows);setSourceErrors(previous=>({...previous,[source]:""}));}}
-   catch(error){if(alive.current&&token===refreshToken.current)setSourceErrors(previous=>({...previous,[source]:error instanceof Error?error.message:`${source==="ftp"?"FTP":source==="video"?"Video":"Local"} history could not be loaded. Retry Library.`}));}
-   finally{if(alive.current&&token===refreshToken.current)setInitialReads(previous=>previous[source]?{...previous,[source]:false}:previous);}
+ const alive=useRef(false),actionPending=useRef(false);
+ const readers=useMemo(()=>{
+  function sourceReader<T>(source:LibrarySource,label:string,read:()=>Promise<readonly T[]>,publish:(rows:readonly T[])=>void){
+   return coalesceRefresh(async()=>{
+    try {
+     const rows=await read();
+     if(!Array.isArray(rows))throw new Error("Invalid library metadata.");
+     if(alive.current){publish(rows);setSourceErrors(previous=>previous[source]?{...previous,[source]:""}:previous);}
+    } catch(error) {
+     const message=error instanceof Error?error.message:`${label} history could not be loaded. Retry Library.`;
+     if(alive.current)setSourceErrors(previous=>previous[source]===message?previous:{...previous,[source]:message});
+    } finally {
+     if(alive.current)setInitialReads(previous=>previous[source]?{...previous,[source]:false}:previous);
+    }
+   });
   }
-  await Promise.all([readSource("local",listLocalCache,setLocal),readSource("ftp",listFtpQueue,setFtp),readSource("video",listRecordings,setVideos)]);
+  return {
+   local:sourceReader("local","Local",listLocalCache,setLocal),
+   video:sourceReader("video","Video",listRecordings,setVideos),
+   ftp:sourceReader("ftp","FTP",listFtpQueue,setFtp),
+  };
+ },[]);
+ async function refresh(source?:LibrarySource){
+  if(source)await readers[source]();
+  else await Promise.all([readers.local(),readers.video(),readers.ftp()]);
  }
- const refresh=useMemo(()=>coalesceRefresh(refreshSnapshot),[]);
- useEffect(()=>{alive.current=true;document.title="FerShot X — Library";void refresh();let live=true;const disposers:Array<()=>void>=[];for(const event of ["fershot-library-updated","fershot-ftp-updated"]){void listenLibrary(event,()=>void refresh()).then(off=>{if(live)disposers.push(off);else off();});}const onVisible=()=>{if(!document.hidden)void refresh();};document.addEventListener("visibilitychange",onVisible);const timer=setInterval(()=>{if(!document.hidden)void refresh();},60000);return()=>{alive.current=false;live=false;disposers.forEach(off=>off());document.removeEventListener("visibilitychange",onVisible);clearInterval(timer);};},[]);
+ useEffect(()=>{
+  alive.current=true;
+  document.title="FerShot X — Library";
+  let live=true;
+  const disposers:Array<()=>void>=[];
+  const subscribe=(event:string,handler:(payload:unknown)=>void,initialRead:()=>void)=>{
+   void listenLibrary(event,payload=>{if(live)handler(payload);})
+    .then(off=>{if(live)disposers.push(off);else off();})
+    .catch(()=>{})
+    .then(()=>{if(live)initialRead();});
+  };
+  const readLocal=()=>{void refresh("local");void refresh("video");};
+  const readFtp=()=>{void refresh("ftp");};
+  subscribe("fershot-library-updated",source=>{
+   if(source==="local"||source==="video")void refresh(source);
+   else readLocal();
+  },readLocal);
+  subscribe("fershot-ftp-updated",readFtp,readFtp);
+  const onVisible=()=>{if(live&&!document.hidden)void refresh();};
+  document.addEventListener("visibilitychange",onVisible);
+  const timer=setInterval(onVisible,60000);
+  return()=>{
+   alive.current=false;live=false;
+   disposers.forEach(off=>off());
+   document.removeEventListener("visibilitychange",onVisible);
+   clearInterval(timer);
+  };
+ },[]);
  const uploaded=useMemo(()=>new Set(ftp.filter(item=>item.status==="success").map(item=>item.sourceId)),[ftp]);
  const visibleLocal=useMemo(()=>local.filter(entry=>!uploaded.has(entry.id)),[local,uploaded]);
  const rows=useMemo<Row[]>(()=>{const list:Row[]=tab==="local"?[...visibleLocal.map(e=>({kind:"local" as const,id:e.id,revision:String(e.revision??0),name:e.name,time:e.createdAt,size:e.byteSize,width:e.width,height:e.height})),...videos.filter(clip=>!uploaded.has(clip.id)).map(clip=>({kind:"local" as const,id:clip.id,revision:clip.revision??clip.id,name:clip.name,time:clip.createdAt,size:clip.byteSize,width:clip.width,height:clip.height,video:clip,isVideo:true}))]:ftp.map(e=>({kind:"ftp",id:e.id,name:e.name,time:e.createdAt,upload:e,isVideo:e.remotePath.endsWith(".mp4")}));return list.sort((a,b)=>b.time-a.time);},[tab,visibleLocal,ftp,videos,uploaded]);
@@ -91,21 +155,83 @@ export default function LibraryWindow(){
  const rowIds=rows.map(key).join("|");
  useEffect(()=>{if(busy||current||(!autoPick.current&&selected===null))return;const retained=rows.filter(row=>selection.has(key(row)));const first=retained[0]??rows[0];if(!first)return;autoPick.current=false;anchor.current=key(first);setSelected(key(first));setSelection(retained.length?new Set(retained.map(key)):new Set([key(first)]));},[tab,rowIds,selected,busy]);
  const cachedPreviewKey=current?.upload?.status==="success"?previewKey(current.upload):null;
- useEffect(()=>{const token=++readToken.current;let owned="";setPreview(null);setVideoPreview(null);setVideoPreviewDocument(null);setPreviewError("");if(!current){setLoading(false);return;}
- if(current.isVideo){let leased=false,released=false;const release=()=>{if(leased&&!released){released=true;void releaseRecordingPreview(current.id).catch(()=>{});}};setLoading(true);void (current.video?readRecording(current.id).then(document=>({clip:document.clip,document})):readFtpVideo(current.id,forceVideoPreview.current===key(current)).then(clip=>({clip,document:null}))).then(({clip,document})=>{leased=!!document;if(!alive.current||token!==readToken.current){release();return;}if(alive.current&&token===readToken.current){setVideoPreview(clip);setVideoPreviewDocument(document);}}).catch(error=>{if(alive.current&&token===readToken.current)setPreviewError(error.message??"Video preview unavailable.");}).finally(()=>{if(alive.current&&token===readToken.current)setLoading(false);});return()=>{readToken.current++;release();};}
- const cached=cachedPreviewKey?previewCache.get(cachedPreviewKey):null;
- if(cached){owned=cached.src;setPreview(cached);setLoading(false);}
- else {setLoading(true);const read=()=>readLibraryImage(current.kind,current.id);void (cachedPreviewKey?previewCache.load(cachedPreviewKey,read):read()).then(image=>{if(!alive.current||token!==readToken.current){URL.revokeObjectURL(image.src);return;}owned=image.src;setPreview(image);}).catch(e=>{if(alive.current&&token===readToken.current)setPreviewError(e instanceof Error?e.message:"Preview unavailable.");}).finally(()=>{if(alive.current&&token===readToken.current)setLoading(false);});}
- return()=>{readToken.current++;if(owned)URL.revokeObjectURL(owned);};},[selected,current?.id,cachedPreviewKey,previewRevision,previewCache,current?.revision]);
- function refreshPreviews(){forceVideoPreview.current=current?key(current):null;previewCache.clear();setPreviewRevision(n=>n+1);void refresh();}
+ const requestedPreview=current?JSON.stringify([selected,current.revision,cachedPreviewKey,previewRevision]):null;
+ const displayedPreview=previewResult?.key===requestedPreview?previewResult:null;
+ const loading=!!requestedPreview&&!displayedPreview;
+ const preview=displayedPreview&&"image" in displayedPreview?displayedPreview.image:null;
+ const videoPreview=displayedPreview&&"clip" in displayedPreview?displayedPreview.clip:null;
+ const videoPreviewDocument=displayedPreview&&"clip" in displayedPreview?displayedPreview.document:null;
+ const previewError=displayedPreview&&"error" in displayedPreview?displayedPreview.error:"";
+ useEffect(()=>{
+  setPreviewResult(null);
+  if(!current||!requestedPreview)return;
+  const row=current,request=requestedPreview;
+  let live=true,owned="",leased=false;
+  const forced=forceVideoPreview.current;
+  const force=forced?.key===key(row)&&forced.revision===previewRevision;
+  if(force)forceVideoPreview.current=null;
+  const release=()=>{
+   if(owned){URL.revokeObjectURL(owned);owned="";}
+   if(leased){leased=false;void releaseRecordingPreview(row.id).catch(()=>{});}
+  };
+  async function loadPreview(){
+   try{
+    let result:PreviewResult;
+    if(row.isVideo){
+     const document=row.video?await readRecording(row.id):null;
+     leased=!!document;
+     const clip=document?.clip??await readFtpVideo(row.id,force);
+     result={key:request,clip,document};
+    } else {
+     const read=()=>readLibraryImage(row.kind,row.id);
+     const image=cachedPreviewKey?await previewCache.load(cachedPreviewKey,read):await read();
+     owned=image.src;
+     result={key:request,image};
+    }
+    if(live)setPreviewResult(result);
+    else release();
+   } catch(error) {
+    release();
+    if(live)setPreviewResult({key:request,error:error instanceof Error?error.message:"Preview unavailable."});
+   }
+  }
+  void loadPreview();
+  return()=>{live=false;release();};
+ },[requestedPreview,previewCache]);
+ function retryPreview(){
+  if(!current)return;
+  if(current.isVideo&&current.kind==="ftp")forceVideoPreview.current={key:key(current),revision:previewRevision+1};
+  if(cachedPreviewKey)previewCache.invalidate(cachedPreviewKey);
+  setPreviewRevision(n=>n+1);
+ }
+ function refreshPreviews(){retryPreview();void refresh();}
 
- async function run(operation:()=>Promise<unknown>,update=false){if(actionPending.current||openingRef.current)return;actionPending.current=true;setBusy(true);setError("");try{await operation();if(update)await refresh();}catch(e){if(alive.current)setError(e instanceof Error?e.message:"Library action failed.");}finally{actionPending.current=false;if(alive.current)setBusy(false);}}
+ async function run(operation:()=>Promise<unknown>,update?:LibrarySource){if(actionPending.current||openingRef.current)return;actionPending.current=true;setBusy(true);setError("");try{await operation();if(update)await refresh(update);}catch(e){if(alive.current)setError(e instanceof Error?e.message:"Library action failed.");}finally{actionPending.current=false;if(alive.current)setBusy(false);}}
  async function openEdit(row:Row){const request={key:key(row),requestId:crypto.randomUUID()};openingRef.current=request;setOpening(request);try{await openListener.current;if(row.video)await openRecording(row.id,request.requestId);else if(row.isVideo)await editFtpVideo(row.id,request.requestId);else await editLibraryImage(row.kind,row.id,request.requestId);}catch(error){finishOpening(request.requestId,true);throw error;}}
  const selectedRows=rows.filter(row=>selection.has(key(row)));
  const selectionBusy=selectedRows.some(row=>row.upload?.status==="uploading");
  function choose(row:Row,extend=false,toggle=false){if(busy)return;const id=key(row);let next=new Set<string>();if(extend&&anchor.current&&rows.some(r=>key(r)===anchor.current)){const a=rows.findIndex(r=>key(r)===anchor.current),b=rows.indexOf(row);next=new Set(rows.slice(Math.min(a,b),Math.max(a,b)+1).map(key));}else if(toggle){next=new Set(selection);if(next.has(id))next.delete(id);else next.add(id);anchor.current=id;}else{next.add(id);anchor.current=id;}setSelection(next);setSelected(next.has(id)?id:rows.find(r=>next.has(key(r)))?key(rows.find(r=>next.has(key(r)))!):null);}
  async function copySelection(){if(!selectedRows.length)return;if(tab==="ftp")await copyUploadUrl([...selectedRows].sort((a,b)=>a.time-b.time).map(row=>row.upload!.url).join("\n"));else if(selectedRows.some(row=>row.isVideo)){if(selectedRows.length!==1)throw new Error("Copy videos individually. Multiple images can be copied together.");await invoke("recording_copy_library",{id:selectedRows[0].id});}else await copyLibraryImages([...selectedRows].sort((a,b)=>a.time-b.time).map(row=>row.id));}
- async function removeSelection(remote=false){const targets=remote?pendingDelete:selectedRows;try{for(const row of targets){if(remote)await deleteFtpRemote(row.id);else if(row.video)await removeRecording(row.id);else if(row.kind==="local")await removeLocalCache(row.id);else await removeFtpUpload(row.id);setSelection(old=>{const next=new Set(old);next.delete(key(row));return next;});if(selected===key(row))autoPick.current=true;setSelected(old=>old===key(row)?null:old);}}finally{setPendingDelete([]);await refresh();}}
+ async function removeSelection(remote=false){
+  const targets=remote?pendingDelete:selectedRows;
+  const sources=new Set<LibrarySource>();
+  try{
+   for(const row of targets){
+    sources.add(row.video?"video":row.kind);
+    if(remote)await deleteFtpRemote(row.id);
+    else if(row.video)await removeRecording(row.id);
+    else if(row.kind==="local")await removeLocalCache(row.id);
+    else await removeFtpUpload(row.id);
+    const id=key(row);
+    setSelection(old=>{const next=new Set(old);next.delete(id);return next;});
+    if(selected===id)autoPick.current=true;
+    setSelected(old=>old===id?null:old);
+   }
+  }finally{
+   setPendingDelete([]);
+   await Promise.all([...sources].map(source=>refresh(source)));
+  }
+ }
  function deleteSelection(){if(busy||selectionBusy||!selectedRows.length)return;if(tab==="ftp")setPendingDelete(selectedRows);else void run(()=>removeSelection());}
  useEffect(()=>{
   const blocked=(event:Event)=>{
@@ -125,7 +251,8 @@ export default function LibraryWindow(){
   window.addEventListener("keydown",keydown);window.addEventListener("copy",copy);
   return()=>{window.removeEventListener("keydown",keydown);window.removeEventListener("copy",copy);};
  });
- function selectTab(value:string){if(busy)return;autoPick.current=true;setTab(value as LibraryKind);setSelected(null);setSelection(new Set());anchor.current=null;setError("");}
+ function selectTab(value:string,fromRecording=false){if((busy&&!fromRecording)||value===activeTab.current)return;activeTab.current=value as LibraryKind;autoPick.current=true;setTab(activeTab.current);setSelected(null);setSelection(new Set());anchor.current=null;setError("");}
+ const issue=error||previewError||recordingError||collectionError;
  return <main className="library-window" aria-label="Library">
   <WindowTitleBar section="Library"/>
   <aside className="library-sidebar" aria-label="Library list">
@@ -138,10 +265,29 @@ export default function LibraryWindow(){
    </div>{selectedRows.length>0&&<div className="library-bulk-actions" role="group" aria-label="Selected images"><span>{selectedRows.length} selected</span><ToolHint label={tab==="ftp"?"Copy Links":"Copy Images"} shortcut="⌘C"><Button variant="outline" size="icon" aria-label={tab==="ftp"?"Copy links":"Copy images"} disabled={busy} onClick={()=>void run(copySelection)}><Copy size={16}/></Button></ToolHint>{tab==="ftp"&&<ToolHint label="Remove History"><Button icon={ListX} variant="warning" size="icon" aria-label="Remove history" disabled={busy||selectionBusy} onClick={()=>void run(()=>removeSelection())}/></ToolHint>}<ToolHint label={tab==="ftp"?"Delete Selected From FTP":"Delete Selected"} shortcut="⌫"><Button aria-label={tab==="ftp"?"Delete selected from FTP":"Delete selected"} variant="destructive" size="icon" disabled={busy||selectionBusy} onClick={deleteSelection}><Trash2 size={16}/></Button></ToolHint></div>}<footer><span>{tab==="local"?"Retained for 30 days":""}</span><Button variant="ghost" size="icon" aria-label="Settings" onClick={()=>void run(()=>openPreferencesWindow())}><Settings2 size={16}/></Button></footer>
   </aside>
   <section className="library-detail" aria-label="Image preview" aria-busy={listing||loading||!!opening}>
-   <header><div><h2>{current?.name??(rows.length?"Select an image":tab==="ftp"?"FTP uploads":"Local images")}</h2><span className="library-image-metrics" aria-label="Image dimensions and file size">{videoPreview?`${videoPreview.width} × ${videoPreview.height} · ${formatTime(videoPreview.durationMs)} · ${bytes(videoPreview.byteSize)}`:preview?`${preview.width} × ${preview.height} · ${bytes(preview.byteSize)}`:current?.width&&current?.height?`${current.width} × ${current.height} · ${bytes(current.size??0)}`:"\u00a0"}</span></div>{current&&<ToolHint label="Edit Image"><Button icon={opening?LoaderCircle:Pencil} className={opening?"library-edit-opening":undefined} size="icon" aria-label="Edit image" aria-busy={!!opening} disabled={busy} onClick={()=>void run(()=>openEdit(current))}/></ToolHint>}{<ToolHint label={!liveTextAvailable?"Live Text requires macOS 13 or later":liveTextState==="empty"?"No Text Found":"Live Text"}><Toggle variant="outline" size="sm" className={liveTextState==="analyzing"?"library-live-text library-edit-opening":"library-live-text"} aria-label="Live Text" aria-busy={liveTextState==="analyzing"} pressed={liveText} disabled={!liveTextAvailable||!preview||!!videoPreview||busy||loading} onPressedChange={enabled=>{setError("");setLiveText(enabled);setLiveTextState(enabled?"analyzing":"idle");}}>{liveTextState==="analyzing"?<LoaderCircle size={16}/>:<ScanText size={16}/>}<span className="sr-only">{liveTextState==="empty"?"No text found":liveTextState==="analyzing"?"Analyzing image":liveTextState==="ready"?"Select text in the image":"Select text using macOS Live Text"}</span></Toggle></ToolHint>}<ToolHint label="Refresh Library"><Button variant="ghost" size="icon" aria-label="Refresh library" disabled={busy||listing} onClick={refreshPreviews}><RefreshCw size={16}/></Button></ToolHint></header>
-   {(error||previewError||recordingError||collectionError)&&<div className="library-error"><p role="alert">{error||previewError||recordingError||collectionError}</p>{current&&previewError&&<Button icon={RefreshCw} variant="outline" size="sm" disabled={loading} onClick={()=>setPreviewRevision(n=>n+1)}>Retry preview</Button>}<Button icon={Settings2} variant="ghost" size="sm" onClick={()=>void openPreferencesWindow()}>Open Settings</Button></div>}
+   <header>
+    <div>
+     <h2>{current?.name??(rows.length?"Select an image":tab==="ftp"?"FTP uploads":"Local images")}</h2>
+     <span className="library-image-metrics" aria-label="Image dimensions and file size">{videoPreview?`${videoPreview.width} × ${videoPreview.height} · ${formatTime(videoPreview.durationMs)} · ${bytes(videoPreview.byteSize)}`:preview?`${preview.width} × ${preview.height} · ${bytes(preview.byteSize)}`:current?.width&&current?.height?`${current.width} × ${current.height} · ${bytes(current.size??0)}`:"\u00a0"}</span>
+    </div>
+    <div className="library-preview-actions" role="group" aria-label="Preview actions">
+     {current&&<ToolHint label="Edit Image"><Button icon={opening?LoaderCircle:Pencil} className={opening?"library-edit-opening":undefined} variant="outline" size="icon" aria-label="Edit image" aria-busy={!!opening} disabled={busy} onClick={()=>void run(()=>openEdit(current))}/></ToolHint>}
+     <ToolHint label={!liveTextAvailable?"Live Text requires macOS 13 or later":liveTextState==="empty"?"No Text Found":"Live Text"}>
+      <Toggle variant="outline" size="sm" className={liveTextState==="analyzing"?"library-live-text library-edit-opening":"library-live-text"} aria-label="Live Text" aria-busy={liveTextState==="analyzing"} pressed={liveText} disabled={!liveTextAvailable||!preview||busy} onPressedChange={enabled=>{setError("");setLiveText(enabled);setLiveTextState(enabled?"analyzing":"idle");}}>
+       {liveTextState==="analyzing"?<LoaderCircle size={16}/>:<ScanText size={16}/>}
+       <span className="sr-only">{liveTextState==="empty"?"No text found":liveTextState==="analyzing"?"Analyzing image":liveTextState==="ready"?"Select text in the image":"Select text using macOS Live Text"}</span>
+      </Toggle>
+     </ToolHint>
+     <ToolHint label="Refresh Library"><Button icon={RefreshCw} variant="outline" size="icon" aria-label="Refresh library" disabled={busy||listing} onClick={refreshPreviews}/></ToolHint>
+    </div>
+   </header>
+   {issue&&<div className="library-error">
+    <StatusMessage tone="error">{issue}</StatusMessage>
+    {issue===previewError&&current&&<Button icon={RefreshCw} variant="outline" size="sm" onClick={retryPreview}>Retry preview</Button>}
+    {issue===previewError&&current?.kind==="ftp"&&<Button icon={Settings2} variant="outline" size="sm" onClick={()=>void run(()=>openPreferencesWindow("uploading"))}>Open Settings</Button>}
+   </div>}
    <div className="library-preview">{opening&&<div className="library-opening-overlay"><LoadingState>Opening image in Edit</LoadingState></div>}{listing?<LoadingState>Loading library…</LoadingState>:loading?<LoadingState>Loading preview…</LoadingState>:videoPreview?<VideoPreview key={`${videoPreview.id}:${previewRevision}:${current?.revision??""}`} clip={videoPreview} document={videoPreviewDocument}/>:preview?<LibraryImagePreview key={selected??preview.id} image={preview} name={current?.name??"Selected image"} liveText={liveText} onLiveTextState={setLiveTextState} onLiveTextError={message=>{setLiveText(false);setLiveTextState("idle");setError(message);}}/>:current?<EmptyState icon={ImageOff} title="This preview is unavailable."/>:rows.length?<EmptyState icon={Images} title="Select an image."/>:listError?<EmptyState icon={ImageOff} title="Refresh to load your library." action={<Button icon={RefreshCw} onClick={()=>void refresh()}>Retry Library</Button>}/>:<EmptyState icon={tab==="ftp"?CloudUpload:Images} title={tab==="ftp"?"No FTP uploads yet.":"Capture an image from the menu bar."} action={<Button icon={tab==="ftp"?Settings2:Keyboard} onClick={()=>void run(()=>openPreferencesWindow(tab==="ftp"?"uploading":"hotkeys"))}>{tab==="ftp"?"Set Up FTP":"Set Up Shortcuts"}</Button>}/>}</div>
-   {current&&<footer className="library-metadata"><div>{current.upload?<><strong className="status-badge" data-tone={uploadTone(current.upload.status)}>{current.upload.status}</strong><output title={current.upload.remotePath}>{current.upload.remotePath}</output>{current.upload.error&&<p role="alert" title={current.upload.error}>{current.upload.error}</p>}</>:<span>Captured {dateFormatter.format(new Date(current.time))} · Local cache</span>}</div>{current.upload&&["failed","pending"].includes(current.upload.status)&&<div className="library-detail-actions" role="group" aria-label="Image actions"><Button variant="outline" size="sm" disabled={busy} onClick={()=>void run(()=>startFtpUpload(current.id),true)}><RotateCw size={14}/>Retry upload</Button></div>}</footer>}
+   {current&&<footer className="library-metadata"><div>{current.upload?<><strong className="status-badge" data-tone={uploadTone(current.upload.status)}>{current.upload.status}</strong><output title={current.upload.remotePath}>{current.upload.remotePath}</output>{current.upload.error&&<p role="alert" title={current.upload.error}>{current.upload.error}</p>}</>:<span>Captured {dateFormatter.format(new Date(current.time))} · Local cache</span>}</div>{current.upload&&["failed","pending"].includes(current.upload.status)&&<div className="library-detail-actions" role="group" aria-label="Image actions"><Button icon={RotateCw} variant="outline" size="sm" disabled={busy} onClick={()=>void run(()=>startFtpUpload(current.id),"ftp")}>Retry upload</Button></div>}</footer>}
   </section>
  <AlertDialog open={pendingDelete.length>0} onOpenChange={open=>{if(!open)setPendingDelete([]);}}><AlertDialogContent><AlertDialogHeader><AlertDialogTitle>Delete image from FTP?</AlertDialogTitle><AlertDialogDescription>Permanently delete {pendingDelete.length===1?pendingDelete[0]?.upload?.remotePath:`${pendingDelete.length} images`} from FTP?</AlertDialogDescription></AlertDialogHeader><AlertDialogFooter><AlertDialogCancel>Cancel</AlertDialogCancel><AlertDialogAction data-variant="destructive" onClick={()=>{void run(()=>removeSelection(true));}}>Delete permanently</AlertDialogAction></AlertDialogFooter></AlertDialogContent></AlertDialog>
  </main>;

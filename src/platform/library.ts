@@ -12,7 +12,7 @@ export const editLibraryImage=(kind:LibraryKind,id:string,requestId?:string)=>ca
 export async function takeEditorImage(){if(!isTauri())return null;const value=await call<LibraryPayload|null>("take_editor_image");if(!value)return null;const image=documentFromPayload(value.image,value.name);try{return {...image,localId:value.localId,libraryRequestId:value.requestId,draft:value.draft?parseLocalDraft(value.draft,image.width,image.height):undefined};}catch(error){URL.revokeObjectURL(image.src);recordDiagnostic("image","failed","invalid_input",{operation:"take_editor_image"});throw error;}}
 export async function showEditor(requestId?:string){if(isTauri())await call<void>("show_editor",requestId?{requestId}:undefined);window.dispatchEvent(new Event("fershot-editor-presented"));}
 export async function showLibrary(){if(isTauri())await call<void>("show_library");else window.open("?library","fershot-library");}
-export async function listenLibrary(event:string,handler:()=>void){if(!isTauri())return()=>{};const {listen}=await import("@tauri-apps/api/event");return listen(event,handler);}
+export async function listenLibrary(event:string,handler:(payload:unknown)=>void){if(!isTauri())return()=>{};const {listen}=await import("@tauri-apps/api/event");return listen(event,message=>handler(message.payload));}
 
 export async function fitEditorWindow(width:number,height:number,video=false){if(isTauri())await call<void>("fit_editor_window",{width,height,...(video?{video:true}:{})});}
 

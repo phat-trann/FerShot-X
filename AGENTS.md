@@ -1,5 +1,9 @@
 # Agent instructions
 
+## C184 Library review, preview performance and push handoff (2026-11-20)
+
+Refresh Local images, recordings and FTP history independently when their source changes. Keep preview pixels and failures keyed to the selected media revision. Explicit video retry bypasses the FTP cache once. Apply shared control and status styles to Library. Run generated or injected local checks. From this request onward, finish publication work once the requested push is confirmed. GitHub Actions builds run asynchronously.
+
 ## C183 user-authorized 1.5.1 publication (2026-11-20)
 
 Publish C180 and C182 with synchronized product version 1.5.1 through a normal push to main. Keep the existing Apple Silicon signing and updater workflow, historical releases and user data intact. Validate using TypeScript, release compilation and generated or injected cases. Installed macOS acceptance is recorded separately. No live capture, recognition, clipboard, server, signing identity or permission changes from local tests.

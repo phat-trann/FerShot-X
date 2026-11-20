@@ -6,8 +6,18 @@ import type {RecordingSettings,RecordingStatus,VideoClip,VideoDocument,VideoDraf
 import type {FtpQueueItem} from "../contracts/phase2";
 import {recordDiagnostic} from "./diagnostics";
 async function call<T>(command:string,args?:Record<string,unknown>):Promise<T>{if(!isTauri())throw new Error("Screen recording requires the desktop app.");const start=performance.now();try{return await invoke<T>(command,args);}catch(error){const invalidArgs=typeof error==="string"&&/^invalid args/i.test(error);recordDiagnostic("capture","failed",invalidArgs?"invalid_input":error&&typeof error==="object"&&"code"in error?error.code:"other",{operation:command,durationMs:performance.now()-start});throw new Error(invalidArgs?"Video edit data could not be saved. Reopen the video and retry.":error&&typeof error==="object"&&"message"in error?String(error.message):"Video operation failed. Retry.");}}
-export const readRecordingSettings=()=>call<RecordingSettings>("read_recording_settings");
-export const saveRecordingSettings=(value:RecordingSettings)=>call<RecordingSettings>("save_recording_settings",{value});
+function recordingSettingsFromWire(value: unknown): RecordingSettings {
+  if (!value || typeof value !== "object" ||
+      !("systemAudio" in value) || typeof value.systemAudio !== "boolean" ||
+      !("microphone" in value) || typeof value.microphone !== "boolean" ||
+      !("recordPointer" in value) || typeof value.recordPointer !== "boolean") {
+    throw new Error("Recording settings are unavailable.");
+  }
+  const { systemAudio, microphone, recordPointer } = value;
+  return { systemAudio, microphone, recordPointer };
+}
+export const readRecordingSettings=async()=>recordingSettingsFromWire(await call<unknown>("read_recording_settings"));
+export const saveRecordingSettings=async(value:RecordingSettings)=>recordingSettingsFromWire(await call<unknown>("save_recording_settings",{value}));
 export const readRecordingStatus=()=>call<RecordingStatus>("read_recording_status");
 export const startRecording=(mode:"fullscreen"|"area"="fullscreen")=>call<void>("start_recording",{mode});
 export const listRecordings=()=>call<VideoClip[]>("recording_list");

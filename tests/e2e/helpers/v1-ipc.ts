@@ -12,7 +12,7 @@ export async function mock(page:Page){await page.context().addInitScript(({png})
  if(command==="read_recording_settings")return owner.__RECORDING_SETTINGS__??{systemAudio:false,microphone:false,recordPointer:true};
  if(command==="save_recording_settings"){owner.__RECORDING_SETTINGS__=args.value;return args.value;}
  if(command==="read_recording_status")return owner.__RECORDING_STATUS__??{phase:"idle",elapsedMs:0};
- if(command==="recording_list")return owner.__VIDEOS__??[];
+ if(command==="recording_list")return structuredClone(owner.__VIDEOS__??[]);
  if(command==="recording_take")return owner.__VIDEO_INBOX__?.shift()??null;
  if(command==="recording_document")return owner.__VIDEO_DOCS__?.[args.id];
  if(command==="recording_save_draft"){owner.__VIDEO_DOCS__[args.id].draft=structuredClone(args.draft);return;}

@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "id": "20261120T111902-codex-C184-c6cedb0a",
+  "created_at": "2026-11-20T11:19:02.857568+07:00",
+  "agent": "codex",
+  "request": "library-review-20261120",
+  "task": "C184",
+  "completion": "done",
+  "summary": "Scope Library reads by source, align preview actions, isolate stale previews and validate recording settings responses.",
+  "files": [
+    "AGENTS.md",
+    "coordination/build-tasks.json",
+    "docs/agents/codex/C184-library-review.md",
+    "src-tauri/src/local_cache.rs",
+    "src-tauri/src/recording/mod.rs",
+    "src/LibraryWindow.css",
+    "src/LibraryWindow.tsx",
+    "src/lib/preview-cache.ts",
+    "src/platform/library.ts",
+    "src/platform/recording.ts",
+    "src/ui.css",
+    "tests/e2e/codex-c184.spec.ts",
+    "tests/e2e/helpers/v1-ipc.ts"
+  ],
+  "file_sha256": {
+    "AGENTS.md": "75d8d01cf1f139a2519d8d5f5e39ff2fa9aa9de308a7f66d4253e08610e4bc99",
+    "coordination/build-tasks.json": "2d6ae5b91c1a512b1892e7884d383207dbec641031bb2ad820d18024cc0d9dc1",
+    "docs/agents/codex/C184-library-review.md": "241dbe53be1d28eb14f5f3f7e0e09922dbb52edec4f9c27fd73f55cb2d5990be",
+    "src-tauri/src/local_cache.rs": "bbff6e92b4535b7d258fd89a20da374d7c37cb68f9eba2e589cd87465edcd796",
+    "src-tauri/src/recording/mod.rs": "acead4b3780c5fdb6aa2f4393de6a929fc1d29e2a2dd68c491a818bafc61e347",
+    "src/LibraryWindow.css": "ed325b26fad2a707cf9d0c026c499315047451aaf42fbeda4296756af7078e0e",
+    "src/LibraryWindow.tsx": "55a84b61be8ef8c5ce744fd8c58222ddff81fa8c25d2d92dc959ef9caa0534a4",
+    "src/lib/preview-cache.ts": "f80617598a23db9a186e5db276b0445db3e3022e9d2980c8302b9d1cf86b4623",
+    "src/platform/library.ts": "5fe107b05f2de596c2abdb8d4b26ccb6c18689e2c452eb6c80ed3cf0850d2caf",
+    "src/platform/recording.ts": "3341b3a927964dd9261089a614311d449f707936d89d859b8b886e7f214b4b3f",
+    "src/ui.css": "e11e00afb69c16748c2f333aef6ad99e10355a14e9aa5d9b81749e18cec6becb",
+    "tests/e2e/codex-c184.spec.ts": "0db29db7f2af6ce15272a7d863d1bfa10457600f1bcc2ac0530174151063ad5b",
+    "tests/e2e/helpers/v1-ipc.ts": "cb6a37923c906e8fc9202e442aca4da84bd08688460d81043ba38505a61d0e88"
+  },
+  "checks": [
+    "TypeScript and locked macOS Rust release check passed.",
+    "442 Vitest and 115 injected Playwright cases passed on final sources.",
+    "Product version 1.5.1 remains synchronized. Formatting/lint delegated to Copilot H01."
+  ],
+  "risks": [
+    "Installed macOS media and configured FTP remain manual acceptance."
+  ],
+  "review": "pending"
+}

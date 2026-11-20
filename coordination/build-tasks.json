@@ -5986,6 +5986,16 @@
       "shared_claim": "root-wiring",
       "owned_paths": "C180 and C182 source and tests, synchronized version metadata and release notes",
       "inputs": "User authorizes pushing and publishing the completed fixes as a new version"
+    },
+    {
+      "id": "C184",
+      "agent": "codex",
+      "title": "Isolate Library updates and standardize preview actions",
+      "state": "READY",
+      "work_kind": "integration",
+      "shared_claim": "root-wiring",
+      "owned_paths": "Library preview and refresh, cache invalidation, native Library events, Library control styles and scoped regressions",
+      "inputs": "User requests continued review, performance fixes, interface consistency and push without waiting for CI"
     }
   ],
   "allocation": "Codex sole active client; external Antigravity and Copilot inactive; preserve historical authorship.",

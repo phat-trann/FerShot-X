@@ -45,5 +45,6 @@ export function createPreviewCache({ maxEntries = 8, maxBytes = 64 * 1024 * 1024
     for (const key of pending.keys()) if (!keys.has(key)) pending.delete(key);
   }
   function clear() { entries.clear(); pending.clear(); bytes = 0; }
-  return { get, load, retain, clear };
+  function invalidate(key: string) { remove(key); pending.delete(key); }
+  return { get, load, retain, clear, invalidate };
 }
